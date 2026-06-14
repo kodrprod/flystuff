@@ -439,6 +439,23 @@ class World:
                 best = min(best, d)
         return best
 
+    def ring_scan(self, pos=None, n_rays=24, max_range=None):
+        """
+        A horizontal 360-degree distance probe around the drone (at its altitude).
+        Used by the reactive obstacle-avoidance layer to steer around things on ANY
+        side (the forward-only reflex/LiDAR can't see a wall the drone drifts into
+        sideways). Returns per-ray directions, distances and hit flags.
+        """
+        pos = self.backend.drone_pos if pos is None else np.asarray(pos, float)
+        mr = self.cfg.lidar_range_m if max_range is None else float(max_range)
+        ang = np.linspace(0.0, 2.0 * np.pi, n_rays, endpoint=False)
+        dirs = np.stack([np.cos(ang), np.sin(ang), np.zeros(n_rays)], axis=1)
+        hits = self.backend.raycast(np.tile(pos, (n_rays, 1)), dirs, mr)
+        dists = np.array([h["distance"] for h in hits], float)
+        return {"dirs": dirs, "dists": dists,
+                "hit": np.array([h["hit"] for h in hits]),
+                "points": [h["point"] for h in hits], "origin": pos}
+
     def reflex_distance(self, pos, heading, half_angle_deg=18.0, n=5):
         """
         CHEAP forward obstacle probe (a few rays) along the travel heading — used

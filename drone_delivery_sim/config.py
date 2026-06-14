@@ -169,6 +169,17 @@ class SimConfig:
     takeoff_clearance_m: float = 0.6     # collision checks start once above this AGL
     #   (so sitting on the launch pad / landing at home is never a "crash")
 
+    # ----- Navigation / obstacle-avoiding path planner -----
+    # Plan a route AROUND (or over) obstacles instead of flying a straight line.
+    enable_path_planning: bool = True    # plan collision-free cruise/return routes
+    nav_clearance_m: float = 1.2         # horizontal safety buffer kept from every
+    #                                      obstacle (absorbs the GPS bias the cruise
+    #                                      flies on); raise it for more caution.
+    nav_max_climb_m: float = 14.0        # if it can't go AROUND, how much higher than
+    #                                      the cruise altitude it may climb to go OVER.
+    waypoint_tol_m: float = 2.5          # "reached" tolerance for an intermediate
+    #                                      route waypoint (loose: cruise flies on GPS).
+
     # ----- LiDAR / depth sensor -----
     lidar_range_m: float = 12.0          # max ray distance
     lidar_h_fov_deg: float = 120.0       # horizontal fan width (forward)
@@ -177,7 +188,13 @@ class SimConfig:
     lidar_v_rays: int = 7                # rays across the vertical fan
     lidar_reflex_stop_m: float = 2.0     # halt if an obstacle is closer than this ahead
     lidar_noise_m: float = 0.02          # range noise
-    enable_lidar_reflex: bool = True     # onboard safety: stop before hitting things
+    enable_lidar_reflex: bool = True     # onboard safety: steer/stop before hitting things
+    # Reactive obstacle avoidance (the onboard layer that STEERS around things the
+    # GPS-guided path drifts toward, instead of just halting). Works with the global
+    # planner: the plan routes the corridor, this keeps real clearance within it.
+    avoid_rays: int = 24                 # horizontal 360-degree probe rays
+    avoid_range_m: float = 4.0           # start steering away when an obstacle is this close
+    avoid_gain: float = 1.2              # how hard to push away from obstacles
 
     # ----- Front-facing camera -----
     front_cam_width: int = 320
@@ -205,6 +222,14 @@ class SimConfig:
     setup_render_height: int = 540
     setup_orbit_azimuth_deg: float = 45.0
     setup_orbit_elevation_deg: float = 25.0
+
+    # ----- Live view (the on-screen window while the mission flies) -----
+    live_speed: float = 1.0              # playback speed of the LIVE window.
+    #   1.0 = real time (1 simulated second takes 1 wall-clock second) so you can
+    #   actually watch each phase; 2.0 = twice as fast, 0.5 = slow motion.
+    live_update_hz: float = 10.0         # how many times/second the live window redraws
+    live_feeds: bool = False             # default live window also shows the 3rd-person
+    #                                      + front camera feeds (needs the 3D world)
 
     # ----- Output -----
     output_dir: str = "outputs"

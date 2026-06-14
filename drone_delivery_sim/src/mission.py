@@ -40,6 +40,7 @@ from src.vision import Vision
 from src.control import HorizontalController, VerticalController
 from src.drop import PayloadDrop
 from src.dispatch import MissionPlan, request_from_config, build_mission
+from src import planner
 
 try:
     from src.world import World
@@ -166,6 +167,40 @@ class Mission:
         self._reflex_active = False      # LiDAR reflex currently halting forward motion
         self._reflex_events = 0          # how many ticks the reflex intervened
 
+        # ---- Obstacle-avoiding route planning (a GROUND-station task) ----------
+        # Plan a collision-free path for the cruise (start -> balcony) and the
+        # return (balcony -> home) legs, so the drone NAVIGATES AROUND obstacles
+        # instead of flying a straight line into them. The onboard LiDAR reflex
+        # stays on as the last-resort local safety net.
+        target_xy = np.array([self.plan.target_east_m, self.plan.target_north_m])
+        start_xy = (self.world.drone_start[:2].copy() if self.world is not None
+                    else np.array([0.0, 0.0]))
+        self.nav_alt = self.plan.cruise_altitude_m
+        self.return_alt = self.plan.return_altitude_m
+        self.cruise_path = [start_xy.copy(), target_xy.copy()]
+        self.return_path = [target_xy.copy(), np.array(self.home_xy)]
+        self.nav_info = {"cruise": None, "return": None}
+        if self.world is not None and getattr(config, "enable_path_planning", True):
+            cr = planner.plan_route(self.world, start_xy, target_xy, config,
+                                    self.plan.cruise_altitude_m)
+            self.cruise_path = cr["waypoints"]
+            self.nav_alt = cr["altitude"]
+            self.nav_info["cruise"] = cr
+            rr = planner.plan_route(self.world, target_xy, self.home_xy, config,
+                                    self.plan.return_altitude_m)
+            self.return_path = rr["waypoints"]
+            self.return_alt = rr["altitude"]
+            self.nav_info["return"] = rr
+        # Waypoints to actually fly (the first point is where the drone already is).
+        self._cruise_wps = list(self.cruise_path[1:]) or [target_xy.copy()]
+        self._return_wps = list(self.return_path[1:]) or [np.array(self.home_xy)]
+        self._cruise_idx = 0
+        self._return_idx = 0
+        # Obstacle AABBs (lo, hi) for the reactive-avoidance broad phase (cheap
+        # "am I near anything?" test so the 360-degree probe only runs when needed).
+        self._solid_aabbs = (list(planner.solid_aabbs(self.world).values())
+                            if self.world is not None else [])
+
         # Runtime state
         self.state = MissionState.IDLE
         self._prev_state = None
@@ -199,6 +234,12 @@ class Mission:
             "collision_time_s": None,
             "world_backend": (self.world.backend_name if self.world is not None else None),
             "reflex_events": 0,
+            # Navigation (obstacle-avoiding planner) outcome:
+            "nav_planned": self.nav_info["cruise"] is not None,
+            "nav_cruise_detour": (self.nav_info["cruise"]["detoured"]
+                                if self.nav_info["cruise"] else False),
+            "nav_cruise_alt": float(self.nav_alt),
+            "nav_waypoints": len(self.cruise_path),
         }
 
         # Per-state helpers
@@ -260,6 +301,70 @@ class Mission:
             return rf
         return vh if vh is not None else (rf if rf is not None else 0.0)
 
+    def _nearest_solid_dist_xy(self, pos) -> float:
+        """Cheap lower-bound horizontal distance to the nearest solid at this altitude."""
+        cfg = self.cfg
+        vclear = cfg.drone_radius_m + cfg.collision_margin_m + 0.4
+        px, py, pz = float(pos[0]), float(pos[1]), float(pos[2])
+        best = np.inf
+        for lo, hi in self._solid_aabbs:
+            if (lo[2] - vclear) <= pz <= (hi[2] + vclear):
+                dx = max(lo[0] - px, 0.0, px - hi[0])
+                dy = max(lo[1] - py, 0.0, py - hi[1])
+                best = min(best, float(np.hypot(dx, dy)))
+        return best
+
+    def _reactive_avoidance(self, pos, v_goal):
+        """
+        Bend the desired horizontal velocity AWAY from nearby obstacles (a local
+        potential-field steer with a tangential deadlock-breaker), so the drone
+        slides around things instead of crashing into or stalling against them.
+        Returns a (possibly) modified 2-D velocity. Open air -> unchanged.
+        """
+        cfg = self.cfg
+        R = cfg.avoid_range_m
+        # Broad phase: nothing near at this altitude -> fly straight (the common case).
+        if self._nearest_solid_dist_xy(pos) > R + 0.5:
+            return v_goal
+
+        scan = self.world.ring_scan(pos, n_rays=cfg.avoid_rays, max_range=R + 1.0)
+        rep = np.zeros(2)
+        nearest = np.inf
+        for d, dirv, hit in zip(scan["dists"], scan["dirs"], scan["hit"]):
+            if not hit or d >= R:
+                continue
+            nearest = min(nearest, d)
+            w = (R - d) / R                      # 0 at the edge -> 1 touching
+            rep += (-dirv[:2]) * (w * w)         # push away from the obstacle
+        if not np.any(rep):
+            return v_goal
+
+        self._reflex_active = True
+        self._reflex_events += 1
+        self.metrics["reflex_events"] = self._reflex_events
+
+        speed = float(np.linalg.norm(v_goal)) or cfg.search_speed_mps
+        v = v_goal + rep * speed * cfg.avoid_gain
+        # Deadlock breaker: if the push is nearly opposite the goal (heading straight
+        # at a wall), add a tangential slide toward whichever side faces the goal.
+        ng = v_goal / (np.linalg.norm(v_goal) + 1e-9)
+        nr = rep / (np.linalg.norm(rep) + 1e-9)
+        if float(ng @ nr) < -0.3:
+            perp = np.array([-nr[1], nr[0]])
+            if perp @ ng < 0:
+                perp = -perp
+            v = v + perp * speed * cfg.avoid_gain
+        # Very close -> don't barrel in; ease off the throttle.
+        if nearest < cfg.lidar_reflex_stop_m:
+            m = np.linalg.norm(v)
+            if m > 1e-9:
+                v = v / m * min(m, cfg.search_speed_mps * 0.6)
+        # Respect the horizontal speed limit.
+        m = np.linalg.norm(v)
+        if m > cfg.max_horizontal_speed_mps:
+            v = v / m * cfg.max_horizontal_speed_mps
+        return v
+
     def _fly_horizontal_via_gps(self, tx, ty, speed, alt_target, use_rangefinder=False):
         """
         Velocity-chase a horizontal target using ONLY noisy GPS, smoothed with an
@@ -285,19 +390,23 @@ class Mission:
         if sp > speed:
             v = v / sp * speed
 
-        # --- Onboard LiDAR safety reflex: halt before flying into an obstacle ---
-        # (This is intentionally local/onboard -- a round-trip to the ground station
-        # would be too slow to avoid a crash. Nominal clear paths never trigger it.)
+        # --- Onboard reactive obstacle avoidance: STEER around things the planned,
+        # GPS-guided path drifts toward (and halt only as a last resort). This is
+        # intentionally local/onboard -- a round-trip to the ground station would be
+        # too slow. Nominal clear paths pass through unchanged. ---
+        # Avoidance runs only on the long transit legs (cruise / return), where the
+        # drone actually traverses the world. The precision phases (search / align /
+        # descend) are deliberately close to the balcony and run their own vision PID,
+        # so steering there would fight the very obstacle we're delivering onto.
         self._reflex_active = False
         if sp > 0.2:
             self._heading = float(np.arctan2(v[1], v[0]))
-            if self.world is not None and cfg.enable_lidar_reflex:
-                fd = self.world.reflex_distance(self.drone.pos, self._heading)
-                if fd < cfg.lidar_reflex_stop_m:
-                    v = v * 0.0                       # hold position
-                    self._reflex_active = True
-                    self._reflex_events += 1
-                    self.metrics["reflex_events"] = self._reflex_events
+            transit = self.state in (MissionState.CRUISE_TO_WAYPOINT,
+                                    MissionState.RETURN_HOME)
+            if transit and self.world is not None and cfg.enable_lidar_reflex:
+                v = self._reactive_avoidance(self.drone.pos, v)
+                if np.linalg.norm(v) > 0.2:
+                    self._heading = float(np.arctan2(v[1], v[0]))
         # Altitude hold: coarse phases use the barometer; landing uses rangefinder.
         if use_rangefinder:
             rf = self.sensors.read_rangefinder()
@@ -333,6 +442,7 @@ class Mission:
                 "image": image, "vis": vis, "state": self.state.name,
                 "pos": true_pos.copy(), "t": self.t,
                 "battery": tel["battery_pct"], "wind": tel["wind"].copy(),
+                "velocity": tel["velocity"].copy(), "reflex": self._reflex_active,
                 "height_above_marker": self.drone.height_above_surface(),
                 "traj_len": len(self.trajectory),
             })
@@ -354,27 +464,40 @@ class Mission:
 
         elif s == MissionState.ARM:
             self.drone.arm()
+            # Anchor the climb to the launch spot ONCE, then hold it. (Re-issuing
+            # takeoff() every tick would re-anchor to the wind-drifted position --
+            # i.e. no horizontal hold -- letting the drone blow sideways into
+            # whatever is next to the launch pad while it climbs.)
+            self._launch_xy = self.drone.pos[:2].copy()
             self._transition(MissionState.TAKEOFF)
-            self.drone.takeoff(self.plan.cruise_altitude_m)
+            self.drone.takeoff(self.nav_alt)
 
         elif s == MissionState.TAKEOFF:
-            self.drone.takeoff(self.plan.cruise_altitude_m)
-            if self.drone.pos[2] >= self.plan.cruise_altitude_m - 0.2:
+            # Hold the launch x,y against the wind while climbing (do NOT re-call
+            # takeoff(), which would reset the hold to the current drifted point).
+            self.drone.goto_local(self._launch_xy[0], self._launch_xy[1], self.nav_alt)
+            if self.drone.pos[2] >= self.nav_alt - 0.2:
                 self._transition(MissionState.CRUISE_TO_WAYPOINT)
 
-        # ---------------- CRUISE (GPS only) ----------------
+        # ---------------- CRUISE (GPS only, following the planned route) -------
         elif s == MissionState.CRUISE_TO_WAYPOINT:
+            wp = self._cruise_wps[self._cruise_idx]
+            is_last = self._cruise_idx >= len(self._cruise_wps) - 1
+            tol = cfg.cruise_arrival_tol_m if is_last else cfg.waypoint_tol_m
             err = self._fly_horizontal_via_gps(
-                self.plan.target_east_m, self.plan.target_north_m,
-                cfg.max_horizontal_speed_mps, self.plan.cruise_altitude_m)
-            if err < cfg.cruise_arrival_tol_m:
-                self._settle += 1
-                if self._settle >= 5:
-                    # Record what a GPS-only drop would miss by (true distance to marker).
-                    self.metrics["gps_only_error_m"] = float(
-                        np.hypot(true_pos[0] - self.marker_world[0],
-                                true_pos[1] - self.marker_world[1]))
-                    self._transition(MissionState.CLIMB_TO_BALCONY_ALT)
+                wp[0], wp[1], cfg.max_horizontal_speed_mps, self.nav_alt)
+            if err < tol:
+                if is_last:
+                    self._settle += 1
+                    if self._settle >= 5:
+                        # Record what a GPS-only drop would miss by (true dist to marker).
+                        self.metrics["gps_only_error_m"] = float(
+                            np.hypot(true_pos[0] - self.marker_world[0],
+                                    true_pos[1] - self.marker_world[1]))
+                        self._transition(MissionState.CLIMB_TO_BALCONY_ALT)
+                else:
+                    self._cruise_idx += 1
+                    self._settle = 0
             else:
                 self._settle = 0
 
@@ -476,17 +599,22 @@ class Mission:
             # moving current position, or wind would push the drone away.
             self._fly_horizontal_via_gps(
                 self.plan.target_east_m, self.plan.target_north_m,
-                cfg.search_speed_mps, self.plan.return_altitude_m)
-            if self.sensors.read_barometer() >= self.plan.return_altitude_m - 0.3:
+                cfg.search_speed_mps, self.return_alt)
+            if self.sensors.read_barometer() >= self.return_alt - 0.3:
                 self._transition(MissionState.RETURN_HOME)
 
-        # ---------------- RETURN HOME (GPS) ----------------
+        # ---------------- RETURN HOME (GPS, following the planned route) -------
         elif s == MissionState.RETURN_HOME:
+            wp = self._return_wps[self._return_idx]
+            is_last = self._return_idx >= len(self._return_wps) - 1
+            tol = cfg.home_arrival_tol_m if is_last else cfg.waypoint_tol_m
             err = self._fly_horizontal_via_gps(
-                self.home_xy[0], self.home_xy[1], cfg.max_horizontal_speed_mps,
-                self.plan.return_altitude_m)
-            if err < cfg.home_arrival_tol_m:
-                self._transition(MissionState.LAND)
+                wp[0], wp[1], cfg.max_horizontal_speed_mps, self.return_alt)
+            if err < tol:
+                if is_last:
+                    self._transition(MissionState.LAND)
+                else:
+                    self._return_idx += 1
 
         # ---------------- LAND ----------------
         elif s == MissionState.LAND:

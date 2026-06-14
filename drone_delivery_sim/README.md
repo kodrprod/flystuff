@@ -261,6 +261,7 @@ drone_delivery_sim/
     camera_sim.py      <- renders the synthetic downward camera image
     vision.py          <- REAL OpenCV ArUco detect + solvePnP (the hardware part)
     control.py         <- PID controllers (centering + descent)
+    planner.py         <- obstacle-avoiding route planner (A* + reactive steering)
     mission.py         <- the mission state machine + failsafes
     drop.py            <- payload release + landing-error model
     visualize.py       <- matplotlib dashboard + MP4/GIF export
@@ -346,13 +347,28 @@ are never blocked.
 
 ```
 python main.py                     # the full mission, now inside the 3D world
+python main.py --feeds             # LIVE multi-feed window (3rd-person + cameras), real time
+python main.py --speed 0.5         # slow the live window to half speed (watch every step)
 python main.py --multifeed         # save the combined multi-feed video (see below)
 python main.py --split             # run the drone + ground station as TWO processes
 python main.py --single-process    # the same split, in one process (faster)
 python setup_positions.py          # place the start / drop points by hand (see D)
 python main.py --world sample      # use the built-in sample world (default)
 python main.py --world blender     # use YOUR exported Blender world
+python world/import_model.py m.obj # use ANY .obj model as the world (no Blender — see I)
 ```
+
+New since the last version (the four things added on top):
+
+* **Obstacle-avoiding navigation** — the drone now plans a route AROUND (or over)
+  buildings, trees and walls instead of flying a straight line into them, so you
+  can put the start anywhere. See **section J**.
+* **A real LIVE feed** — `--feeds` opens a window that updates *while the mission
+  flies*, paced to **real time** (1 simulated second = 1 wall-clock second) so you
+  can actually watch each phase. `--speed` changes the playback rate. See **K**.
+* **More on the dashboard** — current **ground speed**, climb/descent rate,
+  distance-to-goal, obstacle-avoidance status, and the planned route are now shown.
+* **Bring your own 3D model** without Blender — `python world/import_model.py`. See **I**.
 
 The **multi-feed video** (`outputs/multifeed_demo.mp4`) shows four things at once:
 a 3rd-person view of the drone in the world with the **LiDAR hits painted red on
@@ -414,11 +430,17 @@ All under the "3D WORLD UPGRADE KNOBS" heading: which world to load
 (`link_latency_ms`, `link_bandwidth_kbps`, `link_packet_loss`,
 `onboard_budget_ms_per_tick`).
 
+Also: **navigation** (`enable_path_planning`, `nav_clearance_m`, `nav_max_climb_m`,
+`waypoint_tol_m`, and the reactive `avoid_range_m` / `avoid_gain`) and the **live
+view** (`live_speed`, `live_update_hz`, `live_feeds`).
+
 ## G. New tests
 
 ```
 python tests/test_world.py      # scale (1 m cube), collision, reflex, LiDAR ranges
 python tests/test_compute.py    # link latency / bandwidth / loss, budget, the split
+python tests/test_planner.py    # the route planner: clear vs around vs over obstacles
+python tests/test_navigation.py # full missions from starts behind the tree/building
 ```
 
 (The original `test_vision.py`, `test_mission.py`, `test_smoke.py` still pass with
@@ -441,6 +463,92 @@ Empty isn't inside a wall, and that the cruise altitude in `config.py`
 **Two-process split seems stuck.** Some setups dislike `multiprocessing`; the code
 falls back to single-process automatically. You can also just use
 `--single-process`.
+
+---
+
+## I. Bring your own 3D model (no Blender needed)
+
+You don't have to use Blender. If you have a model as a Wavefront **`.obj`** file
+(almost every 3D tool can "Export to OBJ"), point the importer at it:
+
+```
+python world/import_model.py /path/to/my_model.obj
+```
+
+That copies your model into `world/`, works out which parts are solid obstacles
+(everything EXCEPT objects whose name starts with `GROUND` or `MARKER`, same rule
+as the Blender exporter), and writes `world/scene.json` so it becomes the world.
+Then place the start / landing spots and fly — exactly the workflow you already use:
+
+```
+python setup_positions.py     # drag to orbit, type the start / landing coordinates, save
+python main.py                # fly your model (with obstacle-avoiding navigation)
+python main.py --feeds        # ...with the live multi-feed window
+```
+
+Notes:
+* The simulator works in **metres** (1 OBJ unit = 1 m). If your model imports
+  sideways it is probably **Y-up** — re-run with `--y-up`. Rescale with `--scale`.
+* Export your model with **named objects** (the `o`/`g` lines) so each obstacle can
+  be identified — that's how a crash can tell you *what* it hit.
+* Switch back to the built-in demo world any time: `python main.py --world sample`.
+
+## J. Obstacle-avoiding navigation (the drone now routes around things)
+
+Previously the drone flew a dead-straight line from the start to the balcony, and
+the only obstacle handling was an onboard reflex that could merely **stop**. So if
+you moved the start so a tree or a wall sat in between, it would bump into it or
+stall. Now there are **two layers** working together (the same split a real drone
+uses — the laptop plans, the drone reacts):
+
+1. **A global route planner** (`src/planner.py`, a ground-station task). It builds a
+   2-D obstacle map of your world *at the flight altitude* and runs an A\* search to
+   find a clear path, then smooths it into waypoints. If it can't go **around**
+   something, it climbs and flies **over** it (it prefers the lowest altitude that
+   works). The planned route is drawn on the dashboard map (dashed green).
+2. **An onboard reactive layer.** Because the cruise flies on imperfect GPS in wind,
+   the *actual* path drifts a little off the plan; a 360-degree probe gently
+   **steers the drone away** from anything it drifts toward (and slides around it)
+   instead of just halting.
+
+Try it: open `world/scene.json` (or run `python setup_positions.py`) and move
+`drone_start` behind the building or the tree, then `python main.py`. The summary
+prints whether it flew a *clear straight path* or *avoided obstacles*. Tuning knobs
+are in `config.py` under "Navigation / obstacle-avoiding path planner" and the
+reactive-avoidance lines (`nav_clearance_m`, `nav_max_climb_m`, `avoid_range_m`,
+`avoid_gain`). Set `enable_path_planning = False` to go back to straight-line flight.
+
+> A note on clearance: the cruise is GPS-guided, so it keeps a real safety buffer
+> (`nav_clearance_m`) from obstacles — just like a real drone that can't trust GPS
+> to the centimetre. Lower it for tight indoor worlds; raise it to be more cautious.
+
+## K. A real, time-accurate live feed
+
+The on-screen window now updates **while the mission flies** and is paced to **real
+time** — 1 simulated second takes 1 wall-clock second — so the fast phases
+(`SEARCH`, `PRECISION_ALIGN`, `DESCEND`, `DROP`) are actually watchable instead of
+flashing by. Two views:
+
+```
+python main.py             # the 4-panel dashboard, live + real time (map, side, down-cam, telemetry)
+python main.py --feeds     # the rich multi-feed window: 3rd-person + LiDAR + front cam + down cam + radar
+```
+
+Control the pace (applies to either):
+
+```
+python main.py --speed 0.5    # half speed (slow-motion — great for the drop)
+python main.py --speed 2      # double speed
+python main.py --feeds --speed 0.5
+```
+
+The video files (`outputs/mission_demo.mp4`, `outputs/multifeed_demo.mp4`) are still
+saved as before, so you can re-watch and share. (Defaults for the live view live in
+`config.py` under "Live view": `live_speed`, `live_update_hz`, `live_feeds`.)
+
+The **telemetry** panel now also shows the **current ground speed**, the
+climb/descent rate, distance to the goal, and whether obstacle avoidance is actively
+steering.
 
 ---
 
