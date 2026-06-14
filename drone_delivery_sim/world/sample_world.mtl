@@ -1,0 +1,56 @@
+newmtl ground
+Kd 0.550 0.600 0.520
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl wall
+Kd 0.720 0.720 0.740
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl balcony
+Kd 0.660 0.600 0.520
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl railing
+Kd 0.450 0.450 0.480
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl trunk
+Kd 0.400 0.270 0.160
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl leaves
+Kd 0.250 0.500 0.230
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl marker
+Kd 0.950 0.950 0.950
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+
+newmtl marker_start
+Kd 0.200 0.450 0.900
+Ka 0.1 0.1 0.1
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+

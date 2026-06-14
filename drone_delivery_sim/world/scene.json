@@ -1,0 +1,51 @@
+{
+  "units": "meters",
+  "up_axis": "Z",
+  "scale": 1.0,
+  "obj_file": "sample_world.obj",
+  "home": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "drone_start": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "drop_target": [
+    40.0,
+    30.0,
+    8.0
+  ],
+  "markers": {
+    "drop": {
+      "id": 23,
+      "size": 0.25,
+      "pos": [
+        40.0,
+        30.0,
+        8.0
+      ]
+    },
+    "start": {
+      "id": 7,
+      "size": 0.25,
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "solid_objects": [
+    "BUILDING",
+    "BALCONY",
+    "RAILING_FRONT",
+    "RAILING_LEFT",
+    "RAILING_RIGHT",
+    "OBSTACLE_TREE_TRUNK",
+    "OBSTACLE_TREE_CANOPY"
+  ],
+  "note": "Procedural sample world. Replace with your Blender export for the real world."
+}

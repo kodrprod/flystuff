@@ -1,0 +1,27 @@
+# ===========================================================================
+# Python dependencies for the drone delivery simulation.
+#
+# Verified to install as PREBUILT WHEELS on macOS Apple Silicon (arm64) — no
+# compiler needed. Developed and tested against Python 3.10; wheels for every
+# package below are published for Python 3.10 through 3.13, so the recommended
+# python.org Python 3.12 installer works out of the box.
+#
+# IMPORTANT: this uses opencv-contrib-python (NOT plain opencv-python). The
+# "contrib" build is the one that ships cv2.aruco, which this project needs.
+# Do NOT also install opencv-python — having both installed causes conflicts.
+# ===========================================================================
+
+numpy==2.2.6
+opencv-contrib-python==4.13.0.92
+matplotlib==3.10.9
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
+
+# --- 3D world engine (for collision, LiDAR and the camera feeds) ---
+# PyBullet is the recommended 3D backend. It ships macOS Apple-Silicon wheels for
+# Python 3.10-3.12. If `pip install pybullet` fails on your Python (e.g. 3.13 has
+# no wheel yet), use a Python 3.12 virtual environment (the README shows the exact
+# commands). IMPORTANT: the simulation ALSO runs WITHOUT PyBullet -- it falls back
+# to a built-in pure-numpy 3D engine automatically -- so this line is optional but
+# recommended (PyBullet gives nicer camera feeds and exact collision).
+pybullet==3.2.7
