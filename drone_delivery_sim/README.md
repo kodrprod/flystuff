@@ -222,7 +222,7 @@ attribute 'aruco'`.** You have the wrong OpenCV package. You need
 **`opencv-contrib-python`**, not `opencv-python`. Fix it cleanly:
 ```
 pip uninstall -y opencv-python opencv-contrib-python
-pip install opencv-contrib-python==4.13.0.92
+pip install opencv-contrib-python==4.10.0.84
 ```
 Do **not** have both installed at once — that's the usual cause.
 
