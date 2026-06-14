@@ -431,9 +431,15 @@ All under the "3D WORLD UPGRADE KNOBS" heading: which world to load
 (`link_latency_ms`, `link_bandwidth_kbps`, `link_packet_loss`,
 `onboard_budget_ms_per_tick`).
 
-Also: **navigation** (`enable_path_planning`, `nav_clearance_m`, `nav_max_climb_m`,
-`waypoint_tol_m`, and the reactive `avoid_range_m` / `avoid_gain`) and the **live
-view** (`live_speed`, `live_update_hz`, `live_feeds`).
+Also: **sensor-only avoidance** (`avoid_range_m`, `avoid_gain`, `avoid_rays`, and the
+proactive braking `avoid_brake_decel_mps2` / `avoid_min_speed_mps` / `avoid_fwd_cone_deg`),
+the optional **map planner** (`enable_path_planning`, `nav_clearance_m`,
+`nav_max_climb_m`, `waypoint_tol_m`), and the **live view** (`live_speed`,
+`live_update_hz`, `live_feeds`).
+
+If it still clips obstacles, lower `avoid_brake_decel_mps2` (brakes earlier) or
+`max_horizontal_speed_mps`, or raise `avoid_range_m`/`lidar_range_m` so it sees
+things sooner.
 
 ## G. New tests
 
@@ -515,8 +521,18 @@ How it works (`src/avoidance.py`):
   it curves smoothly around obstacles and heads on toward the balcony. If it's
   pointed straight at a wall with the goal behind it, a tangential "slide" makes it
   follow the wall around instead of stalling head-on.
+* It **brakes proactively**: the closer the LiDAR sees something in the way ahead,
+  the more it slows down (it caps its speed so it could always stop within the clear
+  distance), so it never barrels into a tree faster than it can turn. Open air → full
+  speed; something looming → it eases off. Tuned by `avoid_brake_decel_mps2`.
 * The precision drop itself still uses the **down-camera ArUco vision** — also a
   sensor. At no point does the navigation read the true geometry.
+
+**Launching from a balcony/rooftop (an elevated pad).** If `DRONE_START` sits on a
+raised surface in your model, that's fully supported: takeoff clearance, the
+"have I crashed?" check, and the final landing are all measured *relative to the
+launch height*, so resting on (and returning to) an elevated pad is never mistaken
+for a collision.
 
 Try it: run `python setup_positions.py` (or edit `world/scene.json`) and move
 `drone_start` behind the building or the tree, then `python main.py`. The summary

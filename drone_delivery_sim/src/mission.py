@@ -149,6 +149,11 @@ class Mission:
         self.plan = plan if plan is not None else build_mission(request_from_config(config), config)
         # Subsystems (all share one rng for repeatability).
         self.drone = Drone(config, rng=self.rng, start_pos=start_pos)
+        # The altitude the drone launches from. Often 0 (ground), but it can be high
+        # when DRONE_START sits on a balcony/rooftop in a custom model -- everything
+        # below (takeoff clearance, landing, collision arming) is measured RELATIVE
+        # to this so launching from an elevated pad is not treated as a crash.
+        self._start_z = float(self.drone.pos[2])
         self.sensors = Sensors(self.drone, config, rng=self.rng)
         self.camera = CameraSim(config, rng=self.rng)
         self.vision = Vision(config)
@@ -176,8 +181,12 @@ class Mission:
         target_xy = np.array([self.plan.target_east_m, self.plan.target_north_m])
         start_xy = (self.world.drone_start[:2].copy() if self.world is not None
                     else np.array([0.0, 0.0]))
-        self.nav_alt = self.plan.cruise_altitude_m
-        self.return_alt = self.plan.return_altitude_m
+        # Cruise/return altitudes must clear the launch pad: if the drone starts up
+        # high (on a balcony), make sure it still climbs ABOVE the start, not into it.
+        self.nav_alt = max(self.plan.cruise_altitude_m,
+                        self._start_z + config.takeoff_clearance_m + 2.0)
+        self.return_alt = max(self.plan.return_altitude_m,
+                            self._start_z + config.takeoff_clearance_m + 2.0)
         self.cruise_path = [start_xy.copy(), target_xy.copy()]
         self.return_path = [target_xy.copy(), np.array(self.home_xy)]
         self.nav_info = {"cruise": None, "return": None}
@@ -585,10 +594,13 @@ class Mission:
 
         # ---------------- LAND ----------------
         elif s == MissionState.LAND:
+            # Descend back to the launch height (the pad may be elevated, e.g. a
+            # balcony) -- not all the way to z=0, which would fly through the pad.
             self._fly_horizontal_via_gps(self.home_xy[0], self.home_xy[1],
-                                        cfg.search_speed_mps, 0.0, use_rangefinder=True)
+                                        cfg.search_speed_mps, self._start_z,
+                                        use_rangefinder=True)
             rf = self.sensors.read_rangefinder()
-            if (rf is not None and rf < 0.15) or self.drone.pos[2] < 0.1:
+            if (rf is not None and rf < 0.15) or self.drone.pos[2] <= self._start_z + 0.12:
                 self.metrics["return_error_m"] = self._home_dist()
                 self._finish()
                 return  # finished; do not step physics further this tick
@@ -608,7 +620,9 @@ class Mission:
             # The world body faces the travel heading so the front camera / LiDAR
             # look where the drone is going (flight control still uses yaw=0).
             self.world.set_drone_pose(self.drone.pos, self._heading)
-            if self.drone.pos[2] > cfg.takeoff_clearance_m:
+            # "Climbed" = risen clear ABOVE the launch pad (which may itself be high
+            # up, e.g. a balcony). Until then, resting on/just above the pad is fine.
+            if self.drone.pos[2] > self._start_z + cfg.takeoff_clearance_m:
                 self._has_climbed = True
             if self._collision_active():
                 collided, obj, pt, gap = self.world.check_collision()
@@ -662,8 +676,9 @@ class Mission:
         })
 
     def _finish(self):
-        # Land the drone and disarm cleanly.
-        self.drone.pos[2] = 0.0
+        # Land the drone and disarm cleanly (settle onto the launch pad height,
+        # which may be elevated for a balcony/rooftop start).
+        self.drone.pos[2] = self._start_z
         self.drone.vel[:] = 0.0
         try:
             self.drone.disarm()

@@ -172,11 +172,17 @@ class SimConfig:
     # ----- Navigation: sensor-only obstacle avoidance (the realistic default) -----
     # The drone steers around obstacles using ONLY a LiDAR distance scan + its noisy
     # GPS goal direction -- it has NO knowledge of the world layout (src/avoidance.py).
-    avoid_range_m: float = 4.0           # a LiDAR return closer than this pushes the
+    avoid_range_m: float = 5.0           # a LiDAR return closer than this pushes the
     #                                      drone away from it (steer-around distance).
     avoid_gain: float = 1.6              # how hard obstacles push (bigger = wider berth).
     avoid_fov_deg: float = 360.0         # LiDAR sweep used for navigation (360 = full).
     avoid_rays: int = 36                 # number of rays in that sweep.
+    # Proactive braking: slow down as obstacles loom ahead so there is always time to
+    # turn/stop (a real drone can't brake instantly). The drone caps its speed so it
+    # could stop within the clear distance ahead at this deceleration.
+    avoid_brake_decel_mps2: float = 2.0  # gentler = brakes earlier / more cautious
+    avoid_min_speed_mps: float = 0.6     # creep speed near obstacles (so it keeps sliding past)
+    avoid_fwd_cone_deg: float = 55.0     # "ahead" cone (around the goal) used for braking
 
     # ----- OPTIONAL: map-based global route planner (NOT realistic) -----
     # Off by default. When True, the drone is GIVEN the world map and plans an A*
