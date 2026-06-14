@@ -25,8 +25,53 @@ Change the SCENARIO (balcony height, wind, marker, etc.) by editing config.py.
 
 from __future__ import annotations
 import argparse
+import os
 import sys
 import time
+
+
+def _require_dependencies() -> None:
+    """Fail early with a friendly, copy-pasteable message if any third-party
+    package is missing -- instead of a confusing deep ImportError traceback
+    (e.g. "No module named 'cv2'") coming out of some inner module."""
+    import importlib.util
+    required = {
+        "numpy": "numpy",
+        "cv2": "opencv-contrib-python",
+        "matplotlib": "matplotlib",
+        "imageio": "imageio",
+    }
+    missing = [pip_name for module, pip_name in required.items()
+               if importlib.util.find_spec(module) is None]
+    if not missing:
+        return
+    here = os.path.dirname(os.path.abspath(__file__))
+    bar = "=" * 66
+    print(bar)
+    print(" Missing required Python package(s): " + ", ".join(missing))
+    print(bar)
+    print("This simulation needs a few libraries that aren't installed yet.")
+    print("")
+    print("Easiest fix on a Mac -- create the project's private environment")
+    print("and install everything from requirements.txt:")
+    print("")
+    print(f'    cd "{here}"')
+    print("    python3 -m venv .venv")
+    print("    source .venv/bin/activate")
+    print("    pip install -r requirements.txt")
+    print("")
+    print("Then run the simulation again:")
+    print("")
+    print("    source .venv/bin/activate")
+    print("    python main.py")
+    print("")
+    print("(Or just double-click setup_mac.command in Finder.)")
+    print(bar)
+    sys.exit(1)
+
+
+_require_dependencies()
+
 import matplotlib
 
 from config import CONFIG
@@ -73,7 +118,7 @@ def main():
     parser.add_argument("--no-video", action="store_true", help="skip video export")
     parser.add_argument("--seed", type=int, default=CONFIG.seed, help="random seed / scenario")
     parser.add_argument("--setup", action="store_true", help="manual start/drop position setup")
-    parser.add_argument("--multifeed", action="store_true",
+    parser.add_argument("--multifeed", "--feeds", action="store_true", dest="multifeed",
                         help="export the combined multi-feed video (3rd-person+LiDAR+cameras)")
     parser.add_argument("--split", action="store_true",
                         help="run the onboard/ground compute split in two real processes")
