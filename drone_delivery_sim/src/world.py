@@ -439,6 +439,34 @@ class World:
                 best = min(best, d)
         return best
 
+    def horizontal_scan(self, pos=None, heading=0.0, fov_deg=None, n_rays=None,
+                        max_range=None):
+        """
+        Realistic forward LiDAR for NAVIGATION: a single HORIZONTAL fan of distance
+        rays centred on the travel heading, at the drone's current altitude. Returns
+        the world bearing + open distance of each ray. This is the ONLY spatial input
+        the sensor-only navigator (src/avoidance.py) is allowed to use — it never
+        sees object positions, just these distances, exactly like a real LiDAR.
+        """
+        cfg = self.cfg
+        pos = self.backend.drone_pos if pos is None else np.asarray(pos, float)
+        fov = cfg.lidar_h_fov_deg if fov_deg is None else float(fov_deg)
+        n = cfg.lidar_h_rays if n_rays is None else int(n_rays)
+        mr = cfg.lidar_range_m if max_range is None else float(max_range)
+        if fov >= 359.9:        # full sweep: evenly spaced, no duplicated endpoint
+            bearings = float(heading) + np.radians(np.linspace(0.0, 360.0, n, endpoint=False))
+        else:
+            bearings = float(heading) + np.radians(np.linspace(-fov / 2, fov / 2, n))
+        dirs = np.stack([np.cos(bearings), np.sin(bearings), np.zeros(n)], axis=1)
+        hits = self.backend.raycast(np.tile(pos, (n, 1)), dirs, mr)
+        dists = np.array([h["distance"] for h in hits], float)
+        hit = np.array([h["hit"] for h in hits])
+        if cfg.lidar_noise_m > 0:
+            dists = np.clip(dists + self.rng.normal(0, cfg.lidar_noise_m, n), 0, mr)
+        clear = np.where(hit, dists, mr)
+        return {"bearings": bearings, "clear": clear, "dists": dists, "hit": hit,
+                "origin": pos, "heading": float(heading)}
+
     def ring_scan(self, pos=None, n_rays=24, max_range=None):
         """
         A horizontal 360-degree distance probe around the drone (at its altitude).

@@ -169,16 +169,24 @@ class SimConfig:
     takeoff_clearance_m: float = 0.6     # collision checks start once above this AGL
     #   (so sitting on the launch pad / landing at home is never a "crash")
 
-    # ----- Navigation / obstacle-avoiding path planner -----
-    # Plan a route AROUND (or over) obstacles instead of flying a straight line.
-    enable_path_planning: bool = True    # plan collision-free cruise/return routes
-    nav_clearance_m: float = 1.2         # horizontal safety buffer kept from every
-    #                                      obstacle (absorbs the GPS bias the cruise
-    #                                      flies on); raise it for more caution.
-    nav_max_climb_m: float = 14.0        # if it can't go AROUND, how much higher than
-    #                                      the cruise altitude it may climb to go OVER.
-    waypoint_tol_m: float = 2.5          # "reached" tolerance for an intermediate
-    #                                      route waypoint (loose: cruise flies on GPS).
+    # ----- Navigation: sensor-only obstacle avoidance (the realistic default) -----
+    # The drone steers around obstacles using ONLY a LiDAR distance scan + its noisy
+    # GPS goal direction -- it has NO knowledge of the world layout (src/avoidance.py).
+    avoid_range_m: float = 4.0           # a LiDAR return closer than this pushes the
+    #                                      drone away from it (steer-around distance).
+    avoid_gain: float = 1.6              # how hard obstacles push (bigger = wider berth).
+    avoid_fov_deg: float = 360.0         # LiDAR sweep used for navigation (360 = full).
+    avoid_rays: int = 36                 # number of rays in that sweep.
+
+    # ----- OPTIONAL: map-based global route planner (NOT realistic) -----
+    # Off by default. When True, the drone is GIVEN the world map and plans an A*
+    # route around obstacles up front (src/planner.py). Useful for comparison, but
+    # it "cheats" -- a real drone wouldn't have the map. The sensor-only avoidance
+    # above still runs on top of it.
+    enable_path_planning: bool = False
+    nav_clearance_m: float = 1.5         # planner's horizontal obstacle inflation
+    nav_max_climb_m: float = 14.0        # planner: how high it may climb to go OVER
+    waypoint_tol_m: float = 2.5          # planner: intermediate-waypoint reached tol
 
     # ----- LiDAR / depth sensor -----
     lidar_range_m: float = 12.0          # max ray distance
@@ -186,15 +194,9 @@ class SimConfig:
     lidar_h_rays: int = 24               # rays across the horizontal fan
     lidar_v_fov_deg: float = 40.0        # vertical fan width
     lidar_v_rays: int = 7                # rays across the vertical fan
-    lidar_reflex_stop_m: float = 2.0     # halt if an obstacle is closer than this ahead
+    lidar_reflex_stop_m: float = 2.0     # last-resort: halt if something is right ahead
     lidar_noise_m: float = 0.02          # range noise
-    enable_lidar_reflex: bool = True     # onboard safety: steer/stop before hitting things
-    # Reactive obstacle avoidance (the onboard layer that STEERS around things the
-    # GPS-guided path drifts toward, instead of just halting). Works with the global
-    # planner: the plan routes the corridor, this keeps real clearance within it.
-    avoid_rays: int = 24                 # horizontal 360-degree probe rays
-    avoid_range_m: float = 4.0           # start steering away when an obstacle is this close
-    avoid_gain: float = 1.2              # how hard to push away from obstacles
+    enable_lidar_reflex: bool = True     # master switch for onboard LiDAR avoidance
 
     # ----- Front-facing camera -----
     front_cam_width: int = 320

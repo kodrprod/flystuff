@@ -261,7 +261,8 @@ drone_delivery_sim/
     camera_sim.py      <- renders the synthetic downward camera image
     vision.py          <- REAL OpenCV ArUco detect + solvePnP (the hardware part)
     control.py         <- PID controllers (centering + descent)
-    planner.py         <- obstacle-avoiding route planner (A* + reactive steering)
+    avoidance.py       <- SENSOR-ONLY reactive obstacle avoidance (LiDAR repulsion)
+    planner.py         <- OPTIONAL map-based A* route planner (off by default)
     mission.py         <- the mission state machine + failsafes
     drop.py            <- payload release + landing-error model
     visualize.py       <- matplotlib dashboard + MP4/GIF export
@@ -360,9 +361,9 @@ python world/import_model.py m.obj # use ANY .obj model as the world (no Blender
 
 New since the last version (the four things added on top):
 
-* **Obstacle-avoiding navigation** — the drone now plans a route AROUND (or over)
-  buildings, trees and walls instead of flying a straight line into them, so you
-  can put the start anywhere. See **section J**.
+* **Sensor-only obstacle avoidance** — the drone navigates AROUND buildings, trees
+  and walls using only its **LiDAR + noisy GPS** (it has no map of the world), so you
+  can put the start anywhere and it won't crash into things. See **section J**.
 * **A real LIVE feed** — `--feeds` opens a window that updates *while the mission
   flies*, paced to **real time** (1 simulated second = 1 wall-clock second) so you
   can actually watch each phase. `--speed` changes the playback rate. See **K**.
@@ -439,8 +440,9 @@ view** (`live_speed`, `live_update_hz`, `live_feeds`).
 ```
 python tests/test_world.py      # scale (1 m cube), collision, reflex, LiDAR ranges
 python tests/test_compute.py    # link latency / bandwidth / loss, budget, the split
-python tests/test_planner.py    # the route planner: clear vs around vs over obstacles
+python tests/test_avoidance.py  # the sensor-only navigator (steers from a LiDAR scan)
 python tests/test_navigation.py # full missions from starts behind the tree/building
+python tests/test_planner.py    # the OPTIONAL map planner (clear vs around vs over)
 ```
 
 (The original `test_vision.py`, `test_mission.py`, `test_smoke.py` still pass with
@@ -493,34 +495,41 @@ Notes:
   be identified — that's how a crash can tell you *what* it hit.
 * Switch back to the built-in demo world any time: `python main.py --world sample`.
 
-## J. Obstacle-avoiding navigation (the drone now routes around things)
+## J. Obstacle-avoiding navigation — sensor-only (realistic)
 
-Previously the drone flew a dead-straight line from the start to the balcony, and
-the only obstacle handling was an onboard reflex that could merely **stop**. So if
-you moved the start so a tree or a wall sat in between, it would bump into it or
-stall. Now there are **two layers** working together (the same split a real drone
-uses — the laptop plans, the drone reacts):
+Previously the drone flew a dead-straight line to the balcony and the only obstacle
+handling was an onboard reflex that could merely **stop**. So if you moved the start
+behind a tree or a wall, it bumped into it or stalled. Now the drone **navigates
+around obstacles** — and it does it the realistic way: **it knows nothing about the
+world layout.** Everything it uses to avoid things comes from its own sensors.
 
-1. **A global route planner** (`src/planner.py`, a ground-station task). It builds a
-   2-D obstacle map of your world *at the flight altitude* and runs an A\* search to
-   find a clear path, then smooths it into waypoints. If it can't go **around**
-   something, it climbs and flies **over** it (it prefers the lowest altitude that
-   works). The planned route is drawn on the dashboard map (dashed green).
-2. **An onboard reactive layer.** Because the cruise flies on imperfect GPS in wind,
-   the *actual* path drifts a little off the plan; a 360-degree probe gently
-   **steers the drone away** from anything it drifts toward (and slides around it)
-   instead of just halting.
+How it works (`src/avoidance.py`):
 
-Try it: open `world/scene.json` (or run `python setup_positions.py`) and move
+* Each tick the drone takes a **LiDAR distance scan** — `world.horizontal_scan`
+  ray-casts the sensor against the world and hands back *only distances*, exactly
+  like a real spinning LiDAR. No object positions, no map.
+* Every return closer than `avoid_range_m` **pushes the drone away** from that
+  bearing (a local potential field), harder the closer it is. Summed up, this keeps
+  real clearance from walls **and** corners off to the side.
+* That push is blended with the drone's goal direction (from its **noisy GPS**), so
+  it curves smoothly around obstacles and heads on toward the balcony. If it's
+  pointed straight at a wall with the goal behind it, a tangential "slide" makes it
+  follow the wall around instead of stalling head-on.
+* The precision drop itself still uses the **down-camera ArUco vision** — also a
+  sensor. At no point does the navigation read the true geometry.
+
+Try it: run `python setup_positions.py` (or edit `world/scene.json`) and move
 `drone_start` behind the building or the tree, then `python main.py`. The summary
-prints whether it flew a *clear straight path* or *avoided obstacles*. Tuning knobs
-are in `config.py` under "Navigation / obstacle-avoiding path planner" and the
-reactive-avoidance lines (`nav_clearance_m`, `nav_max_climb_m`, `avoid_range_m`,
-`avoid_gain`). Set `enable_path_planning = False` to go back to straight-line flight.
+prints "sensor-only LiDAR avoidance (N steering interventions)", and on the
+dashboard you can watch the **flown path curve off the dashed straight line** as the
+LiDAR steers it around. Tuning knobs are in `config.py` under "Navigation:
+sensor-only obstacle avoidance" (`avoid_range_m`, `avoid_gain`, `avoid_rays`).
 
-> A note on clearance: the cruise is GPS-guided, so it keeps a real safety buffer
-> (`nav_clearance_m`) from obstacles — just like a real drone that can't trust GPS
-> to the centimetre. Lower it for tight indoor worlds; raise it to be more cautious.
+**Optional — a map-based planner for comparison.** If you set
+`enable_path_planning = True` in `config.py`, the drone is instead *given* the world
+map and plans an A\* route up front (`src/planner.py`) — useful to compare against,
+but it "cheats" (a real drone wouldn't have the map). The sensor-only avoidance
+still runs on top of it. Off by default.
 
 ## K. A real, time-accurate live feed
 

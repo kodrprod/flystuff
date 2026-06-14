@@ -1,12 +1,14 @@
 """
 test_navigation.py
 ==================
-End-to-end proof that the drone now NAVIGATES around obstacles instead of crashing
-into / stalling against them when the launch point is moved behind something.
+End-to-end proof that the drone NAVIGATES around obstacles using ONLY its sensors
+(LiDAR + noisy GPS, no map) instead of crashing into / stalling against them when
+the launch point is moved behind something.
 
-Each case relocates DRONE_START in the loaded scene and flies a full mission. The
-drone must reach the balcony and deliver WITHOUT a collision — the exact failure
-("bumps into the tree / the wall") the obstacle avoidance was added to fix.
+Each case relocates DRONE_START in the loaded scene and flies a full mission with
+the realistic sensor-only avoidance (config default). The drone must reach the
+balcony and deliver WITHOUT a collision — the exact failure ("bumps into the tree
+/ the wall") the avoidance was added to fix.
 
 Run directly:   python tests/test_navigation.py
 """
@@ -43,7 +45,7 @@ def _run_from(start_xy, seed=0):
 def test_start_behind_building_navigates():
     me = _run_from((56, 30))           # far side of the building wall
     assert not me["collision"], f"crashed into {me['collision_object']}"
-    assert me["nav_cruise_detour"], "the route should detour around the building"
+    assert me["reflex_events"] > 0, "sensor avoidance should engage to get around the wall"
     assert me["drop_error_m"] is not None, "the snack was never delivered"
 
 
@@ -54,7 +56,7 @@ def test_start_east_of_building_navigates():
 
 
 def test_various_relocated_starts_no_crash():
-    starts = [(40, -15), (24, -8), (60, 60), (-10, 40), (40, -25), (-8, 30)]
+    starts = [(40, -15), (24, -8), (60, 60), (-10, 40), (40, -25), (-8, 30), (48, 8)]
     crashes = []
     for s in starts:
         me = _run_from(s)
@@ -66,7 +68,6 @@ def test_various_relocated_starts_no_crash():
 def test_default_start_still_succeeds():
     me = _run_from((0, 0))
     assert me["success"], f"default mission regressed: {me['fail_reason']}"
-    assert not me["nav_cruise_detour"], "default home->balcony should stay a straight path"
 
 
 if __name__ == "__main__":

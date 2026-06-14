@@ -81,8 +81,9 @@ class Dashboard:
                 textcoords="offset points", xytext=(6, 6), fontsize=8)
         ax.plot(mE, mN, "x", color="#c51b8a", ms=11, mew=2.5, zorder=6)
         ax.annotate("marker", (mE, mN), textcoords="offset points", xytext=(6, -12), fontsize=8)
-        # Planned obstacle-avoiding route (dashed) the drone follows.
-        for key, col, lbl in (("cruise_path", "#31a354", "planned route"),
+        # The straight line to the goal (dashed) -- the drone's flown path curves
+        # off it as the LiDAR steers around obstacles it senses.
+        for key, col, lbl in (("cruise_path", "#31a354", "direct line to goal"),
                             ("return_path", "#9e9ac8", None)):
             path = view.get(key)
             if path is not None and len(path) > 1:

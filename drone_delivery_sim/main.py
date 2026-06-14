@@ -25,8 +25,42 @@ Change the SCENARIO (balcony height, wind, marker, etc.) by editing config.py.
 
 from __future__ import annotations
 import argparse
+import os
 import sys
 import time
+
+
+def _require_dependencies() -> None:
+    """Fail early with a friendly, copy-pasteable message if a third-party package
+    is missing -- instead of a confusing deep ImportError (e.g. "No module named
+    'cv2'") from some inner module."""
+    import importlib.util
+    required = {"numpy": "numpy", "cv2": "opencv-contrib-python",
+                "matplotlib": "matplotlib", "imageio": "imageio"}
+    missing = [pip_name for module, pip_name in required.items()
+            if importlib.util.find_spec(module) is None]
+    if not missing:
+        return
+    here = os.path.dirname(os.path.abspath(__file__))
+    bar = "=" * 66
+    print(bar)
+    print(" Missing required Python package(s): " + ", ".join(missing))
+    print(bar)
+    print("This simulation needs a few libraries that aren't installed yet.\n")
+    print("Create the project's private environment and install everything:\n")
+    print(f'    cd "{here}"')
+    print("    python3 -m venv .venv")
+    print("    source .venv/bin/activate")
+    print("    pip install -r requirements.txt\n")
+    print("Then run it again:\n")
+    print("    source .venv/bin/activate")
+    print("    python main.py")
+    print(bar)
+    sys.exit(1)
+
+
+_require_dependencies()
+
 import matplotlib
 
 from config import CONFIG
@@ -62,11 +96,15 @@ def print_summary(mission):
     print(f"  Returned home within : {fmt(m['return_error_m'],' m')}   (GPS landing)")
     print(f"  Battery used         : {fmt(m['battery_used_pct'],' %')}")
     print(f"  Flight time          : {fmt(m['duration_s'],' s')}")
+    av = m.get("reflex_events", 0)
     if m.get("nav_planned"):
-        route = (f"avoided obstacles (climb to {m['nav_cruise_alt']:.0f} m / "
-                f"{m['nav_waypoints']} waypoints)" if m.get("nav_cruise_detour")
-                else "clear straight path")
-        print(f"  Navigation           : {route}")
+        route = (f"map planner: avoided obstacles ({m['nav_waypoints']} waypoints"
+                f" @ {m['nav_cruise_alt']:.0f} m)" if m.get("nav_cruise_detour")
+                else "map planner: clear straight path")
+    else:
+        route = (f"sensor-only LiDAR avoidance ({av} steering interventions)"
+                if av else "sensor-only: clear path (no obstacles in the way)")
+    print(f"  Navigation           : {route}")
     if m.get("collision"):
         print(f"  COLLISION            : hit {m['collision_object']} at "
             f"{fmt(m['collision_time_s'],' s')}")
