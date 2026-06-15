@@ -107,3 +107,59 @@ def repulse(goal_vel, bearings, clear, cfg):
     elif 1e-6 < m < vmin:
         v = v / m * vmin
     return v, True
+
+
+def vertical_clearances(goal_vel, az, el, clear, cfg):
+    """
+    From a 3-D LiDAR scan, return the open distances that decide a vertical maneuver,
+    all measured along the goal bearing:
+
+      fwd   : at the drone's height (incl. a slightly-down ray, so "clear" means the
+            body — not just the centre — is above the obstacle's top)
+      over  : a ~40-deg up-forward ray (can a climb get over the top from here?)
+      ceil  : steep-up rays (is the sky above open, i.e. can we keep climbing?)
+      under : steep-down rays (is there room to drop below it?)
+    """
+    goal_vel = np.asarray(goal_vel, float)
+    az = np.asarray(az, float); el = np.asarray(el, float); clear = np.asarray(clear, float)
+    gaz = float(np.arctan2(goal_vel[1], goal_vel[0]))
+    cone = np.radians(float(cfg.avoid_fwd_cone_deg))
+    ahead = np.abs(wrap(az - gaz)) < cone
+    mr = float(cfg.lidar_range_m)
+
+    def _min(mask):
+        return float(clear[mask].min()) if np.any(mask) else mr
+
+    fwd = _min(ahead & (el < np.radians(6.0)) & (el > np.radians(-14.0)))
+    over = _min(ahead & (el > np.radians(33.0)) & (el < np.radians(52.0)))
+    ceil = _min(ahead & (el > np.radians(65.0)))
+    under = _min(ahead & (el < np.radians(-25.0)))
+    return fwd, over, ceil, under
+
+
+def vertical_avoid(goal_vel, az, el, clear, cfg, ground_clear=None):
+    """
+    Stateless single-shot vertical decision (used by the unit tests and as a
+    fallback): climb OVER if blocked ahead but open above; duck UNDER if blocked
+    above but open below with ground room; otherwise 0 (steer around).
+    Returns (vertical_rate, active).
+    """
+    if not bool(getattr(cfg, "avoid_vertical", True)):
+        return 0.0, False
+    if float(np.linalg.norm(np.asarray(goal_vel, float))) < 1e-6:
+        return 0.0, False
+    fwd, over, ceil, under = vertical_clearances(goal_vel, az, el, clear, cfg)
+    trig = float(cfg.avoid_climb_trigger_m)
+    need = float(cfg.avoid_climb_clear_m)
+    # "Can clear it" = the up-forward ray reaches (near) OPEN SKY over the top, not
+    # merely travels a few metres up a tall face.
+    sky = 0.8 * float(cfg.lidar_range_m)
+    if fwd >= trig:
+        return 0.0, False
+    rate = float(cfg.avoid_climb_rate_mps) * float(np.clip((trig - fwd) / trig, 0.35, 1.0))
+    if over > sky and ceil > need:
+        return +rate, True
+    if (under > sky and ground_clear is not None
+            and ground_clear > need + float(cfg.avoid_ground_margin_m)):
+        return -rate, True
+    return 0.0, False

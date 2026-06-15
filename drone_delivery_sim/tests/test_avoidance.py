@@ -65,6 +65,52 @@ def test_wall_ahead_steers_sideways():
     assert abs(v[1]) > 0.3, "must develop a sideways (tangential) component to slip past"
 
 
+def _scan3d(level_clear, up_clear, down_clear=12.0, n=16):
+    """Synthetic 3-D scan heading East: ring (el=0) + forward up/down rays at az=0."""
+    cfg = SimConfig()
+    az, el, clear = [], [], []
+    for a in np.radians(np.linspace(0, 360, n, endpoint=False)):
+        az.append(a); el.append(0.0)
+        ahead = abs(avoidance.wrap(np.array([a]))[0]) < np.radians(40)  # near East (0)
+        clear.append(level_clear if ahead else cfg.lidar_range_m)
+    for e in (45.0, 70.0):
+        az.append(0.0); el.append(np.radians(e)); clear.append(up_clear)
+    az.append(0.0); el.append(np.radians(-30.0)); clear.append(down_clear)
+    return np.array(az), np.array(el), np.array(clear)
+
+
+def test_climbs_over_when_open_above():
+    cfg = SimConfig()
+    az, el, clear = _scan3d(level_clear=1.5, up_clear=cfg.lidar_range_m)   # tree: blocked ahead, open above
+    goal = np.array([cfg.max_horizontal_speed_mps, 0.0])
+    rate, active = avoidance.vertical_avoid(goal, az, el, clear, cfg, ground_clear=10.0)
+    assert active and rate > 0.0, "should climb over an obstacle that is open above"
+
+
+def test_no_climb_when_blocked_above():
+    cfg = SimConfig()
+    az, el, clear = _scan3d(level_clear=1.5, up_clear=1.5, down_clear=1.5)  # building: blocked all round
+    goal = np.array([cfg.max_horizontal_speed_mps, 0.0])
+    rate, active = avoidance.vertical_avoid(goal, az, el, clear, cfg, ground_clear=10.0)
+    assert not active and rate == 0.0, "a wall blocked above must be gone around, not climbed"
+
+
+def test_ducks_under_when_open_below():
+    cfg = SimConfig()
+    az, el, clear = _scan3d(level_clear=1.5, up_clear=1.5, down_clear=cfg.lidar_range_m)  # overhang
+    goal = np.array([cfg.max_horizontal_speed_mps, 0.0])
+    rate, active = avoidance.vertical_avoid(goal, az, el, clear, cfg, ground_clear=15.0)
+    assert active and rate < 0.0, "should duck under when blocked above but open below with ground room"
+
+
+def test_no_vertical_when_path_clear():
+    cfg = SimConfig()
+    az, el, clear = _scan3d(level_clear=cfg.lidar_range_m, up_clear=cfg.lidar_range_m)
+    goal = np.array([cfg.max_horizontal_speed_mps, 0.0])
+    rate, active = avoidance.vertical_avoid(goal, az, el, clear, cfg, ground_clear=10.0)
+    assert not active and rate == 0.0, "open path -> no vertical maneuver"
+
+
 if __name__ == "__main__":
     failures = 0
     for name, fn in list(globals().items()):

@@ -431,8 +431,10 @@ All under the "3D WORLD UPGRADE KNOBS" heading: which world to load
 (`link_latency_ms`, `link_bandwidth_kbps`, `link_packet_loss`,
 `onboard_budget_ms_per_tick`).
 
-Also: **sensor-only avoidance** (`avoid_range_m`, `avoid_gain`, `avoid_rays`, and the
-proactive braking `avoid_brake_decel_mps2` / `avoid_min_speed_mps` / `avoid_fwd_cone_deg`),
+Also: **sensor-only avoidance** (`avoid_range_m`, `avoid_gain`, `avoid_rays`, the
+proactive braking `avoid_brake_decel_mps2` / `avoid_min_speed_mps` / `avoid_fwd_cone_deg`,
+and the 3-D climb-over/duck-under `avoid_vertical` / `avoid_climb_trigger_m` /
+`avoid_climb_clear_m` / `avoid_climb_rate_mps`),
 the optional **map planner** (`enable_path_planning`, `nav_clearance_m`,
 `nav_max_climb_m`, `waypoint_tol_m`), and the **live view** (`live_speed`,
 `live_update_hz`, `live_feeds`).
@@ -448,6 +450,7 @@ python tests/test_world.py      # scale (1 m cube), collision, reflex, LiDAR ran
 python tests/test_compute.py    # link latency / bandwidth / loss, budget, the split
 python tests/test_avoidance.py  # the sensor-only navigator (steers from a LiDAR scan)
 python tests/test_navigation.py # full missions from starts behind the tree/building
+python tests/test_vertical_nav.py # climbs OVER a clearable barrier, goes AROUND a too-tall one
 python tests/test_planner.py    # the OPTIONAL map planner (clear vs around vs over)
 ```
 
@@ -525,6 +528,13 @@ How it works (`src/avoidance.py`):
   the more it slows down (it caps its speed so it could always stop within the clear
   distance), so it never barrels into a tree faster than it can turn. Open air → full
   speed; something looming → it eases off. Tuned by `avoid_brake_decel_mps2`.
+* It avoids in **3-D, not just sideways.** Extra LiDAR rays angled up and down let it
+  decide between going **around**, **over**, or **under**: if the way ahead is blocked
+  but open above, it **climbs over** (a tree, a hedge, a low roof); if it's open below
+  with ground to spare, it **ducks under** (an overhang); if it's blocked every way up
+  (a tall building), it steers **around** as before. So a tree taller than the cruise
+  height — which it can't easily go around — is simply hopped over. Tuned by
+  `avoid_vertical`, `avoid_climb_trigger_m`, `avoid_climb_clear_m`, `avoid_climb_rate_mps`.
 * The precision drop itself still uses the **down-camera ArUco vision** — also a
   sensor. At no point does the navigation read the true geometry.
 

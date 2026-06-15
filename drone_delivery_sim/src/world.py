@@ -467,6 +467,35 @@ class World:
         return {"bearings": bearings, "clear": clear, "dists": dists, "hit": hit,
                 "origin": pos, "heading": float(heading)}
 
+    def elevation_fan(self, pos=None, goal_bearing=0.0, n_el=None, max_range=None):
+        """
+        The VERTICAL part of the 3-D LiDAR: a forward fan, around the travel/goal
+        bearing, angled UP (can I clear it by going over?), slightly DOWN (am I high
+        enough above its top, with body margin?), and steeply DOWN (room to duck
+        under?). Cast on demand (only when the horizontal ring says something is
+        ahead), so open-air cruise stays cheap. Distances only -- no map.
+        """
+        cfg = self.cfg
+        pos = self.backend.drone_pos if pos is None else np.asarray(pos, float)
+        mr = cfg.lidar_range_m if max_range is None else float(max_range)
+        n_el = cfg.avoid_el_rays if n_el is None else int(n_el)
+        az_off = np.radians(np.linspace(-40.0, 40.0, 5))
+        el_up = np.radians(np.linspace(25.0, 80.0, max(1, n_el)))        # over
+        el_margin = np.radians([-6.0, -12.0])                            # body clearance
+        el_duck = np.radians([-30.0, -55.0])                            # under
+        el_ang = np.concatenate([el_up, el_margin, el_duck])
+        fa, fe = np.meshgrid(az_off, el_ang)
+        az = float(goal_bearing) + fa.ravel()
+        el = fe.ravel()
+        dirs = np.stack([np.cos(el) * np.cos(az), np.cos(el) * np.sin(az), np.sin(el)], axis=1)
+        hits = self.backend.raycast(np.tile(pos, (len(az), 1)), dirs, mr)
+        dists = np.array([h["distance"] for h in hits], float)
+        hit = np.array([h["hit"] for h in hits])
+        if cfg.lidar_noise_m > 0:
+            dists = np.clip(dists + self.rng.normal(0, cfg.lidar_noise_m, len(az)), 0, mr)
+        clear = np.where(hit, dists, mr)
+        return {"az": az, "el": el, "clear": clear, "origin": pos}
+
     def ring_scan(self, pos=None, n_rays=24, max_range=None):
         """
         A horizontal 360-degree distance probe around the drone (at its altitude).

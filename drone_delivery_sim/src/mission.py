@@ -172,6 +172,8 @@ class Mission:
         self._heading = 0.0              # travel heading (for front cam + LiDAR + reflex)
         self._reflex_active = False      # LiDAR reflex currently halting forward motion
         self._reflex_events = 0          # how many ticks the reflex intervened
+        self._climb_state = 0            # vertical avoidance latch: +1 climbing over, -1 ducking under
+        self._cross_alt = -1e9           # altitude to hold while crossing over an obstacle (-1e9 = none)
 
         # ---- Obstacle-avoiding route planning (a GROUND-station task) ----------
         # Plan a collision-free path for the cruise (start -> balcony) and the
@@ -307,26 +309,98 @@ class Mission:
             return rf
         return vh if vh is not None else (rf if rf is not None else 0.0)
 
-    def _sensor_avoidance(self, pos, v_goal):
+    def _sensor_avoidance(self, pos, v_goal, goal_dist=1e9):
         """
-        SENSOR-ONLY reactive steering. Redirect the GPS-goal velocity around
-        obstacles using ONLY a 360-degree LiDAR scan -- the drone never sees the map.
-        Returns a (possibly) redirected 2-D velocity; open air -> unchanged.
+        SENSOR-ONLY reactive steering in 3-D. From a single LiDAR scan (a horizontal
+        ring + a forward up/down fan) the navigator both STEERS AROUND obstacles and
+        climbs OVER / ducks UNDER them -- the drone never sees the map.
+        Returns (horizontal_velocity_2d, vertical_rate). Open air -> unchanged, 0.
+
+        `goal_dist` is the horizontal distance left to the destination: once the drone
+        is basically there, reactive avoidance is suppressed so it doesn't react to
+        whatever sits just BEHIND the target (e.g. the building wall behind a balcony)
+        -- it's arriving, and the precision phase takes over next.
         """
         cfg = self.cfg
         if float(np.linalg.norm(v_goal)) < 1e-6:
-            return v_goal
-        # A 360-degree LiDAR distance scan -- the ONLY spatial input the navigator
-        # gets. It never sees object positions, just these ranges.
-        scan = self.world.horizontal_scan(pos, heading=0.0,
-                                        fov_deg=cfg.avoid_fov_deg,
-                                        n_rays=cfg.avoid_rays)
-        v, active = avoidance.repulse(v_goal, scan["bearings"], scan["clear"], cfg)
-        if active:
+            return v_goal, 0.0, -1e9
+        if goal_dist < 1.0:                             # essentially arrived
+            self._climb_state = 0
+            self._cross_alt = -1e9
+            return v_goal, 0.0, -1e9
+        gaz = float(np.arctan2(v_goal[1], v_goal[0]))
+        mr = cfg.lidar_range_m
+        # Only obstacles BETWEEN the drone and its destination matter. Returns farther
+        # than the goal are things BEHIND the target (e.g. the wall behind a balcony) --
+        # the drone will stop at the goal first, so treat them as clear. This is what
+        # lets it still climb over / dodge a wall it must CROSS to reach a relocated
+        # start, while not reacting to the building just past its delivery balcony.
+        horizon = max(goal_dist - 1.0, 0.0)
+
+        # Horizontal LiDAR ring (cheap, every tick) -> sideways steer-around.
+        ring = self.world.horizontal_scan(pos, heading=0.0,
+                                        fov_deg=cfg.avoid_fov_deg, n_rays=cfg.avoid_rays)
+        ring_clear = np.where(ring["clear"] < horizon, ring["clear"], mr)
+        v, act_h = avoidance.repulse(v_goal, ring["bearings"], ring_clear, cfg)
+
+        climb = 0.0
+        if cfg.avoid_vertical:
+            trig = cfg.avoid_climb_trigger_m
+            need = cfg.avoid_climb_clear_m
+            sky = 0.8 * cfg.lidar_range_m       # up-ray reaches open sky over the top
+            # Gate the (pricier) vertical fan on the cheap ring: only look up/down when
+            # something is ahead at this height, or we're mid-maneuver. Open air -> skip.
+            cone = np.radians(cfg.avoid_fwd_cone_deg)
+            d_ahead = np.abs(avoidance.wrap(ring["bearings"] - gaz)) < cone
+            fwd_ring = float(ring_clear[d_ahead].min()) if np.any(d_ahead) else mr
+            if fwd_ring >= trig + 2.0 and self._climb_state == 0 and self._cross_alt < -1e8:
+                if act_h:                                   # only sideways steering needed
+                    self._reflex_active = True
+                    self._reflex_events += 1
+                    self.metrics["reflex_events"] = self._reflex_events
+                return v, 0.0, -1e9
+            ground = self.sensors.read_rangefinder()        # downward sensor (real)
+            fan = self.world.elevation_fan(pos, goal_bearing=gaz)
+            fan_clear = np.where(fan["clear"] < horizon, fan["clear"], mr)
+            az = np.concatenate([ring["bearings"], fan["az"]])
+            el = np.concatenate([np.zeros(len(ring["bearings"])), fan["el"]])
+            clear = np.concatenate([ring_clear, fan_clear])
+            fwd, over, ceil, under = avoidance.vertical_clearances(v_goal, az, el, clear, cfg)
+            st = self._climb_state
+            # Decide EARLY (from a few metres out, where a 40-deg ray can see over the
+            # top into open sky) and LATCH it, so the climb doesn't quit the moment the
+            # obstacle fills the shallow up-ray at close range. A tall wall whose top is
+            # NOT in sight up-forward fails this test -> it gets steered around instead.
+            if st == 0 and fwd < trig:
+                if over > sky and ceil > need:
+                    st = +1                                 # commit to going OVER
+                elif (under > sky and ground is not None
+                    and ground > need + cfg.avoid_ground_margin_m):
+                    st = -1                                 # commit to going UNDER
+            elif st == +1:
+                if (fwd >= trig + 1.0 or ceil < need        # cleared above, or can't climb more
+                        or pos[2] > self._start_z + 30.0):  # safety ceiling
+                    st = 0
+            elif st == -1:
+                if fwd >= trig + 1.0 or under < need or (ground is not None and ground < need):
+                    st = 0
+            self._climb_state = st
+            climb = (cfg.avoid_climb_rate_mps if st > 0
+                    else -cfg.avoid_climb_rate_mps if st < 0 else 0.0)
+            # Hold the cleared altitude until the obstacle is actually BEHIND us, so the
+            # altitude-hold doesn't yank the drone straight back down into the thing it
+            # just climbed over (which caused it to oscillate in front of the wall and
+            # clip it). Release once the path ahead AND below-ahead are open (passed it).
+            if st == +1:
+                self._cross_alt = max(self._cross_alt, pos[2])
+            elif self._cross_alt > -1e8:
+                if fwd >= trig + 1.0 and under > sky:
+                    self._cross_alt = -1e9              # obstacle passed -> may descend
+        if act_h or climb != 0.0 or self._cross_alt > -1e8:
             self._reflex_active = True
             self._reflex_events += 1
             self.metrics["reflex_events"] = self._reflex_events
-        return v
+        return v, float(climb), float(self._cross_alt)
 
     def _hold_over_target_gps(self):
         """
@@ -375,12 +449,15 @@ class Mission:
         # the precision phases run their own down-camera vision PID right next to the
         # balcony, where steering would fight the very target we're delivering onto.
         self._reflex_active = False
+        climb = 0.0
+        alt_floor = -1e9
         if sp > 0.2:
             self._heading = float(np.arctan2(v[1], v[0]))
             transit = self.state in (MissionState.CRUISE_TO_WAYPOINT,
                                     MissionState.RETURN_HOME)
+            goal_dist = float(np.hypot(err[0], err[1]))
             if transit and self.world is not None and cfg.enable_lidar_reflex:
-                v = self._sensor_avoidance(self.drone.pos, v)
+                v, climb, alt_floor = self._sensor_avoidance(self.drone.pos, v, goal_dist)
                 if np.linalg.norm(v) > 0.2:
                     self._heading = float(np.arctan2(v[1], v[0]))
         # Altitude hold: coarse phases use the barometer; landing uses rangefinder.
@@ -389,9 +466,19 @@ class Mission:
             alt = rf if rf is not None else self.sensors.read_barometer()
         else:
             alt = self.sensors.read_barometer()
-        vz = np.clip(cfg.position_ctrl_gain * (alt_target - alt),
+        # Don't descend below the altitude we climbed to clear an obstacle until it's
+        # behind us (alt_floor), or the hold would pull us back down into it.
+        alt_target_eff = max(alt_target, alt_floor)
+        vz = np.clip(cfg.position_ctrl_gain * (alt_target_eff - alt),
                     -cfg.max_descent_rate_mps, cfg.max_climb_rate_mps)
-        self.drone.set_velocity_body(float(v[0]), float(v[1]), float(vz), 0.0)
+        # Vertical obstacle avoidance overrides the altitude hold: climb OVER (don't
+        # let it pull back down into the obstacle) or duck UNDER, as decided above.
+        if climb > 0.0:
+            vz = max(vz, climb)
+        elif climb < 0.0:
+            vz = min(vz, climb)
+        vz = float(np.clip(vz, -cfg.max_descent_rate_mps, cfg.max_climb_rate_mps))
+        self.drone.set_velocity_body(float(v[0]), float(v[1]), vz, 0.0)
         return float(np.hypot(err[0], err[1]))
 
     # ------------------------------------------------------------------ #

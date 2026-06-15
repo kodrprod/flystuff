@@ -183,6 +183,16 @@ class SimConfig:
     avoid_brake_decel_mps2: float = 2.0  # gentler = brakes earlier / more cautious
     avoid_min_speed_mps: float = 0.6     # creep speed near obstacles (so it keeps sliding past)
     avoid_fwd_cone_deg: float = 55.0     # "ahead" cone (around the goal) used for braking
+    # Vertical avoidance: climb OVER (or duck UNDER) obstacles, not just steer around
+    # them -- so a tree taller than the cruise height is hopped over, while a tall
+    # building (no room above) is still gone around. Uses extra LiDAR rays angled up
+    # and down (3-D scan) + the downward rangefinder; still no map.
+    avoid_vertical: bool = True          # enable climb-over / duck-under
+    avoid_climb_trigger_m: float = 6.0   # forward clearance below this -> consider going over/under
+    avoid_climb_clear_m: float = 3.5     # open space needed above (or below) to commit to it
+    avoid_climb_rate_mps: float = 2.0    # how fast to climb/descend to clear an obstacle
+    avoid_el_rays: int = 4               # elevation rays in the forward 3-D fan
+    avoid_ground_margin_m: float = 2.0   # keep at least this much ground clearance when ducking under
 
     # ----- OPTIONAL: map-based global route planner (NOT realistic) -----
     # Off by default. When True, the drone is GIVEN the world map and plans an A*
