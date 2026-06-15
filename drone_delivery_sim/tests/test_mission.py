@@ -66,6 +66,26 @@ def test_vision_beats_gps_only():
     assert mean_vision * 5 < mean_gps, "vision should be many times better than GPS-only"
 
 
+def test_vision_phase_reflex_halts_lateral_obstacle():
+    """The final vision approach (align / descend) also runs the onboard reflex.
+    A lateral obstacle -- a tree beside the balcony -- halts the horizontal
+    motion, while the controlled descent ONTO the target is left untouched; a
+    clear approach is not altered."""
+    m = Mission(config=CONFIG, seed=0)
+    if m.world is None:
+        return                       # world layer unavailable; nothing to probe
+    # Just west of the tree canopy (west face ~22.7 m), drifting east INTO it
+    # while descending -- the kind of command the approach controllers produce.
+    m.drone.pos = np.array([21.0, 12.0, 6.5])
+    ve, vn, vz = m._apply_reflex(2.0, 0.0, -1.0, lateral_only=True)
+    assert (ve, vn) == (0.0, 0.0), "drift into the tree must be halted"
+    assert vz == -1.0, "the descent toward the target must be left untouched"
+    assert m._reflex_active
+    # In the open, the identical command must pass through unchanged.
+    m.drone.pos = np.array([5.0, -5.0, 6.5])
+    assert m._apply_reflex(2.0, 0.0, -1.0, lateral_only=True) == (2.0, 0.0, -1.0)
+
+
 def _report(results, seeds=SEEDS):
     drops = np.array([r["drop_error_m"] for r in results])
     gps = np.array([r["gps_only_error_m"] for r in results])

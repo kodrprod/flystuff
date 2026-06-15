@@ -406,7 +406,11 @@ at home for launch and landing is allowed. The onboard **LiDAR reflex** tries to
 prevent this by halting the drone if something is too close along its path. The
 probe is aimed in the drone's actual travel direction and sweeps toward where it
 is climbing or descending, so obstacles it is rising or dropping INTO (a tree
-canopy, an eave) are caught too — not only ones level and off to the side.
+canopy, an eave) are caught too — not only ones level and off to the side. It
+runs in every moving phase, including the final vision approach onto the balcony:
+there it watches only the horizontal directions (the descent itself is aimed at
+the target), so a neighbouring tree or wall still halts the drone without
+fighting the controlled drop.
 
 ## F. New settings in `config.py`
 

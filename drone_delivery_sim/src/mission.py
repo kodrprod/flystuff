@@ -260,6 +260,44 @@ class Mission:
             return rf
         return vh if vh is not None else (rf if rf is not None else 0.0)
 
+    def _apply_reflex(self, v_e, v_n, vz, lateral_only):
+        """
+        Onboard LiDAR safety reflex applied to a velocity command. Probes along
+        the drone's travel direction and, if a solid obstacle is within the stop
+        distance, halts the motion heading into it. Returns the (possibly
+        modified) (v_e, v_n, vz).
+
+        This is intentionally local/onboard -- a round-trip to the ground station
+        would be too slow to avoid a crash -- and runs in EVERY moving phase:
+
+          * lateral_only=False (transit legs): probe the full 3-D travel direction
+            including the climb/descent, and hold ALL motion on a trigger. This is
+            what catches obstacles the drone is flying, climbing or descending INTO
+            (tree canopies, eaves) -- not just ones level and off to the side.
+          * lateral_only=True (the vision approach onto the balcony): probe only
+            the HORIZONTAL travel direction and hold just that. The downward
+            direction is the delivery target itself, so the controlled descent is
+            never fought -- only a lateral obstacle (a neighbouring tree, a wall)
+            halts the drone.
+        """
+        self._reflex_active = False
+        cfg = self.cfg
+        sp = float(np.hypot(v_e, v_n))
+        # Keep the travel heading (body / front-camera facing) current on transit.
+        if sp > 0.2 and not lateral_only:
+            self._heading = float(np.arctan2(v_n, v_e))
+        climb = 0.0 if lateral_only else float(vz)
+        if np.hypot(sp, climb) <= 0.2 or self.world is None or not cfg.enable_lidar_reflex:
+            return v_e, v_n, vz
+        heading = float(np.arctan2(v_n, v_e)) if sp > 1e-3 else self._heading
+        fd = self.world.reflex_distance(self.drone.pos, heading, climb=climb, speed=sp)
+        if fd < cfg.lidar_reflex_stop_m:
+            self._reflex_active = True
+            self._reflex_events += 1
+            self.metrics["reflex_events"] = self._reflex_events
+            return (0.0, 0.0, vz) if lateral_only else (0.0, 0.0, 0.0)
+        return v_e, v_n, vz
+
     def _fly_horizontal_via_gps(self, tx, ty, speed, alt_target, use_rangefinder=False):
         """
         Velocity-chase a horizontal target using ONLY noisy GPS, smoothed with an
@@ -298,28 +336,11 @@ class Mission:
         vz = float(np.clip(cfg.position_ctrl_gain * (alt_target - alt),
                         -cfg.max_descent_rate_mps, cfg.max_climb_rate_mps))
 
-        # --- Onboard LiDAR safety reflex: halt before flying into an obstacle ---
-        # (This is intentionally local/onboard -- a round-trip to the ground station
-        # would be too slow to avoid a crash. Nominal clear paths never trigger it.)
-        # The probe is aimed along the real velocity and sweeps toward where the
-        # drone is climbing / descending, so obstacles it is rising or dropping
-        # INTO (tree canopies, eaves) are caught too, not just ones off to the
-        # side. Gate on the 3-D speed so a near-vertical climb still probes; when
-        # it fires, hold ALL motion -- including the climb / descent.
-        self._reflex_active = False
-        if np.hypot(sp, vz) > 0.2:
-            if sp > 1e-3:
-                self._heading = float(np.arctan2(v[1], v[0]))
-            if self.world is not None and cfg.enable_lidar_reflex:
-                fd = self.world.reflex_distance(self.drone.pos, self._heading,
-                                                climb=vz, speed=sp)
-                if fd < cfg.lidar_reflex_stop_m:
-                    v = v * 0.0                       # hold horizontal position
-                    vz = 0.0                          # and stop the climb / descent
-                    self._reflex_active = True
-                    self._reflex_events += 1
-                    self.metrics["reflex_events"] = self._reflex_events
-        self.drone.set_velocity_body(float(v[0]), float(v[1]), float(vz), 0.0)
+        # Onboard LiDAR safety reflex: probe the full 3-D travel direction (a
+        # transit leg may climb or descend) and hold all motion if something is
+        # too close along the path.
+        v_e, v_n, vz = self._apply_reflex(float(v[0]), float(v[1]), vz, lateral_only=False)
+        self.drone.set_velocity_body(v_e, v_n, vz, 0.0)
         return float(np.hypot(err[0], err[1]))
 
     # ------------------------------------------------------------------ #
@@ -440,6 +461,9 @@ class Mission:
                 cur_h = rf if rf is not None else self._f_h
                 vz = float(np.clip(cfg.position_ctrl_gain * (target_h - cur_h),
                                 -cfg.max_descent_rate_mps, cfg.max_climb_rate_mps))
+                # Onboard reflex: halt drift into a lateral obstacle (a tree, a
+                # wall) while centring; the altitude hold is left untouched.
+                v_e, v_n, vz = self._apply_reflex(v_e, v_n, vz, lateral_only=True)
                 self.drone.set_velocity_body(v_e, v_n, vz, 0.0)
                 offset = np.hypot(self._f_e, self._f_n)
                 if offset < cfg.align_tol_m:
@@ -466,6 +490,10 @@ class Mission:
                     height = self._fused_height(vis)
                     target = cfg.release_height_above_balcony_m
                     vz = self.vert.update(height, target, dt)
+                    # Onboard reflex: a lateral obstacle (a neighbouring tree)
+                    # halts the horizontal motion; the descent onto the target,
+                    # which is straight down, is deliberately not probed.
+                    v_e, v_n, vz = self._apply_reflex(v_e, v_n, vz, lateral_only=True)
                     self.drone.set_velocity_body(v_e, v_n, vz, 0.0)
                     if abs(height - target) < 0.12 and offset < cfg.drop_tol_m:
                         self._settle += 1
