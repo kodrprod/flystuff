@@ -402,6 +402,39 @@ class Mission:
             self.metrics["reflex_events"] = self._reflex_events
         return v, float(climb), float(self._cross_alt)
 
+    def _precision_lateral_halt(self, pos, v_e, v_n):
+        """
+        Obstacle protection for the FINAL vision approach (align/descend). The drone
+        is centring on the balcony and descending onto it, so the full climb-over
+        navigator would fight the delivery. Instead we just probe HORIZONTALLY with
+        the LiDAR (never downward -- down is the target) and cancel any part of the
+        horizontal motion that points TOWARD something close to the side, e.g. a tree
+        or wall right next to the drop point. The controlled descent continues, and
+        centring in the open directions still works. Sensor-only; on a clear balcony
+        it never triggers. Returns (v_e, v_n).
+        """
+        cfg = self.cfg
+        if self.world is None or not cfg.enable_lidar_reflex:
+            return v_e, v_n
+        scan = self.world.horizontal_scan(pos, heading=0.0,
+                                        fov_deg=cfg.avoid_fov_deg, n_rays=cfg.avoid_rays)
+        close = scan["clear"] < cfg.lidar_reflex_stop_m
+        if not np.any(close):
+            return v_e, v_n
+        v = np.array([float(v_e), float(v_n)])
+        triggered = False
+        for b in scan["bearings"][close]:
+            toward = np.array([np.cos(b), np.sin(b)])     # unit vector at the obstacle
+            comp = float(v @ toward)
+            if comp > 0.0:                                # moving toward it -> remove that part
+                v = v - comp * toward
+                triggered = True
+        if triggered:
+            self._reflex_active = True
+            self._reflex_events += 1
+            self.metrics["reflex_events"] = self._reflex_events
+        return float(v[0]), float(v[1])
+
     def _hold_over_target_gps(self):
         """
         Vision-lost fallback for the precision phases: HOLD position over the balcony
@@ -460,6 +493,13 @@ class Mission:
                 v, climb, alt_floor = self._sensor_avoidance(self.drone.pos, v, goal_dist)
                 if np.linalg.norm(v) > 0.2:
                     self._heading = float(np.arctan2(v[1], v[0]))
+            elif self.world is not None and cfg.enable_lidar_reflex:
+                # Other GPS-guided phases (climb / search / ascend / land): the drone
+                # holds a GPS point that, with the GPS bias, can sit near an obstacle by
+                # the target. Don't full-navigate here (it would fight the hover), just
+                # cancel motion INTO anything close to the side -- lateral protection.
+                v0, v1 = self._precision_lateral_halt(self.drone.pos, v[0], v[1])
+                v = np.array([v0, v1])
         # Altitude hold: coarse phases use the barometer; landing uses rangefinder.
         if use_rangefinder:
             rf = self.sensors.read_rangefinder()
@@ -607,6 +647,7 @@ class Mission:
             else:
                 self._lost = 0
                 v_e, v_n = self.horiz.update(self._f_e, self._f_n, dt)
+                v_e, v_n = self._precision_lateral_halt(self.drone.pos, v_e, v_n)
                 # Hold the search altitude with the rangefinder while centring.
                 rf = self.sensors.read_rangefinder()
                 target_h = cfg.search_alt_above_balcony_m
@@ -636,6 +677,7 @@ class Mission:
                     self._transition(MissionState.PRECISION_ALIGN, "offset grew -> re-align")
                 else:
                     v_e, v_n = self.horiz.update(self._f_e, self._f_n, dt)
+                    v_e, v_n = self._precision_lateral_halt(self.drone.pos, v_e, v_n)
                     height = self._fused_height(vis)
                     target = cfg.release_height_above_balcony_m
                     vz = self.vert.update(height, target, dt)

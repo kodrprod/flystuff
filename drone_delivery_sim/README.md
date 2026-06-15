@@ -537,6 +537,17 @@ How it works (`src/avoidance.py`):
   `avoid_vertical`, `avoid_climb_trigger_m`, `avoid_climb_clear_m`, `avoid_climb_rate_mps`.
 * The precision drop itself still uses the **down-camera ArUco vision** — also a
   sensor. At no point does the navigation read the true geometry.
+* During the **final vision approach** (centring + descending onto the balcony) the
+  full climb-over navigator is off — it would fight the controlled descent — but a
+  **lateral LiDAR guard** stays on: it never probes *downward* (down is the delivery
+  target) and only cancels horizontal motion that would carry the drone *into*
+  something close to the side, e.g. a tree or wall right next to the drop point.
+
+> Clearance around the drop point: because the approach to the balcony is GPS-guided
+> until the camera takes over, give the drop target a few metres of clearance from
+> tall obstacles — an obstacle right up against it can be clipped on arrival before
+> vision centres the drone, exactly as a real GPS+camera delivery drone would need
+> room to land.
 
 **Launching from a balcony/rooftop (an elevated pad).** If `DRONE_START` sits on a
 raised surface in your model, that's fully supported: takeoff clearance, the
