@@ -576,13 +576,27 @@ class Mission:
             else:
                 self._lost = 0
                 offset = np.hypot(self._f_e, self._f_n)
-                if offset > cfg.descend_abort_tol_m:
-                    self._transition(MissionState.PRECISION_ALIGN, "offset grew -> re-align")
+                # Only a LARGE divergence (marker blown well off the balcony) climbs
+                # back to re-align. Mild drift is handled below by pausing the descent
+                # and re-centring in place -- climbing all the way back for every small
+                # cross-wind nudge is what used to livelock the approach until timeout.
+                if offset > cfg.descend_reacquire_tol_m:
+                    self._transition(MissionState.PRECISION_ALIGN, "offset diverged -> re-align")
                 else:
                     v_e, v_n = self.horiz.update(self._f_e, self._f_n, dt)
                     height = self._fused_height(vis)
                     target = cfg.release_height_above_balcony_m
                     vz = self.vert.update(height, target, dt)
+                    # Gate the DESCENT on centring ("staircase"): descend at full rate
+                    # only while well-centred, easing to a hover as the offset grows
+                    # toward descend_abort_tol_m. Holding altitude there gives the
+                    # wind-cancelling integral time to pull the drone back over the
+                    # marker before it drops further, instead of out-running its own
+                    # centring into the wall gust. Climb (vz > 0) is never gated.
+                    if vz < 0.0:
+                        align_frac = float(np.clip(
+                            1.0 - offset / cfg.descend_abort_tol_m, 0.0, 1.0))
+                        vz *= align_frac
                     self.drone.set_velocity_body(v_e, v_n, vz, 0.0)
                     if abs(height - target) < 0.12 and offset < cfg.drop_tol_m:
                         self._settle += 1

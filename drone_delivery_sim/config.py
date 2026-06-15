@@ -118,11 +118,16 @@ class SimConfig:
     # Horizontal centring controller (drives marker offset -> 0).
     # Output is a velocity command (m/s) from a position error (m).
     # The integral term must have enough authority to fully cancel the steady
-    # wind near the wall (~1.8 m/s), otherwise the drone parks downwind.
+    # wind near the wall. The wind is amplified up to wind_building_multiplier
+    # (2x) within wind_building_radius_m of the balcony, so the gust right at the
+    # wall peaks around |wind_base| * 2 ~= 2.9 m/s. The integral authority
+    # (ki * i_limit) must exceed that or the drone parks downwind at a residual
+    # offset bigger than drop_tol_m and can never settle to drop. 0.5 * 8.0 = 4.0
+    # m/s comfortably clears the peak gust.
     horiz_kp: float = 1.2
     horiz_ki: float = 0.5
     horiz_kd: float = 0.35
-    horiz_i_limit: float = 5.0           # anti-windup clamp (ki*limit = 2.5 m/s authority)
+    horiz_i_limit: float = 8.0           # anti-windup clamp (ki*limit = 4.0 m/s authority)
     # Vertical descent controller (drives height-above-marker -> target).
     vert_kp: float = 1.0
     vert_ki: float = 0.15
@@ -138,7 +143,16 @@ class SimConfig:
     return_success_tol_m: float = 6.0    # GPS-only home landing realistic tolerance
     align_tol_m: float = 0.15            # must centre within this before descending
     drop_tol_m: float = 0.09             # must be this centred (and steady) to drop
-    descend_abort_tol_m: float = 0.70    # offset grows past this -> climb & re-search
+    descend_abort_tol_m: float = 0.70    # descent is GATED on centring: full descent
+    #                                      rate when centred, easing to a hover as the
+    #                                      offset approaches this (a "staircase" descent
+    #                                      that lets the wind-cancelling integral catch
+    #                                      up instead of out-running it into a cross-wind).
+    descend_reacquire_tol_m: float = 1.20  # only if the offset diverges past THIS (marker
+    #                                      blown well off the balcony) does it climb back
+    #                                      to PRECISION_ALIGN -- mild drift is re-centred
+    #                                      in place, which is what stops the align<->descend
+    #                                      livelock that timed missions out from some starts.
     home_arrival_tol_m: float = 1.0      # "back home" horizontal tolerance
     search_pattern_step_m: float = 1.3   # spacing of the expanding search spiral
     search_speed_mps: float = 2.5        # how fast to fly the search/climb (> peak wind)
