@@ -1,27 +1,39 @@
 # ===========================================================================
 # Python dependencies for the drone delivery simulation.
 #
-# Verified to install as PREBUILT WHEELS on macOS Apple Silicon (arm64) — no
-# compiler needed. Developed and tested against Python 3.10; wheels for every
-# package below are published for Python 3.10 through 3.13, so the recommended
-# python.org Python 3.12 installer works out of the box.
+# Every package below installs as a PREBUILT WHEEL (no compiler needed) on
+# macOS (Apple Silicon AND Intel), Windows and Linux, for Python 3.10-3.13.
+# Just run:   pip install -r requirements.txt
 #
 # IMPORTANT: this uses opencv-contrib-python (NOT plain opencv-python). The
 # "contrib" build is the one that ships cv2.aruco, which this project needs.
-# Do NOT also install opencv-python — having both installed causes conflicts.
+# Do NOT also install opencv-python -- having both installed causes conflicts.
+#
+# Why opencv is pinned to 4.10.0.84 (and not something newer): its macOS wheel
+# supports older systems (back to macOS 11 on Apple Silicon), while opencv
+# 4.11+ wheels require macOS 13+ and are missing for some Python versions. On
+# an older Mac those newer pins fail to install and you get the dreaded
+# "ModuleNotFoundError: No module named 'cv2'". 4.10.0.84 just works.
 # ===========================================================================
 
 numpy==2.2.6
-opencv-contrib-python==4.13.0.92
+opencv-contrib-python==4.10.0.84
 matplotlib==3.10.9
 imageio==2.37.3
 imageio-ffmpeg==0.6.0
 
-# --- 3D world engine (for collision, LiDAR and the camera feeds) ---
-# PyBullet is the recommended 3D backend. It ships macOS Apple-Silicon wheels for
-# Python 3.10-3.12. If `pip install pybullet` fails on your Python (e.g. 3.13 has
-# no wheel yet), use a Python 3.12 virtual environment (the README shows the exact
-# commands). IMPORTANT: the simulation ALSO runs WITHOUT PyBullet -- it falls back
-# to a built-in pure-numpy 3D engine automatically -- so this line is optional but
-# recommended (PyBullet gives nicer camera feeds and exact collision).
-pybullet==3.2.7
+# --- 3D world engine (OPTIONAL -- intentionally NOT installed by default) ---
+# PyBullet gives nicer camera feeds and exact collision, BUT it publishes NO
+# macOS wheels (only Linux), so on a Mac "pip install pybullet" has to COMPILE
+# it from source -- which is slow, needs Xcode build tools, and often fails.
+#
+# The simulation runs perfectly WITHOUT it: it automatically falls back to a
+# built-in pure-numpy 3D engine (collision, LiDAR and the camera feeds all still
+# work). That is why pybullet is left out of the install above, so the core setup
+# can never be blocked by it.
+#
+# If you are on Linux, or have a working compiler on macOS, and want the
+# higher-fidelity PyBullet backend, install it separately:
+#
+#     pip install pybullet==3.2.7
+# ---------------------------------------------------------------------------

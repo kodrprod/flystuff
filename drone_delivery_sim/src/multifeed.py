@@ -17,6 +17,7 @@ Andrey's Mac; the matplotlib projector in the no-PyBullet fallback).
 
 from __future__ import annotations
 import os
+import time
 import numpy as np
 import cv2
 
@@ -91,6 +92,29 @@ def compose(down, vis, front, chase, scan, telem_lines, width=1120, height=700):
     return canvas
 
 
+def compose_frame(mission, world, config=CONFIG):
+    """Render and compose ONE multi-feed frame (chase+front+down+radar+telemetry)."""
+    scan = world.lidar_scan()
+    front = world.front_camera()
+    chase = world.chase_camera(lidar_points=scan["points"])
+    tel = mission.drone.get_telemetry()
+    vel = tel["velocity"]
+    gnd = float(np.hypot(vel[0], vel[1]))
+    dist_goal = float(np.hypot(mission.drone.pos[0] - mission.marker_world[0],
+                            mission.drone.pos[1] - mission.marker_world[1]))
+    lines = [
+        f"state: {mission.state.name}",
+        f"t: {mission.t:5.1f}s   alt: {tel['position'][2]:4.1f} m",
+        f"SPEED: {gnd:4.2f} m/s  (vert {vel[2]:+4.2f})   to marker: {dist_goal:4.1f} m",
+        f"avoidance: {'STEERING' if mission._reflex_active else 'clear'}"
+        f"   LiDAR min: {scan['min_distance']:4.1f} m",
+        f"onboard: control+ArUco+reflex   ground: planning+logging",
+        f"link: {config.link_latency_ms:.0f}ms  {config.link_bandwidth_kbps:.0f}kbps"
+        f"  loss {config.link_packet_loss*100:.0f}%",
+    ]
+    return compose(mission.last_image, mission.last_vision, front, chase, scan, lines)
+
+
 def run_multifeed(config=CONFIG, seed=None, out_dir=None, max_frames=70, sample_every=18):
     """Run a mission and export a combined multi-feed video. Returns (path, metrics)."""
     import imageio.v2 as imageio
@@ -107,30 +131,84 @@ def run_multifeed(config=CONFIG, seed=None, out_dir=None, max_frames=70, sample_
     def on_step(mission):
         if mission.step_count % sample_every != 0 or len(frames) >= max_frames:
             return
-        scan = world.lidar_scan()
-        front = world.front_camera()
-        chase = world.chase_camera(lidar_points=scan["points"])
-        tel = mission.drone.get_telemetry()
-        lines = [
-            f"state: {mission.state.name}",
-            f"t: {mission.t:5.1f}s   alt: {tel['position'][2]:4.1f} m",
-            f"reflex: {'ACTIVE (holding)' if mission._reflex_active else 'clear'}"
-            f"   LiDAR min: {scan['min_distance']:4.1f} m",
-            f"onboard: control+ArUco+reflex   ground: planning+logging",
-            f"link: {config.link_latency_ms:.0f}ms  {config.link_bandwidth_kbps:.0f}kbps"
-            f"  loss {config.link_packet_loss*100:.0f}%",
-        ]
-        frames.append(compose(mission.last_image, mission.last_vision, front, chase, scan, lines))
+        frames.append(compose_frame(mission, world, config))
 
     m.run(on_step=on_step)
 
+    return _write_multifeed(frames, out_dir), m.metrics
+
+
+def _write_multifeed(frames, out_dir, fps=8):
+    """Write composed BGR frames to outputs/multifeed_demo.mp4 (GIF fallback)."""
+    import imageio.v2 as imageio
     path = os.path.join(out_dir, "multifeed_demo.mp4")
     try:
-        with imageio.get_writer(path, fps=8, codec="libx264", quality=7) as w:
+        with imageio.get_writer(path, fps=fps, codec="libx264", quality=7) as w:
             for fr in frames:
                 w.append_data(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB))
     except Exception as exc:
         path = os.path.join(out_dir, "multifeed_demo.gif")
         print(f"  (MP4 failed: {str(exc).splitlines()[0]}; writing GIF)")
         imageio.mimsave(path, [cv2.cvtColor(f, cv2.COLOR_BGR2RGB) for f in frames], fps=6)
+    return path
+
+
+def run_multifeed_live(config=CONFIG, seed=None, speed=None, save=True, out_dir=None,
+                    max_save=320):
+    """
+    Run a mission and show the combined multi-feed LIVE in a window, paced to REAL
+    TIME (so 1 simulated second takes 1 wall-clock second / `speed`), and also save
+    the video. This is the live equivalent of run_multifeed(). Returns (path, metrics).
+    """
+    import matplotlib.pyplot as plt
+    from src.mission import Mission
+
+    speed = config.live_speed if speed is None else float(speed)
+    out_dir = out_dir or os.path.join(os.path.dirname(os.path.dirname(__file__)), config.output_dir)
+    os.makedirs(out_dir, exist_ok=True)
+    m = Mission(config=config, seed=seed)
+    if m.world is None:
+        raise RuntimeError("multifeed needs the 3D world (config.enable_world=True)")
+    world = m.world
+
+    fig, ax = plt.subplots(figsize=(11.2, 7.0))
+    ax.axis("off")
+    fig.tight_layout()
+    interval = 1.0 / max(config.live_update_hz, 1e-3)     # min SIM seconds between redraws
+    st = {"t0": None, "last": -1e9, "im": None}
+    saved = []
+
+    def on_step(mi):
+        if st["t0"] is None:
+            st["t0"] = time.time()
+        # Redraw the window at the configured cadence (in sim time).
+        if mi.t - st["last"] >= interval or mi.done:
+            st["last"] = mi.t
+            frame = compose_frame(mi, world, config)
+            if save and len(saved) < max_save:
+                saved.append(frame)
+            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            if st["im"] is None:
+                st["im"] = ax.imshow(rgb)
+            else:
+                st["im"].set_data(rgb)
+            ax.set_title(f"LIVE multi-feed  —  t={mi.t:5.1f}s   x{speed:g} speed   "
+                        f"{mi.state.name}", fontsize=11)
+            try:
+                fig.canvas.draw_idle(); plt.pause(0.001)
+            except Exception:
+                pass
+        # Real-time pacing: never run faster than `speed`x wall-clock time.
+        target = st["t0"] + mi.t / max(speed, 1e-6)
+        lag = target - time.time()
+        if lag > 0:
+            time.sleep(min(lag, 0.5))
+
+    plt.show(block=False)
+    m.run(on_step=on_step)
+
+    path = None
+    if save and saved:
+        print("\nSaving multi-feed video...")
+        path = _write_multifeed(saved, out_dir, fps=max(6, int(config.live_update_hz)))
     return path, m.metrics

@@ -1,0 +1,13 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments (the README creates .venv inside drone_delivery_sim)
+.venv/
+venv/
+env/
+
+# Generated world / output artifacts (regenerated on demand; not source)
+drone_delivery_sim/world/custom_world.obj
+drone_delivery_sim/outputs/multifeed_demo.mp4

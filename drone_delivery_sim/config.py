@@ -169,15 +169,48 @@ class SimConfig:
     takeoff_clearance_m: float = 0.6     # collision checks start once above this AGL
     #   (so sitting on the launch pad / landing at home is never a "crash")
 
+    # ----- Navigation: sensor-only obstacle avoidance (the realistic default) -----
+    # The drone steers around obstacles using ONLY a LiDAR distance scan + its noisy
+    # GPS goal direction -- it has NO knowledge of the world layout (src/avoidance.py).
+    avoid_range_m: float = 5.0           # a LiDAR return closer than this pushes the
+    #                                      drone away from it (steer-around distance).
+    avoid_gain: float = 1.6              # how hard obstacles push (bigger = wider berth).
+    avoid_fov_deg: float = 360.0         # LiDAR sweep used for navigation (360 = full).
+    avoid_rays: int = 36                 # number of rays in that sweep.
+    # Proactive braking: slow down as obstacles loom ahead so there is always time to
+    # turn/stop (a real drone can't brake instantly). The drone caps its speed so it
+    # could stop within the clear distance ahead at this deceleration.
+    avoid_brake_decel_mps2: float = 2.0  # gentler = brakes earlier / more cautious
+    avoid_min_speed_mps: float = 0.6     # creep speed near obstacles (so it keeps sliding past)
+    avoid_fwd_cone_deg: float = 55.0     # "ahead" cone (around the goal) used for braking
+    # Vertical (over-fly) awareness: the horizontal LiDAR fan above can't see a
+    # treetop sitting just BELOW the flight altitude, so the drone would skim over
+    # and clip it. The navigator also probes AHEAD-and-DOWN and climbs to keep
+    # clearance over such low obstacles (tall ones that reach the flight level are
+    # left to the horizontal steer-around above). Sensor-only, like the rest.
+    avoid_overfly_lookahead_m: float = 7.0   # how far ahead the down-probe looks
+    avoid_vertical_clearance_m: float = 0.6  # gap kept above an over-flown obstacle
+    avoid_climb_cap_m: float = 6.0           # most it may climb above the cruise alt
+
+    # ----- OPTIONAL: map-based global route planner (NOT realistic) -----
+    # Off by default. When True, the drone is GIVEN the world map and plans an A*
+    # route around obstacles up front (src/planner.py). Useful for comparison, but
+    # it "cheats" -- a real drone wouldn't have the map. The sensor-only avoidance
+    # above still runs on top of it.
+    enable_path_planning: bool = False
+    nav_clearance_m: float = 1.5         # planner's horizontal obstacle inflation
+    nav_max_climb_m: float = 14.0        # planner: how high it may climb to go OVER
+    waypoint_tol_m: float = 2.5          # planner: intermediate-waypoint reached tol
+
     # ----- LiDAR / depth sensor -----
     lidar_range_m: float = 12.0          # max ray distance
     lidar_h_fov_deg: float = 120.0       # horizontal fan width (forward)
     lidar_h_rays: int = 24               # rays across the horizontal fan
     lidar_v_fov_deg: float = 40.0        # vertical fan width
     lidar_v_rays: int = 7                # rays across the vertical fan
-    lidar_reflex_stop_m: float = 2.0     # halt if an obstacle is closer than this ahead
+    lidar_reflex_stop_m: float = 2.0     # last-resort: halt if something is right ahead
     lidar_noise_m: float = 0.02          # range noise
-    enable_lidar_reflex: bool = True     # onboard safety: stop before hitting things
+    enable_lidar_reflex: bool = True     # master switch for onboard LiDAR avoidance
 
     # ----- Front-facing camera -----
     front_cam_width: int = 320
@@ -205,6 +238,14 @@ class SimConfig:
     setup_render_height: int = 540
     setup_orbit_azimuth_deg: float = 45.0
     setup_orbit_elevation_deg: float = 25.0
+
+    # ----- Live view (the on-screen window while the mission flies) -----
+    live_speed: float = 1.0              # playback speed of the LIVE window.
+    #   1.0 = real time (1 simulated second takes 1 wall-clock second) so you can
+    #   actually watch each phase; 2.0 = twice as fast, 0.5 = slow motion.
+    live_update_hz: float = 10.0         # how many times/second the live window redraws
+    live_feeds: bool = False             # default live window also shows the 3rd-person
+    #                                      + front camera feeds (needs the 3D world)
 
     # ----- Output -----
     output_dir: str = "outputs"

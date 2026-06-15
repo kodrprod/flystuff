@@ -261,6 +261,8 @@ drone_delivery_sim/
     camera_sim.py      <- renders the synthetic downward camera image
     vision.py          <- REAL OpenCV ArUco detect + solvePnP (the hardware part)
     control.py         <- PID controllers (centering + descent)
+    avoidance.py       <- SENSOR-ONLY reactive obstacle avoidance (LiDAR repulsion)
+    planner.py         <- OPTIONAL map-based A* route planner (off by default)
     mission.py         <- the mission state machine + failsafes
     drop.py            <- payload release + landing-error model
     visualize.py       <- matplotlib dashboard + MP4/GIF export
@@ -346,13 +348,28 @@ are never blocked.
 
 ```
 python main.py                     # the full mission, now inside the 3D world
+python main.py --feeds             # LIVE multi-feed window (3rd-person + cameras), real time
+python main.py --speed 0.5         # slow the live window to half speed (watch every step)
 python main.py --multifeed         # save the combined multi-feed video (see below)
 python main.py --split             # run the drone + ground station as TWO processes
 python main.py --single-process    # the same split, in one process (faster)
 python setup_positions.py          # place the start / drop points by hand (see D)
 python main.py --world sample      # use the built-in sample world (default)
 python main.py --world blender     # use YOUR exported Blender world
+python world/import_model.py m.obj # use ANY .obj model as the world (no Blender — see I)
 ```
+
+New since the last version (the four things added on top):
+
+* **Sensor-only obstacle avoidance** — the drone navigates AROUND buildings, trees
+  and walls using only its **LiDAR + noisy GPS** (it has no map of the world), so you
+  can put the start anywhere and it won't crash into things. See **section J**.
+* **A real LIVE feed** — `--feeds` opens a window that updates *while the mission
+  flies*, paced to **real time** (1 simulated second = 1 wall-clock second) so you
+  can actually watch each phase. `--speed` changes the playback rate. See **K**.
+* **More on the dashboard** — current **ground speed**, climb/descent rate,
+  distance-to-goal, obstacle-avoidance status, and the planned route are now shown.
+* **Bring your own 3D model** without Blender — `python world/import_model.py`. See **I**.
 
 The **multi-feed video** (`outputs/multifeed_demo.mp4`) shows four things at once:
 a 3rd-person view of the drone in the world with the **LiDAR hits painted red on
@@ -414,11 +431,24 @@ All under the "3D WORLD UPGRADE KNOBS" heading: which world to load
 (`link_latency_ms`, `link_bandwidth_kbps`, `link_packet_loss`,
 `onboard_budget_ms_per_tick`).
 
+Also: **sensor-only avoidance** (`avoid_range_m`, `avoid_gain`, `avoid_rays`, and the
+proactive braking `avoid_brake_decel_mps2` / `avoid_min_speed_mps` / `avoid_fwd_cone_deg`),
+the optional **map planner** (`enable_path_planning`, `nav_clearance_m`,
+`nav_max_climb_m`, `waypoint_tol_m`), and the **live view** (`live_speed`,
+`live_update_hz`, `live_feeds`).
+
+If it still clips obstacles, lower `avoid_brake_decel_mps2` (brakes earlier) or
+`max_horizontal_speed_mps`, or raise `avoid_range_m`/`lidar_range_m` so it sees
+things sooner.
+
 ## G. New tests
 
 ```
 python tests/test_world.py      # scale (1 m cube), collision, reflex, LiDAR ranges
 python tests/test_compute.py    # link latency / bandwidth / loss, budget, the split
+python tests/test_avoidance.py  # the sensor-only navigator (steers from a LiDAR scan)
+python tests/test_navigation.py # full missions from starts behind the tree/building
+python tests/test_planner.py    # the OPTIONAL map planner (clear vs around vs over)
 ```
 
 (The original `test_vision.py`, `test_mission.py`, `test_smoke.py` still pass with
@@ -441,6 +471,109 @@ Empty isn't inside a wall, and that the cruise altitude in `config.py`
 **Two-process split seems stuck.** Some setups dislike `multiprocessing`; the code
 falls back to single-process automatically. You can also just use
 `--single-process`.
+
+---
+
+## I. Bring your own 3D model (no Blender needed)
+
+You don't have to use Blender. If you have a model as a Wavefront **`.obj`** file
+(almost every 3D tool can "Export to OBJ"), point the importer at it:
+
+```
+python world/import_model.py /path/to/my_model.obj
+```
+
+That copies your model into `world/`, works out which parts are solid obstacles
+(everything EXCEPT objects whose name starts with `GROUND` or `MARKER`, same rule
+as the Blender exporter), and writes `world/scene.json` so it becomes the world.
+Then place the start / landing spots and fly — exactly the workflow you already use:
+
+```
+python setup_positions.py     # drag to orbit, type the start / landing coordinates, save
+python main.py                # fly your model (with obstacle-avoiding navigation)
+python main.py --feeds        # ...with the live multi-feed window
+```
+
+Notes:
+* The simulator works in **metres** (1 OBJ unit = 1 m). If your model imports
+  sideways it is probably **Y-up** — re-run with `--y-up`. Rescale with `--scale`.
+* Export your model with **named objects** (the `o`/`g` lines) so each obstacle can
+  be identified — that's how a crash can tell you *what* it hit.
+* Switch back to the built-in demo world any time: `python main.py --world sample`.
+
+## J. Obstacle-avoiding navigation — sensor-only (realistic)
+
+Previously the drone flew a dead-straight line to the balcony and the only obstacle
+handling was an onboard reflex that could merely **stop**. So if you moved the start
+behind a tree or a wall, it bumped into it or stalled. Now the drone **navigates
+around obstacles** — and it does it the realistic way: **it knows nothing about the
+world layout.** Everything it uses to avoid things comes from its own sensors.
+
+How it works (`src/avoidance.py`):
+
+* Each tick the drone takes a **LiDAR distance scan** — `world.horizontal_scan`
+  ray-casts the sensor against the world and hands back *only distances*, exactly
+  like a real spinning LiDAR. No object positions, no map.
+* Every return closer than `avoid_range_m` **pushes the drone away** from that
+  bearing (a local potential field), harder the closer it is. Summed up, this keeps
+  real clearance from walls **and** corners off to the side.
+* That push is blended with the drone's goal direction (from its **noisy GPS**), so
+  it curves smoothly around obstacles and heads on toward the balcony. If it's
+  pointed straight at a wall with the goal behind it, a tangential "slide" makes it
+  follow the wall around instead of stalling head-on.
+* It **brakes proactively**: the closer the LiDAR sees something in the way ahead,
+  the more it slows down (it caps its speed so it could always stop within the clear
+  distance), so it never barrels into a tree faster than it can turn. Open air → full
+  speed; something looming → it eases off. Tuned by `avoid_brake_decel_mps2`.
+* The precision drop itself still uses the **down-camera ArUco vision** — also a
+  sensor. At no point does the navigation read the true geometry.
+
+**Launching from a balcony/rooftop (an elevated pad).** If `DRONE_START` sits on a
+raised surface in your model, that's fully supported: takeoff clearance, the
+"have I crashed?" check, and the final landing are all measured *relative to the
+launch height*, so resting on (and returning to) an elevated pad is never mistaken
+for a collision.
+
+Try it: run `python setup_positions.py` (or edit `world/scene.json`) and move
+`drone_start` behind the building or the tree, then `python main.py`. The summary
+prints "sensor-only LiDAR avoidance (N steering interventions)", and on the
+dashboard you can watch the **flown path curve off the dashed straight line** as the
+LiDAR steers it around. Tuning knobs are in `config.py` under "Navigation:
+sensor-only obstacle avoidance" (`avoid_range_m`, `avoid_gain`, `avoid_rays`).
+
+**Optional — a map-based planner for comparison.** If you set
+`enable_path_planning = True` in `config.py`, the drone is instead *given* the world
+map and plans an A\* route up front (`src/planner.py`) — useful to compare against,
+but it "cheats" (a real drone wouldn't have the map). The sensor-only avoidance
+still runs on top of it. Off by default.
+
+## K. A real, time-accurate live feed
+
+The on-screen window now updates **while the mission flies** and is paced to **real
+time** — 1 simulated second takes 1 wall-clock second — so the fast phases
+(`SEARCH`, `PRECISION_ALIGN`, `DESCEND`, `DROP`) are actually watchable instead of
+flashing by. Two views:
+
+```
+python main.py             # the 4-panel dashboard, live + real time (map, side, down-cam, telemetry)
+python main.py --feeds     # the rich multi-feed window: 3rd-person + LiDAR + front cam + down cam + radar
+```
+
+Control the pace (applies to either):
+
+```
+python main.py --speed 0.5    # half speed (slow-motion — great for the drop)
+python main.py --speed 2      # double speed
+python main.py --feeds --speed 0.5
+```
+
+The video files (`outputs/mission_demo.mp4`, `outputs/multifeed_demo.mp4`) are still
+saved as before, so you can re-watch and share. (Defaults for the live view live in
+`config.py` under "Live view": `live_speed`, `live_update_hz`, `live_feeds`.)
+
+The **telemetry** panel now also shows the **current ground speed**, the
+climb/descent rate, distance to the goal, and whether obstacle avoidance is actively
+steering.
 
 ---
 

@@ -25,8 +25,42 @@ Change the SCENARIO (balcony height, wind, marker, etc.) by editing config.py.
 
 from __future__ import annotations
 import argparse
+import os
 import sys
 import time
+
+
+def _require_dependencies() -> None:
+    """Fail early with a friendly, copy-pasteable message if a third-party package
+    is missing -- instead of a confusing deep ImportError (e.g. "No module named
+    'cv2'") from some inner module."""
+    import importlib.util
+    required = {"numpy": "numpy", "cv2": "opencv-contrib-python",
+                "matplotlib": "matplotlib", "imageio": "imageio"}
+    missing = [pip_name for module, pip_name in required.items()
+            if importlib.util.find_spec(module) is None]
+    if not missing:
+        return
+    here = os.path.dirname(os.path.abspath(__file__))
+    bar = "=" * 66
+    print(bar)
+    print(" Missing required Python package(s): " + ", ".join(missing))
+    print(bar)
+    print("This simulation needs a few libraries that aren't installed yet.\n")
+    print("Create the project's private environment and install everything:\n")
+    print(f'    cd "{here}"')
+    print("    python3 -m venv .venv")
+    print("    source .venv/bin/activate")
+    print("    pip install -r requirements.txt\n")
+    print("Then run it again:\n")
+    print("    source .venv/bin/activate")
+    print("    python main.py")
+    print(bar)
+    sys.exit(1)
+
+
+_require_dependencies()
+
 import matplotlib
 
 from config import CONFIG
@@ -62,6 +96,18 @@ def print_summary(mission):
     print(f"  Returned home within : {fmt(m['return_error_m'],' m')}   (GPS landing)")
     print(f"  Battery used         : {fmt(m['battery_used_pct'],' %')}")
     print(f"  Flight time          : {fmt(m['duration_s'],' s')}")
+    av = m.get("reflex_events", 0)
+    if m.get("nav_planned"):
+        route = (f"map planner: avoided obstacles ({m['nav_waypoints']} waypoints"
+                f" @ {m['nav_cruise_alt']:.0f} m)" if m.get("nav_cruise_detour")
+                else "map planner: clear straight path")
+    else:
+        route = (f"sensor-only LiDAR avoidance ({av} steering interventions)"
+                if av else "sensor-only: clear path (no obstacles in the way)")
+    print(f"  Navigation           : {route}")
+    if m.get("collision"):
+        print(f"  COLLISION            : hit {m['collision_object']} at "
+            f"{fmt(m['collision_time_s'],' s')}")
     if m["fail_reason"]:
         print(f"  Note                 : {m['fail_reason']}")
     print("=" * 58)
@@ -79,12 +125,38 @@ def main():
                         help="run the onboard/ground compute split in two real processes")
     parser.add_argument("--single-process", action="store_true",
                         help="run the compute split in one process (fast)")
-    parser.add_argument("--world", choices=["sample", "blender"], default=None,
+    parser.add_argument("--world", choices=["sample", "blender", "custom"], default=None,
                         help="which world to load (overrides config.use_sample_world)")
+    parser.add_argument("--feeds", action="store_true",
+                        help="LIVE multi-feed window (3rd-person + LiDAR + cameras), real time")
+    parser.add_argument("--speed", type=float, default=None,
+                        help="live playback speed (1.0 = real time; 0.5 = slow-mo; 2 = 2x)")
+    parser.add_argument("--import-obj", metavar="PATH", default=None,
+                        help="import any .obj model as the world, then exit (see README)")
     args = parser.parse_args()
 
-    if args.world is not None:
-        CONFIG.use_sample_world = (args.world == "sample")
+    # Import a custom 3D model and exit (sets up the world's scene.json for it).
+    if args.import_obj:
+        from world import import_model
+        import_model.import_model(args.import_obj)
+        return
+
+    if args.speed is not None:
+        CONFIG.live_speed = args.speed
+
+    if args.world == "sample":
+        # Force-rebuild the bundled sample world so it overrides any imported/Blender
+        # scene.json that may be the currently active world.
+        import importlib.util, os as _os
+        wdir = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), CONFIG.world_dir)
+        spec = importlib.util.spec_from_file_location(
+            "make_sample_world", _os.path.join(wdir, "make_sample_world.py"))
+        mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+        mod.build(CONFIG)
+        CONFIG.use_sample_world = True
+        CONFIG.world_scene_file = "scene.json"
+    elif args.world is not None:
+        CONFIG.use_sample_world = False
         CONFIG.world_scene_file = "scene.json"
 
     # ---- Alternate modes (exit after) ----
@@ -136,18 +208,51 @@ def main():
     print(f"matplotlib backend: {backend}  ({'live window' if live else 'headless'})")
     print(f"Scenario: balcony {CONFIG.balcony_height_m:.0f} m up, marker id {CONFIG.marker_id}, "
         f"wind ~{(CONFIG.wind_base_mps[0]**2+CONFIG.wind_base_mps[1]**2)**0.5:.1f} m/s, seed {args.seed}")
+
+    # ---- LIVE multi-feed window (3rd-person + LiDAR + cameras), paced to real time.
+    if args.feeds or CONFIG.live_feeds:
+        from src import multifeed as mf
+        if not live:
+            print("(no display available — rendering the multi-feed video headless)")
+            path, metrics = mf.run_multifeed(CONFIG, seed=args.seed)
+        else:
+            print(f"Flying mission with the LIVE multi-feed window "
+                f"(real time x{CONFIG.live_speed:g})...\n")
+            path, metrics = mf.run_multifeed_live(CONFIG, seed=args.seed)
+        d = metrics.get("drop_error_m")
+        print(f"\nDrop: {d*100:.1f} cm   collision: {metrics['collision']}" if d else
+            f"\nMission ended: {metrics['fail_reason']}")
+        if path:
+            print(f"Saved multi-feed video to: {path}")
+        if live:
+            print("\nClose the window to exit.")
+            plt.ioff(); plt.show()
+        return
+
     print("Flying mission...\n")
 
     mission = Mission(config=CONFIG, seed=args.seed, log_frames=not args.no_video)
+
+    # How often the live window redraws, expressed in sim steps, and the wall-clock
+    # time each sim second should take (real-time pacing so you can watch each phase).
+    update_every = max(1, int(round((1.0 / max(CONFIG.live_update_hz, 1e-3)) / CONFIG.dt)))
+    pace = {"t0": None}
 
     last_state = [None]
     def on_step(m):
         if m.state.name != last_state[0]:
             last_state[0] = m.state.name
             print(f"  t={m.t:6.1f}s   {m.state.name}")
-        if live and m.step_count % (CONFIG.video_every_n_steps * 2) == 0:
+        if live and m.step_count % update_every == 0:
             dash.update(vz.view_from_mission(m))
             plt.pause(0.001)
+            # Real-time pacing: hold each frame so 1 sim second ~= 1 wall second.
+            if pace["t0"] is None:
+                pace["t0"] = time.time()
+            target = pace["t0"] + m.t / max(CONFIG.live_speed, 1e-6)
+            lag = target - time.time()
+            if lag > 0:
+                time.sleep(min(lag, 0.5))
 
     t0 = time.time()
     if live:

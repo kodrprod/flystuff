@@ -439,6 +439,93 @@ class World:
                 best = min(best, d)
         return best
 
+    def horizontal_scan(self, pos=None, heading=0.0, fov_deg=None, n_rays=None,
+                        max_range=None):
+        """
+        Realistic forward LiDAR for NAVIGATION: a single HORIZONTAL fan of distance
+        rays centred on the travel heading, at the drone's current altitude. Returns
+        the world bearing + open distance of each ray. This is the ONLY spatial input
+        the sensor-only navigator (src/avoidance.py) is allowed to use — it never
+        sees object positions, just these distances, exactly like a real LiDAR.
+        """
+        cfg = self.cfg
+        pos = self.backend.drone_pos if pos is None else np.asarray(pos, float)
+        fov = cfg.lidar_h_fov_deg if fov_deg is None else float(fov_deg)
+        n = cfg.lidar_h_rays if n_rays is None else int(n_rays)
+        mr = cfg.lidar_range_m if max_range is None else float(max_range)
+        if fov >= 359.9:        # full sweep: evenly spaced, no duplicated endpoint
+            bearings = float(heading) + np.radians(np.linspace(0.0, 360.0, n, endpoint=False))
+        else:
+            bearings = float(heading) + np.radians(np.linspace(-fov / 2, fov / 2, n))
+        dirs = np.stack([np.cos(bearings), np.sin(bearings), np.zeros(n)], axis=1)
+        hits = self.backend.raycast(np.tile(pos, (n, 1)), dirs, mr)
+        dists = np.array([h["distance"] for h in hits], float)
+        hit = np.array([h["hit"] for h in hits])
+        if cfg.lidar_noise_m > 0:
+            dists = np.clip(dists + self.rng.normal(0, cfg.lidar_noise_m, n), 0, mr)
+        clear = np.where(hit, dists, mr)
+        return {"bearings": bearings, "clear": clear, "dists": dists, "hit": hit,
+                "origin": pos, "heading": float(heading)}
+
+    def ring_scan(self, pos=None, n_rays=24, max_range=None):
+        """
+        A horizontal 360-degree distance probe around the drone (at its altitude).
+        Used by the reactive obstacle-avoidance layer to steer around things on ANY
+        side (the forward-only reflex/LiDAR can't see a wall the drone drifts into
+        sideways). Returns per-ray directions, distances and hit flags.
+        """
+        pos = self.backend.drone_pos if pos is None else np.asarray(pos, float)
+        mr = self.cfg.lidar_range_m if max_range is None else float(max_range)
+        ang = np.linspace(0.0, 2.0 * np.pi, n_rays, endpoint=False)
+        dirs = np.stack([np.cos(ang), np.sin(ang), np.zeros(n_rays)], axis=1)
+        hits = self.backend.raycast(np.tile(pos, (n_rays, 1)), dirs, mr)
+        dists = np.array([h["distance"] for h in hits], float)
+        return {"dirs": dirs, "dists": dists,
+                "hit": np.array([h["hit"] for h in hits]),
+                "points": [h["point"] for h in hits], "origin": pos}
+
+    def overfly_clearance(self, pos, heading, look_ahead_m=9.0, half_az_deg=18.0,
+                        n_az=5, n_el=6, max_down_deg=38.0):
+        """
+        Sensor-only VERTICAL-awareness probe for the reactive navigator (the
+        forward complement to the flat `horizontal_scan`/`ring_scan`).
+
+        It looks AHEAD along the travel `heading` and decides whether the drone is
+        about to skim over the top of a LOW obstacle. Returns the height (z, metres)
+        of that obstacle's top — the level the drone must climb above to clear it —
+        or None when the forward-low corridor is clear.
+
+        It separates "fly over" from "go around": if anything is hit AHEAD-and-ABOVE
+        the drone's own level, the obstacle reaches (and exceeds) the flight altitude
+        and is the HORIZONTAL navigator's job, so this returns None. Only when
+        nothing reaches above the drone but the forward-and-DOWN cone hits something
+        does it report that low obstacle's top. Pure ray distances — the map is
+        never consulted, exactly like a real forward depth sensor.
+        """
+        pos = np.asarray(pos, float)
+        az = np.radians(np.linspace(-half_az_deg, half_az_deg, n_az))
+        # 1) Anything reaching ABOVE us straight ahead? -> tall: a "go around" case.
+        #    (Probing strictly upward avoids flicker when a top sits right at our
+        #    altitude — that case is handled as "climb a bit more" by step 2.)
+        for el in (np.radians(5.0), np.radians(12.0)):
+            ce, se = np.cos(el), np.sin(el)
+            dirs = np.array([(ce * np.cos(heading + a), ce * np.sin(heading + a), se)
+                            for a in az])
+            hits = self.backend.raycast(np.tile(pos, (len(dirs), 1)), dirs, look_ahead_m)
+            if any(h["hit"] for h in hits):
+                return None
+        # 2) Forward-and-down cone: the TOP of whatever low thing is ahead-below.
+        el = np.radians(np.linspace(-2.0, -float(max_down_deg), n_el))
+        dirs = []
+        for e in el:
+            ce, se = np.cos(e), np.sin(e)
+            for a in az:
+                dirs.append((ce * np.cos(heading + a), ce * np.sin(heading + a), se))
+        dirs = np.array(dirs, float)
+        hits = self.backend.raycast(np.tile(pos, (len(dirs), 1)), dirs, look_ahead_m)
+        zs = [h["point"][2] for h in hits if h["hit"] and h["point"] is not None]
+        return max(zs) if zs else None
+
     def reflex_distance(self, pos, heading, half_angle_deg=18.0, n=5):
         """
         CHEAP forward obstacle probe (a few rays) along the travel heading — used
