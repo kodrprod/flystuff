@@ -172,6 +172,8 @@ class Mission:
         self._heading = 0.0              # travel heading (for front cam + LiDAR + reflex)
         self._reflex_active = False      # LiDAR reflex currently halting forward motion
         self._reflex_events = 0          # how many ticks the reflex intervened
+        self._overfly_events = 0         # ticks the vertical (climb-to-clear) avoidance acted
+        self._overfly_extra = 0.0        # sticky extra climb (m) held over a low obstacle
 
         # ---- Obstacle-avoiding route planning (a GROUND-station task) ----------
         # Plan a collision-free path for the cruise (start -> balcony) and the
@@ -240,6 +242,7 @@ class Mission:
             "collision_time_s": None,
             "world_backend": (self.world.backend_name if self.world is not None else None),
             "reflex_events": 0,
+            "overfly_events": 0,         # ticks the vertical climb-to-clear avoidance acted
             # Navigation (obstacle-avoiding planner) outcome:
             "nav_planned": self.nav_info["cruise"] is not None,
             "nav_cruise_detour": (self.nav_info["cruise"]["detoured"]
@@ -383,6 +386,34 @@ class Mission:
                 v = self._sensor_avoidance(self.drone.pos, v)
                 if np.linalg.norm(v) > 0.2:
                     self._heading = float(np.arctan2(v[1], v[0]))
+
+        # --- Onboard SENSOR-ONLY VERTICAL avoidance ---
+        # The horizontal scan above is blind to a treetop sitting just BELOW the
+        # flight altitude, so the drone would skim over and clip it. Here it also
+        # looks ahead-and-down and lifts the altitude target to keep clearance over
+        # such a low obstacle (tall ones reaching the flight level are steered
+        # around by the horizontal layer). The needed climb is held with a slow
+        # decay -- "sticky" -- so a single clear frame (the probe momentarily loses
+        # a rounded treetop) does not drop the drone back onto it mid-fly-over.
+        # Transit legs only, like the steering.
+        transit_alt = self.state in (MissionState.CRUISE_TO_WAYPOINT,
+                                    MissionState.RETURN_HOME)
+        need_extra = 0.0
+        if (sp > 0.2 and self.world is not None and cfg.enable_lidar_reflex
+                and transit_alt):
+            top = self.world.overfly_clearance(self.drone.pos, self._heading,
+                                            look_ahead_m=cfg.avoid_overfly_lookahead_m)
+            if top is not None:
+                clear_alt = (top + cfg.drone_radius_m + cfg.collision_margin_m
+                            + cfg.avoid_vertical_clearance_m)
+                need_extra = max(0.0, clear_alt - alt_target)
+        self._overfly_extra = max(0.96 * self._overfly_extra, need_extra)
+        if self._overfly_extra > 0.05 and transit_alt:
+            alt_target = alt_target + min(self._overfly_extra, cfg.avoid_climb_cap_m)
+            self._reflex_active = True
+            self._overfly_events += 1
+            self.metrics["overfly_events"] = self._overfly_events
+
         # Altitude hold: coarse phases use the barometer; landing uses rangefinder.
         if use_rangefinder:
             rf = self.sensors.read_rangefinder()

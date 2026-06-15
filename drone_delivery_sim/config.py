@@ -183,6 +183,14 @@ class SimConfig:
     avoid_brake_decel_mps2: float = 2.0  # gentler = brakes earlier / more cautious
     avoid_min_speed_mps: float = 0.6     # creep speed near obstacles (so it keeps sliding past)
     avoid_fwd_cone_deg: float = 55.0     # "ahead" cone (around the goal) used for braking
+    # Vertical (over-fly) awareness: the horizontal LiDAR fan above can't see a
+    # treetop sitting just BELOW the flight altitude, so the drone would skim over
+    # and clip it. The navigator also probes AHEAD-and-DOWN and climbs to keep
+    # clearance over such low obstacles (tall ones that reach the flight level are
+    # left to the horizontal steer-around above). Sensor-only, like the rest.
+    avoid_overfly_lookahead_m: float = 7.0   # how far ahead the down-probe looks
+    avoid_vertical_clearance_m: float = 0.6  # gap kept above an over-flown obstacle
+    avoid_climb_cap_m: float = 6.0           # most it may climb above the cruise alt
 
     # ----- OPTIONAL: map-based global route planner (NOT realistic) -----
     # Off by default. When True, the drone is GIVEN the world map and plans an A*

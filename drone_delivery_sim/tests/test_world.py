@@ -101,6 +101,27 @@ def test_lidar_ranges():
     wd.close()
 
 
+def test_overfly_reports_low_obstacle_top():
+    """The vertical (over-fly) probe reports the TOP of a low obstacle ahead that
+    the drone would skim over, and returns None for a tall obstacle that reaches
+    the flight level (the horizontal navigator's job) or for open air. This is the
+    sensor input that lets the navigator climb over a treetop instead of clipping
+    it (the horizontal LiDAR fan is blind to anything just below its own level)."""
+    wd = _world()
+    # Sample tree at (24, 12): trunk to ~6 m, leafy canopy ~z[5.2, 7.8].
+    # Above the canopy, approaching from the west (heading +x) -> reports its top.
+    top = wd.overfly_clearance(np.array([19.0, 12.0, 8.4]), 0.0)
+    assert top is not None and 7.0 <= top <= 8.2, \
+        f"should report the canopy top (~7.8 m), got {top}"
+    # Down among the canopy (it reaches above the drone) -> go-around -> None.
+    assert wd.overfly_clearance(np.array([19.0, 12.0, 6.0]), 0.0) is None, \
+        "an obstacle reaching the flight level must be left to the horizontal layer"
+    # Open air, and high above everything -> clear.
+    assert wd.overfly_clearance(np.array([5.0, -5.0, 8.0]), np.pi / 2) is None
+    assert wd.overfly_clearance(np.array([19.0, 12.0, 13.0]), 0.0) is None
+    wd.close()
+
+
 if __name__ == "__main__":
     failures = 0
     for name, fn in list(globals().items()):
