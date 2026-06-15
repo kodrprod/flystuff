@@ -281,31 +281,44 @@ class Mission:
         self._gps_int = np.clip(self._gps_int + err * cfg.dt,
                                 -cfg.gps_chase_i_limit, cfg.gps_chase_i_limit)
         v = cfg.position_ctrl_gain * err + cfg.gps_chase_ki * self._gps_int
-        sp = np.linalg.norm(v)
+        sp = float(np.linalg.norm(v))
         if sp > speed:
             v = v / sp * speed
+            sp = speed
 
-        # --- Onboard LiDAR safety reflex: halt before flying into an obstacle ---
-        # (This is intentionally local/onboard -- a round-trip to the ground station
-        # would be too slow to avoid a crash. Nominal clear paths never trigger it.)
-        self._reflex_active = False
-        if sp > 0.2:
-            self._heading = float(np.arctan2(v[1], v[0]))
-            if self.world is not None and cfg.enable_lidar_reflex:
-                fd = self.world.reflex_distance(self.drone.pos, self._heading)
-                if fd < cfg.lidar_reflex_stop_m:
-                    v = v * 0.0                       # hold position
-                    self._reflex_active = True
-                    self._reflex_events += 1
-                    self.metrics["reflex_events"] = self._reflex_events
         # Altitude hold: coarse phases use the barometer; landing uses rangefinder.
+        # Computed BEFORE the reflex so the safety probe knows the drone's full
+        # 3-D travel direction -- it must look where a climb or descent is taking
+        # it, not just straight ahead at its current altitude.
         if use_rangefinder:
             rf = self.sensors.read_rangefinder()
             alt = rf if rf is not None else self.sensors.read_barometer()
         else:
             alt = self.sensors.read_barometer()
-        vz = np.clip(cfg.position_ctrl_gain * (alt_target - alt),
-                    -cfg.max_descent_rate_mps, cfg.max_climb_rate_mps)
+        vz = float(np.clip(cfg.position_ctrl_gain * (alt_target - alt),
+                        -cfg.max_descent_rate_mps, cfg.max_climb_rate_mps))
+
+        # --- Onboard LiDAR safety reflex: halt before flying into an obstacle ---
+        # (This is intentionally local/onboard -- a round-trip to the ground station
+        # would be too slow to avoid a crash. Nominal clear paths never trigger it.)
+        # The probe is aimed along the real velocity and sweeps toward where the
+        # drone is climbing / descending, so obstacles it is rising or dropping
+        # INTO (tree canopies, eaves) are caught too, not just ones off to the
+        # side. Gate on the 3-D speed so a near-vertical climb still probes; when
+        # it fires, hold ALL motion -- including the climb / descent.
+        self._reflex_active = False
+        if np.hypot(sp, vz) > 0.2:
+            if sp > 1e-3:
+                self._heading = float(np.arctan2(v[1], v[0]))
+            if self.world is not None and cfg.enable_lidar_reflex:
+                fd = self.world.reflex_distance(self.drone.pos, self._heading,
+                                                climb=vz, speed=sp)
+                if fd < cfg.lidar_reflex_stop_m:
+                    v = v * 0.0                       # hold horizontal position
+                    vz = 0.0                          # and stop the climb / descent
+                    self._reflex_active = True
+                    self._reflex_events += 1
+                    self.metrics["reflex_events"] = self._reflex_events
         self.drone.set_velocity_body(float(v[0]), float(v[1]), float(vz), 0.0)
         return float(np.hypot(err[0], err[1]))
 

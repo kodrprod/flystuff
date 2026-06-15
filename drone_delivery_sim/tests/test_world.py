@@ -7,6 +7,9 @@ using the dependency-light numpy backend so it runs anywhere.
   * scale       : a 1 m reference cube imports as 1.0 m.
   * collision   : flying into the tree IS detected; a clear path is NOT.
   * reflex      : with the LiDAR reflex on, the drone halts before contact.
+  * reflex 3D   : the reflex also catches obstacles the drone is climbing /
+                  descending INTO (overhead canopy), while NOT tripping on
+                  structure it merely passes over.
   * lidar       : ray ranges to known geometry match within tolerance.
 
 Run directly:   python tests/test_world.py
@@ -86,6 +89,57 @@ def test_reflex_halts_before_contact():
     assert not collided, "with the reflex ON the drone must NOT crash into the tree"
     assert pos[0] < 22.0, f"reflex should stop short of the tree, stopped at x={pos[0]:.2f}"
     assert min_fwd >= cfg.lidar_reflex_stop_m - 0.5, "reflex held roughly at the stop distance"
+    wd.close()
+
+
+def _climb_straight_up(world, cfg, start, aimed):
+    """Climb straight up with the onboard reflex. `aimed` probes the true 3-D
+    travel direction (the fix); otherwise it uses the old horizontal-only fan."""
+    pos = np.asarray(start, float).copy()
+    for _ in range(400):
+        world.set_drone_pose(pos, 0.0)
+        collided, name, _pt, _gap = world.check_collision()
+        if collided:
+            return True, pos
+        fd = (world.reflex_distance(pos, 0.0, climb=1.0, speed=0.1) if aimed
+            else world.reflex_distance(pos, 0.0))   # old: flat horizontal fan
+        step = np.array([0.0, 0.0, 0.1])
+        if fd < cfg.lidar_reflex_stop_m:
+            step = step * 0.0
+        pos = pos + step
+    return False, pos
+
+
+def test_reflex_halts_climb_into_overhead_canopy():
+    """Regression: the reflex must catch obstacles the drone is climbing INTO
+    (a tree canopy overhead), not just ones that are level and off to the side.
+    The canopy underside sits at ~5.2 m; starting under it (clear of the trunk)
+    and climbing, the aimed reflex must hold short while the old horizontal-only
+    fan -- which never looks up -- flies straight into it."""
+    cfg = SimConfig()
+    wd = _world()
+    collided, pos = _climb_straight_up(wd, cfg, (23.0, 11.0, 3.0), aimed=True)
+    assert not collided, "aimed reflex must stop the climb before the canopy"
+    assert pos[2] < 5.0, f"should hold below the canopy underside, got z={pos[2]:.2f}"
+    crashed, _ = _climb_straight_up(wd, cfg, (23.0, 11.0, 3.0), aimed=False)
+    assert crashed, "a horizontal-only probe should miss the overhead canopy (the bug)"
+    wd.close()
+
+
+def test_reflex_sweep_is_one_sided_toward_travel():
+    """The elevation sweep reaches only toward the travel direction: climbing
+    over a slab stays clear (no false stop on structure flown over), while
+    descending toward the same slab detects it."""
+    cfg = SimConfig()
+    wd = _world()
+    pos = np.array([40.0, 30.0, 9.5])          # ~1.5 m above the balcony slab
+    heading = np.radians(180)                  # face away from the building
+    clear_up = wd.reflex_distance(pos, heading, climb=1.0, speed=0.5)    # climbing
+    sees_down = wd.reflex_distance(pos, heading, climb=-1.0, speed=0.5)  # descending
+    assert clear_up >= cfg.lidar_reflex_stop_m, \
+        f"climbing over a slab must not trip the reflex, got {clear_up:.2f} m"
+    assert sees_down < cfg.lidar_reflex_stop_m, \
+        f"descending toward the slab must detect it, got {sees_down:.2f} m"
     wd.close()
 
 

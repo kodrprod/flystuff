@@ -439,15 +439,38 @@ class World:
                 best = min(best, d)
         return best
 
-    def reflex_distance(self, pos, heading, half_angle_deg=18.0, n=5):
+    def reflex_distance(self, pos, heading, climb=0.0, speed=1.0,
+                        half_angle_deg=18.0, n=5, n_elev=3):
         """
-        CHEAP forward obstacle probe (a few rays) along the travel heading — used
-        by the onboard safety reflex every tick. Much lighter than a full scan.
+        CHEAP forward obstacle probe (a small fan of rays) AIMED along the travel
+        direction — used by the onboard safety reflex every tick. Much lighter
+        than a full scan.
+
+        The fan spreads in azimuth around `heading` (rad) and, crucially, sweeps
+        in ELEVATION from the horizon toward the climb/descent direction implied
+        by the vertical `climb` rate (m/s up) over the horizontal `speed` (m/s).
+        That vertical sweep is what lets the reflex see obstacles the drone is
+        climbing or descending INTO — tree canopies, branches, eaves — and not
+        just ones that are level and off to the side.
+
+        The sweep is one-sided: it only reaches toward the travel direction and
+        never dips below the horizon in level or climbing flight, so structure
+        the drone legitimately passes OVER (a balcony slab, a railing) does not
+        trip the reflex. With climb=0 it reduces to the original flat forward fan.
         """
-        a = np.radians(np.linspace(-half_angle_deg, half_angle_deg, n))
-        dirs = np.array([[np.cos(heading + da), np.sin(heading + da), 0.0] for da in a])
-        hits = self.backend.raycast(np.tile(np.asarray(pos, float), (n, 1)), dirs,
-                                    self.cfg.lidar_range_m)
+        pitch = float(np.arctan2(climb, max(speed, 1e-9)))   # + up, − down
+        az = np.radians(np.linspace(-half_angle_deg, half_angle_deg, n))
+        # Elevation samples from the horizon to the travel pitch (inclusive).
+        # Level flight collapses these to a single horizontal fan (the original).
+        els = np.array([0.0]) if abs(pitch) < 1e-3 else np.linspace(0.0, pitch, n_elev)
+        dirs = []
+        for el in els:
+            ce, se = np.cos(el), np.sin(el)
+            for a in az:
+                dirs.append((ce * np.cos(heading + a), ce * np.sin(heading + a), se))
+        dirs = np.array(dirs, float)
+        hits = self.backend.raycast(np.tile(np.asarray(pos, float), (len(dirs), 1)),
+                                    dirs, self.cfg.lidar_range_m)
         return min(h["distance"] for h in hits)
 
     def render_camera(self, eye, target, up=(0, 0, 1), fov_deg=70.0, w=320, h=240,
