@@ -24,8 +24,8 @@
           <button class="seg-btn" data-view="gallery" role="tab">Gallery</button>
           <button class="seg-btn" data-view="sources" role="tab">Sources</button>
         </div>
-        <button class="icon-btn" id="tuneBtn" aria-expanded="false" title="Scoring weights">
-          Tune
+        <button class="icon-btn" id="tuneBtn" aria-expanded="false" title="Filters and weights">
+          Filters
         </button>
       </div>
     </header>
@@ -69,12 +69,12 @@
 
     <div class="tune" id="tune" hidden>
       <div class="tune-head">
-        <strong>Scoring weights</strong>
+        <strong>Filters &amp; weights</strong>
         <button class="icon-btn" id="tuneClose" aria-label="Close">Done</button>
       </div>
       <p class="tune-note">
-        Live knobs on the deterministic scorer. Nothing here touches a model —
-        these are the numbers the pipeline would otherwise hard-code.
+        Everything the scorer does, exposed. Nothing here touches a model, and
+        nothing deletes data — change a switch and the ranking re-sorts.
       </p>
       <div id="tuneBody"></div>
       <button class="reset-btn" id="tuneReset">Reset to defaults</button>

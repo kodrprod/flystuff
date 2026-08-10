@@ -11,7 +11,7 @@ import { randomUUID } from 'node:crypto';
 
 import { ROOT, loadEnv, keyStatus, keyIssues, assertKey, readCorpus, writeCorpus, backupCorpus, logRun } from './lib.mjs';
 import {
-  scrapeReels, scrapeGrid, gridIndex, applyExclusions, normalizePost,
+  scrapeReels, scrapeGrid, gridIndex, annotate, normalizePost,
   buildCreators, buildHistory, EXCLUSION_LABELS,
 } from './apify.mjs';
 import { findRestaurant, findSimilarAccounts, reasonAboutPost, extractWithGemini } from './ai.mjs';
@@ -137,17 +137,17 @@ const routes = {
       if (gridCheck) {
         say('Scraping profile grids to detect unlisted / trial reels…');
         try {
-          grid = gridIndex(await scrapeGrid(env.apify, handles, { limitPerAccount: 60 }));
-          say(`Grid indexed for ${Object.keys(grid).length} accounts.`);
+          grid = gridIndex(await scrapeGrid(env.apify, handles, { limitPerAccount: 200 }), limit);
+          const deep = Object.values(grid).filter((g) => g.deep).length;
+          say(`Grid indexed for ${Object.keys(grid).length} accounts (${deep} deep enough to judge).`);
         } catch (e) {
           say(`Grid scrape failed (${e.message}) — continuing without unlisted detection.`);
         }
       }
 
-      const { kept, dropped } = applyExclusions(raw, { gridShortcodes: grid, dropUnlisted: true });
-      const byReason = {};
-      dropped.forEach((d) => (byReason[d.reason] = (byReason[d.reason] || 0) + 1));
-      Object.entries(byReason).forEach(([r, n]) => say(`Excluded ${n}: ${EXCLUSION_LABELS[r] || r}`));
+      const { kept, counts: byReason } = annotate(raw, { gridShortcodes: grid });
+      Object.entries(byReason).forEach(([r, n]) => say(`Flagged ${n}: ${EXCLUSION_LABELS[r] || r}`));
+      say('Everything is stored — use Filters to decide what counts.');
 
       const corpus = readCorpus();
       const now = Date.now();
@@ -165,7 +165,7 @@ const routes = {
         const owners = [...new Set(fresh.map((p) => p.creatorId))];
         corpus.sources[clientId] = [...new Set([...(corpus.sources[clientId] || []), ...owners])];
       }
-      logRun(corpus, 'scrape', { accounts: handles.length, records: raw.length, kept: kept.length, dropped: byReason });
+      logRun(corpus, 'scrape', { accounts: handles.length, records: raw.length, kept: kept.length, flagged: byReason });
       writeCorpus(corpus);
 
       // Report what actually survives the funnel, not just what was stored.

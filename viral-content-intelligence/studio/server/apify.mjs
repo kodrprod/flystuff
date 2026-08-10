@@ -39,7 +39,7 @@ export async function scrapeReels(token, handles, { limitPerAccount = 36 } = {})
  * See `applyExclusions` — the reel actor exposes no trial flag, so the grid is
  * the only signal available.
  */
-export async function scrapeGrid(token, handles, { limitPerAccount = 60 } = {}) {
+export async function scrapeGrid(token, handles, { limitPerAccount = 200 } = {}) {
   return runActor(token, PROFILE_ACTOR, {
     username: handles,
     resultsLimit: limitPerAccount,
@@ -56,12 +56,19 @@ export const EXCLUSION_LABELS = {
   pinned: 'Pinned to the profile',
   sponsored: 'Paid partnership — reach is bought, not earned',
   no_plays: 'No play count returned',
-  suspected_unlisted: 'Not on the profile grid — likely a trial or archived reel',
+  not_on_grid: 'Not on the profile grid — possibly a trial or archived reel',
 };
 
 /**
- * `gridShortcodes` is optional. When supplied, any reel whose shortcode is
- * absent from the account's own grid is treated as unlisted.
+ * Annotates records with the reasons they *could* be excluded. Nothing is
+ * dropped here.
+ *
+ * The previous version deleted at scrape time, and a shallow grid scrape
+ * silently destroyed a third of a 295-reel run: the grid fetch capped at 60
+ * posts per account while reels reached further back, so every older reel
+ * looked "missing from the grid". Reels you paid to scrape should never be
+ * unrecoverable because a heuristic misfired — store everything, flag it, and
+ * let the filter panel decide.
  *
  * Why this is a proxy rather than a check: the reel actor returns no trial
  * field — `productType` is "clips" for every record and `isPinned` was false
@@ -72,37 +79,45 @@ export const EXCLUSION_LABELS = {
  * basis and the flag simply stays off, because guessing from engagement shape
  * would delete exactly the outliers this system exists to find.
  */
-export function applyExclusions(records, { gridShortcodes = null, dropUnlisted = true } = {}) {
+export function annotate(records, { gridShortcodes = null } = {}) {
   const kept = [];
-  const dropped = [];
-  const drop = (rec, reason) =>
-    dropped.push({ reason, username: rec.ownerUsername || rec.username, shortCode: rec.shortCode });
+  const counts = {};
+  const bump = (r) => (counts[r] = (counts[r] || 0) + 1);
 
   for (const rec of records) {
-    if (rec.error) { drop(rec, 'scrape_error'); continue; }
-    if (rec.productType && rec.productType !== 'clips') { drop(rec, 'not_a_reel'); continue; }
-    if (rec.isPinned === true) { drop(rec, 'pinned'); continue; }
-    if (rec.paidPartnership === true) { drop(rec, 'sponsored'); continue; }
-    if (!(rec.videoPlayCount > 0)) { drop(rec, 'no_plays'); continue; }
+    if (rec.error) { bump('scrape_error'); continue; } // no post to store
+    const flags = [];
+
+    if (rec.productType && rec.productType !== 'clips') flags.push('not_a_reel');
+    if (rec.isPinned === true) flags.push('pinned');
+    if (rec.paidPartnership === true) flags.push('sponsored');
+    if (!(rec.videoPlayCount > 0)) flags.push('no_plays');
 
     if (gridShortcodes) {
       const grid = gridShortcodes[rec.ownerUsername];
-      if (grid && grid.size && !grid.has(rec.shortCode)) {
-        if (dropUnlisted) { drop(rec, 'suspected_unlisted'); continue; }
-        rec.__suspectedUnlisted = true;
-      }
+      // Only trust grid-absence when the grid actually reaches back at least as
+      // far as this account's reels. A shallow grid proves nothing.
+      if (grid && grid.deep && !grid.codes.has(rec.shortCode)) flags.push('not_on_grid');
     }
+
+    flags.forEach(bump);
+    rec.__flags = flags;
     kept.push(rec);
   }
-  return { kept, dropped };
+  return { kept, counts };
 }
 
-export function gridIndex(gridRecords) {
+/**
+ * `deep` marks accounts whose grid we fetched enough of to draw a conclusion.
+ * Without it, "not on the grid" just means "we did not look far enough".
+ */
+export function gridIndex(gridRecords, reelsPerAccount = 36) {
   const idx = {};
   for (const r of gridRecords) {
     if (r.error || !r.ownerUsername) continue;
-    (idx[r.ownerUsername] ||= new Set()).add(r.shortCode);
+    (idx[r.ownerUsername] ||= { codes: new Set(), deep: false }).codes.add(r.shortCode);
   }
+  for (const v of Object.values(idx)) v.deep = v.codes.size >= reelsPerAccount * 2;
   return idx;
 }
 
@@ -145,7 +160,7 @@ export function normalizePost(rec, now = Date.now()) {
     music: rec.musicInfo
       ? { song: rec.musicInfo.song_name, artist: rec.musicInfo.artist_name, original: !!rec.musicInfo.uses_original_audio }
       : null,
-    suspectedUnlisted: !!rec.__suspectedUnlisted,
+    flags: rec.__flags || [],
     poster: { hue: POSTER_HUES[h % POSTER_HUES.length], glyph: GLYPHS[h % GLYPHS.length] },
     // Filled in later by the Gemini/Claude stages.
     attributes: null,
@@ -183,6 +198,7 @@ export function buildHistory(posts) {
       mediaType: p.mediaType,
       views: p.views,
       ageDays: p.ageDays,
+      flags: p.flags || [], // the scorer drops excluded reels from baselines too
     });
   }
   return byCreator;

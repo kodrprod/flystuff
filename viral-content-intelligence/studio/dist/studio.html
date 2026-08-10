@@ -594,6 +594,22 @@ button { font: inherit; cursor: pointer; }
 .warn-box b { color: var(--warn); display: block; margin-bottom: 8px; font-weight: 600; }
 .warn-row { display: flex; gap: 7px; flex-wrap: wrap; }
 
+.tune { width: min(400px, calc(100vw - 32px)); }
+.fsec { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-3);
+  margin: 16px 0 8px; font-weight: 600; border-top: 1px solid var(--line); padding-top: 12px; }
+.fsec:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.fchk { justify-content: flex-start; gap: 8px; padding: 4px 0; }
+.fchk b { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--fg-3); font-weight: 500; }
+.frow { display: flex; flex-direction: column; gap: 2px; margin-bottom: 9px; }
+.frow label { display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  font-size: 12px; color: var(--fg-2); }
+.frow input { width: 90px; background: var(--bg-3); border: 1px solid var(--line-2); color: var(--fg);
+  padding: 5px 8px; border-radius: 7px; font-size: 12.5px; font-family: var(--mono); }
+.frow > span { font-size: 10.5px; color: var(--fg-3); }
+.fstats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-top: 12px;
+  border-top: 1px solid var(--line); font-size: 11px; color: var(--fg-3); }
+.fstats b { color: var(--fg); font-family: var(--mono); }
+
 </style>
 
     <header class="topbar">
@@ -613,8 +629,8 @@ button { font: inherit; cursor: pointer; }
           <button class="seg-btn" data-view="gallery" role="tab">Gallery</button>
           <button class="seg-btn" data-view="sources" role="tab">Sources</button>
         </div>
-        <button class="icon-btn" id="tuneBtn" aria-expanded="false" title="Scoring weights">
-          Tune
+        <button class="icon-btn" id="tuneBtn" aria-expanded="false" title="Filters and weights">
+          Filters
         </button>
       </div>
     </header>
@@ -658,12 +674,12 @@ button { font: inherit; cursor: pointer; }
 
     <div class="tune" id="tune" hidden>
       <div class="tune-head">
-        <strong>Scoring weights</strong>
+        <strong>Filters &amp; weights</strong>
         <button class="icon-btn" id="tuneClose" aria-label="Close">Done</button>
       </div>
       <p class="tune-note">
-        Live knobs on the deterministic scorer. Nothing here touches a model —
-        these are the numbers the pipeline would otherwise hard-code.
+        Everything the scorer does, exposed. Nothing here touches a model, and
+        nothing deletes data — change a switch and the ranking re-sorts.
       </p>
       <div id="tuneBody"></div>
       <button class="reset-btn" id="tuneReset">Reset to defaults</button>
@@ -2088,6 +2104,19 @@ const CONFIG = {
     shortTrendHalfLife: 0.15, // < 14 days
   },
 
+  /**
+   * Which scrape-time flags exclude a reel. Nothing is deleted at ingest any
+   * more — reels carry their flags and these switches decide what counts, so a
+   * filter you disagree with costs a click rather than a re-scrape.
+   */
+  exclude: {
+    pinned: true,
+    sponsored: true,
+    not_a_reel: true,
+    no_plays: true,
+    not_on_grid: false, // off by default — it is a proxy, and it over-fires
+  },
+
   // §5.4 client-fit component weights. Must sum to 1.
   fitWeights: {
     space: 0.35,
@@ -2135,6 +2164,7 @@ const ageDays = (iso, now = Date.now()) =>
 function computeBaseline(creator, mediaType, excludePostId = null, k = 12) {
   const pool = creator.history
     .filter((h) => h.mediaType === mediaType)
+    .filter((h) => !(h.flags || []).some((f) => CONFIG.exclude[f]))
     .filter((h) => h.id !== excludePostId)
     .filter((h) => h.ageDays >= CONFIG.minAgeDays)
     .sort((a, b) => a.ageDays - b.ageDays)
@@ -2385,7 +2415,27 @@ function hardFilters(attrs, client, tone) {
  * Top level
  * ------------------------------------------------------------------ */
 
+const FLAG_LABELS = {
+  pinned: 'Pinned to the profile',
+  sponsored: 'Paid partnership',
+  not_a_reel: 'Not a reel',
+  no_plays: 'No play count',
+  not_on_grid: 'Not on the profile grid',
+};
+
 function scoreConcept(post, creator, client, now = Date.now()) {
+  const excluded = (post.flags || []).filter((f) => CONFIG.exclude[f]);
+  if (excluded.length) {
+    return {
+      post, creator, client, scorerVersion: SCORER_VERSION,
+      baseline: { medianViews: 0, nPosts: 0, valid: false },
+      outlier: { valid: false, multiplier: 0, conservative: 0 },
+      stage: 'excluded',
+      dropReasons: excluded.map((f) => FLAG_LABELS[f] || f),
+      opportunity: 0,
+    };
+  }
+
   const baseline = computeBaseline(creator, post.mediaType, post.id);
   const outlier = detectOutlier(post, baseline);
 
@@ -2601,7 +2651,11 @@ function exportAll() {
 
 
 const SHORTLIST_SIZE = 6;
-const DEFAULTS = JSON.parse(JSON.stringify({ weights: CONFIG.weights, gate: CONFIG.gemniGateMultiplier }));
+const DEFAULTS = JSON.parse(JSON.stringify({
+  weights: CONFIG.weights, gate: CONFIG.gemniGateMultiplier, exclude: CONFIG.exclude,
+  minAgeDays: CONFIG.minAgeDays, maxAgeDays: CONFIG.maxAgeDays,
+  minBaselinePosts: CONFIG.minBaselinePosts, minBaselineViews: CONFIG.minBaselineViews,
+}));
 
 const SPACES = ['counter', 'small_kitchen', 'full_kitchen', 'dining_room', 'shared_seating', 'outdoor', 'street', 'multi_location'];
 const EQUIPMENT = ['phone', 'tripod', 'gimbal', 'light', 'second_camera', 'drone'];
@@ -2720,7 +2774,7 @@ const titleCase = (s) => String(s).replace(/_/g, ' ');
  * Scoring pass
  * ------------------------------------------------------------------ */
 
-const STAGE_ORDER = { scored: 0, unanalysed: 1, filtered: 2, below_gate: 3, rejected: 4 };
+const STAGE_ORDER = { scored: 0, unanalysed: 1, filtered: 2, below_gate: 3, rejected: 4, excluded: 5 };
 
 function recompute() {
   const c = client();
@@ -2857,6 +2911,7 @@ function dropLabel(res) {
   if (res.stage === 'rejected') return 'OUT OF WINDOW';
   if (res.stage === 'below_gate') return 'BELOW GATE';
   if (res.stage === 'unanalysed') return 'NEEDS ANALYSIS';
+  if (res.stage === 'excluded') return 'FILTERED OUT';
   return 'FILTERED';
 }
 
@@ -3575,7 +3630,47 @@ async function refreshStatus() {
 
 function renderTune() {
   const w = CONFIG.weights;
+  const r = state.results;
+  const count = (st) => r.filter((x) => x.stage === st).length;
+
+  // How many reels each switch is currently removing, so the cost of every
+  // filter is visible rather than inferred.
+  const flagCounts = {};
+  for (const x of r) for (const f of x.post.flags || []) flagCounts[f] = (flagCounts[f] || 0) + 1;
+
+  const num = (key, label, min, max, step, val, note) => `
+    <div class="frow">
+      <label>${esc(label)}<input type="number" min="${min}" max="${max}" step="${step}" value="${val}" data-cfg="${key}" /></label>
+      <span>${esc(note)}</span>
+    </div>`;
+
   $('tuneBody').innerHTML = `
+    <h5 class="fsec">Exclude these reels</h5>
+    ${Object.keys(CONFIG.exclude)
+      .map(
+        (f) => `<label class="chk fchk">
+          <input type="checkbox" data-exclude="${f}" ${CONFIG.exclude[f] ? 'checked' : ''} />
+          ${esc(FLAG_LABELS[f] || f)}
+          <b>${flagCounts[f] || 0}</b>
+        </label>`,
+      )
+      .join('')}
+    <p class="tune-note">Nothing is deleted — these decide what counts. "Not on the profile grid" is a guess at
+    trial reels and over-fires on accounts that post often, so it is off by default.</p>
+
+    <h5 class="fsec">Which reels are scoreable</h5>
+    ${num('minAgeDays', 'Youngest age', 0, 60, 1, CONFIG.minAgeDays, 'days — below this, views are still climbing')}
+    ${num('maxAgeDays', 'Oldest age', 20, 365, 5, CONFIG.maxAgeDays, 'days')}
+    ${num('minBaselinePosts', 'Min posts for a baseline', 3, 20, 1, CONFIG.minBaselinePosts, 'fewer = noisier median')}
+    ${num('minBaselineViews', 'Min baseline views', 0, 20000, 250, CONFIG.minBaselineViews, 'stops dead accounts faking outliers')}
+
+    <h5 class="fsec">Gate</h5>
+    <div class="slider">
+      <label>Send to Gemini above <span>${CONFIG.gemniGateMultiplier}×</span></label>
+      <input type="range" min="1" max="30" step="0.5" value="${CONFIG.gemniGateMultiplier}" data-gate="1" />
+    </div>
+
+    <h5 class="fsec">Score weights</h5>
     ${[['V', 'Virality evidence'], ['R', 'Replicability'], ['F', 'Client fit'], ['T', 'Tone fit']]
       .map(
         ([k, label]) => `
@@ -3585,11 +3680,14 @@ function renderTune() {
       </div>`,
       )
       .join('')}
-    <div class="slider">
-      <label>Extraction gate <span>${CONFIG.gemniGateMultiplier.toFixed(0)}×</span></label>
-      <input type="range" min="2" max="30" step="1" value="${CONFIG.gemniGateMultiplier}" data-gate="1" />
-    </div>
-    <p class="tune-note" style="margin:0">Weights are normalised to sum to 1, so moving one moves the others.</p>`;
+
+    <div class="fstats">
+      <span><b>${count('scored')}</b> scored</span>
+      <span><b>${count('unanalysed')}</b> to analyse</span>
+      <span><b>${count('below_gate')}</b> under gate</span>
+      <span><b>${count('rejected')}</b> out of window</span>
+      <span><b>${count('excluded')}</b> filtered out</span>
+    </div>`;
 }
 
 function normaliseWeights() {
@@ -3774,7 +3872,12 @@ document.addEventListener('click', (e) => {
   if (t.id === 'tuneClose') $('tune').hidden = true;
   if (t.id === 'tuneReset') {
     Object.assign(CONFIG.weights, DEFAULTS.weights);
+    Object.assign(CONFIG.exclude, DEFAULTS.exclude);
     CONFIG.gemniGateMultiplier = DEFAULTS.gate;
+    CONFIG.minAgeDays = DEFAULTS.minAgeDays;
+    CONFIG.maxAgeDays = DEFAULTS.maxAgeDays;
+    CONFIG.minBaselinePosts = DEFAULTS.minBaselinePosts;
+    CONFIG.minBaselineViews = DEFAULTS.minBaselineViews;
     renderTune();
     renderAll();
   }
@@ -3825,6 +3928,20 @@ document.addEventListener('input', (e) => {
       ratioEl.className = `out-ratio ${ratio ? (ratio >= 2 ? 'good' : ratio >= 1 ? 'mid' : 'bad') : ''}`;
     }
     renderClientBar();
+    return;
+  }
+
+  if (el.dataset.exclude) {
+    CONFIG.exclude[el.dataset.exclude] = el.checked;
+    renderAll();
+    renderTune();
+    return;
+  }
+  if (el.dataset.cfg) {
+    const v = +el.value;
+    if (Number.isFinite(v)) CONFIG[el.dataset.cfg] = v;
+    renderAll();
+    renderTune();
     return;
   }
 

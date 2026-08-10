@@ -1,12 +1,16 @@
 import { CLIENTS, CREATORS, POSTS, TONE_LABELS } from './data.js';
-import { CONFIG, SCORER_VERSION, scoreAll, labelSpace } from './scoring.js';
+import { CONFIG, SCORER_VERSION, scoreAll, labelSpace, FLAG_LABELS } from './scoring.js';
 import {
   resolveClients, saveClient, deleteClient, isCustomClient, hasOverride, resetClient,
   getOutcome, setOutcome, outcomeSummary, getUI, setUI,
 } from './store.js';
 
 const SHORTLIST_SIZE = 6;
-const DEFAULTS = JSON.parse(JSON.stringify({ weights: CONFIG.weights, gate: CONFIG.gemniGateMultiplier }));
+const DEFAULTS = JSON.parse(JSON.stringify({
+  weights: CONFIG.weights, gate: CONFIG.gemniGateMultiplier, exclude: CONFIG.exclude,
+  minAgeDays: CONFIG.minAgeDays, maxAgeDays: CONFIG.maxAgeDays,
+  minBaselinePosts: CONFIG.minBaselinePosts, minBaselineViews: CONFIG.minBaselineViews,
+}));
 
 const SPACES = ['counter', 'small_kitchen', 'full_kitchen', 'dining_room', 'shared_seating', 'outdoor', 'street', 'multi_location'];
 const EQUIPMENT = ['phone', 'tripod', 'gimbal', 'light', 'second_camera', 'drone'];
@@ -125,7 +129,7 @@ const titleCase = (s) => String(s).replace(/_/g, ' ');
  * Scoring pass
  * ------------------------------------------------------------------ */
 
-const STAGE_ORDER = { scored: 0, unanalysed: 1, filtered: 2, below_gate: 3, rejected: 4 };
+const STAGE_ORDER = { scored: 0, unanalysed: 1, filtered: 2, below_gate: 3, rejected: 4, excluded: 5 };
 
 function recompute() {
   const c = client();
@@ -262,6 +266,7 @@ function dropLabel(res) {
   if (res.stage === 'rejected') return 'OUT OF WINDOW';
   if (res.stage === 'below_gate') return 'BELOW GATE';
   if (res.stage === 'unanalysed') return 'NEEDS ANALYSIS';
+  if (res.stage === 'excluded') return 'FILTERED OUT';
   return 'FILTERED';
 }
 
@@ -980,7 +985,47 @@ async function refreshStatus() {
 
 function renderTune() {
   const w = CONFIG.weights;
+  const r = state.results;
+  const count = (st) => r.filter((x) => x.stage === st).length;
+
+  // How many reels each switch is currently removing, so the cost of every
+  // filter is visible rather than inferred.
+  const flagCounts = {};
+  for (const x of r) for (const f of x.post.flags || []) flagCounts[f] = (flagCounts[f] || 0) + 1;
+
+  const num = (key, label, min, max, step, val, note) => `
+    <div class="frow">
+      <label>${esc(label)}<input type="number" min="${min}" max="${max}" step="${step}" value="${val}" data-cfg="${key}" /></label>
+      <span>${esc(note)}</span>
+    </div>`;
+
   $('tuneBody').innerHTML = `
+    <h5 class="fsec">Exclude these reels</h5>
+    ${Object.keys(CONFIG.exclude)
+      .map(
+        (f) => `<label class="chk fchk">
+          <input type="checkbox" data-exclude="${f}" ${CONFIG.exclude[f] ? 'checked' : ''} />
+          ${esc(FLAG_LABELS[f] || f)}
+          <b>${flagCounts[f] || 0}</b>
+        </label>`,
+      )
+      .join('')}
+    <p class="tune-note">Nothing is deleted — these decide what counts. "Not on the profile grid" is a guess at
+    trial reels and over-fires on accounts that post often, so it is off by default.</p>
+
+    <h5 class="fsec">Which reels are scoreable</h5>
+    ${num('minAgeDays', 'Youngest age', 0, 60, 1, CONFIG.minAgeDays, 'days — below this, views are still climbing')}
+    ${num('maxAgeDays', 'Oldest age', 20, 365, 5, CONFIG.maxAgeDays, 'days')}
+    ${num('minBaselinePosts', 'Min posts for a baseline', 3, 20, 1, CONFIG.minBaselinePosts, 'fewer = noisier median')}
+    ${num('minBaselineViews', 'Min baseline views', 0, 20000, 250, CONFIG.minBaselineViews, 'stops dead accounts faking outliers')}
+
+    <h5 class="fsec">Gate</h5>
+    <div class="slider">
+      <label>Send to Gemini above <span>${CONFIG.gemniGateMultiplier}×</span></label>
+      <input type="range" min="1" max="30" step="0.5" value="${CONFIG.gemniGateMultiplier}" data-gate="1" />
+    </div>
+
+    <h5 class="fsec">Score weights</h5>
     ${[['V', 'Virality evidence'], ['R', 'Replicability'], ['F', 'Client fit'], ['T', 'Tone fit']]
       .map(
         ([k, label]) => `
@@ -990,11 +1035,14 @@ function renderTune() {
       </div>`,
       )
       .join('')}
-    <div class="slider">
-      <label>Extraction gate <span>${CONFIG.gemniGateMultiplier.toFixed(0)}×</span></label>
-      <input type="range" min="2" max="30" step="1" value="${CONFIG.gemniGateMultiplier}" data-gate="1" />
-    </div>
-    <p class="tune-note" style="margin:0">Weights are normalised to sum to 1, so moving one moves the others.</p>`;
+
+    <div class="fstats">
+      <span><b>${count('scored')}</b> scored</span>
+      <span><b>${count('unanalysed')}</b> to analyse</span>
+      <span><b>${count('below_gate')}</b> under gate</span>
+      <span><b>${count('rejected')}</b> out of window</span>
+      <span><b>${count('excluded')}</b> filtered out</span>
+    </div>`;
 }
 
 function normaliseWeights() {
@@ -1179,7 +1227,12 @@ document.addEventListener('click', (e) => {
   if (t.id === 'tuneClose') $('tune').hidden = true;
   if (t.id === 'tuneReset') {
     Object.assign(CONFIG.weights, DEFAULTS.weights);
+    Object.assign(CONFIG.exclude, DEFAULTS.exclude);
     CONFIG.gemniGateMultiplier = DEFAULTS.gate;
+    CONFIG.minAgeDays = DEFAULTS.minAgeDays;
+    CONFIG.maxAgeDays = DEFAULTS.maxAgeDays;
+    CONFIG.minBaselinePosts = DEFAULTS.minBaselinePosts;
+    CONFIG.minBaselineViews = DEFAULTS.minBaselineViews;
     renderTune();
     renderAll();
   }
@@ -1230,6 +1283,20 @@ document.addEventListener('input', (e) => {
       ratioEl.className = `out-ratio ${ratio ? (ratio >= 2 ? 'good' : ratio >= 1 ? 'mid' : 'bad') : ''}`;
     }
     renderClientBar();
+    return;
+  }
+
+  if (el.dataset.exclude) {
+    CONFIG.exclude[el.dataset.exclude] = el.checked;
+    renderAll();
+    renderTune();
+    return;
+  }
+  if (el.dataset.cfg) {
+    const v = +el.value;
+    if (Number.isFinite(v)) CONFIG[el.dataset.cfg] = v;
+    renderAll();
+    renderTune();
     return;
   }
 

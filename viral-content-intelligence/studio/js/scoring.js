@@ -50,6 +50,19 @@ export const CONFIG = {
     shortTrendHalfLife: 0.15, // < 14 days
   },
 
+  /**
+   * Which scrape-time flags exclude a reel. Nothing is deleted at ingest any
+   * more — reels carry their flags and these switches decide what counts, so a
+   * filter you disagree with costs a click rather than a re-scrape.
+   */
+  exclude: {
+    pinned: true,
+    sponsored: true,
+    not_a_reel: true,
+    no_plays: true,
+    not_on_grid: false, // off by default — it is a proxy, and it over-fires
+  },
+
   // §5.4 client-fit component weights. Must sum to 1.
   fitWeights: {
     space: 0.35,
@@ -97,6 +110,7 @@ export const ageDays = (iso, now = Date.now()) =>
 export function computeBaseline(creator, mediaType, excludePostId = null, k = 12) {
   const pool = creator.history
     .filter((h) => h.mediaType === mediaType)
+    .filter((h) => !(h.flags || []).some((f) => CONFIG.exclude[f]))
     .filter((h) => h.id !== excludePostId)
     .filter((h) => h.ageDays >= CONFIG.minAgeDays)
     .sort((a, b) => a.ageDays - b.ageDays)
@@ -347,7 +361,27 @@ export function hardFilters(attrs, client, tone) {
  * Top level
  * ------------------------------------------------------------------ */
 
+export const FLAG_LABELS = {
+  pinned: 'Pinned to the profile',
+  sponsored: 'Paid partnership',
+  not_a_reel: 'Not a reel',
+  no_plays: 'No play count',
+  not_on_grid: 'Not on the profile grid',
+};
+
 export function scoreConcept(post, creator, client, now = Date.now()) {
+  const excluded = (post.flags || []).filter((f) => CONFIG.exclude[f]);
+  if (excluded.length) {
+    return {
+      post, creator, client, scorerVersion: SCORER_VERSION,
+      baseline: { medianViews: 0, nPosts: 0, valid: false },
+      outlier: { valid: false, multiplier: 0, conservative: 0 },
+      stage: 'excluded',
+      dropReasons: excluded.map((f) => FLAG_LABELS[f] || f),
+      opportunity: 0,
+    };
+  }
+
   const baseline = computeBaseline(creator, post.mediaType, post.id);
   const outlier = detectOutlier(post, baseline);
 
