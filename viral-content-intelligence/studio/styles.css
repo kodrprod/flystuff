@@ -509,3 +509,72 @@ button { font: inherit; cursor: pointer; }
   .fstage span { font-size: 9.5px; }
   .client-bar { padding: 11px 14px; gap: 12px; }
 }
+
+/* ---------------- sources / setup ---------------- */
+
+.sources { height: 100%; overflow-y: auto; padding: 20px 18px 60px; }
+.src-wrap { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.src-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
+.src-card h3 { margin: 0 0 6px; font-size: 14px; font-weight: 650; letter-spacing: -0.01em; }
+.src-p { font-size: 12.5px; line-height: 1.6; color: var(--fg-2); margin: 0 0 12px; }
+.src-p code { background: var(--bg-3); padding: 1px 5px; border-radius: 4px; font-family: var(--mono); font-size: 11.5px; }
+.src-note { font-size: 11.5px; color: var(--fg-3); margin: 10px 0 0; }
+
+.src-row { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; }
+.src-row input[type="text"], .src-row input:not([type]) {
+  flex: 1; min-width: 220px;
+  background: var(--bg-3); border: 1px solid var(--line-2); color: var(--fg);
+  padding: 9px 11px; border-radius: 9px; font-size: 13px;
+}
+.src-lab { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--fg-2); }
+.src-lab input { width: 72px; background: var(--bg-3); border: 1px solid var(--line-2); color: var(--fg);
+  padding: 7px 9px; border-radius: 8px; font-size: 13px; font-family: var(--mono); }
+.primary-btn.narrow { flex: 0 0 auto; padding: 9px 16px; }
+.primary-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.key-row { display: flex; align-items: center; gap: 9px; font-size: 12.5px; padding: 4px 0; color: var(--fg-2); }
+.key-row b { color: var(--fg); font-weight: 600; min-width: 76px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+.dot.ok { background: var(--good); }
+.dot.no { background: var(--bad); }
+
+.src-stats { display: flex; gap: 22px; margin-top: 12px; flex-wrap: wrap; }
+.src-stats div { display: flex; flex-direction: column; }
+.src-stats b { font-size: 19px; font-weight: 650; letter-spacing: -0.02em; }
+.src-stats span { font-size: 10.5px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.cands { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.cand { display: flex; gap: 12px; align-items: center; justify-content: space-between;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.cand-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cand-main b { font-size: 13px; }
+.cand-main span { font-size: 11.5px; color: var(--fg-2); }
+.cand-note { color: var(--fg-3) !important; font-size: 10.5px !important; }
+.cand-side { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+
+.conf { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 999px; font-weight: 600; }
+.conf.high { background: rgba(74,222,128,0.15); color: var(--good); }
+.conf.medium { background: rgba(251,191,36,0.15); color: var(--warn); }
+.conf.low { background: rgba(248,113,113,0.13); color: var(--bad); }
+
+.acc-head { display: flex; gap: 7px; margin: 12px 0 4px; }
+.acc-sec { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--fg-3);
+  margin: 14px 0 7px; font-weight: 600; }
+.accs { display: flex; flex-direction: column; gap: 5px; }
+.acc { display: grid; grid-template-columns: auto 150px 1fr auto; gap: 10px; align-items: center;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 9px; padding: 7px 11px; cursor: pointer; }
+.acc.on { border-color: hsl(var(--tab-hue) 55% 40%); background: hsl(var(--tab-hue) 40% 12%); }
+.acc input { accent-color: hsl(var(--tab-hue) 70% 55%); }
+.acc-h { font-size: 12px; font-family: var(--mono); color: var(--fg); }
+.acc-w { font-size: 11.5px; color: var(--fg-2); }
+
+.src-log { background: #08090c; border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px;
+  max-height: 260px; overflow-y: auto; font-family: var(--mono); font-size: 11px; line-height: 1.7; }
+.src-log div { color: var(--fg-2); }
+.src-log span { color: var(--fg-3); display: inline-block; min-width: 46px; }
+
+@media (max-width: 700px) {
+  .acc { grid-template-columns: auto 1fr auto; }
+  .acc-w { grid-column: 1 / -1; }
+  .sources { height: auto; overflow: visible; }
+}

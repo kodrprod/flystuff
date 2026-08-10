@@ -364,6 +364,16 @@ export function scoreConcept(post, creator, client, now = Date.now()) {
       opportunity: 0,
     };
 
+  // Live corpus: a reel can clear the gate but not yet have been through
+  // Gemini/Claude. That is a pipeline state, not a rejection.
+  if (!post.attributes)
+    return {
+      ...base,
+      stage: 'unanalysed',
+      dropReasons: [`Clears the gate at ${outlier.conservative.toFixed(1)}× — not yet analysed`],
+      opportunity: 0,
+    };
+
   const attrs = post.attributes;
   const V = scoreVirality(outlier.conservative);
   const R = scoreReplicability(attrs, client);

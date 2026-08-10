@@ -362,7 +362,10 @@ labelled data the eventual system needs.
 | Risk | Severity | Mitigation |
 |---|---|---|
 | Apify actor breaks or changes schema | High — likely within months | Normalize fields at ingest behind one adapter. Keep a second actor identified. Never let raw actor field names reach the database schema. |
-| View-count semantics (`play_count` vs `ig_play_count` vs "views") | Medium — silently corrupts every baseline | Pick one field, document it, assert on it at ingest. A mid-stream change invalidates historical baselines. |
+| View-count semantics | **Confirmed, resolved.** In live Apify data `videoPlayCount` and `videoViewCount` differ by 1.4×–118× and are not proportional. Use `videoPlayCount`; keep the other only for reference. Assert on it at ingest. |
+| Creator attribution | **Confirmed.** The actor returns reels by accounts that merely tagged the requested one (2 of 47). Key creators on `ownerUsername`, never the requested handle. |
+| Trial reels are undetectable from the reel actor | Medium | No trial field exists in the output. Cross-reference the profile grid — trial and archived reels are absent from it. Never infer from engagement shape; that deletes real outliers. |
+| Gemini 2.5 Flash is closed to new API keys | Low, but blocks a fresh setup | Pin `gemini-3.5-flash`. Avoid the `-latest` aliases: a floating model silently changes extraction behaviour under a scorer that depends on it. |
 | Age confound under-detects recent posts | High | §5.2 maturity gate. |
 | Scoring weights are arbitrary until calibrated | Medium | Ship with the loop instrumented and treat scores as ordering hints, not truth, for the first ~50 concepts. |
 | Platform ToS / GDPR | Medium — you're operating in Germany | Store aggregate metrics and post IDs; avoid retaining personal data beyond what scoring needs; don't republish scraped content. Worth a lawyer's hour before client work, not after. |

@@ -17,11 +17,27 @@ change, not a rewrite.
 ## Run it
 
 ```bash
-npm run dev     # http://localhost:4173  (python3 -m http.server)
+cp .env.example .env    # add your Apify / Anthropic / Gemini keys
+npm start               # http://localhost:4173
 ```
 
-ES modules need a server — opening `index.html` off the filesystem will fail on
-CORS. If you want a file you can double-click or email to someone:
+Without `.env` the app still runs — it just stays on the seeded demo corpus and
+the Sources tab tells you so. With keys, the Sources tab does the real work:
+
+1. **Find the restaurant.** Type a name. Claude searches the web and returns
+   candidates with address and Instagram handle, so you confirm *which* one
+   before spending anything. Asked for "Sen Vietnamese Dresden Neustadt" it
+   correctly answered that SEN is on Wilsdruffer Str. in Altstadt, and offered
+   two Neustadt alternatives in case the street mattered more than the name.
+2. **Build the source list.** Claude finds ~45 similar accounts — same cuisine
+   nearby, same cuisine elsewhere, adjacent concepts, food creators — each with
+   a reason and a confidence. Low-confidence ones start unticked.
+3. **Scrape.** Apify, with the exclusions below.
+4. **Analyse.** Gemini watches every reel past the gate, Claude works out the
+   mechanism and adapts it for the selected client.
+
+If you want a file you can double-click or email to someone (demo corpus only,
+no server, no API):
 
 ```bash
 npm run build   # -> dist/studio.html, one self-contained file, no server
@@ -88,6 +104,10 @@ set correctly.
 ## Structure
 
 ```
+server/index.mjs   API + static server, background jobs
+server/apify.mjs   scraping, exclusions, normalisation
+server/ai.mjs      Claude discovery + reasoning, Gemini extraction
+server/lib.mjs     env, http retry, corpus on disk
 js/scoring.js   deterministic engine — baselines, outliers, V/R/F/T, filters
 js/data.js      seeded corpus + client capability profiles
 js/store.js     localStorage: client edits, custom clients, outcome logs
@@ -150,3 +170,58 @@ get the gradient poster, which is enough to judge layout and pacing.
 - **The outcome loop is captured but not yet used.** Logged results do not feed
   back into the weights automatically; that is the regression described in
   PLAN.md §5.5 and it needs ~50 filmed concepts before it means anything.
+
+
+---
+
+## What gets excluded when scraping
+
+Applied in `server/apify.mjs`, and reported per run in the Sources log:
+
+| Rule | Why |
+|---|---|
+| `isPinned` | Pinned reels sit at the top of a profile for months and accumulate plays that have nothing to do with the reel. Confirmed live: **7 excluded from a 160-record run.** |
+| `paidPartnership` | Reach was bought. The mechanism isn't transferable. |
+| `productType !== 'clips'` | Not a reel. |
+| No play count | Nothing to score against. |
+| Not on the profile grid | Best available proxy for a trial or archived reel — see below. |
+
+### Trial reels
+
+**The reel actor exposes no trial flag.** `productType` was `clips` for all 47
+records in your export and `isPinned` was false for every one of them. So trial
+reels cannot be detected directly.
+
+The grid cross-reference is the closest honest signal: Instagram serves trial
+reels only to non-followers and does not show them on the profile grid, so a
+reel present in the reel feed but absent from the grid is likely a trial (it
+also catches archived reels, which you equally don't want in a baseline). Tick
+**Detect unlisted / trial reels** to enable it — it costs a second Apify run per
+account, which is why it is a toggle rather than always-on.
+
+What it deliberately does *not* do is guess from engagement shape. Trial reels
+have odd view-to-follower ratios; so do genuine outliers. A heuristic there
+would delete exactly what the system exists to find.
+
+---
+
+## What the real data showed
+
+Run against your Vietnamese-restaurant export and a live scrape, Aug 2026:
+
+- **`videoPlayCount` is the view metric, not `videoViewCount`.** They differ by
+  1.4×–118× and are not proportional. The normaliser uses `videoPlayCount` and
+  keeps the other as `legacyViewCount` for reference. Mixing them across a
+  baseline is silent corruption, and it is the single easiest way to make this
+  whole system produce confident nonsense.
+- **Creators are keyed on `ownerUsername`, never `inputUrl`.** The actor returns
+  reels by *other* accounts that tagged the one you asked for — 2 of 47 in your
+  export. Attributing those to the requested account puts a stranger's reach
+  into its baseline.
+- **`likesCount` is `-1` when likes are hidden** (9 of 47). Stored as `null`,
+  not as a number.
+- **Depth per account matters more than account count.** At 12 reels/account
+  across 3 accounts, the best multiplier was 1.69× — nothing to analyse. At 40
+  reels/account across 4 accounts, one reel cleared 8×. The default is 36.
+- **Roughly 1 outlier per 47 posts**, which is close to the 1-in-50 the plan
+  assumed.

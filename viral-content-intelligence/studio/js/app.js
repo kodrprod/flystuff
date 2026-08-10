@@ -19,7 +19,46 @@ const state = {
   results: [],
   selectedId: null,
   editing: null,
+  // Seeded corpus until the server answers; then whatever has actually been
+  // scraped for the active client.
+  corpus: { posts: POSTS, creators: CREATORS, live: false },
+  status: null,
+  wiz: { query: '', candidates: null, restaurant: null, accounts: null, selected: new Set(), busy: '', log: [] },
 };
+
+/* ---------------- API ---------------- */
+
+const api = async (path, body) => {
+  const res = await fetch(path, body
+    ? { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }
+    : undefined);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `${res.status}`);
+  return data;
+};
+
+/** Poll a background job to completion, streaming its log into the wizard. */
+async function followJob(jobId, onTick) {
+  for (;;) {
+    const job = await api(`/api/job/${jobId}`);
+    state.wiz.log = job.log;
+    onTick?.(job);
+    if (job.status === 'done') return job.result;
+    if (job.status === 'error') throw new Error(job.error);
+    await new Promise((r) => setTimeout(r, 900));
+  }
+}
+
+async function loadCorpus() {
+  if (!state.status?.keys) return;
+  try {
+    const { posts, creators } = await api(`/api/corpus?clientId=${encodeURIComponent(state.clientId)}`);
+    // Fall back to the seeded demo set rather than showing an empty app.
+    state.corpus = posts.length ? { posts, creators, live: true } : { posts: POSTS, creators: CREATORS, live: false };
+  } catch {
+    state.corpus = { posts: POSTS, creators: CREATORS, live: false };
+  }
+}
 
 const $ = (id) => document.getElementById(id);
 const client = () => state.clients.find((c) => c.id === state.clientId) || state.clients[0];
@@ -35,11 +74,11 @@ const titleCase = (s) => String(s).replace(/_/g, ' ');
  * Scoring pass
  * ------------------------------------------------------------------ */
 
-const STAGE_ORDER = { scored: 0, filtered: 1, below_gate: 2, rejected: 3 };
+const STAGE_ORDER = { scored: 0, unanalysed: 1, filtered: 2, below_gate: 3, rejected: 4 };
 
 function recompute() {
   const c = client();
-  const results = scoreAll(POSTS, CREATORS, c);
+  const results = scoreAll(state.corpus.posts, state.corpus.creators, c);
 
   results.sort((a, b) => {
     const s = STAGE_ORDER[a.stage] - STAGE_ORDER[b.stage];
@@ -127,7 +166,7 @@ function renderFunnel() {
   const scored = r.filter((x) => x.stage === 'scored').length;
 
   const stages = [
-    [POSTS.length, 'discovered', ''],
+    [state.corpus.posts.length, 'discovered', ''],
     [mature, 'in age window', ''],
     [gated, `past ${CONFIG.gemniGateMultiplier}× gate`, ''],
     [scored, 'client-viable', ''],
@@ -171,6 +210,7 @@ function mediaHTML(res) {
 function dropLabel(res) {
   if (res.stage === 'rejected') return 'OUT OF WINDOW';
   if (res.stage === 'below_gate') return 'BELOW GATE';
+  if (res.stage === 'unanalysed') return 'NEEDS ANALYSIS';
   return 'FILTERED';
 }
 
@@ -183,7 +223,7 @@ function renderFeed() {
     .map((res) => {
       const p = res.post;
       const { inner, badge, flag, m, tone, dropped } = mediaHTML(res);
-      const dots = p.timeline
+      const dots = (p.timeline || [])
         .map(
           (t, i) =>
             `<div class="scrub-dot" style="left:${(t.t / p.durationS) * 100}%" data-post="${p.id}" data-i="${i}" title="${esc(t.label)}"></div>`,
@@ -200,7 +240,7 @@ function renderFeed() {
           </div>
           <div class="scrub">
             <div class="scrub-track">${dots}</div>
-            <div class="scrub-label" data-label="${p.id}">${esc(p.timeline[0].label)}</div>
+            <div class="scrub-label" data-label="${p.id}">${esc(p.timeline?.[0]?.label || '')}</div>
           </div>
           <div class="ph-bot">
             <div class="ph-cap">${esc(p.caption)}</div>
@@ -265,8 +305,8 @@ function renderGallery() {
           <div class="tile-line">
             ${scoreLine}
             <span>▶ ${fmt(p.views)}</span>
-            <span>${esc(TONE_LABELS[p.attributes.tone] || p.attributes.tone)}</span>
-            <span>€${p.attributes.propsCostEur} · ${p.attributes.staffMinutes}m</span>
+            ${p.attributes ? `<span>${esc(TONE_LABELS[p.attributes.tone] || p.attributes.tone)}</span>
+            <span>€${p.attributes.propsCostEur} · ${p.attributes.staffMinutes}m</span>` : '<span>not analysed</span>'}
           </div>
           ${mini}
         </div>
@@ -329,8 +369,8 @@ function renderDetail(res) {
         <h4>Why it is not on the list</h4>
         <div class="drops"><ul class="ul">${res.dropReasons.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></div>
       </div>
-      <div class="sec"><h4>Mechanism (recorded anyway)</h4><p>${esc(p.mechanism)}</p></div>
-      ${attrsHTML(a)}`;
+      ${p.mechanism ? `<div class="sec"><h4>Mechanism (recorded anyway)</h4><p>${esc(p.mechanism)}</p></div>` : ''}
+      ${a ? attrsHTML(a) : ''}`;
   }
 
   const bars = [
@@ -409,7 +449,7 @@ function renderDetail(res) {
       <p>Roughly <b>€${a.propsCostEur}</b> in props and <b>${a.staffMinutes} minutes</b> of staff time. Needs ${esc(labelSpace(a.spaceRequired))}, ${a.peopleOnCamera} on camera, kit: ${esc(a.equipment.join(', '))}.</p>
     </div>
 
-    <div class="sec"><h4>Transcript</h4><p>${esc(p.transcript)}</p></div>
+    ${p.transcript ? `<div class="sec"><h4>Transcript</h4><p>${esc(p.transcript)}</p></div>` : ''}
     ${attrsHTML(a)}`;
 }
 
@@ -628,6 +668,205 @@ function exportShootList() {
   URL.revokeObjectURL(a.href);
 }
 
+
+/* ------------------------------------------------------------------ *
+ * Sources — restaurant lookup, similar accounts, scrape, analyse
+ * ------------------------------------------------------------------ */
+
+function renderSources() {
+  const w = state.wiz;
+  const c = client();
+  const st = state.status;
+
+  if (!st) {
+    $('sources').innerHTML = `<div class="src-wrap"><div class="src-card">
+      <h3>Offline</h3>
+      <p class="src-p">No API server on this origin, so the app is running on the seeded demo corpus.
+      Start it with <code>npm start</code> from <code>studio/</code> to enable discovery and scraping.</p>
+    </div></div>`;
+    return;
+  }
+
+  const k = st.keys;
+  const keyRow = (ok, name, what) =>
+    `<div class="key-row"><span class="dot ${ok ? 'ok' : 'no'}"></span><b>${name}</b><span>${what}</span></div>`;
+
+  const step1 = `
+    <div class="src-card">
+      <h3>1 · Find the restaurant</h3>
+      <p class="src-p">Type the name. Claude searches the web and comes back with candidates so you can
+      confirm which one you mean before anything gets scraped.</p>
+      <div class="src-row">
+        <input id="wizQuery" placeholder="e.g. Sen Vietnamese Dresden" value="${esc(w.query)}" />
+        <button class="primary-btn narrow" data-wiz="find" ${!k.anthropic ? 'disabled' : ''}>Search</button>
+      </div>
+      ${w.candidates ? renderCandidates(w.candidates) : ''}
+    </div>`;
+
+  const step2 = !w.restaurant ? '' : `
+    <div class="src-card">
+      <h3>2 · Build the source list</h3>
+      <p class="src-p">Confirmed: <b>${esc(w.restaurant.name)}</b>, ${esc(w.restaurant.address)}, ${esc(w.restaurant.city)}
+      ${w.restaurant.instagram ? ` · @${esc(w.restaurant.instagram)}` : ' · no Instagram found'}</p>
+      <div class="src-row">
+        <label class="src-lab">How many accounts <input id="wizCount" type="number" min="10" max="60" value="45" /></label>
+        <button class="primary-btn narrow" data-wiz="similar" ${w.busy ? 'disabled' : ''}>Find similar accounts</button>
+      </div>
+      ${w.accounts ? renderAccounts(w.accounts) : ''}
+    </div>`;
+
+  const step3 = !w.accounts?.length ? '' : `
+    <div class="src-card">
+      <h3>3 · Scrape</h3>
+      <p class="src-p"><b>${w.selected.size}</b> accounts selected.
+      Pinned reels, sponsored posts and non-reels are always excluded. The grid check costs a second
+      Apify run per account and is the only way to spot unlisted or trial reels — the reel actor exposes no flag for them.</p>
+      <div class="src-row">
+        <label class="src-lab">Reels per account <input id="wizLimit" type="number" min="12" max="60" value="36" /></label>
+        <label class="chk"><input type="checkbox" id="wizGrid" checked /> Detect unlisted / trial reels</label>
+        <button class="primary-btn narrow" data-wiz="scrape" ${w.busy || !w.selected.size ? 'disabled' : ''}>Scrape selected</button>
+      </div>
+    </div>`;
+
+  const step4 = `
+    <div class="src-card">
+      <h3>4 · Analyse the outliers</h3>
+      <p class="src-p">Gemini watches each reel that clears the ${CONFIG.gemniGateMultiplier}× gate and reports observable facts.
+      Claude works out the mechanism and adapts it for <b>${esc(c.name)}</b>. Only what passes the gate is sent, so this
+      costs cents rather than euros.</p>
+      <div class="src-row">
+        <label class="src-lab">Max reels <input id="wizMax" type="number" min="1" max="60" value="30" /></label>
+        <button class="primary-btn narrow" data-wiz="analyze" ${w.busy ? 'disabled' : ''}>Analyse for ${esc(c.name)}</button>
+      </div>
+    </div>`;
+
+  const logCard = !w.log.length ? '' : `
+    <div class="src-card">
+      <h3>${w.busy ? `Running — ${esc(w.busy)}` : 'Last run'}</h3>
+      <div class="src-log">${w.log.map((l) => `<div><span>${(l.t / 1000).toFixed(1)}s</span>${esc(l.msg)}</div>`).join('')}</div>
+    </div>`;
+
+  $('sources').innerHTML = `<div class="src-wrap">
+    <div class="src-card">
+      <h3>Status</h3>
+      ${keyRow(k.apify, 'Apify', k.apify ? 'scraping enabled' : 'APIFY_TOKEN missing')}
+      ${keyRow(k.anthropic, 'Claude', k.anthropic ? st.models.anthropic : 'ANTHROPIC_API_KEY missing')}
+      ${keyRow(k.gemini, 'Gemini', k.gemini ? st.models.gemini : 'GEMINI_API_KEY missing')}
+      <div class="src-stats">
+        <div><b>${st.corpus.posts}</b><span>reels held</span></div>
+        <div><b>${st.corpus.creators}</b><span>creators</span></div>
+        <div><b>${st.corpus.analysed}</b><span>analysed</span></div>
+        <div><b>${st.corpus.sources[c.id] || 0}</b><span>sources for ${esc(c.name)}</span></div>
+      </div>
+      ${state.corpus.live ? '' : '<p class="src-note">Showing the seeded demo corpus — nothing scraped for this client yet.</p>'}
+    </div>
+    ${step1}${step2}${step3}${step4}${logCard}
+  </div>`;
+}
+
+function renderCandidates(list) {
+  if (!list.length) return '<p class="src-note">Nothing found. Try adding the city or street.</p>';
+  return `<div class="cands">${list
+    .map(
+      (r, i) => `<div class="cand">
+        <div class="cand-main">
+          <b>${esc(r.name)}</b>
+          <span>${esc(r.address)}${r.address ? ', ' : ''}${esc(r.city)} · ${esc(r.cuisine)}</span>
+          <span class="cand-note">${r.instagram ? '@' + esc(r.instagram) : 'no Instagram found'} · ${esc(r.note)}</span>
+        </div>
+        <div class="cand-side">
+          <span class="conf ${esc(r.confidence)}">${esc(r.confidence)}</span>
+          <button class="mini-btn" data-pick="${i}">Yes, this one</button>
+        </div>
+      </div>`,
+    )
+    .join('')}</div>`;
+}
+
+function renderAccounts(list) {
+  const groups = { same_cuisine_same_city: 'Same cuisine, same city', same_cuisine_other_city: 'Same cuisine, other cities',
+    adjacent_concept: 'Adjacent concepts', food_creator: 'Food creators' };
+  const bySec = {};
+  list.forEach((a, i) => (bySec[a.category] ||= []).push({ ...a, i }));
+
+  return `<div class="acc-head">
+      <button class="mini-btn" data-wiz="all">Select all</button>
+      <button class="mini-btn" data-wiz="none">Clear</button>
+    </div>` + Object.entries(groups)
+    .filter(([k]) => bySec[k]?.length)
+    .map(
+      ([k, label]) => `<h5 class="acc-sec">${label}</h5>
+      <div class="accs">${bySec[k]
+        .map(
+          (a) => `<label class="acc ${state.wiz.selected.has(a.handle) ? 'on' : ''}">
+            <input type="checkbox" data-acc="${esc(a.handle)}" ${state.wiz.selected.has(a.handle) ? 'checked' : ''} />
+            <span class="acc-h">@${esc(a.handle)}</span>
+            <span class="acc-w">${esc(a.why)}</span>
+            <span class="conf ${esc(a.confidence)}">${esc(a.confidence)}</span>
+          </label>`,
+        )
+        .join('')}</div>`,
+    )
+    .join('');
+}
+
+async function runWiz(action) {
+  const w = state.wiz;
+  try {
+    if (action === 'find') {
+      w.query = $('wizQuery').value;
+      w.busy = 'searching'; w.log = []; renderSources();
+      const { jobId } = await api('/api/discover/restaurant', { query: w.query });
+      const out = await followJob(jobId, renderSources);
+      w.candidates = out.candidates || []; w.restaurant = null; w.accounts = null;
+    }
+
+    if (action === 'similar') {
+      w.busy = 'finding accounts'; renderSources();
+      const { jobId } = await api('/api/discover/similar', { restaurant: w.restaurant, count: +$('wizCount').value });
+      const out = await followJob(jobId, renderSources);
+      w.accounts = out.accounts || [];
+      w.selected = new Set(w.accounts.filter((a) => a.confidence !== 'low').map((a) => a.handle));
+    }
+
+    if (action === 'scrape') {
+      w.busy = 'scraping'; renderSources();
+      const { jobId } = await api('/api/scrape', {
+        clientId: state.clientId,
+        handles: [...w.selected],
+        limitPerAccount: +$('wizLimit').value,
+        gridCheck: $('wizGrid').checked,
+      });
+      await followJob(jobId, renderSources);
+      await refreshStatus();
+      await loadCorpus();
+    }
+
+    if (action === 'analyze') {
+      w.busy = 'analysing'; renderSources();
+      const { jobId } = await api('/api/analyze', {
+        clientId: state.clientId, client: client(), limit: +$('wizMax').value,
+        gate: CONFIG.gemniGateMultiplier,
+      });
+      await followJob(jobId, renderSources);
+      await refreshStatus();
+      await loadCorpus();
+    }
+  } catch (e) {
+    w.log = [...w.log, { t: 0, msg: `Error: ${e.message}` }];
+  } finally {
+    w.busy = '';
+    recompute();
+    renderClientBar();
+    renderFunnel();
+    renderSources();
+  }
+}
+
+async function refreshStatus() {
+  try { state.status = await api('/api/status'); } catch { state.status = null; }
+}
+
 /* ------------------------------------------------------------------ *
  * Tune drawer
  * ------------------------------------------------------------------ */
@@ -667,7 +906,8 @@ function renderAll() {
   renderClientBar();
   renderFunnel();
   if (state.view === 'feed') renderFeed();
-  else renderGallery();
+  else if (state.view === 'gallery') renderGallery();
+  else renderSources();
   renderPanel();
 }
 
@@ -675,9 +915,11 @@ function setView(v) {
   state.view = v;
   $('feedWrap').hidden = v !== 'feed';
   $('gallery').hidden = v !== 'gallery';
+  $('sources').hidden = v !== 'sources';
   document.querySelectorAll('#viewSwitch .seg-btn').forEach((b) => b.classList.toggle('is-active', b.dataset.view === v));
   if (v === 'feed') renderFeed();
-  else renderGallery();
+  else if (v === 'gallery') renderGallery();
+  else renderSources();
   renderPanel();
 }
 
@@ -744,10 +986,26 @@ document.addEventListener('click', (e) => {
     return;
   }
 
+  const wizBtn = t.closest('[data-wiz]');
+  if (wizBtn) {
+    const a = wizBtn.dataset.wiz;
+    if (a === 'all') { state.wiz.accounts.forEach((x) => state.wiz.selected.add(x.handle)); return renderSources(); }
+    if (a === 'none') { state.wiz.selected.clear(); return renderSources(); }
+    return runWiz(a);
+  }
+
+  const pick = t.closest('[data-pick]');
+  if (pick) {
+    state.wiz.restaurant = state.wiz.candidates[+pick.dataset.pick];
+    state.wiz.candidates = null;
+    return renderSources();
+  }
+
   const tab = t.closest('[data-client]');
   if (tab) {
     state.clientId = tab.dataset.client;
     state.selectedId = null;
+    loadCorpus().then(renderAll);
     return renderAll();
   }
 
@@ -756,7 +1014,7 @@ document.addEventListener('click', (e) => {
 
   const dot = t.closest('.scrub-dot');
   if (dot) {
-    const post = POSTS.find((p) => p.id === dot.dataset.post);
+    const post = state.corpus.posts.find((p) => p.id === dot.dataset.post);
     const label = document.querySelector(`[data-label="${dot.dataset.post}"]`);
     if (post && label) label.textContent = post.timeline[+dot.dataset.i].label;
     e.stopPropagation();
@@ -793,6 +1051,14 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('input', (e) => {
   const el = e.target;
+
+  if (el.dataset.acc) {
+    el.checked ? state.wiz.selected.add(el.dataset.acc) : state.wiz.selected.delete(el.dataset.acc);
+    el.closest('.acc')?.classList.toggle('on', el.checked);
+    const n = document.querySelector('[data-wiz="scrape"]');
+    if (n) renderSources();
+    return;
+  }
 
   if (state.editing && el.closest('#editor')) {
     applyEditorField(el);
@@ -834,7 +1100,7 @@ document.addEventListener('input', (e) => {
 document.addEventListener('mouseover', (e) => {
   const dot = e.target.closest('.scrub-dot');
   if (!dot) return;
-  const post = POSTS.find((p) => p.id === dot.dataset.post);
+  const post = state.corpus.posts.find((p) => p.id === dot.dataset.post);
   const label = document.querySelector(`[data-label="${dot.dataset.post}"]`);
   if (post && label) label.textContent = post.timeline[+dot.dataset.i].label;
 });
@@ -849,3 +1115,13 @@ document.addEventListener('keydown', (e) => {
 
 $('scorerVersion').textContent = `scorer v${SCORER_VERSION}`;
 renderAll();
+
+// Server is optional: without it the app stays on the seeded corpus.
+(async () => {
+  await refreshStatus();
+  if (state.status) {
+    await loadCorpus();
+    renderAll();
+    if (state.view === 'sources') renderSources();
+  }
+})();
