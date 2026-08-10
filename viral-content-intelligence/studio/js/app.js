@@ -729,14 +729,38 @@ function renderSources() {
       </div>
     </div>`;
 
+  const gate = CONFIG.gemniGateMultiplier;
+  const eligible = state.results.filter((r) => r.outlier.valid && r.outlier.conservative >= gate);
+  const todo = eligible.filter((r) => !r.post.attributes || !r.post.adaptations?.[c.id]);
+  const best = state.results.filter((r) => r.outlier.valid)
+    .sort((a, b) => b.outlier.conservative - a.outlier.conservative)[0];
+
   const step4 = `
     <div class="src-card">
       <h3>4 · Analyse the outliers</h3>
-      <p class="src-p">Gemini watches each reel that clears the ${CONFIG.gemniGateMultiplier}× gate and reports observable facts.
-      Claude works out the mechanism and adapts it for <b>${esc(c.name)}</b>. Only what passes the gate is sent, so this
-      costs cents rather than euros.</p>
-      <div class="src-row">
-        <label class="src-lab">Max reels <input id="wizMax" type="number" min="1" max="60" value="30" /></label>
+      <p class="src-p">Gemini watches each reel above the gate and reports observable facts; Claude works out the
+      mechanism and adapts it for <b>${esc(c.name)}</b>. Anything already done is skipped, so re-running is free —
+      you never pay twice for the same video.</p>
+
+      <div class="gate-box">
+        <label class="src-lab">Gate
+          <input id="wizGate" type="number" min="1" max="60" step="0.5" value="${gate}" />
+          <span>× the account's own median</span>
+        </label>
+        <div class="gate-read">
+          <b>${eligible.length}</b> qualify · <b>${todo.length}</b> still to do
+          ${best ? ` · best in corpus is <b>${best.outlier.conservative.toFixed(1)}×</b>` : ''}
+        </div>
+      </div>
+      <p class="src-note" style="margin-top:6px">
+        Lower it to see more, at falling quality. ${best && best.outlier.conservative < gate
+          ? `Nothing reaches ${gate}× right now — the best is ${best.outlier.conservative.toFixed(1)}×, so try that or scrape more accounts.`
+          : 'Above about 8× you are looking at genuine outliers rather than good days.'}
+      </p>
+
+      <div class="src-row" style="margin-top:10px">
+        <label class="src-lab">Max reels <input id="wizMax" type="number" min="1" max="200" value="30" /></label>
+        <label class="chk"><input type="checkbox" id="wizForce" /> Redo ones already analysed</label>
         <button class="primary-btn narrow" data-wiz="analyze" ${w.busy ? 'disabled' : ''}>Analyse for ${esc(c.name)}</button>
       </div>
     </div>`;
@@ -837,6 +861,7 @@ async function runWiz(action) {
         handles: [...w.selected],
         limitPerAccount: +$('wizLimit').value,
         gridCheck: $('wizGrid').checked,
+        gate: CONFIG.gemniGateMultiplier,
       });
       await followJob(jobId, renderSources);
       await refreshStatus();
@@ -847,7 +872,7 @@ async function runWiz(action) {
       w.busy = 'analysing'; renderSources();
       const { jobId } = await api('/api/analyze', {
         clientId: state.clientId, client: client(), limit: +$('wizMax').value,
-        gate: CONFIG.gemniGateMultiplier,
+        gate: +$('wizGate').value, force: $('wizForce').checked,
       });
       await followJob(jobId, renderSources);
       await refreshStatus();
@@ -1052,6 +1077,20 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('input', (e) => {
   const el = e.target;
+
+  if (el.id === 'wizGate') {
+    CONFIG.gemniGateMultiplier = Math.max(1, +el.value || 1);
+    recompute();
+    renderFunnel();
+    const box = document.querySelector('.gate-read');
+    if (box) {
+      const c2 = client();
+      const elig = state.results.filter((r) => r.outlier.valid && r.outlier.conservative >= CONFIG.gemniGateMultiplier);
+      const td = elig.filter((r) => !r.post.attributes || !r.post.adaptations?.[c2.id]);
+      box.innerHTML = `<b>${elig.length}</b> qualify · <b>${td.length}</b> still to do`;
+    }
+    return;
+  }
 
   if (el.dataset.acc) {
     el.checked ? state.wiz.selected.add(el.dataset.acc) : state.wiz.selected.delete(el.dataset.acc);

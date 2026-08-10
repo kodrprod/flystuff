@@ -579,3 +579,9 @@ button { font: inherit; cursor: pointer; }
   .sources { height: auto; overflow: visible; }
 }
 .key-row .key-bad { color: var(--bad); line-height: 1.5; }
+
+.gate-box { display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.gate-box .src-lab span { color: var(--fg-3); font-size: 11.5px; }
+.gate-read { font-size: 12.5px; color: var(--fg-2); }
+.gate-read b { color: hsl(var(--tab-hue) 70% 62%); font-weight: 650; }

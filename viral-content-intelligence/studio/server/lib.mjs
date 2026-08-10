@@ -130,6 +130,16 @@ export function writeCorpus(c) {
   return c;
 }
 
+/** Timestamped copy of the corpus, so a reset or bad run is never terminal. */
+export function backupCorpus() {
+  if (!existsSync(CORPUS)) return null;
+  mkdirSync(join(DATA, 'backups'), { recursive: true });
+  const name = `corpus-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+  const dest = join(DATA, 'backups', name);
+  writeFileSync(dest, readFileSync(CORPUS));
+  return dest;
+}
+
 export function logRun(corpus, type, stats) {
   corpus.runs.unshift({ type, at: new Date().toISOString(), ...stats });
   corpus.runs = corpus.runs.slice(0, 60);

@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { randomUUID } from 'node:crypto';
 
-import { ROOT, loadEnv, keyStatus, keyIssues, assertKey, readCorpus, writeCorpus, logRun } from './lib.mjs';
+import { ROOT, loadEnv, keyStatus, keyIssues, assertKey, readCorpus, writeCorpus, backupCorpus, logRun } from './lib.mjs';
 import {
   scrapeReels, scrapeGrid, gridIndex, applyExclusions, normalizePost,
   buildCreators, buildHistory, EXCLUSION_LABELS,
@@ -121,7 +121,7 @@ const routes = {
     return { jobId };
   },
 
-  'POST /api/scrape': async ({ clientId, handles, limitPerAccount, gridCheck }) => {
+  'POST /api/scrape': async ({ clientId, handles, limitPerAccount, gridCheck, gate }) => {
     assertKey(env, 'apify', 'APIFY_TOKEN');
     if (!handles?.length) throw new Error('handles required');
 
@@ -167,17 +167,18 @@ const routes = {
       writeCorpus(corpus);
 
       // Report what actually survives the funnel, not just what was stored.
+      const threshold = gate > 0 ? gate : CONFIG.gemniGateMultiplier;
       const scored = withOutliers(corpus.posts);
       const usable = scored.filter((p) => p.outlier.valid);
-      const past = usable.filter((p) => p.outlier.passesGate);
-      say(`${corpus.posts.length} reels held · ${usable.length} have a usable baseline · ${past.length} clear the ${CONFIG.gemniGateMultiplier}x gate.`);
+      const past = usable.filter((p) => p.outlier.conservative >= threshold);
+      say(`${corpus.posts.length} reels held · ${usable.length} have a usable baseline · ${past.length} clear the ${threshold}x gate.`);
 
       return { kept: kept.length, dropped: byReason, usable: usable.length, pastGate: past.length };
     });
     return { jobId };
   },
 
-  'POST /api/analyze': async ({ clientId, client, limit, gate }) => {
+  'POST /api/analyze': async ({ clientId, client, limit, gate, force }) => {
     if (!env.gemini) throw new Error('GEMINI_API_KEY missing');
     assertKey(env, 'anthropic', 'ANTHROPIC_API_KEY');
     if (!client) throw new Error('client profile required');
@@ -200,29 +201,49 @@ const routes = {
       say(`${targets.length} outliers to analyse.`);
 
       const byId = new Map(corpus.posts.map((p) => [p.id, p]));
-      let ok = 0;
+      let ok = 0, skipped = 0, failed = 0;
+
       for (const [i, t] of targets.entries()) {
         const stored = byId.get(t.id);
+        const tag = `[${i + 1}/${targets.length}] @${t.creatorId}`;
+
+        // Resume, don't repeat. Gemini output is per-video and Claude output is
+        // per-video-per-client, so each is skipped independently unless forced.
+        const haveVideo = !!stored.attributes;
+        const haveReasoning = !!stored.adaptations?.[client.id];
+        if (haveVideo && haveReasoning && !force) {
+          skipped++;
+          if (skipped <= 3) say(`${tag} — already done, skipping`);
+          continue;
+        }
+
         try {
-          if (!stored.attributes) {
-            say(`[${i + 1}/${targets.length}] @${t.creatorId} — Gemini…`);
+          if (!haveVideo || force) {
+            say(`${tag} — Gemini…`);
             Object.assign(stored, await extractWithGemini(env, stored));
+            writeCorpus(corpus); // bank the video pass before spending on Claude
+          } else {
+            say(`${tag} — Gemini cached`);
           }
-          say(`[${i + 1}/${targets.length}] @${t.creatorId} — Claude…`);
+
+          say(`${tag} — Claude…`);
           const r = await reasonAboutPost(env, { ...stored, outlierMultiplier: t.outlierMultiplier }, client);
           stored.mechanism = r.mechanism;
           stored.essentialElements = r.essentialElements;
           stored.incidentalElements = r.incidentalElements;
           stored.adaptations = { ...(stored.adaptations || {}), [client.id]: r.adaptation };
           ok++;
-          writeCorpus(corpus); // checkpoint — a mid-run failure keeps paid-for work
+          writeCorpus(corpus); // checkpoint after every video
         } catch (e) {
-          say(`[${i + 1}/${targets.length}] @${t.creatorId} failed: ${e.message}`);
+          failed++;
+          say(`${tag} failed: ${e.message}`);
         }
       }
-      logRun(corpus, 'analyze', { targets: targets.length, ok });
+      if (skipped > 3) say(`…and ${skipped - 3} more already done.`);
+      say(`${ok} analysed · ${skipped} skipped · ${failed} failed.`);
+      logRun(corpus, 'analyze', { targets: targets.length, ok, skipped, failed, gate: threshold });
       writeCorpus(corpus);
-      return { analysed: ok, attempted: targets.length };
+      return { analysed: ok, skipped, failed, attempted: targets.length };
     });
     return { jobId };
   },
@@ -235,9 +256,14 @@ const routes = {
   },
 
   'POST /api/reset': async () => {
+    // Snapshot first — losing a scraped-and-analysed corpus means paying for
+    // it all again.
+    const backup = backupCorpus();
     writeCorpus({ creators: {}, posts: [], sources: {}, runs: [] });
-    return { ok: true };
+    return { ok: true, backup };
   },
+
+  'POST /api/backup': async () => ({ ok: true, backup: backupCorpus() }),
 };
 
 const pickAnalysis = (p) => ({
