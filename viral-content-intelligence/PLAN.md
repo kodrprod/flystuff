@@ -208,10 +208,18 @@ F = weighted fraction of required capabilities the client actually has
 `est_cost_eur > monthly_budget / 6` · required capability the client lacks ·
 `trend_half_life_days < days_to_film`.
 
+**T — tone / brand fit.** Added after the first client intake round: clients
+differ on *register*, not just capability. A mall kebab counter wants jokes; a
+sit-down Vietnamese restaurant wants craft and warmth. The same replicable
+mechanism can be right for one and wrong for the other, and capability matching
+alone cannot see that. `T` is the client's stated preference weight for the
+video's extracted tone, with a small credit for the secondary tone. A tone on
+the client's `avoid` list is a hard filter, not a deduction.
+
 **Opportunity:**
 
 ```
-Opportunity = 100 × V^0.40 × R^0.35 × F^0.25
+Opportunity = 100 × V^0.35 × R^0.30 × F^0.20 × T^0.15
 ```
 
 Weighted geometric mean. A zero in any dimension kills the concept (which is what the

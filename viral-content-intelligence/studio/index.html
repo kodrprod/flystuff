@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Viral Content Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">VC</span>
+        <div class="brand-text">
+          <strong>Viral Content Studio</strong>
+          <span id="scorerVersion">scorer —</span>
+        </div>
+      </div>
+
+      <div class="client-switch" id="clientSwitch" role="tablist" aria-label="Client"></div>
+
+      <div class="topbar-right">
+        <div class="seg" id="viewSwitch" role="tablist" aria-label="View mode">
+          <button class="seg-btn is-active" data-view="feed" role="tab">Feed</button>
+          <button class="seg-btn" data-view="gallery" role="tab">Gallery</button>
+        </div>
+        <button class="icon-btn" id="tuneBtn" aria-expanded="false" title="Scoring weights">
+          Tune
+        </button>
+      </div>
+    </header>
+
+    <section class="client-bar" id="clientBar"></section>
+
+    <section class="funnel" id="funnel" aria-label="Pipeline funnel"></section>
+
+    <main id="main">
+      <!-- FEED -->
+      <div class="feed-wrap" id="feedWrap">
+        <div class="feed" id="feed" tabindex="0"></div>
+        <aside class="panel" id="panel"></aside>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="gallery" id="gallery" hidden></div>
+    </main>
+
+    <div class="sheet" id="sheet" hidden>
+      <div class="sheet-inner" id="sheetInner"></div>
+      <button class="sheet-close" id="sheetClose" aria-label="Close">Close</button>
+    </div>
+
+    <div class="tune" id="tune" hidden>
+      <div class="tune-head">
+        <strong>Scoring weights</strong>
+        <button class="icon-btn" id="tuneClose" aria-label="Close">Done</button>
+      </div>
+      <p class="tune-note">
+        Live knobs on the deterministic scorer. Nothing here touches a model —
+        these are the numbers the pipeline would otherwise hard-code.
+      </p>
+      <div id="tuneBody"></div>
+      <button class="reset-btn" id="tuneReset">Reset to defaults</button>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

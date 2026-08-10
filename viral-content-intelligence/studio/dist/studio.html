@@ -1,0 +1,2756 @@
+<title>Viral Content Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<style>
+/* Deliberately single-theme (dark). A media-review tool reads better against
+   black, and poster gradients need a fixed ground to stay predictable. */
+
+:root {
+  --bg: #0b0c10;
+  --bg-2: #121419;
+  --bg-3: #191c23;
+  --line: #262a33;
+  --line-2: #333844;
+  --fg: #eef1f6;
+  --fg-2: #a4acbb;
+  --fg-3: #6f7788;
+  --accent: 198;
+  --good: #4ade80;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --radius: 14px;
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+/* .sheet/.gallery/.feed-wrap set an explicit `display`, which beats the UA
+   rule for [hidden]. Without this they stay laid out and keep eating clicks. */
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* App shell: the chrome sizes itself, the media area takes whatever is left.
+   Hard-coded viewport maths here goes stale the moment a brief wraps to an
+   extra line. */
+body { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+#main { flex: 1; min-height: 0; }
+
+button { font: inherit; cursor: pointer; }
+
+/* ---------------- topbar ---------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 10px 18px;
+  background: rgba(11, 12, 16, 0.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 9px;
+  background: linear-gradient(140deg, hsl(var(--accent) 80% 55%), hsl(calc(var(--accent) + 50) 75% 45%));
+  font-weight: 700; font-size: 13px; color: #06070a;
+  transition: background 0.35s ease;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-text strong { font-size: 14px; letter-spacing: -0.01em; }
+.brand-text span { font-size: 11px; color: var(--fg-3); font-family: var(--mono); }
+
+.client-switch { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+
+.client-tab {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 1px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--fg-2);
+  text-align: left;
+  transition: all 0.16s ease;
+}
+.client-tab:hover { border-color: var(--line-2); color: var(--fg); }
+.client-tab strong { font-size: 13px; font-weight: 600; }
+.client-tab span { font-size: 10.5px; color: var(--fg-3); }
+.client-tab.is-active {
+  background: hsl(var(--tab-hue) 60% 16%);
+  border-color: hsl(var(--tab-hue) 70% 40%);
+  color: #fff;
+}
+.client-tab.is-active span { color: hsl(var(--tab-hue) 60% 75%); }
+
+.topbar-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+
+.seg { display: flex; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.seg-btn {
+  border: 0; background: transparent; color: var(--fg-2);
+  padding: 5px 14px; border-radius: 7px; font-size: 13px; font-weight: 500;
+}
+.seg-btn.is-active { background: var(--bg-3); color: var(--fg); box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset; }
+
+.icon-btn {
+  border: 1px solid var(--line); background: var(--bg-2); color: var(--fg-2);
+  padding: 6px 12px; border-radius: 9px; font-size: 13px;
+}
+.icon-btn:hover { color: var(--fg); border-color: var(--line-2); }
+
+/* ---------------- client bar ---------------- */
+
+.client-bar {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.cb-brief { max-width: 620px; font-size: 12.5px; line-height: 1.55; color: var(--fg-2); }
+.cb-brief b { color: var(--fg); font-weight: 600; }
+.cb-caps { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-size: 11px; padding: 3px 9px; border-radius: 999px;
+  background: var(--bg-3); border: 1px solid var(--line); color: var(--fg-2);
+  white-space: nowrap;
+}
+.chip.no { color: var(--bad); border-color: rgba(248,113,113,0.25); background: rgba(248,113,113,0.08); }
+.chip.yes { color: var(--good); border-color: rgba(74,222,128,0.22); background: rgba(74,222,128,0.07); }
+
+/* ---------------- funnel ---------------- */
+
+.funnel {
+  display: flex; gap: 0; padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+.fstage {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 9px 18px 9px 0; margin-right: 18px;
+  border-right: 1px solid var(--line);
+  min-width: 96px;
+}
+.fstage:last-child { border-right: 0; }
+.fstage b { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+.fstage span { font-size: 10.5px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.fstage.shortlist b { color: hsl(var(--tab-hue) 70% 62%); }
+
+/* ---------------- feed ---------------- */
+
+.feed-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  height: 100%;
+  min-height: 0;
+}
+
+.feed {
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  padding: 0;
+  outline: none;
+}
+.feed::-webkit-scrollbar { width: 6px; }
+.feed::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 4px; }
+
+.slide {
+  scroll-snap-align: center;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+}
+
+.phone {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 9 / 16;
+  max-height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+.phone video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.poster {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-size: 74px;
+  background:
+    radial-gradient(120% 90% at 30% 15%, hsl(var(--ph) 70% 42% / 0.95), transparent 62%),
+    linear-gradient(160deg, hsl(var(--ph) 60% 26%), hsl(calc(var(--ph) + 40) 55% 12%));
+}
+.poster::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 26%, transparent 52%, rgba(0,0,0,0.86) 100%);
+}
+
+.ph-top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+  padding: 11px 12px; display: flex; align-items: center; gap: 8px;
+}
+.handle { font-size: 12px; font-weight: 600; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+.ph-top .mult {
+  margin-left: auto;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  padding: 3px 8px; border-radius: 999px;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.mult.peak { color: #fff; background: linear-gradient(90deg, #f43f5e, #f59e0b); border-color: transparent; }
+.mult.high { color: var(--warn); }
+.mult.mid { color: var(--good); }
+.mult.low { color: var(--fg-2); }
+
+.ph-bot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 12px; }
+.ph-cap { font-size: 12.5px; line-height: 1.45; color: #fff; margin-bottom: 8px; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+.ph-stats { display: flex; gap: 12px; font-size: 11px; color: rgba(255,255,255,0.82); font-family: var(--mono); }
+
+.scrub { position: absolute; left: 12px; right: 12px; bottom: 62px; z-index: 3; }
+.scrub-track { height: 3px; background: rgba(255,255,255,0.22); border-radius: 2px; position: relative; }
+.scrub-dot {
+  position: absolute; top: -3.5px; width: 10px; height: 10px; border-radius: 50%;
+  background: #fff; transform: translateX(-50%); cursor: pointer;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.4);
+}
+.scrub-dot:hover { transform: translateX(-50%) scale(1.35); }
+.scrub-label {
+  margin-top: 7px; font-size: 10.5px; color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.6); padding: 4px 8px; border-radius: 7px;
+  backdrop-filter: blur(6px); min-height: 25px;
+}
+
+.badge-rank {
+  position: absolute; z-index: 3; top: 44px; left: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 4px 9px; border-radius: 6px;
+  background: hsl(var(--tab-hue) 75% 50%); color: #06070a;
+}
+.badge-drop {
+  position: absolute; z-index: 3; top: 44px; left: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  padding: 4px 9px; border-radius: 6px;
+  background: rgba(0,0,0,0.7); color: var(--bad); border: 1px solid rgba(248,113,113,0.4);
+}
+.phone.is-dropped .poster { filter: saturate(0.25) brightness(0.5); }
+
+/* ---------------- info panel ---------------- */
+
+.panel {
+  border-left: 1px solid var(--line);
+  background: var(--bg-2);
+  overflow-y: auto;
+  padding: 18px;
+  scrollbar-width: thin;
+}
+.panel::-webkit-scrollbar { width: 6px; }
+.panel::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 4px; }
+
+.p-title { font-size: 16px; font-weight: 650; letter-spacing: -0.015em; line-height: 1.3; margin: 0 0 4px; }
+.p-sub { font-size: 11.5px; color: var(--fg-3); font-family: var(--mono); margin-bottom: 16px; }
+
+.score-hero { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.score-num { font-size: 40px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+.score-meta { font-size: 11.5px; color: var(--fg-2); line-height: 1.5; }
+.score-meta b { color: var(--fg); }
+
+.bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
+.bar-row { display: grid; grid-template-columns: 116px 1fr 38px; gap: 10px; align-items: center; }
+.bar-lab { font-size: 11px; color: var(--fg-2); }
+.bar-track { height: 6px; background: var(--bg-3); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s cubic-bezier(0.4,0,0.2,1); }
+.bar-val { font-size: 11px; font-family: var(--mono); color: var(--fg-2); text-align: right; }
+
+.sec { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 14px; }
+.sec h4 {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--fg-3); margin: 0 0 8px; font-weight: 600;
+}
+.sec p { font-size: 12.5px; line-height: 1.6; color: var(--fg-2); margin: 0 0 8px; }
+.sec p.lead { color: var(--fg); }
+
+.ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.ul li { font-size: 12px; line-height: 1.5; color: var(--fg-2); padding-left: 15px; position: relative; }
+.ul li::before { content: "—"; position: absolute; left: 0; color: var(--fg-3); }
+.ul.essential li::before { content: "✓"; color: var(--good); }
+.ul.incidental li::before { content: "×"; color: var(--fg-3); }
+.ul.penalty li::before { content: "−"; color: var(--bad); }
+.ul.penalty li { display: flex; justify-content: space-between; padding-left: 15px; gap: 10px; }
+.ul.penalty .amt { font-family: var(--mono); font-size: 11px; color: var(--bad); flex-shrink: 0; }
+
+.adapt {
+  background: hsl(var(--tab-hue) 45% 12%);
+  border: 1px solid hsl(var(--tab-hue) 50% 26%);
+  border-radius: 11px; padding: 12px;
+}
+.adapt p { color: hsl(var(--tab-hue) 30% 88%); margin: 0; font-size: 12.5px; line-height: 1.6; }
+.adapt .none { color: var(--fg-3); font-style: italic; }
+
+.drops { background: rgba(248,113,113,0.07); border: 1px solid rgba(248,113,113,0.24); border-radius: 11px; padding: 11px 12px; }
+.drops li { color: #fca5a5; font-size: 12px; }
+.drops li::before { content: "✕"; color: var(--bad); }
+
+.fit-row { display: flex; justify-content: space-between; gap: 10px; font-size: 11.5px; padding: 5px 0; border-bottom: 1px solid var(--line); }
+.fit-row:last-child { border-bottom: 0; }
+.fit-row .l { color: var(--fg-2); }
+.fit-row .r { font-family: var(--mono); flex-shrink: 0; }
+.fit-row .r.ok { color: var(--good); }
+.fit-row .r.mid { color: var(--warn); }
+.fit-row .r.no { color: var(--bad); }
+
+.attr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 12px; }
+.attr { font-size: 11px; }
+.attr b { display: block; color: var(--fg-3); font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+.attr span { color: var(--fg-2); font-family: var(--mono); }
+
+/* ---------------- gallery ---------------- */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px;
+  padding: 20px 18px 60px;
+  height: 100%;
+  overflow-y: auto;
+  align-content: start;
+}
+.tile { display: flex; flex-direction: column; gap: 9px; text-align: left; background: none; border: 0; padding: 0; color: inherit; }
+.tile-media {
+  position: relative; aspect-ratio: 9 / 16; border-radius: 13px; overflow: hidden;
+  border: 1px solid var(--line); background: #000;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.tile:hover .tile-media { transform: translateY(-3px); border-color: var(--line-2); }
+.tile-stats { display: flex; flex-direction: column; gap: 4px; }
+.tile-title { font-size: 12.5px; font-weight: 600; line-height: 1.35; }
+.tile-line { display: flex; gap: 9px; font-size: 10.5px; font-family: var(--mono); color: var(--fg-3); flex-wrap: wrap; }
+.tile-line .op { color: hsl(var(--tab-hue) 70% 62%); font-weight: 700; }
+.tile-line .drop { color: var(--bad); }
+.tile-mini { display: flex; gap: 3px; margin-top: 2px; }
+.tile-mini i { height: 3px; border-radius: 2px; flex: 1; background: var(--bg-3); overflow: hidden; position: relative; }
+.tile-mini i b { position: absolute; inset: 0 auto 0 0; display: block; border-radius: 2px; }
+
+/* ---------------- sheet (mobile / gallery detail) ---------------- */
+
+.sheet {
+  position: fixed; inset: 0; z-index: 60;
+  background: rgba(4, 5, 8, 0.78);
+  backdrop-filter: blur(6px);
+  display: flex; justify-content: flex-end;
+}
+.sheet-inner {
+  width: min(460px, 100%); background: var(--bg-2);
+  border-left: 1px solid var(--line); overflow-y: auto; padding: 20px;
+}
+.sheet-close {
+  position: absolute; top: 14px; right: 18px;
+  border: 1px solid var(--line); background: var(--bg-3); color: var(--fg);
+  padding: 6px 13px; border-radius: 9px; font-size: 13px; z-index: 2;
+}
+
+/* ---------------- tune drawer ---------------- */
+
+.tune {
+  position: fixed; right: 16px; top: 62px; z-index: 70;
+  width: min(340px, calc(100vw - 32px));
+  background: var(--bg-2); border: 1px solid var(--line-2);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 16px; max-height: 78vh; overflow-y: auto;
+}
+.tune-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.tune-note { font-size: 11.5px; color: var(--fg-3); line-height: 1.5; margin: 0 0 14px; }
+.slider { margin-bottom: 13px; }
+.slider label { display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-2); margin-bottom: 5px; }
+.slider label span { font-family: var(--mono); color: var(--fg); }
+.slider input { width: 100%; accent-color: hsl(var(--tab-hue) 70% 55%); }
+.reset-btn {
+  width: 100%; margin-top: 6px; padding: 8px; border-radius: 9px;
+  border: 1px solid var(--line); background: var(--bg-3); color: var(--fg-2); font-size: 12.5px;
+}
+.reset-btn:hover { color: var(--fg); }
+
+.empty { padding: 40px 18px; color: var(--fg-3); font-size: 13px; text-align: center; }
+
+/* ---------------- responsive ---------------- */
+
+@media (max-width: 900px) {
+  body { height: auto; overflow: visible; }
+  .feed-wrap { grid-template-columns: 1fr; height: auto; }
+  .panel { display: none; }
+  .feed { height: 78vh; }
+  .gallery { height: auto; overflow: visible; }
+  /* `flex: 1` above sets flex-basis:0, which beats width:100% — so the tabs
+     never wrap onto their own row without an explicit basis here. */
+  .client-switch { order: 3; flex: 1 0 100%; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .client-tab { flex: 0 0 auto; }
+  .topbar-right { order: 2; }
+  .phone { width: min(100%, 360px); }
+  .topbar { gap: 10px; padding: 10px 14px; }
+  .fstage { min-width: 74px; padding-right: 12px; margin-right: 12px; }
+  .fstage span { font-size: 9.5px; }
+  .client-bar { padding: 11px 14px; gap: 12px; }
+}
+
+</style>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">VC</span>
+        <div class="brand-text">
+          <strong>Viral Content Studio</strong>
+          <span id="scorerVersion">scorer —</span>
+        </div>
+      </div>
+
+      <div class="client-switch" id="clientSwitch" role="tablist" aria-label="Client"></div>
+
+      <div class="topbar-right">
+        <div class="seg" id="viewSwitch" role="tablist" aria-label="View mode">
+          <button class="seg-btn is-active" data-view="feed" role="tab">Feed</button>
+          <button class="seg-btn" data-view="gallery" role="tab">Gallery</button>
+        </div>
+        <button class="icon-btn" id="tuneBtn" aria-expanded="false" title="Scoring weights">
+          Tune
+        </button>
+      </div>
+    </header>
+
+    <section class="client-bar" id="clientBar"></section>
+
+    <section class="funnel" id="funnel" aria-label="Pipeline funnel"></section>
+
+    <main id="main">
+      <!-- FEED -->
+      <div class="feed-wrap" id="feedWrap">
+        <div class="feed" id="feed" tabindex="0"></div>
+        <aside class="panel" id="panel"></aside>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="gallery" id="gallery" hidden></div>
+    </main>
+
+    <div class="sheet" id="sheet" hidden>
+      <div class="sheet-inner" id="sheetInner"></div>
+      <button class="sheet-close" id="sheetClose" aria-label="Close">Close</button>
+    </div>
+
+    <div class="tune" id="tune" hidden>
+      <div class="tune-head">
+        <strong>Scoring weights</strong>
+        <button class="icon-btn" id="tuneClose" aria-label="Close">Done</button>
+      </div>
+      <p class="tune-note">
+        Live knobs on the deterministic scorer. Nothing here touches a model —
+        these are the numbers the pipeline would otherwise hard-code.
+      </p>
+      <div id="tuneBody"></div>
+      <button class="reset-btn" id="tuneReset">Reset to defaults</button>
+    </div>
+
+<script type="module">
+/**
+ * Seeded corpus.
+ *
+ * Stands in for stages 1-4 of the pipeline (Apify ingest, baseline detection,
+ * Gemini extraction, Claude reasoning). The shapes here are exactly what those
+ * stages are specified to produce in ../../PLAN.md §4, so swapping in the real
+ * adapter is a data-source change, not a rewrite.
+ *
+ * Deliberately includes posts that get rejected, filtered and gated, so the
+ * funnel is visible rather than implied.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Clients
+ * ------------------------------------------------------------------ */
+
+const CLIENTS = [
+  {
+    id: 'bosporus',
+    name: 'Bosporus Grill',
+    cuisine: 'Kebab / Turkish grill',
+    city: 'Dresden',
+    site: 'Food court, Centrum Galerie',
+    accent: 198,
+    brief:
+      'Fun and jokes. High footfall, very low dwell time. Everything shot behind or in front of a 4-metre counter — there is no back room and no outdoor space.',
+    capability: {
+      spaces: ['counter', 'small_kitchen', 'shared_seating'],
+      chefOnCamera: 'high',
+      customersOnCamera: true,
+      staffCount: 4,
+      staffAvailableForFilming: 2,
+      staffMinutesPerConcept: 45,
+      monthlyBudgetEur: 150,
+      equipment: ['phone', 'tripod'],
+      preferredTones: {
+        comedy: 1.0,
+        challenge: 0.9,
+        energetic: 0.85,
+        satisfying: 0.7,
+        transformation: 0.6,
+        heartwarming: 0.5,
+        educational: 0.4,
+        craft: 0.35,
+        story: 0.3,
+        shock: 0.45,
+      },
+      avoidTones: ['luxury'],
+      constraints: [
+        'No outdoor area — mall interior only',
+        'Seating is shared food-court seating, not ours',
+        'Mall filming rules: no tripods in walkways during opening hours',
+      ],
+    },
+  },
+  {
+    id: 'sen',
+    name: 'Sen Vietnamese',
+    cuisine: 'Vietnamese',
+    city: 'Dresden',
+    site: 'Sit-down restaurant, Neustadt',
+    accent: 152,
+    brief:
+      'Craft and warmth over jokes. Full kitchen, own dining room, small terrace. Guests must not be identifiable on camera without written consent.',
+    capability: {
+      spaces: ['counter', 'small_kitchen', 'full_kitchen', 'dining_room', 'outdoor'],
+      chefOnCamera: 'medium',
+      customersOnCamera: false,
+      staffCount: 8,
+      staffAvailableForFilming: 3,
+      staffMinutesPerConcept: 90,
+      monthlyBudgetEur: 300,
+      equipment: ['phone', 'tripod', 'light', 'gimbal'],
+      preferredTones: {
+        craft: 1.0,
+        story: 0.95,
+        heartwarming: 0.9,
+        satisfying: 0.85,
+        educational: 0.7,
+        transformation: 0.6,
+        energetic: 0.4,
+        comedy: 0.3,
+        challenge: 0.25,
+        luxury: 0.5,
+      },
+      avoidTones: ['shock'],
+      constraints: [
+        'No identifiable guests without written consent',
+        'Kitchen is only free between 15:00 and 17:00',
+      ],
+    },
+  },
+  {
+    id: 'nonna',
+    name: 'Trattoria da Nonna',
+    cuisine: 'Italian family trattoria',
+    city: 'Leipzig',
+    site: 'Sit-down restaurant',
+    accent: 22,
+    brief:
+      'Family warmth, generational story, visible craft. Chef is camera-shy; the owner’s mother is not.',
+    capability: {
+      spaces: ['counter', 'small_kitchen', 'full_kitchen', 'dining_room'],
+      chefOnCamera: 'low',
+      customersOnCamera: true,
+      staffCount: 6,
+      staffAvailableForFilming: 2,
+      staffMinutesPerConcept: 60,
+      monthlyBudgetEur: 200,
+      equipment: ['phone', 'tripod', 'light'],
+      preferredTones: {
+        heartwarming: 1.0,
+        craft: 0.85,
+        story: 0.8,
+        satisfying: 0.75,
+        transformation: 0.7,
+        educational: 0.6,
+        comedy: 0.5,
+        energetic: 0.4,
+        challenge: 0.3,
+        shock: 0.2,
+      },
+      avoidTones: [],
+      constraints: ['Head chef will not appear on camera', 'No filming Fri/Sat service'],
+    },
+  },
+];
+
+/* ------------------------------------------------------------------ *
+ * Creators + synthetic history (drives the real baseline computation)
+ * ------------------------------------------------------------------ */
+
+const CREATOR_SEEDS = [
+  ['c1', 'kebab_king_berlin', 'Kebab / street food', 22000],
+  ['c2', 'dresden_streetfood', 'Street food', 14500],
+  ['c3', 'pho_hanoi_official', 'Vietnamese', 31000],
+  ['c4', 'chefmarco_pasta', 'Italian', 46000],
+  ['c5', 'the_kitchen_diary', 'Restaurant life', 9800],
+  ['c6', 'mallfood_tokyo', 'Food court', 62000],
+  ['c7', 'saigon_kitchen_uk', 'Vietnamese', 18700],
+  ['c8', 'grill_bros', 'Grill / kebab', 27400],
+  ['c9', 'tiny_kitchen_vienna', 'Small-space cooking', 7300],
+  ['c10', 'restaurant_reels_de', 'Restaurant marketing', 12100],
+  ['c11', 'michelin_moments', 'Fine dining', 88000],
+  ['c12', 'family_trattoria', 'Italian family', 15600],
+];
+
+/** Deterministic PRNG so baselines never move between reloads. */
+function rng(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+}
+
+const CREATORS = CREATOR_SEEDS.map(([id, handle, niche, baselineViews], i) => {
+  const rand = rng(1000 + i * 77);
+  const history = Array.from({ length: 14 }, (_, j) => ({
+    id: `${id}-h${j}`,
+    mediaType: 'reel',
+    // 0.55x - 1.5x around the baseline, plus one deliberate prior spike so the
+    // median-not-mean choice actually matters.
+    views: Math.round(baselineViews * (j === 4 ? 6.2 : 0.55 + rand() * 0.95)),
+    ageDays: 16 + j * 6,
+  }));
+  return { id, handle, niche, baselineViews, history };
+});
+
+/* ------------------------------------------------------------------ *
+ * Posts + extracted attributes + reasoning
+ * ------------------------------------------------------------------ */
+
+const P = (o) => o;
+
+const POSTS = [
+  P({
+    id: 'p1',
+    creatorId: 'c1',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p1',
+    views: 780000,
+    likes: 61200,
+    comments: 2140,
+    ageDays: 34,
+    durationS: 27,
+    caption: 'He said €10. I said say less. 😤 #kebab #streetfood',
+    poster: { hue: 24, glyph: '🔥' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'curiosity',
+      format: 'customer_interaction',
+      tone: 'challenge',
+      secondaryTone: 'comedy',
+      peopleOnCamera: 2,
+      chefOnCamera: true,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 12,
+      staffMinutes: 35,
+      cuts: 9,
+      avgShotLengthS: 3.0,
+    },
+    transcript:
+      '"Ten euro. Make me whatever you want." — "Whatever I want?" — "Whatever you want." … "Bro. That is not ten euros of food."',
+    timeline: [
+      { t: 0, label: 'Customer slides a €10 note across the counter' },
+      { t: 3, label: 'Chef pauses, looks at camera' },
+      { t: 6, label: 'Fast build sequence, no dialogue' },
+      { t: 19, label: 'Reveal — plate is visibly oversized' },
+      { t: 23, label: 'Customer reaction, genuine laugh' },
+    ],
+    mechanism:
+      'Handing creative control to the maker converts a transaction into a bet. The viewer stays to find out whether the chef over- or under-delivers; the reveal resolves a wager the viewer placed for free.',
+    essentialElements: [
+      'Customer surrenders the decision, on camera',
+      'A visible constraint (the price) the audience can judge against',
+      'An unambiguous reveal that beats expectation',
+      'A real, unperformed reaction',
+    ],
+    incidentalElements: ['The €10 figure', 'Kebab specifically', 'The chef’s personality'],
+    adaptations: {
+      bosporus:
+        'Run it as "€8 and I trust you" at the counter, filmed from the customer side so the mall background is out of focus. The reveal has to be physically bigger than a normal order — stack it so the size difference reads in one frame. Two staff, one lunch shift, no props beyond the food itself.',
+      sen:
+        'Reframe from bet to trust: "Chef, cook me what you would eat." Guest is off-camera and unidentifiable; the entire piece is the chef’s hands and the plate. Loses the comedy, keeps the reveal, fits the no-guests rule.',
+      nonna:
+        'Give the decision to Nonna rather than the chef — "€10, and Nonna decides." The generational twist replaces the comedy beat and gets your camera-shy chef out of it entirely.',
+    },
+  }),
+
+  P({
+    id: 'p2',
+    creatorId: 'c8',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p2',
+    views: 512000,
+    likes: 44800,
+    comments: 903,
+    ageDays: 41,
+    durationS: 18,
+    caption: 'the shave. every time. 🌀',
+    poster: { hue: 38, glyph: '🌀' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'visual_spectacle',
+      format: 'b_roll',
+      tone: 'satisfying',
+      secondaryTone: 'craft',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 20,
+      cuts: 4,
+      avgShotLengthS: 4.5,
+    },
+    transcript: '[no speech — blade, meat, and the sound of the cone turning]',
+    timeline: [
+      { t: 0, label: 'Extreme close-up, blade enters frame' },
+      { t: 2, label: 'First shave falls in slow motion' },
+      { t: 8, label: 'Pull back to reveal full cone' },
+      { t: 14, label: 'Pile lands on the board' },
+    ],
+    mechanism:
+      'Uninterrupted competence at close range. No narrative, no payoff — the sensory loop is the product, which is why it retains without a hook line.',
+    essentialElements: [
+      'One repeated motion filmed closer than the eye normally gets',
+      'Diegetic sound carrying the whole track',
+      'No cuts that break the motion',
+    ],
+    incidentalElements: ['The specific dish', 'Slow motion as a technique'],
+    adaptations: {
+      bosporus:
+        'You already own this shot — it is your daily work at 15cm instead of 2m. Phone on a tripod at counter height, mic pointed at the cone, one 20-second take between rushes. Cheapest concept on this list and the most repeatable.',
+      sen:
+        'Substitute the cone for the pho ladle: broth lifted and poured back, filmed from directly above at close range. Same sensory loop, no guests, no dialogue.',
+      nonna:
+        'Hand-cut pasta falling onto the board, close and slow. Chef never shows a face — only hands, which solves your camera-shy problem.',
+    },
+  }),
+
+  P({
+    id: 'p3',
+    creatorId: 'c2',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p3',
+    views: 268000,
+    likes: 19400,
+    comments: 1580,
+    ageDays: 22,
+    durationS: 34,
+    caption: 'guess the price, eat for free 👀',
+    poster: { hue: 280, glyph: '💸' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'curiosity',
+      format: 'customer_reaction',
+      tone: 'comedy',
+      secondaryTone: 'challenge',
+      peopleOnCamera: 3,
+      chefOnCamera: false,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 8,
+      staffMinutes: 50,
+      cuts: 16,
+      avgShotLengthS: 2.1,
+    },
+    transcript: '"If you guess the price within fifty cents, it is free." — "…six euro?" — "…"',
+    timeline: [
+      { t: 0, label: 'Rules stated to camera in one line' },
+      { t: 4, label: 'First customer guesses, misses' },
+      { t: 13, label: 'Second customer, closer' },
+      { t: 24, label: 'Third guesses exactly, reaction' },
+    ],
+    mechanism:
+      'The viewer plays along silently and is scored against strangers. Participation happens in the viewer’s head before the reveal, which is what holds them to the end.',
+    essentialElements: [
+      'A guessable quantity stated up front',
+      'Multiple attempts to build a scale',
+      'A win that actually costs the business something',
+    ],
+    incidentalElements: ['Price as the quantity', 'Free meal as the prize'],
+    adaptations: {
+      bosporus:
+        'Perfect counter format — the queue is the cast. Run it as "guess the weight of your döner". Costs you a handful of free meals per shoot and needs no space beyond where you already stand. Budget 50 minutes across one lunch rush.',
+      nonna:
+        'Guess how many years the recipe has been in the family, rather than a price. Keeps the guessing loop, swaps the comedy for the heritage angle your audience responds to.',
+    },
+  }),
+
+  P({
+    id: 'p4',
+    creatorId: 'c3',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p4',
+    views: 690000,
+    likes: 58300,
+    comments: 1210,
+    ageDays: 51,
+    durationS: 44,
+    caption: '12 hours. one shot every hour. 🍜',
+    poster: { hue: 168, glyph: '🍜' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'transformation',
+      format: 'food_preparation',
+      tone: 'craft',
+      secondaryTone: 'story',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'full_kitchen',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 70,
+      cuts: 12,
+      avgShotLengthS: 3.6,
+    },
+    transcript: '"Hour one. Hour four — you can see the colour changing. Hour twelve. This is it."',
+    timeline: [
+      { t: 0, label: 'Locked-off shot, clear water, bones going in' },
+      { t: 9, label: 'Timestamp cards begin' },
+      { t: 26, label: 'Colour shift becomes obvious' },
+      { t: 38, label: 'Final strain and pour' },
+    ],
+    mechanism:
+      'Time-compression makes invisible labour visible. The value proposition of the restaurant is argued without a single sales line — the viewer concludes it themselves.',
+    essentialElements: [
+      'A fixed camera position across the whole duration',
+      'Explicit time markers so the effort is legible',
+      'A visible state change between first and last frame',
+    ],
+    incidentalElements: ['12 hours specifically', 'Broth as the subject'],
+    adaptations: {
+      sen:
+        'This is close to a native format for you — one locked-off tripod in the corner of the kitchen during a normal broth day, one shot per hour, no extra labour beyond pressing record. Fits the 15:00–17:00 window because the camera works while you do.',
+      nonna:
+        'Apply it to a 48-hour ragù or a dough prove. Same fixed frame, same timestamp cards; the chef is never in shot so the camera-shy constraint is irrelevant.',
+    },
+  }),
+
+  P({
+    id: 'p5',
+    creatorId: 'c7',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p5',
+    views: 903000,
+    likes: 112000,
+    comments: 4310,
+    ageDays: 63,
+    durationS: 52,
+    caption: 'she has made it the same way since 1974.',
+    poster: { hue: 340, glyph: '🕯️' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'story',
+      format: 'interview',
+      tone: 'story',
+      secondaryTone: 'heartwarming',
+      peopleOnCamera: 2,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_dining_room',
+      spaceRequired: 'dining_room',
+      equipment: ['phone', 'tripod', 'light'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 15,
+      staffMinutes: 90,
+      cuts: 11,
+      avgShotLengthS: 4.7,
+    },
+    transcript:
+      '"My mother wrote it down once and then threw the paper away. She said if you need to read it, you are not ready to cook it."',
+    timeline: [
+      { t: 0, label: 'Hands, not face — pastry being folded' },
+      { t: 6, label: 'First line of voiceover lands' },
+      { t: 21, label: 'Cut to her face for the first time' },
+      { t: 44, label: 'Finished dish placed on a worn table' },
+    ],
+    mechanism:
+      'A single specific detail — the discarded paper — does the work a generic heritage claim cannot. Specificity is the mechanism; the emotion is a consequence of it.',
+    essentialElements: [
+      'One concrete, checkable detail rather than a general claim',
+      'Delaying the face until the voice has earned it',
+      'Hands and texture carrying the first third',
+    ],
+    incidentalElements: ['1974', 'The grandmother relationship specifically'],
+    adaptations: {
+      sen:
+        'Your strongest fit on this list. Find the one detail — the pot that came over, the herb that has to be bought from one supplier — and build 50 seconds around it. Needs the dining room after service and about 90 minutes with someone who can tell it plainly.',
+      nonna:
+        'Nonna is the asset here, not the chef. One detail, one telling, shot at a corner table before opening. This is the concept most likely to outperform your baseline.',
+      bosporus:
+        'Harder for you — no dining room and a food-court background that fights the mood. If you want it, shoot tight against the counter tile at close range and treat it as a 25-second version.',
+    },
+  }),
+
+  P({
+    id: 'p6',
+    creatorId: 'c10',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p6',
+    views: 340000,
+    likes: 26100,
+    comments: 2890,
+    ageDays: 29,
+    durationS: 41,
+    caption: 'I reviewed my own restaurant as a mystery customer 💀',
+    poster: { hue: 258, glyph: '🕵️' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'controversy',
+      format: 'pov',
+      tone: 'comedy',
+      secondaryTone: 'story',
+      peopleOnCamera: 2,
+      chefOnCamera: true,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'any_dining_room',
+      spaceRequired: 'dining_room',
+      equipment: ['phone'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 20,
+      staffMinutes: 55,
+      cuts: 18,
+      avgShotLengthS: 2.3,
+    },
+    transcript: '"Service: seven out of ten. Portion size — we need to talk about the portion size."',
+    timeline: [
+      { t: 0, label: 'Owner sits down at own restaurant, disguised badly' },
+      { t: 5, label: 'Scores announced as captions' },
+      { t: 22, label: 'A genuinely critical score appears' },
+      { t: 34, label: 'Staff realise mid-service' },
+    ],
+    mechanism:
+      'Voluntary self-criticism buys credibility that praise cannot. The audience trusts the positive scores precisely because a negative one appeared.',
+    essentialElements: [
+      'At least one real criticism the business will act on',
+      'The owner exposed rather than protected',
+      'Scores stated concretely, not vaguely',
+    ],
+    incidentalElements: ['The disguise gag', 'Review format specifically'],
+    adaptations: {
+      bosporus:
+        'Do it standing in your own queue at peak. The mall setting works for once — you are genuinely one of many counters, so the "would I pick us?" framing is real. Must include one criticism you then visibly fix in a follow-up.',
+      nonna:
+        'Have a family member review, not the owner — softer register, same credibility mechanism, and it keeps your chef off camera.',
+    },
+  }),
+
+  P({
+    id: 'p7',
+    creatorId: 'c6',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p7',
+    views: 1240000,
+    likes: 98700,
+    comments: 3120,
+    ageDays: 37,
+    durationS: 22,
+    caption: 'food court, 12:30, POV 🏃',
+    poster: { hue: 8, glyph: '⚡' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'visual_spectacle',
+      format: 'pov',
+      tone: 'energetic',
+      secondaryTone: 'satisfying',
+      peopleOnCamera: 2,
+      chefOnCamera: false,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone', 'gimbal'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'trending_sound',
+      trendHalfLifeDays: 21,
+      propsCostEur: 0,
+      staffMinutes: 25,
+      cuts: 21,
+      avgShotLengthS: 1.0,
+    },
+    transcript: '[no speech — trending audio over service sounds]',
+    timeline: [
+      { t: 0, label: 'Camera moves into the pass at speed' },
+      { t: 4, label: 'Rapid cuts on the beat' },
+      { t: 12, label: 'Order counter hand-off' },
+      { t: 18, label: 'Freeze on the finished tray' },
+    ],
+    mechanism:
+      'Speed as reassurance. A crowded, fast operation reads as social proof — the viewer infers quality from demand without being told.',
+    essentialElements: [
+      'Genuine peak-hour density (staged calm does not work)',
+      'Cut rhythm locked to the audio',
+      'A single continuous journey through the space',
+    ],
+    incidentalElements: ['The specific audio track', 'Gimbal movement'],
+    adaptations: {
+      bosporus:
+        'Your queue at 12:30 is the entire asset and you have not used it. Handheld is fine — a gimbal is not required if you brace against the counter. Watch the 21-day trend window: shoot within a week of picking the audio.',
+    },
+  }),
+
+  P({
+    id: 'p8',
+    creatorId: 'c5',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p8',
+    views: 187000,
+    likes: 21300,
+    comments: 1940,
+    ageDays: 26,
+    durationS: 31,
+    caption: 'reading our worst review out loud 🙃',
+    poster: { hue: 218, glyph: '📝' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'controversy',
+      format: 'talking_head',
+      tone: 'comedy',
+      secondaryTone: 'heartwarming',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'small_kitchen',
+      equipment: ['phone'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 25,
+      cuts: 6,
+      avgShotLengthS: 5.2,
+    },
+    transcript: '"One star. \'The chef looked at me.\' … I did. I do that. I look at people."',
+    timeline: [
+      { t: 0, label: 'Phone held up, review read cold' },
+      { t: 7, label: 'Beat of genuine silence' },
+      { t: 12, label: 'Deadpan response' },
+      { t: 25, label: 'Returns to work mid-sentence' },
+    ],
+    mechanism:
+      'Absorbing an attack without defending converts hostility into likeability. The restraint is the joke; a rebuttal would kill it.',
+    essentialElements: [
+      'A real review, read verbatim',
+      'No defensive explanation',
+      'A dry rather than triumphant response',
+    ],
+    incidentalElements: ['One-star specifically', 'Kitchen setting'],
+    adaptations: {
+      bosporus:
+        'Cheapest thing on the board: one person, one phone, 25 minutes, no props. Read a genuine bad review at the counter between rushes. The rule is no defending — the moment you explain yourself it stops working.',
+      nonna:
+        'Have Nonna read it rather than the chef. Same mechanism, warmer register, and it dodges the camera-shy constraint entirely.',
+    },
+  }),
+
+  P({
+    id: 'p9',
+    creatorId: 'c11',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p9',
+    views: 4100000,
+    likes: 402000,
+    comments: 11200,
+    ageDays: 44,
+    durationS: 29,
+    caption: 'he walked in with no reservation.',
+    poster: { hue: 48, glyph: '⭐' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'surprise',
+      format: 'behind_the_scenes',
+      tone: 'shock',
+      secondaryTone: 'story',
+      peopleOnCamera: 4,
+      chefOnCamera: true,
+      customersOnCamera: true,
+      namedPersonDependency: true,
+      locationType: 'any_dining_room',
+      spaceRequired: 'dining_room',
+      equipment: ['phone', 'second_camera'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 60,
+      cuts: 19,
+      avgShotLengthS: 1.5,
+    },
+    transcript: '"Table for one." — [kitchen erupts]',
+    timeline: [
+      { t: 0, label: 'Door opens, recognisable figure enters' },
+      { t: 3, label: 'Staff double-take' },
+      { t: 11, label: 'Kitchen scramble' },
+      { t: 24, label: 'Plate delivered, reaction shot' },
+    ],
+    mechanism:
+      'Borrowed status. The video performs because of who walked in, not because of anything the restaurant designed — which is exactly why it does not transfer.',
+    essentialElements: ['A person the audience already recognises'],
+    incidentalElements: ['Everything else in the video'],
+    adaptations: {},
+  }),
+
+  P({
+    id: 'p10',
+    creatorId: 'c11',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p10',
+    views: 1150000,
+    likes: 94000,
+    comments: 1640,
+    ageDays: 55,
+    durationS: 24,
+    caption: 'sunset service, 14th floor.',
+    poster: { hue: 302, glyph: '🚁' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'visual_spectacle',
+      format: 'b_roll',
+      tone: 'luxury',
+      secondaryTone: 'craft',
+      peopleOnCamera: 6,
+      chefOnCamera: false,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'unique_venue',
+      spaceRequired: 'outdoor',
+      equipment: ['drone', 'gimbal', 'light'],
+      editComplexity: 'vfx_motion_graphics',
+      audioDependency: 'licensed_music',
+      trendHalfLifeDays: null,
+      propsCostEur: 200,
+      staffMinutes: 120,
+      cuts: 14,
+      avgShotLengthS: 1.7,
+    },
+    transcript: '[no speech — licensed orchestral bed]',
+    timeline: [
+      { t: 0, label: 'Drone rises past the building edge' },
+      { t: 7, label: 'Terrace revealed at golden hour' },
+      { t: 15, label: 'Push in to a single table' },
+      { t: 21, label: 'Logo sting' },
+    ],
+    mechanism:
+      'Production value as the entire proposition. Nothing here is a transferable idea — it is a budget, filmed.',
+    essentialElements: ['A rooftop', 'A drone operator', 'A licensing budget'],
+    incidentalElements: ['The food'],
+    adaptations: {},
+  }),
+
+  P({
+    id: 'p11',
+    creatorId: 'c9',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p11',
+    views: 214000,
+    likes: 24600,
+    comments: 611,
+    ageDays: 19,
+    durationS: 12,
+    caption: 'wait for it 🧀',
+    poster: { hue: 44, glyph: '🧀' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'curiosity',
+      format: 'b_roll',
+      tone: 'satisfying',
+      secondaryTone: 'transformation',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'small_kitchen',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 5,
+      staffMinutes: 15,
+      cuts: 3,
+      avgShotLengthS: 4.0,
+    },
+    transcript: '[no speech]',
+    timeline: [
+      { t: 0, label: 'Knife enters, nothing visible yet' },
+      { t: 4, label: 'First separation' },
+      { t: 7, label: 'Full pull, held' },
+    ],
+    mechanism:
+      'A promised payoff withheld for exactly long enough. Twelve seconds is the format — any longer and the tension leaks out.',
+    essentialElements: [
+      'An explicit promise in the first second',
+      'One physical payoff, not a montage',
+      'Ruthlessly short duration',
+    ],
+    incidentalElements: ['Cheese', 'Slow motion'],
+    adaptations: {
+      bosporus:
+        'Sauce pour or the first cut into a fresh cone — anything with one held payoff. Fifteen minutes of staff time. Run this one weekly as filler between the bigger concepts.',
+      sen:
+        'Broth poured over noodles, filmed at the moment the steam rises. Same withheld-payoff structure, no dialogue, no guests.',
+      nonna:
+        'Burrata or a cut into a baked pasta. Hands only — no face required.',
+    },
+  }),
+
+  P({
+    id: 'p12',
+    creatorId: 'c2',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p12',
+    views: 402000,
+    likes: 33900,
+    comments: 2450,
+    ageDays: 31,
+    durationS: 38,
+    caption: 'the weirdest order we have ever had 😭',
+    poster: { hue: 92, glyph: '🤢' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'curiosity',
+      format: 'challenge',
+      tone: 'comedy',
+      secondaryTone: 'challenge',
+      peopleOnCamera: 3,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 10,
+      staffMinutes: 45,
+      cuts: 15,
+      avgShotLengthS: 2.5,
+    },
+    transcript: '"Someone actually ordered this." — "No." — "Yes." — "…make it."',
+    timeline: [
+      { t: 0, label: 'Order ticket held to camera' },
+      { t: 4, label: 'Staff reactions, unscripted' },
+      { t: 14, label: 'Reluctant assembly' },
+      { t: 30, label: 'Taste test, verdict' },
+    ],
+    mechanism:
+      'Shared disgust is a bonding mechanism. The staff act as the audience’s proxy, so the viewer joins a group rather than watches one.',
+    essentialElements: [
+      'A genuinely real order, not invented',
+      'Staff reacting honestly before they are told to',
+      'A verdict at the end',
+    ],
+    incidentalElements: ['How weird the order actually is'],
+    adaptations: {
+      bosporus:
+        'You have a ticket archive worth mining and staff who will react honestly. Three people, 45 minutes, one shoot yields two or three of these. Strongest recurring format for your tone.',
+    },
+  }),
+
+  P({
+    id: 'p13',
+    creatorId: 'c7',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p13',
+    views: 445000,
+    likes: 39800,
+    comments: 720,
+    ageDays: 47,
+    durationS: 58,
+    caption: '300 spring rolls. one take. no cuts.',
+    poster: { hue: 138, glyph: '🥢' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'authority',
+      format: 'food_preparation',
+      tone: 'craft',
+      secondaryTone: 'satisfying',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'small_kitchen',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'single_take',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 25,
+      staffMinutes: 80,
+      cuts: 0,
+      avgShotLengthS: 58,
+    },
+    transcript: '[no speech — paper, filling, the rhythm of folding]',
+    timeline: [
+      { t: 0, label: 'Caption states the claim, timer starts' },
+      { t: 10, label: 'Rhythm established, hands only' },
+      { t: 40, label: 'Tray filling visibly' },
+      { t: 55, label: 'Last roll, timer stops' },
+    ],
+    mechanism:
+      'The unbroken take is the proof. A cut would let the viewer suspect a shortcut, so the format itself is the credibility argument.',
+    essentialElements: [
+      'A verifiable claim stated up front',
+      'No cuts — the constraint is the content',
+      'Visible accumulation so progress reads',
+    ],
+    incidentalElements: ['300 as the number', 'Spring rolls'],
+    adaptations: {
+      sen:
+        'Native to your kitchen and your tone. One tripod, one continuous take during normal prep — the labour is happening anyway, you are only recording it. Fits the 15:00–17:00 window.',
+      nonna:
+        'Hand-rolling a tray of gnocchi or filling ravioli in one take. Hands only, no face, no dialogue.',
+    },
+  }),
+
+  P({
+    id: 'p14',
+    creatorId: 'c10',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p14',
+    views: 156000,
+    likes: 14200,
+    comments: 430,
+    ageDays: 16,
+    durationS: 15,
+    caption: 'restaurant edition 😂 #trend',
+    poster: { hue: 320, glyph: '🎵' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'relatability',
+      format: 'challenge',
+      tone: 'energetic',
+      secondaryTone: 'comedy',
+      peopleOnCamera: 3,
+      chefOnCamera: false,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'trending_sound',
+      trendHalfLifeDays: 6,
+      propsCostEur: 0,
+      staffMinutes: 20,
+      cuts: 8,
+      avgShotLengthS: 1.9,
+    },
+    transcript: '[trending audio]',
+    timeline: [
+      { t: 0, label: 'Audio drop, staff in position' },
+      { t: 5, label: 'Beat-matched swaps' },
+      { t: 12, label: 'Final pose' },
+    ],
+    mechanism:
+      'Pure trend participation. Performance comes from the audio’s distribution, not the content — which is why it decays to zero within days.',
+    essentialElements: ['Being early to the audio'],
+    incidentalElements: ['Everything shown on screen'],
+    adaptations: {},
+  }),
+
+  P({
+    id: 'p15',
+    creatorId: 'c4',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p15',
+    views: 1380000,
+    likes: 121000,
+    comments: 5400,
+    ageDays: 58,
+    durationS: 47,
+    caption: '€5 version vs €45 version. same four ingredients.',
+    poster: { hue: 12, glyph: '⚖️' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'curiosity',
+      format: 'before_after',
+      tone: 'educational',
+      secondaryTone: 'transformation',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'full_kitchen',
+      equipment: ['phone', 'tripod', 'light'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 45,
+      staffMinutes: 100,
+      cuts: 22,
+      avgShotLengthS: 2.1,
+    },
+    transcript: '"Same flour. Same egg. The only difference is forty minutes and knowing when to stop."',
+    timeline: [
+      { t: 0, label: 'Two plates side by side, prices shown' },
+      { t: 6, label: 'Split-screen build begins' },
+      { t: 28, label: 'Divergence point named explicitly' },
+      { t: 41, label: 'Both finished, tasted' },
+    ],
+    mechanism:
+      'A controlled comparison. Holding the inputs constant makes the skill the only variable, which converts a price objection into an argument for craft.',
+    essentialElements: [
+      'Genuinely identical inputs',
+      'One named divergence point',
+      'Both outcomes shown honestly',
+    ],
+    incidentalElements: ['The specific price gap', 'Split-screen as a technique'],
+    adaptations: {
+      sen:
+        'Run it on pho: instant stock versus your 12-hour broth, same bowl, same noodles. It is the clearest argument for your price point you can make in 45 seconds. Budget the €45 of ingredients and a full 100-minute block.',
+    },
+  }),
+
+  P({
+    id: 'p16',
+    creatorId: 'c5',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p16',
+    views: 288000,
+    likes: 41200,
+    comments: 3100,
+    ageDays: 42,
+    durationS: 36,
+    caption: 'he has not had to order in four years.',
+    poster: { hue: 190, glyph: '☕' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'relatability',
+      format: 'customer_interaction',
+      tone: 'heartwarming',
+      secondaryTone: 'story',
+      peopleOnCamera: 2,
+      chefOnCamera: false,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'any_counter',
+      spaceRequired: 'counter',
+      equipment: ['phone'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 30,
+      cuts: 7,
+      avgShotLengthS: 5.1,
+    },
+    transcript: '"Same as always?" — "Same as always." — [it is already being made]',
+    timeline: [
+      { t: 0, label: 'Regular appears at the door' },
+      { t: 3, label: 'Staff start making it before he speaks' },
+      { t: 18, label: 'Short exchange, clearly habitual' },
+      { t: 30, label: 'He leaves; caption states four years' },
+    ],
+    mechanism:
+      'Evidence of belonging. The viewer is not being told the place is friendly — they watch a relationship that predates the camera.',
+    essentialElements: [
+      'A real, long-standing regular',
+      'The order starting before it is spoken',
+      'A duration claim that makes it concrete',
+    ],
+    incidentalElements: ['Four years specifically', 'The drink itself'],
+    adaptations: {
+      bosporus:
+        'You have regulars in a mall food court, which is the surprising part and therefore the hook. 30 minutes, no props, one phone. Get his written consent first.',
+      nonna:
+        'Your best-fitting concept overall — the regular table, the order that never changes, the duration claim. Warm, cheap, and exactly your register.',
+    },
+  }),
+
+  P({
+    id: 'p17',
+    creatorId: 'c9',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p17',
+    views: 98000,
+    likes: 8900,
+    comments: 260,
+    ageDays: 24,
+    durationS: 20,
+    caption: 'closing time, sped up 🌙',
+    poster: { hue: 232, glyph: '🌙' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'relatability',
+      format: 'behind_the_scenes',
+      tone: 'satisfying',
+      secondaryTone: 'craft',
+      peopleOnCamera: 2,
+      chefOnCamera: false,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'full_kitchen',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 40,
+      cuts: 5,
+      avgShotLengthS: 4.0,
+    },
+    transcript: '[no speech]',
+    timeline: [
+      { t: 0, label: 'Last plate leaves the pass' },
+      { t: 5, label: 'Timelapse begins' },
+      { t: 15, label: 'Surfaces cleared and wiped' },
+      { t: 18, label: 'Lights out' },
+    ],
+    mechanism:
+      'Order restored. The satisfaction is structural — chaos resolving to stillness — and requires no narrative at all.',
+    essentialElements: ['A visible start state of disorder', 'Unbroken progression to order', 'A definite end beat'],
+    incidentalElements: ['Timelapse speed', 'Closing time specifically'],
+    adaptations: {
+      sen:
+        'One tripod in the corner during your normal close. Zero additional labour — press record on the way past.',
+      nonna:
+        'Same, and it works around the no-Friday/Saturday rule since you would shoot a quiet weeknight close.',
+    },
+  }),
+
+  P({
+    id: 'p18',
+    creatorId: 'c1',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p18',
+    views: 356000,
+    likes: 28700,
+    comments: 1830,
+    ageDays: 33,
+    durationS: 43,
+    caption: 'blind taste test with actual customers 🙈',
+    poster: { hue: 62, glyph: '🙈' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'curiosity',
+      format: 'customer_reaction',
+      tone: 'comedy',
+      secondaryTone: 'challenge',
+      peopleOnCamera: 4,
+      chefOnCamera: true,
+      customersOnCamera: true,
+      namedPersonDependency: false,
+      locationType: 'any_seating',
+      spaceRequired: 'shared_seating',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 18,
+      staffMinutes: 60,
+      cuts: 17,
+      avgShotLengthS: 2.5,
+    },
+    transcript: '"Which one is ours?" — "…this one." — "That is the frozen one."',
+    timeline: [
+      { t: 0, label: 'Two unlabelled samples presented' },
+      { t: 8, label: 'First taster commits to an answer' },
+      { t: 25, label: 'A taster gets it wrong' },
+      { t: 38, label: 'Reveal and reaction' },
+    ],
+    mechanism:
+      'Risking a public loss. The format only works because the business could genuinely come off badly, and the audience knows it.',
+    essentialElements: [
+      'A real possibility of losing',
+      'Tasters with no stake',
+      'The result shown regardless of outcome',
+    ],
+    incidentalElements: ['Two samples specifically', 'The comparison product'],
+    adaptations: {
+      bosporus:
+        'Food-court seating is fine for this — you do not need your own dining room, only a table and two trays. Four on camera stretches your two-person crew, so recruit customers as tasters rather than staff.',
+    },
+  }),
+
+  P({
+    id: 'p19',
+    creatorId: 'c4',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p19',
+    views: 398000,
+    likes: 31000,
+    comments: 940,
+    ageDays: 66,
+    durationS: 33,
+    caption: 'three ingredients. one signature dish.',
+    poster: { hue: 104, glyph: '🌿' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'authority',
+      format: 'food_preparation',
+      tone: 'educational',
+      secondaryTone: 'craft',
+      peopleOnCamera: 1,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'small_kitchen',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 12,
+      staffMinutes: 45,
+      cuts: 8,
+      avgShotLengthS: 4.1,
+    },
+    transcript: '"Three things. That is it. People do not believe me until they watch."',
+    timeline: [
+      { t: 0, label: 'Three items placed on the board' },
+      { t: 6, label: 'Build begins' },
+      { t: 24, label: 'Finished plate' },
+    ],
+    mechanism: 'Constraint as proof of skill — the shorter the ingredient list, the more the technique carries.',
+    essentialElements: ['A hard numeric constraint', 'No hidden additions', 'A finished result worth the claim'],
+    incidentalElements: ['Three as the number'],
+    adaptations: {},
+  }),
+
+  P({
+    id: 'p20',
+    creatorId: 'c8',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p20',
+    views: 690000,
+    likes: 71000,
+    comments: 4900,
+    ageDays: 12,
+    durationS: 25,
+    caption: 'we told the new guy the fryer was on fire 💀',
+    poster: { hue: 0, glyph: '🚨' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'surprise',
+      format: 'behind_the_scenes',
+      tone: 'comedy',
+      secondaryTone: 'shock',
+      peopleOnCamera: 3,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'small_kitchen',
+      equipment: ['phone'],
+      editComplexity: 'heavy_cuts_captions',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 0,
+      staffMinutes: 30,
+      cuts: 12,
+      avgShotLengthS: 2.1,
+    },
+    transcript: '"FIRE!" — [nothing is on fire]',
+    timeline: [
+      { t: 0, label: 'Setup whispered to camera' },
+      { t: 6, label: 'The shout' },
+      { t: 10, label: 'New starter reacts' },
+      { t: 20, label: 'Reveal, everyone laughing' },
+    ],
+    mechanism: 'Staged jeopardy resolved quickly. Works on surprise, which is why it does not survive a second viewing.',
+    essentialElements: ['A believable threat', 'A genuine unscripted reaction', 'Fast resolution'],
+    incidentalElements: ['The fire premise'],
+    adaptations: {},
+  }),
+
+  P({
+    id: 'p21',
+    creatorId: 'c12',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p21',
+    views: 445000,
+    likes: 52000,
+    comments: 2200,
+    ageDays: 104,
+    durationS: 49,
+    caption: 'why this dish is on the menu.',
+    poster: { hue: 16, glyph: '📜' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'story',
+      format: 'interview',
+      tone: 'story',
+      secondaryTone: 'heartwarming',
+      peopleOnCamera: 2,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_dining_room',
+      spaceRequired: 'dining_room',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 20,
+      staffMinutes: 70,
+      cuts: 10,
+      avgShotLengthS: 4.9,
+    },
+    transcript: '"It was the only thing we could afford to make in the first year."',
+    timeline: [
+      { t: 0, label: 'Dish placed down' },
+      { t: 8, label: 'Story begins' },
+      { t: 40, label: 'Return to the plate' },
+    ],
+    mechanism: 'Origin as justification — the dish stops being an item and becomes evidence.',
+    essentialElements: ['A specific hardship', 'A dish still on the menu', 'Told by someone who was there'],
+    incidentalElements: ['The first-year framing'],
+    adaptations: {},
+  }),
+
+  P({
+    id: 'p22',
+    creatorId: 'c12',
+    mediaType: 'reel',
+    url: 'https://instagram.com/p/seed-p22',
+    views: 512000,
+    likes: 63400,
+    comments: 3400,
+    ageDays: 39,
+    durationS: 40,
+    caption: 'nonna watched me cook for 40 seconds and this happened',
+    poster: { hue: 350, glyph: '👵' },
+    videoUrl: null,
+    attributes: {
+      hookType: 'relatability',
+      format: 'behind_the_scenes',
+      tone: 'heartwarming',
+      secondaryTone: 'comedy',
+      peopleOnCamera: 2,
+      chefOnCamera: true,
+      customersOnCamera: false,
+      namedPersonDependency: false,
+      locationType: 'any_kitchen',
+      spaceRequired: 'full_kitchen',
+      equipment: ['phone', 'tripod'],
+      editComplexity: 'simple_cuts',
+      audioDependency: 'original_dialogue',
+      trendHalfLifeDays: null,
+      propsCostEur: 10,
+      staffMinutes: 55,
+      cuts: 9,
+      avgShotLengthS: 4.4,
+    },
+    transcript: '"No." — "What?" — "No." — [she takes the spoon]',
+    timeline: [
+      { t: 0, label: 'Chef working, unaware' },
+      { t: 7, label: 'She enters frame' },
+      { t: 14, label: 'Correction, wordless' },
+      { t: 33, label: 'He tastes it. She is right.' },
+    ],
+    mechanism:
+      'Authority inversion. The expert being overruled by someone with no title is funny and warm at once, and it argues for the food without a claim.',
+    essentialElements: [
+      'A real hierarchy to invert',
+      'The correction being non-verbal',
+      'The professional conceding honestly',
+    ],
+    incidentalElements: ['The grandmother relationship', 'The specific dish'],
+    adaptations: {
+      nonna:
+        'This is your format and you already have the cast. One tripod, a quiet prep hour, 55 minutes. Chef appears only in profile and barely speaks, which fits his limit — Nonna carries it.',
+      sen:
+        'Works with any senior family member correcting the kitchen. Keeps your craft register while adding warmth; no guests involved so the consent rule is not in play.',
+    },
+  }),
+];
+
+const TONE_LABELS = {
+  comedy: 'Comedy',
+  challenge: 'Challenge',
+  satisfying: 'Satisfying',
+  craft: 'Craft',
+  story: 'Story',
+  heartwarming: 'Heartwarming',
+  educational: 'Educational',
+  transformation: 'Transformation',
+  energetic: 'Energetic',
+  shock: 'Shock',
+  luxury: 'Luxury',
+};
+
+
+/**
+ * Deterministic scoring engine.
+ *
+ * Implements §5 of ../../PLAN.md. The models (Gemini, Claude) never emit a
+ * score — they emit observable attributes. Everything numeric happens here,
+ * in code you can read, tune and unit-test.
+ *
+ * Every weight and penalty in this file is a knob. Change it, reload, watch
+ * the ranking move. That is the whole point of keeping it out of the LLM.
+ */
+
+const SCORER_VERSION = '0.3.0';
+
+/* ------------------------------------------------------------------ *
+ * Tunables
+ * ------------------------------------------------------------------ */
+
+const CONFIG = {
+  // §5.1 baseline guards
+  minBaselinePosts: 8,
+  minBaselineViews: 1000,
+
+  // §5.2 maturity gate — posts outside this window are not scored at all
+  minAgeDays: 14,
+  maxAgeDays: 90,
+
+  // §5.3 gate to expensive extraction
+  gemniGateMultiplier: 8,
+
+  // §5.3 log ceiling: a 50x outlier saturates V
+  virailtyCeiling: 50,
+
+  // How long from shortlist to camera. Trends with a shorter half-life are dead
+  // before the client can film them.
+  daysToFilm: 7,
+
+  // §5.4 opportunity exponents. Must sum to 1.
+  weights: { V: 0.35, R: 0.3, F: 0.2, T: 0.15 },
+
+  // §5.4 replicability penalties
+  penalties: {
+    namedPersonDependency: 0.45,
+    uniqueVenue: 0.35,
+    manyPeopleOnCamera: 0.15, // > 3 people
+    equipmentGapEach: 0.1, // per missing item, capped below
+    equipmentGapCap: 0.2,
+    editVfx: 0.2,
+    editHeavy: 0.1,
+    licensedMusic: 0.15,
+    shortTrendHalfLife: 0.15, // < 14 days
+  },
+
+  // §5.4 client-fit component weights. Must sum to 1.
+  fitWeights: {
+    space: 0.35,
+    chefWillingness: 0.2,
+    staffTime: 0.15,
+    castSize: 0.15,
+    customersOnCamera: 0.15,
+  },
+};
+
+/* ------------------------------------------------------------------ *
+ * Small helpers
+ * ------------------------------------------------------------------ */
+
+const clamp = (lo, hi, x) => Math.min(hi, Math.max(lo, x));
+
+function median(xs) {
+  if (!xs.length) return 0;
+  const s = [...xs].sort((a, b) => a - b);
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function percentile(xs, p) {
+  if (!xs.length) return 0;
+  const s = [...xs].sort((a, b) => a - b);
+  const i = clamp(0, s.length - 1, Math.ceil((p / 100) * s.length) - 1);
+  return s[i];
+}
+
+const ageDays = (iso, now = Date.now()) =>
+  Math.floor((now - new Date(iso).getTime()) / 86400000);
+
+/* ------------------------------------------------------------------ *
+ * §5.1 / §5.3  Baseline and outlier detection — no client involved
+ * ------------------------------------------------------------------ */
+
+/**
+ * Baseline for one creator + media type. Median of the k most recent mature
+ * posts of the same type, excluding the candidate.
+ *
+ * Same media type only: reels and carousels have completely different reach
+ * mechanics, and mixing them manufactures outliers that aren't there.
+ */
+function computeBaseline(creator, mediaType, excludePostId = null, k = 12) {
+  const pool = creator.history
+    .filter((h) => h.mediaType === mediaType)
+    .filter((h) => h.id !== excludePostId)
+    .filter((h) => h.ageDays >= CONFIG.minAgeDays)
+    .sort((a, b) => a.ageDays - b.ageDays)
+    .slice(0, k);
+
+  const views = pool.map((p) => p.views);
+  const med = median(views);
+
+  return {
+    creatorId: creator.id,
+    mediaType,
+    nPosts: pool.length,
+    medianViews: med,
+    p75Views: percentile(views, 75),
+    // Guards: a dormant account with a 200-view baseline otherwise produces a
+    // "50x outlier" every time it posts.
+    valid: pool.length >= CONFIG.minBaselinePosts && med >= CONFIG.minBaselineViews,
+  };
+}
+
+/**
+ * Outlier multiplier. Ranks on the conservative (p75-based) figure because with
+ * k=12 the median is noisy and we don't want to spend Gemini calls on noise.
+ */
+function detectOutlier(post, baseline) {
+  const age = post.ageDays;
+  const matureEnough = age >= CONFIG.minAgeDays && age <= CONFIG.maxAgeDays;
+
+  if (!baseline.valid || !matureEnough) {
+    return {
+      valid: false,
+      reason: !baseline.valid
+        ? `Baseline unusable (n=${baseline.nPosts}, median=${baseline.medianViews})`
+        : age < CONFIG.minAgeDays
+          ? `Too recent to score (${age}d < ${CONFIG.minAgeDays}d maturity gate)`
+          : `Too old (${age}d > ${CONFIG.maxAgeDays}d)`,
+      multiplier: 0,
+      conservative: 0,
+    };
+  }
+
+  const multiplier = post.views / baseline.medianViews;
+  const conservative = post.views / (baseline.p75Views || baseline.medianViews);
+
+  return {
+    valid: true,
+    multiplier,
+    conservative,
+    band: band(conservative),
+    passesGate: conservative >= CONFIG.gemniGateMultiplier,
+  };
+}
+
+function band(m) {
+  if (m >= 50) return { label: 'exceptional', tone: 'peak' };
+  if (m >= 25) return { label: 'major outlier', tone: 'high' };
+  if (m >= 10) return { label: 'outlier', tone: 'high' };
+  if (m >= 5) return { label: 'strong', tone: 'mid' };
+  if (m >= 2) return { label: 'interesting', tone: 'low' };
+  return { label: 'normal', tone: 'low' };
+}
+
+/* ------------------------------------------------------------------ *
+ * §5.4  Attributes + client profile -> scores
+ * ------------------------------------------------------------------ */
+
+/** V — virality evidence. Log scale: 40x vs 80x is not twice as interesting. */
+function scoreVirality(conservativeMultiplier) {
+  if (conservativeMultiplier <= 1) return 0;
+  return clamp(
+    0,
+    1,
+    Math.log10(conservativeMultiplier) / Math.log10(CONFIG.virailtyCeiling),
+  );
+}
+
+/** R — replicability. Pure penalty table over extracted attributes. */
+function scoreReplicability(attrs, client) {
+  const p = CONFIG.penalties;
+  const hits = [];
+  let total = 0;
+
+  const add = (amount, label) => {
+    total += amount;
+    hits.push({ label, amount });
+  };
+
+  if (attrs.namedPersonDependency) add(p.namedPersonDependency, 'Needs a specific known person');
+  if (attrs.locationType === 'unique_venue') add(p.uniqueVenue, 'Depends on a one-off venue');
+  if (attrs.peopleOnCamera > 3) add(p.manyPeopleOnCamera, `Cast of ${attrs.peopleOnCamera}`);
+
+  const missingKit = (attrs.equipment || []).filter(
+    (e) => !client.capability.equipment.includes(e),
+  );
+  if (missingKit.length) {
+    add(
+      Math.min(p.equipmentGapCap, missingKit.length * p.equipmentGapEach),
+      `Kit you don't have: ${missingKit.join(', ')}`,
+    );
+  }
+
+  if (attrs.editComplexity === 'vfx_motion_graphics') add(p.editVfx, 'VFX / motion graphics edit');
+  else if (attrs.editComplexity === 'heavy_cuts_captions') add(p.editHeavy, 'Heavy cut + caption edit');
+
+  if (attrs.audioDependency === 'licensed_music') add(p.licensedMusic, 'Licensed music dependency');
+  if (attrs.trendHalfLifeDays && attrs.trendHalfLifeDays < 14)
+    add(p.shortTrendHalfLife, `Trend half-life only ${attrs.trendHalfLifeDays}d`);
+
+  return { score: clamp(0, 1, 1 - total), penalties: hits, totalPenalty: total };
+}
+
+/**
+ * F — client fit. A capability compatibility check, not a vibe. Every component
+ * maps to a field the client filled in during intake.
+ */
+function scoreFit(attrs, client) {
+  const cap = client.capability;
+  const w = CONFIG.fitWeights;
+  const parts = [];
+
+  // Space
+  const hasSpace = cap.spaces.includes(attrs.spaceRequired);
+  const substitutable = (SPACE_SUBSTITUTES[attrs.spaceRequired] || []).some((s) =>
+    cap.spaces.includes(s),
+  );
+  const spaceScore = hasSpace ? 1 : substitutable ? 0.55 : 0;
+  parts.push({
+    key: 'space',
+    label: `Needs ${labelSpace(attrs.spaceRequired)}`,
+    score: spaceScore,
+    weight: w.space,
+    note: hasSpace ? 'available' : substitutable ? 'workable substitute' : 'not available',
+  });
+
+  // Chef willingness
+  const need = attrs.chefOnCamera ? 1 : 0;
+  const willing = { high: 1, medium: 0.65, low: 0.3, no: 0 }[cap.chefOnCamera] ?? 0;
+  const chefScore = need ? willing : 1;
+  parts.push({
+    key: 'chefWillingness',
+    label: attrs.chefOnCamera ? 'Chef must appear' : 'No chef appearance needed',
+    score: chefScore,
+    weight: w.chefWillingness,
+    note: need ? `willingness: ${cap.chefOnCamera}` : 'n/a',
+  });
+
+  // Staff time
+  const timeScore = clamp(0, 1, cap.staffMinutesPerConcept / Math.max(1, attrs.staffMinutes));
+  parts.push({
+    key: 'staffTime',
+    label: `${attrs.staffMinutes} min of staff time`,
+    score: clamp(0, 1, timeScore),
+    weight: w.staffTime,
+    note: `budget ${cap.staffMinutesPerConcept} min`,
+  });
+
+  // Cast size
+  const castScore = clamp(0, 1, cap.staffAvailableForFilming / Math.max(1, attrs.peopleOnCamera));
+  parts.push({
+    key: 'castSize',
+    label: `${attrs.peopleOnCamera} on camera`,
+    score: castScore,
+    weight: w.castSize,
+    note: `${cap.staffAvailableForFilming} available`,
+  });
+
+  // Customers on camera
+  const custScore = attrs.customersOnCamera ? (cap.customersOnCamera ? 1 : 0.2) : 1;
+  parts.push({
+    key: 'customersOnCamera',
+    label: attrs.customersOnCamera ? 'Films real customers' : 'No customers on camera',
+    score: custScore,
+    weight: w.customersOnCamera,
+    note: attrs.customersOnCamera ? (cap.customersOnCamera ? 'permitted' : 'not permitted') : 'n/a',
+  });
+
+  const score = parts.reduce((acc, p) => acc + p.weight * p.score, 0);
+  return { score: clamp(0, 1, score), parts };
+}
+
+/**
+ * T — tone / brand fit.
+ *
+ * Added beyond PLAN.md §5.4 because clients differ on register, not just
+ * capability: a mall kebab counter wants jokes, a sit-down Vietnamese
+ * restaurant wants craft and warmth. The same replicable mechanism can be
+ * right for one and wrong for the other.
+ */
+function scoreTone(attrs, client) {
+  const prefs = client.capability.preferredTones || {};
+  const primary = prefs[attrs.tone] ?? 0.25;
+  const secondary = attrs.secondaryTone ? (prefs[attrs.secondaryTone] ?? 0.25) * 0.4 : 0;
+  return {
+    score: clamp(0.05, 1, primary + secondary),
+    primary: attrs.tone,
+    primaryWeight: primary,
+    secondary: attrs.secondaryTone || null,
+  };
+}
+
+const SPACE_SUBSTITUTES = {
+  full_kitchen: ['small_kitchen'],
+  small_kitchen: ['counter', 'full_kitchen'],
+  counter: ['small_kitchen'],
+  dining_room: ['shared_seating'],
+  shared_seating: ['dining_room'],
+};
+
+const SPACE_LABELS = {
+  counter: 'service counter',
+  small_kitchen: 'small prep kitchen',
+  full_kitchen: 'full kitchen',
+  dining_room: 'own dining room',
+  shared_seating: 'shared seating area',
+  outdoor: 'outdoor space',
+  street: 'street / public area',
+  multi_location: 'multiple locations',
+};
+const labelSpace = (s) => SPACE_LABELS[s] || s;
+
+/* ------------------------------------------------------------------ *
+ * Hard filters — drops, not deductions
+ * ------------------------------------------------------------------ */
+
+function hardFilters(attrs, client, tone) {
+  const cap = client.capability;
+  const fails = [];
+
+  const ceiling = cap.monthlyBudgetEur / 6;
+  if (attrs.propsCostEur > ceiling)
+    fails.push(`Costs €${attrs.propsCostEur} — over the €${Math.round(ceiling)} per-concept ceiling`);
+
+  const hasSpace =
+    cap.spaces.includes(attrs.spaceRequired) ||
+    (SPACE_SUBSTITUTES[attrs.spaceRequired] || []).some((s) => cap.spaces.includes(s));
+  if (!hasSpace) fails.push(`Requires ${labelSpace(attrs.spaceRequired)}, which this site doesn't have`);
+
+  if (attrs.trendHalfLifeDays && attrs.trendHalfLifeDays < CONFIG.daysToFilm)
+    fails.push(`Trend dies in ${attrs.trendHalfLifeDays}d, filming takes ${CONFIG.daysToFilm}d`);
+
+  if ((cap.avoidTones || []).includes(attrs.tone))
+    fails.push(`Tone "${attrs.tone}" is off-brand for this client`);
+
+  return fails;
+}
+
+/* ------------------------------------------------------------------ *
+ * Top level
+ * ------------------------------------------------------------------ */
+
+function scoreConcept(post, creator, client, now = Date.now()) {
+  const baseline = computeBaseline(creator, post.mediaType, post.id);
+  const outlier = detectOutlier(post, baseline);
+
+  const base = { post, creator, client, baseline, outlier, scorerVersion: SCORER_VERSION };
+
+  if (!outlier.valid) return { ...base, stage: 'rejected', dropReasons: [outlier.reason], opportunity: 0 };
+  if (!outlier.passesGate)
+    return {
+      ...base,
+      stage: 'below_gate',
+      dropReasons: [
+        `${outlier.conservative.toFixed(1)}x is under the ${CONFIG.gemniGateMultiplier}x extraction gate`,
+      ],
+      opportunity: 0,
+    };
+
+  const attrs = post.attributes;
+  const V = scoreVirality(outlier.conservative);
+  const R = scoreReplicability(attrs, client);
+  const F = scoreFit(attrs, client);
+  const T = scoreTone(attrs, client);
+  const dropReasons = hardFilters(attrs, client, T);
+
+  if (dropReasons.length)
+    return { ...base, stage: 'filtered', dropReasons, V, R, F, T, opportunity: 0 };
+
+  const w = CONFIG.weights;
+  // Weighted geometric mean: a zero in any dimension kills the concept, but the
+  // score stays bounded and no single factor can swamp the others.
+  const opportunity =
+    100 *
+    Math.pow(Math.max(V, 1e-6), w.V) *
+    Math.pow(Math.max(R.score, 1e-6), w.R) *
+    Math.pow(Math.max(F.score, 1e-6), w.F) *
+    Math.pow(Math.max(T.score, 1e-6), w.T);
+
+  return { ...base, stage: 'scored', V, R, F, T, dropReasons: [], opportunity };
+}
+
+function scoreAll(posts, creators, client, now = Date.now()) {
+  const byId = Object.fromEntries(creators.map((c) => [c.id, c]));
+  return posts
+    .map((p) => scoreConcept(p, byId[p.creatorId], client, now))
+    .sort((a, b) => b.opportunity - a.opportunity);
+}
+
+
+
+
+const SHORTLIST_SIZE = 6;
+const DEFAULTS = JSON.parse(JSON.stringify({ weights: CONFIG.weights, gate: CONFIG.gemniGateMultiplier }));
+
+const state = {
+  clientId: CLIENTS[0].id,
+  view: 'feed',
+  results: [],
+  selectedId: null,
+};
+
+const $ = (id) => document.getElementById(id);
+const client = () => CLIENTS.find((c) => c.id === state.clientId);
+
+const fmt = (n) =>
+  n >= 1e6 ? `${(n / 1e6).toFixed(n >= 1e7 ? 0 : 1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(0)}K` : `${n}`;
+const esc = (s) =>
+  String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const pct = (x) => `${Math.round(x * 100)}%`;
+
+/* ------------------------------------------------------------------ *
+ * Scoring pass
+ * ------------------------------------------------------------------ */
+
+const STAGE_ORDER = { scored: 0, filtered: 1, below_gate: 2, rejected: 3 };
+
+function recompute() {
+  const c = client();
+  const results = scoreAll(POSTS, CREATORS, c);
+
+  results.sort((a, b) => {
+    const s = STAGE_ORDER[a.stage] - STAGE_ORDER[b.stage];
+    if (s !== 0) return s;
+    if (a.stage === 'scored') return b.opportunity - a.opportunity;
+    return (b.outlier.conservative || 0) - (a.outlier.conservative || 0);
+  });
+
+  results.forEach((r, i) => {
+    r.rank = r.stage === 'scored' ? i + 1 : null;
+    r.shortlisted = r.stage === 'scored' && i < SHORTLIST_SIZE;
+  });
+
+  state.results = results;
+  if (!results.find((r) => r.post.id === state.selectedId)) {
+    state.selectedId = results[0]?.post.id ?? null;
+  }
+  document.documentElement.style.setProperty('--tab-hue', c.accent);
+  document.documentElement.style.setProperty('--accent', c.accent);
+}
+
+/* ------------------------------------------------------------------ *
+ * Header / client bar / funnel
+ * ------------------------------------------------------------------ */
+
+function renderClientSwitch() {
+  $('clientSwitch').innerHTML = CLIENTS.map(
+    (c) => `
+    <button class="client-tab ${c.id === state.clientId ? 'is-active' : ''}"
+            style="--tab-hue:${c.accent}" data-client="${c.id}" role="tab">
+      <strong>${esc(c.name)}</strong>
+      <span>${esc(c.cuisine)} · ${esc(c.city)}</span>
+    </button>`,
+  ).join('');
+}
+
+function renderClientBar() {
+  const c = client();
+  const cap = c.capability;
+  const chips = [
+    `${cap.staffCount} staff · ${cap.staffAvailableForFilming} free to film`,
+    `€${cap.monthlyBudgetEur}/mo · €${Math.round(cap.monthlyBudgetEur / 6)} per concept`,
+    `${cap.staffMinutesPerConcept} min per concept`,
+    `kit: ${cap.equipment.join(', ')}`,
+    `chef on camera: ${cap.chefOnCamera}`,
+  ]
+    .map((t) => `<span class="chip">${esc(t)}</span>`)
+    .join('');
+
+  const yesno = [
+    `<span class="chip ${cap.customersOnCamera ? 'yes' : 'no'}">guests on camera: ${cap.customersOnCamera ? 'ok' : 'not allowed'}</span>`,
+    ...cap.spaces.map((s) => `<span class="chip yes">${esc(labelSpace(s))}</span>`),
+    ...(cap.avoidTones || []).map((t) => `<span class="chip no">avoids ${esc(TONE_LABELS[t] || t)}</span>`),
+  ].join('');
+
+  $('clientBar').innerHTML = `
+    <div class="cb-brief"><b>Brief.</b> ${esc(c.brief)}</div>
+    <div class="cb-caps">${chips}${yesno}</div>`;
+}
+
+function renderFunnel() {
+  const r = state.results;
+  const mature = r.filter((x) => x.outlier.valid).length;
+  const gated = r.filter((x) => x.stage !== 'rejected' && x.stage !== 'below_gate').length;
+  const scored = r.filter((x) => x.stage === 'scored').length;
+
+  const stages = [
+    [POSTS.length, 'discovered', ''],
+    [mature, 'in age window', ''],
+    [gated, `past ${CONFIG.gemniGateMultiplier}× gate`, ''],
+    [scored, 'client-viable', ''],
+    [Math.min(SHORTLIST_SIZE, scored), 'shortlist', 'shortlist'],
+  ];
+
+  $('funnel').innerHTML = stages
+    .map(([n, label, cls]) => `<div class="fstage ${cls}"><b>${n}</b><span>${esc(label)}</span></div>`)
+    .join('');
+}
+
+/* ------------------------------------------------------------------ *
+ * Poster / media
+ * ------------------------------------------------------------------ */
+
+function mediaHTML(res) {
+  const p = res.post;
+  const dropped = res.stage !== 'scored';
+  const badge = res.shortlisted
+    ? `<div class="badge-rank">SHORTLIST #${res.rank}</div>`
+    : dropped
+      ? `<div class="badge-drop">${esc(dropLabel(res))}</div>`
+      : '';
+
+  const inner = p.videoUrl
+    ? `<video src="${esc(p.videoUrl)}" muted loop playsinline preload="metadata"></video>`
+    : `<div class="poster" style="--ph:${p.poster.hue}">${p.poster.glyph}</div>`;
+
+  const m = res.outlier.valid ? res.outlier.conservative : 0;
+  const tone = res.outlier.valid ? res.outlier.band.tone : 'low';
+
+  return { inner, badge, m, tone, dropped };
+}
+
+function dropLabel(res) {
+  if (res.stage === 'rejected') return 'OUT OF WINDOW';
+  if (res.stage === 'below_gate') return 'BELOW GATE';
+  return 'FILTERED';
+}
+
+/* ------------------------------------------------------------------ *
+ * Feed
+ * ------------------------------------------------------------------ */
+
+function renderFeed() {
+  const feed = $('feed');
+  feed.innerHTML = state.results
+    .map((res) => {
+      const p = res.post;
+      const cr = res.creator;
+      const { inner, badge, m, tone, dropped } = mediaHTML(res);
+
+      const dots = p.timeline
+        .map(
+          (t, i) =>
+            `<div class="scrub-dot" style="left:${(t.t / p.durationS) * 100}%" data-post="${p.id}" data-i="${i}" title="${esc(t.label)}"></div>`,
+        )
+        .join('');
+
+      return `
+      <section class="slide" data-post="${p.id}">
+        <div class="phone ${dropped ? 'is-dropped' : ''}" data-open="${p.id}">
+          ${inner}
+          ${badge}
+          <div class="ph-top">
+            <span class="handle">@${esc(cr.handle)}</span>
+            <span class="mult ${tone}">${m ? `${m.toFixed(1)}×` : '—'}</span>
+          </div>
+          <div class="scrub">
+            <div class="scrub-track">${dots}</div>
+            <div class="scrub-label" data-label="${p.id}">${esc(p.timeline[0].label)}</div>
+          </div>
+          <div class="ph-bot">
+            <div class="ph-cap">${esc(p.caption)}</div>
+            <div class="ph-stats">
+              <span>▶ ${fmt(p.views)}</span><span>♥ ${fmt(p.likes)}</span>
+              <span>💬 ${fmt(p.comments)}</span><span>${p.durationS}s</span>
+            </div>
+          </div>
+        </div>
+      </section>`;
+    })
+    .join('');
+
+  observeSlides();
+}
+
+let observer;
+function observeSlides() {
+  observer?.disconnect();
+  observer = new IntersectionObserver(
+    (entries) => {
+      const best = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (best) {
+        state.selectedId = best.target.dataset.post;
+        renderPanel();
+      }
+    },
+    { root: $('feed'), threshold: [0.5, 0.75] },
+  );
+  document.querySelectorAll('.slide').forEach((el) => observer.observe(el));
+}
+
+/* ------------------------------------------------------------------ *
+ * Gallery
+ * ------------------------------------------------------------------ */
+
+function renderGallery() {
+  $('gallery').innerHTML = state.results
+    .map((res) => {
+      const p = res.post;
+      const { inner, badge, m, tone, dropped } = mediaHTML(res);
+      const scoreLine = dropped
+        ? `<span class="drop">${esc(dropLabel(res))}</span>`
+        : `<span class="op">${res.opportunity.toFixed(1)}</span>`;
+
+      const mini = dropped
+        ? ''
+        : `<div class="tile-mini">
+             ${[['V', res.V, '#60a5fa'], ['R', res.R.score, '#4ade80'], ['F', res.F.score, '#fbbf24'], ['T', res.T.score, '#c084fc']]
+               .map(([, v, col]) => `<i><b style="width:${pct(v)};background:${col}"></b></i>`)
+               .join('')}
+           </div>`;
+
+      return `
+      <button class="tile" data-open="${p.id}">
+        <div class="tile-media ${dropped ? 'is-dropped' : ''}">
+          ${inner}${badge}
+          <div class="ph-top"><span class="handle">@${esc(res.creator.handle)}</span>
+            <span class="mult ${tone}">${m ? `${m.toFixed(1)}×` : '—'}</span></div>
+        </div>
+        <div class="tile-stats">
+          <div class="tile-title">${esc(p.caption)}</div>
+          <div class="tile-line">
+            ${scoreLine}
+            <span>▶ ${fmt(p.views)}</span>
+            <span>${esc(TONE_LABELS[p.attributes.tone] || p.attributes.tone)}</span>
+            <span>€${p.attributes.propsCostEur} · ${p.attributes.staffMinutes}m</span>
+          </div>
+          ${mini}
+        </div>
+      </button>`;
+    })
+    .join('');
+}
+
+/* ------------------------------------------------------------------ *
+ * Detail (panel + sheet share this)
+ * ------------------------------------------------------------------ */
+
+function renderDetail(res) {
+  if (!res) return '<div class="empty">Nothing selected.</div>';
+  const p = res.post;
+  const a = p.attributes;
+  const c = res.client;
+  const adaptation = p.adaptations?.[c.id];
+
+  const head = `
+    <h2 class="p-title">${esc(p.caption)}</h2>
+    <div class="p-sub">@${esc(res.creator.handle)} · ${p.durationS}s · ${p.ageDays}d old · baseline ${fmt(res.baseline.medianViews)} (n=${res.baseline.nPosts})</div>`;
+
+  if (res.stage !== 'scored') {
+    return `${head}
+      <div class="sec" style="border-top:0;padding-top:0;margin-top:0">
+        <h4>Why it is not on the list</h4>
+        <div class="drops"><ul class="ul">${res.dropReasons.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></div>
+      </div>
+      <div class="sec"><h4>Mechanism (recorded anyway)</h4><p>${esc(p.mechanism)}</p></div>
+      ${attrsHTML(a)}`;
+  }
+
+  const bars = [
+    ['V — virality evidence', res.V, '#60a5fa', `${res.outlier.conservative.toFixed(1)}× conservative`],
+    ['R — replicability', res.R.score, '#4ade80', `${res.R.penalties.length} penalt${res.R.penalties.length === 1 ? 'y' : 'ies'}`],
+    ['F — client fit', res.F.score, '#fbbf24', 'capability match'],
+    ['T — tone fit', res.T.score, '#c084fc', TONE_LABELS[res.T.primary] || res.T.primary],
+  ];
+
+  return `
+    ${head}
+    <div class="score-hero">
+      <div class="score-num" style="color:hsl(${c.accent} 70% 62%)">${res.opportunity.toFixed(1)}</div>
+      <div class="score-meta">
+        Opportunity for <b>${esc(c.name)}</b><br />
+        ${res.shortlisted ? `<b>Shortlisted</b> — rank ${res.rank} of ${state.results.filter((r) => r.stage === 'scored').length}` : `Rank ${res.rank}, below the top ${SHORTLIST_SIZE}`}
+      </div>
+    </div>
+
+    <div class="bars">
+      ${bars
+        .map(
+          ([lab, v, col, note]) => `
+        <div class="bar-row">
+          <div class="bar-lab">${esc(lab)}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct(v)};background:${col}"></div></div>
+          <div class="bar-val">${v.toFixed(2)}</div>
+        </div>
+        <div class="bar-row"><div></div><div class="bar-val" style="text-align:left;color:var(--fg-3)">${esc(note)}</div><div></div></div>`,
+        )
+        .join('')}
+    </div>
+
+    <div class="sec">
+      <h4>Adaptation for ${esc(c.name)}</h4>
+      <div class="adapt">
+        ${adaptation ? `<p>${esc(adaptation)}</p>` : `<p class="none">Not generated — Claude only runs on the shortlist, and this one placed below it.</p>`}
+      </div>
+    </div>
+
+    <div class="sec">
+      <h4>Why the original worked</h4>
+      <p class="lead">${esc(p.mechanism)}</p>
+    </div>
+
+    <div class="sec">
+      <h4>Essential — must survive the adaptation</h4>
+      <ul class="ul essential">${p.essentialElements.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
+    </div>
+
+    <div class="sec">
+      <h4>Incidental — safe to change</h4>
+      <ul class="ul incidental">${p.incidentalElements.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>
+    </div>
+
+    ${
+      res.R.penalties.length
+        ? `<div class="sec"><h4>Replicability penalties</h4>
+           <ul class="ul penalty">${res.R.penalties
+             .map((x) => `<li><span>${esc(x.label)}</span><span class="amt">−${x.amount.toFixed(2)}</span></li>`)
+             .join('')}</ul></div>`
+        : `<div class="sec"><h4>Replicability penalties</h4><p>None — this is fully within your means.</p></div>`
+    }
+
+    <div class="sec">
+      <h4>Client-fit breakdown</h4>
+      ${res.F.parts
+        .map((x) => {
+          const cls = x.score >= 0.85 ? 'ok' : x.score >= 0.5 ? 'mid' : 'no';
+          return `<div class="fit-row"><span class="l">${esc(x.label)}<br /><span style="color:var(--fg-3);font-size:10.5px">${esc(x.note)}</span></span><span class="r ${cls}">${pct(x.score)}</span></div>`;
+        })
+        .join('')}
+    </div>
+
+    <div class="sec">
+      <h4>Production</h4>
+      <p>Roughly <b>€${a.propsCostEur}</b> in props and <b>${a.staffMinutes} minutes</b> of staff time. Needs ${esc(labelSpace(a.spaceRequired))}, ${a.peopleOnCamera} on camera, kit: ${esc(a.equipment.join(', '))}.</p>
+    </div>
+
+    <div class="sec"><h4>Transcript</h4><p>${esc(p.transcript)}</p></div>
+    ${attrsHTML(a)}`;
+}
+
+function attrsHTML(a) {
+  const rows = [
+    ['Hook', a.hookType],
+    ['Format', a.format],
+    ['Tone', TONE_LABELS[a.tone] || a.tone],
+    ['Edit', a.editComplexity],
+    ['Audio', a.audioDependency],
+    ['Cuts', `${a.cuts} · avg ${a.avgShotLengthS}s`],
+    ['On camera', a.peopleOnCamera],
+    ['Trend half-life', a.trendHalfLifeDays ? `${a.trendHalfLifeDays}d` : 'evergreen'],
+  ];
+  return `<div class="sec"><h4>Extracted attributes (Gemini)</h4><div class="attr-grid">
+    ${rows.map(([k, v]) => `<div class="attr"><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join('')}
+  </div></div>`;
+}
+
+function renderPanel() {
+  const res = state.results.find((r) => r.post.id === state.selectedId);
+  $('panel').innerHTML = renderDetail(res);
+}
+
+/* ------------------------------------------------------------------ *
+ * Tune drawer
+ * ------------------------------------------------------------------ */
+
+function renderTune() {
+  const w = CONFIG.weights;
+  const rows = [
+    ['V', 'Virality evidence', w.V],
+    ['R', 'Replicability', w.R],
+    ['F', 'Client fit', w.F],
+    ['T', 'Tone fit', w.T],
+  ];
+  $('tuneBody').innerHTML = `
+    ${rows
+      .map(
+        ([k, label, v]) => `
+      <div class="slider">
+        <label>${esc(label)} <span>${v.toFixed(2)}</span></label>
+        <input type="range" min="0" max="0.7" step="0.01" value="${v}" data-weight="${k}" />
+      </div>`,
+      )
+      .join('')}
+    <div class="slider">
+      <label>Extraction gate <span>${CONFIG.gemniGateMultiplier.toFixed(0)}×</span></label>
+      <input type="range" min="2" max="30" step="1" value="${CONFIG.gemniGateMultiplier}" data-gate="1" />
+    </div>
+    <p class="tune-note" style="margin:0">
+      Weights are normalised to sum to 1 before scoring, so moving one moves the others.
+    </p>`;
+}
+
+function normaliseWeights() {
+  const w = CONFIG.weights;
+  const sum = w.V + w.R + w.F + w.T || 1;
+  ['V', 'R', 'F', 'T'].forEach((k) => (w[k] = w[k] / sum));
+}
+
+/* ------------------------------------------------------------------ *
+ * Render + events
+ * ------------------------------------------------------------------ */
+
+function renderAll() {
+  recompute();
+  renderClientSwitch();
+  renderClientBar();
+  renderFunnel();
+  if (state.view === 'feed') renderFeed();
+  else renderGallery();
+  renderPanel();
+}
+
+function setView(v) {
+  state.view = v;
+  $('feedWrap').hidden = v !== 'feed';
+  $('gallery').hidden = v !== 'gallery';
+  document.querySelectorAll('#viewSwitch .seg-btn').forEach((b) => b.classList.toggle('is-active', b.dataset.view === v));
+  if (v === 'feed') renderFeed();
+  else renderGallery();
+  renderPanel();
+}
+
+function openSheet(postId) {
+  const res = state.results.find((r) => r.post.id === postId);
+  $('sheetInner').innerHTML = renderDetail(res);
+  $('sheet').hidden = false;
+}
+
+document.addEventListener('click', (e) => {
+  const tab = e.target.closest('[data-client]');
+  if (tab) {
+    state.clientId = tab.dataset.client;
+    state.selectedId = null;
+    renderAll();
+    return;
+  }
+
+  const view = e.target.closest('[data-view]');
+  if (view) return setView(view.dataset.view);
+
+  const dot = e.target.closest('.scrub-dot');
+  if (dot) {
+    const post = POSTS.find((p) => p.id === dot.dataset.post);
+    const label = document.querySelector(`[data-label="${dot.dataset.post}"]`);
+    if (post && label) label.textContent = post.timeline[+dot.dataset.i].label;
+    e.stopPropagation();
+    return;
+  }
+
+  const open = e.target.closest('[data-open]');
+  if (open) {
+    const narrow = window.matchMedia('(max-width: 900px)').matches;
+    if (state.view === 'gallery' || narrow) openSheet(open.dataset.open);
+    else {
+      state.selectedId = open.dataset.open;
+      renderPanel();
+    }
+    return;
+  }
+
+  if (e.target.id === 'sheetClose' || e.target.id === 'sheet') $('sheet').hidden = true;
+
+  if (e.target.id === 'tuneBtn') {
+    const t = $('tune');
+    t.hidden = !t.hidden;
+    $('tuneBtn').setAttribute('aria-expanded', String(!t.hidden));
+    if (!t.hidden) renderTune();
+  }
+  if (e.target.id === 'tuneClose') $('tune').hidden = true;
+
+  if (e.target.id === 'tuneReset') {
+    Object.assign(CONFIG.weights, DEFAULTS.weights);
+    CONFIG.gemniGateMultiplier = DEFAULTS.gate;
+    renderTune();
+    renderAll();
+  }
+});
+
+document.addEventListener('input', (e) => {
+  const wk = e.target.dataset.weight;
+  if (wk) {
+    CONFIG.weights[wk] = +e.target.value;
+    normaliseWeights();
+    renderTune();
+    renderAll();
+    return;
+  }
+  if (e.target.dataset.gate) {
+    CONFIG.gemniGateMultiplier = +e.target.value;
+    renderTune();
+    renderAll();
+  }
+});
+
+document.addEventListener('mouseover', (e) => {
+  const dot = e.target.closest('.scrub-dot');
+  if (!dot) return;
+  const post = POSTS.find((p) => p.id === dot.dataset.post);
+  const label = document.querySelector(`[data-label="${dot.dataset.post}"]`);
+  if (post && label) label.textContent = post.timeline[+dot.dataset.i].label;
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    $('sheet').hidden = true;
+    $('tune').hidden = true;
+  }
+});
+
+$('scorerVersion').textContent = `scorer v${SCORER_VERSION}`;
+renderAll();
+
+</script>
