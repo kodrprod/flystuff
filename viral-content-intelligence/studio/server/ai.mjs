@@ -233,6 +233,170 @@ export function reasonAboutPost(env, post, client) {
 }
 
 /* ------------------------------------------------------------------ *
+ * Gemini as the default reasoner
+ * ------------------------------------------------------------------ *
+ *
+ * Claude is better at this task, but it is not free and it has no free tier,
+ * which makes it the wrong default for someone running this on no budget.
+ * Gemini does the same job here for roughly a twentieth of the price — and for
+ * nothing at all on the free tier — so it is the default and Claude is opt-in.
+ *
+ * The division of labour is unchanged and is the point of the whole design:
+ * neither model produces a score. They produce observable attributes and a
+ * written adaptation; js/scoring.js does every number.
+ */
+
+const GEMINI_URL = (model, key) =>
+  `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+/**
+ * One Gemini call returning parsed JSON.
+ *
+ * `search` and `schema` are mutually exclusive: Gemini rejects a response
+ * schema on a search-grounded call, the same conflict Claude has between
+ * structured output and citations. Grounded calls therefore ask for JSON in the
+ * prompt and are parsed leniently.
+ */
+async function geminiJson(env, { prompt, schema = null, search = false, parts = [], temperature = 0.2, maxRetries = 2 }) {
+  const body = {
+    contents: [{ parts: [...parts, { text: prompt }] }],
+    generationConfig: { temperature },
+  };
+  if (search) body.tools = [{ google_search: {} }];
+  else if (schema) {
+    body.generationConfig.responseMimeType = 'application/json';
+    body.generationConfig.responseSchema = schema;
+  }
+
+  const out = await jsonFetch(
+    GEMINI_URL(env.geminiModel),
+    {
+      method: 'POST',
+      headers: { 'x-goog-api-key': env.gemini, 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+    },
+    { retries: maxRetries, timeoutMs: 240000 },
+  );
+
+  const text = (out?.candidates?.[0]?.content?.parts || []).map((p) => p.text).filter(Boolean).join('');
+  if (!text) throw new Error(out?.error?.message || 'Gemini returned no content');
+  return parseLooseJson(text);
+}
+
+/** Grounded replies wrap JSON in prose or a fence often enough to handle it here. */
+function parseLooseJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+    const candidate = fenced ? fenced[1] : text.slice(text.search(/[[{]/), text.lastIndexOf(text.includes('}') ? '}' : ']') + 1);
+    return JSON.parse(candidate);
+  }
+}
+
+const REASON_SCHEMA = {
+  type: 'object',
+  properties: {
+    mechanism: { type: 'string' },
+    essentialElements: { type: 'array', items: { type: 'string' } },
+    incidentalElements: { type: 'array', items: { type: 'string' } },
+    adaptation: { type: 'string' },
+  },
+  required: ['mechanism', 'essentialElements', 'incidentalElements', 'adaptation'],
+};
+
+/** Shared brief, so swapping reasoner does not silently swap the task. */
+function reasonPrompt(post, client) {
+  const cap = client.capability;
+  return (
+    'You separate the transferable mechanism of a high-performing short video from its incidental ' +
+    'execution, then adapt it for one specific restaurant.\n\n' +
+    'The literal action is rarely the mechanism. "Chef throws dough" is execution; "expectation ' +
+    'violated, then a visible reaction" is mechanism. Adapt the mechanism, never copy the execution — ' +
+    'a near-copy is a brand risk for the client.\n\n' +
+    'The adaptation must be filmable inside the stated constraints and specific enough to shoot from. ' +
+    'Do not score anything and do not use adjectives like "viral" or "engaging".\n\n' +
+    `## The video that outperformed\n` +
+    `Caption: ${post.caption}\n` +
+    `Duration: ${post.durationS}s\n` +
+    `Outperformance: ${post.outlierMultiplier?.toFixed(1) ?? '?'}× this account's own median ` +
+    `${post.outlierMetric || 'engagement'}\n` +
+    `Transcript: ${post.transcript || '(none)'}\n` +
+    `Observed structure: ${JSON.stringify(post.attributes)}\n` +
+    `Beat-by-beat: ${(post.timeline || []).map((t) => `${t.t}s ${t.label}`).join(' | ')}\n\n` +
+    `## The client\n` +
+    `${client.name} — ${client.cuisine}, ${client.site}, ${client.city}\n` +
+    `Brief: ${client.brief}\n` +
+    `Spaces: ${cap.spaces.join(', ')}\n` +
+    `Kit: ${cap.equipment.join(', ')}\n` +
+    `Staff: ${cap.staffCount} total, ${cap.staffAvailableForFilming} free to film, ` +
+    `${cap.staffMinutesPerConcept} min per concept\n` +
+    `Budget: EUR ${cap.monthlyBudgetEur}/month, so about EUR ${Math.round(cap.monthlyBudgetEur / 6)} per concept\n` +
+    `Chef on camera: ${cap.chefOnCamera}. Guests on camera: ${cap.customersOnCamera ? 'allowed' : 'NOT allowed'}\n` +
+    `Hard constraints: ${(cap.constraints || []).join('; ') || 'none stated'}\n\n` +
+    'Return JSON with keys: mechanism, essentialElements, incidentalElements, adaptation.'
+  );
+}
+
+export function reasonWithGemini(env, post, client) {
+  return geminiJson(env, { prompt: reasonPrompt(post, client), schema: REASON_SCHEMA, temperature: 0.4 });
+}
+
+/**
+ * Routes to whichever reasoner is configured and available.
+ * Falls back rather than failing: a missing Claude key should downgrade the
+ * output, not stop a run that has already paid to fetch the videos.
+ */
+export async function reason(env, post, client, preferred = 'gemini') {
+  if (preferred === 'claude' && env.anthropic) return reasonAboutPost(env, post, client);
+  if (env.gemini) return reasonWithGemini(env, post, client);
+  if (env.anthropic) return reasonAboutPost(env, post, client);
+  throw new Error('no reasoning model configured (set GEMINI_API_KEY)');
+}
+
+/* ---------------- discovery without Claude ---------------- */
+
+export async function findRestaurantGemini(env, query) {
+  const out = await geminiJson(env, {
+    search: true,
+    temperature: 0.1,
+    prompt:
+      `Identify the restaurant "${query}" using Google Search. I need the street address and the ` +
+      'Instagram handle so I can tell it apart from similarly named places.\n\n' +
+      'Only report an Instagram handle you actually saw in a search result; use "" rather than guessing. ' +
+      'If the query names a city or street, weight that heavily.\n\n' +
+      'Return JSON only, no prose: {"candidates":[{"name","address","city","cuisine","instagram",' +
+      '"confidence":"high|medium|low","note"}]} — up to 5, best match first.',
+  });
+  return { candidates: (out.candidates || []).slice(0, 5) };
+}
+
+export async function findSimilarAccountsGemini(env, restaurant, count = 45) {
+  const out = await geminiJson(env, {
+    search: true,
+    temperature: 0.3,
+    prompt:
+      `Use Google Search to build a source list of about ${count} Instagram accounts whose reels are ` +
+      'worth mining for repeatable content ideas, for this restaurant:\n\n' +
+      `Name: ${restaurant.name}\nCity: ${restaurant.city}\nCuisine: ${restaurant.cuisine}\n` +
+      `Address: ${restaurant.address}\nTheir Instagram: ${restaurant.instagram || 'unknown'}\n\n` +
+      'Rules that matter:\n' +
+      '- The account must post reels regularly. An account that posts static photos is useless here.\n' +
+      '- It must be a public Business or Creator account — personal and private accounts cannot be read.\n' +
+      '- Prefer independent restaurants of a similar size and price band over chains and franchises.\n' +
+      '- Mix the list: same cuisine in the same city, the same cuisine in comparable cities, adjacent ' +
+      'concepts with the same service model, and a few food creators who reliably produce outliers.\n' +
+      '- Only return handles you actually saw. A wrong handle just returns nothing, so leave it out ' +
+      'rather than inventing one.\n' +
+      '- Do not include the subject restaurant itself.\n\n' +
+      'Return JSON only, no prose: {"accounts":[{"handle","name","city","category":' +
+      '"same_cuisine_same_city|same_cuisine_other_city|adjacent_concept|food_creator","why",' +
+      '"confidence":"high|medium|low"}]}',
+  });
+  return { accounts: (out.accounts || []).map((a) => ({ ...a, handle: String(a.handle || '').replace(/^@/, '') })) };
+}
+
+/* ------------------------------------------------------------------ *
  * Gemini — video to observable attributes
  * ------------------------------------------------------------------ */
 
@@ -287,15 +451,26 @@ Then describe the production requirements as if someone had to reshoot it:
 
 Do not rate, score, or judge quality. Report facts.`;
 
-export async function extractWithGemini(env, post) {
-  if (!post.videoUrl) throw new Error('no videoUrl on post');
+/**
+ * @param video Optional pre-fetched `{ buffer, durationS }` from sources/video.mjs.
+ *   Passed in rather than fetched here because getting the bytes is now the
+ *   rate-limited step: it needs throttling, a Graph-URL-then-yt-dlp fallback,
+ *   and progress reporting, none of which belong in a model call.
+ */
+export async function extractWithGemini(env, post, video = null) {
+  let buf = video?.buffer;
 
-  const res = await fetch(post.videoUrl);
-  if (!res.ok) throw new Error(`video fetch failed: ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
+  if (!buf) {
+    if (!post.videoUrl) throw new Error('no videoUrl on post');
+    const res = await fetch(post.videoUrl);
+    if (!res.ok) throw new Error(`video fetch failed: ${res.status}`);
+    buf = Buffer.from(await res.arrayBuffer());
+  }
   // Inline uploads share the ~20MB request ceiling; reels are far smaller, but
   // a long one can breach it and the resulting 400 is unhelpful.
   if (buf.length > 18 * 1024 * 1024) throw new Error(`video too large (${(buf.length / 1e6).toFixed(1)}MB)`);
+
+  const durationS = video?.durationS || post.durationS || 0;
 
   const out = await jsonFetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${env.geminiModel}:generateContent`,
@@ -328,6 +503,8 @@ export async function extractWithGemini(env, post) {
   return {
     transcript: a.transcript || '',
     timeline: (a.timeline || []).slice(0, 6),
+    // Graph-sourced posts have no duration until the video is fetched.
+    durationS: durationS || post.durationS || 0,
     attributes: {
       hookType: a.hookType,
       format: a.format,
@@ -348,7 +525,7 @@ export async function extractWithGemini(env, post) {
       propsCostEur: Math.max(0, a.propsCostEur ?? 0),
       staffMinutes: Math.max(5, a.staffMinutes ?? 30),
       cuts: a.cuts ?? 0,
-      avgShotLengthS: a.cuts > 0 ? +(post.durationS / a.cuts).toFixed(1) : post.durationS,
+      avgShotLengthS: a.cuts > 0 ? +((durationS || post.durationS) / a.cuts).toFixed(1) : durationS,
     },
   };
 }

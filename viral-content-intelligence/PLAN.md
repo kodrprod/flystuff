@@ -1,6 +1,108 @@
 # Viral Content Intelligence System — Build Plan
 
-**Status:** planning · **Date:** 2026-08-10 · **Source:** `viralcontentintelligencesystemfullconversation.md`
+**Status:** built, rev 2 · **Date:** 2026-08-10 · **Source:** `viralcontentintelligencesystemfullconversation.md`
+
+---
+
+## 0. Revision 2 — the paid path is gone
+
+§6 of this plan was wrong, and it cost real money. It costed the **apidojo**
+actor at $0.47 per 1,000 posts and arrived at ~$0.71/month. The implementation
+used `apify/instagram-reel-scraper` at **$0.0026/reel — $2.60 per 1,000, 5.5×
+the quoted rate** — and added a profile-grid scrape that appears nowhere in this
+plan and costs a further $1.53 per run. That is how a €0.71 estimate became a €5
+overrun. The error was in the plan and in the build, not in Apify's pricing.
+
+Rev 2 removes Apify from the default path entirely.
+
+### What replaced it
+
+Established by testing against Instagram directly, not from documentation:
+
+| Approach | Result |
+|---|---|
+| Anonymous web scraping | **dead** — `302` to login, `401 require_login` |
+| yt-dlp, profile enumeration | **blocked** — `429`, extractor marked broken |
+| yt-dlp, single reel by URL | **works**, then throttles after ~3 rapid requests |
+| Instagram Graph API `business_discovery` | **works, free, official** |
+
+So: **the Graph API lists reels and their metrics; yt-dlp fetches video files
+for the ~30 finalists, spaced 20s apart.** Both free. Setup is one Meta app —
+see `studio/SETUP-FREE.md`.
+
+Three things the official API gives that the paid scraper did not:
+
+- `media_product_type` is an exact REELS discriminator, replacing a
+  `productType === 'clips'` guess.
+- It returns the **profile grid**, which is the definition of what a trial reel
+  is absent from. Trial and archived reels are excluded for free — the
+  `not_on_grid` proxy and the $1.53 grid scrape behind it are both gone.
+- It is chronological, so a pinned reel is not hoisted to the front of a
+  "most recent k posts" baseline.
+
+### The metric had to change
+
+No free source returns play counts; Instagram exposes those only for accounts
+you own. Virality is therefore measured on **likes + comments**.
+
+This is sound rather than a concession: every figure is a *ratio against the
+same account's own median*, so the unit cancels. Validated on the 165-reel
+corpus, which carries both metrics — **5 of the top 8 reels are identical under
+both**, and engagement finds slightly *more* candidates (45 scoreable vs 41).
+It is also more stable than what it replaces: §10 already recorded that
+`videoPlayCount` and `videoViewCount` disagreed by 1.4×–118× on the same posts.
+
+The real consequence is scale. Likes saturate where plays do not, so engagement
+multipliers are **compressed** — a reel at 40× the plays may show 8× the likes.
+Which invalidates §5.3's fixed gate.
+
+### §5.3's 8× gate is replaced by a top-N cut
+
+The 8× threshold was arbitrary, was tuned on plays, and passed 1 reel out of
+165. It is replaced by **"analyse the best N reels, whatever their
+multiplier"**: N is simultaneously the quality dial and the entire cost ceiling,
+and it can never return an empty shortlist. The UI reports what multiplier the
+cut landed on, so the honesty the fixed gate provided is preserved as a readout
+rather than a filter.
+
+### Why the funnel produced 2 concepts instead of 6
+
+Not the threshold — **depth**. Per-account, on the real corpus:
+
+```
+cafe_milchmaedchen  40 reels  →  usable baseline
+sonaleipzig         36 reels  →  usable baseline
+vacay_leipzig       35 reels  →  usable baseline
+sfizio_dresden      30 reels  →  usable baseline
+9 further accounts  1-12      →  no usable baseline
+```
+
+Four accounts is not enough to find six outliers at any threshold, and depth was
+expensive. It is now free: 40 accounts × 50 reels ≈ 2,000 reels at $0.00, which
+on the observed rate yields ~130 candidates above 1.5×.
+
+One guard was also miscalibrated: `@sfizio_dresden` has 28 mature reels and a
+5,012 median play count, and was rejected purely for a median engagement of 5.
+Rejecting an account with 28 posts of evidence is the guard misfiring. The
+engagement floor moved 20 → 10, and a smoothing constant now damps
+small-denominator ratios instead of hard-rejecting the account.
+
+### Cost model, rev 2
+
+| Step | Platform | Cost |
+|---|---|---|
+| Find restaurant + 45 similar accounts | Gemini | ~$0.03 |
+| 40 accounts × 50 reels | Instagram Graph API | **$0.00** |
+| 30 video downloads | yt-dlp | **$0.00** |
+| 30 video analyses + adaptations | Gemini | ~$0.23 |
+| **Total per client per month** | | **~$0.26** |
+
+$0.00 on the Gemini free tier. The same run through Apify: **$18.80**. Claude is
+now optional (`REASONER=claude`); Gemini is the default because it has a free
+tier and this system has to run on no budget.
+
+Every action states its cost and billing platform *before* it runs, and the one
+remaining paid path requires a typed confirmation naming the amount.
 
 ---
 

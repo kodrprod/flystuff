@@ -7,10 +7,32 @@ import {
 
 const SHORTLIST_SIZE = 6;
 const DEFAULTS = JSON.parse(JSON.stringify({
-  weights: CONFIG.weights, gate: CONFIG.gemniGateMultiplier, exclude: CONFIG.exclude,
+  weights: CONFIG.weights, gate: CONFIG.gateMultiplier, exclude: CONFIG.exclude,
+  gateMode: CONFIG.gateMode, topN: CONFIG.topN, minMultiplier: CONFIG.minMultiplier,
   minAgeDays: CONFIG.minAgeDays, maxAgeDays: CONFIG.maxAgeDays,
-  minBaselinePosts: CONFIG.minBaselinePosts, minBaselineViews: CONFIG.minBaselineViews,
+  minBaselinePosts: CONFIG.minBaselinePosts, minBaselineValue: CONFIG.minBaselineValue,
 }));
+
+/**
+ * Post-hoc filters over the whole dataset, applied after scoring.
+ *
+ * Separate from CONFIG on purpose: CONFIG changes what the scorer *believes*
+ * and re-ranks everything, whereas these only change what you are looking at.
+ * Narrowing to "comedy, under 3 people" should never silently move an
+ * opportunity score.
+ */
+const BLANK_FILTERS = () => ({
+  q: '',
+  creators: new Set(),
+  tones: new Set(),
+  formats: new Set(),
+  stages: new Set(),
+  minMultiplier: 0,
+  maxAgeDays: 0,
+  maxPeople: 0,
+  analysedOnly: false,
+  shortlistOnly: false,
+});
 
 const SPACES = ['counter', 'small_kitchen', 'full_kitchen', 'dining_room', 'shared_seating', 'outdoor', 'street', 'multi_location'];
 const EQUIPMENT = ['phone', 'tripod', 'gimbal', 'light', 'second_camera', 'drone'];
@@ -29,6 +51,9 @@ const state = {
   // scraped for the active client.
   corpus: { posts: POSTS, creators: CREATORS, live: false },
   status: null,
+  filters: BLANK_FILTERS(),
+  gateInfo: null,
+  estimates: {},
   wiz: {
     query: SAVED.wizQuery || '',
     candidates: null,
@@ -134,6 +159,8 @@ const STAGE_ORDER = { scored: 0, unanalysed: 1, filtered: 2, below_gate: 3, reje
 function recompute() {
   const c = client();
   const results = scoreAll(state.corpus.posts, state.corpus.creators, c);
+  state.gateInfo = results.gate;
+  state.metric = results.metric;
 
   results.sort((a, b) => {
     const s = STAGE_ORDER[a.stage] - STAGE_ORDER[b.stage];
@@ -149,12 +176,65 @@ function recompute() {
   });
 
   state.results = results;
-  if (!results.find((r) => r.post.id === state.selectedId)) {
-    state.selectedId = results[0]?.post.id ?? null;
+  state.visible = applyFilters(results);
+
+  // Keep the selection if it survived the filter; otherwise fall to the top of
+  // what is actually on screen, so the detail panel never shows a hidden reel.
+  if (!state.visible.find((r) => r.post.id === state.selectedId)) {
+    state.selectedId = state.visible[0]?.post.id ?? null;
   }
   document.documentElement.style.setProperty('--tab-hue', c.accent);
   document.documentElement.style.setProperty('--accent', c.accent);
 }
+
+/**
+ * The cross-dataset filter pass.
+ *
+ * Runs over every result regardless of stage, because the useful question after
+ * a step is usually about the reels that did *not* make it — "show me
+ * everything that failed only on space", "what did @x post that scored at all".
+ */
+function applyFilters(results) {
+  const f = state.filters;
+  const q = f.q.trim().toLowerCase();
+
+  return results.filter((r) => {
+    const p = r.post;
+    const a = p.attributes;
+
+    if (f.shortlistOnly && !r.shortlisted) return false;
+    if (f.analysedOnly && !a) return false;
+    if (f.stages.size && !f.stages.has(r.stage)) return false;
+    if (f.creators.size && !f.creators.has(p.creatorId)) return false;
+    if (f.minMultiplier && (r.outlier.conservative || 0) < f.minMultiplier) return false;
+    if (f.maxAgeDays && p.ageDays > f.maxAgeDays) return false;
+
+    // Attribute filters only bite once a reel has been analysed; applying them
+    // to unanalysed reels would hide the very things waiting to be analysed.
+    if (a) {
+      if (f.tones.size && !f.tones.has(a.tone) && !f.tones.has(a.secondaryTone)) return false;
+      if (f.formats.size && !f.formats.has(a.format)) return false;
+      if (f.maxPeople && (a.peopleOnCamera || 0) > f.maxPeople) return false;
+    } else if (f.tones.size || f.formats.size || f.maxPeople) {
+      return false;
+    }
+
+    if (q) {
+      const hay = [
+        p.caption, p.creatorId, p.transcript, r.mechanism, p.mechanism,
+        ...(p.hashtags || []), a?.tone, a?.format, a?.hookType,
+      ].filter(Boolean).join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+const filtersActive = () => {
+  const f = state.filters;
+  return !!(f.q || f.creators.size || f.tones.size || f.formats.size || f.stages.size ||
+    f.minMultiplier || f.maxAgeDays || f.maxPeople || f.analysedOnly || f.shortlistOnly);
+};
 
 /* ------------------------------------------------------------------ *
  * Header / client bar / funnel
@@ -205,32 +285,178 @@ function renderClientBar() {
     <div class="cb-brief">
       <b>Brief.</b> ${esc(c.brief)}
       <div class="cb-actions">
+        <button class="mini-btn" data-capstoggle="1" aria-expanded="${state.capsOpen ? 'true' : 'false'}">
+          ${state.capsOpen ? 'Hide sliders' : 'Adjust capability'}
+        </button>
         <button class="mini-btn" data-editclient="${c.id}">Edit profile</button>
         ${hasOverride(c.id) ? `<button class="mini-btn" data-resetclient="${c.id}">Revert to seeded</button>` : ''}
         ${isCustomClient(c.id) ? `<button class="mini-btn danger" data-deleteclient="${c.id}">Delete</button>` : ''}
         <button class="mini-btn" data-export="1">Export shoot list</button>
       </div>
     </div>
-    <div class="cb-caps">${chips}${yesno}${outcome}</div>`;
+    <div class="cb-caps">${chips}${yesno}${outcome}</div>
+    ${state.capsOpen ? capSlidersHTML(c) : ''}`;
 }
 
+/**
+ * Sliders for the capability numbers the chips above only display.
+ *
+ * These are the inputs to F (client fit) and to the hard filters, so moving one
+ * re-ranks the whole shortlist live — which is the point. The per-concept
+ * budget is derived rather than editable because it is defined as the monthly
+ * budget over the six concepts the system is built to deliver.
+ */
+function capSlidersHTML(c) {
+  const cap = c.capability;
+  const row = (key, label, min, max, step, value, suffix, note) => `
+    <label class="cap-row">
+      <span class="cap-name">${esc(label)}</span>
+      <input type="range" min="${min}" max="${max}" step="${step}" value="${value}" data-cap="${key}" />
+      <output class="cap-val">${esc(String(value))}${esc(suffix || '')}</output>
+      ${note ? `<em class="cap-note">${esc(note)}</em>` : ''}
+    </label>`;
+
+  const chefOrder = ['no', 'low', 'medium', 'high'];
+
+  return `
+    <div class="cap-sliders">
+      ${row('staffCount', 'Staff, total', 1, 30, 1, cap.staffCount, '')}
+      ${row('staffAvailableForFilming', 'Free to film', 0, 12, 1, cap.staffAvailableForFilming, '',
+        cap.staffAvailableForFilming > cap.staffCount ? 'more than total staff' : '')}
+      ${row('staffMinutesPerConcept', 'Minutes per concept', 5, 240, 5, cap.staffMinutesPerConcept, ' min')}
+      ${row('monthlyBudgetEur', 'Monthly budget', 0, 2000, 25, cap.monthlyBudgetEur, ' €',
+        `≈ €${Math.round(cap.monthlyBudgetEur / SHORTLIST_SIZE)} per concept ceiling`)}
+      ${row('ownBaselineViews', 'Their own baseline', 0, 200000, 500, cap.ownBaselineViews || 0, ' views',
+        'only used to grade outcomes you log')}
+      <label class="cap-row">
+        <span class="cap-name">Chef on camera</span>
+        <input type="range" min="0" max="3" step="1" value="${chefOrder.indexOf(cap.chefOnCamera)}" data-cap="chefOnCamera" />
+        <output class="cap-val">${esc(cap.chefOnCamera)}</output>
+      </label>
+      <label class="cap-row toggle">
+        <span class="cap-name">Guests on camera</span>
+        <input type="checkbox" data-cap="customersOnCamera" ${cap.customersOnCamera ? 'checked' : ''} />
+        <output class="cap-val">${cap.customersOnCamera ? 'allowed' : 'not allowed'}</output>
+      </label>
+      <p class="cap-hint">
+        Changes save to this client immediately and re-rank the shortlist.
+        ${hasOverride(c.id) ? 'Use “Revert to seeded” to undo.' : ''}
+      </p>
+    </div>`;
+}
+
+/**
+ * The funnel doubles as the "why don't I have six" explanation, so each stage is
+ * clickable and filters the dataset down to exactly the reels it counts.
+ */
 function renderFunnel() {
   const r = state.results;
   const mature = r.filter((x) => x.outlier.valid).length;
-  const gated = r.filter((x) => x.stage !== 'rejected' && x.stage !== 'below_gate').length;
+  const gated = r.filter((x) => x.stage !== 'rejected' && x.stage !== 'below_gate' && x.stage !== 'excluded').length;
   const scored = r.filter((x) => x.stage === 'scored').length;
+  const cut = state.gateInfo?.threshold;
 
   const stages = [
-    [state.corpus.posts.length, 'discovered', ''],
-    [mature, 'in age window', ''],
-    [gated, `past ${CONFIG.gemniGateMultiplier}× gate`, ''],
-    [scored, 'client-viable', ''],
-    [Math.min(SHORTLIST_SIZE, scored), 'shortlist', 'shortlist'],
+    [state.corpus.posts.length, 'held', '', null],
+    [mature, `scoreable ${state.metric?.short || ''}`.trim(), '', null],
+    [gated, cut ? `shortlist ≥${cut.toFixed(1)}×` : 'shortlist', '', 'unanalysed'],
+    [scored, 'client-viable', scored < SHORTLIST_SIZE ? 'short' : '', 'scored'],
+    [Math.min(SHORTLIST_SIZE, scored), `top ${SHORTLIST_SIZE}`, 'shortlist', 'shortlist'],
   ];
 
   $('funnel').innerHTML = stages
-    .map(([n, label, cls]) => `<div class="fstage ${cls}"><b>${n}</b><span>${esc(label)}</span></div>`)
-    .join('');
+    .map(([n, label, cls, filter]) =>
+      `<div class="fstage ${cls}" ${filter ? `data-funnel="${filter}" role="button" tabindex="0"` : ''}>
+         <b>${n}</b><span>${esc(label)}</span>
+       </div>`)
+    .join('') +
+    (scored < SHORTLIST_SIZE
+      ? `<div class="fstage warn" data-shortfall="1" role="button" tabindex="0">
+           <b>${SHORTLIST_SIZE - scored}</b><span>short of ${SHORTLIST_SIZE} — why?</span>
+         </div>`
+      : '');
+}
+
+/* ------------------------------------------------------------------ *
+ * Cross-dataset filter bar
+ * ------------------------------------------------------------------ */
+
+const STAGE_LABELS = {
+  scored: 'client-viable',
+  unanalysed: 'shortlisted, not analysed',
+  filtered: 'failed client constraints',
+  below_gate: 'below shortlist cut',
+  rejected: 'no usable baseline',
+  excluded: 'excluded at ingest',
+};
+
+function renderFilterBar() {
+  const el = $('filterBar');
+  if (!el) return;
+  const f = state.filters;
+  const all = state.results;
+  const shown = state.visible.length;
+
+  const counts = {};
+  for (const r of all) counts[r.stage] = (counts[r.stage] || 0) + 1;
+
+  const creators = [...new Set(all.map((r) => r.post.creatorId))].sort();
+  const tones = [...new Set(all.map((r) => r.post.attributes?.tone).filter(Boolean))].sort();
+  const formats = [...new Set(all.map((r) => r.post.attributes?.format).filter(Boolean))].sort();
+
+  const pills = (items, set, key, label) =>
+    items.length
+      ? `<div class="fb-group"><span class="fb-label">${label}</span>${items
+          .map((v) => `<button class="fb-pill ${set.has(v) ? 'on' : ''}" data-filter="${key}" data-value="${esc(v)}">
+              ${esc(titleCase(v))}${counts[v] != null ? ` <i>${counts[v]}</i>` : ''}</button>`)
+          .join('')}</div>`
+      : '';
+
+  el.innerHTML = `
+    <div class="fb-row">
+      <input class="fb-search" id="fbSearch" type="search" placeholder="Search captions, transcripts, mechanisms, hashtags…"
+             value="${esc(f.q)}" />
+      <span class="fb-count ${shown < all.length ? 'on' : ''}">${shown} of ${all.length}</span>
+      ${filtersActive() ? `<button class="mini-btn" data-clearfilters="1">Clear filters</button>` : ''}
+    </div>
+
+    <div class="fb-row wrap">
+      ${pills(Object.keys(STAGE_LABELS).filter((s) => counts[s]).map((s) => s), f.stages, 'stages', 'Stage')}
+    </div>
+
+    <div class="fb-row wrap">
+      <div class="fb-group">
+        <span class="fb-label">Min multiplier</span>
+        <input type="range" min="0" max="10" step="0.5" value="${f.minMultiplier}" data-filter="minMultiplier" />
+        <output>${f.minMultiplier ? `${f.minMultiplier}×` : 'any'}</output>
+      </div>
+      <div class="fb-group">
+        <span class="fb-label">Max age</span>
+        <input type="range" min="0" max="180" step="5" value="${f.maxAgeDays}" data-filter="maxAgeDays" />
+        <output>${f.maxAgeDays ? `${f.maxAgeDays}d` : 'any'}</output>
+      </div>
+      <div class="fb-group">
+        <span class="fb-label">Max cast</span>
+        <input type="range" min="0" max="8" step="1" value="${f.maxPeople}" data-filter="maxPeople" />
+        <output>${f.maxPeople || 'any'}</output>
+      </div>
+      <label class="fb-check"><input type="checkbox" data-filter="analysedOnly" ${f.analysedOnly ? 'checked' : ''} /> analysed only</label>
+      <label class="fb-check"><input type="checkbox" data-filter="shortlistOnly" ${f.shortlistOnly ? 'checked' : ''} /> shortlist only</label>
+    </div>
+
+    <details class="fb-more" ${f.creators.size || f.tones.size || f.formats.size ? 'open' : ''}>
+      <summary>Filter by account, tone, format</summary>
+      ${pills(creators, f.creators, 'creators', 'Account')}
+      ${pills(tones, f.tones, 'tones', 'Tone')}
+      ${pills(formats, f.formats, 'formats', 'Format')}
+    </details>`;
+
+  // Stage pills carry their own labels; patch them in after the generic render.
+  el.querySelectorAll('[data-filter="stages"]').forEach((b) => {
+    const s = b.dataset.value;
+    b.innerHTML = `${esc(STAGE_LABELS[s] || s)} <i>${counts[s] || 0}</i>`;
+    b.classList.toggle('on', f.stages.has(s));
+  });
 }
 
 /* ------------------------------------------------------------------ *
@@ -274,8 +500,18 @@ function dropLabel(res) {
  * Feed
  * ------------------------------------------------------------------ */
 
+/** Shown when filters hide everything — silence reads as a broken app. */
+function emptyStateHTML() {
+  return `<div class="empty-state">
+    <b>Nothing matches these filters.</b>
+    <p>${state.results.length} reels are loaded; the current filters hide all of them.</p>
+    <button class="mini-btn" data-clearfilters="1">Clear filters</button>
+  </div>`;
+}
+
 function renderFeed() {
-  $('feed').innerHTML = state.results
+  if (!state.visible.length) { $('feed').innerHTML = emptyStateHTML(); return; }
+  $('feed').innerHTML = state.visible
     .map((res) => {
       const p = res.post;
       const { inner, badge, flag, m, tone, dropped } = mediaHTML(res);
@@ -333,7 +569,8 @@ function observeSlides() {
  * ------------------------------------------------------------------ */
 
 function renderGallery() {
-  $('gallery').innerHTML = state.results
+  if (!state.visible.length) { $('gallery').innerHTML = emptyStateHTML(); return; }
+  $('gallery').innerHTML = state.visible
     .map((res) => {
       const p = res.post;
       const { inner, badge, flag, m, tone, dropped } = mediaHTML(res);
@@ -726,7 +963,64 @@ function exportShootList() {
 
 
 /* ------------------------------------------------------------------ *
- * Sources — restaurant lookup, similar accounts, scrape, analyse
+ * Cost badges
+ * ------------------------------------------------------------------ *
+ *
+ * Every button that spends anything states the amount and the platform it bills
+ * to *before* it is pressed. The estimate comes from the server rather than
+ * being recomputed here: a UI that quotes one price while the server charges
+ * another is exactly how a €0.71 plan became a €5 bill.
+ */
+
+/** Renders from cache, and fetches in the background on a miss. */
+function costBadge(action, params) {
+  const key = `${action}:${JSON.stringify(params)}`;
+  const est = state.estimates[key];
+
+  if (!est) {
+    if (state.estimates[key] === undefined) {
+      state.estimates[key] = null; // in flight — don't refetch on re-render
+      api('/api/estimate', { action, params })
+        .then((r) => {
+          state.estimates[key] = r;
+          document.querySelectorAll(`[data-cost="${CSS.escape(key)}"]`).forEach((el) => {
+            el.outerHTML = costBadge(action, params);
+          });
+        })
+        .catch(() => { state.estimates[key] = { items: [], totalUsd: 0, free: true, failed: true }; });
+    }
+    return `<div class="cost-badge pending" data-cost="${esc(key)}">Estimating cost…</div>`;
+  }
+
+  if (est.failed) return `<div class="cost-badge" data-cost="${esc(key)}">Cost estimate unavailable</div>`;
+
+  const lines = est.items
+    .map((i) => `<li><span>${esc(i.platform)}</span><b>${i.free ? 'free' : `$${i.usd.toFixed(4)}`}</b>
+                 <em>${esc(i.detail)}</em>${i.note ? `<span class="cost-note">${esc(i.note)}</span>` : ''}</li>`)
+    .join('');
+
+  const apify = state.status?.apify;
+  const spendsApify = est.items.some((i) => i.platform === 'Apify');
+  const balance = spendsApify && apify
+    ? `<div class="cost-note ${apify.remainingUsd != null && apify.remainingUsd <= 0 ? 'bad' : ''}">
+         Apify: $${apify.usedUsd?.toFixed(2)} used of $${apify.limitUsd?.toFixed(2)}
+         ${apify.remainingUsd != null ? `· $${apify.remainingUsd.toFixed(2)} left` : ''}
+       </div>`
+    : '';
+
+  return `
+    <div class="cost-badge ${est.free ? 'free' : 'paid'}" data-cost="${esc(key)}">
+      <div class="cost-head">
+        <b>${est.free ? '$0.00 · free' : `≈ $${est.totalUsd.toFixed(4)}`}</b>
+        <span>${esc([...new Set(est.items.map((i) => i.platform))].join(' · ') || 'no cost')}</span>
+      </div>
+      ${lines ? `<ul class="cost-items">${lines}</ul>` : ''}
+      ${balance}
+    </div>`;
+}
+
+/* ------------------------------------------------------------------ *
+ * Sources — restaurant lookup, similar accounts, fetch, analyse
  * ------------------------------------------------------------------ */
 
 function renderSources() {
@@ -748,14 +1042,17 @@ function renderSources() {
     `<div class="key-row"><span class="dot ${ok ? 'ok' : 'no'}"></span><b>${name}</b>` +
     `<span${ok ? '' : ' class="key-bad"'}>${esc(ok ? what : issue || what)}</span></div>`;
 
+  const searcher = st.models?.reasoner === 'claude' && k.anthropic ? 'Claude' : 'Gemini';
+
   const step1 = `
     <div class="src-card">
       <h3>1 · Find the restaurant</h3>
-      <p class="src-p">Type the name. Claude searches the web and comes back with candidates so you can
-      confirm which one you mean before anything gets scraped.</p>
+      <p class="src-p">Type the name. ${searcher} searches the web and comes back with candidates so you can
+      confirm which one you mean before anything gets fetched.</p>
+      ${costBadge('discover', { accounts: 1 })}
       <div class="src-row">
         <input id="wizQuery" placeholder="e.g. Sen Vietnamese Dresden" value="${esc(w.query)}" />
-        <button class="primary-btn narrow" data-wiz="find" ${!k.anthropic ? 'disabled' : ''}>Search</button>
+        <button class="primary-btn narrow" data-wiz="find" ${!k.gemini && !k.anthropic ? 'disabled' : ''}>Search</button>
       </div>
       ${w.candidates ? renderCandidates(w.candidates) : ''}
     </div>`;
@@ -765,6 +1062,10 @@ function renderSources() {
       <h3>2 · Build the source list</h3>
       <p class="src-p">Confirmed: <b>${esc(w.restaurant.name)}</b>, ${esc(w.restaurant.address)}, ${esc(w.restaurant.city)}
       ${w.restaurant.instagram ? ` · @${esc(w.restaurant.instagram)}` : ' · no Instagram found'}</p>
+      <p class="src-p">Ask for more than you need — only public <b>Business</b> and <b>Creator</b> accounts can be
+      read for free, and private or personal ones will fail at fetch. Depth matters more than breadth:
+      four accounts with 30+ reels beat twenty with five.</p>
+      ${costBadge('similar', {})}
       <div class="src-row">
         <label class="src-lab">How many accounts <input id="wizCount" type="number" min="10" max="60" value="45" /></label>
         <button class="primary-btn narrow" data-wiz="similar" ${w.busy ? 'disabled' : ''}>Find similar accounts</button>
@@ -772,50 +1073,76 @@ function renderSources() {
       ${w.accounts ? renderAccounts(w.accounts) : ''}
     </div>`;
 
+  const graphOK = st.sourcesAvailable?.graph;
+  const limitVal = state.wizLimit || 50;
+
   const step3 = !w.accounts?.length ? '' : `
     <div class="src-card">
-      <h3>3 · Scrape</h3>
+      <h3>3 · Fetch the reels</h3>
       <p class="src-p"><b>${w.selected.size}</b> accounts selected.
-      Pinned reels, sponsored posts and non-reels are always excluded. The grid check costs a second
-      Apify run per account and is the only way to spot unlisted or trial reels — the reel actor exposes no flag for them.</p>
+      This uses the official Instagram Graph API, which is <b>free</b> and returns the profile grid —
+      so trial and archived reels are excluded automatically, with no second scrape and no guessing.</p>
+      ${graphOK
+        ? costBadge('graph', { accounts: w.selected.size, limitPerAccount: limitVal })
+        : `<div class="cost-badge warn">
+             <b>Not connected.</b> Add <code>IG_GRAPH_TOKEN</code> to <code>studio/.env</code> — see
+             <code>SETUP-FREE.md</code>. Until then this step can't run.
+             ${st.graph?.reason ? `<br><span class="cost-note">${esc(st.graph.reason)}</span>` : ''}
+           </div>`}
       <div class="src-row">
-        <label class="src-lab">Reels per account <input id="wizLimit" type="number" min="12" max="60" value="36" /></label>
-        <label class="chk"><input type="checkbox" id="wizGrid" checked /> Detect unlisted / trial reels</label>
-        <button class="primary-btn narrow" data-wiz="scrape" ${w.busy || !w.selected.size ? 'disabled' : ''}>Scrape selected</button>
+        <label class="src-lab">Reels per account
+          <input id="wizLimit" type="number" min="12" max="200" step="10" value="${limitVal}" />
+        </label>
+        <button class="primary-btn narrow" data-wiz="graph" ${w.busy || !w.selected.size || !graphOK ? 'disabled' : ''}>
+          Fetch reels — free
+        </button>
       </div>
+      <details class="src-adv">
+        <summary>Use Apify instead (paid)</summary>
+        <p class="src-p">Only worth it if the Graph API can't reach an account. This is what spent the
+        €5 allowance: the reel actor bills $0.0026 per reel and the grid check another $0.0017 per post.</p>
+        ${costBadge('scrape', { accounts: w.selected.size, limitPerAccount: limitVal, gridCheck: false })}
+        <div class="src-row">
+          <label class="chk"><input type="checkbox" id="wizGrid" /> Also run the grid check</label>
+          <button class="mini-btn danger" data-wiz="scrape" ${w.busy || !w.selected.size || !k.apify ? 'disabled' : ''}>
+            Scrape with Apify
+          </button>
+        </div>
+      </details>
     </div>`;
 
-  const gate = CONFIG.gemniGateMultiplier;
-  const eligible = state.results.filter((r) => r.outlier.valid && r.outlier.conservative >= gate);
+  const cut = state.gateInfo?.threshold ?? 0;
+  const eligible = state.results.filter((r) => r.outlier.valid && r.outlier.conservative >= cut);
   const todo = eligible.filter((r) => !r.post.attributes || !r.post.adaptations?.[c.id]);
   const best = state.results.filter((r) => r.outlier.valid)
     .sort((a, b) => b.outlier.conservative - a.outlier.conservative)[0];
 
+  const reasoner = st.models?.reasoner === 'claude' && k.anthropic ? 'Claude' : 'Gemini';
   const step4 = `
     <div class="src-card">
-      <h3>4 · Analyse the outliers</h3>
-      <p class="src-p">Gemini watches each reel above the gate and reports observable facts; Claude works out the
-      mechanism and adapts it for <b>${esc(c.name)}</b>. Anything already done is skipped, so re-running is free —
-      you never pay twice for the same video.</p>
+      <h3>4 · Analyse the shortlist</h3>
+      <p class="src-p">Gemini watches each shortlisted reel and reports observable facts; ${reasoner} works out the
+      mechanism and adapts it for <b>${esc(c.name)}</b>. Anything already done is skipped, so re-running costs
+      nothing — you never pay twice for the same video.</p>
 
       <div class="gate-box">
-        <label class="src-lab">Gate
-          <input id="wizGate" type="number" min="1" max="60" step="0.5" value="${gate}" />
-          <span>× the account's own median</span>
+        <label class="src-lab">Analyse the top
+          <input id="wizTopN" type="number" min="1" max="120" step="1" value="${CONFIG.topN}" />
+          <span>reels by multiplier</span>
         </label>
         <div class="gate-read">
-          <b>${eligible.length}</b> qualify · <b>${todo.length}</b> still to do
-          ${best ? ` · best in corpus is <b>${best.outlier.conservative.toFixed(1)}×</b>` : ''}
+          <b>${eligible.length}</b> shortlisted${cut ? ` at ≥${cut.toFixed(1)}×` : ''} · <b>${todo.length}</b> still to do
+          ${best ? ` · best is <b>${best.outlier.conservative.toFixed(1)}×</b>` : ''}
         </div>
       </div>
       <p class="src-note" style="margin-top:6px">
-        Lower it to see more, at falling quality. ${best && best.outlier.conservative < gate
-          ? `Nothing reaches ${gate}× right now — the best is ${best.outlier.conservative.toFixed(1)}×, so try that or scrape more accounts.`
-          : 'Above about 8× you are looking at genuine outliers rather than good days.'}
+        This number <em>is</em> the budget: it caps how many videos get watched. It can never come back
+        empty the way a fixed multiplier gate could — it takes the best you have and tells you what
+        multiplier that turned out to be.
       </p>
+      ${costBadge('analyze', { videos: todo.length })}
 
       <div class="src-row" style="margin-top:10px">
-        <label class="src-lab">Max reels <input id="wizMax" type="number" min="1" max="200" value="30" /></label>
         <label class="chk"><input type="checkbox" id="wizForce" /> Redo ones already analysed</label>
         <button class="primary-btn narrow" data-wiz="analyze" ${w.busy ? 'disabled' : ''}>Analyse for ${esc(c.name)}</button>
       </div>
@@ -830,15 +1157,21 @@ function renderSources() {
   $('sources').innerHTML = `<div class="src-wrap">
     <div class="src-card">
       <h3>Status</h3>
-      ${keyRow(k.apify, 'Apify', 'scraping enabled', st.keyIssues?.apify)}
-      ${keyRow(k.anthropic, 'Claude', st.models.anthropic, st.keyIssues?.anthropic)}
-      ${keyRow(k.gemini, 'Gemini', st.models.gemini, st.keyIssues?.gemini)}
+      ${keyRow(k.graph, 'Instagram Graph API', st.graph?.self ? `free · as @${st.graph.self.username}` : 'free reel data', st.keyIssues?.graph)}
+      ${keyRow(k.gemini, 'Gemini', `${st.models.gemini}${st.geminiFreeTier ? ' · free tier' : ''}`, st.keyIssues?.gemini)}
+      ${keyRow(st.sourcesAvailable?.ytdlp, 'yt-dlp', 'free video download', 'not installed — pip3 install yt-dlp')}
+      ${keyRow(k.anthropic, 'Claude (optional)', st.models.anthropic, st.keyIssues?.anthropic)}
+      ${keyRow(k.apify, 'Apify (optional, paid)', 'only used if you ask for it', st.keyIssues?.apify)}
       <div class="src-stats">
         <div><b>${st.corpus.posts}</b><span>reels held</span></div>
-        <div><b>${st.corpus.creators}</b><span>creators</span></div>
+        <div><b>${st.corpus.withBaseline ?? 0}</b><span>scoreable</span></div>
         <div><b>${st.corpus.analysed}</b><span>analysed</span></div>
         <div><b>${st.corpus.sources[c.id] || 0}</b><span>sources for ${esc(c.name)}</span></div>
       </div>
+      <p class="src-note">
+        Ranking on <b>${esc(st.corpus.metric === 'views' ? 'plays' : 'likes + comments')}</b>, chosen automatically from
+        what this corpus carries. Free sources return no play counts, so newly fetched reels rank on engagement.
+      </p>
       ${orphanWarning(st, c)}
     </div>
     ${step1}${step2}${step3}${step4}${logCard}
@@ -939,14 +1272,41 @@ async function runWiz(action) {
       w.selected = new Set(w.accounts.filter((a) => a.confidence !== 'low').map((a) => a.handle));
     }
 
+    // The free path.
+    if (action === 'graph') {
+      w.busy = 'reading accounts'; renderSources();
+      const { jobId } = await api('/api/graph/fetch', {
+        clientId: state.clientId,
+        handles: [...w.selected],
+        limitPerAccount: +$('wizLimit').value,
+      });
+      await followJob(jobId, renderSources);
+      await refreshStatus();
+      await loadCorpus();
+    }
+
     if (action === 'scrape') {
-      w.busy = 'scraping'; renderSources();
+      const est = await api('/api/estimate', {
+        action: 'scrape',
+        params: {
+          accounts: w.selected.size,
+          limitPerAccount: +$('wizLimit').value,
+          gridCheck: $('wizGrid')?.checked,
+        },
+      });
+      // Last stop before real money leaves the account.
+      if (!confirm(
+        `This bills Apify about $${est.totalUsd.toFixed(2)}.\n\n` +
+        est.items.map((i) => `  ${i.platform}: $${i.usd.toFixed(4)} — ${i.detail}`).join('\n') +
+        `\n\nThe Graph API does the same job for $0.00. Continue with Apify?`,
+      )) return;
+
+      w.busy = 'scraping (paid)'; renderSources();
       const { jobId } = await api('/api/scrape', {
         clientId: state.clientId,
         handles: [...w.selected],
         limitPerAccount: +$('wizLimit').value,
-        gridCheck: $('wizGrid').checked,
-        gate: CONFIG.gemniGateMultiplier,
+        gridCheck: $('wizGrid')?.checked,
       });
       await followJob(jobId, renderSources);
       await refreshStatus();
@@ -954,10 +1314,12 @@ async function runWiz(action) {
     }
 
     if (action === 'analyze') {
+      const topN = +$('wizTopN').value || CONFIG.topN;
+      CONFIG.topN = topN;
       w.busy = 'analysing'; renderSources();
       const { jobId } = await api('/api/analyze', {
-        clientId: state.clientId, client: client(), limit: +$('wizMax').value,
-        gate: +$('wizGate').value, force: $('wizForce').checked,
+        clientId: state.clientId, client: client(),
+        topN, limit: topN, force: $('wizForce').checked,
       });
       await followJob(jobId, renderSources);
       await refreshStatus();
@@ -1010,20 +1372,37 @@ function renderTune() {
         </label>`,
       )
       .join('')}
-    <p class="tune-note">Nothing is deleted — these decide what counts. "Not on the profile grid" is a guess at
-    trial reels and over-fires on accounts that post often, so it is off by default.</p>
+    <p class="tune-note">Nothing is deleted — these decide what counts. "Not on the profile grid" only applies to
+    the old paid scrape; the Graph API returns the grid itself, so trial reels never enter the corpus.</p>
 
     <h5 class="fsec">Which reels are scoreable</h5>
-    ${num('minAgeDays', 'Youngest age', 0, 60, 1, CONFIG.minAgeDays, 'days — below this, views are still climbing')}
+    ${num('minAgeDays', 'Youngest age', 0, 60, 1, CONFIG.minAgeDays, 'days — below this, reach is still climbing')}
     ${num('maxAgeDays', 'Oldest age', 20, 365, 5, CONFIG.maxAgeDays, 'days')}
     ${num('minBaselinePosts', 'Min posts for a baseline', 3, 20, 1, CONFIG.minBaselinePosts, 'fewer = noisier median')}
-    ${num('minBaselineViews', 'Min baseline views', 0, 20000, 250, CONFIG.minBaselineViews, 'stops dead accounts faking outliers')}
 
-    <h5 class="fsec">Gate</h5>
-    <div class="slider">
-      <label>Send to Gemini above <span>${CONFIG.gemniGateMultiplier}×</span></label>
-      <input type="range" min="1" max="30" step="0.5" value="${CONFIG.gemniGateMultiplier}" data-gate="1" />
+    <h5 class="fsec">Shortlist cut</h5>
+    <div class="tune-seg">
+      <button class="seg-btn ${CONFIG.gateMode === 'topN' ? 'is-active' : ''}" data-gatemode="topN">Top N</button>
+      <button class="seg-btn ${CONFIG.gateMode === 'multiplier' ? 'is-active' : ''}" data-gatemode="multiplier">Fixed ×</button>
     </div>
+    ${CONFIG.gateMode === 'topN'
+      ? `<div class="slider">
+           <label>Analyse the best <span>${CONFIG.topN}</span></label>
+           <input type="range" min="5" max="100" step="5" value="${CONFIG.topN}" data-cfg="topN" />
+         </div>
+         <div class="slider">
+           <label>…but never below <span>${CONFIG.minMultiplier}×</span></label>
+           <input type="range" min="1" max="5" step="0.1" value="${CONFIG.minMultiplier}" data-cfg="minMultiplier" />
+         </div>
+         <p class="tune-note">Current cut: <b>${state.gateInfo?.threshold?.toFixed(1) ?? '—'}×</b> from
+         ${state.gateInfo?.eligible ?? 0} eligible reels. Top-N can never return nothing, and it caps
+         what analysis costs.</p>`
+      : `<div class="slider">
+           <label>Analyse above <span>${CONFIG.gateMultiplier}×</span></label>
+           <input type="range" min="1" max="30" step="0.5" value="${CONFIG.gateMultiplier}" data-gate="1" />
+         </div>
+         <p class="tune-note">Honest, but can return zero. An 8× cut tuned on plays passes almost nothing on
+         engagement, because likes saturate where plays do not.</p>`}
 
     <h5 class="fsec">Score weights</h5>
     ${[['V', 'Virality evidence'], ['R', 'Replicability'], ['F', 'Client fit'], ['T', 'Tone fit']]
@@ -1060,6 +1439,7 @@ function renderAll() {
   renderClientSwitch();
   renderClientBar();
   renderFunnel();
+  renderFilterBar();
   if (state.view === 'feed') renderFeed();
   else if (state.view === 'gallery') renderGallery();
   else renderSources();
@@ -1071,6 +1451,8 @@ function setView(v) {
   $('feedWrap').hidden = v !== 'feed';
   $('gallery').hidden = v !== 'gallery';
   $('sources').hidden = v !== 'sources';
+  // The filter bar acts on the dataset, so it is meaningless over the wizard.
+  $('filterBar').hidden = v === 'sources';
   document.querySelectorAll('#viewSwitch .seg-btn').forEach((b) => b.classList.toggle('is-active', b.dataset.view === v));
   if (v === 'feed') renderFeed();
   else if (v === 'gallery') renderGallery();
@@ -1228,29 +1610,91 @@ document.addEventListener('click', (e) => {
   if (t.id === 'tuneReset') {
     Object.assign(CONFIG.weights, DEFAULTS.weights);
     Object.assign(CONFIG.exclude, DEFAULTS.exclude);
-    CONFIG.gemniGateMultiplier = DEFAULTS.gate;
+    CONFIG.gateMultiplier = DEFAULTS.gate;
+    CONFIG.gateMode = DEFAULTS.gateMode;
+    CONFIG.topN = DEFAULTS.topN;
+    CONFIG.minMultiplier = DEFAULTS.minMultiplier;
     CONFIG.minAgeDays = DEFAULTS.minAgeDays;
     CONFIG.maxAgeDays = DEFAULTS.maxAgeDays;
     CONFIG.minBaselinePosts = DEFAULTS.minBaselinePosts;
-    CONFIG.minBaselineViews = DEFAULTS.minBaselineViews;
+    CONFIG.minBaselineValue = DEFAULTS.minBaselineValue;
     renderTune();
     renderAll();
   }
 });
 
+/* ---------------- capability sliders + dataset filters ---------------- */
+
+document.addEventListener('click', (e) => {
+  const t = e.target;
+
+  if (t.closest('[data-capstoggle]')) {
+    state.capsOpen = !state.capsOpen;
+    return renderClientBar();
+  }
+
+  const gm = t.closest('[data-gatemode]');
+  if (gm) {
+    CONFIG.gateMode = gm.dataset.gatemode;
+    renderAll();
+    return renderTune();
+  }
+
+  const pill = t.closest('.fb-pill');
+  if (pill) {
+    const set = state.filters[pill.dataset.filter];
+    const v = pill.dataset.value;
+    set.has(v) ? set.delete(v) : set.add(v);
+    return applyAndRender();
+  }
+
+  if (t.closest('[data-clearfilters]')) {
+    state.filters = BLANK_FILTERS();
+    return applyAndRender();
+  }
+
+  // Funnel stages are shortcuts into the same filter set.
+  const fs = t.closest('[data-funnel]');
+  if (fs) {
+    const want = fs.dataset.funnel;
+    state.filters = BLANK_FILTERS();
+    if (want === 'shortlist') state.filters.shortlistOnly = true;
+    else state.filters.stages.add(want);
+    return applyAndRender();
+  }
+
+  // "Why am I short of six" — show exactly what failed the client, not the data.
+  if (t.closest('[data-shortfall]')) {
+    state.filters = BLANK_FILTERS();
+    state.filters.stages.add('filtered');
+    state.filters.stages.add('unanalysed');
+    return applyAndRender();
+  }
+});
+
+function applyAndRender() {
+  state.visible = applyFilters(state.results);
+  if (!state.visible.find((r) => r.post.id === state.selectedId))
+    state.selectedId = state.visible[0]?.post.id ?? null;
+  renderFilterBar();
+  if (state.view === 'gallery') renderGallery(); else renderFeed();
+  renderPanel();
+}
+
 document.addEventListener('input', (e) => {
   const el = e.target;
 
-  if (el.id === 'wizGate') {
-    CONFIG.gemniGateMultiplier = Math.max(1, +el.value || 1);
+  if (el.id === 'wizTopN') {
+    CONFIG.topN = Math.max(1, +el.value || 1);
     recompute();
     renderFunnel();
     const box = document.querySelector('.gate-read');
     if (box) {
       const c2 = client();
-      const elig = state.results.filter((r) => r.outlier.valid && r.outlier.conservative >= CONFIG.gemniGateMultiplier);
+      const cut = state.gateInfo?.threshold ?? 0;
+      const elig = state.results.filter((r) => r.outlier.valid && r.outlier.conservative >= cut);
       const td = elig.filter((r) => !r.post.attributes || !r.post.adaptations?.[c2.id]);
-      box.innerHTML = `<b>${elig.length}</b> qualify · <b>${td.length}</b> still to do`;
+      box.innerHTML = `<b>${elig.length}</b> shortlisted at ≥${cut.toFixed(1)}× · <b>${td.length}</b> still to do`;
     }
     return;
   }
@@ -1309,9 +1753,76 @@ document.addEventListener('input', (e) => {
     return;
   }
   if (el.dataset.gate) {
-    CONFIG.gemniGateMultiplier = +el.value;
+    CONFIG.gateMultiplier = +el.value;
     renderTune();
     renderAll();
+    return;
+  }
+
+  /* ---- capability sliders ---- */
+  if (el.dataset.cap) {
+    const key = el.dataset.cap;
+    const c = client();
+    const cap = { ...c.capability };
+
+    if (key === 'chefOnCamera') cap[key] = ['no', 'low', 'medium', 'high'][+el.value] || 'no';
+    else if (key === 'customersOnCamera') cap[key] = el.checked;
+    else cap[key] = +el.value;
+
+    // Persist immediately — the previous version lost work on reload and that is
+    // not a mistake worth repeating.
+    const updated = { ...c, capability: cap };
+    saveClient(updated, !CLIENTS.some((x) => x.id === c.id));
+    state.clients = resolveClients(CLIENTS);
+
+    // Update the readout in place. A full re-render would tear the slider out
+    // from under the pointer mid-drag.
+    const out = el.closest('.cap-row')?.querySelector('.cap-val');
+    if (out) {
+      out.textContent =
+        key === 'chefOnCamera' ? cap[key]
+          : key === 'customersOnCamera' ? (cap[key] ? 'allowed' : 'not allowed')
+            : `${el.value}${{ staffMinutesPerConcept: ' min', monthlyBudgetEur: ' €', ownBaselineViews: ' views' }[key] || ''}`;
+    }
+    recompute();
+    renderFunnel();
+    renderFilterBar();
+    if (state.view === 'gallery') renderGallery(); else renderFeed();
+    renderPanel();
+    return;
+  }
+
+  /* ---- dataset filters ---- */
+  if (el.dataset.filter) {
+    const key = el.dataset.filter;
+    if (el.type === 'checkbox') state.filters[key] = el.checked;
+    else state.filters[key] = +el.value;
+    const out = el.closest('.fb-group')?.querySelector('output');
+    if (out) {
+      out.textContent =
+        key === 'minMultiplier' ? (+el.value ? `${el.value}×` : 'any')
+          : key === 'maxAgeDays' ? (+el.value ? `${el.value}d` : 'any')
+            : (+el.value || 'any');
+    }
+    state.visible = applyFilters(state.results);
+    if (state.view === 'gallery') renderGallery(); else renderFeed();
+    const count = document.querySelector('.fb-count');
+    if (count) {
+      count.textContent = `${state.visible.length} of ${state.results.length}`;
+      count.classList.toggle('on', state.visible.length < state.results.length);
+    }
+    return;
+  }
+
+  if (el.id === 'fbSearch') {
+    state.filters.q = el.value;
+    state.visible = applyFilters(state.results);
+    if (state.view === 'gallery') renderGallery(); else renderFeed();
+    const count = document.querySelector('.fb-count');
+    if (count) {
+      count.textContent = `${state.visible.length} of ${state.results.length}`;
+      count.classList.toggle('on', state.visible.length < state.results.length);
+    }
   }
 });
 

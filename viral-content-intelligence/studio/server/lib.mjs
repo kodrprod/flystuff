@@ -20,11 +20,23 @@ export function loadEnv() {
     }
   }
   return {
+    // Free path. IG_USER_ID is optional — resolved from the token on first use.
+    graph: clean(process.env.IG_GRAPH_TOKEN),
+    igUserId: clean(process.env.IG_USER_ID),
+
+    // Paid, opt-in only.
     apify: clean(process.env.APIFY_TOKEN),
+
     anthropic: clean(process.env.ANTHROPIC_API_KEY),
     gemini: clean(process.env.GEMINI_API_KEY),
     anthropicModel: process.env.ANTHROPIC_MODEL || 'claude-opus-5',
     geminiModel: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
+    // 'gemini' | 'claude'. Gemini by default: it is ~20x cheaper and has a free
+    // tier, which matters more here than the quality edge.
+    reasoner: (process.env.REASONER || 'gemini').toLowerCase(),
+    geminiFreeTier: /^(1|true|yes)$/i.test(process.env.GEMINI_FREE_TIER || ''),
+    // Optional cookies.txt, only if the anonymous yt-dlp path gets throttled.
+    cookiesFile: clean(process.env.IG_COOKIES_FILE),
     port: +(process.env.PORT || 4173),
   };
 }
@@ -48,21 +60,20 @@ export function keyIssue(value, name) {
   return null;
 }
 
+const KEYS = {
+  graph: 'IG_GRAPH_TOKEN',
+  gemini: 'GEMINI_API_KEY',
+  anthropic: 'ANTHROPIC_API_KEY',
+  apify: 'APIFY_TOKEN',
+};
+
 /** Which credentials are usable — never returns the values themselves. */
 export function keyStatus(env) {
-  return {
-    apify: !keyIssue(env.apify, 'APIFY_TOKEN'),
-    anthropic: !keyIssue(env.anthropic, 'ANTHROPIC_API_KEY'),
-    gemini: !keyIssue(env.gemini, 'GEMINI_API_KEY'),
-  };
+  return Object.fromEntries(Object.entries(KEYS).map(([k, label]) => [k, !keyIssue(env[k], label)]));
 }
 
 export function keyIssues(env) {
-  return {
-    apify: keyIssue(env.apify, 'APIFY_TOKEN'),
-    anthropic: keyIssue(env.anthropic, 'ANTHROPIC_API_KEY'),
-    gemini: keyIssue(env.gemini, 'GEMINI_API_KEY'),
-  };
+  return Object.fromEntries(Object.entries(KEYS).map(([k, label]) => [k, keyIssue(env[k], label)]));
 }
 
 /** Throw a readable error before a bad key reaches fetch(). */

@@ -189,7 +189,13 @@ export function buildCreators(records) {
   return out;
 }
 
-/** History rows the baseline computation needs, derived from the posts we hold. */
+/**
+ * History rows the baseline computation needs, derived from the posts we hold.
+ *
+ * Carries both metrics because a corpus can be mixed — reels scraped before the
+ * move to the free sources have play counts, reels from the Graph API never
+ * will — and the scorer decides which one the corpus as a whole can support.
+ */
 export function buildHistory(posts) {
   const byCreator = {};
   for (const p of posts) {
@@ -197,6 +203,9 @@ export function buildHistory(posts) {
       id: p.id,
       mediaType: p.mediaType,
       views: p.views,
+      likes: p.likes,
+      comments: p.comments,
+      engagement: Number.isFinite(p.engagement) ? p.engagement : (p.likes || 0) + (p.comments || 0),
       ageDays: p.ageDays,
       flags: p.flags || [], // the scorer drops excluded reels from baselines too
     });

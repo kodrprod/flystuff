@@ -606,3 +606,85 @@ button { font: inherit; cursor: pointer; }
 .fstats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-top: 12px;
   border-top: 1px solid var(--line); font-size: 11px; color: var(--fg-3); }
 .fstats b { color: var(--fg); font-family: var(--mono); }
+
+/* ------------------------------------------------------------------ *
+ * Capability sliders — the client bar values, made editable
+ * ------------------------------------------------------------------ */
+
+.cap-sliders { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 4px 20px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.cap-row { display: grid; grid-template-columns: 1fr 110px auto; align-items: center;
+  gap: 10px; padding: 5px 0; font-size: 12.5px; }
+.cap-row.toggle { grid-template-columns: 1fr auto auto; }
+.cap-name { color: var(--fg-2); }
+.cap-val { font-family: var(--mono); font-size: 11.5px; color: hsl(var(--tab-hue) 70% 62%);
+  min-width: 72px; text-align: right; }
+.cap-note { grid-column: 1 / -1; font-size: 10.5px; color: var(--fg-3); font-style: normal; }
+.cap-hint { grid-column: 1 / -1; font-size: 11px; color: var(--fg-3); margin: 6px 0 0; }
+.cap-row input[type="range"] { width: 100%; accent-color: hsl(var(--tab-hue) 70% 55%); }
+
+/* ------------------------------------------------------------------ *
+ * Cross-dataset filter bar
+ * ------------------------------------------------------------------ */
+
+.filter-bar { flex: 0 0 auto; padding: 10px 16px; border-bottom: 1px solid var(--line);
+  background: var(--bg-2); display: flex; flex-direction: column; gap: 8px; }
+.filter-bar[hidden] { display: none !important; }
+.fb-row { display: flex; align-items: center; gap: 10px; }
+.fb-row.wrap { flex-wrap: wrap; }
+.fb-search { flex: 1 1 auto; min-width: 0; background: var(--bg-3); border: 1px solid var(--line-2);
+  color: var(--fg); padding: 7px 11px; border-radius: 8px; font-size: 12.5px; }
+.fb-count { font-family: var(--mono); font-size: 11.5px; color: var(--fg-3); white-space: nowrap; }
+.fb-count.on { color: hsl(var(--tab-hue) 70% 62%); }
+.fb-group { display: flex; align-items: center; gap: 7px; }
+.fb-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--fg-3); }
+.fb-group input[type="range"] { width: 96px; accent-color: hsl(var(--tab-hue) 70% 55%); }
+.fb-group output { font-family: var(--mono); font-size: 11px; color: var(--fg-2); min-width: 34px; }
+.fb-pill { background: var(--bg-3); border: 1px solid var(--line-2); color: var(--fg-2);
+  padding: 4px 9px; border-radius: 999px; font-size: 11.5px; cursor: pointer; }
+.fb-pill:hover { border-color: var(--line); color: var(--fg); }
+.fb-pill.on { background: hsl(var(--tab-hue) 70% 55% / 0.16); border-color: hsl(var(--tab-hue) 70% 55% / 0.5);
+  color: hsl(var(--tab-hue) 75% 72%); }
+.fb-pill i { font-style: normal; font-family: var(--mono); font-size: 10px; opacity: 0.65; }
+.fb-check { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--fg-2); cursor: pointer; }
+.fb-more { font-size: 11.5px; color: var(--fg-3); }
+.fb-more summary { cursor: pointer; padding: 2px 0; }
+.fb-more .fb-group { flex-wrap: wrap; margin-top: 6px; }
+
+.empty-state { padding: 40px 20px; text-align: center; color: var(--fg-3); font-size: 13px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.empty-state b { color: var(--fg); font-size: 14px; }
+.empty-state p { margin: 0; }
+
+/* ------------------------------------------------------------------ *
+ * Cost badges — what a button spends, and to whom, before it is pressed
+ * ------------------------------------------------------------------ */
+
+.cost-badge { margin: 10px 0; border-radius: 10px; padding: 9px 11px; font-size: 12px;
+  border: 1px solid var(--line-2); background: var(--bg-3); }
+.cost-badge.free { border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.07); }
+.cost-badge.paid { border-color: rgba(251,191,36,0.35); background: rgba(251,191,36,0.07); }
+.cost-badge.warn { border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.09); color: var(--fg-2); }
+.cost-badge.pending { color: var(--fg-3); font-style: italic; }
+.cost-head { display: flex; align-items: baseline; gap: 9px; }
+.cost-head b { font-family: var(--mono); font-size: 13px; }
+.cost-badge.free .cost-head b { color: #34d399; }
+.cost-badge.paid .cost-head b { color: var(--warn); }
+.cost-head span { font-size: 11px; color: var(--fg-3); }
+.cost-items { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+.cost-items li { display: grid; grid-template-columns: auto auto 1fr; gap: 8px; align-items: baseline;
+  font-size: 11.5px; color: var(--fg-3); }
+.cost-items li span:first-child { color: var(--fg-2); }
+.cost-items li b { font-family: var(--mono); font-size: 11px; color: var(--fg-2); }
+.cost-items li em { font-style: normal; }
+.cost-note { grid-column: 1 / -1; font-size: 10.5px; color: var(--warn); }
+.cost-note.bad { color: var(--bad, #f87171); }
+
+.tune-seg { display: flex; gap: 6px; margin-bottom: 10px; }
+.tune-seg .seg-btn { flex: 1; }
+.src-adv { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+.src-adv summary { cursor: pointer; font-size: 12px; color: var(--fg-3); }
+.fstage[data-funnel], .fstage[data-shortfall] { cursor: pointer; }
+.fstage[data-funnel]:hover, .fstage[data-shortfall]:hover { border-color: hsl(var(--tab-hue) 70% 55% / 0.5); }
+.fstage.warn b { color: var(--warn); }
+.fstage.short b { color: var(--warn); }
