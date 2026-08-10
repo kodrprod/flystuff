@@ -49,6 +49,20 @@
       <button class="sheet-close" id="sheetClose" aria-label="Close">Close</button>
     </div>
 
+    <div class="modal" id="editor" hidden>
+      <div class="modal-card">
+        <div class="modal-head">
+          <strong>Client profile</strong>
+          <button class="icon-btn" id="editorClose" aria-label="Close">Close</button>
+        </div>
+        <p class="tune-note">
+          Every field here feeds the F and T factors directly. A profile that is
+          vague produces a shortlist that is vague.
+        </p>
+        <div id="editorBody"></div>
+      </div>
+    </div>
+
     <div class="tune" id="tune" hidden>
       <div class="tune-head">
         <strong>Scoring weights</strong>

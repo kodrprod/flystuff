@@ -32,6 +32,7 @@ export const CLIENTS = [
       staffAvailableForFilming: 2,
       staffMinutesPerConcept: 45,
       monthlyBudgetEur: 150,
+      ownBaselineViews: 2400,
       equipment: ['phone', 'tripod'],
       preferredTones: {
         comedy: 1.0,
@@ -70,6 +71,7 @@ export const CLIENTS = [
       staffAvailableForFilming: 3,
       staffMinutesPerConcept: 90,
       monthlyBudgetEur: 300,
+      ownBaselineViews: 3100,
       equipment: ['phone', 'tripod', 'light', 'gimbal'],
       preferredTones: {
         craft: 1.0,
@@ -107,6 +109,7 @@ export const CLIENTS = [
       staffAvailableForFilming: 2,
       staffMinutesPerConcept: 60,
       monthlyBudgetEur: 200,
+      ownBaselineViews: 1900,
       equipment: ['phone', 'tripod', 'light'],
       preferredTones: {
         heartwarming: 1.0,

@@ -21,7 +21,7 @@ const flatten = (src) =>
     .replace(/^export\s*\{[^}]*\};?\s*$/gm, '');
 
 const css = read('styles.css');
-const js = ['js/data.js', 'js/scoring.js', 'js/app.js'].map((f) => flatten(read(f))).join('\n\n');
+const js = ['js/data.js', 'js/scoring.js', 'js/store.js', 'js/app.js'].map((f) => flatten(read(f))).join('\n\n');
 
 // Body markup, lifted from index.html between <body> and </body>.
 const body = read('index.html')

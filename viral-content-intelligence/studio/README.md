@@ -58,6 +58,25 @@ breakdown.
 immediately. These are the numbers a normal implementation would bury in a
 config file; they are exposed here because picking them is the actual work.
 
+**Edit profile** opens the client intake form — spaces, kit, capacity, budget,
+guest-consent rule, and a tone slider per register. Every field feeds `F` or
+`T` directly, so a vague profile produces a vague shortlist. Zeroing a client's
+comedy and challenge sliders and maxing craft and story is enough to move their
+top pick from the €10 chef challenge to the cheese-pull payoff. Seeded clients
+can be edited and reverted; clients you add are yours to delete.
+
+**Log the outcome** on any concept: picked → filmed → published, plus views
+after 7 days. The app divides that by the client's own median to get a
+performance ratio, and the client bar shows the running median across
+everything logged. This is the only input that can ever calibrate the weights
+(PLAN.md §5.5), and it cannot be reconstructed later — so it is here from the
+first version rather than deferred to Phase 3.
+
+**Export shoot list** downloads the shortlist as Markdown: mechanism, the
+client-specific adaptation, what must survive, what is safe to change, the
+production line, and a tick-box for filmed/published/views. That file is the
+actual deliverable — the app is scaffolding around producing it.
+
 **The rejects are visible on purpose.** Dimmed cards at the bottom show what the
 funnel threw away and why — a 12-day-old post that hasn't matured, a celebrity
 walk-in that scores 47× and is worthless to you, a €200 drone shoot, a trend
@@ -71,6 +90,7 @@ set correctly.
 ```
 js/scoring.js   deterministic engine — baselines, outliers, V/R/F/T, filters
 js/data.js      seeded corpus + client capability profiles
+js/store.js     localStorage: client edits, custom clients, outcome logs
 js/app.js       UI
 build.mjs       inlines everything into dist/studio.html
 check.mjs       assertions over the scoring engine
@@ -121,6 +141,12 @@ get the gradient poster, which is enough to judge layout and pacing.
   ordering is meaningful; the absolute number is not calibrated and should not
   be shown to clients yet. See PLAN.md §5.5 — it stays uncalibrated until the
   outcomes table has ~50 filmed concepts in it.
-- **No persistence.** Tuned weights reset on reload.
-- **No outcome logging.** The `outcomes` table in the plan has no UI yet; that is
-  Phase 3 and it is the piece that makes the scoring improve over time.
+- **Tuned weights reset on reload.** Client profiles and outcomes persist;
+  weights deliberately do not, so you always start from the committed defaults.
+- **Storage is localStorage, per browser.** Nothing syncs between your laptop and
+  your phone, and clearing site data wipes the outcome log. Fine for testing,
+  not fine once real shoots are being tracked — that is the point at which the
+  `clients` and `outcomes` tables need to move to Postgres.
+- **The outcome loop is captured but not yet used.** Logged results do not feed
+  back into the weights automatically; that is the regression described in
+  PLAN.md §5.5 and it needs ~50 filmed concepts before it means anything.
