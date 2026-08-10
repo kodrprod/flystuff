@@ -7,27 +7,68 @@ export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /* ---------------- env ---------------- */
 
+/** Trim, and strip the quotes people leave behind when pasting into .env. */
+const clean = (v) => String(v ?? '').trim().replace(/^["']|["']$/g, '');
+
 export function loadEnv() {
   const p = join(ROOT, '.env');
   if (existsSync(p)) {
     for (const line of readFileSync(p, 'utf8').split('\n')) {
+      if (/^\s*#/.test(line)) continue;
       const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/);
-      if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim();
+      if (m && !process.env[m[1]]) process.env[m[1]] = clean(m[2]);
     }
   }
   return {
-    apify: process.env.APIFY_TOKEN || '',
-    anthropic: process.env.ANTHROPIC_API_KEY || '',
-    gemini: process.env.GEMINI_API_KEY || '',
+    apify: clean(process.env.APIFY_TOKEN),
+    anthropic: clean(process.env.ANTHROPIC_API_KEY),
+    gemini: clean(process.env.GEMINI_API_KEY),
     anthropicModel: process.env.ANTHROPIC_MODEL || 'claude-opus-5',
     geminiModel: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
     port: +(process.env.PORT || 4173),
   };
 }
 
-/** Which credentials are present — never returns the values themselves. */
+/**
+ * Credentials must be present AND sendable as an HTTP header.
+ *
+ * The failure this exists for: the Anthropic and Google consoles display keys
+ * masked with U+2022 bullets, and a masked value pasted into .env throws
+ * "Cannot convert argument to a ByteString ... value 8226" from deep inside
+ * fetch — which says nothing about which key or why.
+ */
+const HEADER_SAFE = /^[\x21-\x7E]+$/;
+
+export function keyIssue(value, name) {
+  if (!value) return `${name} is missing from .env`;
+  if (/[\u2022\u00b7\u2219\u25cf*]/.test(value))
+    return `${name} contains mask characters (•) — you copied the hidden version the console shows, not the real key. Keys are only shown in full once, at creation; if you've lost it, create a new one.`;
+  if (!HEADER_SAFE.test(value))
+    return `${name} has characters that cannot go in an HTTP header (a space, quote, newline or smart character). Re-paste it as plain text.`;
+  return null;
+}
+
+/** Which credentials are usable — never returns the values themselves. */
 export function keyStatus(env) {
-  return { apify: !!env.apify, anthropic: !!env.anthropic, gemini: !!env.gemini };
+  return {
+    apify: !keyIssue(env.apify, 'APIFY_TOKEN'),
+    anthropic: !keyIssue(env.anthropic, 'ANTHROPIC_API_KEY'),
+    gemini: !keyIssue(env.gemini, 'GEMINI_API_KEY'),
+  };
+}
+
+export function keyIssues(env) {
+  return {
+    apify: keyIssue(env.apify, 'APIFY_TOKEN'),
+    anthropic: keyIssue(env.anthropic, 'ANTHROPIC_API_KEY'),
+    gemini: keyIssue(env.gemini, 'GEMINI_API_KEY'),
+  };
+}
+
+/** Throw a readable error before a bad key reaches fetch(). */
+export function assertKey(env, which, label) {
+  const issue = keyIssue(env[which], label);
+  if (issue) throw new Error(issue);
 }
 
 /* ---------------- http ---------------- */

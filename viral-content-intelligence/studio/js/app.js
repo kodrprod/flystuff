@@ -688,8 +688,9 @@ function renderSources() {
   }
 
   const k = st.keys;
-  const keyRow = (ok, name, what) =>
-    `<div class="key-row"><span class="dot ${ok ? 'ok' : 'no'}"></span><b>${name}</b><span>${what}</span></div>`;
+  const keyRow = (ok, name, what, issue) =>
+    `<div class="key-row"><span class="dot ${ok ? 'ok' : 'no'}"></span><b>${name}</b>` +
+    `<span${ok ? '' : ' class="key-bad"'}>${esc(ok ? what : issue || what)}</span></div>`;
 
   const step1 = `
     <div class="src-card">
@@ -749,9 +750,9 @@ function renderSources() {
   $('sources').innerHTML = `<div class="src-wrap">
     <div class="src-card">
       <h3>Status</h3>
-      ${keyRow(k.apify, 'Apify', k.apify ? 'scraping enabled' : 'APIFY_TOKEN missing')}
-      ${keyRow(k.anthropic, 'Claude', k.anthropic ? st.models.anthropic : 'ANTHROPIC_API_KEY missing')}
-      ${keyRow(k.gemini, 'Gemini', k.gemini ? st.models.gemini : 'GEMINI_API_KEY missing')}
+      ${keyRow(k.apify, 'Apify', 'scraping enabled', st.keyIssues?.apify)}
+      ${keyRow(k.anthropic, 'Claude', st.models.anthropic, st.keyIssues?.anthropic)}
+      ${keyRow(k.gemini, 'Gemini', st.models.gemini, st.keyIssues?.gemini)}
       <div class="src-stats">
         <div><b>${st.corpus.posts}</b><span>reels held</span></div>
         <div><b>${st.corpus.creators}</b><span>creators</span></div>

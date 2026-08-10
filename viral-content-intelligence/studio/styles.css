@@ -578,3 +578,4 @@ button { font: inherit; cursor: pointer; }
   .acc-w { grid-column: 1 / -1; }
   .sources { height: auto; overflow: visible; }
 }
+.key-row .key-bad { color: var(--bad); line-height: 1.5; }

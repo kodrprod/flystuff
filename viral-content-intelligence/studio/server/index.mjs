@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { randomUUID } from 'node:crypto';
 
-import { ROOT, loadEnv, keyStatus, readCorpus, writeCorpus, logRun } from './lib.mjs';
+import { ROOT, loadEnv, keyStatus, keyIssues, assertKey, readCorpus, writeCorpus, logRun } from './lib.mjs';
 import {
   scrapeReels, scrapeGrid, gridIndex, applyExclusions, normalizePost,
   buildCreators, buildHistory, EXCLUSION_LABELS,
@@ -74,6 +74,7 @@ const routes = {
     const c = readCorpus();
     return {
       keys: keyStatus(env),
+      keyIssues: keyIssues(env),
       models: { anthropic: env.anthropicModel, gemini: env.geminiModel },
       corpus: {
         creators: Object.keys(c.creators).length,
@@ -97,7 +98,7 @@ const routes = {
   },
 
   'POST /api/discover/restaurant': async ({ query }) => {
-    if (!env.anthropic) throw new Error('ANTHROPIC_API_KEY missing');
+    assertKey(env, 'anthropic', 'ANTHROPIC_API_KEY');
     if (!query?.trim()) throw new Error('query required');
     // Web search puts this around a minute; too long to hold a request open.
     const jobId = startJob('Finding the restaurant', async (say) => {
@@ -110,7 +111,7 @@ const routes = {
   },
 
   'POST /api/discover/similar': async ({ restaurant, count }) => {
-    if (!env.anthropic) throw new Error('ANTHROPIC_API_KEY missing');
+    assertKey(env, 'anthropic', 'ANTHROPIC_API_KEY');
     const jobId = startJob('Finding similar accounts', async (say) => {
       say(`Searching for accounts like ${restaurant.name}…`);
       const out = await findSimilarAccounts(env, restaurant, count || 45);
@@ -121,7 +122,7 @@ const routes = {
   },
 
   'POST /api/scrape': async ({ clientId, handles, limitPerAccount, gridCheck }) => {
-    if (!env.apify) throw new Error('APIFY_TOKEN missing');
+    assertKey(env, 'apify', 'APIFY_TOKEN');
     if (!handles?.length) throw new Error('handles required');
 
     const jobId = startJob(`Scraping ${handles.length} accounts`, async (say) => {
@@ -178,7 +179,7 @@ const routes = {
 
   'POST /api/analyze': async ({ clientId, client, limit, gate }) => {
     if (!env.gemini) throw new Error('GEMINI_API_KEY missing');
-    if (!env.anthropic) throw new Error('ANTHROPIC_API_KEY missing');
+    assertKey(env, 'anthropic', 'ANTHROPIC_API_KEY');
     if (!client) throw new Error('client profile required');
 
     const jobId = startJob('Analysing outliers', async (say) => {
@@ -295,8 +296,9 @@ const server = createServer(async (req, res) => {
 
 server.listen(env.port, () => {
   const k = keyStatus(env);
+  const issues = keyIssues(env);
   console.log(`\n  Viral Content Studio  →  http://localhost:${env.port}\n`);
   console.log(`  apify ${k.apify ? '✓' : '✗'}   anthropic ${k.anthropic ? '✓' : '✗'}   gemini ${k.gemini ? '✓' : '✗'}`);
-  if (!k.apify || !k.anthropic || !k.gemini) console.log('  Missing keys → copy .env.example to .env');
+  for (const msg of Object.values(issues)) if (msg) console.log(`  ! ${msg}`);
   console.log('');
 });
