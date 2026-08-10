@@ -16,7 +16,7 @@
 
 const KEY = 'vcs.v1';
 
-const EMPTY = { clientOverrides: {}, customClients: [], outcomes: {} };
+const EMPTY = { clientOverrides: {}, customClients: [], outcomes: {}, ui: {} };
 
 function read() {
   try {
@@ -125,6 +125,26 @@ export function outcomeSummary(clientId, ownBaselineViews) {
       : (ratios[(ratios.length >> 1) - 1] + ratios[ratios.length >> 1]) / 2
     : null;
   return { filmed: filmed.length, published: published.length, medianRatio: med };
+}
+
+/* ------------------------------------------------------------------ *
+ * UI state
+ *
+ * Selected client, the discovery wizard, and any job in flight. All of this
+ * used to live in memory only, so a reload silently dropped you back to the
+ * first client — which, with its own empty source list, looked exactly like
+ * losing every reel you had scraped.
+ * ------------------------------------------------------------------ */
+
+export function getUI() {
+  return read().ui || {};
+}
+
+export function setUI(patch) {
+  const db = read();
+  db.ui = { ...(db.ui || {}), ...patch };
+  write(db);
+  return db.ui;
 }
 
 export function exportAll() {

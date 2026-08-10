@@ -2,7 +2,7 @@ import { CLIENTS, CREATORS, POSTS, TONE_LABELS } from './data.js';
 import { CONFIG, SCORER_VERSION, scoreAll, labelSpace } from './scoring.js';
 import {
   resolveClients, saveClient, deleteClient, isCustomClient, hasOverride, resetClient,
-  getOutcome, setOutcome, outcomeSummary,
+  getOutcome, setOutcome, outcomeSummary, getUI, setUI,
 } from './store.js';
 
 const SHORTLIST_SIZE = 6;
@@ -12,9 +12,11 @@ const SPACES = ['counter', 'small_kitchen', 'full_kitchen', 'dining_room', 'shar
 const EQUIPMENT = ['phone', 'tripod', 'gimbal', 'light', 'second_camera', 'drone'];
 const TONES = Object.keys(TONE_LABELS);
 
+const SAVED = getUI();
+
 const state = {
   clients: resolveClients(CLIENTS),
-  clientId: CLIENTS[0].id,
+  clientId: SAVED.clientId || CLIENTS[0].id,
   view: 'feed',
   results: [],
   selectedId: null,
@@ -23,8 +25,27 @@ const state = {
   // scraped for the active client.
   corpus: { posts: POSTS, creators: CREATORS, live: false },
   status: null,
-  wiz: { query: '', candidates: null, restaurant: null, accounts: null, selected: new Set(), busy: '', log: [] },
+  wiz: {
+    query: SAVED.wizQuery || '',
+    candidates: null,
+    restaurant: SAVED.wizRestaurant || null,
+    accounts: SAVED.wizAccounts || null,
+    selected: new Set(SAVED.wizSelected || []),
+    busy: '',
+    log: [],
+  },
 };
+
+/** Anything that must outlive a reload. */
+function persistUI() {
+  setUI({
+    clientId: state.clientId,
+    wizQuery: state.wiz.query,
+    wizRestaurant: state.wiz.restaurant,
+    wizAccounts: state.wiz.accounts,
+    wizSelected: [...state.wiz.selected],
+  });
+}
 
 /* ---------------- API ---------------- */
 
@@ -39,6 +60,15 @@ const api = async (path, body) => {
 
 /** Poll a background job to completion, streaming its log into the wizard. */
 async function followJob(jobId, onTick) {
+  setUI({ activeJob: jobId });
+  try {
+    return await pollJob(jobId, onTick);
+  } finally {
+    setUI({ activeJob: null });
+  }
+}
+
+async function pollJob(jobId, onTick) {
   for (;;) {
     const job = await api(`/api/job/${jobId}`);
     state.wiz.log = job.log;
@@ -46,6 +76,27 @@ async function followJob(jobId, onTick) {
     if (job.status === 'done') return job.result;
     if (job.status === 'error') throw new Error(job.error);
     await new Promise((r) => setTimeout(r, 900));
+  }
+}
+
+/** Re-attach to a job that was still running when the page was reloaded. */
+async function resumeJob() {
+  const id = getUI().activeJob;
+  if (!id) return;
+  try {
+    const job = await api(`/api/job/${id}`);
+    if (job.status !== 'running') return setUI({ activeJob: null });
+    state.wiz.busy = job.label || 'running';
+    state.view = 'sources';
+    setView('sources');
+    await followJob(id, renderSources);
+  } catch {
+    setUI({ activeJob: null });
+  } finally {
+    state.wiz.busy = '';
+    await refreshStatus();
+    await loadCorpus();
+    renderAll();
   }
 }
 
@@ -783,9 +834,38 @@ function renderSources() {
         <div><b>${st.corpus.analysed}</b><span>analysed</span></div>
         <div><b>${st.corpus.sources[c.id] || 0}</b><span>sources for ${esc(c.name)}</span></div>
       </div>
-      ${state.corpus.live ? '' : '<p class="src-note">Showing the seeded demo corpus — nothing scraped for this client yet.</p>'}
+      ${orphanWarning(st, c)}
     </div>
     ${step1}${step2}${step3}${step4}${logCard}
+  </div>`;
+}
+
+/**
+ * The corpus is keyed by client. If reels exist but none belong to the selected
+ * client, saying nothing and quietly rendering the demo set reads as data loss.
+ */
+function orphanWarning(st, c) {
+  const mine = st.corpus.sources[c.id] || 0;
+  if (mine) return '';
+  const others = Object.entries(st.corpus.sources).filter(([, n]) => n > 0);
+
+  if (!st.corpus.posts) {
+    return '<p class="src-note">Nothing scraped yet — start at step 1.</p>';
+  }
+  if (!others.length) {
+    return `<div class="warn-box"><b>${st.corpus.posts} reels are stored but not linked to any client.</b>
+      <button class="mini-btn" data-adopt="${esc(c.id)}">Link them all to ${esc(c.name)}</button></div>`;
+  }
+  return `<div class="warn-box">
+    <b>Your ${st.corpus.posts} reels are filed under a different client, so this one is showing the demo set.</b>
+    <div class="warn-row">${others
+      .map(([id, n]) => {
+        const known = state.clients.find((x) => x.id === id);
+        return `<button class="mini-btn" data-switch="${esc(id)}">${esc(known ? known.name : id)} — ${n} accounts</button>`;
+      })
+      .join('')}
+      <button class="mini-btn" data-adopt="${esc(c.id)}">or link them to ${esc(c.name)}</button>
+    </div>
   </div>`;
 }
 
@@ -882,6 +962,7 @@ async function runWiz(action) {
     w.log = [...w.log, { t: 0, msg: `Error: ${e.message}` }];
   } finally {
     w.busy = '';
+    persistUI();
     recompute();
     renderClientBar();
     renderFunnel();
@@ -1015,15 +1096,43 @@ document.addEventListener('click', (e) => {
   const wizBtn = t.closest('[data-wiz]');
   if (wizBtn) {
     const a = wizBtn.dataset.wiz;
-    if (a === 'all') { state.wiz.accounts.forEach((x) => state.wiz.selected.add(x.handle)); return renderSources(); }
-    if (a === 'none') { state.wiz.selected.clear(); return renderSources(); }
+    if (a === 'all') { state.wiz.accounts.forEach((x) => state.wiz.selected.add(x.handle)); persistUI(); return renderSources(); }
+    if (a === 'none') { state.wiz.selected.clear(); persistUI(); return renderSources(); }
     return runWiz(a);
+  }
+
+  const sw = t.closest('[data-switch]');
+  if (sw) {
+    const id = sw.dataset.switch;
+    if (state.clients.some((x) => x.id === id)) {
+      state.clientId = id;
+      state.selectedId = null;
+      persistUI();
+      return loadCorpus().then(renderAll);
+    }
+    alert(`The reels are filed under client id "${id}", which no longer exists in this browser.\nUse "link them to ..." to attach them to the client you want.`);
+    return;
+  }
+
+  const adopt = t.closest('[data-adopt]');
+  if (adopt) {
+    (async () => {
+      const all = await api('/api/corpus?clientId=__all__');
+      const handles = [...new Set((all.allCreators || []).map((x) => x))];
+      await api('/api/sources', { clientId: adopt.dataset.adopt, handles });
+      await refreshStatus();
+      await loadCorpus();
+      renderAll();
+      renderSources();
+    })();
+    return;
   }
 
   const pick = t.closest('[data-pick]');
   if (pick) {
     state.wiz.restaurant = state.wiz.candidates[+pick.dataset.pick];
     state.wiz.candidates = null;
+    persistUI();
     return renderSources();
   }
 
@@ -1031,6 +1140,7 @@ document.addEventListener('click', (e) => {
   if (tab) {
     state.clientId = tab.dataset.client;
     state.selectedId = null;
+    persistUI();
     loadCorpus().then(renderAll);
     return renderAll();
   }
@@ -1094,6 +1204,7 @@ document.addEventListener('input', (e) => {
 
   if (el.dataset.acc) {
     el.checked ? state.wiz.selected.add(el.dataset.acc) : state.wiz.selected.delete(el.dataset.acc);
+    persistUI();
     el.closest('.acc')?.classList.toggle('on', el.checked);
     const n = document.querySelector('[data-wiz="scrape"]');
     if (n) renderSources();
@@ -1159,9 +1270,9 @@ renderAll();
 // Server is optional: without it the app stays on the seeded corpus.
 (async () => {
   await refreshStatus();
-  if (state.status) {
-    await loadCorpus();
-    renderAll();
-    if (state.view === 'sources') renderSources();
-  }
+  if (!state.status) return;
+  await loadCorpus();
+  renderAll();
+  if (state.view === 'sources') renderSources();
+  await resumeJob();
 })();

@@ -89,6 +89,8 @@ const routes = {
   'GET /api/corpus': async (_body, url) => {
     const clientId = url.searchParams.get('clientId') || '';
     const c = readCorpus();
+    // Escape hatch for the UI when reels exist but belong to no known client.
+    if (clientId === '__all__') return { posts: [], creators: [], allCreators: Object.keys(c.creators) };
     const posts = clientPosts(c, clientId);
     const history = buildHistory(posts);
     const creators = Object.values(c.creators)
