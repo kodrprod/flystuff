@@ -10,17 +10,14 @@ import { extname, join, normalize } from 'node:path';
 import { randomUUID } from 'node:crypto';
 
 import { ROOT, loadEnv, keyStatus, keyIssues, assertKey, readCorpus, writeCorpus, backupCorpus, logRun, sleep } from './lib.mjs';
-import {
-  scrapeReels, scrapeGrid, gridIndex, annotate, normalizePost,
-  buildCreators, buildHistory, EXCLUSION_LABELS,
-} from './apify.mjs';
+import { importDataset, buildHistory, EXCLUSION_LABELS } from './ingest.mjs';
 import { resolveSelf, graphStatus, fetchMany, normalizeGraphMedia } from './sources/graph.mjs';
 import { fetchVideo, ytdlpAvailable } from './sources/video.mjs';
 import {
   findRestaurant, findSimilarAccounts, findRestaurantGemini, findSimilarAccountsGemini,
   reason, extractWithGemini,
 } from './ai.mjs';
-import { estimate, apifyUsage, RATES } from './costs.mjs';
+import { estimate, RATES } from './costs.mjs';
 import {
   computeBaseline, detectOutlier, effectiveGate, resolveMetric, isExcluded, CONFIG,
 } from '../js/scoring.js';
@@ -132,22 +129,14 @@ function clientPosts(corpus, clientId) {
 const routes = {
   'GET /api/status': async () => {
     const c = readCorpus();
-    const [graph, ytdlp, apify] = await Promise.all([
-      graphStatus(env.graph),
-      ytdlpAvailable(),
-      apifyUsage(env.apify),
-    ]);
+    const [graph, ytdlp] = await Promise.all([graphStatus(env.graph), ytdlpAvailable()]);
     const posts = withOutliers(c.posts);
     return {
       keys: keyStatus(env),
       keyIssues: keyIssues(env),
       models: { anthropic: env.anthropicModel, gemini: env.geminiModel, reasoner: env.reasoner },
       geminiFreeTier: env.geminiFreeTier,
-      sourcesAvailable: {
-        graph: graph.ok,
-        ytdlp: !!ytdlp,
-        apify: !!apify,
-      },
+      sourcesAvailable: { graph: graph.ok, ytdlp: !!ytdlp },
       graph,
       corpus: {
         creators: Object.keys(c.creators).length,
@@ -158,7 +147,6 @@ const routes = {
         sources: Object.fromEntries(Object.entries(c.sources).map(([k, v]) => [k, v.length])),
       },
       runs: c.runs.slice(0, 8),
-      apify,
       rates: RATES,
     };
   },
@@ -313,59 +301,48 @@ const routes = {
     return { jobId };
   },
 
-  'POST /api/scrape': async ({ clientId, handles, limitPerAccount, gridCheck, gate }) => {
-    assertKey(env, 'apify', 'APIFY_TOKEN');
-    if (!handles?.length) throw new Error('handles required');
-
-    const jobId = startJob(`Scraping ${handles.length} accounts`, async (say) => {
-      const limit = limitPerAccount || 36;
-      say(`Requesting up to ${limit} reels from ${handles.length} accounts…`);
-      const raw = await scrapeReels(env.apify, handles, { limitPerAccount: limit });
-      say(`Actor returned ${raw.length} records.`);
-
-      let grid = null;
-      if (gridCheck) {
-        say('Scraping profile grids to detect unlisted / trial reels…');
-        try {
-          grid = gridIndex(await scrapeGrid(env.apify, handles, { limitPerAccount: 200 }), limit);
-          const deep = Object.values(grid).filter((g) => g.deep).length;
-          say(`Grid indexed for ${Object.keys(grid).length} accounts (${deep} deep enough to judge).`);
-        } catch (e) {
-          say(`Grid scrape failed (${e.message}) — continuing without unlisted detection.`);
-        }
+  /**
+   * Import a JSON export you already have on disk.
+   *
+   * Replaces the Apify integration. Nothing in this server calls a paid actor
+   * any more, but reels already bought stay readable — discarding them to make
+   * a point about cost would be its own kind of waste.
+   */
+  'POST /api/import': async ({ clientId, path: filePath, json }) => {
+    const jobId = startJob('Importing dataset', async (say) => {
+      let data = json;
+      if (!data) {
+        if (!filePath) throw new Error('Give a file path or inline JSON.');
+        const abs = filePath.startsWith('/') ? filePath : join(ROOT, filePath);
+        say(`Reading ${abs}…`);
+        data = JSON.parse(await readFile(abs, 'utf8'));
       }
 
-      const { kept, counts: byReason } = annotate(raw, { gridShortcodes: grid });
-      Object.entries(byReason).forEach(([r, n]) => say(`Flagged ${n}: ${EXCLUSION_LABELS[r] || r}`));
+      const { posts: fresh, creators, flagCounts, read } = importDataset(data);
+      say(`Read ${read} records → ${fresh.length} reels.`);
+      Object.entries(flagCounts).forEach(([r, n]) => say(`Flagged ${n}: ${EXCLUSION_LABELS[r] || r}`));
       say('Everything is stored — use Filters to decide what counts.');
 
       const corpus = readCorpus();
-      const now = Date.now();
-      const fresh = kept.map((r) => normalizePost(r, now));
-
-      // Keep any analysis already paid for on a re-scrape.
       const existing = new Map(corpus.posts.map((p) => [p.id, p]));
       for (const p of fresh) {
         const prev = existing.get(p.id);
         existing.set(p.id, prev?.attributes ? { ...p, ...pickAnalysis(prev) } : p);
       }
       corpus.posts = [...existing.values()];
-      Object.assign(corpus.creators, buildCreators(kept));
+      Object.assign(corpus.creators, creators);
       if (clientId) {
         const owners = [...new Set(fresh.map((p) => p.creatorId))];
         corpus.sources[clientId] = [...new Set([...(corpus.sources[clientId] || []), ...owners])];
       }
-      logRun(corpus, 'scrape', { accounts: handles.length, records: raw.length, kept: kept.length, flagged: byReason });
+      logRun(corpus, 'import', { read, kept: fresh.length, flagged: flagCounts, costUsd: 0 });
       writeCorpus(corpus);
 
-      // Report what actually survives the funnel, not just what was stored.
-      const threshold = gate > 0 ? gate : CONFIG.gemniGateMultiplier;
       const scored = withOutliers(corpus.posts);
-      const usable = scored.filter((p) => p.outlier.valid);
-      const past = usable.filter((p) => p.outlier.conservative >= threshold);
-      say(`${corpus.posts.length} reels held · ${usable.length} have a usable baseline · ${past.length} clear the ${threshold}x gate.`);
-
-      return { kept: kept.length, dropped: byReason, usable: usable.length, pastGate: past.length };
+      const usable = scored.filter((p) => p.outlier?.valid);
+      const { picked, gate } = shortlist(scored, { topN: CONFIG.topN });
+      say(`${corpus.posts.length} reels held · ${usable.length} scoreable · cut ${gate.threshold.toFixed(1)}x -> ${picked.length}.`);
+      return { read, kept: fresh.length, usable: usable.length, shortlisted: picked.length, costUsd: 0 };
     });
     return { jobId };
   },
@@ -536,7 +513,7 @@ server.listen(env.port, () => {
   const k = keyStatus(env);
   const issues = keyIssues(env);
   console.log(`\n  Viral Content Studio  →  http://localhost:${env.port}\n`);
-  console.log(`  apify ${k.apify ? '✓' : '✗'}   anthropic ${k.anthropic ? '✓' : '✗'}   gemini ${k.gemini ? '✓' : '✗'}`);
+  console.log(`  instagram ${k.graph ? '✓' : '✗'}   gemini ${k.gemini ? '✓' : '✗'}   claude ${k.anthropic ? '✓ (optional)' : '– (optional)'}`);
   for (const msg of Object.values(issues)) if (msg) console.log(`  ! ${msg}`);
   console.log('');
 });

@@ -13,7 +13,10 @@ the quoted rate** — and added a profile-grid scrape that appears nowhere in th
 plan and costs a further $1.53 per run. That is how a €0.71 estimate became a €5
 overrun. The error was in the plan and in the build, not in Apify's pricing.
 
-Rev 2 removes Apify from the default path entirely.
+Rev 2 removes the Apify integration entirely. There is no code path left that
+can call a paid actor: the module, the route, the token and the UI are gone.
+What remains is a file importer, so exports already paid for stay readable —
+discarding those would be a second act of waste, not a correction.
 
 ### What replaced it
 
@@ -97,12 +100,13 @@ small-denominator ratios instead of hard-rejecting the account.
 | 30 video analyses + adaptations | Gemini | ~$0.23 |
 | **Total per client per month** | | **~$0.26** |
 
-$0.00 on the Gemini free tier. The same run through Apify: **$18.80**. Claude is
-now optional (`REASONER=claude`); Gemini is the default because it has a free
-tier and this system has to run on no budget.
+$0.00 on the Gemini free tier. The scraper this replaced would have charged
+**$18.80** for the same run. Claude is now optional (`REASONER=claude`); Gemini
+is the default because it has a free tier and this system has to run on no
+budget.
 
-Every action states its cost and billing platform *before* it runs, and the one
-remaining paid path requires a typed confirmation naming the amount.
+Every action states its cost and billing platform before it runs. With the
+scraper removed, the only non-zero lines left are model tokens.
 
 ---
 
@@ -152,13 +156,13 @@ Five stages. Stages 1–2 are cheap arithmetic over metadata; stages 3–5 are t
 that cost real money, and they only ever see ~30 videos.
 
 ```
-[1] INGEST        Apify → raw_posts        45 creators × ~33 posts = ~1,500 posts
-       ↓                                    metadata only, no video files
-[2] DETECT        per-account baselines     pure SQL/Python, no AI
-       ↓          → outlier multipliers     ~1,500 → ~30 confirmed outliers
-[3] EXTRACT       Gemini 2.5 Flash          transcript + structured observations
+[1] INGEST        IG Graph API → posts     40 accounts × 50 reels = ~2,000 reels
+       ↓          (free)                     metadata only, no video files
+[2] DETECT        per-account baselines     pure arithmetic, no AI
+       ↓          → outlier multipliers     ~2,000 → top 30 by multiplier
+[3] EXTRACT       Gemini + yt-dlp           transcript + structured observations
        ↓          → video_attributes        30 videos, one pass each
-[4] REASON        Claude Sonnet 5           mechanism, essential vs incidental,
+[4] REASON        Gemini (Claude optional)  mechanism, essential vs incidental,
        ↓          → mechanism + adaptation  client-specific adaptation (top ~15)
 [5] SCORE         deterministic scorer      attributes + client profile → ranked list
        ↓                                    → 6 concept briefs
@@ -171,11 +175,12 @@ models. Never send a video to Gemini that arithmetic could have rejected.
 
 | Layer | Choice | Note |
 |---|---|---|
-| Social data | Apify (`apidojo/instagram-scraper`) | $0.47–0.50 / 1k posts, verified 2026-08-10. Normalize fields at ingest so a second actor can be swapped in. |
+| Social data | **Instagram Graph API `business_discovery`** | Free, official, no ToS exposure. Reads public Business/Creator accounts only. Returns no play counts — see §0. |
+| Video files | **yt-dlp**, throttled 20s | Free. Only the ~30 finalists; it cannot enumerate profiles and throttles under bulk. |
 | Database | Postgres (Supabase) | Free tier is ample at this volume. |
 | Backend | Python | |
-| Video understanding | Gemini 2.5 Flash | $0.30/M in, $2.50/M out. **Not** Gemini 3.6 Flash ($1.50/$7.50) — 5× input cost for a transcription-and-observation job. |
-| Reasoning | Claude Sonnet 5 (`claude-sonnet-5`) | $3/$15 per MTok ($2/$10 intro through 2026-08-31). Consider Opus 5 for the final 6 only. |
+| Video understanding | Gemini Flash | $0.30/M in, $2.50/M out, and a usable free tier. |
+| Reasoning | Gemini Flash by default | Claude is opt-in via `REASONER=claude` — better, but ~20× the cost and no free tier. |
 | Scheduling | Cron | n8n adds a moving part you don't need yet. |
 | Output | Generated Markdown | Dashboard deferred. |
 
@@ -339,7 +344,7 @@ can swamp the others.
 Every score component is logged with a `scorer_version`. After ~50 filmed concepts, the
 `outcomes` table gives you supervised labels: regress `performance_ratio` on
 `(V, R, F, penalties)` and re-fit the weights. This is the part of the system that gets
-better with age and that a competitor buying the same Apify actor cannot copy.
+better with age and that a competitor buying the same scraper cannot copy.
 
 ---
 
@@ -405,7 +410,7 @@ conversation: **1 outlier per 50 videos**, and **1 filmable concept per 5 outlie
 Test them before building anything.
 
 1. Pick one pilot client. Hand-curate 45 creators.
-2. One Apify run, 1,500 posts (~$0.71).
+2. One Graph API run, ~2,000 reels ($0.00).
 3. Compute baselines and outlier multipliers in a notebook.
 4. A human watches the top 30 and answers: *how many of these could this specific
    restaurant actually film this month?*
@@ -415,7 +420,7 @@ wrong or the ratio is, and the volume/cost model needs rebuilding before code ex
 This is a week and one dollar to de-risk a five-week build.
 
 ### Phase 1 — Ingest + detect (weeks 2–3)
-Apify client with field normalization · Postgres schema · baseline computation with the
+Graph API client with field normalization · corpus schema · baseline computation with the
 age gate · outlier detection · CLI that emits a ranked outlier CSV. **No AI in this phase.**
 
 ### Phase 2 — Extract + reason + score (week 4)
@@ -463,9 +468,11 @@ labelled data the eventual system needs.
 
 | Risk | Severity | Mitigation |
 |---|---|---|
-| Apify actor breaks or changes schema | High — likely within months | Normalize fields at ingest behind one adapter. Keep a second actor identified. Never let raw actor field names reach the database schema. |
-| View-count semantics | **Confirmed, resolved.** In live Apify data `videoPlayCount` and `videoViewCount` differ by 1.4×–118× and are not proportional. Use `videoPlayCount`; keep the other only for reference. Assert on it at ingest. |
-| Creator attribution | **Confirmed.** The actor returns reels by accounts that merely tagged the requested one (2 of 47). Key creators on `ownerUsername`, never the requested handle. |
+| Scraper cost overrun | **Happened.** A $0.47/1k actor was costed; a $2.60/1k one shipped, plus an unplanned grid scrape. €5 gone. Resolved by deleting the integration — no code path can bill a scraper. Every action now shows cost and platform before it runs. |
+| Graph API token expiry | Certain, every 60 days | `get-token.mjs` re-issues and verifies. The status panel shows the failure as "token expired", not a generic error. |
+| Private/personal source accounts | High — roughly a third of any list | `business_discovery` cannot see them. Ask for more accounts than needed; failures are reported per handle, not as a run failure. |
+| View-count semantics | **Confirmed, then obsoleted.** In live scraped data `videoPlayCount` and `videoViewCount` differed by 1.4×–118× and were not proportional. Moot now: no free source returns plays at all, and ranking moved to likes+comments (§0). |
+| Creator attribution | **Confirmed, and it distorted the funnel.** Scraped exports return reels by accounts that merely tagged the requested one (2 of 47) — those strangers were 7 of the 13 "accounts" that had no usable baseline. Key creators on the owning handle, never the requested one. `business_discovery` is queried per handle, so it does not have this failure mode. |
 | Trial reels are undetectable from the reel actor | Medium | No trial field exists in the output. Cross-reference the profile grid — trial and archived reels are absent from it. Never infer from engagement shape; that deletes real outliers. |
 | Gemini 2.5 Flash is closed to new API keys | Low, but blocks a fresh setup | Pin `gemini-3.5-flash`. Avoid the `-latest` aliases: a floating model silently changes extraction behaviour under a scorer that depends on it. |
 | Age confound under-detects recent posts | High | §5.2 maturity gate. |

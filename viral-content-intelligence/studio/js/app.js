@@ -999,15 +999,6 @@ function costBadge(action, params) {
                  <em>${esc(i.detail)}</em>${i.note ? `<span class="cost-note">${esc(i.note)}</span>` : ''}</li>`)
     .join('');
 
-  const apify = state.status?.apify;
-  const spendsApify = est.items.some((i) => i.platform === 'Apify');
-  const balance = spendsApify && apify
-    ? `<div class="cost-note ${apify.remainingUsd != null && apify.remainingUsd <= 0 ? 'bad' : ''}">
-         Apify: $${apify.usedUsd?.toFixed(2)} used of $${apify.limitUsd?.toFixed(2)}
-         ${apify.remainingUsd != null ? `· $${apify.remainingUsd.toFixed(2)} left` : ''}
-       </div>`
-    : '';
-
   return `
     <div class="cost-badge ${est.free ? 'free' : 'paid'}" data-cost="${esc(key)}">
       <div class="cost-head">
@@ -1015,7 +1006,6 @@ function costBadge(action, params) {
         <span>${esc([...new Set(est.items.map((i) => i.platform))].join(' · ') || 'no cost')}</span>
       </div>
       ${lines ? `<ul class="cost-items">${lines}</ul>` : ''}
-      ${balance}
     </div>`;
 }
 
@@ -1098,15 +1088,12 @@ function renderSources() {
         </button>
       </div>
       <details class="src-adv">
-        <summary>Use Apify instead (paid)</summary>
-        <p class="src-p">Only worth it if the Graph API can't reach an account. This is what spent the
-        €5 allowance: the reel actor bills $0.0026 per reel and the grid check another $0.0017 per post.</p>
-        ${costBadge('scrape', { accounts: w.selected.size, limitPerAccount: limitVal, gridCheck: false })}
+        <summary>Import a JSON export you already have</summary>
+        <p class="src-p">Reads a dataset dump from disk — including the Apify exports you already paid for.
+        Nothing is fetched and nothing is billed.</p>
         <div class="src-row">
-          <label class="chk"><input type="checkbox" id="wizGrid" /> Also run the grid check</label>
-          <button class="mini-btn danger" data-wiz="scrape" ${w.busy || !w.selected.size || !k.apify ? 'disabled' : ''}>
-            Scrape with Apify
-          </button>
+          <input id="wizImport" placeholder="/path/to/dataset.json" />
+          <button class="mini-btn" data-wiz="import" ${w.busy ? 'disabled' : ''}>Import file</button>
         </div>
       </details>
     </div>`;
@@ -1161,7 +1148,6 @@ function renderSources() {
       ${keyRow(k.gemini, 'Gemini', `${st.models.gemini}${st.geminiFreeTier ? ' · free tier' : ''}`, st.keyIssues?.gemini)}
       ${keyRow(st.sourcesAvailable?.ytdlp, 'yt-dlp', 'free video download', 'not installed — pip3 install yt-dlp')}
       ${keyRow(k.anthropic, 'Claude (optional)', st.models.anthropic, st.keyIssues?.anthropic)}
-      ${keyRow(k.apify, 'Apify (optional, paid)', 'only used if you ask for it', st.keyIssues?.apify)}
       <div class="src-stats">
         <div><b>${st.corpus.posts}</b><span>reels held</span></div>
         <div><b>${st.corpus.withBaseline ?? 0}</b><span>scoreable</span></div>
@@ -1285,28 +1271,11 @@ async function runWiz(action) {
       await loadCorpus();
     }
 
-    if (action === 'scrape') {
-      const est = await api('/api/estimate', {
-        action: 'scrape',
-        params: {
-          accounts: w.selected.size,
-          limitPerAccount: +$('wizLimit').value,
-          gridCheck: $('wizGrid')?.checked,
-        },
-      });
-      // Last stop before real money leaves the account.
-      if (!confirm(
-        `This bills Apify about $${est.totalUsd.toFixed(2)}.\n\n` +
-        est.items.map((i) => `  ${i.platform}: $${i.usd.toFixed(4)} — ${i.detail}`).join('\n') +
-        `\n\nThe Graph API does the same job for $0.00. Continue with Apify?`,
-      )) return;
-
-      w.busy = 'scraping (paid)'; renderSources();
-      const { jobId } = await api('/api/scrape', {
+    if (action === 'import') {
+      w.busy = 'importing'; renderSources();
+      const { jobId } = await api('/api/import', {
         clientId: state.clientId,
-        handles: [...w.selected],
-        limitPerAccount: +$('wizLimit').value,
-        gridCheck: $('wizGrid')?.checked,
+        path: $('wizImport').value.trim(),
       });
       await followJob(jobId, renderSources);
       await refreshStatus();
@@ -1703,7 +1672,7 @@ document.addEventListener('input', (e) => {
     el.checked ? state.wiz.selected.add(el.dataset.acc) : state.wiz.selected.delete(el.dataset.acc);
     persistUI();
     el.closest('.acc')?.classList.toggle('on', el.checked);
-    const n = document.querySelector('[data-wiz="scrape"]');
+    const n = document.querySelector('[data-wiz="graph"]');
     if (n) renderSources();
     return;
   }

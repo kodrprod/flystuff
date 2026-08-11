@@ -10,7 +10,6 @@
  */
 import { readCorpus } from './server/lib.mjs';
 import { CONFIG, METRICS, computeBaseline, detectOutlier, effectiveGate } from './js/scoring.js';
-import { buildHistory } from './server/apify.mjs';
 
 const corpus = readCorpus();
 const posts = corpus.posts;

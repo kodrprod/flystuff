@@ -1,7 +1,7 @@
 /**
  * Seeded corpus.
  *
- * Stands in for stages 1-4 of the pipeline (Apify ingest, baseline detection,
+ * Stands in for stages 1-4 of the pipeline (ingest, baseline detection,
  * Gemini extraction, Claude reasoning). The shapes here are exactly what those
  * stages are specified to produce in ../../PLAN.md §4, so swapping in the real
  * adapter is a data-source change, not a rewrite.

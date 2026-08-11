@@ -7,25 +7,17 @@
  * cheaper actor than the one that shipped, and nothing in the UI showed the
  * difference until the money was gone.
  *
- * Apify prices are the real per-event rates read from their API (FREE tier);
- * Claude's are published list rates. Gemini's are overridable in .env because
- * per-model video rates move around — everything is labelled with its source so
- * an estimate is never mistaken for a quote.
+ * Claude's rates are published list prices. Gemini's are overridable in .env
+ * because per-model video rates move around — everything is labelled with its
+ * source so an estimate is never mistaken for a quote.
  *
- * The default pipeline no longer bills anything: listing is the Instagram Graph
- * API, video fetching is yt-dlp, and both are free. Apify remains only as an
- * explicit opt-in and is the one thing here that can spend real money.
+ * Nothing here can bill a scraper any more. Listing is the Instagram Graph API
+ * and video fetching is yt-dlp, both free, so the only non-zero lines left are
+ * model tokens — and those go to zero on the Gemini free tier.
  */
-import { jsonFetch } from './lib.mjs';
-
 export const FREE = 'free';
 
 export const RATES = {
-  // apify.com — pay-per-event, FREE tier. Higher plans are cheaper per item.
-  apifyReel: 0.0026,       // per reel written to the dataset
-  apifyPost: 0.0017,       // per profile-grid post (the trial-reel check)
-  apifyStart: 0.001,       // flat, per actor run
-
   // platform.claude.com/pricing — Opus 5
   claudeInPerM: 5.0,
   claudeOutPerM: 25.0,
@@ -79,18 +71,6 @@ export function estimate(action, p = {}) {
       gapMin > 1 ? `Throttled to avoid a block — allow about ${gapMin} min.` : null);
   }
 
-  if (action === 'scrape') {
-    const accounts = p.accounts || 0;
-    const reels = accounts * (p.limitPerAccount || 36);
-    add('Apify', `${reels} reels @ $${RATES.apifyReel}`, reels * RATES.apifyReel);
-    add('Apify', '1 actor start', RATES.apifyStart);
-    if (p.gridCheck) {
-      const posts = accounts * (p.gridDepth || 200);
-      add('Apify', `grid check — up to ${posts} posts @ $${RATES.apifyPost}`, posts * RATES.apifyPost);
-      add('Apify', '1 actor start', RATES.apifyStart);
-    }
-  }
-
   if (action === 'analyze') {
     const n = p.videos || 0;
     const secs = p.avgSeconds || RATES.avgReelSeconds;
@@ -141,20 +121,4 @@ export function estimate(action, p = {}) {
     byPlatform: items.reduce((acc, i) => ((acc[i.platform] = usd((acc[i.platform] || 0) + i.usd)), acc), {}),
     free: totalUsd === 0,
   };
-}
-
-/** Live Apify balance, so "you have $0.00 left" appears before a run, not after. */
-export async function apifyUsage(token) {
-  if (!token) return null;
-  try {
-    const d = await jsonFetch(`https://api.apify.com/v2/users/me/limits?token=${encodeURIComponent(token)}`,
-      {}, { retries: 1, timeoutMs: 15000 });
-    const used = d?.data?.current?.monthlyUsageUsd ?? null;
-    const limit = d?.data?.limits?.maxMonthlyUsageUsd ?? null;
-    if (used == null) return null;
-    return { usedUsd: Math.round(used * 100) / 100, limitUsd: limit,
-      remainingUsd: limit == null ? null : Math.round((limit - used) * 100) / 100 };
-  } catch {
-    return null;
-  }
 }

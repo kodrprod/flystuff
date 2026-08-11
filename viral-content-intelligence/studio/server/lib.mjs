@@ -24,9 +24,6 @@ export function loadEnv() {
     graph: clean(process.env.IG_GRAPH_TOKEN),
     igUserId: clean(process.env.IG_USER_ID),
 
-    // Paid, opt-in only.
-    apify: clean(process.env.APIFY_TOKEN),
-
     anthropic: clean(process.env.ANTHROPIC_API_KEY),
     gemini: clean(process.env.GEMINI_API_KEY),
     anthropicModel: process.env.ANTHROPIC_MODEL || 'claude-opus-5',
@@ -64,7 +61,6 @@ const KEYS = {
   graph: 'IG_GRAPH_TOKEN',
   gemini: 'GEMINI_API_KEY',
   anthropic: 'ANTHROPIC_API_KEY',
-  apify: 'APIFY_TOKEN',
 };
 
 /** Which credentials are usable — never returns the values themselves. */

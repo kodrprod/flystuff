@@ -2,7 +2,7 @@
 
 The pipeline needs exactly **one** credential you don't already have: an
 Instagram Graph API token. It costs nothing, it is the official API, and it
-replaces the Apify scraper that spent your €5.
+replaces the paid scraper that spent your €5.
 
 Budget about 15 minutes, once. The token then lasts 60 days and is renewable.
 
@@ -15,7 +15,6 @@ Budget about 15 minutes, once. The token then lasts 60 days and is renewable.
 | `IG_GRAPH_TOKEN` | **yes** | free | Lists competitors' reels + likes/comments |
 | `GEMINI_API_KEY` | **yes** | free tier, or ~$0.005/video | Watches the videos, writes the adaptations |
 | `ANTHROPIC_API_KEY` | no | ~$0.03/video | Better adaptations. Set `REASONER=claude` to use it |
-| `APIFY_TOKEN` | no | $2.60 per 1,000 reels | Only if the Graph API can't reach an account |
 
 yt-dlp is used to download the finalists' video files. It's free and needs no
 key: `pip3 install yt-dlp`.
@@ -146,7 +145,10 @@ the client's constraints.
 On the Gemini free tier it's **$0.00**, just slower. Set `GEMINI_FREE_TIER=1`
 so the cost panel stops quoting you paid rates.
 
-For comparison, the same run through Apify: **$18.80**.
+For comparison, the paid scraper this replaced would have charged **$18.80** for
+the same run. That integration has been removed — there is no code path left
+that can bill a scraper. Exports you already paid for stay readable via
+**Import a JSON export** in step 3.
 
 ---
 
