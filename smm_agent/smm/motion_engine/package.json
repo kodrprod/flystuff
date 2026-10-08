@@ -1,0 +1,13 @@
+{
+  "name": "smm-motion-engine",
+  "private": true,
+  "type": "module",
+  "description": "Renders AI-authored HTML/CSS/GSAP designs frame-exactly with headless Chromium",
+  "dependencies": {
+    "gsap": "3.12.5",
+    "@fontsource/montserrat": "5.0.19",
+    "@fontsource/unbounded": "5.0.20",
+    "@fontsource/manrope": "5.0.20",
+    "playwright": "1.56.1"
+  }
+}

@@ -136,8 +136,9 @@ class CLIBackend(Backend):
     name = "cli"
 
     def __init__(self, binary: str | None = None, model: str = MODEL, timeout_s: int = 900,
-                 allowed_tools: str = "", runner=subprocess.run):
-        # allowed_tools: "" (judgment steps) or e.g. "WebSearch,WebFetch" for research steps
+                 allowed_tools: str = "", runner=subprocess.run, add_dirs: list[str] | None = None):
+        # allowed_tools: "" (judgment steps), "Read" (look at frames/images in add_dirs), or e.g. "WebSearch,WebFetch"
+        self.add_dirs = list(add_dirs or [])
         self.binary = binary or shutil.which("claude") or os.environ.get("CLAUDE_CODE_EXECPATH") or "claude"
         self.model = model
         self.timeout_s = timeout_s
@@ -152,6 +153,8 @@ class CLIBackend(Backend):
                "--json-schema", json.dumps(call.schema, ensure_ascii=False),
                "--system-prompt", call.system or "Reply only with the requested JSON."]
         cmd += ["--tools", self.allowed_tools]          # "" = no tools for pure judgment steps
+        for d in self.add_dirs:
+            cmd += ["--add-dir", d]
         return cmd
 
     def raw(self, call: Call) -> Any:
