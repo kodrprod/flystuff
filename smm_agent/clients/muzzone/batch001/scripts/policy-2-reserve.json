@@ -7,38 +7,38 @@
  "beats": [
   {
    "t0": 0.0,
-   "t1": 3.0,
-   "kind": "text",
+   "t1": 1.8,
+   "kind": "kinetic",
    "onscreen": "Самовывоз: резерв заказа на 3 рабочих дня",
-   "bg": "#14202b"
+   "palette": 0
   },
   {
-   "t0": 3.0,
-   "t1": 6.4,
-   "kind": "text",
+   "t0": 1.8,
+   "t1": 3.6,
+   "kind": "kinetic",
    "onscreen": "Оформили заказ —\nзабираете: Кажымукана, 14",
-   "bg": "#1b2a1f"
+   "palette": 1
   },
   {
-   "t0": 6.4,
-   "t1": 10.0,
-   "kind": "text",
+   "t0": 3.6,
+   "t1": 5.4,
+   "kind": "kinetic",
    "onscreen": "Не успели? Напишите —\nпродлим резерв",
-   "bg": "#14202b"
+   "palette": 3
   },
   {
-   "t0": 10.0,
-   "t1": 13.8,
-   "kind": "text",
+   "t0": 5.4,
+   "t1": 7.6,
+   "kind": "kinetic",
    "onscreen": "Оплата: Kaspi QR, Kaspi Pay,\nкарта или наличные при получении",
-   "bg": "#2a1f14"
+   "palette": 2
   },
   {
-   "t0": 13.8,
-   "t1": 17.3,
-   "kind": "text",
+   "t0": 7.6,
+   "t1": 9.8,
+   "kind": "kinetic",
    "onscreen": "Написать в WhatsApp\n+7 701 0987734",
-   "bg": "#101418"
+   "palette": 0
   }
  ],
  "caption": "Самовывоз в Астане: резерв заказа действует 3 рабочих дня, при необходимости продлим. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
@@ -55,5 +55,6 @@
   }
  ],
  "is_aigc": false,
- "audio": "none in render; publisher adds licensed/trending audio"
+ "audio": "synthesised SFX only; publisher adds licensed/trending music",
+ "tier": "floor: replace with real worker footage when available"
 }

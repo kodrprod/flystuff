@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import urllib.request
@@ -74,7 +75,7 @@ def fit_text(text: str, max_w: int, max_h: int, start: int = 112, min_size: int 
     while size >= min_size:
         font = ImageFont.truetype(FONT_BOLD if bold else FONT_REG, size)
         lines = wrap(text, font, max_w)
-        longest_word = max((font.getlength(w) for w in protect(text).split(" ")), default=0)
+        longest_word = max((font.getlength(w.replace(_NBSP, " ")) for w in re.split(r"[ \n]", protect(text)) if w), default=0)
         height = int(len(lines) * size * 1.22)
         if height <= max_h and longest_word <= max_w:
             return font, lines
@@ -231,35 +232,70 @@ def validate_timeline(beats: list[dict]) -> float:
     return prev
 
 
+SFX_SRC = {
+    "whoosh": ("anoisesrc=d=0.4:c=pink:r=44100:a=0.7,highpass=f=500,lowpass=f=7000,"
+               "afade=t=in:st=0:d=0.1,afade=t=out:st=0.12:d=0.28,volume=0.45"),
+    "ding": ("aevalsrc='0.25*sin(2*PI*1760*t)+0.12*sin(2*PI*2637*t)':d=0.6:s=44100,"
+             "afade=t=out:st=0.03:d=0.57"),
+}
+
+
+def collect_sfx(beats: list[dict]) -> list[dict]:
+    from .motion import SCENES, scene_sfx
+    out = []
+    for b in beats:
+        evs = b.get("sfx") if "sfx" in b else (scene_sfx(b) if b.get("kind") in SCENES else [])
+        out += [{"t": b["t0"] + e["t"], "kind": e["kind"]} for e in evs]
+    return sorted(out, key=lambda e: e["t"])
+
+
 def render_video(script: dict, out_path: str | Path, cache_dir: str | Path = ".render_cache") -> dict:
     """Render `script['beats']` to out_path. Returns facts about the file (from ffprobe, not assumed)."""
     if not shutil.which("ffmpeg"):
         raise RuntimeError("ffmpeg not found")
+    from . import motion
     beats = script["beats"]
     total = validate_timeline(beats)
     n_frames = round(total * FPS)
     cache = Path(cache_dir)
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    sfx = collect_sfx(beats)
     cmd = ["ffmpeg", "-y", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-           "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
-           "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p",
-           "-c:a", "aac", "-b:a", "96k", "-shortest", "-movflags", "+faststart", str(out_path)]
-    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+           "-f", "lavfi", "-t", f"{total}", "-i", "anullsrc=r=44100:cl=stereo"]
+    for e in sfx:
+        cmd += ["-f", "lavfi", "-i", SFX_SRC[e["kind"]]]
+    if sfx:
+        parts = []
+        for i, e in enumerate(sfx, start=2):
+            ms = int(e["t"] * 1000)
+            parts.append(f"[{i}:a]aformat=channel_layouts=stereo,adelay={ms}|{ms}[s{i}]")
+        mix = "[1:a]" + "".join(f"[s{i}]" for i in range(2, 2 + len(sfx))) + f"amix=inputs={1 + len(sfx)}:normalize=0:duration=first,alimiter=limit=0.9[a]"
+        cmd += ["-filter_complex", ";".join(parts) + ";" + mix, "-map", "0:v", "-map", "[a]"]
+    else:
+        cmd += ["-map", "0:v", "-map", "1:a"]
+    cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
+            "-c:a", "aac", "-b:a", "128k", "-t", f"{total}", "-movflags", "+faststart", str(out_path)]
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
     imgs: dict = {}
+    ctx = motion.make_ctx(cache)
     try:
         for f in range(n_frames):
             t = f / FPS
             beat = next(b for b in beats if b["t0"] <= t < b["t1"] or b is beats[-1])
-            frame = beat_frame(beat, t - beat["t0"], beat["t1"] - beat["t0"], cache, imgs)
+            if beat.get("kind") in motion.SCENES:
+                frame = motion.SCENES[beat["kind"]](beat, t - beat["t0"], beat["t1"] - beat["t0"], ctx)
+            else:
+                frame = beat_frame(beat, t - beat["t0"], beat["t1"] - beat["t0"], cache, imgs)
             proc.stdin.write(frame.tobytes())
         proc.stdin.close()
+        err = proc.stderr.read().decode("utf-8", "replace")
         if proc.wait() != 0:
-            raise RuntimeError("ffmpeg failed")
+            raise RuntimeError(f"ffmpeg failed: {err[-400:]}")
     except BrokenPipeError:
-        raise RuntimeError("ffmpeg closed the pipe early")
-    return probe(out_path) | {"audio": "needs_publisher"}
+        raise RuntimeError(f"ffmpeg closed the pipe early: {proc.stderr.read().decode('utf-8', 'replace')[-400:]}")
+    return probe(out_path) | {"audio": "needs_publisher", "sfx": len(sfx)}
 
 
 def probe(path: str | Path) -> dict:

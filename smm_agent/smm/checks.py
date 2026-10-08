@@ -182,6 +182,10 @@ def check_shots(shots: list[dict]) -> list[Violation]:
     return out
 
 
+# beat keys that never reach the screen as text
+NON_TEXT_BEAT_KEYS = {"kind", "image", "image2", "bg", "fg", "t0", "t1", "palette", "step", "sfx", "dur"}
+
+
 def check_script(script: dict, ledger: Ledger, now=None) -> list[Violation]:
     """Run every applicable check on a script dict (see tests for the shape)."""
     out: list[Violation] = []
@@ -191,10 +195,13 @@ def check_script(script: dict, ledger: Ledger, now=None) -> list[Violation]:
     beats = script.get("beats", [])
     for i, b in enumerate(beats):
         # every string that can end up on screen is checked, including card prices
-        for k in ("spoken", "onscreen", "text", "price", "price2", "old_price"):
-            if b.get(k):
-                out += check_text(b[k], ledger, f"beats[{i}].{k}", now)
-    first = (beats[0].get("onscreen") or beats[0].get("text") or "") if beats else ""
+        for k, v in b.items():
+            if k in NON_TEXT_BEAT_KEYS:
+                continue
+            for j, txt in enumerate(v if isinstance(v, list) else [v]):
+                if isinstance(txt, str) and txt.strip():
+                    out += check_text(txt, ledger, f"beats[{i}].{k}" + (f"[{j}]" if isinstance(v, list) else ""), now)
+    first = (beats[0].get("onscreen") or beats[0].get("text") or (beats[0].get("texts") or [""])[0]) if beats else ""
     if script.get("hook_onscreen") and first.strip() != script["hook_onscreen"].strip():
         out.append(Violation("H5", "error", "first beat must show the hook text (first frame = what the words say)", "beats[0]"))
     out += check_text(script.get("caption", ""), ledger, "caption", now)

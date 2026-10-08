@@ -10,8 +10,8 @@
  "beats": [
   {
    "t0": 0.0,
-   "t1": 3.0,
-   "kind": "split",
+   "t1": 1.4,
+   "kind": "versus",
    "image": "https://muzzone.kz/images/detailed/44/ukulele-kontsert-caesar-us-c40-44622.jpg",
    "image2": "https://muzzone.kz/images/detailed/44/ukulele-kontsert-alston-uf-330-44427.jpg",
    "price": "32 901 ₸",
@@ -19,32 +19,29 @@
    "onscreen": "Два укулеле: 32 901 ₸ против 64 501 ₸"
   },
   {
-   "t0": 3.0,
-   "t1": 6.4,
-   "kind": "text",
-   "onscreen": "Caesar US-C40:\nверхняя дека — массив ели",
-   "bg": "#14202b"
+   "t0": 1.4,
+   "t1": 3.6,
+   "kind": "stat",
+   "label": "Верхняя дека",
+   "left": "Массив ели",
+   "right": "Клён",
+   "left_name": "Caesar\nUS-C40",
+   "right_name": "Alston\nUF-330",
+   "palette": 1
   },
   {
-   "t0": 6.4,
-   "t1": 9.8,
-   "kind": "text",
-   "onscreen": "Alston UF-330:\nверхняя дека — клён",
-   "bg": "#1b2a1f"
+   "t0": 3.6,
+   "t1": 5.4,
+   "kind": "kinetic",
+   "onscreen": "Разница в цене:\n31 600 ₸",
+   "palette": 2
   },
   {
-   "t0": 9.8,
-   "t1": 13.0,
-   "kind": "text",
-   "onscreen": "Разница в цене: 31 600 ₸",
-   "bg": "#2a1f14"
-  },
-  {
-   "t0": 13.0,
-   "t1": 16.5,
-   "kind": "text",
+   "t0": 5.4,
+   "t1": 7.6,
+   "kind": "kinetic",
    "onscreen": "Написать в WhatsApp\n+7 701 0987734",
-   "bg": "#101418"
+   "palette": 0
   }
  ],
  "caption": "Концертные укулеле Caesar US-C40 (32 901 ₸) и Alston UF-330 (64 501 ₸): разница в цене 31 600 ₸. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
@@ -61,5 +58,6 @@
   }
  ],
  "is_aigc": false,
- "audio": "none in render; publisher adds licensed/trending audio"
+ "audio": "synthesised SFX only; publisher adds licensed/trending music",
+ "tier": "motion graphics from real photos"
 }

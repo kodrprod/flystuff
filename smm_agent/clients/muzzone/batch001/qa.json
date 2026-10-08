@@ -10,11 +10,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 16.5,
+   "duration_s": 10.1,
    "has_audio_stream": true,
-   "size_bytes": 981782,
+   "size_bytes": 2180703,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 8,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 5.53,
+   "events": 18,
+   "tier": "motion graphics from real photos"
   }
  },
  {
@@ -28,11 +33,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 16.5,
+   "duration_s": 10.1,
    "has_audio_stream": true,
-   "size_bytes": 584143,
+   "size_bytes": 1860948,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 8,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 5.32,
+   "events": 18,
+   "tier": "motion graphics from real photos"
   }
  },
  {
@@ -46,11 +56,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 16.2,
+   "duration_s": 9.5,
    "has_audio_stream": true,
-   "size_bytes": 391405,
+   "size_bytes": 1123586,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 7,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 1.59,
+   "events": 16,
+   "tier": "motion graphics from real photos"
   }
  },
  {
@@ -64,11 +79,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 16.2,
+   "duration_s": 9.5,
    "has_audio_stream": true,
-   "size_bytes": 348411,
+   "size_bytes": 988494,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 7,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 1.52,
+   "events": 16,
+   "tier": "motion graphics from real photos"
   }
  },
  {
@@ -82,11 +102,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 16.5,
+   "duration_s": 7.6,
    "has_audio_stream": true,
-   "size_bytes": 192499,
+   "size_bytes": 942006,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 4,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 12.08,
+   "events": 17,
+   "tier": "motion graphics from real photos"
   }
  },
  {
@@ -100,11 +125,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 16.5,
+   "duration_s": 9.6,
    "has_audio_stream": true,
-   "size_bytes": 200693,
+   "size_bytes": 1188969,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 5,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 10.29,
+   "events": 22,
+   "tier": "motion graphics from real photos"
   }
  },
  {
@@ -118,11 +148,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 17.7,
+   "duration_s": 9.8,
    "has_audio_stream": true,
-   "size_bytes": 161795,
+   "size_bytes": 1483882,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 5,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 4.75,
+   "events": 26,
+   "tier": "floor: replace with real worker footage when available"
   }
  },
  {
@@ -136,11 +171,16 @@
    "height": 1920,
    "codec": "h264",
    "fps": 30.0,
-   "duration_s": 17.3,
+   "duration_s": 9.8,
    "has_audio_stream": true,
-   "size_bytes": 188189,
+   "size_bytes": 1510748,
    "audio": "needs_publisher",
-   "platform_problems": []
+   "sfx": 5,
+   "platform_problems": [],
+   "pacing_problems": [],
+   "first2_motion": 4.87,
+   "events": 26,
+   "tier": "floor: replace with real worker footage when available"
   }
  }
 ]

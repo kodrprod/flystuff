@@ -9,40 +9,45 @@
  "beats": [
   {
    "t0": 0.0,
-   "t1": 2.8,
-   "kind": "photo",
+   "t1": 1.1,
+   "kind": "hook",
    "image": "https://muzzone.kz/images/detailed/43/kombousilitel-dlya-elektrogitary-hibilly-retro-30r-cream-43762.jpg",
    "onscreen": "Комбик 30 Вт: было 70 720 ₸, стало 56 576 ₸"
   },
   {
-   "t0": 2.8,
-   "t1": 6.3,
-   "kind": "card",
+   "t0": 1.1,
+   "t1": 3.5,
+   "kind": "cuts",
    "image": "https://muzzone.kz/images/detailed/43/kombousilitel-dlya-elektrogitary-hibilly-retro-30r-cream-43762.jpg",
-   "onscreen": "Hibilly Retro 30R",
+   "texts": [
+    "Hibilly Retro 30R",
+    "Транзисторный",
+    "30 Вт"
+   ]
+  },
+  {
+   "t0": 3.5,
+   "t1": 6.3,
+   "kind": "pricedrop",
+   "image": "https://muzzone.kz/images/detailed/43/kombousilitel-dlya-elektrogitary-hibilly-retro-30r-cream-43762.jpg",
+   "old_price": "70 720 ₸",
    "price": "56 576 ₸",
-   "old_price": "70 720 ₸"
+   "badge": "-20%",
+   "onscreen": "Hibilly Retro 30R"
   },
   {
    "t0": 6.3,
-   "t1": 9.8,
-   "kind": "text",
-   "onscreen": "Транзисторный комбоусилитель\nдля электрогитары, 30 Вт",
-   "bg": "#14202b"
-  },
-  {
-   "t0": 9.8,
-   "t1": 13.0,
-   "kind": "text",
+   "t1": 7.9,
+   "kind": "kinetic",
    "onscreen": "Скидка 20%\nна распродаже muzzone.kz",
-   "bg": "#1b2a1f"
+   "palette": 1
   },
   {
-   "t0": 13.0,
-   "t1": 16.5,
-   "kind": "text",
+   "t0": 7.9,
+   "t1": 10.1,
+   "kind": "kinetic",
    "onscreen": "Написать в WhatsApp\n+7 701 0987734",
-   "bg": "#101418"
+   "palette": 0
   }
  ],
  "caption": "Комбоусилитель Hibilly Retro 30R: 56 576 ₸ вместо 70 720 ₸ на распродаже. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
@@ -59,5 +64,6 @@
   }
  ],
  "is_aigc": false,
- "audio": "none in render; publisher adds licensed/trending audio"
+ "audio": "synthesised SFX only; publisher adds licensed/trending music",
+ "tier": "motion graphics from real photos"
 }

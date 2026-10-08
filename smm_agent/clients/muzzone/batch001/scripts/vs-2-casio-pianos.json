@@ -10,8 +10,8 @@
  "beats": [
   {
    "t0": 0.0,
-   "t1": 3.0,
-   "kind": "split",
+   "t1": 1.4,
+   "kind": "versus",
    "image": "https://muzzone.kz/images/detailed/10/67869969.jpg",
    "image2": "https://muzzone.kz/images/detailed/10/casio-ap-270-bk-celviano.jpg",
    "price": "695 913 ₸",
@@ -19,32 +19,40 @@
    "onscreen": "Casio PX-770 или AP-270: чем отличаются?"
   },
   {
-   "t0": 3.0,
-   "t1": 6.2,
-   "kind": "text",
-   "onscreen": "Клавиш: 88 и 88",
-   "bg": "#14202b"
+   "t0": 1.4,
+   "t1": 3.4,
+   "kind": "stat",
+   "label": "Клавиш",
+   "left": "88",
+   "right": "88",
+   "left_name": "PX-770",
+   "right_name": "AP-270",
+   "palette": 3
   },
   {
-   "t0": 6.2,
+   "t0": 3.4,
+   "t1": 5.6,
+   "kind": "stat",
+   "label": "Полифония, голосов",
+   "left": "128",
+   "right": "192",
+   "left_name": "PX-770",
+   "right_name": "AP-270",
+   "palette": 1
+  },
+  {
+   "t0": 5.6,
+   "t1": 7.4,
+   "kind": "kinetic",
+   "onscreen": "Разница в цене:\n38 973 ₸",
+   "palette": 2
+  },
+  {
+   "t0": 7.4,
    "t1": 9.6,
-   "kind": "text",
-   "onscreen": "Полифония:\n128 и 192 голоса",
-   "bg": "#1b2a1f"
-  },
-  {
-   "t0": 9.6,
-   "t1": 13.0,
-   "kind": "text",
-   "onscreen": "Разница в цене: 38 973 ₸",
-   "bg": "#2a1f14"
-  },
-  {
-   "t0": 13.0,
-   "t1": 16.5,
-   "kind": "text",
+   "kind": "kinetic",
    "onscreen": "Написать в WhatsApp\n+7 701 0987734",
-   "bg": "#101418"
+   "palette": 0
   }
  ],
  "caption": "Цифровые пианино Casio PX-770 (695 913 ₸) и Celviano AP-270 (734 886 ₸): разница 38 973 ₸. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
@@ -61,5 +69,6 @@
   }
  ],
  "is_aigc": false,
- "audio": "none in render; publisher adds licensed/trending audio"
+ "audio": "synthesised SFX only; publisher adds licensed/trending music",
+ "tier": "motion graphics from real photos"
 }
