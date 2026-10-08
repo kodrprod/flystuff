@@ -87,3 +87,11 @@ def test_card_text_is_numbered_and_has_tips():
     assert "Как снимать" in card and "вертикально" in card
     assert "ИИ-ассистент" in card and "после согласования" in card
     assert S.manifest(ordered)[0] == {"n": 1, "shot_id": ordered[0].id, "seconds": ordered[0].seconds, "kind": ordered[0].kind}
+
+
+def test_hook_shot_goes_first_and_is_flagged_in_the_card():
+    hs = S.hook_shot("hook_as100", "Alston AS-100BK", "стена с гитарами", "громкий аккорд, камера на руки и гриф")
+    ordered = S.order_by_location([shots_fixture()[0], hs])
+    assert ordered[0].id == "hook_as100" and hs.takes == 3 and hs.seconds == 3
+    card = S.render_card_ru("W41", ordered, S.session_minutes(ordered))
+    assert "⭐ САМОЕ ВАЖНОЕ" in card and card.index("⭐") < card.index("Сыграйте на электрогитаре")

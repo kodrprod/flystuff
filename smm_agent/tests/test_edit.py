@@ -83,3 +83,32 @@ def test_caption_is_burned_in_only_when_given(clips, tmp_path):
 def test_start_past_end_is_an_error(clips, tmp_path):
     with pytest.raises(ValueError):
         E.assemble([{"path": clips / "short.mp4", "start": 5.0, "dur": 2.0}], tmp_path / "x.mp4")
+
+
+def test_jumpcuts_turn_a_static_shot_into_something_that_passes_pacing(clips, tmp_path):
+    # 1.0 s, not 1.5 s: measured — 1.5 s jumps still leave the opening 1.5 s unchanged, failing the
+    # first-3-seconds rule (a change every <=1.2 s). Opening cuts must stay under 1.2 s.
+    from smm import pacing as P
+    ff("-f", "lavfi", "-i", "testsrc2=s=1280x720:r=30", "-frames:v", "1", str(tmp_path / "still.png"))
+    ff("-loop", "1", "-framerate", "30", "-i", str(tmp_path / "still.png"), "-f", "lavfi", "-i", "sine=f=440:d=7",
+       "-t", "7", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest", str(tmp_path / "static_demo.mp4"))
+    E.assemble([{"path": tmp_path / "static_demo.mp4", "start": 0.5, "dur": 6.0, "grade": False}], tmp_path / "flat.mp4")
+    E.assemble([{"path": tmp_path / "static_demo.mp4", "start": 0.5, "dur": 6.0, "jump": 1.0, "grade": False}], tmp_path / "jumpy.mp4")
+    flat, jumpy = P.analyze_pacing(tmp_path / "flat.mp4"), P.analyze_pacing(tmp_path / "jumpy.mp4")
+    assert any(p.startswith("P3") for p in flat["problems"]) and flat["longest_freeze_s"] > 5
+    assert not any(p.startswith(("P3", "P4")) for p in jumpy["problems"]), jumpy
+    assert abs(jumpy["duration_s"] - flat["duration_s"]) < 0.3          # nothing was cut out, only re-framed
+
+
+def test_expand_jumpcuts_keeps_source_time_contiguous_and_caption_once():
+    segs = E.expand_jumpcuts([{"path": "x.mp4", "start": 1.0, "dur": 6.0, "jump": 2.0, "text": "Подпись"}])
+    assert [round(s["start"], 2) for s in segs] == [1.0, 3.0, 5.0] and sum(s["dur"] for s in segs) == pytest.approx(6.0)
+    assert [s.get("zoom") for s in segs] == [1.0, 1.14, 1.0]
+    assert segs[0]["text"] == "Подпись" and all("text" not in s for s in segs[1:])
+    short = E.expand_jumpcuts([{"path": "x.mp4", "dur": 2.0, "jump": 2.0}])
+    assert len(short) == 1                                                  # too short to split
+
+
+def test_grade_keeps_output_valid(clips, tmp_path):
+    info = E.assemble([{"path": clips / "landscape.mp4", "start": 0.5, "dur": 1.5}], tmp_path / "g.mp4")     # grade on by default
+    assert (info["width"], info["height"]) == (1080, 1920)

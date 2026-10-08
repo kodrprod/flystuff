@@ -43,6 +43,12 @@ class Video:
     shots: list[str] = field(default_factory=list)   # required Shot ids
 
 
+def hook_shot(id: str, product: str, location: str, action: str) -> Shot:
+    """The first 2 seconds of a real-footage video. It is filmed separately so a bad take costs 3 seconds,
+    not a whole demo, and the editor can always open the video with the strongest moment."""
+    return Shot(id, f"{product}: {action}", location, 3, "hook", takes=3)
+
+
 def shot_minutes(s: Shot) -> float:
     return s.seconds * s.takes / 60.0 + OVERHEAD_MIN
 
@@ -97,7 +103,7 @@ def plan(videos: list[Video], shots: list[Shot], capacity_min: float = 20.0, saf
 
 def order_by_location(shots: list[Shot]) -> list[Shot]:
     """Group by location (no walking back), talk shots after demos at the same place."""
-    rank = {"demo": 0, "detail": 1, "process": 2, "talk": 3}
+    rank = {"hook": 0, "demo": 1, "detail": 2, "process": 3, "talk": 4}
     first_seen: dict[str, int] = {}
     for s in shots:
         first_seen.setdefault(s.location, len(first_seen))
@@ -124,7 +130,8 @@ def render_card_ru(week: str, shots: list[Shot], minutes: float, capacity_min: f
             last_loc = s.location
         n += 1
         extra = f" Скажите: «{s.say}»" if s.say else ""
-        lines.append(f"{n}. {s.what} — {s.seconds} сек.{extra}")
+        star = "⭐ САМОЕ ВАЖНОЕ (первые 2 секунды ролика): " if s.kind == "hook" else ""
+        lines.append(f"{n}. {star}{s.what} — {s.seconds} сек.{extra}")
     lines += ["", "Как снимать:"] + [f"• {t}" for t in TIPS_RU]
     lines += ["", "Когда закончите — отправьте все ролики в этот чат в том же порядке. Я смонтирую, а опубликую только после согласования с владельцем."]
     return "\n".join(lines)

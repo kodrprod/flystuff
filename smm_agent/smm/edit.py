@@ -102,7 +102,10 @@ def _normalize_segment(seg: dict, dst: Path, tmp: Path) -> None:
     if dur <= 0.2:
         raise ValueError(f"segment {src} has no usable footage after trimming")
     seg["dur_used"] = dur
-    vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},setsar=1,format=yuv420p")
+    zoom = float(seg.get("zoom", 1.0))
+    punch = f",scale=iw*{zoom}:ih*{zoom},crop={W}:{H}" if zoom > 1.0 else ""
+    grade = ",eq=contrast=1.06:saturation=1.12:gamma=0.98,unsharp=5:5:0.6:5:5:0.0" if seg.get("grade", True) else ""
+    vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}{punch}{grade},fps={FPS},setsar=1,format=yuv420p")
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{start}", "-t", f"{dur}", "-i", src]
     n_in = 1
     if seg.get("text"):
@@ -125,6 +128,34 @@ def _normalize_segment(seg: dict, dst: Path, tmp: Path) -> None:
         raise RuntimeError(f"ffmpeg failed on {src}: {r.stderr[-400:]}")
 
 
+def expand_jumpcuts(segments: list[dict], punch: float = 1.14) -> list[dict]:
+    """A segment with "jump": N is split every N seconds; every second piece is punched in (zoom).
+    This is the standard way to add pace to a long static demo or talking shot. Use N <= 1.0 for the
+    opening of a video: the pacing rule wants a visible change every <= 1.2 s in the first 3 s, and
+    1.5 s jumps measurably fail it (see tests/test_edit.py). Pieces are
+    contiguous in source time, so nothing is cut out, and captions stay on the first piece only."""
+    out: list[dict] = []
+    for seg in segments:
+        n = float(seg.get("jump", 0) or 0)
+        if n <= 0 or float(seg["dur"]) <= n * 1.3:
+            out.append(seg)
+            continue
+        t, i = 0.0, 0
+        total = float(seg["dur"])
+        while t < total - 0.05:
+            d = min(n, total - t)
+            if total - (t + d) < 0.4:           # absorb a tiny tail instead of a 0.2 s flash
+                d = total - t
+            piece = {k: v for k, v in seg.items() if k != "jump"}
+            piece.update(start=float(seg.get("start", 0.0)) + t, dur=d, zoom=punch if i % 2 else 1.0)
+            if i > 0:
+                piece.pop("text", None)
+            out.append(piece)
+            t += d
+            i += 1
+    return out
+
+
 def assemble(segments: list[dict], out_path: str | Path) -> dict:
     """segments: [{"path", "start"(s, default 0), "dur"(s), "text"(optional caption)}...].
     Returns facts about the result (probed, not assumed)."""
@@ -135,7 +166,7 @@ def assemble(segments: list[dict], out_path: str | Path) -> dict:
     with tempfile.TemporaryDirectory() as td:
         tmp = Path(td)
         parts = []
-        for i, seg in enumerate(segments):
+        for i, seg in enumerate(expand_jumpcuts(segments)):
             seg = dict(seg)
             dst = tmp / f"seg{i:02d}.mp4"
             _normalize_segment(seg, dst, tmp)
