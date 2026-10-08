@@ -66,7 +66,11 @@ def analyze_clip(path: str | Path, kind: str = "demo", need_seconds: float = 0.0
         mean_db = float(m.group(1)) if m else None
         max_db = float(x.group(1)) if x else None
 
+    a = audio_stats(path) if has_audio else {}
+    shake = shake_px(path) if kind in ("demo", "talk", "hook", "detail", "process") else None
     problems = []
+    if a.get("clipped_samples", 0) > CLIP_SAMPLES:
+        problems.append(f"sound clipped ({a['clipped_samples']} samples at 0 dB): move the phone ~1 m from the amp or play softer, then reshoot")
     if min(dw, dh) < MIN_SHORT_SIDE:
         problems.append(f"low resolution {dw}x{dh}")
     if brightness is not None and brightness < MIN_BRIGHTNESS:
@@ -79,15 +83,97 @@ def analyze_clip(path: str | Path, kind: str = "demo", need_seconds: float = 0.0
         elif mean_db is not None and mean_db < MIN_MEAN_DB:
             problems.append(f"sound too quiet ({mean_db:.0f} dB): move the phone closer to the instrument/speaker")
     return {"width": dw, "height": dh, "rotation": rot, "duration_s": duration, "has_audio": has_audio,
-            "brightness": brightness, "mean_db": mean_db, "max_db": max_db, "problems": problems}
+            "brightness": brightness, "mean_db": mean_db, "max_db": max_db, "audio": a, "shake_px": shake,
+            "problems": problems}
 
 
-def caption_layer(text: str, path: Path, start: int = 76) -> Path:
-    """Transparent PNG: dark band + text in the lower third, inside the platform safe area."""
-    band = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(band).rectangle((0, H - SAFE["bottom"] - 460, W, H - SAFE["bottom"] + 30), fill=(0, 0, 0, 150))
+TARGET_LUFS = -14.0          # typical short-form platform target; linear gain only, no dynamic compression
+LIMIT_LINEAR = 0.89          # ~ -1 dBTP true-peak ceiling after gain
+CLIP_SAMPLES = 50            # samples at 0 dBFS above this = the phone mic clipped (unfixable -> retake)
+NOISY_FLOOR_DB = -50.0       # speech noise floor above this -> light denoise
+SHAKE_PX = 6.0               # median frame-to-frame motion (px at 360p) above this -> stabilise.
+                             # Measured: test pattern with moving content = 3.0, synthetic handheld jitter = 30.9.
+                             # Heuristic until re-tuned on real worker footage.
+
+
+def audio_stats(path: str | Path, start: float = 0.0, dur: float | None = None) -> dict:
+    """Integrated loudness (LUFS), clipping (samples at 0 dBFS) and noise floor of a clip range."""
+    rng = ["-ss", f"{start}"] + (["-t", f"{dur}"] if dur else [])
+    r = _run(["ffmpeg", "-nostats", *rng, "-i", str(path), "-af", "ebur128=peak=true", "-vn", "-f", "null", "-"])
+    lufs = re.findall(r"\bI:\s+(-?[\d.]+) LUFS", r.stderr)
+    tp = re.findall(r"Peak:\s+(-?[\d.]+|-inf) dBFS", r.stderr)
+    r2 = _run(["ffmpeg", "-nostats", *rng, "-i", str(path), "-af", "volumedetect,astats=measure_perchannel=none",
+               "-vn", "-f", "null", "-"])
+    h0 = re.search(r"histogram_0db:\s*(\d+)", r2.stderr)
+    nf = re.findall(r"Noise floor dB:\s*(-?[\d.]+|-inf)", r2.stderr)
+    return {"lufs": float(lufs[-1]) if lufs else None,
+            "true_peak_db": float(tp[-1]) if tp and tp[-1] != "-inf" else None,
+            "clipped_samples": int(h0.group(1)) if h0 else 0,
+            "noise_floor_db": float(nf[-1]) if nf and nf[-1] != "-inf" else None}
+
+
+def shake_px(path: str | Path, start: float = 0.0, dur: float | None = None, tmp: Path | None = None) -> float | None:
+    """Median frame-to-frame camera motion in pixels at 360p, from vidstabdetect's local motions."""
+    tmpdir = Path(tmp or tempfile.mkdtemp())
+    trf = tmpdir / f"{Path(path).stem}_{int(start * 1000)}.trf"
+    rng = ["-ss", f"{start}"] + (["-t", f"{dur}"] if dur else [])
+    _run(["ffmpeg", "-nostats", *rng, "-i", str(path), "-vf",
+          f"scale=-2:360,vidstabdetect=shakiness=6:accuracy=9:result={trf}", "-an", "-f", "null", "-"])
+    if not trf.exists():
+        return None
+    mags = []
+    for line in trf.read_text(errors="replace").splitlines():
+        lm = re.findall(r"\(LM\s+(-?\d+)\s+(-?\d+)", line)
+        if lm:
+            dx = sorted(int(a) for a, _ in lm)[len(lm) // 2]
+            dy = sorted(int(b) for _, b in lm)[len(lm) // 2]
+            mags.append((dx * dx + dy * dy) ** 0.5)
+    return sorted(mags)[len(mags) // 2] if mags else 0.0
+
+
+def speech_segments(path: str | Path, noise_db: float = -35.0, min_silence: float = 0.7) -> list[tuple[float, float]]:
+    """Non-silent stretches (start, end) using silencedetect."""
+    r = _run(["ffmpeg", "-nostats", "-i", str(path), "-af", f"silencedetect=noise={noise_db}dB:d={min_silence}",
+              "-vn", "-f", "null", "-"])
+    total = float(_ffprobe_json(path)["format"]["duration"])
+    starts = [float(x) for x in re.findall(r"silence_start:\s*(-?[\d.]+)", r.stderr)]
+    ends = [float(x) for x in re.findall(r"silence_end:\s*([\d.]+)", r.stderr)]
+    segs, cur = [], 0.0
+    for i, st in enumerate(starts):
+        if st - cur > 0.15:
+            segs.append((round(max(0.0, cur), 2), round(st, 2)))
+        cur = ends[i] if i < len(ends) else total
+    if total - cur > 0.15:
+        segs.append((round(cur, 2), round(total, 2)))
+    return segs
+
+
+def pick_last_take(path: str | Path, need_seconds: float, min_share: float = 0.6) -> tuple[float, float] | None:
+    """Workers are told: after a mistake, pause 2 seconds and repeat the whole line. So the LAST
+    non-silent stretch that is long enough is the clean take. Returns (start, duration) or None."""
+    segs = [s for s in speech_segments(path) if s[1] - s[0] >= min_share * need_seconds]
+    if not segs:
+        return None
+    a, b = segs[-1]
+    a = max(0.0, a - 0.15)                       # keep the breath before the first word
+    return a, min(b - a + 0.2, need_seconds + 1.5)
+
+
+def caption_layer(text: str, path: Path, start: int = 84) -> Path:
+    """Transparent PNG: bold white text with a heavy black outline in the lower third (the native short-form
+    look), inside the platform safe area. No dark slab over the footage."""
+    from PIL import ImageFont
+    from .render import fit_text, FONT_BOLD
     box = (SAFE["left"], H - SAFE["bottom"] - 440, W - SAFE["right"], H - SAFE["bottom"])
-    layer = Image.alpha_composite(band, text_layer(text, "#ffffff", box, start, "center"))
+    font, lines = fit_text(text, box[2] - box[0], box[3] - box[1], start=start)
+    lh = int(font.size * 1.25)
+    y0 = box[1] + (box[3] - box[1] - lh * len(lines)) // 2
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    for i, ln in enumerate(lines):
+        w = font.getlength(ln)
+        d.text(((W - w) / 2, y0 + i * lh), ln, font=font, fill=(255, 255, 255, 255),
+               stroke_width=max(4, font.size // 11), stroke_fill=(0, 0, 0, 255))
     layer.save(path)
     return path
 
@@ -116,7 +202,16 @@ def _normalize_segment(seg: dict, dst: Path, tmp: Path) -> None:
     else:
         fc = f"[0:v]{vf}[v]"
     if info["has_audio"]:
-        fc += ";[0:a]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100,aformat=channel_layouts=stereo[a]"
+        # One gain per SOURCE clip (computed in assemble), so jump-cut pieces of the same take never jump in level.
+        # Linear gain + true-peak limiter keeps music dynamics intact (single-pass loudnorm would pump).
+        gain = float(seg.get("gain_db", 0.0))
+        clean = ""
+        if seg.get("kind") == "talk":
+            clean = "highpass=f=80,"
+            if (seg.get("noise_floor_db") or -99) > NOISY_FLOOR_DB:
+                clean += f"afftdn=nf={max(-80, min(-20, int(seg['noise_floor_db'])))},"
+        fc += (f";[0:a]{clean}volume={gain:.2f}dB,alimiter=limit={LIMIT_LINEAR}:attack=5:release=50,"
+               f"aresample=44100,aformat=channel_layouts=stereo[a]")
     else:
         cmd += ["-f", "lavfi", "-t", f"{dur}", "-i", "anullsrc=r=44100:cl=stereo"]
         fc += f";[{n_in}:a]anull[a]"
@@ -165,8 +260,35 @@ def assemble(segments: list[dict], out_path: str | Path) -> dict:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as td:
         tmp = Path(td)
+        prepared = []
+        for j, seg in enumerate(segments):
+            seg = dict(seg)
+            if seg.get("kind") == "talk" and seg.get("auto_take", True) and seg.get("need_seconds"):
+                take = pick_last_take(seg["path"], float(seg["need_seconds"]))
+                if take:
+                    seg["start"], seg["dur"] = take
+                    seg["take"] = "last_take"
+            st, du = float(seg.get("start", 0.0)), float(seg["dur"])
+            a = audio_stats(seg["path"], st, du)
+            if a["lufs"] is not None:
+                seg["gain_db"] = max(-20.0, min(20.0, TARGET_LUFS - a["lufs"]))
+                seg["noise_floor_db"] = a["noise_floor_db"]
+            if seg.get("stabilize", "auto") != "off":
+                sh = shake_px(seg["path"], st, du, tmp)
+                if sh is not None and (sh > SHAKE_PX or seg.get("stabilize") == "on"):
+                    trf = tmp / f"stab{j}.trf"
+                    _run(["ffmpeg", "-nostats", "-ss", f"{st}", "-t", f"{du}", "-i", str(seg["path"]), "-vf",
+                          f"vidstabdetect=shakiness=6:accuracy=9:result={trf}", "-an", "-f", "null", "-"])
+                    stable = tmp / f"stab{j}.mp4"
+                    r = _run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{st}", "-t", f"{du}", "-i", str(seg["path"]),
+                              "-vf", f"vidstabtransform=input={trf}:smoothing=15:zoom=6:optzoom=0",
+                              "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-c:a", "copy", str(stable)])
+                    if trf.exists() and r.returncode == 0:
+                        # pieces are cut from the stabilised take, so transform frames always line up
+                        seg.update(path=str(stable), start=0.0, shake_px=sh, stabilized=True)
+            prepared.append(seg)
         parts = []
-        for i, seg in enumerate(expand_jumpcuts(segments)):
+        for i, seg in enumerate(expand_jumpcuts(prepared)):
             seg = dict(seg)
             dst = tmp / f"seg{i:02d}.mp4"
             _normalize_segment(seg, dst, tmp)
