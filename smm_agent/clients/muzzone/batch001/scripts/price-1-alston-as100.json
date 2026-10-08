@@ -1,0 +1,62 @@
+{
+ "id": "price-1-alston-as100",
+ "arm": "price_point",
+ "products": [
+  "as100"
+ ],
+ "hook_spoken": "Электрогитара за 59 800 ₸: что получаешь?",
+ "hook_onscreen": "Электрогитара за 59 800 ₸: что получаешь?",
+ "beats": [
+  {
+   "t0": 0.0,
+   "t1": 2.8,
+   "kind": "photo",
+   "image": "https://muzzone.kz/images/detailed/44/elektrogitara-alston-as-100bk-44386_2cbv-ix.jpg",
+   "onscreen": "Электрогитара за 59 800 ₸: что получаешь?"
+  },
+  {
+   "t0": 2.8,
+   "t1": 6.0,
+   "kind": "text",
+   "onscreen": "Форма Stratocaster\nдатчики HSS",
+   "bg": "#14202b"
+  },
+  {
+   "t0": 6.0,
+   "t1": 9.2,
+   "kind": "text",
+   "onscreen": "Корпус из тополя\nгриф из клёна",
+   "bg": "#1b2a1f"
+  },
+  {
+   "t0": 9.2,
+   "t1": 12.7,
+   "kind": "card",
+   "image": "https://muzzone.kz/images/detailed/44/elektrogitara-alston-as-100bk-44386_2cbv-ix.jpg",
+   "onscreen": "Alston AS-100BK",
+   "price": "59 800 ₸"
+  },
+  {
+   "t0": 12.7,
+   "t1": 16.2,
+   "kind": "text",
+   "onscreen": "Написать в WhatsApp\n+7 701 0987734",
+   "bg": "#101418"
+  }
+ ],
+ "caption": "Alston AS-100BK: форма Stratocaster, датчики HSS, тополь и клён. 59 800 ₸. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
+ "cta": {
+  "text": "Написать в WhatsApp\n+7 701 0987734",
+  "fact_id": "wa"
+ },
+ "shots": [
+  {
+   "kind": "real",
+   "depicts": [
+    "client_product"
+   ]
+  }
+ ],
+ "is_aigc": false,
+ "audio": "none in render; publisher adds licensed/trending audio"
+}

@@ -1,0 +1,59 @@
+{
+ "id": "policy-2-reserve",
+ "arm": "policy",
+ "products": [],
+ "hook_spoken": "Самовывоз: резерв заказа на 3 рабочих дня",
+ "hook_onscreen": "Самовывоз: резерв заказа на 3 рабочих дня",
+ "beats": [
+  {
+   "t0": 0.0,
+   "t1": 3.0,
+   "kind": "text",
+   "onscreen": "Самовывоз: резерв заказа на 3 рабочих дня",
+   "bg": "#14202b"
+  },
+  {
+   "t0": 3.0,
+   "t1": 6.4,
+   "kind": "text",
+   "onscreen": "Оформили заказ —\nзабираете: Кажымукана, 14",
+   "bg": "#1b2a1f"
+  },
+  {
+   "t0": 6.4,
+   "t1": 10.0,
+   "kind": "text",
+   "onscreen": "Не успели? Напишите —\nпродлим резерв",
+   "bg": "#14202b"
+  },
+  {
+   "t0": 10.0,
+   "t1": 13.8,
+   "kind": "text",
+   "onscreen": "Оплата: Kaspi QR, Kaspi Pay,\nкарта или наличные при получении",
+   "bg": "#2a1f14"
+  },
+  {
+   "t0": 13.8,
+   "t1": 17.3,
+   "kind": "text",
+   "onscreen": "Написать в WhatsApp\n+7 701 0987734",
+   "bg": "#101418"
+  }
+ ],
+ "caption": "Самовывоз в Астане: резерв заказа действует 3 рабочих дня, при необходимости продлим. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
+ "cta": {
+  "text": "Написать в WhatsApp\n+7 701 0987734",
+  "fact_id": "wa"
+ },
+ "shots": [
+  {
+   "kind": "real",
+   "depicts": [
+    "client_product"
+   ]
+  }
+ ],
+ "is_aigc": false,
+ "audio": "none in render; publisher adds licensed/trending audio"
+}

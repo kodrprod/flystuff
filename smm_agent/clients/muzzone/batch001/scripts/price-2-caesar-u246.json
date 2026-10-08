@@ -1,0 +1,62 @@
+{
+ "id": "price-2-caesar-u246",
+ "arm": "price_point",
+ "products": [
+  "u246"
+ ],
+ "hook_spoken": "Укулеле за 22 100 ₸: что внутри?",
+ "hook_onscreen": "Укулеле за 22 100 ₸: что внутри?",
+ "beats": [
+  {
+   "t0": 0.0,
+   "t1": 2.8,
+   "kind": "photo",
+   "image": "https://muzzone.kz/images/detailed/44/ukulele-kontsert-caesar-u-246-44543.jpg",
+   "onscreen": "Укулеле за 22 100 ₸: что внутри?"
+  },
+  {
+   "t0": 2.8,
+   "t1": 6.2,
+   "kind": "text",
+   "onscreen": "Верхняя дека — ель\nкорпус — красное дерево",
+   "bg": "#14202b"
+  },
+  {
+   "t0": 6.2,
+   "t1": 9.2,
+   "kind": "text",
+   "onscreen": "Чехол в комплекте",
+   "bg": "#1b2a1f"
+  },
+  {
+   "t0": 9.2,
+   "t1": 12.7,
+   "kind": "card",
+   "image": "https://muzzone.kz/images/detailed/44/ukulele-kontsert-caesar-u-246-44543.jpg",
+   "onscreen": "Caesar U-246, концертное",
+   "price": "22 100 ₸"
+  },
+  {
+   "t0": 12.7,
+   "t1": 16.2,
+   "kind": "text",
+   "onscreen": "Написать в WhatsApp\n+7 701 0987734",
+   "bg": "#101418"
+  }
+ ],
+ "caption": "Концертное укулеле Caesar U-246: ель, красное дерево, чехол в комплекте. 22 100 ₸. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
+ "cta": {
+  "text": "Написать в WhatsApp\n+7 701 0987734",
+  "fact_id": "wa"
+ },
+ "shots": [
+  {
+   "kind": "real",
+   "depicts": [
+    "client_product"
+   ]
+  }
+ ],
+ "is_aigc": false,
+ "audio": "none in render; publisher adds licensed/trending audio"
+}

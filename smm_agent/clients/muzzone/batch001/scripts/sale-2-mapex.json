@@ -1,0 +1,63 @@
+{
+ "id": "sale-2-mapex",
+ "arm": "sale",
+ "products": [
+  "mapex"
+ ],
+ "hook_spoken": "Ударная установка Mapex: 283 296 ₸ вместо 354 120 ₸",
+ "hook_onscreen": "Ударная установка Mapex: 283 296 ₸ вместо 354 120 ₸",
+ "beats": [
+  {
+   "t0": 0.0,
+   "t1": 2.8,
+   "kind": "photo",
+   "image": "https://muzzone.kz/images/detailed/37/udarnaya-ustanovka-mapex-comet-cm5295ftcir-sc-infra-red-37726.jpg",
+   "onscreen": "Ударная установка Mapex: 283 296 ₸ вместо 354 120 ₸"
+  },
+  {
+   "t0": 2.8,
+   "t1": 6.3,
+   "kind": "card",
+   "image": "https://muzzone.kz/images/detailed/37/udarnaya-ustanovka-mapex-comet-cm5295ftcir-sc-infra-red-37726.jpg",
+   "onscreen": "Mapex Comet CM5295",
+   "price": "283 296 ₸",
+   "old_price": "354 120 ₸"
+  },
+  {
+   "t0": 6.3,
+   "t1": 9.8,
+   "kind": "text",
+   "onscreen": "5 барабанов\nкорпус из тополя",
+   "bg": "#14202b"
+  },
+  {
+   "t0": 9.8,
+   "t1": 13.0,
+   "kind": "text",
+   "onscreen": "Скидка 20%\nна распродаже muzzone.kz",
+   "bg": "#1b2a1f"
+  },
+  {
+   "t0": 13.0,
+   "t1": 16.5,
+   "kind": "text",
+   "onscreen": "Написать в WhatsApp\n+7 701 0987734",
+   "bg": "#101418"
+  }
+ ],
+ "caption": "Ударная установка Mapex Comet CM5295: 283 296 ₸ вместо 354 120 ₸ на распродаже. Пишите в WhatsApp +7 701 0987734 или на muzzone.kz",
+ "cta": {
+  "text": "Написать в WhatsApp\n+7 701 0987734",
+  "fact_id": "wa"
+ },
+ "shots": [
+  {
+   "kind": "real",
+   "depicts": [
+    "client_product"
+   ]
+  }
+ ],
+ "is_aigc": false,
+ "audio": "none in render; publisher adds licensed/trending audio"
+}

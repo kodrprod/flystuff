@@ -2,3 +2,5 @@ __pycache__/
 .pytest_cache/
 *.pyc
 raw/
+.render_cache/
+clients/*/batch*/drafts/

@@ -99,9 +99,18 @@ def parse_product(page_html: str) -> dict:
             "rating": rating.get("ratingValue"),
             "review_count": rating.get("reviewCount"),
             "url": j.get("url"),
+            "images": [i for i in (j.get("image") or []) if isinstance(i, str)][:6],
+            "properties": {pp.get("name"): pp.get("value") for pp in (j.get("additionalProperty") or [])
+                           if isinstance(pp, dict) and pp.get("name")},
         }
         break
     text = " ".join(_clean_lines(re.sub(r"<script.*?</script>", "", page_html, flags=re.S)))
+    rec["old_price"] = None
+    for ln in _clean_lines(re.sub(r"<script.*?</script>", "", page_html, flags=re.S)):
+        pr = [_num(p) for p in _PRICE_RE.findall(ln)]
+        if len(pr) == 2 and pr[0] > pr[1] and rec.get("price") in pr:
+            rec["old_price"] = pr[0]
+            break
     m = re.search(r"В наличии:\s*(\d[\d\s]*)\s*шт", text)
     rec["stock_qty"] = _num(m.group(1)) if m else None
     return rec

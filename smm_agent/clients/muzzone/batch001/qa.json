@@ -1,0 +1,146 @@
+[
+ {
+  "id": "sale-1-hibilly",
+  "arm": "sale",
+  "hook": "Комбик 30 Вт: было 70 720 ₸, стало 56 576 ₸",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 16.5,
+   "has_audio_stream": true,
+   "size_bytes": 981782,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "sale-2-mapex",
+  "arm": "sale",
+  "hook": "Ударная установка Mapex: 283 296 ₸ вместо 354 120 ₸",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 16.5,
+   "has_audio_stream": true,
+   "size_bytes": 584143,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "price-1-alston-as100",
+  "arm": "price_point",
+  "hook": "Электрогитара за 59 800 ₸: что получаешь?",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 16.2,
+   "has_audio_stream": true,
+   "size_bytes": 391405,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "price-2-caesar-u246",
+  "arm": "price_point",
+  "hook": "Укулеле за 22 100 ₸: что внутри?",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 16.2,
+   "has_audio_stream": true,
+   "size_bytes": 348411,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "vs-1-ukuleles",
+  "arm": "vs",
+  "hook": "Два укулеле: 32 901 ₸ против 64 501 ₸",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 16.5,
+   "has_audio_stream": true,
+   "size_bytes": 192499,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "vs-2-casio-pianos",
+  "arm": "vs",
+  "hook": "Casio PX-770 или AP-270: чем отличаются?",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 16.5,
+   "has_audio_stream": true,
+   "size_bytes": 200693,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "policy-1-returns",
+  "arm": "policy",
+  "hook": "14 дней на возврат: что нужно сохранить?",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 17.7,
+   "has_audio_stream": true,
+   "size_bytes": 161795,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ },
+ {
+  "id": "policy-2-reserve",
+  "arm": "policy",
+  "hook": "Самовывоз: резерв заказа на 3 рабочих дня",
+  "errors": [],
+  "warnings": [],
+  "render": {
+   "width": 1080,
+   "height": 1920,
+   "codec": "h264",
+   "fps": 30.0,
+   "duration_s": 17.3,
+   "has_audio_stream": true,
+   "size_bytes": 188189,
+   "audio": "needs_publisher",
+   "platform_problems": []
+  }
+ }
+]

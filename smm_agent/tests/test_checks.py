@@ -112,7 +112,8 @@ def good_script():
     return {
         "hook_spoken": "Casio PX-770: 695 913 ₸ — стоит ли?",
         "hook_onscreen": "PX-770 за 695 913 ₸",
-        "beats": [{"spoken": "Возврат в течение 14 дней", "onscreen": "14 дней на возврат"}],
+        "beats": [{"onscreen": "PX-770 за 695 913 ₸", "spoken": "Возврат в течение 14 дней"},
+                  {"onscreen": "14 дней на возврат"}],
         "caption": "Пишите в WhatsApp +7 701 0987734",
         "cta": {"text": "WhatsApp +7 701 0987734", "fact_id": "wa"},
         "shots": [{"kind": "real", "depicts": ["client_product"]}],
@@ -134,3 +135,20 @@ def test_script_violations_are_caught(mutate, rule):
     s = good_script()
     mutate(s)
     assert rule in {v.rule for v in errors(check_script(s, ledger(), now=NOW))}
+
+
+def test_grouped_price_counts_as_one_word_in_hook():
+    # 8 words as a viewer reads them, though 10+ whitespace tokens
+    assert not [v for v in check_hook("Комбик 30 Вт: было 70 720 ₸, стало 56 576 ₸") if v.rule == "H1"]
+
+
+def test_card_price_fields_are_checked():
+    s = good_script()
+    s["beats"].append({"kind": "card", "onscreen": "Гитара", "price": "12 345 ₸"})
+    assert any(v.rule == "R6-NUM" and "price" in v.where for v in errors(check_script(s, ledger(), now=NOW)))
+
+
+def test_first_beat_must_show_hook_text():
+    s = good_script()
+    s["beats"][0]["onscreen"] = "что-то другое"
+    assert "H5" in {v.rule for v in errors(check_script(s, ledger(), now=NOW))}

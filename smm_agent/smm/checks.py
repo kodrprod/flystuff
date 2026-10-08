@@ -15,6 +15,7 @@ import re
 from dataclasses import dataclass
 
 from .facts import Ledger
+from .textutil import words
 
 
 @dataclass
@@ -105,17 +106,17 @@ def _allowed_numbers(values: set[str]) -> tuple[set[tuple[str, str]], set[str]]:
 # ------------------------------------------------------------------ checks
 def check_hook(spoken: str, on_screen: str = "", max_words: int = 8) -> list[Violation]:
     out: list[Violation] = []
-    words = [w for w in re.split(r"\s+", spoken.strip()) if re.search(r"\w", w)]
-    if not words:
+    wl = words(spoken)
+    if not wl:
         out.append(Violation("H0", "error", "empty spoken hook", "hook"))
-    if len(words) > max_words:
-        out.append(Violation("H1", "error", f"hook has {len(words)} words, max {max_words}", "hook"))
+    if len(wl) > max_words:
+        out.append(Violation("H1", "error", f"hook has {len(wl)} words, max {max_words}", "hook"))
     for label, txt in (("spoken", spoken), ("on_screen", on_screen)):
         if CHILDISH.search(txt):
             out.append(Violation("H2", "error", "childish/engagement-bait game", f"hook.{label}"))
         if AD_VOICE.search(txt):
             out.append(Violation("H3", "warn", "ad voice", f"hook.{label}"))
-    if words and not (re.search(r"\d", spoken) or re.search(r"[A-Za-z]{2,}", spoken)):
+    if wl and not (re.search(r"\d", spoken) or re.search(r"[A-Za-z]{2,}", spoken)):
         out.append(Violation("H4", "warn", "no number or model/brand token: is it specific?", "hook"))
     return out
 
@@ -187,10 +188,15 @@ def check_script(script: dict, ledger: Ledger, now=None) -> list[Violation]:
     out += check_hook(script.get("hook_spoken", ""), script.get("hook_onscreen", ""))
     out += check_text(script.get("hook_spoken", ""), ledger, "hook_spoken", now)
     out += check_text(script.get("hook_onscreen", ""), ledger, "hook_onscreen", now)
-    for i, b in enumerate(script.get("beats", [])):
-        for k in ("spoken", "onscreen"):
+    beats = script.get("beats", [])
+    for i, b in enumerate(beats):
+        # every string that can end up on screen is checked, including card prices
+        for k in ("spoken", "onscreen", "text", "price", "price2", "old_price"):
             if b.get(k):
                 out += check_text(b[k], ledger, f"beats[{i}].{k}", now)
+    first = (beats[0].get("onscreen") or beats[0].get("text") or "") if beats else ""
+    if script.get("hook_onscreen") and first.strip() != script["hook_onscreen"].strip():
+        out.append(Violation("H5", "error", "first beat must show the hook text (first frame = what the words say)", "beats[0]"))
     out += check_text(script.get("caption", ""), ledger, "caption", now)
     cta = script.get("cta", {})
     if not cta.get("text"):
