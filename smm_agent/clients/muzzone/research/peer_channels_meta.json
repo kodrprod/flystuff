@@ -1,0 +1,106 @@
+{
+ "UC2ZHiXb8ojj9aW81RlROxjw": {
+  "name": "Мир Музыки",
+  "vertical": "retail",
+  "followers": 74400,
+  "median_views": 2500.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UClhmGQgQTKJ6bcdjH-HB1ag": {
+  "name": "Ловец Нот - музыкальный магазин",
+  "vertical": "retail",
+  "followers": 3540,
+  "median_views": 762.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UCDbDEEAH2GlX8CL6YyqM-nQ": {
+  "name": "JAM Музичні Інструменти",
+  "vertical": "retail",
+  "followers": 17800,
+  "median_views": 1900.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UCDKLPHZzfQGfNCd4aLLAKZA": {
+  "name": "MAJOR-MUSIC",
+  "vertical": "retail",
+  "followers": 170000,
+  "median_views": 23500.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UC6DYBXuMixf9hMZ6p65mlzw": {
+  "name": "Pianoby - LIVE",
+  "vertical": "review",
+  "followers": 65100,
+  "median_views": 3300.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UCoESRu64o7nIK5mGEDeakzA": {
+  "name": "PIANOBY",
+  "vertical": "review",
+  "followers": 6740,
+  "median_views": 1200,
+  "n_total": 71,
+  "n_used": 71
+ },
+ "UCxZoWeuYsBBGNRPabOGkHlg": {
+  "name": "Рок-н-Ролл магазин для музыкантов",
+  "vertical": "retail",
+  "followers": 5750,
+  "median_views": 1100.0,
+  "n_total": 50,
+  "n_used": 50
+ },
+ "UCOtmHwYhxhqGokpQEbLE3RA": {
+  "name": "Гитарная лавка",
+  "vertical": "retail",
+  "followers": 28800,
+  "median_views": 4000.0,
+  "n_total": 96,
+  "n_used": 96
+ },
+ "UCDqm-bHglojdsSVWCAY5-8w": {
+  "name": "Гитарная Лаборатория",
+  "vertical": "review",
+  "followers": 43200,
+  "median_views": 5600,
+  "n_total": 55,
+  "n_used": 55
+ },
+ "UCXT9jSImojAq_hWzSdfvufg": {
+  "name": "Вова и Гитары",
+  "vertical": "review",
+  "followers": 41900,
+  "median_views": 5800,
+  "n_total": 111,
+  "n_used": 100
+ },
+ "UCJsxAwkchPTO4YM2deDfr4w": {
+  "name": "SKIFMUSIC",
+  "vertical": "lessons",
+  "followers": 151000,
+  "median_views": 4400.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UCDFQdaGoCkT5IyfamOEYZHg": {
+  "name": "Гитарный клуб",
+  "vertical": "lessons",
+  "followers": 197000,
+  "median_views": 4700.0,
+  "n_total": 150,
+  "n_used": 100
+ },
+ "UCrg0DxbuX1jdxmXQpSMdVOg": {
+  "name": "Георгий Морев. Уроки гитары для взрослых",
+  "vertical": "lessons",
+  "followers": 99300,
+  "median_views": 8950.0,
+  "n_total": 150,
+  "n_used": 100
+ }
+}

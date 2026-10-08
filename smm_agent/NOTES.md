@@ -92,6 +92,40 @@ feed; possible (small) training-data contamination; one run, no test-retest yet.
 **Consequence:** authority is scoped. Granted here: `rank` for *YouTube long-form titles, Muzzone*. **Not** granted
 for short-form hooks until calibrated on short-form data.
 
+## 4b. Experiment 002 — same test on short-form (the format that matters)
+
+1 172 YouTube Shorts from 13 peer RU/UA music channels (6 retail, 4 review, 3 lessons; ≤100 per channel, random).
+Label = views ÷ that channel's median (removes channel size). 8 blind raters, Read-only, saw title + duration +
+channel median. Data/scores: `experiments/002_shorts_scores_and_labels.json`.
+
+| slice | n | Spearman (95% CI) | pairwise ≥3× | top-20% hit (chance 20%) | authority |
+|---|---|---|---|---|---|
+| all | 1172 | **0.11** (0.05–0.17) | 0.58 | 26% | filter_only |
+| retail (closest to Muzzone) | 546 | 0.07 (−0.01–0.16) | 0.56 | 23% | **none** |
+| review | 326 | 0.18 (0.07–0.29) | 0.62 | 29% | filter_only |
+| lessons | 300 | 0.11 (−0.01–0.23) | 0.58 | 25% | none |
+
+Per channel ρ ranges −0.07…+0.35; the channel most like Muzzone in size («Ловец Нот», 3.5k subs) is −0.05.
+Trivial baselines (duration, title length, hashtags, has-digit) ≈ 0.00–0.07.
+
+**Replication check.** Hypotheses from 001 (beginner framing, head-to-head) tested out-of-sample on 002:
+median relative views 1.00 / 0.99, CIs span 0. **They do not replicate for short-form.** No title pattern among
+15 tried predicts short-form performance (the few weakly positive ones — review, ALLCAPS, emoji — have CIs
+touching 0 after ~15 comparisons; treat as noise).
+
+**What this means (the real finding):**
+- The old "content quality stuck at 5–6/10, critic has no ground truth" is half right. For *long-form/search*
+  titles a judge works (ρ 0.44). For *short-form feed* content a text-only judge is nearly blind (ρ≈0.1):
+  what makes a Short work lives in the first frames, voice and algorithmic luck, which a title does not carry.
+- Therefore a creative "critic as gatekeeper" cannot be the core of an autonomous short-form system. The core has to be
+  **produce → publish → measure → reallocate** (experiment engine), with the judge demoted to a cheap filter
+  (drop the clearly worst) and deterministic rails for correctness. Authority is read from calibration records, never assumed.
+- Ground truth for short-form can only come from the system's own posts. That makes an owned test account +
+  fast cheap production the critical path, not more prompt refinement.
+- Not tested (needs credits/video access): video-based predictors (e.g. Higgsfield `virality_predictor`) — calibrate them
+  on our own posted videos with known results before trusting them. Competitor video download is bot-blocked.
+- Limits of 002: title ≠ spoken hook; YouTube Shorts ≠ TikTok/Reels; one rater panel, no test-retest.
+
 ## 5. Decisions (and why)
 
 - D1. Calibrate on **public outcomes** (the client's own channel, then peer channels) instead of waiting for
@@ -102,6 +136,12 @@ for short-form hooks until calibrated on short-form data.
   inventing offers a silent owner will reject. Still no end-dates/scarcity claims. R3 for *new* offers unchanged.
 - D4. Store provenance on every fact; `simulated` provenance is blocked from external text in code.
 - D5. Don't publish anything, contact anyone, or spend credits without a human decision (outward-facing/irreversible).
+- D6. (from experiment 002) The selector for short-form is **audience data via an experiment engine** (variant
+  allocation → measured outcome → posterior update, per client), not a model's taste. The judge only filters.
+  The engine must work with tiny n (a few posts a week), so it uses Bayesian/Thompson allocation with
+  explicit uncertainty, and never reports a "winner" without an interval.
+- D7. Production must be cheap enough to run many variants: a zero-credit renderer from real product photos +
+  text is part of the system, not a demo. (R5 stays: AI footage never stands in for the real product.)
 
 ## 6. Dead ends / bugs found (don't repeat)
 
@@ -122,6 +162,9 @@ Owner of each is Andrey unless noted. Work continues meanwhile.
 
 ## 8. Next steps
 
-1. facts ledger + deterministic checks + tests (in progress)  2. short-form calibration set from peer channels
-3. renderer (script→mp4, zero credits)  4. first Muzzone batch on real facts, built on proven winners, not published
-5. handoff queue with escalation / safe defaults  6. update protocol (v3) + sync to skill.
+Done: facts ledger, deterministic checks (30 tests), crawler, calibration + experiments 001/002.
+Next, in order: (1) experiment engine (Thompson allocation, tiny-n safe) + metrics ingestion;
+(2) zero-credit renderer script→mp4 from real product photos; (3) first Muzzone batch on real facts, as
+*variants* across angles, rendered but NOT published; (4) handoff queue with escalation / safe defaults;
+(5) protocol v3 (this file's findings folded in) + sync to the skill; (6) when credits/accounts exist: calibrate
+`virality_predictor` on own posts, run first real test.
