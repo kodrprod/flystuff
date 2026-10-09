@@ -1,0 +1,548 @@
+"""The marketing brain: any client, any boss request -> a campaign that can be executed and measured.
+
+    request + client folder
+      1 intake      the request as a business objective, a marketing objective, ONE success metric, constraints
+      2 inputs      what is already in hand (code inventories the folder) vs what is missing and how to get it
+      3 insights    evidence base (every item cites a fact id or file) -> ranked insights (tensions, moments, proof)
+      4 ideas       many diverse short-video ideas from insights x drivers x formats, each scored on a rubric
+      5 selection   CODE, not the model: rubric prior + audience data + diversity -> the test slate
+      6 campaign    the plan around the slate: big idea, roles, offer (needs approval), calendar, worker asks,
+                    measurement and decision rules
+      7 critique    the boss and a veteran creator attack it; one revision fixes fatal/major points
+
+Judgment (1-4, 6, 7) is done by the model following the method in brain/METHOD.md, which is a document the
+agent reads, not code. Code does only what code is better at:
+  * assembling the inputs from the client folder (facts ledger, research files, past metrics, learnings),
+  * validating every step against its schema,
+  * truth: every audience-facing string is checked against the facts ledger (numbers, claims, contacts);
+    a string that needs an unconfirmed fact becomes a question to the owner, never a guess,
+  * feasibility: worker minutes are recomputed from the shot list with the shoot-card model and the week is cut to
+    the real budget,
+  * selection and exploration: experiment 002 showed nobody predicts short-form winners from text (rho 0.07 for
+    retail), so the model's scores are only a PRIOR; audience data and diversity decide what is tested.
+"""
+from __future__ import annotations
+
+import json
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+
+from . import shootcard
+from .attribution import make_code
+from .checks import check_hook, check_text
+from .facts import Ledger
+from .llm import LLM
+
+ROOT = Path(__file__).resolve().parent.parent
+METHOD_PATH = ROOT / "brain" / "METHOD.md"
+KNOWLEDGE = ROOT / "knowledge"
+INPUT_DIRS = ("research", "inputs", "metrics", "uploads")     # what the client/owner gave us; never our own outputs
+
+# ----------------------------------------------------------------- schemas (one per judgment step)
+
+
+def obj(props: dict, required: list[str] | None = None) -> dict:
+    return {"type": "object", "properties": props, "required": required if required is not None else list(props),
+            "additionalProperties": False}
+
+
+S, N, I, B = {"type": "string"}, {"type": "number"}, {"type": "integer"}, {"type": "boolean"}
+
+
+def arr(items: dict, **kw) -> dict:
+    return {"type": "array", "items": items, **kw}
+
+
+REQUEST_TYPES = ["sales_push", "launch_or_event", "awareness_or_viral", "reputation_or_trust", "price_pressure",
+                 "retention_or_loyalty", "hiring", "b2b_leads", "should_we_do_social", "other"]
+
+INTAKE_SCHEMA = obj({
+    "request_type": {"type": "string", "enum": REQUEST_TYPES},
+    "reframed_request": S,
+    "business_objective": S,
+    "marketing_objective": S,
+    "success_metric": obj({"name": S, "how_measured": S, "target": S, "by_when": S}),
+    "leading_indicators": arr(S),
+    "constraints": arr(S),
+    "assumptions": arr(S),
+    "clarifying_questions": arr(S, maxItems=3),
+    "push_back": S,                       # where the request itself is wrong / unrealistic, said plainly ("" if none)
+})
+
+INPUTS_SCHEMA = obj({
+    "have": arr(obj({"input": S, "what_it_gives": S})),
+    "missing": arr(obj({"input": S, "why_it_matters": S, "how": S, "who": {"type": "string", "enum": ["agent", "owner", "staff", "customer"]},
+                        "owner_minutes": N, "fallback_if_missing": S, "blocks_step": S})),
+})
+
+INSIGHTS_SCHEMA = obj({
+    "evidence": arr(obj({"id": S, "kind": {"type": "string", "enum": [
+        "fact", "customer_language", "behaviour", "proof_asset", "moment", "constraint", "market", "performance"]},
+        "claim": S, "source": S, "confidence": {"type": "string", "enum": ["verified", "likely", "assumption"]}})),
+    "insights": arr(obj({"id": S, "insight": S, "tension": S, "evidence_ids": arr(S), "who_feels_it": S,
+                         "content_reality": S, "strength": I})),
+})
+
+RUBRIC = ["stop", "truth", "share_save", "comment", "producible", "brand_link", "objective_fit"]
+RUBRIC_HELP = {
+    "stop": "would a stranger stop in the first second (first frame + first words)?",
+    "truth": "rooted in a verified insight/fact, nothing invented",
+    "share_save": "would someone send it to a friend or save it (practical value, identity, emotion, story)?",
+    "comment": "does it invite a real comment (opinion, experience, choice), not bait?",
+    "producible": "one weak phone, sound only close-up, staff minutes + AI, no credits risk",
+    "brand_link": "could ONLY this business have made it?",
+    "objective_fit": "does it move the success metric, not just views?",
+}
+
+IDEA = obj({
+    "id": S, "title": S, "insight_ids": arr(S), "driver": S, "format": S, "funnel": {"type": "string", "enum": [
+        "attention", "consideration", "conversion", "trust", "retention", "recruiting"]},
+    "hook_ru": S, "first_frame": S, "on_screen_ru": arr(S), "what_happens": S, "why_stop": S, "why_share_or_save": S,
+    "comment_prompt_ru": S, "cta_ru": S,
+    "production": obj({"mode": {"type": "string", "enum": ["worker", "ai", "mixed", "ugc", "screen"]},
+                       "worker_shots": arr(obj({"what_ru": S, "location": S, "seconds": I, "takes": I, "say_ru": S,
+                                                "kind": {"type": "string", "enum": ["hook", "demo", "talk", "detail", "process"]}})),
+                       "ai_parts": S, "people_on_camera": I}),
+    "facts_used": arr(S),
+    "kpi": S,
+    "risks": arr(S),
+    "rubric": obj({k: I for k in RUBRIC}),
+})
+IDEAS_SCHEMA = obj({"ideas": arr(IDEA, minItems=8)})
+
+CAMPAIGN_SCHEMA = obj({
+    "name": S, "big_idea": S, "single_minded_message_ru": S, "why_this_wins": S,
+    "series": arr(obj({"name": S, "role": S, "idea_ids": arr(S), "cadence": S})),
+    "offer": obj({"needed": B, "proposal": S, "fact_ids": arr(S), "needs_owner_approval": B}),
+    "channels": arr(obj({"channel": S, "role": S})),
+    "weeks": arr(obj({"week": I, "goal": S, "idea_ids": arr(S), "worker_ask_ru": S, "ai_work": S})),
+    "measurement": obj({"success_metric": S, "attribution": S, "leading_indicators": arr(S), "review_cadence": S}),
+    "decision_rules": arr(S),
+    "learning_questions": arr(S),
+    "owner_asks": arr(obj({"ask": S, "why": S, "minutes": N})),
+    "risks": arr(S),
+})
+
+REVIEW_SCHEMA = obj({
+    "persona": S, "score": I, "would_approve": B, "best_idea": S,
+    "refutations": arr(obj({"target": S, "why_fails": S, "severity": {"type": "string", "enum": ["fatal", "major", "minor"]},
+                            "fix": S})),
+})
+
+# ----------------------------------------------------------------- inputs (code)
+
+
+@dataclass
+class Client:
+    slug: str
+    dir: Path
+    profile: dict
+    ledger: Ledger
+
+    @classmethod
+    def load(cls, slug: str, base: Path | None = None) -> "Client":
+        d = (base or ROOT / "clients") / slug
+        if not d.is_dir():
+            raise FileNotFoundError(f"no client folder {d}")
+        prof = json.loads((d / "profile.json").read_text(encoding="utf-8")) if (d / "profile.json").exists() else {"name": slug}
+        led = Ledger.load(d / "facts.jsonl") if (d / "facts.jsonl").exists() else Ledger()
+        return cls(slug, d, prof, led)
+
+
+def _preview(p: Path, max_chars: int = 700) -> str:
+    """Shape of a research file so the model knows what is there; it can Read the file for detail."""
+    try:
+        if p.suffix == ".json":
+            data = json.loads(p.read_text(encoding="utf-8"))
+            if isinstance(data, list):
+                head = json.dumps(data[:2], ensure_ascii=False)[:max_chars]
+                return f"list of {len(data)} records; first: {head}"
+            if isinstance(data, dict):
+                keys = ", ".join(f"{k}({type(v).__name__}{'[' + str(len(v)) + ']' if isinstance(v, (list, dict)) else ''})"
+                                 for k, v in list(data.items())[:25])
+                return f"object with keys: {keys}"[:max_chars]
+        return p.read_text(encoding="utf-8", errors="replace")[:max_chars]
+    except (ValueError, OSError) as e:
+        return f"(unreadable: {e})"
+
+
+def inventory(client: Client, now=None) -> dict:
+    """Everything the agent already has for this client, without asking anyone."""
+    usable = list(client.ledger.usable(now).values())
+    probs = client.ledger.report(now)
+    files = []
+    for sub in INPUT_DIRS:
+        for p in sorted((client.dir / sub).rglob("*")) if (client.dir / sub).is_dir() else []:
+            if p.is_file() and p.suffix in (".json", ".jsonl", ".csv", ".md", ".txt") and p.stat().st_size < 50_000_000:
+                files.append({"path": str(p), "bytes": p.stat().st_size, "preview": _preview(p)})
+    learn = []
+    lf = KNOWLEDGE / "learnings.jsonl"
+    if lf.exists():
+        vert = (client.profile.get("vertical") or "").lower()
+        for line in lf.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                r = json.loads(line)
+                if not vert or r.get("vertical", "").lower() in (vert, "any"):
+                    learn.append(r)
+    return {
+        "profile": client.profile,
+        "facts_usable": [{"id": f.id, "text": f.text, "provenance": f.provenance, "source": f.source,
+                          "as_of": f.fetched_at} for f in usable],
+        "facts_not_usable": [{"id": i, "why": p} for i, p in probs.items()][:40],
+        "files": files,
+        "learnings": learn[-60:],
+    }
+
+
+# ----------------------------------------------------------------- deterministic checks
+
+
+def worker_shots(idea: dict, prefix: str) -> list[shootcard.Shot]:
+    out = []
+    for j, s in enumerate(idea.get("production", {}).get("worker_shots") or []):
+        out.append(shootcard.Shot(f"{prefix}_{j}", s.get("what_ru", ""), s.get("location") or "магазин",
+                                  max(1, int(s.get("seconds") or 1)), s.get("kind") or "demo",
+                                  max(1, int(s.get("takes") or 2)), s.get("say_ru") or ""))
+    return out
+
+
+def idea_minutes(idea: dict) -> float:
+    """Marginal minutes this idea costs the staff (the shoot-card model; fixed card time is shared)."""
+    shots = worker_shots(idea, "x")
+    if not shots:
+        return 0.0
+    return shootcard.session_minutes(shots) - shootcard.FIXED_MIN
+
+
+def audience_strings(idea: dict) -> list[tuple[str, str]]:
+    out = [("hook_ru", idea.get("hook_ru", "")), ("cta_ru", idea.get("cta_ru", "")),
+           ("comment_prompt_ru", idea.get("comment_prompt_ru", ""))]
+    out += [(f"on_screen_ru[{i}]", s) for i, s in enumerate(idea.get("on_screen_ru") or [])]
+    out += [(f"say_ru[{i}]", s.get("say_ru", "")) for i, s in enumerate(idea.get("production", {}).get("worker_shots") or [])]
+    return [(k, v) for k, v in out if v]
+
+
+def check_idea(idea: dict, ledger: Ledger, insight_ids: set[str], now=None) -> dict:
+    """Returns {'errors': [...], 'needs_facts': [...], 'warnings': [...]} for one idea."""
+    errs, needs, warns = [], [], []
+    for k, txt in audience_strings(idea):
+        for v in check_text(txt, ledger, where=f"{idea['id']}.{k}", now=now):
+            if v.rule.startswith("R6"):
+                needs.append(f"{v.where}: {v.message}")          # becomes an owner question, not a silent edit
+            elif v.severity == "error":
+                errs.append(f"{v.where}: {v.rule} {v.message}")
+            else:
+                warns.append(f"{v.where}: {v.rule} {v.message}")
+    for v in check_hook(idea.get("hook_ru", "")):
+        (errs if v.severity == "error" else warns).append(f"{idea['id']}.hook: {v.rule} {v.message}")
+    missing = [i for i in idea.get("insight_ids") or [] if i not in insight_ids]
+    if missing:
+        errs.append(f"{idea['id']}: cites unknown insights {missing}")
+    if not idea.get("insight_ids"):
+        errs.append(f"{idea['id']}: not rooted in any insight")
+    m = idea_minutes(idea)
+    if m > 17:
+        errs.append(f"{idea['id']}: needs {m:.1f} staff minutes alone (budget 20/week incl. setup)")
+    mode = idea.get("production", {}).get("mode")
+    if mode in ("worker", "mixed") and not idea.get("production", {}).get("worker_shots"):
+        errs.append(f"{idea['id']}: mode {mode} but no worker shots")
+    for k in RUBRIC:
+        val = idea.get("rubric", {}).get(k)
+        if not isinstance(val, int) or not 1 <= val <= 5:
+            errs.append(f"{idea['id']}: rubric.{k} must be 1-5")
+    return {"errors": errs, "needs_facts": needs, "warnings": warns}
+
+
+def check_insights(ins: dict, ledger: Ledger, files: set[str]) -> list[str]:
+    """Every evidence item must point at something real: a fact id in the ledger, a file the agent was given,
+    a URL, or be labelled an assumption."""
+    out = []
+    ev_ids = {e["id"] for e in ins["evidence"]}
+    for e in ins["evidence"]:
+        src = e.get("source", "")
+        real = (src in ledger.facts or any(src.startswith(f) or f in src for f in files) or src.startswith("http")
+                or src.startswith("request") or src.startswith("profile"))
+        if not real and e.get("confidence") != "assumption":
+            out.append(f"evidence {e['id']}: source {src!r} is not a fact id, file or URL; label it an assumption")
+    for i in ins["insights"]:
+        bad = [x for x in i.get("evidence_ids") or [] if x not in ev_ids]
+        if bad or not i.get("evidence_ids"):
+            out.append(f"insight {i['id']}: evidence {bad or 'none'} not in the evidence base")
+    return out
+
+
+# ----------------------------------------------------------------- selection (code: prior + data + diversity)
+
+
+def load_weights() -> dict[str, float]:
+    f = KNOWLEDGE / "rubric_weights.json"
+    if f.exists():
+        return json.loads(f.read_text(encoding="utf-8"))
+    return {"stop": 1.5, "truth": 1.0, "share_save": 1.3, "comment": 0.8, "producible": 1.0, "brand_link": 0.8,
+            "objective_fit": 1.4}
+
+
+def prior_score(idea: dict, weights: dict[str, float]) -> float:
+    r = idea.get("rubric", {})
+    tot = sum(weights.values())
+    return round(sum(weights[k] * r.get(k, 1) for k in weights) / tot, 3)
+
+
+def data_bonus(idea: dict, arm_stats: dict[str, dict] | None) -> float:
+    """Audience data beats the prior: posterior mean (log-relative views) of the idea's driver/format arm,
+    shrunk by its uncertainty. 0 without data."""
+    if not arm_stats:
+        return 0.0
+    b = 0.0
+    for key in (f"driver:{idea.get('driver', '').lower()}", f"format:{idea.get('format', '').lower()}"):
+        st = arm_stats.get(key)
+        if st and st.get("n", 0) > 0:
+            b += st["mean"] / (1 + st["sd"])
+    return b
+
+
+def select(ideas: list[dict], k: int, weights: dict[str, float], arm_stats: dict | None = None,
+           explore_share: float = 0.25, blocked: set[str] = frozenset()) -> list[dict]:
+    """Greedy max-marginal-relevance slate: high prior, but each repeat of a driver/format/mode costs, and about
+    a quarter of the slots go to the most *different* remaining ideas (exploration), because the prior is weak."""
+    pool = [i for i in ideas if i["id"] not in blocked]
+    for i in pool:
+        i["_prior"] = prior_score(i, weights)
+        i["_value"] = i["_prior"] + data_bonus(i, arm_stats)
+    chosen: list[dict] = []
+    n_explore = max(1, round(k * explore_share)) if k >= 4 else 0
+    while pool and len(chosen) < k - n_explore:
+        def mmr(i):
+            rep = sum((c.get("driver") == i.get("driver")) * 0.6 + (c.get("format") == i.get("format")) * 0.5 +
+                      (c["production"]["mode"] == i["production"]["mode"]) * 0.15 for c in chosen)
+            return i["_value"] - rep
+        best = max(pool, key=mmr)
+        best["_why"] = "prior+data"
+        chosen.append(best)
+        pool.remove(best)
+    while pool and len(chosen) < k:                           # exploration: maximise novelty, prior as tie-break
+        def novelty(i):
+            return (int(i.get("driver") not in {c.get("driver") for c in chosen}) * 2
+                    + int(i.get("format") not in {c.get("format") for c in chosen}), i["_prior"])
+        best = max(pool, key=novelty)
+        best["_why"] = "explore"
+        chosen.append(best)
+        pool.remove(best)
+    return chosen
+
+
+def plan_week(chosen: list[dict], capacity_min: float = 20.0) -> tuple[list[str], list[shootcard.Shot], float]:
+    """Which selected ideas get real footage this week, within the staff budget (exact optimiser)."""
+    shots, videos = [], []
+    for i in chosen:
+        ws = worker_shots(i, i["id"])
+        if ws:
+            shots += ws
+            videos.append(shootcard.Video(i["id"], i.get("_value", 1.0), [s.id for s in ws]))
+    if not videos:
+        return [], [], 0.0
+    vids, sh, mins = shootcard.plan(videos, shots, capacity_min)
+    return [v.id for v in vids], sh, mins
+
+
+# ----------------------------------------------------------------- the run
+
+
+@dataclass
+class BrainRun:
+    client: str
+    request: str
+    out_dir: Path
+    steps: dict = field(default_factory=dict)
+    checks: dict = field(default_factory=dict)
+    questions: list = field(default_factory=list)       # for the owner, batched
+
+    def save(self, name: str, data) -> None:
+        self.steps[name] = data
+        (self.out_dir / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def method_text(path: Path | None = None) -> str:
+    p = path or METHOD_PATH
+    if not p.exists():
+        raise FileNotFoundError(f"method not found: {p} (the brain needs brain/METHOD.md)")
+    return p.read_text(encoding="utf-8")
+
+
+def _sys(method: str, step: str) -> str:
+    return ("You are the marketing brain of an autonomous short-video marketing agent for local businesses. "
+            "Follow the METHOD literally; when it does not cover something, use the judgment of a top strategist "
+            "and say so in the output. Never invent facts about the business: use only the inputs; "
+            "anything else is labelled an assumption. Audience-facing copy in Russian (or the client's language); "
+            f"everything else in English.\n\nCURRENT STEP: {step}\n\nMETHOD:\n{method}")
+
+
+def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_ideas: int = 24,
+        slate: int = 8, capacity_min: float = 20.0, critique: bool = True, method_path: Path | None = None,
+        now=None, run_id: str | None = None) -> BrainRun:
+    method = method_text(method_path)
+    rid = run_id or time.strftime("%Y%m%d-%H%M%S", time.gmtime())
+    out = (out_root or client.dir / "campaigns") / rid
+    out.mkdir(parents=True, exist_ok=True)
+    br = BrainRun(client.slug, request, out)
+    inv = inventory(client, now)
+    br.save("inventory", inv)
+    files = {f["path"] for f in inv["files"]}
+    ctx = ("CLIENT INPUTS (JSON; files can be opened with the Read tool for detail):\n" +
+           json.dumps(inv, ensure_ascii=False, indent=1) + f"\n\nTHE BOSS'S REQUEST, verbatim: {request}")
+
+    # 1 intake
+    intake = llm.json(f"intake:{client.slug}", _sys(method, "A. Request intake"), ctx +
+                      "\n\nTurn the request into the intake object. Ask at most 3 questions; assume where the answer "
+                      "would not change the plan.", INTAKE_SCHEMA)
+    br.save("intake", intake)
+    br.questions += [{"from": "intake", "q": q} for q in intake.get("clarifying_questions") or []]
+
+    # 2 inputs
+    inputs = llm.json(f"inputs:{client.slug}", _sys(method, "B. Inputs"), ctx + "\n\nINTAKE:\n" +
+                      json.dumps(intake, ensure_ascii=False) +
+                      "\n\nList what is already in hand and what is missing, ranked by value per owner minute.", INPUTS_SCHEMA)
+    br.save("inputs", inputs)
+    br.questions += [{"from": "inputs", "q": m["input"], "how": m["how"], "minutes": m.get("owner_minutes")}
+                     for m in inputs["missing"] if m["who"] in ("owner", "staff")]
+
+    # 3 evidence + insights (one revision if sources do not hold)
+    prompt3 = (ctx + "\n\nINTAKE:\n" + json.dumps(intake, ensure_ascii=False) +
+               "\n\nBuild the evidence base (cite fact ids, file paths or URLs as source) and the ranked insights.")
+    ins = llm.json(f"insights:{client.slug}", _sys(method, "C. Working the inputs"), prompt3, INSIGHTS_SCHEMA)
+    p3 = check_insights(ins, client.ledger, files)
+    if p3:
+        ins = llm.json(f"insights-fix:{client.slug}", _sys(method, "C. Working the inputs"), prompt3 +
+                       "\n\nYOUR PREVIOUS ANSWER:\n" + json.dumps(ins, ensure_ascii=False) +
+                       "\n\nTHESE ITEMS FAILED THE SOURCE CHECK, fix them:\n- " + "\n- ".join(p3), INSIGHTS_SCHEMA)
+        p3 = check_insights(ins, client.ledger, files)
+    br.save("insights", ins)
+    br.checks["insights"] = p3
+
+    # 4 ideas
+    rub = "\n".join(f"- {k}: {v}" for k, v in RUBRIC_HELP.items())
+    prompt4 = (ctx + "\n\nINTAKE:\n" + json.dumps(intake, ensure_ascii=False) + "\n\nINSIGHTS:\n" +
+               json.dumps(ins, ensure_ascii=False) +
+               f"\n\nGenerate {n_ideas} short-video ideas, as diverse as the method demands (drivers, formats, production "
+               f"modes, funnel stages). Score each 1-5 on this rubric (a prior, not a prediction):\n{rub}\n"
+               f"Staff: one weak phone (good sound only close-up), {capacity_min:g} minutes a week in total. "
+               "Prices, numbers, contacts on screen only if they are in facts_usable; otherwise write the idea without "
+               "them or mark the fact as needed in facts_used as 'NEEDED: ...'.")
+    ideas = llm.json(f"ideas:{client.slug}", _sys(method, "D. Idea generation"), prompt4, IDEAS_SCHEMA)["ideas"]
+    iids = {i["id"] for i in ins["insights"]}
+    report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+    bad = {k: v["errors"] for k, v in report.items() if v["errors"]}
+    if bad:
+        fixed = llm.json(f"ideas-fix:{client.slug}", _sys(method, "D. Idea generation"), prompt4 +
+                         "\n\nYOUR IDEAS:\n" + json.dumps(ideas, ensure_ascii=False) +
+                         "\n\nTHESE FAILED THE AUTOMATIC CHECKS. Return the full list with every failing idea fixed or "
+                         "replaced:\n" + json.dumps(bad, ensure_ascii=False, indent=1), IDEAS_SCHEMA)["ideas"]
+        ideas = fixed
+        report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+    br.save("ideas", ideas)
+    br.checks["ideas"] = report
+    for iid, r in report.items():
+        for n in r["needs_facts"]:
+            br.questions.append({"from": "facts", "q": f"Confirm before idea {iid} can be produced: {n}"})
+
+    # 5 selection (code)
+    arm_stats = None
+    eng_file = client.dir / "engine_state.json"
+    if eng_file.exists():
+        arm_stats = json.loads(eng_file.read_text(encoding="utf-8")).get("summary")
+    blocked = {k for k, v in report.items() if v["errors"]}
+    chosen = select(ideas, slate, load_weights(), arm_stats, blocked=blocked)
+    week_ids, week_shots, week_min = plan_week(chosen, capacity_min)
+    selection = {"slate": [{"id": c["id"], "prior": c["_prior"], "value": round(c["_value"], 3), "why": c["_why"],
+                            "driver": c.get("driver"), "format": c.get("format"), "staff_min": round(idea_minutes(c), 1),
+                            "needs_facts": report[c["id"]]["needs_facts"]} for c in chosen],
+                 "blocked": sorted(blocked), "week1_filmed": week_ids, "week1_minutes": round(week_min, 1),
+                 "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"}
+    br.save("selection", selection)
+
+    # 6 campaign
+    prompt6 = (ctx + "\n\nINTAKE:\n" + json.dumps(intake, ensure_ascii=False) + "\n\nINSIGHTS:\n" +
+               json.dumps(ins["insights"], ensure_ascii=False) + "\n\nSELECTED SLATE (chosen by the selection code; "
+               "use these ideas, you may order and group them):\n" +
+               json.dumps([i for i in ideas if i["id"] in {c['id'] for c in chosen}], ensure_ascii=False) +
+               f"\n\nWEEK 1 FILMING THAT FITS THE STAFF BUDGET ({week_min:.1f} of {capacity_min:g} min): {week_ids}\n"
+               "Design the campaign. Any offer that is not already in facts_usable needs owner approval.")
+    camp = llm.json(f"campaign:{client.slug}", _sys(method, "F. Campaign design"), prompt6, CAMPAIGN_SCHEMA)
+
+    # 7 critique -> one revision
+    reviews = []
+    if critique:
+        bundle = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in {c['id'] for c in chosen}],
+                             "campaign": camp}, ensure_ascii=False)
+        for persona in (f"the BOSS of {client.profile.get('name', client.slug)}, who asked: {request}. Does this solve MY "
+                        "problem, is it worth my staff's time and money, is anything risky, embarrassing or untrue?",
+                        "a veteran short-form creator and SMM for local businesses in Kazakhstan/CIS: is anything generic, "
+                        "ad-like, unproducible with one weak phone in 20 minutes, or unlikely to spread or bring inquiries?"):
+            reviews.append(llm.json(f"review:{client.slug}:{persona[:12]}", "You are " + persona +
+                                    " Attack the plan; be concrete; severity fatal = you would reject it.",
+                                    bundle, REVIEW_SCHEMA, effort="medium"))
+        serious = [r for rv in reviews for r in rv["refutations"] if r["severity"] in ("fatal", "major")]
+        if serious:
+            camp = llm.json(f"campaign-revise:{client.slug}", _sys(method, "F. Campaign design (revision)"), prompt6 +
+                            "\n\nYOUR CAMPAIGN:\n" + json.dumps(camp, ensure_ascii=False) +
+                            "\n\nFIX EVERY ONE OF THESE BY CHANGING THE PLAN (not by arguing):\n" +
+                            json.dumps(serious, ensure_ascii=False, indent=1), CAMPAIGN_SCHEMA)
+    br.save("reviews", reviews)
+
+    # attribution codes for every slate idea (code, deterministic)
+    camp["attribution_codes"] = {c["id"]: make_code(1, n + 1) for n, c in enumerate(chosen)}
+    camp_ids = {x for w in camp.get("weeks", []) for x in w.get("idea_ids", [])}
+    br.checks["campaign"] = ([f"campaign uses idea {x} that is not in the slate" for x in camp_ids - {c['id'] for c in chosen}] +
+                             (["offer needs owner approval"] if camp.get("offer", {}).get("needs_owner_approval") else []))
+    br.save("campaign", camp)
+    br.questions += [{"from": "campaign", "q": a["ask"], "why": a["why"], "minutes": a.get("minutes")}
+                     for a in camp.get("owner_asks") or []]
+    if week_shots:
+        (out / "shoot_card_week1_ru.txt").write_text(
+            shootcard.render_card_ru("1", week_shots, week_min, capacity_min), encoding="utf-8")
+    br.save("questions", br.questions)
+    (out / "campaign.md").write_text(render_md(br, ideas, chosen), encoding="utf-8")
+    return br
+
+
+# ----------------------------------------------------------------- owner-facing summary
+
+
+def render_md(br: BrainRun, ideas: list[dict], chosen: list[dict]) -> str:
+    it, cp, sel = br.steps["intake"], br.steps["campaign"], br.steps["selection"]
+    byid = {i["id"]: i for i in ideas}
+    L = [f"# {cp['name']}", "", f"**Request:** {br.request}", f"**Reframed:** {it['reframed_request']}",
+         f"**Success metric:** {it['success_metric']['name']} — target {it['success_metric']['target']} by "
+         f"{it['success_metric']['by_when']} ({it['success_metric']['how_measured']})", ""]
+    if it.get("push_back"):
+        L += [f"**Push back:** {it['push_back']}", ""]
+    L += ["## Big idea", cp["big_idea"], "", f"> {cp['single_minded_message_ru']}", "", cp["why_this_wins"], "",
+          "## Test slate (picked by code: rubric prior + data + diversity)", ""]
+    for s in sel["slate"]:
+        i = byid[s["id"]]
+        L += [f"### {i['id']} · {i['title']}  ({s['why']}, prior {s['prior']}, staff {s['staff_min']} min)",
+              f"- Hook: «{i['hook_ru']}»  — first frame: {i['first_frame']}",
+              f"- What happens: {i['what_happens']}",
+              f"- Why stop / share: {i['why_stop']} / {i['why_share_or_save']}",
+              f"- Driver · format · funnel: {i['driver']} · {i['format']} · {i['funnel']}",
+              f"- Production: {i['production']['mode']}; AI: {i['production']['ai_parts'] or '—'}",
+              f"- KPI: {i['kpi']}; WhatsApp code: {cp['attribution_codes'].get(i['id'], '—')}"]
+        if s["needs_facts"]:
+            L.append(f"- **Needs confirmation:** {'; '.join(s['needs_facts'])}")
+        L.append("")
+    L += ["## Weeks", ""] + [f"- **Week {w['week']}** — {w['goal']}: {', '.join(w['idea_ids'])}. Staff: {w['worker_ask_ru']}. "
+                             f"AI: {w['ai_work']}" for w in cp["weeks"]]
+    L += ["", f"Week 1 filming fits the budget: {sel['week1_minutes']} min ({', '.join(sel['week1_filmed']) or 'no staff footage'}).",
+          "", "## Measurement and decisions", f"- Metric: {cp['measurement']['success_metric']}",
+          f"- Attribution: {cp['measurement']['attribution']}", f"- Review: {cp['measurement']['review_cadence']}"]
+    L += [f"- Rule: {r}" for r in cp["decision_rules"]]
+    off = cp.get("offer") or {}
+    if off.get("needed"):
+        L += ["", "## Offer", off["proposal"] + ("  **(needs owner approval)**" if off.get("needs_owner_approval") else "")]
+    if br.questions:
+        L += ["", "## Questions for the owner (batched)"] + [f"- {q['q']}" for q in br.questions]
+    rv = br.steps.get("reviews") or []
+    if rv:
+        L += ["", "## Attack before revision"] + [f"- {r['persona'][:40]}: {r['score']}/10, approve={r['would_approve']}" for r in rv]
+    return "\n".join(L) + "\n"
