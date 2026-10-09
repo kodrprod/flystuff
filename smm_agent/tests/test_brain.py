@@ -209,3 +209,11 @@ def test_owner_card_fits_15_minutes_and_defers_the_rest():
     assert sum(1 for q in card if q["from"] == "facts") == 1 and "(и ещё 3)" in card[-1]["q"]
     assert {"from": "intake", "q": "Вопрос 3?"} in deferred                              # max 3 asked; rest deferred
     assert len(card) + len(deferred) == 3 + 5 + 1 + 3 + 1                               # nothing dropped but the duplicate
+
+
+def test_owner_card_never_exceeds_7_items_even_with_zero_minute_asks():
+    qs = ([{"from": "intake", "q": f"Вопрос {i}?"} for i in range(3)] +
+          [{"from": "inputs", "q": f"Мелочь {i}", "minutes": 0} for i in range(10)] +
+          [{"from": "facts", "q": "ID01: NEEDS FACT цена"}])
+    card, deferred = B.owner_card(qs)
+    assert len(card) == 7 and card[-1]["from"] == "facts" and len(deferred) == 7

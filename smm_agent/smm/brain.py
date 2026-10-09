@@ -398,6 +398,8 @@ def plan_week(chosen: list[dict], capacity_min: float = 20.0) -> tuple[list[str]
 # ----------------------------------------------------------------- the owner card (code)
 
 OWNER_MINUTES_CAP = 15          # onboarding batch; later weeks <= 5 (method L5)
+OWNER_MAX_ITEMS = 7             # stress test: owners answered 2 of 8+ asks; a card longer than this is not read
+MIN_ITEM_MINUTES = 1.0          # reading and answering anything costs at least a minute, whatever the model claims
 
 
 def owner_card(questions: list[dict], minutes_cap: float = OWNER_MINUTES_CAP) -> tuple[list[dict], list[dict]]:
@@ -416,10 +418,12 @@ def owner_card(questions: list[dict], minutes_cap: float = OWNER_MINUTES_CAP) ->
     rest = [q for q in uniq if q.get("from") not in ("intake", "facts")]
     card, deferred, used = list(clar), list(extra_clar), 1.0 * len(clar)
     budget = minutes_cap - (2.0 if facts else 0.0)                  # the facts item below costs ~2 minutes
+    slots = OWNER_MAX_ITEMS - len(clar) - (1 if facts else 0)
     for q in rest:
         m = q.get("minutes")
-        m = float(m) if isinstance(m, (int, float)) else 2.0
-        if used + m <= budget:
+        m = max(MIN_ITEM_MINUTES, float(m) if isinstance(m, (int, float)) else 2.0)
+        if used + m <= budget and slots > 0:
+            slots -= 1
             card.append(q)
             used += m
         else:
@@ -443,6 +447,7 @@ class BrainRun:
     steps: dict = field(default_factory=dict)
     checks: dict = field(default_factory=dict)
     questions: list = field(default_factory=list)       # for the owner, batched
+    staff_asks: list = field(default_factory=list)      # go on the staff card, never in the owner's message
 
     def save(self, name: str, data) -> None:
         self.steps[name] = data
@@ -492,7 +497,8 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                       "\n\nList what is already in hand and what is missing, ranked by value per owner minute.", INPUTS_SCHEMA)
     br.save("inputs", inputs)
     br.questions += [{"from": "inputs", "q": m["input"], "how": m["how"], "minutes": m.get("owner_minutes")}
-                     for m in inputs["missing"] if m["who"] in ("owner", "staff")]
+                     for m in inputs["missing"] if m["who"] == "owner"]
+    br.staff_asks += [{"q": m["input"], "how": m["how"]} for m in inputs["missing"] if m["who"] == "staff"]
 
     # 3 evidence + insights (one revision if sources do not hold)
     prompt3 = (ctx + "\n\nINTAKE:\n" + json.dumps(intake, ensure_ascii=False) +
@@ -627,6 +633,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     br.questions = card
     br.save("questions", card)
     br.save("questions_deferred", deferred)
+    br.save("staff_asks", br.staff_asks)
     (out / "campaign.md").write_text(render_md(br, ideas, chosen), encoding="utf-8")
     return br
 
