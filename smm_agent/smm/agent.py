@@ -46,7 +46,8 @@ def cmd_plan(a) -> int:
         llm = get_llm(a.llm, tape)
     try:
         br = brain.run(client, a.request, llm, n_ideas=a.ideas, slate=a.slate, capacity_min=a.minutes,
-                       critique=not a.no_critique, run_id=a.run_id)
+                       critique=not a.no_critique, run_id=a.run_id,
+                       method_path=Path(a.method) if a.method else None, out_root=Path(a.out) if a.out else None)
     except UsageLimitError as e:
         print(f"PARKED: the model is usage-limited right now ({e}). Re-run the same command later; finished "
               f"steps are on the tape and are not paid for twice when replayed with --llm recorded.", file=sys.stderr)
@@ -111,6 +112,8 @@ def main(argv=None) -> int:
     p.add_argument("--minutes", type=float, default=20.0)
     p.add_argument("--no-critique", action="store_true")
     p.add_argument("--run-id")
+    p.add_argument("--method", help="method file (default brain/METHOD.md)")
+    p.add_argument("--out", help="folder for runs (default clients/<slug>/campaigns)")
     p.set_defaults(fn=cmd_plan)
     q = sub.add_parser("questions")
     q.add_argument("--client", required=True)
