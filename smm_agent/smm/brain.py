@@ -28,7 +28,7 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from . import shootcard
+from . import acquire, shootcard
 from .attribution import make_code
 from .checks import check_hook, check_text
 from .facts import Ledger
@@ -380,7 +380,8 @@ def _sys(method: str, step: str) -> str:
 
 def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_ideas: int = 24,
         slate: int = 8, capacity_min: float = 20.0, critique: bool = True, method_path: Path | None = None,
-        now=None, run_id: str | None = None) -> BrainRun:
+        now=None, run_id: str | None = None, fetch=acquire._get) -> BrainRun:
+    """fetch: how the agent re-fetches product pages it already knows (None = never fetch)."""
     method = method_text(method_path)
     rid = run_id or time.strftime("%Y%m%d-%H%M%S", time.gmtime())
     out = (out_root or client.dir / "campaigns") / rid
@@ -440,6 +441,14 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                          "replaced:\n" + json.dumps(bad, ensure_ascii=False, indent=1), IDEAS_SCHEMA)["ideas"]
         ideas = fixed
         report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+    # facts the agent can get itself (known product pages) are fetched now instead of asking the owner
+    need = [i for i in ideas if report[i["id"]]["needs_facts"]]
+    if need and fetch is not None:
+        got = acquire.fill_facts(client.ledger, client.dir / "facts.jsonl", client.dir,
+                                 [t for i in need for _, t in audience_strings(i)], fetch, now)
+        br.checks["fetched_facts"] = got
+        if got["added"]:
+            report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
     br.save("ideas", ideas)
     br.checks["ideas"] = report
     for iid, r in report.items():

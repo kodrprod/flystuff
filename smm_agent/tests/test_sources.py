@@ -27,6 +27,12 @@ def test_jsonld_products_incl_graph_and_broken_blocks():
     assert ps[0]["price"] == 98280 and ps[0]["availability"] == "InStock" and ps[0]["brand"] == "Cort"
     facts = S.product_to_facts("g", ps[0], "2026-10-08")
     assert {f.id for f in facts} == {"g_price", "g_instock"} and facts[0].ttl_days == 2
+    # the price as content writes it ("98 280 ₸") must be backed, not only the bare number
+    from smm.checks import check_text
+    from smm.facts import Ledger
+    lg = Ledger(facts)
+    now = __import__("datetime").datetime(2026, 10, 9, tzinfo=__import__("datetime").timezone.utc)
+    assert not check_text("Гитара X за 98 280 ₸", lg, now=now) and check_text("за 98 281 ₸", lg, now=now)
 
 
 def test_ytdlp_flat_summary_and_signals():

@@ -93,12 +93,17 @@ def parse_jsonld_products(html: str) -> list[dict]:
     return out
 
 
+CURRENCY_SIGN = {"KZT": "₸", "RUB": "₽", "USD": "$", "EUR": "€", "UZS": "сум", "KGS": "сом"}
+
+
 def product_to_facts(key: str, p: dict, fetched_at: str, ttl_days: int = 2) -> list[Fact]:
     facts = []
     if p.get("price") is not None:
-        facts.append(Fact(f"{key}_price", f"{p['name']} — {p['price']} {p.get('currency') or ''}".strip(), "web",
-                          p.get("url") or "", fetched_at, values=[f"{int(float(p['price'])):,}".replace(",", " ")],
-                          ttl_days=ttl_days))
+        n = f"{int(float(p['price'])):,}".replace(",", " ")
+        sign = CURRENCY_SIGN.get((p.get("currency") or "").upper(), p.get("currency") or "")
+        # both forms: "218 400 ₸" (how content writes it) and the bare number
+        facts.append(Fact(f"{key}_price", f"{p['name']} — {n} {sign}".strip(), "web", p.get("url") or "", fetched_at,
+                          values=[f"{n} {sign}".strip(), n], ttl_days=ttl_days))
     if p.get("availability") == "InStock":
         facts.append(Fact(f"{key}_instock", f"{p['name']}: в наличии по данным сайта", "web", p.get("url") or "",
                           fetched_at, ttl_days=ttl_days))

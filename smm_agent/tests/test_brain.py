@@ -135,7 +135,7 @@ def test_full_run_writes_campaign_questions_codes_and_shoot_card(tmp_path):
     be = Scripted(outs)
     llm = LLM(be, Tape(tmp_path / "tape.jsonl"))
     cl = B.Client.load("acme", tmp_path / "clients")
-    br = B.run(cl, "Продайте больше укулеле", llm, method_path=method, slate=6, now=NOW, run_id="t1")
+    br = B.run(cl, "Продайте больше укулеле", llm, method_path=method, slate=6, now=NOW, run_id="t1", fetch=None)
     out = cdir / "campaigns" / "t1"
     for f in ("inventory", "intake", "inputs", "insights", "ideas", "selection", "campaign", "questions"):
         assert (out / f"{f}.json").exists(), f
