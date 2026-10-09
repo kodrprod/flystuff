@@ -431,7 +431,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                "Prices, numbers, contacts on screen only if they are in facts_usable; otherwise write the idea without "
                "them or mark the fact as needed in facts_used as 'NEEDED: ...'.")
     ideas = llm.json(f"ideas:{client.slug}", _sys(method, "D. Idea generation"), prompt4, IDEAS_SCHEMA)["ideas"]
-    iids = {i["id"] for i in ins["insights"]}
+    iids = {i["id"] for i in ins["insights"] if (i.get("strength") or 0) > 0}    # rejected insights cannot be cited
     report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
     bad = {k: v["errors"] for k, v in report.items() if v["errors"]}
     if bad:
@@ -508,6 +508,9 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     br.questions += [{"from": "campaign", "q": a["ask"], "why": a["why"], "minutes": a.get("minutes")}
                      for a in camp.get("owner_asks") or []]
     if week_shots:
+        (out / "manifest_week1.json").write_text(json.dumps(
+            [dict(m, idea_id=m["shot_id"].rsplit("_", 1)[0]) for m in shootcard.manifest(week_shots)],
+            ensure_ascii=False, indent=1), encoding="utf-8")
         (out / "shoot_card_week1_ru.txt").write_text(
             shootcard.render_card_ru("1", week_shots, week_min, capacity_min), encoding="utf-8")
     br.save("questions", br.questions)

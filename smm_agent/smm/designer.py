@@ -63,7 +63,9 @@ DESIGN_CONTRACT = f"""TECHNICAL CONTRACT (the renderer enforces it):
 - Images you may use are only the local files listed in the brief (file:// URLs).
 - Platform UI covers: top 150px, bottom 350px, left 72px, right 132px. Keep all text inside that safe box.
 - Every price, phone number or code must be typed EXACTLY as given in FACTS. Never invent numbers or claims.
-- The first frame (t=0) is the thumbnail and the hook: it must already show readable text and the subject."""
+- The first frame (t=0) is the thumbnail and the hook: it must already show readable text and the subject.
+- With footage underneath, the video is exactly as long as the footage (brief.footage_duration_s): time every beat to
+  the real footage you looked at; after your timeline ends its last state stays on screen."""
 
 
 @dataclass
@@ -112,6 +114,11 @@ def design_video(brief: dict, workdir: Path, ledger, playbook: str, llm_designer
     edit_plan, why_watch}. Returns the best render and the full round history (designs, checks, critiques)."""
     workdir.mkdir(parents=True, exist_ok=True)
     tape = Tape(tape_path or workdir / "tape.jsonl")
+    footage_s = None
+    if background:
+        from .render import probe
+        footage_s = round(float(probe(background)["duration_s"]) - bg_start, 2)
+        brief = dict(brief, footage_duration_s=footage_s)     # the design must time itself to the real footage
     reads = [str(workdir)] + [str(Path(p).parent) for p in (frames_for_designer or []) + list(brief.get("images", []))]
     llm_designer = llm_designer or LLM(CLIBackend(allowed_tools="Read", add_dirs=sorted(set(reads))), tape)
     llm_critic = llm_critic or LLM(CLIBackend(allowed_tools="Read", add_dirs=sorted(set(reads))), tape)
@@ -139,7 +146,8 @@ def design_video(brief: dict, workdir: Path, ledger, playbook: str, llm_designer
         html_path.write_text(d["html"], encoding="utf-8")
         out = rd / "draft.mp4"
         try:
-            info = htmlmotion.render_design(html_path, out, background, bg_start, audio, ledger=ledger, now=now)
+            info = htmlmotion.render_design(html_path, out, background, bg_start, audio, ledger=ledger, now=now,
+                                            duration=footage_s)
         except RuntimeError as e:
             feedback = f"The design failed to render: {e}. Return a valid design."
             rounds.append({"round": rnd, "render_error": str(e)})

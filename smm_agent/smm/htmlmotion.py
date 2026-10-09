@@ -130,13 +130,14 @@ def layout_problems(meta: dict, safe=(72, 150, 132, 350)) -> list[str]:
 
 
 def render_design(design_html: str | Path, out_mp4: str | Path, background=None, bg_start: float = 0.0,
-                  audio=None, ledger=None, now=None, keep_frames: bool = False) -> dict:
+                  audio=None, ledger=None, now=None, keep_frames: bool = False, duration: float | None = None) -> dict:
     """Render + composite + verify. Returns facts about the result; raises nothing for rule violations
-    (they are returned so the editor can revise the design)."""
+    (they are returned so the editor can revise the design). `duration` overrides the design's own length
+    (over footage the video is as long as the footage; the design's last state holds)."""
     from .render import probe
     tmp = Path(tempfile.mkdtemp(prefix="design_"))
     try:
-        meta = render_frames(design_html, tmp / "frames")
+        meta = render_frames(design_html, tmp / "frames", duration=duration)
         composite(tmp / "frames", out_mp4, background, bg_start, audio, duration=meta["duration"])
         info = probe(out_mp4)
         info["on_screen_text"] = visible_strings(meta)
