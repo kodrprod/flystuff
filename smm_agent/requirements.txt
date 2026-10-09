@@ -1,3 +1,4 @@
 pillow>=10
 pytest>=8
 yt-dlp   # only for research scripts (public listings); not needed by the core
+higgsfield-client>=0.2   # AI generation (optional; dry-run without HF_KEY)
