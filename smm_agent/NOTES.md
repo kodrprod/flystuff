@@ -1,6 +1,6 @@
 # SMM agent — working notes (read this first when resuming)
 
-Last updated: 2026-10-09 05:30 UTC (session on branch `claude/festive-hypatia-yifkyo`).
+Last updated: 2026-10-09 19:10 UTC (session on branch `claude/festive-hypatia-yifkyo`).
 This folder lives inside the unrelated `flystuff` (drone sim) repo only because that
 was the repo attached to the session. It should move to its own repo — see "Waiting for human".
 
@@ -30,7 +30,7 @@ limits) `formats.py` · staff card `shootcard.py` · editing `edit.py`, `pacing.
 publish package `publish.py`, human cards `handoff.py` · WhatsApp attribution `attribution.py` · experiments
 `experiments.py`.
 
-**Verified vs not (2026-10-09):** 117 tests pass (`python3 -m pytest -q`; needs `pip install -r requirements.txt` after a
+**Verified vs not (2026-10-09 morning):** 117 tests pass (`python3 -m pytest -q`; needs `pip install -r requirements.txt` after a
 container restore). NOT yet run end to end against the real model: `brain.run` (waits for METHOD.md),
 `designer.design_video` (needs a CLI run), Higgsfield (no SDK key/credits). No real phone footage tested yet.
 
@@ -48,6 +48,28 @@ container restore). NOT yet run end to end against the real model: `brain.run` (
 playwright into `motion_engine/node_modules`); vidstab transforms misalign with jump-cut pieces (stabilise into an
 intermediate file first); SHAKE_PX 2.5 false-positives on moving content (6.0); jump-cuts of 1.5 s still fail opening
 pacing (1.0 s).
+
+**Update 2026-10-09 evening (read with the block above):**
+- Method v1 exists: `brain/METHOD_v1.md` (synthesis of 5 expert drafts, bound to the code contract; 14.8k words).
+  The code reads the driver/format slug vocabulary from the method's own tables (`brain.method_vocab`).
+- First full real brain run (Muzzone, "sell digital pianos before New Year", provisional method = strategist draft):
+  boss 5/10 and veteran creator 5/10, neither approves. Real failures: hero series rests on a sound difference a weak
+  phone mic flattens; SKUs chosen ignore stock depth; week-1 shoot (7 pianos, presets) not doable in 17 min (the
+  minute model has no per-subject setup cost); Kaspi installments missing; 29 owner questions (now capped by code:
+  `brain.owner_card`, <=15 min, rest deferred). Output: scratchpad `brain/runs/provisional-pianos/` (not in repo).
+- Stress test (`python -m smm.stress`, 8 cases: 4 real Muzzone requests, 4 labelled hypothetical clients) is running
+  in batches of 3 because 8 parallel runs exhausted the subscription session window. Tapes make every run resumable.
+- Next: v2 revision workflow (`scratchpad/brain/revise_v2.js`: per-case diagnosis -> v2 -> two attacks -> final),
+  re-test the hardest cases, BRAIN.md, SUMMARY.md update.
+
+**Decisions added (evening):** D13 the method document is the single source of the categorical vocabulary (arms).
+D14 owner card: <=3 clarifying questions + ranked asks within 15 min + one facts item; everything else deferred.
+D15 a fresh fetch of a page supersedes older facts of the same kind from that page (stale prices can never pass).
+D16 stress tests run through the real code path (`agent plan`), not through a simulation of the method.
+
+**Dead ends added:** usage-limit detection by substring "429" matched ordinary token counts (42901) and parked 8 good
+runs (now: structured fields only). Committing after `pytest | tail` hid a failing test twice; commit only on rc==0.
+Tests must not depend on the working directory.
 
 ## 1. Goal and definition of done
 
