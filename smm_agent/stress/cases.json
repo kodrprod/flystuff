@@ -1,0 +1,50 @@
+[
+ {
+  "key": "muzzone-viral",
+  "client": "muzzone",
+  "real": true,
+  "request": "Сделайте нас вирусными в TikTok."
+ },
+ {
+  "key": "muzzone-pianos",
+  "client": "muzzone",
+  "real": true,
+  "request": "Нужно продать цифровые пианино до Нового года."
+ },
+ {
+  "key": "muzzone-hiring",
+  "client": "muzzone",
+  "real": true,
+  "request": "Нам нужен продавец-консультант. Найдите через соцсети."
+ },
+ {
+  "key": "muzzone-sales",
+  "client": "muzzone",
+  "real": true,
+  "request": "Мы хотим больше продаж через соцсети. У сотрудников есть телефон и 20 минут в неделю."
+ },
+ {
+  "key": "dental",
+  "client": "dental",
+  "real": false,
+  "request": "Нужно больше пациентов на импланты."
+ },
+ {
+  "key": "coffee",
+  "client": "coffee",
+  "real": false,
+  "request": "Через 3 недели открываем вторую точку на Левом берегу. Нужен ажиотаж."
+ },
+ {
+  "key": "b2b",
+  "client": "b2b",
+  "real": false,
+  "request": "Мы продаём только компаниям. Нам вообще нужны соцсети?"
+ },
+ {
+  "key": "salon",
+  "client": "salon",
+  "real": false,
+  "request": "Конкуренты дешевле, клиенты уходят. Что делать?"
+ }
+]

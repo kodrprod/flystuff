@@ -24,6 +24,7 @@ agent reads, not code. Code does only what code is better at:
 from __future__ import annotations
 
 import json
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -84,6 +85,14 @@ INSIGHTS_SCHEMA = obj({
                          "content_reality": S, "strength": I})),
 })
 
+def engine_key(idea: dict) -> str:
+    """Categorical engine (the `format` slug) for diversity and experiment arms. If a model ever returns prose
+    ('E09 blind test ...'), the first token is used, so free text cannot make every idea look unique."""
+    v = (idea.get("format") or "?").strip()
+    m = re.match(r"([A-Za-z]{1,3}\d{1,3})\b", v)
+    return (m.group(1) if m else (v.split() or ["?"])[0]).lower().strip(".,:;")[:32]
+
+
 RUBRIC = ["stop", "truth", "share_save", "comment", "producible", "brand_link", "objective_fit"]
 RUBRIC_HELP = {
     "stop": "would a stranger stop in the first second (first frame + first words)?",
@@ -96,7 +105,8 @@ RUBRIC_HELP = {
 }
 
 IDEA = obj({
-    "id": S, "title": S, "insight_ids": arr(S), "driver": S, "format": S, "funnel": {"type": "string", "enum": [
+    "id": S, "title": S, "insight_ids": arr(S),
+    "driver": S, "format": S, "funnel": {"type": "string", "enum": [
         "attention", "consideration", "conversion", "trust", "retention", "recruiting"]},
     "hook_ru": S, "first_frame": S, "on_screen_ru": arr(S), "what_happens": S, "why_stop": S, "why_share_or_save": S,
     "comment_prompt_ru": S, "cta_ru": S,
@@ -110,6 +120,30 @@ IDEA = obj({
     "rubric": obj({k: I for k in RUBRIC}),
 })
 IDEAS_SCHEMA = obj({"ideas": arr(IDEA, minItems=8)})
+
+
+def method_vocab(method: str) -> dict[str, list[str]]:
+    """The categorical vocabulary the method defines: the first column of the table under the heading that says
+    "the `driver` field uses these exact slugs" (and the same for `format`). The method document is the single
+    source of truth, so a revised method cannot drift from the code's arms. Empty list = not found (free text)."""
+    out = {}
+    for field in ("driver", "format"):
+        m = re.search(r"^#{2,4} .*`%s` field[^\n]*\n(.*?)(?=^#{2,4} )" % field, method, re.M | re.S)
+        table = re.search(r"((?:^\|.*\n?)+)", m.group(1), re.M) if m else None     # first table only
+        slugs = re.findall(r"^\|\s*([a-z][a-z0-9_]+)\s*\|", table.group(1), re.M) if table else []
+        out[field] = [x for x in dict.fromkeys(slugs) if x not in (field, "behaviour", "insight")]
+    return out
+
+
+def ideas_schema(vocab: dict[str, list[str]] | None = None) -> dict:
+    """IDEAS_SCHEMA with driver/format restricted to the method's slugs when the method defines them."""
+    if not vocab or not (vocab.get("driver") or vocab.get("format")):
+        return IDEAS_SCHEMA
+    idea = json.loads(json.dumps(IDEA))
+    for f in ("driver", "format"):
+        if vocab.get(f):
+            idea["properties"][f] = {"type": "string", "enum": vocab[f]}
+    return obj({"ideas": arr(idea, minItems=8)})
 
 CAMPAIGN_SCHEMA = obj({
     "name": S, "big_idea": S, "single_minded_message_ru": S, "why_this_wins": S,
@@ -254,16 +288,30 @@ def check_idea(idea: dict, ledger: Ledger, insight_ids: set[str], now=None) -> d
     return {"errors": errs, "needs_facts": needs, "warnings": warns}
 
 
+def source_is_real(src: str, ledger: Ledger, files: set[str]) -> bool:
+    """`fact:<id>` in the ledger, `file:<path>[#locator]` among the files the agent was given, a URL, or the
+    request/profile itself. A bare fact id or path is accepted too."""
+    s = (src or "").strip()
+    low = s.lower()
+    if low.startswith(("http://", "https://", "request", "profile", "intake")):
+        return True
+    if low.startswith("fact:"):
+        return s[5:].strip() in ledger.facts
+    if low.startswith("file:"):
+        s = s[5:].strip()
+    path = s.split("#", 1)[0].strip()
+    return s in ledger.facts or any(path and (f == path or f.endswith("/" + path.lstrip("./")) or path.endswith(f))
+                                    for f in files)
+
+
 def check_insights(ins: dict, ledger: Ledger, files: set[str]) -> list[str]:
-    """Every evidence item must point at something real: a fact id in the ledger, a file the agent was given,
-    a URL, or be labelled an assumption."""
+    """Every evidence item must point at something real (see source_is_real) or be labelled an assumption."""
     out = []
     ev_ids = {e["id"] for e in ins["evidence"]}
     for e in ins["evidence"]:
         src = e.get("source", "")
-        real = (src in ledger.facts or any(src.startswith(f) or f in src for f in files) or src.startswith("http")
-                or src.startswith("request") or src.startswith("profile"))
-        if not real and e.get("confidence") != "assumption":
+        if e.get("confidence") != "assumption" and not src.lower().startswith("assumption") \
+                and not source_is_real(src, ledger, files):
             out.append(f"evidence {e['id']}: source {src!r} is not a fact id, file or URL; label it an assumption")
     for i in ins["insights"]:
         bad = [x for x in i.get("evidence_ids") or [] if x not in ev_ids]
@@ -295,7 +343,7 @@ def data_bonus(idea: dict, arm_stats: dict[str, dict] | None) -> float:
     if not arm_stats:
         return 0.0
     b = 0.0
-    for key in (f"driver:{idea.get('driver', '').lower()}", f"format:{idea.get('format', '').lower()}"):
+    for key in (f"driver:{idea.get('driver', '').lower()}", f"engine:{engine_key(idea)}"):
         st = arm_stats.get(key)
         if st and st.get("n", 0) > 0:
             b += st["mean"] / (1 + st["sd"])
@@ -314,7 +362,7 @@ def select(ideas: list[dict], k: int, weights: dict[str, float], arm_stats: dict
     n_explore = max(1, round(k * explore_share)) if k >= 4 else 0
     while pool and len(chosen) < k - n_explore:
         def mmr(i):
-            rep = sum((c.get("driver") == i.get("driver")) * 0.6 + (c.get("format") == i.get("format")) * 0.5 +
+            rep = sum((c.get("driver") == i.get("driver")) * 0.6 + (engine_key(c) == engine_key(i)) * 0.5 +
                       (c["production"]["mode"] == i["production"]["mode"]) * 0.15 for c in chosen)
             return i["_value"] - rep
         best = max(pool, key=mmr)
@@ -324,7 +372,7 @@ def select(ideas: list[dict], k: int, weights: dict[str, float], arm_stats: dict
     while pool and len(chosen) < k:                           # exploration: maximise novelty, prior as tie-break
         def novelty(i):
             return (int(i.get("driver") not in {c.get("driver") for c in chosen}) * 2
-                    + int(i.get("format") not in {c.get("format") for c in chosen}), i["_prior"])
+                    + int(engine_key(i) not in {engine_key(c) for c in chosen}), i["_prior"])
         best = max(pool, key=novelty)
         best["_why"] = "explore"
         chosen.append(best)
@@ -380,7 +428,7 @@ def _sys(method: str, step: str) -> str:
 
 def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_ideas: int = 24,
         slate: int = 8, capacity_min: float = 20.0, critique: bool = True, method_path: Path | None = None,
-        now=None, run_id: str | None = None, fetch=acquire._get) -> BrainRun:
+        now=None, run_id: str | None = None, fetch=acquire._get, rereview: bool = False) -> BrainRun:
     """fetch: how the agent re-fetches product pages it already knows (None = never fetch)."""
     method = method_text(method_path)
     rid = run_id or time.strftime("%Y%m%d-%H%M%S", time.gmtime())
@@ -427,10 +475,14 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                json.dumps(ins, ensure_ascii=False) +
                f"\n\nGenerate {n_ideas} short-video ideas, as diverse as the method demands (drivers, formats, production "
                f"modes, funnel stages). Score each 1-5 on this rubric (a prior, not a prediction):\n{rub}\n"
+               "driver and format are the method's exact slugs (D2/D3): code uses them as experiment arms and to "
+               "spread the test slate, so they must be honest categories. Write {CODE} where the WhatsApp code goes; "
+               "code fills it in.\n"
                f"Staff: one weak phone (good sound only close-up), {capacity_min:g} minutes a week in total. "
                "Prices, numbers, contacts on screen only if they are in facts_usable; otherwise write the idea without "
                "them or mark the fact as needed in facts_used as 'NEEDED: ...'.")
-    ideas = llm.json(f"ideas:{client.slug}", _sys(method, "D. Idea generation"), prompt4, IDEAS_SCHEMA)["ideas"]
+    isch = ideas_schema(method_vocab(method))
+    ideas = llm.json(f"ideas:{client.slug}", _sys(method, "D. Idea generation"), prompt4, isch)["ideas"]
     iids = {i["id"] for i in ins["insights"] if (i.get("strength") or 0) > 0}    # rejected insights cannot be cited
     report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
     bad = {k: v["errors"] for k, v in report.items() if v["errors"]}
@@ -438,7 +490,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
         fixed = llm.json(f"ideas-fix:{client.slug}", _sys(method, "D. Idea generation"), prompt4 +
                          "\n\nYOUR IDEAS:\n" + json.dumps(ideas, ensure_ascii=False) +
                          "\n\nTHESE FAILED THE AUTOMATIC CHECKS. Return the full list with every failing idea fixed or "
-                         "replaced:\n" + json.dumps(bad, ensure_ascii=False, indent=1), IDEAS_SCHEMA)["ideas"]
+                         "replaced:\n" + json.dumps(bad, ensure_ascii=False, indent=1), isch)["ideas"]
         ideas = fixed
         report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
     # facts the agent can get itself (known product pages) are fetched now instead of asking the owner
@@ -464,7 +516,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     chosen = select(ideas, slate, load_weights(), arm_stats, blocked=blocked)
     week_ids, week_shots, week_min = plan_week(chosen, capacity_min)
     selection = {"slate": [{"id": c["id"], "prior": c["_prior"], "value": round(c["_value"], 3), "why": c["_why"],
-                            "driver": c.get("driver"), "format": c.get("format"), "staff_min": round(idea_minutes(c), 1),
+                            "driver": c.get("driver"), "engine": engine_key(c), "staff_min": round(idea_minutes(c), 1),
                             "needs_facts": report[c["id"]]["needs_facts"]} for c in chosen],
                  "blocked": sorted(blocked), "week1_filmed": week_ids, "week1_minutes": round(week_min, 1),
                  "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"}
@@ -481,13 +533,15 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
 
     # 7 critique -> one revision
     reviews = []
+    personas = (f"the BOSS of {client.profile.get('name', client.slug)} (persona: boss), who asked: {request}. Does this "
+                "solve MY problem, is it worth my staff's time and money, is anything risky, embarrassing or untrue?",
+                "a veteran short-form creator and SMM for local businesses in Kazakhstan/CIS (persona: veteran_creator): "
+                "is anything generic, ad-like, unproducible with one weak phone in 20 minutes, or unlikely to spread or "
+                "bring inquiries?")
     if critique:
         bundle = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in {c['id'] for c in chosen}],
                              "campaign": camp}, ensure_ascii=False)
-        for persona in (f"the BOSS of {client.profile.get('name', client.slug)}, who asked: {request}. Does this solve MY "
-                        "problem, is it worth my staff's time and money, is anything risky, embarrassing or untrue?",
-                        "a veteran short-form creator and SMM for local businesses in Kazakhstan/CIS: is anything generic, "
-                        "ad-like, unproducible with one weak phone in 20 minutes, or unlikely to spread or bring inquiries?"):
+        for persona in personas:
             reviews.append(llm.json(f"review:{client.slug}:{persona[:12]}", "You are " + persona +
                                     " Attack the plan; be concrete; severity fatal = you would reject it.",
                                     bundle, REVIEW_SCHEMA, effort="medium"))
@@ -497,10 +551,26 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                             "\n\nYOUR CAMPAIGN:\n" + json.dumps(camp, ensure_ascii=False) +
                             "\n\nFIX EVERY ONE OF THESE BY CHANGING THE PLAN (not by arguing):\n" +
                             json.dumps(serious, ensure_ascii=False, indent=1), CAMPAIGN_SCHEMA)
+            if rereview:                     # measure whether the revision actually fixed it (stress tests)
+                bundle2 = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in {c['id'] for c in chosen}],
+                                      "campaign": camp}, ensure_ascii=False)
+                br.save("reviews_after", [llm.json(f"review-after:{client.slug}:{persona[:12]}", "You are " + persona +
+                                                   " Attack the plan; be concrete; severity fatal = you would reject it.",
+                                                   bundle2, REVIEW_SCHEMA, effort="medium") for persona in personas])
     br.save("reviews", reviews)
 
-    # attribution codes for every slate idea (code, deterministic)
+    # attribution: one WhatsApp code per slate idea (code, deterministic), written into the {CODE} placeholders
     camp["attribution_codes"] = {c["id"]: make_code(1, n + 1) for n, c in enumerate(chosen)}
+    for c in chosen:
+        code = camp["attribution_codes"][c["id"]]
+        for k in ("cta_ru", "comment_prompt_ru"):
+            c[k] = (c.get(k) or "").replace("{CODE}", code)
+        c["on_screen_ru"] = [t.replace("{CODE}", code) for t in c.get("on_screen_ru") or []]
+        # facts the model itself marked as missing become owner questions too
+        for r in c.get("risks") or []:
+            if r.strip().upper().startswith("NEEDS FACT"):
+                br.questions.append({"from": "facts", "q": f"{c['id']}: {r.split(':', 1)[-1].strip()}"})
+    br.save("ideas", ideas)
     camp_ids = {x for w in camp.get("weeks", []) for x in w.get("idea_ids", [])}
     br.checks["campaign"] = ([f"campaign uses idea {x} that is not in the slate" for x in camp_ids - {c['id'] for c in chosen}] +
                              (["offer needs owner approval"] if camp.get("offer", {}).get("needs_owner_approval") else []))
@@ -513,6 +583,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
             ensure_ascii=False, indent=1), encoding="utf-8")
         (out / "shoot_card_week1_ru.txt").write_text(
             shootcard.render_card_ru("1", week_shots, week_min, capacity_min), encoding="utf-8")
+    br.save("checks", br.checks)
     br.save("questions", br.questions)
     (out / "campaign.md").write_text(render_md(br, ideas, chosen), encoding="utf-8")
     return br
@@ -537,7 +608,7 @@ def render_md(br: BrainRun, ideas: list[dict], chosen: list[dict]) -> str:
               f"- Hook: «{i['hook_ru']}»  — first frame: {i['first_frame']}",
               f"- What happens: {i['what_happens']}",
               f"- Why stop / share: {i['why_stop']} / {i['why_share_or_save']}",
-              f"- Driver · format · funnel: {i['driver']} · {i['format']} · {i['funnel']}",
+              f"- Driver · engine · funnel: {i['driver']} ({i.get('driver_mechanism', '')}) · {i.get('engine', '')} · {i['funnel']}",
               f"- Production: {i['production']['mode']}; AI: {i['production']['ai_parts'] or '—'}",
               f"- KPI: {i['kpi']}; WhatsApp code: {cp['attribution_codes'].get(i['id'], '—')}"]
         if s["needs_facts"]:

@@ -15,7 +15,7 @@ def ledger():
                    Fact("wa", "WhatsApp +7 701 0987734", "web", "https://x.kz/c", "2026-10-08", ["+7 701 0987734"], 30)])
 
 
-def idea(i, driver="curiosity", fmt="demo", mode="worker", hook="Как звучит укулеле за 22 100 ₸?", shots=None, **kw):
+def idea(i, driver="watch", fmt="E04", mode="worker", hook="Как звучит укулеле за 22 100 ₸?", shots=None, **kw):
     d = {"id": i, "title": i, "insight_ids": ["in1"], "driver": driver, "format": fmt, "funnel": "attention",
          "hook_ru": hook, "first_frame": "руки на струнах", "on_screen_ru": [], "what_happens": "играет", "why_stop": "звук",
          "why_share_or_save": "полезно", "comment_prompt_ru": "", "cta_ru": "", "production": {
@@ -58,18 +58,18 @@ def test_evidence_must_point_at_something_real():
 
 
 def test_selection_spreads_drivers_and_keeps_exploration_slots():
-    ideas = [idea(f"same{j}", driver="price", fmt="slide", rubric={k: 5 for k in B.RUBRIC}) for j in range(6)]
-    ideas += [idea("story", driver="story", fmt="pov"), idea("faq", driver="practical", fmt="answer"),
-              idea("odd", driver="surprise", fmt="challenge", rubric={k: 2 for k in B.RUBRIC})]
+    ideas = [idea(f"same{j}", driver="convert", fmt="E08", rubric={k: 5 for k in B.RUBRIC}) for j in range(6)]
+    ideas += [idea("story", driver="share", fmt="E22"), idea("faq", driver="save", fmt="E05"),
+              idea("odd", driver="comment", fmt="E23", rubric={k: 2 for k in B.RUBRIC})]
     sl = B.select(ideas, 6, B.load_weights())
     drivers = [i["driver"] for i in sl]
-    assert drivers.count("price") <= 3 and {"story", "practical", "surprise"} & set(drivers)
+    assert drivers.count("convert") <= 3 and {"share", "save", "comment"} & set(drivers)
     assert any(i["_why"] == "explore" for i in sl)
 
 
 def test_audience_data_overrides_the_prior():
-    a, b = idea("a", driver="price", rubric={k: 4 for k in B.RUBRIC}), idea("b", driver="story", rubric={k: 3 for k in B.RUBRIC})
-    stats = {"driver:story": {"n": 12, "mean": 1.2, "sd": 0.3}, "driver:price": {"n": 12, "mean": -0.8, "sd": 0.3}}
+    a, b = idea("a", driver="convert", rubric={k: 4 for k in B.RUBRIC}), idea("b", driver="share", rubric={k: 3 for k in B.RUBRIC})
+    stats = {"driver:share": {"n": 12, "mean": 1.2, "sd": 0.3}, "driver:convert": {"n": 12, "mean": -0.8, "sd": 0.3}}
     assert B.select([a, b], 1, B.load_weights(), None, explore_share=0)[0]["id"] == "a"
     assert B.select([dict(a), dict(b)], 1, B.load_weights(), stats, explore_share=0)[0]["id"] == "b"
 
@@ -104,10 +104,13 @@ def test_full_run_writes_campaign_questions_codes_and_shoot_card(tmp_path):
     method = tmp_path / "METHOD.md"
     method.write_text("# method\nbe good", encoding="utf-8")
     ideas = [idea(f"i{j}", driver=d, fmt=f) for j, (d, f) in enumerate(
-        [("curiosity", "demo"), ("story", "pov"), ("practical", "answer"), ("identity", "duet"), ("surprise", "test"),
-         ("price", "compare"), ("social", "reaction"), ("nostalgia", "before_after"), ("fear", "myth")])]
+        [("watch", "E04"), ("share", "E12"), ("save", "E06"), ("follow", "E14"), ("stop", "E10"),
+         ("convert", "E08"), ("comment", "E23"), ("share", "E02"), ("save", "E01")])]
     ideas[1]["hook_ru"] = "Скидка 50% только сегодня"                       # invented -> owner question, not shipped
     ideas[2]["insight_ids"] = ["zzz"]                                      # not rooted -> error -> fix round
+    ideas[0]["cta_ru"] = "Напишите в WhatsApp {CODE}"
+    ideas[0]["risks"] = ["NEEDS FACT: условия рассрочки"]
+    ideas[0]["rubric"] = {k: 5 for k in B.RUBRIC}                          # top prior -> certainly in the slate
     outs = {
         "intake": {"request_type": "sales_push", "reframed_request": "r", "business_objective": "b",
                    "marketing_objective": "m", "success_metric": {"name": "WhatsApp chats", "how_measured": "codes",
@@ -147,6 +150,9 @@ def test_full_run_writes_campaign_questions_codes_and_shoot_card(tmp_path):
     qs = " ".join(q["q"] for q in br.questions)
     assert "бюджет" in qs and "sales by category" in qs and "consent" in qs and "i1" in qs
     assert (out / "shoot_card_week1_ru.txt").read_text().startswith("Это ИИ-ассистент")
+    saved = {i["id"]: i for i in json.loads((out / "ideas.json").read_text())}
+    assert saved["i0"]["cta_ru"] == "Напишите в WhatsApp " + camp["attribution_codes"]["i0"]
+    assert "условия рассрочки" in qs
     md = (out / "campaign.md").read_text()
     assert "Звук решает" in md and "Questions for the owner" in md
     assert "sales.json" in json.dumps(br.steps["inventory"]) and be.calls[0].startswith("intake")
@@ -155,3 +161,38 @@ def test_full_run_writes_campaign_questions_codes_and_shoot_card(tmp_path):
 def test_missing_method_is_an_error(tmp_path):
     with pytest.raises(FileNotFoundError):
         B.method_text(tmp_path / "nope.md")
+
+
+def test_method_defines_the_categorical_vocabulary():
+    m = """### D2. Drivers (the `driver` field uses these exact slugs)
+| driver | Mechanism |
+|---|---|
+| sensory | close sound |
+| relief | anxiety |
+
+Self-test table:
+| behaviour | Test |
+| stop | x |
+
+### D3. Engines (the `format` field uses these exact slugs)
+| format | Move |
+|---|---|
+| close_sound | loop |
+
+| Insight type | Engines |
+| myth | myth_check |
+
+### D4. Next
+"""
+    v = B.method_vocab(m)
+    assert v == {"driver": ["sensory", "relief"], "format": ["close_sound"]}
+    sch = B.ideas_schema(v)["properties"]["ideas"]["items"]["properties"]
+    assert sch["driver"]["enum"] == ["sensory", "relief"] and sch["format"]["enum"] == ["close_sound"]
+    assert B.ideas_schema(B.method_vocab("no tables")) is B.IDEAS_SCHEMA
+
+
+def test_evidence_sources_with_method_prefixes():
+    lg, files = ledger(), {"/c/research/stock.json"}
+    assert B.source_is_real("fact:price", lg, files) and B.source_is_real("file:research/stock.json#row 4", lg, files)
+    assert not B.source_is_real("fact:nope", lg, files) and not B.source_is_real("file:other.json", lg, files)
+    assert B.source_is_real("https://muzzone.kz/x", lg, files)

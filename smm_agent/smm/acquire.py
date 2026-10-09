@@ -63,7 +63,11 @@ def key_for(url: str) -> str:
     return "web_" + re.sub(r"[^a-z0-9]+", "_", base.lower()).strip("_")[:60]
 
 
-def refresh(rows: list[dict], fetch=_get, now: datetime | None = None, ttl_days: int = 2) -> tuple[list[Fact], list[str]]:
+PRICE_TTL_DAYS, STOCK_TTL_DAYS = 7, 2      # method v1, ruling 12: prices <=7 days, stock <=48 h; re-fetched before publishing
+
+
+def refresh(rows: list[dict], fetch=_get, now: datetime | None = None,
+            ttl_days: int = STOCK_TTL_DAYS) -> tuple[list[Fact], list[str]]:
     now = now or datetime.now(timezone.utc)
     at = now.isoformat(timespec="seconds")
     facts, failed = [], []
@@ -80,7 +84,10 @@ def refresh(rows: list[dict], fetch=_get, now: datetime | None = None, ttl_days:
         p = dict(ps[0])
         p["url"] = p.get("url") or row["url"]
         k = key_for(row["url"])
-        facts += product_to_facts(k, p, at, ttl_days)
+        for f in product_to_facts(k, p, at, ttl_days):
+            if f.id.endswith("_price"):
+                f.ttl_days = max(ttl_days, PRICE_TTL_DAYS)
+            facts.append(f)
         text = htmllib.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", " ", html, flags=re.S)))
         m = STOCK_QTY.search(text)
         if m:

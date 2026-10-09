@@ -1,0 +1,29 @@
+{
+ "name": "Салон красоты (гипотетический), Шымкент",
+ "vertical": "beauty_salon",
+ "city": "Шымкент",
+ "languages": [
+  "ru",
+  "kk"
+ ],
+ "what_they_sell": "mid-price beauty salon, 8 masters; competitors nearby ~30% cheaper; good 2GIS reviews; owner wants to keep prices",
+ "social": {
+  "instagram": "unknown"
+ },
+ "sales_channels": [
+  "WhatsApp booking",
+  "2GIS",
+  "walk-in"
+ ],
+ "staff_capacity": {
+  "minutes_per_week": 20,
+  "device": "one phone",
+  "audio": "good only close"
+ },
+ "known_unknowns": [
+  "exact prices",
+  "which services lose clients",
+  "masters' consent to be filmed"
+ ],
+ "note": "HYPOTHETICAL client for stress-testing the method. Every detail below is an assumption, not a fact; the ledger is empty, so no number may appear in content until a real client confirms it."
+}

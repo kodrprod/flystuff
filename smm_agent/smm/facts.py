@@ -13,6 +13,7 @@ Provenance values:
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -55,9 +56,13 @@ class Ledger:
         return lg
 
     def dump(self, path: str | Path) -> None:
-        with open(path, "w", encoding="utf-8") as fh:
+        """Atomic: write a temp file and rename, so parallel runs never leave a half-written ledger."""
+        path = Path(path)
+        tmp = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+        with open(tmp, "w", encoding="utf-8") as fh:
             for f in self.facts.values():
                 fh.write(json.dumps(asdict(f), ensure_ascii=False) + "\n")
+        os.replace(tmp, path)
 
     # -- editing ----------------------------------------------------------
     def add(self, f: Fact) -> None:

@@ -1,0 +1,28 @@
+{
+ "name": "Кофейня (гипотетическая), Астана",
+ "vertical": "specialty_coffee",
+ "city": "Астана",
+ "languages": [
+  "ru",
+  "kk"
+ ],
+ "what_they_sell": "specialty coffee shop, one location; loyal regulars; baristas 20-25 willing to be filmed; second location opens on Левый берег in 3 weeks",
+ "social": {
+  "instagram": "~2.1k followers (assumed)"
+ },
+ "sales_channels": [
+  "walk-in",
+  "2GIS"
+ ],
+ "staff_capacity": {
+  "minutes_per_week": 20,
+  "device": "one phone",
+  "audio": "good only close"
+ },
+ "known_unknowns": [
+  "exact opening date and address",
+  "menu prices",
+  "opening offer if any"
+ ],
+ "note": "HYPOTHETICAL client for stress-testing the method. Every detail below is an assumption, not a fact; the ledger is empty, so no number may appear in content until a real client confirms it."
+}

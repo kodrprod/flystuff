@@ -1,0 +1,27 @@
+{
+ "name": "Поставщик стройматериалов (гипотетический), Караганда",
+ "vertical": "b2b_construction_materials",
+ "city": "Караганда",
+ "languages": [
+  "ru"
+ ],
+ "what_they_sell": "dry mixes and insulation to contractors and companies; warehouse, delivery trucks, ~40 SKUs; owner skeptical of social media",
+ "social": {},
+ "sales_channels": [
+  "phone",
+  "WhatsApp",
+  "tenders",
+  "sales reps"
+ ],
+ "staff_capacity": {
+  "minutes_per_week": 20,
+  "device": "one phone",
+  "audio": "good only close"
+ },
+ "known_unknowns": [
+  "who buys (foremen? procurement?)",
+  "prices/terms",
+  "delivery radius"
+ ],
+ "note": "HYPOTHETICAL client for stress-testing the method. Every detail below is an assumption, not a fact; the ledger is empty, so no number may appear in content until a real client confirms it."
+}

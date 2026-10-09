@@ -35,7 +35,7 @@ def _latest_run(client: brain.Client, run: str | None) -> Path:
 
 
 def cmd_plan(a) -> int:
-    client = brain.Client.load(a.client)
+    client = brain.Client.load(a.client, Path(a.clients_dir) if a.clients_dir else None)
     tape = Path(a.tape) if a.tape else client.dir / "campaigns" / "tape.jsonl"
     if a.llm == "cli":
         # the brain may open the client's research files itself (Read only, inside the client folder)
@@ -47,7 +47,8 @@ def cmd_plan(a) -> int:
     try:
         br = brain.run(client, a.request, llm, n_ideas=a.ideas, slate=a.slate, capacity_min=a.minutes,
                        critique=not a.no_critique, run_id=a.run_id,
-                       method_path=Path(a.method) if a.method else None, out_root=Path(a.out) if a.out else None)
+                       method_path=Path(a.method) if a.method else None, out_root=Path(a.out) if a.out else None,
+                       rereview=a.rereview, fetch=None if a.no_fetch else brain.acquire._get)
     except UsageLimitError as e:
         print(f"PARKED: the model is usage-limited right now ({str(e)[-160:]}). Re-run the same command later: "
               f"finished steps are replayed from the tape ({tape}) and not paid for twice.", file=sys.stderr)
@@ -114,6 +115,9 @@ def main(argv=None) -> int:
     p.add_argument("--run-id")
     p.add_argument("--method", help="method file (default brain/METHOD.md)")
     p.add_argument("--out", help="folder for runs (default clients/<slug>/campaigns)")
+    p.add_argument("--clients-dir", help="where client folders live (default clients/)")
+    p.add_argument("--rereview", action="store_true", help="re-run the attack after the revision (stress tests)")
+    p.add_argument("--no-fetch", action="store_true", help="never re-fetch product pages")
     p.set_defaults(fn=cmd_plan)
     q = sub.add_parser("questions")
     q.add_argument("--client", required=True)

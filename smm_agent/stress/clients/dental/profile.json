@@ -1,0 +1,33 @@
+{
+ "name": "Стоматология (гипотетическая), Алматы",
+ "vertical": "dental_clinic",
+ "city": "Алматы",
+ "languages": [
+  "ru",
+  "kk"
+ ],
+ "what_they_sell": "private dental clinic: implants, crowns, hygiene; 6 chairs, 2 implant surgeons; prices above average",
+ "social": {
+  "instagram": "~3k followers (assumed)"
+ },
+ "sales_channels": [
+  "WhatsApp",
+  "phone",
+  "Instagram DM"
+ ],
+ "staff_capacity": {
+  "minutes_per_week": 20,
+  "device": "one phone",
+  "audio": "good only close"
+ },
+ "constraints_known": [
+  "medical advertising rules in RK apply: no outcome guarantees, no before/after without consent, no patient faces without written consent"
+ ],
+ "known_unknowns": [
+  "prices",
+  "implant brands",
+  "patient consent policy",
+  "ad budget"
+ ],
+ "note": "HYPOTHETICAL client for stress-testing the method. Every detail below is an assumption, not a fact; the ledger is empty, so no number may appear in content until a real client confirms it."
+}

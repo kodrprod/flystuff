@@ -31,7 +31,8 @@ def test_known_product_price_is_fetched_instead_of_asked(tmp_path):
     assert not check_text("В наличии 9 шт", lg, now=NOW)
     saved = Ledger.load(d / "facts.jsonl")
     f = saved.facts["web_cifrovoe_pianino_estrada_edp_220bk_price"]
-    assert f.source.endswith("edp-220bk.html") and f.provenance == "web" and f.ttl_days == 2
+    assert f.source.endswith("edp-220bk.html") and f.provenance == "web" and f.ttl_days == 7     # price: 7 days
+    assert saved.facts["web_cifrovoe_pianino_estrada_edp_220bk_qty"].ttl_days == 2                  # stock: 48 h
     assert set(got["added"]) >= {"web_cifrovoe_pianino_estrada_edp_220bk_price", "web_cifrovoe_pianino_estrada_edp_220bk_qty"}
 
 
@@ -54,7 +55,7 @@ def test_fetch_failure_is_reported_not_raised(tmp_path):
 def test_refetch_replaces_stale_fact(tmp_path):
     d, lg = client(tmp_path), Ledger()
     A.fill_facts(lg, None, d, ["Estrada EDP-220BK"], fetch=lambda u: PAGE, now=datetime(2026, 9, 1, tzinfo=timezone.utc))
-    assert check_text("200 720 ₸", lg, now=NOW)                            # 2-day TTL: stale by Oct 9
+    assert check_text("200 720 ₸", lg, now=NOW)                            # 7-day price TTL: stale by Oct 9
     A.fill_facts(lg, None, d, ["Estrada EDP-220BK"], fetch=lambda u: PAGE, now=NOW)
     assert not check_text("200 720 ₸", lg, now=NOW)
 
