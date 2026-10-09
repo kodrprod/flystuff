@@ -25,6 +25,23 @@ await page.evaluate(async () => { await document.fonts.ready; });
 await page.addStyleTag({ content: '*{caret-color:transparent!important}' });
 const duration = Number(durArg) || await page.evaluate(() => window.__duration);
 if (!duration || !(duration > 0)) { console.error('design must set window.__duration'); process.exit(2); }
+// Typography hygiene, not style: a price, phone or number+unit must never break across lines ("22 / 100 ₸").
+// Same rule as smm/textutil.py UNBREAKABLE; re-applied every frame in case the timeline changes text.
+await page.evaluate(() => {
+  window.__glue = () => {
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = w.nextNode())) {
+      if (node.parentElement && /^(SCRIPT|STYLE)$/.test(node.parentElement.tagName)) continue;
+      const s0 = node.textContent;
+      const s = s0.replace(/\+?\d[\d ]{6,}\d/g, m => m.replace(/ /g, '\u00A0'))
+                  .replace(/(\d) (?=\d{3}(?!\d))/g, '$1\u00A0')
+                  .replace(/(\d) (?=(₸|тг|тенге|%|шт|кг|дн|мес))/g, '$1\u00A0');
+      if (s !== s0) node.textContent = s;
+    }
+  };
+  window.__glue();
+});
 await page.evaluate(() => {
   if (window.gsap) { gsap.ticker.lagSmoothing(0); gsap.globalTimeline.pause(); }
   for (const a of document.getAnimations()) a.pause();
@@ -38,6 +55,7 @@ for (let i = 0; i < n; i++) {
     if (window.gsap) gsap.globalTimeline.seek(t, false);
     for (const a of document.getAnimations()) a.currentTime = t * 1000;
     if (window.__onSeek) window.__onSeek(t);
+    window.__glue();
   }, t);
   await page.screenshot({ path: path.join(outDir, `frame_${String(i).padStart(5, '0')}.png`), omitBackground: true });
   if (i % fps === 0 || i === n - 1) {
