@@ -64,3 +64,19 @@ def test_shortened_model_code_still_matches_but_unrelated_text_does_not():
     idx = {"px-s1100bkc7": {"url": "u1", "name": "Casio Privia PX-S1100BKC7"}, "as-100bk": {"url": "u2", "name": "Alston AS-100BK"}}
     assert [r["url"] for r in A.mentioned(["Casio PX-S1100BK — для дома"], idx)] == ["u1"]
     assert A.mentioned(["Пианино за 300 тысяч: что внутри?"], idx) == []
+
+
+def test_fresh_price_retires_the_stale_one_and_what_was_derived_from_it(tmp_path):
+    from smm.facts import Fact
+    d = client(tmp_path)
+    url = "https://shop.kz/cifrovoe-pianino-estrada-edp-220bk.html"
+    lg = Ledger([Fact("old_price", "Цифровое пианино Estrada EDP-220BK — 250 000 ₸", "web", url, "2026-10-08T10:00:00+00:00",
+                      ["250 000 ₸"], 7),
+                 Fact("other", "Гитара — 50 000 ₸", "web", url, "2026-10-08T10:00:00+00:00", ["50 000 ₸"], 7),
+                 Fact("diff", "Разница: 20 000 ₸", "derived", "", "", ["20 000 ₸"], 7, derived_from=["old_price"])])
+    lg.facts["other"].source = "https://shop.kz/other.html"
+    got = A.fill_facts(lg, None, d, ["Estrada EDP-220BK"], fetch=lambda u: PAGE, now=NOW)
+    assert got["retired"] == ["old_price"] and lg.facts["old_price"].do_not_use
+    assert check_text("Estrada EDP-220BK за 250 000 ₸", lg, now=NOW)        # the stale price no longer passes
+    assert check_text("Разница 20 000 ₸", lg, now=NOW)                       # nor anything derived from it
+    assert not check_text("за 200 720 ₸", lg, now=NOW) and not lg.facts["other"].do_not_use

@@ -101,9 +101,35 @@ def fill_facts(ledger: Ledger, ledger_path: Path | None, client_dir: Path, texts
     """Refresh every known product the texts mention; replace older facts with the same id; save the ledger."""
     rows = mentioned(texts, product_index(client_dir))
     facts, failed = refresh(rows, fetch, now)
+    retired = []
     for f in facts:
         ledger.facts.pop(f.id, None)
+        retired += supersede(ledger, f)
         ledger.add(f)
     if facts and ledger_path:
         ledger.dump(ledger_path)
-    return {"products": [r["url"] for r in rows], "added": [f.id for f in facts], "failed": failed}
+    return {"products": [r["url"] for r in rows], "added": [f.id for f in facts], "retired": retired, "failed": failed}
+
+
+def fact_kind(f: Fact) -> str:
+    if f.id.endswith("_price") or re.search(r"—\s*[\d\s]+₸", f.text):
+        return "price"
+    if f.id.endswith("_qty") or re.search(r"в наличии:?\s*\d+\s*шт", f.text, re.I):
+        return "qty"
+    if f.id.endswith("_instock") or "в наличии" in f.text.lower():
+        return "instock"
+    return "other"
+
+
+def supersede(ledger: Ledger, new: Fact) -> list[str]:
+    """A fresh fact about the same page and kind retires the older ones (do_not_use + note), so a stale price can
+    never back a claim next to the current one. Facts derived from them become unusable through the ledger gate."""
+    out = []
+    kind = fact_kind(new)
+    for old in ledger.facts.values():
+        if old.id != new.id and old.source == new.source and new.source and not old.do_not_use \
+                and fact_kind(old) == kind and kind != "other" and (old.fetched_at or "") < (new.fetched_at or ""):
+            old.do_not_use = True
+            old.note = (old.note + " " if old.note else "") + f"superseded by {new.id} ({new.fetched_at}): {new.text}"
+            out.append(old.id)
+    return out
