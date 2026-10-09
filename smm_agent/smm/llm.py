@@ -162,7 +162,7 @@ class CLIBackend(Backend):
         out = (r.stdout or "").strip()
         err = (r.stderr or "").strip()
         blob = (out + " " + err).lower()
-        if any(s in blob for s in ("usage limit", "rate limit", "limit reached", "429")):
+        if any(s in blob for s in ("usage limit", "rate limit", "limit reached", "session limit", "usage_limit_reached", "429")):
             raise UsageLimitError((err or out)[-300:])
         if r.returncode != 0:
             raise LLMError(f"claude exited {r.returncode}: {(err or out)[-400:]}")
@@ -172,7 +172,7 @@ class CLIBackend(Backend):
             raise LLMError(f"CLI did not return JSON: {out[:300]}") from e
         if isinstance(env, dict) and env.get("is_error"):
             msg = str(env.get("result"))
-            if any(x in msg.lower() for x in ("usage limit", "rate limit", "limit reached")):
+            if any(x in msg.lower() for x in ("usage limit", "rate limit", "limit reached", "session limit")):
                 raise UsageLimitError(msg[:300])
             raise LLMError(f"CLI error: {msg[:300]}")
         if isinstance(env, dict):
@@ -257,13 +257,23 @@ def _json_from_text(s: str) -> Any:
 
 # ----------------------------------------------------------------- the client the brain uses
 class LLM:
-    def __init__(self, backend: Backend, tape: Tape, retries: int = 1):
+    """resume=True: a step whose exact (step, system, prompt, schema) already succeeded on the tape is replayed
+    from it instead of being paid for again. That is what makes a run that was parked by a usage limit continue
+    where it stopped when the same command is re-run."""
+
+    def __init__(self, backend: Backend, tape: Tape, retries: int = 1, resume: bool = True):
         self.backend = backend
         self.tape = tape
         self.retries = retries
+        self.cache = tape.lookup() if resume and not isinstance(backend, RecordedBackend) else {}
+        self.replayed: list[str] = []
 
     def json(self, step: str, system: str, prompt: str, schema: dict, effort: str = "high") -> Any:
         call = Call(step, system, prompt, schema, effort)
+        hit = self.cache.get(call.key)
+        if hit is not None and not validate(hit["output"], schema):
+            self.replayed.append(step)
+            return hit["output"]
         last_errs: list[str] = []
         p = prompt
         for attempt in range(self.retries + 1):

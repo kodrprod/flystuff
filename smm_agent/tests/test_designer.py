@@ -20,13 +20,15 @@ NOW = __import__("datetime").datetime(2026, 10, 9, tzinfo=__import__("datetime")
 
 def html(text: str) -> str:
     return f"""<!doctype html><html><head>{htmlmotion.head_snippet()}</head><body>
+<div id="band" style="position:absolute;left:0;top:560px;width:1080px;height:640px;background:#000;opacity:0.55"></div>
 <div id="t" style="position:absolute;left:160px;top:700px;width:700px;font:800 84px Montserrat;color:#fff;
  -webkit-text-stroke:3px #000">{text}</div>
 <script>
 window.__duration = 3;
 const tl = gsap.timeline({{paused:true}});
-tl.fromTo('#t', {{scale:1.0}}, {{scale:1.08, duration:0.6, ease:'power2.out'}}, 0)
-  .to('#t', {{y:-40, duration:0.5}}, 0.9).to('#t', {{y:0, duration:0.5}}, 1.6).to('#t', {{scale:1.0, duration:0.5}}, 2.3);
+tl.fromTo('#t', {{scale:1.0}}, {{scale:1.08, duration:0.6, ease:'power2.out'}}, 0);
+// a visible beat about every 0.9 s for as long as the footage runs (pacing rule P3)
+for (let k = 1; k < 8; k++) tl.set('#band', {{opacity: k % 2 ? 0.15 : 0.55}}, k * 0.9);
 window.__tl = tl;
 </script></body></html>"""
 

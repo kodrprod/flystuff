@@ -49,8 +49,8 @@ def cmd_plan(a) -> int:
                        critique=not a.no_critique, run_id=a.run_id,
                        method_path=Path(a.method) if a.method else None, out_root=Path(a.out) if a.out else None)
     except UsageLimitError as e:
-        print(f"PARKED: the model is usage-limited right now ({e}). Re-run the same command later; finished "
-              f"steps are on the tape and are not paid for twice when replayed with --llm recorded.", file=sys.stderr)
+        print(f"PARKED: the model is usage-limited right now ({str(e)[-160:]}). Re-run the same command later: "
+              f"finished steps are replayed from the tape ({tape}) and not paid for twice.", file=sys.stderr)
         return 75
     print(f"campaign: {br.out_dir / 'campaign.md'}")
     print(f"questions for the owner: {len(br.questions)}  (python -m smm.agent questions --client {a.client})")

@@ -83,6 +83,26 @@ def test_recorded_backend_replays_by_prompt_and_never_invents(tmp_path):
         rec.json("s", "SYS", "a different prompt", SCHEMA)
 
 
+def test_parked_run_resumes_from_the_tape_without_paying_twice(tmp_path):
+    ok = {"is_error": False, "structured_output": {"ok": True, "n": 1, "tags": ["t"]}}
+    # the exact envelope the CLI printed when the subscription hit its limit on 2026-10-09
+    limit = {"type": "result", "subtype": "success", "is_error": True, "api_error_status": 429,
+             "api_error": "usage_limit_reached", "result": "You've hit your session limit · resets 8:10am (UTC)"}
+    first = FakeRun([ok, limit])
+    llm = L.LLM(L.CLIBackend(runner=first), L.Tape(tmp_path / "t.jsonl"))
+    llm.json("step1", "S", "P1", SCHEMA)
+    with pytest.raises(L.UsageLimitError):
+        llm.json("step2", "S", "P2", SCHEMA)
+    second = FakeRun([ok])                                          # limit reset: re-run the same command
+    llm2 = L.LLM(L.CLIBackend(runner=second), L.Tape(tmp_path / "t.jsonl"))
+    llm2.json("step1", "S", "P1", SCHEMA)                           # replayed, no model call
+    llm2.json("step2", "S", "P2", SCHEMA)                           # the parked step runs live
+    assert len(second.calls) == 1 and second.calls[0][1] == "P2" and llm2.replayed == ["step1"]
+    llm3 = L.LLM(L.CLIBackend(runner=FakeRun([ok])), L.Tape(tmp_path / "t.jsonl"), resume=False)
+    llm3.json("step1", "S", "P1", SCHEMA)
+    assert llm3.replayed == []                                      # resume can be switched off
+
+
 # ------------------------------------------------------------------ attribution
 def test_codes_are_unique_short_and_keyboard_safe():
     codes = {A.make_code(c, p) for c in range(20) for p in range(40)}
