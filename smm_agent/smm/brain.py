@@ -24,6 +24,7 @@ agent reads, not code. Code does only what code is better at:
 from __future__ import annotations
 
 import json
+import os
 import re
 import time
 from dataclasses import dataclass, field
@@ -176,7 +177,7 @@ class Client:
 
     @classmethod
     def load(cls, slug: str, base: Path | None = None) -> "Client":
-        d = (base or ROOT / "clients") / slug
+        d = (base or Path(os.environ.get("SMM_CLIENTS_DIR") or ROOT / "clients")) / slug
         if not d.is_dir():
             raise FileNotFoundError(f"no client folder {d}")
         prof = json.loads((d / "profile.json").read_text(encoding="utf-8")) if (d / "profile.json").exists() else {"name": slug}
@@ -394,6 +395,43 @@ def plan_week(chosen: list[dict], capacity_min: float = 20.0) -> tuple[list[str]
     return [v.id for v in vids], sh, mins
 
 
+# ----------------------------------------------------------------- the owner card (code)
+
+OWNER_MINUTES_CAP = 15          # onboarding batch; later weeks <= 5 (method L5)
+
+
+def owner_card(questions: list[dict], minutes_cap: float = OWNER_MINUTES_CAP) -> tuple[list[dict], list[dict]]:
+    """One message the owner can answer in <= minutes_cap minutes: clarifying questions first (they change the plan),
+    then the other asks in the order the brain ranked them (value per owner minute) while minutes fit, then ONE item
+    listing the facts to confirm. Everything else is deferred, not dropped. Returns (card, deferred)."""
+    seen, uniq = set(), []
+    for q in questions:
+        k = " ".join(q["q"].lower().split())[:120]
+        if k not in seen:
+            seen.add(k)
+            uniq.append(q)
+    intake = [q for q in uniq if q.get("from") == "intake"]
+    clar, extra_clar = intake[:3], intake[3:]                       # method A8: at most 3 clarifying questions
+    facts = [q for q in uniq if q.get("from") == "facts"]
+    rest = [q for q in uniq if q.get("from") not in ("intake", "facts")]
+    card, deferred, used = list(clar), list(extra_clar), 1.0 * len(clar)
+    budget = minutes_cap - (2.0 if facts else 0.0)                  # the facts item below costs ~2 minutes
+    for q in rest:
+        m = q.get("minutes")
+        m = float(m) if isinstance(m, (int, float)) else 2.0
+        if used + m <= budget:
+            card.append(q)
+            used += m
+        else:
+            deferred.append(q)
+    if facts:
+        shown = facts[:6]
+        card.append({"from": "facts", "minutes": 2.0, "q": "Подтвердите или поправьте, пожалуйста, факты для роликов: " +
+                     "; ".join(f["q"].split(": ", 1)[-1][:90] for f in shown) + (f" (и ещё {len(facts) - 6})" if len(facts) > 6 else "")})
+        deferred += facts[6:]
+    return card, deferred
+
+
 # ----------------------------------------------------------------- the run
 
 
@@ -584,7 +622,11 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
         (out / "shoot_card_week1_ru.txt").write_text(
             shootcard.render_card_ru("1", week_shots, week_min, capacity_min), encoding="utf-8")
     br.save("checks", br.checks)
-    br.save("questions", br.questions)
+    br.save("questions_all", br.questions)
+    card, deferred = owner_card(br.questions)
+    br.questions = card
+    br.save("questions", card)
+    br.save("questions_deferred", deferred)
     (out / "campaign.md").write_text(render_md(br, ideas, chosen), encoding="utf-8")
     return br
 

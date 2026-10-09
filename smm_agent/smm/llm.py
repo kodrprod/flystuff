@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import time
@@ -123,6 +124,16 @@ class Tape:
 
 
 # ----------------------------------------------------------------- backends
+LIMIT_ERRORS = {"usage_limit_reached", "rate_limit", "rate_limit_error", "overloaded_error"}
+LIMIT_PHRASES = ("usage limit", "rate limit", "limit reached", "session limit", "usage_limit_reached")
+
+
+def _limit_text(t: str) -> bool:
+    """A human/stderr message that says we are limited. Bare numbers never count."""
+    low = t.lower()
+    return any(p in low for p in LIMIT_PHRASES) or bool(re.search(r"\b(?:status|error|http)\W{0,3}429\b", low))
+
+
 class Backend:
     name = "base"
 
@@ -161,20 +172,23 @@ class CLIBackend(Backend):
         r = self.runner(self.command(call), input=call.prompt, capture_output=True, text=True, timeout=self.timeout_s)
         out = (r.stdout or "").strip()
         err = (r.stderr or "").strip()
-        blob = (out + " " + err).lower()
-        if any(s in blob for s in ("usage limit", "rate limit", "limit reached", "session limit", "usage_limit_reached", "429")):
+        try:
+            env = json.loads(out)
+        except ValueError:
+            env = None
+        # Usage limits are read from the structured fields only. A substring test on the whole envelope once matched
+        # "429" inside an ordinary token count (e.g. 42901) and threw away 8 valid, paid answers.
+        if isinstance(env, dict) and (env.get("api_error_status") == 429 or env.get("api_error") in LIMIT_ERRORS
+                                      or (env.get("is_error") and _limit_text(str(env.get("result"))))):
+            raise UsageLimitError(str(env.get("result"))[:300])
+        if env is None and _limit_text(err + " " + out):
             raise UsageLimitError((err or out)[-300:])
         if r.returncode != 0:
             raise LLMError(f"claude exited {r.returncode}: {(err or out)[-400:]}")
-        try:
-            env = json.loads(out)
-        except ValueError as e:
-            raise LLMError(f"CLI did not return JSON: {out[:300]}") from e
+        if env is None:
+            raise LLMError(f"CLI did not return JSON: {out[:300]}")
         if isinstance(env, dict) and env.get("is_error"):
-            msg = str(env.get("result"))
-            if any(x in msg.lower() for x in ("usage limit", "rate limit", "limit reached", "session limit")):
-                raise UsageLimitError(msg[:300])
-            raise LLMError(f"CLI error: {msg[:300]}")
+            raise LLMError(f"CLI error: {str(env.get('result'))[:300]}")
         if isinstance(env, dict):
             self.last_usage = {"usd_equiv": env.get("total_cost_usd"), "usage": env.get("usage")}
         # structured output: prefer the explicit field, else parse the result text

@@ -196,3 +196,16 @@ def test_evidence_sources_with_method_prefixes():
     assert B.source_is_real("fact:price", lg, files) and B.source_is_real("file:research/stock.json#row 4", lg, files)
     assert not B.source_is_real("fact:nope", lg, files) and not B.source_is_real("file:other.json", lg, files)
     assert B.source_is_real("https://muzzone.kz/x", lg, files)
+
+
+def test_owner_card_fits_15_minutes_and_defers_the_rest():
+    qs = ([{"from": "intake", "q": f"Вопрос {i}?"} for i in range(4)] +
+          [{"from": "inputs", "q": f"Экспорт {i}", "minutes": 4} for i in range(5)] +
+          [{"from": "facts", "q": f"ID0{i}: NEEDS FACT цена {i}"} for i in range(9)] +
+          [{"from": "inputs", "q": "Экспорт 0", "minutes": 4}])                          # duplicate
+    card, deferred = B.owner_card(qs)
+    mins = sum(q.get("minutes", 1.0) if q.get("from") != "intake" else 1.0 for q in card)
+    assert [q["q"] for q in card[:3]] == ["Вопрос 0?", "Вопрос 1?", "Вопрос 2?"] and mins <= 15
+    assert sum(1 for q in card if q["from"] == "facts") == 1 and "(и ещё 3)" in card[-1]["q"]
+    assert {"from": "intake", "q": "Вопрос 3?"} in deferred                              # max 3 asked; rest deferred
+    assert len(card) + len(deferred) == 3 + 5 + 1 + 3 + 1                               # nothing dropped but the duplicate

@@ -103,6 +103,16 @@ def test_parked_run_resumes_from_the_tape_without_paying_twice(tmp_path):
     assert llm3.replayed == []                                      # resume can be switched off
 
 
+def test_numbers_that_contain_429_are_not_a_usage_limit(tmp_path):
+    ok = {"type": "result", "is_error": False, "api_error_status": None, "duration_ms": 14290,
+          "usage": {"cache_creation_input_tokens": 42901}, "structured_output": {"ok": True, "n": 1, "tags": ["t"]}}
+    llm = L.LLM(L.CLIBackend(runner=FakeRun([ok])), L.Tape(tmp_path / "t.jsonl"))
+    assert llm.json("s", "", "P", SCHEMA)["ok"] is True
+    for msg in ("Error: HTTP 429 Too Many Requests", "Claude usage limit reached"):
+        with pytest.raises(L.UsageLimitError):
+            L.LLM(L.CLIBackend(runner=FakeRun([(1, "", msg)])), L.Tape(tmp_path / "u.jsonl")).json("s", "", "P", SCHEMA)
+
+
 # ------------------------------------------------------------------ attribution
 def test_codes_are_unique_short_and_keyboard_safe():
     codes = {A.make_code(c, p) for c in range(20) for p in range(40)}
