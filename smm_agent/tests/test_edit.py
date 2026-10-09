@@ -1,7 +1,7 @@
 import subprocess
 
 import pytest
-from PIL import Image, ImageStat
+from PIL import Image, ImageChops, ImageStat
 
 from smm import edit as E
 
@@ -77,7 +77,12 @@ def test_caption_is_burned_in_only_when_given(clips, tmp_path):
     E.assemble([{"path": clips / "landscape.mp4", "start": 0.5, "dur": 1.5}], tmp_path / "b.mp4")
     ga, gb = frame(tmp_path / "a.mp4", 1.0, tmp_path / "a.png"), frame(tmp_path / "b.mp4", 1.0, tmp_path / "b.png")
     region = (0, 1200, 1080, 1560)
-    assert ImageStat.Stat(ga.crop(region)).mean[0] < ImageStat.Stat(gb.crop(region)).mean[0] - 15   # dark caption band
+    # captions are outlined letters (no dark slab), so look for the change itself, not a darker band
+    diff = ImageChops.difference(ga.crop(region).convert("L"), gb.crop(region).convert("L"))
+    changed = sum(1 for v in diff.resize((270, 90)).getdata() if v > 40) / (270 * 90)
+    assert changed > 0.01                                   # text was burned in where captions go
+    top = ImageChops.difference(ga.crop((0, 0, 1080, 360)).convert("L"), gb.crop((0, 0, 1080, 360)).convert("L"))
+    assert ImageStat.Stat(top).mean[0] < 3                  # and nowhere else
 
 
 def test_start_past_end_is_an_error(clips, tmp_path):
