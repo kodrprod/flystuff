@@ -278,7 +278,7 @@ def check_insights(ins: dict, ledger: Ledger, files: set[str]) -> list[str]:
 def load_weights() -> dict[str, float]:
     f = KNOWLEDGE / "rubric_weights.json"
     if f.exists():
-        return json.loads(f.read_text(encoding="utf-8"))
+        return {k: float(v) for k, v in json.loads(f.read_text(encoding="utf-8")).items() if not k.startswith("_")}
     return {"stop": 1.5, "truth": 1.0, "share_save": 1.3, "comment": 0.8, "producible": 1.0, "brand_link": 0.8,
             "objective_fit": 1.4}
 

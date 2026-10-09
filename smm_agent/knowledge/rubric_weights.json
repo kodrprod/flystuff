@@ -1,0 +1,10 @@
+{
+ "stop": 1.5,
+ "truth": 1.0,
+ "share_save": 1.3,
+ "comment": 0.8,
+ "producible": 1.0,
+ "brand_link": 0.8,
+ "objective_fit": 1.4,
+ "_note": "Prior weights (2026-10-09, judgment, not fitted). Re-fit per vertical from audience data once >=30 posts/arm exist."
+}

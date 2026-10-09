@@ -1,8 +1,53 @@
 # SMM agent — working notes (read this first when resuming)
 
-Last updated: 2026-10-08 (session on branch `claude/festive-hypatia-yifkyo`).
+Last updated: 2026-10-09 05:30 UTC (session on branch `claude/festive-hypatia-yifkyo`).
 This folder lives inside the unrelated `flystuff` (drone sim) repo only because that
 was the repo attached to the session. It should move to its own repo — see "Waiting for human".
+
+## 0. Status 2026-10-09 (read this first)
+
+**Owner's current priority (Andrey, 2026-10-08 night):** the BRAIN first — which inputs, what we extract, how
+inputs become high-chance viral ideas and a campaign, for ANY client and ANY boss request. "Everything else is
+just using tools." Tools come after the brain and SUMMARY.md.
+
+**Architecture (decided 2026-10-08, after "templates break" and "looks like 2015 motion graphics"):**
+- Brain = a written method (`brain/METHOD.md`, produced by the stress-tested workflow `campaign-brain-method`)
+  executed by the model step by step through `smm/brain.py` (intake → inputs → insights → ideas → **code selection**
+  → campaign → boss/creator attack → revision). Code holds only guardrails: truth rails on every audience string,
+  staff-minute feasibility, schema validation, selection with diversity + exploration + audience data.
+- Execution = a video-native AI (Higgsfield: SDK for generation, Higgsedit for editing) and AI-written per-video
+  HTML/GSAP motion design rendered in headless Chromium (`smm/htmlmotion.py`, `smm/designer.py`), never a template
+  library. Staff footage is cleaned by `smm/edit.py` (music-safe loudness, stabilisation, last-take, jump-cuts).
+- Selection of winners = audience data (`smm/experiments.py`), because experiment 002 showed text judges are near-blind
+  on short-form. Rubric scores are only a prior.
+- LLM calls go through the `claude` CLI on the subscription (`smm/llm.py`, `--system-prompt` + `--tools ""` =
+  ~1.8k overhead tokens per call instead of ~33k). API backend exists for scale; recorded backend for tests.
+
+**Module map:** facts ledger `facts.py` · rails `checks.py`/`textutil.py` · inputs `sources.py`, `muzzone_crawl.py` ·
+judge calibration `calibration.py`/`evaluate_judge.py` · brain `brain.py` + CLI `agent.py` · formats (examples, not
+limits) `formats.py` · staff card `shootcard.py` · editing `edit.py`, `pacing.py` · motion design `htmlmotion.py`,
+`designer.py`, `motion_engine/` · floor renderer `render.py`/`motion.py` (no longer the main path) · approvals and
+publish package `publish.py`, human cards `handoff.py` · WhatsApp attribution `attribution.py` · experiments
+`experiments.py`.
+
+**Verified vs not (2026-10-09):** 117 tests pass (`python3 -m pytest -q`; needs `pip install -r requirements.txt` after a
+container restore). NOT yet run end to end against the real model: `brain.run` (waits for METHOD.md),
+`designer.design_video` (needs a CLI run), Higgsfield (no SDK key/credits). No real phone footage tested yet.
+
+**Decisions added:**
+- D8. No template/style library for video. Per-video AI design + code guardrails (exact text from the DOM, safe area,
+  pacing P1–P4, truth rails) + a critic that looks at rendered frames. First-pass owner-approval rate is the KPI.
+- D9. Staff audio is the moat (real instrument sound): one gain per take + true-peak limiter, never per-piece loudnorm
+  (it flattened 21.6 dB of dynamics to 0.0 in the mutation check). No voice-isolation mic mode.
+- D10. The model proposes, code selects: rubric weights live in `knowledge/rubric_weights.json` and are to be re-fit
+  from audience data; ~25% of slate slots are exploration.
+- D11. Unconfirmed facts in an idea never get "fixed" silently: they become one batched owner question (`agent questions`).
+- D12. CLI-first (subscription) for every judgment call; usage limits park the step (`UsageLimitError`, exit 75).
+
+**Dead ends added:** `claude --bare` fails auth on the subscription; ESM ignores global node modules (symlink
+playwright into `motion_engine/node_modules`); vidstab transforms misalign with jump-cut pieces (stabilise into an
+intermediate file first); SHAKE_PX 2.5 false-positives on moving content (6.0); jump-cuts of 1.5 s still fail opening
+pacing (1.0 s).
 
 ## 1. Goal and definition of done
 

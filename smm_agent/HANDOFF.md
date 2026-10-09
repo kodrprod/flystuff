@@ -1,4 +1,4 @@
-# Open asks for Andrey (one batch, 2026-10-08)
+# Open asks for Andrey (one batch, updated 2026-10-09)
 
 Nothing below blocks the campaign-design work running now; each item unblocks a specific step.
 
@@ -23,5 +23,15 @@ Why: these are the only things the agent cannot get or decide alone
    stock/sales export (1C/Excel/Kaspi cabinet). The site gives stock; sales by SKU only the owner has.
 6. **Where the project lives.** It sits in `flystuff/smm_agent/` only because that repo was attached to the session.
 
-Paused, not committed: jump-cut + hook-shot edits in `smm/edit.py` / `smm/shootcard.py` (the tool call was
-interrupted). They stay uncommitted until the campaign design says which footage formats matter.
+7. **Higgsfield API key for the agent (1 min).** The MCP connection works for chat, but the unattended agent needs an
+   SDK key (`HF_KEY`, from the Higgsfield dashboard) plus a credit budget per month. Without it the AI-video and
+   AI-edit steps run in dry-run only (they plan the generation and stop before spending).
+8. **A 3-clip real phone test (10 min of a worker, once).** Film 3 clips with the store phone using the shoot card
+   (one instrument close-up with sound, one 5-second answer to a question, one wide shot of the hall) and send them.
+   This is the only way to verify the audio/video chain on the real device instead of synthetic test clips.
+9. **Paid boost decision.** Click-to-WhatsApp ads on proven organic winners are the cheapest way from views to
+   chats in this market. Is there any monthly budget (even 30–50k ₸)? Default until answered: organic only.
+10. **AI around the real product (rule R5).** Today the rule is: AI never shows the client's real product, people or
+   store. Allowed now: AI backgrounds, motion text, b-roll of generic scenes, dubbing. Do you want to relax it for
+   clearly labelled AI scenes *around* real footage (e.g. an AI-generated "first concert" scene, then the real piano)?
+   Default until answered: no.
