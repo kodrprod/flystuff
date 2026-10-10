@@ -244,9 +244,10 @@ def inventory(client: Client, now=None) -> dict:
 def worker_shots(idea: dict, prefix: str) -> list[shootcard.Shot]:
     out = []
     for j, s in enumerate(idea.get("production", {}).get("worker_shots") or []):
+        subj = sorted(acquire.model_tokens(s.get("what_ru", "")))
         out.append(shootcard.Shot(f"{prefix}_{j}", s.get("what_ru", ""), s.get("location") or "магазин",
                                   max(1, int(s.get("seconds") or 1)), s.get("kind") or "demo",
-                                  max(1, int(s.get("takes") or 2)), s.get("say_ru") or ""))
+                                  max(1, int(s.get("takes") or 2)), s.get("say_ru") or "", subj[0] if subj else ""))
     return out
 
 
@@ -266,18 +267,42 @@ def audience_strings(idea: dict) -> list[tuple[str, str]]:
     return [(k, v) for k, v in out if v]
 
 
-def check_idea(idea: dict, ledger: Ledger, insight_ids: set[str], now=None) -> dict:
-    """Returns {'errors': [...], 'needs_facts': [...], 'warnings': [...]} for one idea."""
+PLACEHOLDER = re.compile(r"\[[^\]]*\]|\{(?!CODE\})[^}]*\}|\[|\]")
+CUSTOMER_QUOTE = re.compile(r"(?:\bнам|\bнас)\s+(?:часто\s+)?(?:пишут|спрашивают)|клиент\w*\s+(?:часто\s+)?(?:пишут|спрашивают)",
+                            re.I)
+GUESS_OK = re.compile(r"угадай\w*|отгадай\w*", re.I)
+GUESS_FORMATS = {"guess", "prediction_game"}
+
+
+def check_idea(idea: dict, ledger: Ledger, insight_ids: set[str], now=None, evidence: dict | None = None) -> dict:
+    """Returns {'errors': [...], 'needs_facts': [...], 'warnings': [...]} for one idea.
+    evidence: {evidence_id: kind} from step 3, used to verify that a quoted customer question really exists."""
     errs, needs, warns = [], [], []
+    usable_nums = bool(ledger.usable_values(now))
     for k, txt in audience_strings(idea):
+        if PLACEHOLDER.search(txt):
+            errs.append(f"{idea['id']}.{k}: unfilled placeholder {PLACEHOLDER.search(txt).group(0)!r}")
         for v in check_text(txt, ledger, where=f"{idea['id']}.{k}", now=now):
             if v.rule.startswith("R6"):
                 needs.append(f"{v.where}: {v.message}")          # becomes an owner question, not a silent edit
+            elif v.rule == "H2" and idea.get("format") in GUESS_FORMATS and GUESS_OK.search(txt):
+                warns.append(f"{v.where}: H2 guess wording allowed for format {idea.get('format')}")
             elif v.severity == "error":
                 errs.append(f"{v.where}: {v.rule} {v.message}")
             else:
                 warns.append(f"{v.where}: {v.rule} {v.message}")
+        if CUSTOMER_QUOTE.search(txt):
+            cited = [f for f in idea.get("facts_used") or [] if (evidence or {}).get(f) == "customer_language"]
+            if not cited:
+                needs.append(f"{idea['id']}.{k}: R7-QUOTE customer quote '{txt[:60]}' without chat/review evidence")
+    for f in idea.get("facts_used") or []:
+        if f in ledger.facts and ledger.problems(ledger.facts[f], now):
+            needs.append(f"{idea['id']}: R6-FACT cited fact '{f}' is not usable ({'; '.join(ledger.problems(ledger.facts[f], now))})")
     for v in check_hook(idea.get("hook_ru", "")):
+        if v.rule == "H4" and not usable_nums:
+            continue                          # 'is it specific?' is noise when the ledger has nothing to be specific with
+        if v.rule == "H2" and idea.get("format") in GUESS_FORMATS and GUESS_OK.search(idea.get("hook_ru", "")):
+            continue
         (errs if v.severity == "error" else warns).append(f"{idea['id']}.hook: {v.rule} {v.message}")
     missing = [i for i in idea.get("insight_ids") or [] if i not in insight_ids]
     if missing:
@@ -360,9 +385,10 @@ def data_bonus(idea: dict, arm_stats: dict[str, dict] | None) -> float:
 
 
 def select(ideas: list[dict], k: int, weights: dict[str, float], arm_stats: dict | None = None,
-           explore_share: float = 0.25, blocked: set[str] = frozenset()) -> list[dict]:
+           explore_share: float = 0.25, blocked: set[str] = frozenset(), quotas: list | None = None) -> list[dict]:
     """Greedy max-marginal-relevance slate: high prior, but each repeat of a driver/format/mode costs, and about
-    a quarter of the slots go to the most *different* remaining ideas (exploration), because the prior is weak."""
+    a quarter of the slots go to the most *different* remaining ideas (exploration), because the prior is weak.
+    quotas: [(predicate, n, label)] the slate must satisfy (e.g. ideas on the bottleneck insight), enforced by swaps."""
     pool = [i for i in ideas if i["id"] not in blocked]
     for i in pool:
         i["_prior"] = prior_score(i, weights)
@@ -386,7 +412,41 @@ def select(ideas: list[dict], k: int, weights: dict[str, float], arm_stats: dict
         best["_why"] = "explore"
         chosen.append(best)
         pool.remove(best)
+    for pred, need, why in quotas or []:
+        _enforce(chosen, pool, pred, need, why, [q[0] for q in quotas or [] if q[0] is not pred])
     return chosen
+
+
+def _enforce(chosen: list[dict], pool: list[dict], pred, need: int, why: str, keep_preds: list) -> None:
+    """Swap the weakest picks that do not satisfy `pred` (and are not needed by another quota) for the best remaining
+    ideas that do, until `need` picks satisfy it or nothing is left to swap."""
+    while sum(1 for c in chosen if pred(c)) < need:
+        cands = sorted((i for i in pool if pred(i)), key=lambda i: -i["_value"])
+        outs = sorted((c for c in chosen if not pred(c) and not any(kp(c) for kp in keep_preds)), key=lambda c: c["_value"])
+        if not cands or not outs:
+            return
+        new, old = cands[0], outs[0]
+        new["_why"] = why
+        chosen[chosen.index(old)] = new
+        pool.remove(new)
+        pool.append(old)
+
+
+NEEDS_PRIOR_POSTS = {"reply", "audience_vote"}     # formats that need earlier posts/comments: never in week 1
+
+
+def slate_quotas(intake: dict, ins: dict, k: int) -> list:
+    """Stress-test audits: slates ignored the insight on the stated bottleneck (salon: fatal) and a 'go viral' slate was
+    bottom-funnel. So: >=2 ideas on the strongest insight(s); reach requests get >=half attention-stage ideas."""
+    live = [i for i in ins.get("insights") or [] if (i.get("strength") or 0) > 0]
+    q = []
+    if live:
+        top = max(i["strength"] for i in live)
+        tops = {i["id"] for i in live if i["strength"] == top}
+        q.append((lambda i, t=tops: bool(t & set(i.get("insight_ids") or [])), min(2, k), "top-insight"))
+    if intake.get("request_type") in ("awareness_or_viral", "launch_or_event"):
+        q.append((lambda i: i.get("funnel") == "attention", k // 2, "reach-quota"))
+    return q
 
 
 def plan_week(chosen: list[dict], capacity_min: float = 20.0) -> tuple[list[str], list[shootcard.Shot], float]:
@@ -399,7 +459,7 @@ def plan_week(chosen: list[dict], capacity_min: float = 20.0) -> tuple[list[str]
             videos.append(shootcard.Video(i["id"], i.get("_value", 1.0), [s.id for s in ws]))
     if not videos:
         return [], [], 0.0
-    vids, sh, mins = shootcard.plan(videos, shots, capacity_min)
+    vids, sh, mins = shootcard.plan(videos, shots, capacity_min, order="idea")
     return [v.id for v in vids], sh, mins
 
 
@@ -532,6 +592,11 @@ def fact_question_ru(violation: str, hook: str) -> str | None:
         return f"Можно ли в ролике «{hook}» утверждать «{x}» и чем это подтверждается? Без подтверждения уберём."
     if "R6-CONTACT" in violation or "contact" in violation:
         return f"Верен ли контакт «{x}» для ролика «{hook}»?"
+    if "R7-QUOTE" in violation:
+        return (f"В ролике «{hook}» есть фраза «Нам пишут…». Клиенты правда так пишут? Перешлите 2 похожих сообщения "
+                "(без имён) — иначе переформулируем без цитаты.")
+    if "R6-FACT" in violation:
+        return f"Факт для ролика «{hook}» устарел или снят с сайта ({x}). Он ещё верен?"
     return None
 
 
@@ -551,7 +616,7 @@ def assign_codes(client_dir: Path, ids: list[str], preview: bool = False) -> dic
 
 
 def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, gated: set, slate_ids: list[str],
-                 capacity_min: float, today: str, codes_preview: bool = False) -> dict:
+                 capacity_min: float, today: str, codes_preview: bool = False, evidence: dict | None = None) -> dict:
     """Everything a human receives, built from ONE source of truth: the campaign's week-1 filming set and owner asks,
     over the (patched, re-checked) ideas. Used for the review preview and, after the revision, for the final files."""
     byid = {i["id"]: i for i in ideas}
@@ -566,13 +631,18 @@ def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, ga
             problems.append(f"week 1 idea {x} is blocked (failed checks or dropped by the revision)")
         elif x in gated:
             problems.append(f"week 1 idea {x} waits for owner facts and is not filmed until they are confirmed")
-    film = [byid[x] for x in want if x in byid and x not in blocked and x not in gated]
+    for x in want:
+        if x in byid and byid[x].get("format") in NEEDS_PRIOR_POSTS:
+            problems.append(f"week 1 idea {x} ({byid[x].get('format')}) needs earlier posts; moved to week 2+")
+    film = [byid[x] for x in want if x in byid and x not in blocked and x not in gated
+            and byid[x].get("format") not in NEEDS_PRIOR_POSTS]
     if len(film) < MIN_WEEK1:
         # stress test: when every planned idea waits for facts, week 1 was empty. Fill it with the best ideas that
         # need no unconfirmed fact (reserves), so the staff still film something true this week.
         w = load_weights()
         reserves = sorted((i for i in ideas if i["id"] not in blocked and i["id"] not in gated and not i.get("_dropped")
-                           and i["id"] not in {f["id"] for f in film}), key=lambda i: -prior_score(i, w))
+                           and i.get("format") not in NEEDS_PRIOR_POSTS and i["id"] not in {f["id"] for f in film}),
+                          key=lambda i: -prior_score(i, w))
         add = reserves[:MIN_WEEK1 - len(film)]
         film += add
         if add:
@@ -604,7 +674,7 @@ def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, ga
     for x in [*want, *publish_ids]:
         if x in byid and x not in blocked:
             idea = byid[x]
-            for v in check_idea(idea, client.ledger, {i for i in [*(idea.get("insight_ids") or [])]}, None)["needs_facts"]:
+            for v in check_idea(idea, client.ledger, set(idea.get("insight_ids") or []), None, evidence)["needs_facts"]:
                 q = fact_question_ru(v, idea.get("hook_ru", ""))
                 if q:
                     items.append({"from": "facts", "q": f"{x}: {q}"})
@@ -613,6 +683,17 @@ def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, ga
                     problems.append(f"{x}: NEEDS FACT not in Russian, kept internal: {need[:80]}")
                     continue
                 items.append({"from": "facts", "q": f"{x}: Подтвердите для ролика «{idea.get('hook_ru', '')}»: {need}"})
+    # campaign-level copy the audience or staff will read goes through the same truth rails (stress-test audit)
+    w1 = [w for w in camp.get("weeks") or [] if w.get("week") == 1]
+    for label, txt in (("главная фраза кампании", camp.get("single_minded_message_ru", "")),
+                       ("предложение", (camp.get("offer") or {}).get("proposal", "") if (camp.get("offer") or {}).get("needed") else ""),
+                       ("задание сотрудникам", w1[0].get("worker_ask_ru", "") if w1 else "")):
+        for v in check_text(txt or "", client.ledger, where=label):
+            if v.rule.startswith("R6"):
+                problems.append(f"{label}: {v.message}")
+                q = fact_question_ru(str(v), label)
+                if q:
+                    items.append({"from": "facts", "q": f"campaign: {q}"})
     seen, clean = set(), []
     for q in items:
         text = q["q"].split(": ", 1)[-1] if q["from"] == "facts" else q["q"]
@@ -731,7 +812,8 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     isch = ideas_schema(method_vocab(method))
     ideas = llm.json(f"ideas:{client.slug}", _sys(method, "D. Idea generation"), prompt4, isch)["ideas"]
     iids = {i["id"] for i in ins["insights"] if (i.get("strength") or 0) > 0}    # rejected insights cannot be cited
-    report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+    ev = {e["id"]: e.get("kind") for e in ins.get("evidence") or []}
+    report = {i["id"]: check_idea(i, client.ledger, iids, now, ev) for i in ideas}
     bad = {k: v["errors"] for k, v in report.items() if v["errors"]}
     if bad:
         fixed = llm.json(f"ideas-fix:{client.slug}", _sys(method, "D. Idea generation"), prompt4 +
@@ -739,7 +821,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                          "\n\nTHESE FAILED THE AUTOMATIC CHECKS. Return the full list with every failing idea fixed or "
                          "replaced:\n" + json.dumps(bad, ensure_ascii=False, indent=1), isch)["ideas"]
         ideas = fixed
-        report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+        report = {i["id"]: check_idea(i, client.ledger, iids, now, ev) for i in ideas}
     # facts the agent can get itself (known product pages) are fetched now instead of asking the owner
     need = [i for i in ideas if report[i["id"]]["needs_facts"]]
     if need and fetch is not None:
@@ -747,7 +829,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                                  [t for i in need for _, t in audience_strings(i)], fetch, now)
         br.checks["fetched_facts"] = got
         if got["added"]:
-            report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+            report = {i["id"]: check_idea(i, client.ledger, iids, now, ev) for i in ideas}
     br.save("ideas", ideas)
     br.checks["ideas"] = report
     for iid, r in report.items():
@@ -760,7 +842,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     if eng_file.exists():
         arm_stats = json.loads(eng_file.read_text(encoding="utf-8")).get("summary")
     blocked = {k for k, v in report.items() if v["errors"]}
-    chosen = select(ideas, slate, load_weights(), arm_stats, blocked=blocked)
+    chosen = select(ideas, slate, load_weights(), arm_stats, blocked=blocked, quotas=slate_quotas(intake, ins, slate))
     week_ids, week_shots, week_min = plan_week(chosen, capacity_min)
     selection = {"slate": [{"id": c["id"], "prior": c["_prior"], "value": round(c["_value"], 3), "why": c["_why"],
                             "driver": c.get("driver"), "engine": engine_key(c), "staff_min": round(idea_minutes(c), 1),
@@ -785,7 +867,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                "\n\nDesign the campaign. Any offer that is not already in facts_usable needs owner approval.")
     camp = llm.json(f"campaign:{client.slug}", _sys(method, "F. Campaign design"), prompt6, CAMPAIGN_SCHEMA)
     gated = {i["id"] for i in ideas if report.get(i["id"], {}).get("needs_facts") or declared_needs(i)}
-    preview = deliverables(client, camp, ideas, blocked, gated, slate_ids, capacity_min, today, codes_preview=True)
+    preview = deliverables(client, camp, ideas, blocked, gated, slate_ids, capacity_min, today, codes_preview=True, evidence=ev)
 
     # 7 critique (method F13 + the actual deliverables) -> one revision that may patch ideas -> re-attack
     reviews = []
@@ -801,7 +883,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     def attack(c, tag):
         b = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in set(slate_ids) | set(week1_of(c))],
                         "campaign": c, **deliverables(client, c, ideas, blocked, gated, slate_ids, capacity_min, today,
-                                                      codes_preview=True)["for_review"]}, ensure_ascii=False)
+                                                      codes_preview=True, evidence=ev)["for_review"]}, ensure_ascii=False)
         return [approval_gate(llm.json(f"{tag}:{client.slug}:{persona[:12]}", "You are " + persona + " " + review_sys,
                                        b, REVIEW_SCHEMA, effort="medium")) for persona in personas]
     if critique:
@@ -814,7 +896,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                            "in idea_patches (only the fields that change; drop=true removes it); weeks[week=1].idea_ids is "
                            "the final filming set:\n" + json.dumps(serious, ensure_ascii=False, indent=1), REVISION_SCHEMA)
             br.checks["patches"] = apply_patches(ideas, rev.pop("idea_patches", []), client.ledger, now)
-            report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+            report = {i["id"]: check_idea(i, client.ledger, iids, now, ev) for i in ideas}
             blocked |= {k for k, v in report.items() if v["errors"]} | {i["id"] for i in ideas if i.get("_dropped")}
             gated = {i["id"] for i in ideas if report.get(i["id"], {}).get("needs_facts") or declared_needs(i)}
             camp = rev
@@ -825,7 +907,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     # deliverables, built ONLY from the final campaign and the (patched) ideas
     if not camp.get("owner_asks"):
         camp["owner_asks"] = [{"ask": q["q"], "why": "", "minutes": q.get("minutes") or 1} for q in pending]
-    final = deliverables(client, camp, ideas, blocked, gated, slate_ids, capacity_min, today)
+    final = deliverables(client, camp, ideas, blocked, gated, slate_ids, capacity_min, today, evidence=ev)
     camp["attribution_codes"] = final["codes"]
     br.checks["campaign"] = final["problems"]
     br.checks["ideas_final"] = {k: v for k, v in report.items() if v["errors"] or v["needs_facts"]}

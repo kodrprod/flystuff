@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 FIXED_MIN = 2.0
 SETUP_MIN = 1.0
 OVERHEAD_MIN = 0.5
+SUBJECT_SETUP_MIN = 0.75       # find it, power on / tune / set the same preset (stress test: 7 pianos never fit 17 min)
 EXACT_MAX = 18
 
 
@@ -34,6 +35,7 @@ class Shot:
     kind: str = "demo"         # demo | talk | detail | process
     takes: int = 2
     say: str = ""              # exact words for talk shots (kept short)
+    subject: str = ""          # the product/thing filmed; each extra subject at a spot costs set-up time
 
 
 @dataclass
@@ -55,7 +57,10 @@ def shot_minutes(s: Shot) -> float:
 
 def session_minutes(shots: list[Shot]) -> float:
     locs = {s.location for s in shots}
-    return (FIXED_MIN if shots else 0.0) + SETUP_MIN * len(locs) + sum(shot_minutes(s) for s in shots)
+    subjects = {(s.location, s.subject) for s in shots if s.subject}
+    extra = max(0, len(subjects) - len({loc for loc, _ in subjects}))       # the first subject per spot is in SETUP_MIN
+    return (FIXED_MIN if shots else 0.0) + SETUP_MIN * len(locs) + SUBJECT_SETUP_MIN * extra + \
+        sum(shot_minutes(s) for s in shots)
 
 
 def _shots_for(videos: list[Video], by_id: dict[str, Shot]) -> list[Shot]:
@@ -63,7 +68,7 @@ def _shots_for(videos: list[Video], by_id: dict[str, Shot]) -> list[Shot]:
     return [by_id[i] for i in ids]
 
 
-def plan(videos: list[Video], shots: list[Shot], capacity_min: float = 20.0, safety: float = 0.15):
+def plan(videos: list[Video], shots: list[Shot], capacity_min: float = 20.0, safety: float = 0.15, order: str = "kind"):
     """Return (chosen_videos, chosen_shots_in_order, minutes). Maximises total value within
     capacity*(1-safety); ties broken by fewer minutes."""
     by_id = {s.id: s for s in shots}
@@ -97,16 +102,22 @@ def plan(videos: list[Video], shots: list[Shot], capacity_min: float = 20.0, saf
             _, pick = max(scored, key=lambda t: t[0])
             chosen.append(pick)
             remaining.remove(pick)
-    shots_out = order_by_location(_shots_for(chosen, by_id))
+    shots_out = order_by_location(_shots_for(chosen, by_id), by_idea=(order == "idea"))
     return chosen, shots_out, session_minutes(shots_out)
 
 
-def order_by_location(shots: list[Shot]) -> list[Shot]:
-    """Group by location (no walking back), talk shots after demos at the same place."""
+def order_by_location(shots: list[Shot], by_idea: bool = False) -> list[Shot]:
+    """Group by location (no walking back). Default: talk shots after demos at the same place. by_idea: within a spot,
+    each idea's shots stay together in the order the idea needs them (process order: e.g. bare nails before polish)."""
     rank = {"hook": 0, "demo": 1, "detail": 2, "process": 3, "talk": 4}
     first_seen: dict[str, int] = {}
     for s in shots:
         first_seen.setdefault(s.location, len(first_seen))
+    if by_idea:
+        def key(s):
+            idea, _, n = s.id.rpartition("_")
+            return (first_seen[s.location], idea, int(n) if n.isdigit() else 0)
+        return sorted(shots, key=key)
     return sorted(shots, key=lambda s: (first_seen[s.location], rank.get(s.kind, 9), s.id))
 
 

@@ -95,3 +95,18 @@ def test_hook_shot_goes_first_and_is_flagged_in_the_card():
     assert ordered[0].id == "hook_as100" and hs.takes == 3 and hs.seconds == 3
     card = S.render_card_ru("W41", ordered, S.session_minutes(ordered))
     assert "⭐ САМОЕ ВАЖНОЕ" in card and card.index("⭐") < card.index("Сыграйте на электрогитаре")
+
+
+def test_each_extra_product_at_a_spot_costs_setup_time():
+    a = S.Shot("p1_0", "Casio PX-770: аккорд", "зал", 5, subject="px-770")
+    b = S.Shot("p2_0", "Casio AP-270: аккорд", "зал", 5, subject="ap-270")
+    c = S.Shot("p3_0", "Kurzweil CUP-E1: аккорд", "зал", 5, subject="cup-e1")
+    one = S.session_minutes([a])
+    assert S.session_minutes([a, b, c]) - one > 2 * (S.shot_minutes(b)) + 2 * S.SUBJECT_SETUP_MIN - 1e-9
+
+
+def test_by_idea_order_keeps_process_order():
+    shots = [S.Shot("nails_1", "покрытие", "стол", 5, "demo"), S.Shot("nails_0", "голые ногти", "стол", 5, "talk"),
+             S.Shot("brows_0", "брови", "стол", 5, "hook")]
+    ids = [s.id for s in S.order_by_location(shots, by_idea=True)]
+    assert ids.index("nails_0") < ids.index("nails_1")             # process order wins over the kind rank

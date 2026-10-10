@@ -42,12 +42,17 @@ AD_VOICE = re.compile(
     r"don'?t\s+miss|limited\s+offer",
     re.I,
 )
-SCARCITY = re.compile(
-    r"только\s+сегодня|последний\s+день|последние\s+\w+|осталось\s+\d+|"
-    r"до\s+конца\s+(месяца|недели|года|сезона)|ограниченн\w+\s+(тираж|количество|предложение)|"
-    r"успей\w*|распродан[оа]?\s+скоро|закрываемся|закрытие\s+магазина",
+SCARCITY = re.compile(        # always urgency claims
+    r"только\s+сегодня|осталось\s+\d+|ограниченн\w+\s+(тираж|количество|предложение)|"
+    r"распродан[оа]?\s+скоро|закрываемся|закрытие\s+магазина|\bуспей(?:те)?\b",
     re.I,
 )
+SCARCITY_SOFT = re.compile(   # urgency only next to an offer, stock or date (stress test: fired on questions and advice)
+    r"последний\s+день|последние\s+\w+|до\s+конца\s+(месяца|недели|года|сезона)",
+    re.I,
+)
+OFFER_CONTEXT = re.compile(r"акци|скидк|распродаж|осталось|мест\b|штук|\bшт\b|\d{1,2}\.\d{1,2}|\bдо\s+\d", re.I)
+NEGATED = re.compile(r"(?:\bне|\bни|\bк)\s+$", re.I)      # «не лучший», «не самый», «от худшего к лучшему»
 ABSOLUTE_CLAIM = re.compile(
     r"лучш\w+|самы[йяео]\s+\w+|№\s*1|номер\s+один|единственн\w+|гарантируем|"
     r"идеальн\w+|дешевле\s+всех|\b100\s*%\s*\w+|best\b|#1\b",
@@ -142,12 +147,16 @@ def check_text(text: str, ledger: Ledger, where: str = "text", now=None) -> list
         if not ok:
             out.append(Violation("R6-NUM", "error", f"number {raw!r} not backed by a usable fact", where))
 
+    soft = SCARCITY_SOFT if (OFFER_CONTEXT.search(text) and not text.rstrip().endswith("?")) else None
     for rx, rule, sev, msg in (
         (ABSOLUTE_CLAIM, "R6-CLAIM", "error", "absolute/superlative claim without a backing fact"),
         (SCARCITY, "R6-SCARCITY", "error", "scarcity/urgency claim without a backing fact"),
+        (soft, "R6-SCARCITY", "error", "scarcity/urgency claim without a backing fact"),
     ):
-        for m in rx.finditer(text):
+        for m in (rx.finditer(text) if rx else []):
             phrase = m.group(0).lower().strip()
+            if rule == "R6-CLAIM" and NEGATED.search(text[max(0, m.start() - 4):m.start()]):
+                continue
             if not any(phrase in v for v in values):
                 out.append(Violation(rule, sev, f"{msg}: {m.group(0)!r}", where))
 

@@ -250,3 +250,53 @@ def test_a_fresh_clone_finds_the_committed_method(tmp_path, monkeypatch):
     (tmp_path / "METHOD_v10.md").write_text("ten", encoding="utf-8")
     monkeypatch.setattr(B, "METHOD_PATH", tmp_path / "METHOD.md")
     assert B.method_text() == "ten"                                      # newest version when METHOD.md is absent
+
+
+def test_rails_from_the_stress_audits():
+    lg = ledger()
+    ok = idea("q", hook="Как звучит укулеле за 22 100 ₸?")
+    assert not B.check_idea(ok, lg, {"in1"}, NOW)["errors"]
+    ph = idea("p", on_screen_ru=["Цена: [цена]"])
+    assert any("placeholder" in e for e in B.check_idea(ph, lg, {"in1"}, NOW)["errors"])
+    quote = idea("c", on_screen_ru=["Нам пишут: «а если не подойдёт?»"], facts_used=[])
+    r = B.check_idea(quote, lg, {"in1"}, NOW, evidence={"E07": "customer_language"})
+    assert any("R7-QUOTE" in n for n in r["needs_facts"])
+    quote["facts_used"] = ["E07"]
+    assert not any("R7-QUOTE" in n for n in B.check_idea(quote, lg, {"in1"}, NOW, evidence={"E07": "customer_language"})["needs_facts"])
+    lg.facts["price"].do_not_use = True
+    stale = idea("s", facts_used=["price"])
+    assert any("R6-FACT" in n for n in B.check_idea(stale, lg, {"in1"}, NOW)["needs_facts"])
+    g = idea("g", fmt="guess", hook="Угадайте, какая укулеле дороже?")
+    assert not B.check_idea(g, ledger(), {"in1"}, NOW)["errors"]                 # the method's own guess engine
+    assert B.check_idea(idea("h", fmt="close_sound", hook="Угадайте, какая дороже?"), ledger(), {"in1"}, NOW)["errors"]
+    empty = B.check_idea(idea("e", hook="Что слышно за дверью клиники"), Ledger(), {"in1"}, NOW)
+    assert not any("H4" in w for w in empty["warnings"])                         # no 'be specific' noise, nothing to cite
+
+
+def test_slate_covers_the_bottleneck_insight_and_reach_quota():
+    drivers = ["practical_value", "sensory", "relief", "story", "identity", "mastery"]
+    ideas = [idea(f"x{j}", driver=drivers[j], fmt=f"f{j}", insight_ids=["in2"], funnel="conversion",
+                  production={"mode": ["worker", "mixed", "ai"][j % 3], "worker_shots": [], "ai_parts": "", "people_on_camera": 0},
+                  rubric={k: 5 for k in B.RUBRIC}) for j in range(6)]
+    ideas += [idea("t1", driver="practical_value", fmt="f0", insight_ids=["in1"], funnel="attention", rubric={k: 2 for k in B.RUBRIC}),
+              idea("t2", driver="sensory", fmt="f1", insight_ids=["in1"], funnel="attention", rubric={k: 2 for k in B.RUBRIC})]
+    ins = {"insights": [{"id": "in1", "strength": 5}, {"id": "in2", "strength": 3}]}
+    plain = B.select([dict(i) for i in ideas], 4, B.load_weights(), explore_share=0)
+    assert not {"t1", "t2"} & {i["id"] for i in plain}                         # the prior alone ignores them
+    q = B.slate_quotas({"request_type": "price_pressure"}, ins, 4)
+    sl = B.select([dict(i) for i in ideas], 4, B.load_weights(), explore_share=0, quotas=q)
+    assert {"t1", "t2"} <= {i["id"] for i in sl}
+    qv = B.slate_quotas({"request_type": "awareness_or_viral"}, ins, 4)
+    assert sum(i["funnel"] == "attention" for i in B.select([dict(i) for i in ideas], 4, B.load_weights(),
+                                                             explore_share=0, quotas=qv)) >= 2
+
+
+def test_campaign_level_copy_goes_through_the_rails(tmp_path):
+    cdir = tmp_path / "c"
+    cdir.mkdir()
+    cl = B.Client("c", cdir, {"name": "C"}, ledger())
+    camp = {"single_minded_message_ru": "Самый честный звук в городе", "offer": {"needed": True, "proposal": "Скидка 30% до пятницы"},
+            "weeks": [{"week": 1, "idea_ids": [], "worker_ask_ru": "снять", "goal": "", "ai_work": ""}], "owner_asks": []}
+    d = B.deliverables(cl, camp, [idea("a")], set(), set(), ["a"], 20.0, "2026-10-10", codes_preview=True)
+    assert any("главная фраза" in x for x in d["problems"]) and any("предложение" in x for x in d["problems"])
+    assert "Самый честный" in " ".join(q["q"] for q in d["owner_card"])          # asked in Russian, not shipped
