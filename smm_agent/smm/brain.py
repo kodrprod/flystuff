@@ -478,7 +478,10 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     out = (out_root or client.dir / "campaigns") / rid
     out.mkdir(parents=True, exist_ok=True)
     br = BrainRun(client.slug, request, out)
-    inv = inventory(client, now)
+    # A run's inputs are frozen at its first start: resuming the same run id replays its finished steps even if the
+    # ledger changed meanwhile (e.g. this run's own fact fetch). A new run id takes a fresh snapshot.
+    snap = out / "inventory.json"
+    inv = json.loads(snap.read_text(encoding="utf-8")) if snap.exists() else inventory(client, now)
     br.save("inventory", inv)
     files = {f["path"] for f in inv["files"]}
     ctx = ("CLIENT INPUTS (JSON; files can be opened with the Read tool for detail):\n" +

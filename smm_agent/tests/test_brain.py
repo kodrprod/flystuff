@@ -217,3 +217,24 @@ def test_owner_card_never_exceeds_7_items_even_with_zero_minute_asks():
           [{"from": "facts", "q": "ID01: NEEDS FACT цена"}])
     card, deferred = B.owner_card(qs)
     assert len(card) == 7 and card[-1]["from"] == "facts" and len(deferred) == 7
+
+
+def test_resumed_run_keeps_its_input_snapshot(tmp_path):
+    cdir = tmp_path / "clients" / "acme"
+    cdir.mkdir(parents=True)
+    ledger().dump(cdir / "facts.jsonl")
+    (tmp_path / "M.md").write_text("m", encoding="utf-8")
+    calls = []
+
+    class Stop(Backend):
+        name = "stop"
+
+        def raw(self, call):
+            calls.append(call.prompt)
+            raise RuntimeError("parked")
+    for _ in range(2):
+        with pytest.raises(RuntimeError):
+            B.run(B.Client.load("acme", tmp_path / "clients"), "r", LLM(Stop(), Tape(tmp_path / "t.jsonl")),
+                  method_path=tmp_path / "M.md", run_id="same", fetch=None)
+        (cdir / "facts.jsonl").write_text("", encoding="utf-8")          # the ledger changes between attempts
+    assert calls[0] == calls[1]                                          # same prompt -> tape replay would hit
