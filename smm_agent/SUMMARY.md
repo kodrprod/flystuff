@@ -78,7 +78,7 @@ All judgment calls run through the `claude` CLI on the subscription, with no per
 | Judge calibration experiments 001/002 | Real store-phone footage through the editor (only synthetic test clips so far) |
 | 117 automated tests (truth rails, selection, shoot card, editor audio and stabilisation, pacing, approvals, attribution parser, LLM client) | Higgsfield generation and editing (no SDK key or credits) |
 | One brain step through the real CLI (intake for "sell pianos": it opened the stock file itself) | `designer.py` loop end to end with the real model |
-| | The method itself: stress-tested by a workflow on 7 very different requests (results go into `BRAIN.md`) |
+| | The method itself: v1 (`brain/METHOD.md` = `brain/METHOD_v1.md`) ran through the real code on 6 requests (scores 5.5–6/10 from the boss/creator attack); v2 and `BRAIN.md` (the human-readable brain overview) are not written yet |
 
 ## 4. What the owner must provide (see HANDOFF.md)
 

@@ -17,7 +17,8 @@
 ## Rollout
 
 **Phase 0: brain proven on paper (now).**
-- Method v2 stress-tested on 7 requests across 5 industries; BRAIN.md written.
+- Method v1 run through the real code on 6 requests across 5 industries (done); method v2 from those audits and
+  `BRAIN.md` (human-readable overview of the brain) still to be written.
 - `agent plan` produces a Muzzone campaign from real data.
 
 Exit: Andrey reads one campaign and says "I would send this to the client."

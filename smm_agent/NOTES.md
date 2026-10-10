@@ -31,7 +31,7 @@ publish package `publish.py`, human cards `handoff.py` · WhatsApp attribution `
 `experiments.py`.
 
 **Verified vs not (2026-10-09 morning):** 117 tests pass (`python3 -m pytest -q`; needs `pip install -r requirements.txt` after a
-container restore). NOT yet run end to end against the real model: `brain.run` (waits for METHOD.md),
+container restore). NOT yet run end to end against the real model (morning status; see the evening update below): `brain.run`,
 `designer.design_video` (needs a CLI run), Higgsfield (no SDK key/credits). No real phone footage tested yet.
 
 **Decisions added:**

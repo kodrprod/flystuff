@@ -110,21 +110,29 @@ def order_by_location(shots: list[Shot]) -> list[Shot]:
     return sorted(shots, key=lambda s: (first_seen[s.location], rank.get(s.kind, 9), s.id))
 
 
-TIPS_RU = [
+TIPS_RU = [   # generic: true for any business filmed with one ordinary phone (vertical extras come from the profile)
     "Телефон строго вертикально, основная камера (не фронтальная), без зума пальцами — просто подойдите ближе.",
     "Протрите объектив салфеткой. Свет — от окна или лампы за вашей спиной, не против света.",
     "Держите телефон двумя руками, локти прижаты. Начните запись, молча 1 секунду, потом действие, в конце снова 1 секунду тишины.",
     "Ошиблись — не останавливайте запись: помолчите 2 секунды и повторите всю фразу целиком. В ролик пойдёт последний дубль.",
-    "Звук важен: инструмент в 30–50 см от телефона; громкий комбик или барабаны — не ближе 1 метра, иначе звук хрипит. Музыку в зале выключить.",
-    "Если в Пункте управления есть «Режим микрофона» — выберите «Стандартный» или «Широкий спектр», не «Изоляция голоса» (она вырезает звук инструмента).",
-    "Камера: 1080p или 4K, 30 кадров. Долгим нажатием на экран зафиксируйте фокус и экспозицию (АЭ/АФ). Не переключайтесь на 0,5×.",
+    "Звук: телефон в 20–30 см от того, что звучит (руки, инструмент, голос). Фоновую музыку выключить.",
+    "Если в настройках есть «Режим микрофона» — «Стандартный», не «Изоляция голоса» (она вырезает всё, кроме голоса).",
+    "Долгим нажатием на экран зафиксируйте фокус и яркость. Не переключайтесь на 0,5×.",
+    "Отправляйте ролики как файл (документ), не как видео — так мессенджер не испортит качество.",
 ]
+CONSENT_RU = ("Если в кадре лицо или голос человека — сначала короткое видео-согласие: «Я, [имя], согласен(на), чтобы это "
+              "видео показали в соцсетях [название]». Без него ролик с этим человеком не публикуется.")
 
 
-def render_card_ru(week: str, shots: list[Shot], minutes: float, capacity_min: float = 20.0) -> str:
-    """Plain-text card for WhatsApp/Telegram. Short on purpose."""
-    lines = ["Это ИИ-ассистент MetaPrompt: я веду соцсети магазина вместе с владельцем.",
+def render_card_ru(week: str, shots: list[Shot], minutes: float, capacity_min: float = 20.0, business: str = "",
+                   extra_tips: list[str] | None = None, consent: bool = False) -> str:
+    """Plain-text card for WhatsApp/Telegram. Short on purpose. The tips are generic phone rules plus the client's own
+    `card_tips_ru` from its profile, so a dental clinic never gets a music shop's amplifier advice."""
+    who = f" для «{business}»" if business else ""
+    lines = [f"Это ИИ-ассистент MetaPrompt: я веду соцсети{who} вместе с владельцем.",
              f"🎬 Съёмка на неделю {week}. Всего ~{round(minutes)} мин из {round(capacity_min)}.", ""]
+    if consent:
+        lines += ["⚠️ " + CONSENT_RU, ""]
     n, last_loc = 0, None
     for s in shots:
         if s.location != last_loc:
@@ -134,7 +142,7 @@ def render_card_ru(week: str, shots: list[Shot], minutes: float, capacity_min: f
         extra = f" Скажите: «{s.say}»" if s.say else ""
         star = "⭐ САМОЕ ВАЖНОЕ (первые 2 секунды ролика): " if s.kind == "hook" else ""
         lines.append(f"{n}. {star}{s.what} — {s.seconds} сек.{extra}")
-    lines += ["", "Как снимать:"] + [f"• {t}" for t in TIPS_RU]
+    lines += ["", "Как снимать:"] + [f"• {t}" for t in TIPS_RU + list(extra_tips or [])]
     lines += ["", "Когда закончите — отправьте все ролики в этот чат в том же порядке. Я смонтирую, а опубликую только после согласования с владельцем."]
     return "\n".join(lines)
 

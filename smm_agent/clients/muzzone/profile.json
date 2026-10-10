@@ -2,16 +2,30 @@
   "name": "Muzzone",
   "vertical": "music_instruments_retail",
   "city": "Астана",
-  "languages": ["ru", "kk"],
+  "languages": [
+    "ru",
+    "kk"
+  ],
   "what_they_sell": "musical instruments and pro audio: digital pianos, guitars, ukuleles, drums, amps, cymbals (site catalogue, 2026-10-08)",
-  "sales_channels": ["WhatsApp chat (site-listed number)", "phone", "store pickup", "site orders with delivery across Kazakhstan; Kaspi payment methods listed on product pages"],
+  "sales_channels": [
+    "WhatsApp chat (site-listed number)",
+    "phone",
+    "store pickup",
+    "site orders with delivery across Kazakhstan; Kaspi payment methods listed on product pages"
+  ],
   "social": {
     "instagram": "muzzone_astana (linked from site; not analysed: blocks anonymous fetch)",
     "youtube": "3 620 subscribers, 379 videos, median 2 300 views, best 64 000 (beginner electric guitar demo); last upload 2026-05-10",
     "tiktok": "none linked from the site; ownership unknown",
-    "vk": "muzzoneastana", "facebook": "muzzonemusicshop"
+    "vk": "muzzoneastana",
+    "facebook": "muzzonemusicshop"
   },
-  "staff_capacity": {"minutes_per_week": 20, "device": "one mid/low-quality phone", "audio": "good only when held close to the instrument", "people_on_camera": "unknown: consent not yet asked"},
+  "staff_capacity": {
+    "minutes_per_week": 20,
+    "device": "one mid/low-quality phone",
+    "audio": "good only when held close to the instrument",
+    "people_on_camera": "unknown: consent not yet asked"
+  },
   "owner_access": "no direct contact yet; via Andrey (MetaPrompt) and Pavel",
   "known_unknowns": [
     "why the site-wide sale is called 'Финальная распродажа' (closure? brand exit? seasonal?)",
@@ -19,5 +33,13 @@
     "who may appear on camera; whether a TikTok account exists",
     "ad budget (none assumed)"
   ],
-  "sources": ["https://muzzone.kz (crawled 2026-10-08)", "clients/muzzone/research/*", "NOTES.md section 3"]
+  "sources": [
+    "https://muzzone.kz (crawled 2026-10-08)",
+    "clients/muzzone/research/*",
+    "NOTES.md section 3"
+  ],
+  "card_tips_ru": [
+    "Громкий комбик или барабаны — не ближе 1 метра от телефона, иначе звук хрипит.",
+    "Перед записью инструмента: проверьте строй и громкость, на клавишах — один и тот же тембр."
+  ]
 }

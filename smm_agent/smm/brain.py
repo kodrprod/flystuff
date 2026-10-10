@@ -27,6 +27,7 @@ import json
 import os
 import re
 import time
+from datetime import date, datetime, timezone
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -158,6 +159,13 @@ CAMPAIGN_SCHEMA = obj({
     "owner_asks": arr(obj({"ask": S, "why": S, "minutes": N})),
     "risks": arr(S),
 })
+
+PATCH_FIELDS = ("hook_ru", "first_frame", "on_screen_ru", "what_happens", "cta_ru", "comment_prompt_ru", "facts_used", "risks")
+REVISION_SCHEMA = json.loads(json.dumps(CAMPAIGN_SCHEMA))
+REVISION_SCHEMA["properties"]["idea_patches"] = arr(obj(
+    {"id": S, "drop": B, **{k: (arr(S) if k in ("on_screen_ru", "facts_used", "risks") else S) for k in PATCH_FIELDS},
+     "worker_shots": IDEA["properties"]["production"]["properties"]["worker_shots"]}, required=["id"]))
+REVISION_SCHEMA["required"] = list(REVISION_SCHEMA["required"]) + ["idea_patches"]
 
 REVIEW_SCHEMA = obj({
     "persona": S, "score": I, "would_approve": B, "best_idea": S,
@@ -430,10 +438,182 @@ def owner_card(questions: list[dict], minutes_cap: float = OWNER_MINUTES_CAP) ->
             deferred.append(q)
     if facts:
         shown = facts[:6]
-        card.append({"from": "facts", "minutes": 2.0, "q": "Подтвердите или поправьте, пожалуйста, факты для роликов: " +
-                     "; ".join(f["q"].split(": ", 1)[-1][:90] for f in shown) + (f" (и ещё {len(facts) - 6})" if len(facts) > 6 else "")})
+        card.append({"from": "facts", "minutes": 2.0, "q": "Подтвердите или поправьте, пожалуйста, факты для роликов:\n" +
+                     "\n".join("   — " + f["q"].split(": ", 1)[-1] for f in shown) +
+                     (f"\n   (и ещё {len(facts) - 6} — пришлю после ответа)" if len(facts) > 6 else "")})
         deferred += facts[6:]
     return card, deferred
+
+
+# ----------------------------------------------------------------- final deliverables (code)
+
+
+def method_section(method: str, code: str) -> str:
+    """The text of one method section by its code (e.g. 'F13'), so a step gets the rules it is judged by."""
+    m = re.search(r"^(#{2,4}) %s\b.*?(?=^#{2,4} |\Z)" % re.escape(code), method, re.M | re.S)
+    return m.group(0).strip() if m else ""
+
+
+def week1_of(camp: dict) -> list[str]:
+    weeks = camp.get("weeks") or []
+    w1 = [w for w in weeks if w.get("week") == 1] or ([min(weeks, key=lambda w: w.get("week", 99))] if weeks else [])
+    return list(dict.fromkeys(x for w in w1 for x in w.get("idea_ids") or []))
+
+
+def approval_gate(review: dict) -> dict:
+    """Method F13: approval needs score >= 7 and no fatal point. Code decides, not the reviewer's own flag."""
+    review = json.loads(json.dumps(review))          # never mutate the model/tape output
+    review["model_would_approve"] = review.get("would_approve")
+    review["would_approve"] = bool(review.get("score", 0) >= 7 and
+                                   not any(r.get("severity") == "fatal" for r in review.get("refutations") or []))
+    return review
+
+
+def apply_patches(ideas: list[dict], patches: list[dict], ledger: Ledger, now=None) -> dict:
+    """The revision's idea-level fixes are applied to the ideas themselves, so the copy staff film and the editor burns
+    in is the revised one (stress test: every case shipped pre-revision copy). Patched ideas are re-checked by the caller."""
+    byid = {i["id"]: i for i in ideas}
+    done = {"patched": [], "dropped": [], "unknown": []}
+    for pt in patches or []:
+        idea = byid.get(pt.get("id"))
+        if idea is None:
+            done["unknown"].append(pt.get("id"))
+            continue
+        if pt.get("drop"):
+            idea["_dropped"] = True
+            done["dropped"].append(idea["id"])
+            continue
+        for k in PATCH_FIELDS:
+            if k in pt:
+                idea[k] = pt[k]
+        if "worker_shots" in pt:
+            idea.setdefault("production", {})["worker_shots"] = pt["worker_shots"]
+        done["patched"].append(idea["id"])
+    return done
+
+
+def declared_needs(idea: dict) -> list[str]:
+    """'NEEDS FACT: ...' the model itself wrote in risks (method C6.2). Facts the agent can fetch itself are tagged
+    '(agent ...)' and are not owner questions."""
+    out = []
+    for r in idea.get("risks") or []:
+        if r.strip().upper().startswith("NEEDS FACT") and "(agent" not in r.lower():
+            out.append(r.split(":", 1)[-1].strip())
+    return out
+
+
+def latin_share(text: str) -> float:
+    letters = [c for c in text if c.isalpha()]
+    return sum(c.isascii() for c in letters) / len(letters) if letters else 0.0
+
+
+def has_past_date(text: str, today: str) -> bool:
+    t = date.fromisoformat(today)
+    for d, m, y in re.findall(r"\b(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?\b", text):
+        try:
+            yy = int(y) + (2000 if y and len(y) == 2 else 0) if y else t.year
+            if date(yy, int(m), int(d)) < t:
+                return True
+        except ValueError:
+            continue
+    return False
+
+
+def fact_question_ru(violation: str, hook: str) -> str | None:
+    """A truth-rail hit becomes a plain Russian question for the owner; rail messages are never sent verbatim."""
+    m = re.search(r"'([^']+)'", violation)
+    x = m.group(1) if m else ""
+    if "R6-NUM" in violation or "number" in violation:
+        return f"Верна ли цифра «{x}» для ролика «{hook}»? Если да — откуда она (прайс, сайт, ваш учёт)?"
+    if "R6-SCARCITY" in violation or "scarcity" in violation:
+        return f"Есть ли подтверждённый срок или остаток для «{x}» (ролик «{hook}»)? Без него фразу уберём."
+    if "R6-CLAIM" in violation or "claim" in violation:
+        return f"Можно ли в ролике «{hook}» утверждать «{x}» и чем это подтверждается? Без подтверждения уберём."
+    if "R6-CONTACT" in violation or "contact" in violation:
+        return f"Верен ли контакт «{x}» для ролика «{hook}»?"
+    return None
+
+
+def assign_codes(client_dir: Path, ids: list[str], preview: bool = False) -> dict[str, str]:
+    """One WhatsApp code per idea that will be published, from a per-client campaign counter, so codes never repeat
+    across runs (stress test: every run reused the same codes)."""
+    f = client_dir / "codes.json"
+    st = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {"campaigns": 0, "issued": {}}
+    idx = st["campaigns"] + 1
+    codes = {iid: make_code(idx, n + 1) for n, iid in enumerate(ids)}
+    if not preview and ids:
+        st["campaigns"] = idx
+        for iid, c in codes.items():
+            st["issued"][c] = {"idea": iid, "campaign": idx, "at": time.strftime("%Y-%m-%d", time.gmtime())}
+        f.write_text(json.dumps(st, ensure_ascii=False, indent=1), encoding="utf-8")
+    return codes
+
+
+def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, gated: set, slate_ids: list[str],
+                 capacity_min: float, today: str, codes_preview: bool = False) -> dict:
+    """Everything a human receives, built from ONE source of truth: the campaign's week-1 filming set and owner asks,
+    over the (patched, re-checked) ideas. Used for the review preview and, after the revision, for the final files."""
+    byid = {i["id"]: i for i in ideas}
+    want, problems = week1_of(camp), []
+    if not want:
+        want = [x for x in slate_ids if x not in blocked]
+        problems.append("campaign named no week-1 ideas; the code slate is used")
+    for x in want:
+        if x not in byid:
+            problems.append(f"week 1 names unknown idea {x}")
+        elif x in blocked:
+            problems.append(f"week 1 idea {x} is blocked (failed checks or dropped by the revision)")
+        elif x in gated:
+            problems.append(f"week 1 idea {x} waits for owner facts and is not filmed until they are confirmed")
+    film = [byid[x] for x in want if x in byid and x not in blocked and x not in gated]
+    for f in film:
+        f.setdefault("_value", prior_score(f, load_weights()))
+    filmed_ids, shots, minutes = plan_week(film, capacity_min)
+    for f in film:
+        if worker_shots(f, f["id"]) and f["id"] not in filmed_ids:
+            problems.append(f"week 1 idea {f['id']} does not fit the staff minutes and moves to week 2")
+    week1 = [f["id"] for f in film if f["id"] in filmed_ids or not worker_shots(f, f["id"])]
+    publish_ids = week1 + [x for x in slate_ids if x not in week1 and x not in blocked]
+    codes = assign_codes(client.dir, publish_ids, preview=codes_preview)
+    if not codes_preview:
+        for iid, code in codes.items():
+            i = byid[iid]
+            for k in ("cta_ru", "comment_prompt_ru"):
+                i[k] = (i.get(k) or "").replace("{CODE}", code)
+            i["on_screen_ru"] = [t.replace("{CODE}", code) for t in i.get("on_screen_ru") or []]
+    consent = any((byid[x].get("production") or {}).get("people_on_camera", 0) for x in week1)
+    card = shootcard.render_card_ru("1", shots, minutes, capacity_min, business=client.profile.get("name", ""),
+                                    extra_tips=client.profile.get("card_tips_ru"), consent=consent) if shots else \
+        "Это ИИ-ассистент MetaPrompt. На этой неделе съёмка не нужна."
+    manifest = [dict(m, idea_id=m["shot_id"].rsplit("_", 1)[0]) for m in shootcard.manifest(shots)]
+
+    # owner message: the final campaign's asks are the source; facts only for ideas we intend to publish
+    items = [{"from": "campaign", "q": a["ask"], "why": a.get("why", ""), "minutes": a.get("minutes")}
+             for a in camp.get("owner_asks") or []]
+    for x in [*want, *publish_ids]:
+        if x in byid and x not in blocked:
+            idea = byid[x]
+            for v in check_idea(idea, client.ledger, {i for i in [*(idea.get("insight_ids") or [])]}, None)["needs_facts"]:
+                q = fact_question_ru(v, idea.get("hook_ru", ""))
+                if q:
+                    items.append({"from": "facts", "q": f"{x}: {q}"})
+            for need in declared_needs(idea):
+                items.append({"from": "facts", "q": f"{x}: Подтвердите для ролика «{idea.get('hook_ru', '')}»: {need}"})
+    seen, clean = set(), []
+    for q in items:
+        text = q["q"].split(": ", 1)[-1] if q["from"] == "facts" else q["q"]
+        if latin_share(text) > 0.2:
+            problems.append(f"owner item not in Russian, not sent: {text[:80]}")
+        elif has_past_date(text, today):
+            problems.append(f"owner item has a date before {today}, not sent: {text[:80]}")
+        elif text not in seen:
+            seen.add(text)
+            clean.append(q)
+    card_items, deferred = owner_card(clean)
+    msg = "\n".join(f"{n}. {q['q'].split(': ', 1)[-1] if q['from'] == 'facts' else q['q']}" for n, q in enumerate(card_items, 1))
+    return {"week1": week1, "minutes": minutes, "shots": shots, "manifest": manifest, "card": card, "codes": codes,
+            "owner_card": card_items, "owner_deferred": deferred, "problems": problems,
+            "for_review": {"WEEK1_SHOOT_CARD_RU": card, "OWNER_MESSAGE_RU": msg, "CODE_PROBLEMS": problems}}
 
 
 # ----------------------------------------------------------------- the run
@@ -455,7 +635,12 @@ class BrainRun:
 
 
 def method_text(path: Path | None = None) -> str:
+    """The active method: brain/METHOD.md, else the newest brain/METHOD_v<N>.md (an explicit path must exist)."""
     p = path or METHOD_PATH
+    if not p.exists() and path is None:
+        versions = sorted(METHOD_PATH.parent.glob("METHOD_v*.md"),
+                          key=lambda f: int(re.sub(r"\D", "", f.stem) or 0))
+        p = versions[-1] if versions else p
     if not p.exists():
         raise FileNotFoundError(f"method not found: {p} (the brain needs brain/METHOD.md)")
     return p.read_text(encoding="utf-8")
@@ -475,6 +660,7 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
     """fetch: how the agent re-fetches product pages it already knows (None = never fetch)."""
     method = method_text(method_path)
     rid = run_id or time.strftime("%Y%m%d-%H%M%S", time.gmtime())
+    today = (now or datetime.now(timezone.utc)).date().isoformat()
     out = (out_root or client.dir / "campaigns") / rid
     out.mkdir(parents=True, exist_ok=True)
     br = BrainRun(client.slug, request, out)
@@ -569,115 +755,130 @@ def run(client: Client, request: str, llm: LLM, out_root: Path | None = None, n_
                  "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"}
     br.save("selection", selection)
 
-    # 6 campaign
-    prompt6 = (ctx + "\n\nINTAKE:\n" + json.dumps(intake, ensure_ascii=False) + "\n\nINSIGHTS:\n" +
-               json.dumps(ins["insights"], ensure_ascii=False) + "\n\nSELECTED SLATE (chosen by the selection code; "
-               "use these ideas, you may order and group them):\n" +
-               json.dumps([i for i in ideas if i["id"] in {c['id'] for c in chosen}], ensure_ascii=False) +
-               f"\n\nWEEK 1 FILMING THAT FITS THE STAFF BUDGET ({week_min:.1f} of {capacity_min:g} min): {week_ids}\n"
-               "Design the campaign. Any offer that is not already in facts_usable needs owner approval.")
+    # 6 campaign: sees the whole checked pool (not only the code slate) and the asks it must merge
+    slate_ids = [c["id"] for c in chosen]
+    pool = [i for i in ideas if i["id"] not in blocked]
+    pending = [q for q in br.questions if q.get("from") in ("intake", "inputs")]
+    prompt6 = (ctx + f"\n\nTODAY: {today}. Never write a date before today; write deadlines as «в течение 24 часов»." +
+               "\n\nINTAKE:\n" + json.dumps(intake, ensure_ascii=False) + "\n\nINSIGHTS:\n" +
+               json.dumps(ins["insights"], ensure_ascii=False) +
+               "\n\nIDEA POOL (every idea that passed the code checks; ids are stable):\n" + json.dumps(pool, ensure_ascii=False) +
+               f"\n\nSLATE CHOSEN BY CODE (default test set): {slate_ids}"
+               f"\nWEEK 1 FILMING THAT FITS THE STAFF BUDGET ({week_min:.1f} of {capacity_min:g} min): {week_ids}"
+               "\nweeks[week=1].idea_ids is the FILMING SET for week 1: only pool ids; code rebuilds the staff card from it."
+               "\n\nPENDING OWNER ASKS from intake and inputs (owner_asks must absorb every one you still need, rewritten "
+               "in plain Russian with a default; anything you leave out is NOT asked):\n" + json.dumps(pending, ensure_ascii=False) +
+               "\n\nDesign the campaign. Any offer that is not already in facts_usable needs owner approval.")
     camp = llm.json(f"campaign:{client.slug}", _sys(method, "F. Campaign design"), prompt6, CAMPAIGN_SCHEMA)
+    gated = {i["id"] for i in ideas if report.get(i["id"], {}).get("needs_facts") or declared_needs(i)}
+    preview = deliverables(client, camp, ideas, blocked, gated, slate_ids, capacity_min, today, codes_preview=True)
 
-    # 7 critique -> one revision
+    # 7 critique (method F13 + the actual deliverables) -> one revision that may patch ideas -> re-attack
     reviews = []
     personas = (f"the BOSS of {client.profile.get('name', client.slug)} (persona: boss), who asked: {request}. Does this "
                 "solve MY problem, is it worth my staff's time and money, is anything risky, embarrassing or untrue?",
                 "a veteran short-form creator and SMM for local businesses in Kazakhstan/CIS (persona: veteran_creator): "
                 "is anything generic, ad-like, unproducible with one weak phone in 20 minutes, or unlikely to spread or "
                 "bring inquiries?")
+    review_sys = ("Attack the plan; be concrete; severity fatal = you would reject it. Judge the DELIVERABLES (the staff "
+                  "shoot card and the owner message) as well as the plan.\n\n" + method_section(method, "F13") +
+                  "\n" + method_section(method, "G6"))
+
+    def attack(c, tag):
+        b = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in set(slate_ids) | set(week1_of(c))],
+                        "campaign": c, **deliverables(client, c, ideas, blocked, gated, slate_ids, capacity_min, today,
+                                                      codes_preview=True)["for_review"]}, ensure_ascii=False)
+        return [approval_gate(llm.json(f"{tag}:{client.slug}:{persona[:12]}", "You are " + persona + " " + review_sys,
+                                       b, REVIEW_SCHEMA, effort="medium")) for persona in personas]
     if critique:
-        bundle = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in {c['id'] for c in chosen}],
-                             "campaign": camp}, ensure_ascii=False)
-        for persona in personas:
-            reviews.append(llm.json(f"review:{client.slug}:{persona[:12]}", "You are " + persona +
-                                    " Attack the plan; be concrete; severity fatal = you would reject it.",
-                                    bundle, REVIEW_SCHEMA, effort="medium"))
+        reviews = attack(camp, "review")
         serious = [r for rv in reviews for r in rv["refutations"] if r["severity"] in ("fatal", "major")]
         if serious:
-            camp = llm.json(f"campaign-revise:{client.slug}", _sys(method, "F. Campaign design (revision)"), prompt6 +
-                            "\n\nYOUR CAMPAIGN:\n" + json.dumps(camp, ensure_ascii=False) +
-                            "\n\nFIX EVERY ONE OF THESE BY CHANGING THE PLAN (not by arguing):\n" +
-                            json.dumps(serious, ensure_ascii=False, indent=1), CAMPAIGN_SCHEMA)
-            if rereview:                     # measure whether the revision actually fixed it (stress tests)
-                bundle2 = json.dumps({"intake": intake, "slate": [i for i in ideas if i["id"] in {c['id'] for c in chosen}],
-                                      "campaign": camp}, ensure_ascii=False)
-                br.save("reviews_after", [llm.json(f"review-after:{client.slug}:{persona[:12]}", "You are " + persona +
-                                                   " Attack the plan; be concrete; severity fatal = you would reject it.",
-                                                   bundle2, REVIEW_SCHEMA, effort="medium") for persona in personas])
+            rev = llm.json(f"campaign-revise:{client.slug}", _sys(method, "F. Campaign design (revision)"), prompt6 +
+                           "\n\nYOUR CAMPAIGN:\n" + json.dumps(camp, ensure_ascii=False) +
+                           "\n\nFIX EVERY ONE OF THESE BY CHANGING THE PLAN (not by arguing). A fix to an idea's content goes "
+                           "in idea_patches (only the fields that change; drop=true removes it); weeks[week=1].idea_ids is "
+                           "the final filming set:\n" + json.dumps(serious, ensure_ascii=False, indent=1), REVISION_SCHEMA)
+            br.checks["patches"] = apply_patches(ideas, rev.pop("idea_patches", []), client.ledger, now)
+            report = {i["id"]: check_idea(i, client.ledger, iids, now) for i in ideas}
+            blocked |= {k for k, v in report.items() if v["errors"]} | {i["id"] for i in ideas if i.get("_dropped")}
+            gated = {i["id"] for i in ideas if report.get(i["id"], {}).get("needs_facts") or declared_needs(i)}
+            camp = rev
+            if rereview:
+                br.save("reviews_after", attack(camp, "review-after"))
     br.save("reviews", reviews)
 
-    # attribution: one WhatsApp code per slate idea (code, deterministic), written into the {CODE} placeholders
-    camp["attribution_codes"] = {c["id"]: make_code(1, n + 1) for n, c in enumerate(chosen)}
-    for c in chosen:
-        code = camp["attribution_codes"][c["id"]]
-        for k in ("cta_ru", "comment_prompt_ru"):
-            c[k] = (c.get(k) or "").replace("{CODE}", code)
-        c["on_screen_ru"] = [t.replace("{CODE}", code) for t in c.get("on_screen_ru") or []]
-        # facts the model itself marked as missing become owner questions too
-        for r in c.get("risks") or []:
-            if r.strip().upper().startswith("NEEDS FACT"):
-                br.questions.append({"from": "facts", "q": f"{c['id']}: {r.split(':', 1)[-1].strip()}"})
+    # deliverables, built ONLY from the final campaign and the (patched) ideas
+    if not camp.get("owner_asks"):
+        camp["owner_asks"] = [{"ask": q["q"], "why": "", "minutes": q.get("minutes") or 1} for q in pending]
+    final = deliverables(client, camp, ideas, blocked, gated, slate_ids, capacity_min, today)
+    camp["attribution_codes"] = final["codes"]
+    br.checks["campaign"] = final["problems"]
+    br.checks["ideas_final"] = {k: v for k, v in report.items() if v["errors"] or v["needs_facts"]}
     br.save("ideas", ideas)
-    camp_ids = {x for w in camp.get("weeks", []) for x in w.get("idea_ids", [])}
-    br.checks["campaign"] = ([f"campaign uses idea {x} that is not in the slate" for x in camp_ids - {c['id'] for c in chosen}] +
-                             (["offer needs owner approval"] if camp.get("offer", {}).get("needs_owner_approval") else []))
     br.save("campaign", camp)
-    br.questions += [{"from": "campaign", "q": a["ask"], "why": a["why"], "minutes": a.get("minutes")}
-                     for a in camp.get("owner_asks") or []]
-    if week_shots:
-        (out / "manifest_week1.json").write_text(json.dumps(
-            [dict(m, idea_id=m["shot_id"].rsplit("_", 1)[0]) for m in shootcard.manifest(week_shots)],
-            ensure_ascii=False, indent=1), encoding="utf-8")
-        (out / "shoot_card_week1_ru.txt").write_text(
-            shootcard.render_card_ru("1", week_shots, week_min, capacity_min), encoding="utf-8")
+    br.steps["selection"]["week1_filmed"], br.steps["selection"]["week1_minutes"] = final["week1"], round(final["minutes"], 1)
+    br.save("selection", br.steps["selection"])
+    (out / "manifest_week1.json").write_text(json.dumps(final["manifest"], ensure_ascii=False, indent=1), encoding="utf-8")
+    (out / "shoot_card_week1_ru.txt").write_text(final["card"], encoding="utf-8")
+    br.questions = final["owner_card"]
     br.save("checks", br.checks)
-    br.save("questions_all", br.questions)
-    card, deferred = owner_card(br.questions)
-    br.questions = card
-    br.save("questions", card)
-    br.save("questions_deferred", deferred)
+    br.save("questions", final["owner_card"])
+    br.save("questions_deferred", final["owner_deferred"])
     br.save("staff_asks", br.staff_asks)
-    (out / "campaign.md").write_text(render_md(br, ideas, chosen), encoding="utf-8")
+    (out / "campaign.md").write_text(render_md(br, ideas, final), encoding="utf-8")
     return br
 
 
 # ----------------------------------------------------------------- owner-facing summary
 
 
-def render_md(br: BrainRun, ideas: list[dict], chosen: list[dict]) -> str:
+def render_md(br: BrainRun, ideas: list[dict], final: dict) -> str:
+    """Internal summary for MetaPrompt (English, with Russian quotes). Built from the FINAL campaign, the final week-1
+    set and both review rounds, so it never shows a plan that was revised away."""
     it, cp, sel = br.steps["intake"], br.steps["campaign"], br.steps["selection"]
     byid = {i["id"]: i for i in ideas}
-    L = [f"# {cp['name']}", "", f"**Request:** {br.request}", f"**Reframed:** {it['reframed_request']}",
-         f"**Success metric:** {it['success_metric']['name']} — target {it['success_metric']['target']} by "
-         f"{it['success_metric']['by_when']} ({it['success_metric']['how_measured']})", ""]
+    last = br.steps.get("reviews_after") or br.steps.get("reviews") or []
+    approved = bool(last) and all(r["would_approve"] for r in last)
+    L = [f"# {cp['name']}  (internal, for MetaPrompt)", ""]
+    if last and not approved:
+        L += [f"**NOT APPROVED by the attack:** " + ", ".join(f"{r['persona'][:20]} {r['score']}/10" for r in last) +
+              " (approval needs >=7 and no fatal point). Open points are listed at the end.", ""]
+    L += [f"**Request:** {br.request}", f"**Reframed:** {it['reframed_request']}",
+          f"**Success metric:** {it['success_metric']['name']} — target {it['success_metric']['target']} by "
+          f"{it['success_metric']['by_when']} ({it['success_metric']['how_measured']})", ""]
     if it.get("push_back"):
-        L += [f"**Push back:** {it['push_back']}", ""]
+        L += [f"**Push back (to the owner):** {it['push_back']}", ""]
     L += ["## Big idea", cp["big_idea"], "", f"> {cp['single_minded_message_ru']}", "", cp["why_this_wins"], "",
-          "## Test slate (picked by code: rubric prior + data + diversity)", ""]
-    for s in sel["slate"]:
-        i = byid[s["id"]]
-        L += [f"### {i['id']} · {i['title']}  ({s['why']}, prior {s['prior']}, staff {s['staff_min']} min)",
-              f"- Hook: «{i['hook_ru']}»  — first frame: {i['first_frame']}",
-              f"- What happens: {i['what_happens']}",
-              f"- Why stop / share: {i['why_stop']} / {i['why_share_or_save']}",
-              f"- Driver · engine · funnel: {i['driver']} ({i.get('driver_mechanism', '')}) · {i.get('engine', '')} · {i['funnel']}",
-              f"- Production: {i['production']['mode']}; AI: {i['production']['ai_parts'] or '—'}",
-              f"- KPI: {i['kpi']}; WhatsApp code: {cp['attribution_codes'].get(i['id'], '—')}"]
-        if s["needs_facts"]:
-            L.append(f"- **Needs confirmation:** {'; '.join(s['needs_facts'])}")
-        L.append("")
-    L += ["## Weeks", ""] + [f"- **Week {w['week']}** — {w['goal']}: {', '.join(w['idea_ids'])}. Staff: {w['worker_ask_ru']}. "
-                             f"AI: {w['ai_work']}" for w in cp["weeks"]]
-    L += ["", f"Week 1 filming fits the budget: {sel['week1_minutes']} min ({', '.join(sel['week1_filmed']) or 'no staff footage'}).",
-          "", "## Measurement and decisions", f"- Metric: {cp['measurement']['success_metric']}",
+          f"## Week 1: filmed and published ({len(final['week1'])} videos, {final['minutes']:.1f} staff min)", ""]
+    for iid in final["week1"]:
+        i = byid[iid]
+        L += [f"### {iid} · {i.get('title', '')}",
+              f"- Hook: «{i.get('hook_ru', '')}»  — first frame: {i.get('first_frame', '')}",
+              f"- What happens: {i.get('what_happens', '')}",
+              f"- Driver · format · funnel: {i.get('driver')} · {i.get('format')} · {i.get('funnel')}",
+              f"- WhatsApp code: {final['codes'].get(iid, '—')}; KPI: {i.get('kpi', '')}", ""]
+    rest = [s_["id"] for s_ in sel["slate"] if s_["id"] not in final["week1"]]
+    if rest:
+        L += ["## Rest of the test slate (code selection: rubric prior + data + diversity)", ""]
+        L += [f"- {x}: «{byid[x].get('hook_ru', '')}» ({byid[x].get('driver')}/{byid[x].get('format')})" for x in rest if x in byid]
+    L += ["", "## Weeks", ""] + [f"- **Week {w['week']}** — {w['goal']}: {', '.join(w['idea_ids']) or '—'}. Staff: "
+                                 f"{w['worker_ask_ru']}. AI: {w['ai_work']}" for w in cp["weeks"]]
+    L += ["", "## Measurement and decisions", f"- Metric: {cp['measurement']['success_metric']}",
           f"- Attribution: {cp['measurement']['attribution']}", f"- Review: {cp['measurement']['review_cadence']}"]
     L += [f"- Rule: {r}" for r in cp["decision_rules"]]
     off = cp.get("offer") or {}
     if off.get("needed"):
         L += ["", "## Offer", off["proposal"] + ("  **(needs owner approval)**" if off.get("needs_owner_approval") else "")]
-    if br.questions:
-        L += ["", "## Questions for the owner (batched)"] + [f"- {q['q']}" for q in br.questions]
-    rv = br.steps.get("reviews") or []
-    if rv:
-        L += ["", "## Attack before revision"] + [f"- {r['persona'][:40]}: {r['score']}/10, approve={r['would_approve']}" for r in rv]
+    L += ["", "## Owner message (Russian, one batch)"] + [f"{n}. {q['q'].split(': ', 1)[-1] if q['from'] == 'facts' else q['q']}"
+                                                          for n, q in enumerate(final["owner_card"], 1)]
+    if final["problems"]:
+        L += ["", "## Code checks on the deliverables"] + [f"- {x}" for x in final["problems"]]
+    for title, rv in (("Attack before revision", br.steps.get("reviews") or []), ("Attack after revision", br.steps.get("reviews_after") or [])):
+        if rv:
+            L += ["", f"## {title}"] + [f"- {r['persona'][:30]}: {r['score']}/10, approved={r['would_approve']}" for r in rv]
+    if last:
+        open_pts = [f"- [{f['severity']}] {f['target']}: {f['why_fails']}" for r in last for f in r["refutations"] if f["severity"] != "minor"]
+        if open_pts:
+            L += ["", "## Open points from the last attack"] + open_pts
     return "\n".join(L) + "\n"

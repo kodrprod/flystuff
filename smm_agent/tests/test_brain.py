@@ -132,7 +132,8 @@ def test_full_run_writes_campaign_questions_codes_and_shoot_card(tmp_path):
                      "measurement": {"success_metric": "chats", "attribution": "codes", "leading_indicators": [],
                                      "review_cadence": "weekly"},
                      "decision_rules": ["scale arms with P(best)>0.9"], "learning_questions": [],
-                     "owner_asks": [{"ask": "consent to film staff", "why": "faces", "minutes": 2}], "risks": []},
+                     "owner_asks": [{"ask": "Есть ли бюджет на рекламу? По умолчанию: 0 ₸.", "why": "boost", "minutes": 1},
+                                    {"ask": "consent to film staff", "why": "faces", "minutes": 2}], "risks": []},
         "review": {"persona": "boss", "score": 7, "would_approve": True, "best_idea": "i0", "refutations": []},
     }
     be = Scripted(outs)
@@ -148,13 +149,16 @@ def test_full_run_writes_campaign_questions_codes_and_shoot_card(tmp_path):
     camp = json.loads((out / "campaign.json").read_text())
     assert len(camp["attribution_codes"]) == len(sel["slate"]) and len(set(camp["attribution_codes"].values())) == len(sel["slate"])
     qs = " ".join(q["q"] for q in br.questions)
-    assert "бюджет" in qs and "sales by category" in qs and "consent" in qs and "i1" in qs
+    # the FINAL campaign's asks are the owner message; English asks are refused and logged, never sent
+    assert "бюджет" in qs and "consent" not in qs and "sales by category" not in qs and "i1" not in qs
+    assert any("not in Russian" in x for x in br.checks["campaign"])
+    assert "i0" not in json.loads((out / "selection.json").read_text())["week1_filmed"]      # waits for its fact
     assert (out / "shoot_card_week1_ru.txt").read_text().startswith("Это ИИ-ассистент")
     saved = {i["id"]: i for i in json.loads((out / "ideas.json").read_text())}
     assert saved["i0"]["cta_ru"] == "Напишите в WhatsApp " + camp["attribution_codes"]["i0"]
     assert "условия рассрочки" in qs
     md = (out / "campaign.md").read_text()
-    assert "Звук решает" in md and "Questions for the owner" in md
+    assert "Звук решает" in md and "Owner message" in md and "waits for owner facts" in md
     assert "sales.json" in json.dumps(br.steps["inventory"]) and be.calls[0].startswith("intake")
 
 
@@ -206,7 +210,7 @@ def test_owner_card_fits_15_minutes_and_defers_the_rest():
     card, deferred = B.owner_card(qs)
     mins = sum(q.get("minutes", 1.0) if q.get("from") != "intake" else 1.0 for q in card)
     assert [q["q"] for q in card[:3]] == ["Вопрос 0?", "Вопрос 1?", "Вопрос 2?"] and mins <= 15
-    assert sum(1 for q in card if q["from"] == "facts") == 1 and "(и ещё 3)" in card[-1]["q"]
+    assert sum(1 for q in card if q["from"] == "facts") == 1 and "и ещё 3" in card[-1]["q"]
     assert {"from": "intake", "q": "Вопрос 3?"} in deferred                              # max 3 asked; rest deferred
     assert len(card) + len(deferred) == 3 + 5 + 1 + 3 + 1                               # nothing dropped but the duplicate
 
@@ -238,3 +242,11 @@ def test_resumed_run_keeps_its_input_snapshot(tmp_path):
                   method_path=tmp_path / "M.md", run_id="same", fetch=None)
         (cdir / "facts.jsonl").write_text("", encoding="utf-8")          # the ledger changes between attempts
     assert calls[0] == calls[1]                                          # same prompt -> tape replay would hit
+
+
+def test_a_fresh_clone_finds_the_committed_method(tmp_path, monkeypatch):
+    assert "MetaPrompt Method" in B.method_text()                      # brain/METHOD.md is committed
+    (tmp_path / "METHOD_v1.md").write_text("one", encoding="utf-8")
+    (tmp_path / "METHOD_v10.md").write_text("ten", encoding="utf-8")
+    monkeypatch.setattr(B, "METHOD_PATH", tmp_path / "METHOD.md")
+    assert B.method_text() == "ten"                                      # newest version when METHOD.md is absent
