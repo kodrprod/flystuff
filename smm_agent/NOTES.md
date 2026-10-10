@@ -1,6 +1,6 @@
 # SMM agent — working notes (read this first when resuming)
 
-Last updated: 2026-10-09 19:10 UTC (session on branch `claude/festive-hypatia-yifkyo`).
+Last updated: 2026-10-10 22:55 UTC (session on branch `claude/festive-hypatia-yifkyo`).
 This folder lives inside the unrelated `flystuff` (drone sim) repo only because that
 was the repo attached to the session. It should move to its own repo — see "Waiting for human".
 
@@ -70,6 +70,33 @@ D16 stress tests run through the real code path (`agent plan`), not through a si
 **Dead ends added:** usage-limit detection by substring "429" matched ordinary token counts (42901) and parked 8 good
 runs (now: structured fields only). Committing after `pytest | tail` hid a failing test twice; commit only on rc==0.
 Tests must not depend on the working directory.
+
+**Status 2026-10-10 22:55 UTC (supervisor mode: weekly usage limit close, resets Tue 14:00 UTC)**
+
+Done (all pushed):
+- Method v1 (`brain/METHOD_v1.md`, also `brain/METHOD.md` so a fresh clone runs) ran through the real code on 6 requests
+  (Muzzone viral / more sales, dental, coffee launch, B2B "do we need social?", salon price pressure). Boss + veteran
+  creator scores 5.0-6.0/10 before the agent's revision, 5.5-6.0 after; fatal points 6 -> 1 (`brain/board_v1.json`).
+- 6 independent audits of those runs (`brain/audits_v1.json`): 105 failures, 55 caused by code. Status of the 55:
+  `brain/AUDIT_v1_STATUS.md` (31 fixed, 18 partial, 6 open). The 5 fatal patterns are fixed: deliverables built from the
+  final revised plan, owner message from the final asks (Russian only, no past dates), approval decided in code, per-client
+  shoot card, codes never reused.
+- `python -m smm.replay` rebuilds a recorded run from its tape with 0 model calls and hard-checks every deliverable; all
+  6 runs pass. The old code had filmed 27 of 75 shots for ideas outside the final week 1. `tests/test_replay.py` pins it.
+- Tests: 154 passed.
+
+Blocked on Andrey (see HANDOFF.md): Higgsfield SDK key + credits; TikTok/Reels test account; the meaning of
+"Финальная распродажа"; Muzzone contact and staff consent; a 10-minute real phone test; paid-boost budget; R5 scope.
+
+Next (in order, after the usage reset):
+1. `revise_v2` workflow (run wf_230275cf-bf4): the 6 audits are cached; revise -> 2 attacks -> finalise produce method v2.
+   If it did not finish, resume it with the same args (the audits replay from cache).
+2. Save v2 as `brain/METHOD_v2.md` + `brain/METHOD.md`; apply its "CODE CHANGES REQUESTED"; align schemas.
+3. Re-test v2 on the hiring request + the 2 lowest-scoring cases (b2b, salon) with `python -m smm.stress --only ...`,
+   at most 3 cases per usage window.
+4. Agent-side research step (open items 4/14/22/33): inputs+insights steps with WebSearch/WebFetch so evidence is real.
+5. BRAIN.md (owner overview of the brain) and SUMMARY.md update from v2 results.
+Rule learned: 8 parallel brain runs exhaust a usage window; run <=3 at a time; commit only when tests return rc 0.
 
 ## 1. Goal and definition of done
 

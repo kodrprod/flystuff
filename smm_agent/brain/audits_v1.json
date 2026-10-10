@@ -1,0 +1,985 @@
+[
+ {
+  "case": "muzzone-viral: real client Muzzone (music instrument retail, Astana); boss request «Сделайте нас вирусными в TikTok.» Run artifacts: /tmp/claude-0/-home-user-flystuff/ed90e34e-b470-5816-9bae-4695c8c48b9b/scratchpad/brain/stress_v1/muzzone-viral/ (all steps present; the log reports a slate of 8, 7 owner questions, and 7 ideas filmed in week 1 in 14.9 min). The run finished.",
+  "verdict": "The run finished, but what it delivers can't be used as is. The strategy is good: an honest push-back against the word \"viral\", a measurable objective (coded WhatsApp chats from new first-instrument buyers, 8/20/35 against a week-0 baseline), realism math with ranges, and strict truth handling (the «Финальная распродажа» risk, the PX-770 25% price swing, the Casio service in Almaty). Two problems stop it from being shippable. (1) The creative slate is safe and catalogue-like for a \"make us viral on TikTok\" brief. 7 of 8 slate ideas sit at consideration, conversion or retention. Every video is faceless and almost silent. None of the 5 ideas the model itself labelled wildcards was picked, and the highest-prior idea is a delivery-policy card (ID19). Both reviewers scored it 6/10 before and after the revision. (2) Code shipped the pre-revision plan as the deliverables. The staff shoot card films ID05, which the revision cut from week 1, plus the old glissando ID06 and ID19. The owner card skips all 12 revised owner asks. Instead it sends the chat-export request that the revision withdrew over privacy, the 3 intake questions whose deadline «до 10.10 12:00» had passed before the run finished, the same questions again inside a second ask, and English developer strings cut off mid-word. A real boss would get contradictory instructions to staff and an owner message that can't be answered.",
+  "would_a_real_boss_use_it": false,
+  "best_part": "The intake and measurement design. The push_back says it plainly in Russian: «Гарантировать, что ролик «залетит» в TikTok, не может никто… Успех считаем не в просмотрах, а в обращениях в WhatsApp по коду из ролика». The intake turns \"viral\" into «+20 coded WhatsApp inquiries from new contacts about first instruments», with conservative/expected/stretch targets, a week-0 baseline re-fixed on 2026-11-01, and REALISM math with a 10× range. It spots that «Финальная распродажа» could mean a closure, which would invalidate the brief. It catches the PX-770 price moving 695 913 → 521 935 ₸ within a day (E26) and bans prices in evergreen videos. It refuses to repeat «100% оригинальный товар» or the incentivised-review delivery compensation. After review it sets «вирусный» to mean ≥100 000 views and adds tier-2 attribution (DMs and «цена?» comment handoffs). Of the creative, ID01 (blind three-ukulele listen) and ID03 (electric unplugged vs through the combo, one continuous take) are the right kind of idea for one weak phone: close real sound, a stake in frame 1, a true reveal.",
+  "failures": [
+   {
+    "what": "The deliverables that actually go out (staff shoot card, slate cards, filming line) are pre-revision. The revision exists only as prose in campaign.weeks, so staff are told to film ideas the plan cut or rebuilt, and 11 shots that the plan itself calls over capacity.",
+    "evidence": "shoot_card_week1_ru.txt: «6. PX-770: арпеджио с нажатой педалью…», «8. AP-270: то же арпеджио…» (ID05), «7. Глиссандо по всем клавишам…» (old ID06), «10. Руки застёгивают чехол укулеле и ставят на коробку» (ID19). campaign.md Week 1: «4 bodies instead of 7, because the reviewed estimate for 7 bodies was unrealistic… ID19 is a pinned post… ID05 is not shot… ID06 is rebuilt: hook on a key press… not a glissando». The same file says «Week 1 filming fits the budget: 14.9 min (ID19, ID06, ID13, ID03, ID05, ID01, ID14)», and the slate card for ID05 still reads «Synthetic voice-over labelled «озвучка ИИ» explaining polyphony». reviews_after (boss, major): «Карточки слейта (ID05, ID06 и ID19) расходятся с исправленной кампанией… На утверждение мне и на съёмку должна идти одна версия».",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "F13 (revision may only change campaign fields) + E1 (code writes the shoot card); brain.py run() lines 564, 610-632, render_md 657-668",
+    "fix": "Add `idea_patches` [{id, field, new_value}] and `week1_ids` to the revised 6_campaign schema (F13: 'a fix to an idea's content goes in idea_patches'). Code applies the patches, re-runs check_idea truth rails on the patched strings, re-runs plan_week on week1_ids, and regenerates the shoot card, the slate section and the codes from the patched ideas. Code fails the run if campaign.weeks[1].idea_ids != selection.week1_filmed."
+   },
+   {
+    "what": "The owner card that is actually sent skips every revised owner ask. It reintroduces the chat-export ask that the revision withdrew over privacy, carries deadlines that had expired before the run ended, asks the sale-reason and faces questions twice, and keeps an outdated TikTok default in which the agent creates the account.",
+    "evidence": "questions.json (7 items) = 3 intake questions ending «Ответ до 10.10 12:00» (the run wrote its files at 15:27–15:44 on 2026-10-10) + «WhatsApp chat export: 15–30 recent customer chats, no media» + «TikTok… 2 — нет, создаём новый на почту магазина: от вас только код подтверждения из SMS» + «Permissions tap card… (merges intake Q1 + Q3)», which repeats «Почему распродажа называется «Финальная»?» and «Кого можно снимать» + a facts item. All 12 campaign.owner_asks are in questions_deferred.json, including «цель месяца — около 20 обращений… «вирусный» только от 100 000» and the privacy-safe option «1 — сотрудник ставит… ярлык «Новый»… По умолчанию: 1». The boss review had flagged the export as major: «клиентские переписки уходят внешнему ИИ-подрядчику… юридический риск по закону РК о персональных данных».",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "L5/B1 (one batched owner message ≤15 min) + A8; brain.py owner_card() lines 405-436 (priority intake→inputs→campaign, dedupe on the first 120 chars), line 502 (q = English input title)",
+    "fix": "Rule: the final revised campaign.owner_asks is the only source of the owner card. Intake and inputs asks are inputs to step 6, which must merge them, and each ask carries a required `ask_key` enum (sale_reason, faces, tiktok, chat_data, …) that code dedupes on. Code fills in deadlines as send_time + 24 working hours, rejects asks containing model-written dates, and builds the card in campaign order until 15 min."
+   },
+   {
+    "what": "The facts item asks the owner, in English developer strings cut off at 90 characters, to confirm facts for an idea that isn't on the slate and arithmetic the agent can do itself.",
+    "evidence": "campaign.md: «Подтвердите или поправьте, пожалуйста, факты для роликов: ID02.hook_ru: absolute/superlative claim without a backing fact: 'лучше'; … '31 600 ₸' not backed by a usable fact; ID03.on_screen_ru[6]: number '116 376 ₸' not backed…; ledger entry for the derived sum 116 376 ₸ = as100_price + hib_price (agent; valid only wh; staff confirm the polyphony explanation and any other differences (keyboard action, cabine». ID02 is not on the slate. «31 600 ₸» was a valid derived fact (diff_uke) until this run's own re-fetch superseded usc40_price/uf330_price and nothing re-derived it. The model had tagged the sum «(agent…)».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "L2 / C6.2 (NEEDS FACT → one batched owner question); brain.py 553-555 (facts questions for all 24 ideas), 617-619 (every NEEDS FACT goes to the owner), 433-434 (truncation); acquire.supersede (no re-derivation)",
+    "fix": "Rule change: `NEEDS FACT: <fact> (agent|staff|owner)` is routed by its tag. Code resolves agent facts itself (recompute derived diffs and sums from fresh facts after every supersede, re-fetch pages), puts staff facts on the staff card, and asks the owner only about owner facts on slate ideas, in Russian, from a per-fact template. Owner-facing strings containing Latin identifiers (IDxx, hook_ru, ledger ids) fail the build."
+   },
+   {
+    "what": "Agent-fetchable Tier-0 inputs were listed as missing and never fetched. The insights therefore rest on zero customer language, the A7 disguised-problem checks (Kaspi price position, reviews) were skipped, and the dombra was never looked for.",
+    "evidence": "inputs.missing has 9 `who: agent` items with 0 owner minutes (YouTube comments on the 64k video, 2GIS/Google/Kaspi reviews, Kaspi position, demand phrases, peer short-form outliers, a TikTok handle search, site service pages), all marked «blocks_step: none». checks.fetched_facts covers only 4 product pages. insights E53: «There are no WhatsApp chats, public reviews… or search-suggestion scans… so there is zero customer verbatim». I06: «the belief is assumed, since there are no customer verbatims». intake: «Kaspi price position, WhatsApp reply time and reviews have not been fetched». Creator: «Missing dombra… Everything on the slate is generic Western beginner retail that any shop in Moscow could post». youtube_channel.json: 379 videos, 0 with comments extracted.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "Method table step 2 ('Runs the agent fetches') + B1/B2 ('Tier 0… always run') + A7 (disguised non-marketing problems); brain.py run() has no fetch executor between steps 2 and 3",
+    "fix": "Code runs every `who: agent` missing item through a fetcher registry (YouTube comments, 2GIS card, Kaspi search, suggest endpoints, site search for each category word in the request and profile) before step 3, and logs the result or failure for each. Step 3 refuses to start while any Tier-0 item is un-attempted. Rule in C5: an insight that cites no `customer_language` evidence is capped at strength 2 and cannot anchor the hero series."
+   },
+   {
+    "what": "Selection ignored the awareness mix and never picked a declared wildcard, so the slate for a 'viral' brief is bottom-funnel and ad-like. The idea the veteran creator named as 'the stronger idea the slate is missing' was already in the pool and was not selected.",
+    "evidence": "Slate funnels: ID19 conversion, ID06 conversion, ID03 conversion, ID13/ID05/ID01 consideration, ID24 retention, ID14 attention, so 1 of 8 is attention-stage, against F3 «awareness_or_viral 55% hero/reach». Top prior: ID19 delivery policy, 4.064 (truth 5, producible 5, share_save 4); creator: «Text cards about delivery thresholds… are a pure ad». WILDCARD-tagged ideas ID10, ID17, ID18, ID21 and ID23 were not selected; the explore slots went to ID01 (3.679) and ID14 (3.654). ID10 «Цифровое пианино, если выключить звук… Соседи слышат, как вы играете?» (prior 3.038, not selected) vs the creator review: «The stronger idea the slate is missing is… «пианино в квартире: соседи vs наушники»… all you hear is the clack of the keys».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F3 (default mix) + E1 (weights, ~25% exploration) + 0.1 ruling 9 (code protects exploration); brain.py select() 354-381 (no funnel quota; novelty tie-break by prior)",
+    "fix": "select() takes request_type and enforces F3 as funnel quotas (awareness: ≥4 of 8 slots attention/reach). Add `wildcard: bool` to the idea schema; explore slots are filled by seeded random draws among wildcard ideas, never by prior. Method E1: truth and producibility are gates (L2/L5), not prior weight, so the prior uses only stop, share_save and comment for reach slots."
+   },
+   {
+    "what": "The slate is faceless, nearly voiceless and has nothing local, which is the format the creator says every CIS music shop already posts. The store's real asset, people who can play (the channel's skill content: Govan clinic 39 000, Davidyants 61 000), is unused.",
+    "evidence": "All 8 slate ideas have people_on_camera 0 and say_ru \"\", except one optional ID13 line. Creator after revision: «None of the 5 week-1 videos says «Астана», uses Kazakh, or has a human voice beyond one optional line… Make Q3 option 2 (seller face with consent) the recommended answer». intake FILMING default: «hands, instruments, instrument sound and voice only; no faces until consent is asked». ID21 (mastery series) and ID23 (clinic re-cut) were not selected.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A5 FILMING default + A8 Q3 default «1 — только руки» + D4/E3 (no voice or locality requirement)",
+    "fix": "Add to E3 for awareness_or_viral: ≥2 of 5 weekly bodies carry one recurring staff voice (phone at the mouth, no face needed) and ≥1 carries a local marker (city, a native-checked Kazakh word, a local instrument). For any retail client whose staff can perform, ≥1 mastery idea goes into the slate. The consent question is mandatory at onboarding and recommends option 2 (staff faces with consent)."
+   },
+   {
+    "what": "The staff-minute model is unrealistic: no instrument set-up, no skill prerequisite, no uploads. The card cannot be filmed in the stated time.",
+    "evidence": "Card: «Всего ~15 мин из 20» for 11 shots across 3 locations with 2–3 takes each, needing a ukulele C chord, a pedalled arpeggio, a glissando and an amp riff. Creator: «That estimate is already unrealistic for 7 bodies across 3 locations… plan for 20–25 minutes». campaign.risks: «the code model may not include tuning and amp set-up minutes. They are added manually here (ID01 +2, ID03 +1)». Boss after revision: «не вошли 15 загрузок в неделю… На деле это легко 30–40 минут в неделю». Ideas carry «Staff member must be able to play a C chord on ukulele [ASSUMPTION]».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 minute model + L5; shootcard.py (FIXED_MIN=2 'reading the card + uploading', no set-up term)",
+    "fix": "D9/shootcard: card_minutes += Σ setup_min (a schema field with floors: tuning 0.5 per instrument, cable/amp 1.0, instrument switch 0.5) + uploads (posts × platforms × 0.5 unless an uploader other than staff is confirmed). Ideas that need a skill declare `requires_skill`, and code blocks them until the staff reality scan names a player."
+   },
+   {
+    "what": "The shoot card's hard-coded audio tips contradict the weak-phone constraint, the shot instructions and the revision. For a concept built on close sound, that is a production-breaking ambiguity.",
+    "evidence": "shoot_card_week1_ru.txt: «Звук важен: инструмент в 30–50 см от телефона; громкий комбик или барабаны — не ближе 1 метра». Shot 4 on the same card: «телефон в 30 см от динамика». campaign week 1: «телефон закреплён в 60 см, шумоподавление выключено». METHOD D9: «звук товара — 20–30 см»; L5: «audio is usable only within about 30 cm». The card's «Пункт управления… Режим микрофона» tip is iPhone-only, while the profile says «one mid/low-quality phone». Neither the tuner nor the noise-suppression-off steps added in the revision appear on the card.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 shoot-card phone rules; shootcard.py line 118 (static tips)",
+    "fix": "Code generates the card's audio tips from profile.staff_capacity.audio and the per-shot distances. The card build fails if any shot distance conflicts with a tip. Per-idea prep steps (tuning, amp level, noise suppression off) come from a `prep_ru` idea field and are printed first."
+   },
+   {
+    "what": "The review gate is not a gate. Both personas approved at 6/10, which F13 forbids. After the revision both still scored 6/10 with 9 new majors, the plan shipped anyway, and campaign.md shows only the pre-revision 'approve=True'.",
+    "evidence": "reviews.json: score 6, would_approve true (boss and creator). reviews_after.json: 6 and 6, with majors including «Мой лимит времени… 16 минут», «Скрытые затраты времени сотрудников», «Базовая неделя 0… отчёт будет врать в нашу пользу», «Whole slate: faceless, voiceless, no local flavour». campaign.md: «Владелец Muzzone, который попросил «Сдел: 6/10, approve=True».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F13 ('would_approve: true only if there is no fatal refutation and score ≥ 7'); brain.py 588-607, 680-682",
+    "fix": "Code sets would_approve=false whenever score<7 or a fatal exists. If any post-revision persona is below 7 or has a major on a deliverable (card, owner asks, shoot card), it runs a second revision limited to those refutations. If a persona is still below 7, campaign.md opens with «НЕ УТВЕРЖДЕНО: 6/10» and lists the open majors, and code does not emit the shoot card."
+   },
+   {
+    "what": "The boss's named channel is silently defaulted away: with no answer, the plan publishes on Reels and Shorts instead of TikTok.",
+    "evidence": "campaign owner_ask: «По умолчанию: пока аккаунта нет, публикуем в Reels и YouTube Shorts». inputs fallback: «Publish on Reels and YouTube Shorts only». Boss after revision (major): «Я просил именно TikTok… Перенос в Reels/Shorts не должен быть молчаливым вариантом по умолчанию.» No TikTok handle search was run, although the inputs step promised «The agent searches TikTok first».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A5 ACCOUNTS ('A missing account is an owner ask') + A8 defaults",
+    "fix": "Add to A5: a channel named in the boss's request is a hard constraint. If its account is missing, week 0 gets a critical-path task with a named person, a deadline and step-by-step instructions (KZ SIM, shop phone, no VPN). No answer triggers one reminder and a reported slip, never a default to other channels."
+   },
+   {
+    "what": "The model has no clock, so the intake deadlines had passed before the owner could see them and dates conflict across artifacts.",
+    "evidence": "intake.clarifying_questions: «Ответ до 10.10 12:00» (files written 15:27 on 2026-10-10). campaign asks: «Ответ до 14.10 12:00». Boss: «в брифе я должен был ответить до 10.10 12:00, а в кампании стоит 14.10, а сегодня уже 10.10. Какой срок настоящий, непонятно.» A8: «The deadline is 24 hours; after it, proceed on the default», so every default fires before the owner has read the question.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "A8 (24-hour deadline); brain.py 487-488 (context has no TODAY)",
+    "fix": "Code injects TODAY and the planned owner-message send time into every step prompt, writes {DEADLINE} placeholders as send_time + 24 working hours, and rejects owner-facing strings that contain literal dates in the past."
+   },
+   {
+    "what": "Insight strengths exceed the C5 caps: the hero insight and the myth insight are scored as if customer-evidenced.",
+    "evidence": "I01 strength 4, although its tension rests on long-form view counts (E39) and E40 says «the title formula does not» transfer, with no customer_language evidence. I06 [myth] strength 3 although «the belief is assumed (no customer verbatims)»; C5 caps assumption-only evidence at 2, and C2 allows myth_check «only with proof» of a B cluster.",
+    "severity": "minor",
+    "cause": "model_noncompliance",
+    "method_section": "C5 caps, C2 (B → myth_check only with proof), B2 ('never carry long-form findings to short-form')",
+    "fix": "Code check in check_insights: strength ≤3 if no cited evidence has kind customer_language, and ≤2 for type myth without a B-coded customer_language item. Violations go back for one fix, like the source check."
+   },
+   {
+    "what": "Copy that cannot be verified or followed: ID01's reveal card hard-codes an answer order that the edit randomises, and the alphanumeric codes are not typeable.",
+    "evidence": "ID01 on_screen_ru: «2 — Alston UF-330, 64 501 ₸», while what_happens says «Answer order is randomised at edit». Creator: «If the editor follows the card, the reveal is wrong». CTAs read «Напишите в WhatsApp BA29», while campaign.channels proposes «УКУЛЕЛЕ 1, КОМБИК 1» because «KZ viewers don't type codes».",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "D3 guess/ab_compare ('true reveal') + L3/F9 codes",
+    "fix": "Rule: guess and ab_compare reveal lines use slot placeholders ({A},{B},{C}) that code fills from the final shot order at edit. Codes are generated as a Russian product word plus a digit from a per-line lexicon, not alphanumerics."
+   },
+   {
+    "what": "Smaller code defects in what humans read: an empty engine field, garbled week lines, a contingent idea in the week-1 slate, and two conflicting staff label schemes.",
+    "evidence": "campaign.md «Driver · engine · funnel: relief () ·  · conversion»; «Week-1 shoot card sent Fri 16.10.: . Staff:»; slate includes «ID24 · Reply to a real week-1 comment» with code BA28 although «Only built when a real, answerable comment exists». staff_asks.json labels „Видео“/„Оплачен“/„Неделя 0“ vs campaign week 0 «Новый», «Видео», «Оплачен».",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "F2 (Reply series 'starts once comments exist'), F7 (worker asks); brain.py 663, 669, 504, select()",
+    "fix": "Add `available_from_week` to the idea schema and have select() exclude ideas unavailable in week 1. render_md uses `format`, skips empty idea_ids and never truncates personas. The staff card is built only from campaign.weeks[0].worker_ask_ru; raw staff asks from inputs are inputs to step 6, not messages."
+   }
+  ],
+  "code_issues": [
+   "brain.py run() lines 564/627-632: plan_week and the week-1 shoot card are computed from the pre-revision slate and never recomputed after the F13 revision; the shoot card films the cut ID05 and the old ID06/ID19.",
+   "brain.py render_md 657-671: slate cards render the unrevised idea objects; the line 'Week 1 filming fits the budget: 14.9 min (… ID05 …)' contradicts the revised weeks text.",
+   "brain.py owner_card 405-436: priority is intake→inputs→campaign, so all 12 revised campaign owner_asks are deferred; dedupe on the first 120 chars misses near-duplicates («Финальная» and «Кого можно снимать» are asked twice); the facts line truncates each item to 90 chars ('valid only wh', 'cabine').",
+   "brain.py line 502: an inputs ask uses m['input'] (English title) as q; render_md prints only q, so the owner sees 'WhatsApp chat export: 15–30 recent customer chats, no media'.",
+   "brain.py 553-555: 'Confirm before idea…' facts questions are generated for all 24 ideas, not just the slate (ID02 is off-slate but on the owner card).",
+   "brain.py 617-619: every 'NEEDS FACT' risk becomes an owner question regardless of its '(agent)'/'(staff)' tag.",
+   "acquire.py supersede/fill_facts: retiring usc40_price/uf330_price makes the derived diff_uke unusable and nothing re-derives it; there is no derived-sum support (116 376 ₸).",
+   "brain.py run(): no executor for who:agent missing inputs, though METHOD's step table says code 'Runs the agent fetches'; only product pages tied to needs_facts are fetched.",
+   "brain.py select() 354-381: no funnel/request_type quota (F3 ignored); exploration tie-break is by prior; no wildcard flag, so none of the 5 WILDCARD ideas is picked; no availability check (ID24 reply in week 1).",
+   "brain.py 487-488: the step context has no current date, so the model wrote deadlines that had already passed.",
+   "brain.py 588-607: would_approve is not validated against score≥7 (F13); reviews_after is saved but neither gates shipping nor appears in campaign.md; there is only one revision.",
+   "brain.py render_md 663/669/682: uses non-existent i['engine'] and 'driver_mechanism' (prints 'relief () ·  ·'); joins empty idea_ids ('16.10.: .'); persona truncated to 40 chars.",
+   "brain.py 504: staff_asks come from inputs only and are never reconciled with campaign.weeks[0].worker_ask_ru (conflicting WhatsApp label schemes).",
+   "shootcard.py line 118: hard-coded tip «инструмент в 30–50 см… комбик… не ближе 1 метра» contradicts METHOD D9 (20–30 cm) and the per-shot distances; the iPhone-only mic-mode tip is wrong for a mid/low phone; FIXED_MIN=2 covers 'reading + uploading' with no per-instrument set-up or per-platform upload minutes.",
+   "brain.py check_idea: does not validate facts_used ids, so ideas still cite superseded do_not_use facts (u246_price, as100_price) after this run's own re-fetch.",
+   "brain.py 562: ideas with unresolved needs_facts (ID03 '116 376 ₸') are selected and filmed without a gate or an agent-side resolution attempt."
+  ]
+ },
+ {
+  "case": "muzzone-sales",
+  "verdict": "The run finished: intake, inputs, insights, 24 ideas, selection, campaign, two reviews, one revision and a second review. The strategy is sound and honest. The single message «Послушайте, прежде чем платить» fits the brief: hands-only sound demos, a guitar+amp starter basket over the 100 000 ₸ free-delivery line, a ukulele gift line and ear tests. The truth discipline is strong. But the files that staff and the owner would actually receive are the pre-revision versions.\n\n- **Shoot card is stale.** It still has 15 shots in 2 rooms and says \"~15 мин\", built on the 2-unit clearance Hibilly amp. The veteran reviewer called exactly this fatal. The revision moved piano to week 2 and dropped the Hibilly, but only in prose.\n- **Codes are stale.** The CTAs still say «BA28» although the revision switched to the word codes «ГИТАРА»/«ПИАНИНО»/«УКУЛЕЛЕ».\n- **Owner card is stale.** It still asks for the WhatsApp chat export the revision banned. It asks the 3 intake questions twice, once on their own and once inside the \"tap card\". It includes raw English validator strings. The asks the revision added (which amp, the 15.12 verdict date, Instagram access) were deferred.\n- **The slate is not diverse.** The \"diverse\" slate is 5 of 8 guitar ideas, 4 of them on the same AS-100BK + Hibilly pair at the same wall. The sale line, one of the four lines the plan says it will test, has 0 ideas.\n- **No real customer evidence.** Every customer tension is a guess (E44, E50). The agent's own fetch plan (2GIS, YouTube comments, Kaspi, search suggestions) was written down but never run.\n\nThe fatal_after=0 and approve_after=2 on the board measure prose, not the files people would use. Score about 5/10. With the slate patched, ID14, ID23, ID19 and ID01 (recorded through a cable into the phone) could ship.",
+  "would_a_real_boss_use_it": false,
+  "best_part": "ID14, «Если дарите инструмент тому, кто не играет»: a C chord on the ukulele played with one finger, which is true by construction on camera.\n- It needs 2 shots, about 2.4 staff minutes.\n- An unplugged ukulele records cleanly on a weak phone at 20 cm.\n- The gift buyer gets a concrete DM line, and the prices are from the ledger: U-246 22 100 ₸ and US-C40 32 901 ₸, both with a case («Чехол в комплекте: Да»).\n\nBoth reviewers singled it out. Around it, the run's truth discipline was real:\n- It refused «Финальная» and any sale reason until the owner answers.\n- It refused to promote the site's «компенсация доставки за честный отзыв» clause and «100% оригинальный товар».\n- It used piano prices only from the 2026-10-09 ids.\n- It turned every unverified claim (cable included, staff can play, «сыграем обе») into a NEEDS FACT instead of guessing.\n\nThe critique step was also good: it caught almost every real problem, including the 2-unit Hibilly dependency, the privacy risk of the chat export, the clipping risk of overdrive on a phone mic, and the slate/campaign drift.",
+  "failures": [
+   {
+    "what": "The revision never reaches the files staff and the owner use. The shoot card, manifest, slate copy, attribution codes and owner card are all built from the pre-revision ideas, so the plan contradicts itself and the veteran's fatal issue still stands.",
+    "evidence": "campaign.json why_this_wins: «REVISED: the guitar+amp pieces are no longer built on the 2-unit clearance Hibilly»; weeks[1]: «ONE location (гитарная стена)… Piano content moves to week 2». But shoot_card_week1_ru.txt: «Всего ~15 мин из 20», «1. … Гитара подключена к комбику Hibilly», «8. Руки ставят рядом комбик Hibilly», «📍 зал с пианино 13. Глиссандо по всем клавишам PX-770» (15 shots, 2 locations). campaign.md prints both «4 filmed worker ideas» and «Week 1 filming fits the budget: 15.0 min (ID23, ID06, ID14, ID01, ID11, ID15)». Slate ID08 still has «Не переплачивайте за пианино» and «Разница на бумаге — полифония: 128 и 192», which the campaign says «is withdrawn». The revision says ID23 is «cut from the ID01/ID11 footage», but ID23's first frame is the guitar placed on the counter. reviews_after (veteran): «If the edit is built from the cards, the old version ships». board.json still shows fatal_after 0.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "F13 (a revision may only 'swap among existing idea ids') + G5 schema; brain.run() computes week_shots and the shoot card at step 5 and codes after step 7, ignoring the revision",
+    "fix": "Add idea_patches [{id, hook_ru, on_screen_ru, worker_shots, facts_used, driver, format, mode, drop}] to the revision schema. Code applies the patches to ideas.json, then re-runs check_idea → select/plan_week → shoot card → codes → owner_card. The re-review sees the regenerated shoot card and owner card. A 'REVISED <id>' in prose with no matching patch is a schema error."
+   },
+   {
+    "what": "The slate's 'diversity' is only diversity of labels. Most picks are the same product pair at the same location, and the diagnostic across 4 lines cannot be read.",
+    "evidence": "Slate lines: guitar 5 (ID23, ID01, ID11, ID15, ID19), piano 2, ukulele 1, sale 0. The intake promised «diagnostic across 4 in-stock lines: … and the site's sale section». 4 of 6 week-1 filmed ideas are the AS-100BK + Hibilly at «гитарная стена», all opening on a hand on the guitar 20 cm from the amp. The Hibilly has 2 units in stock (E15). ID03 (prior 3.808, the second-highest) was dropped by the driver penalty, while ID11 (3.603) and ID15 (3.449) were picked as «explore», both again guitar+Hibilly. Learning question 1 («Which line … produces the most video-attributed inquiries») and DR-line (≥3 posts per line) cannot be met.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "E1/E3 (no line or SKU dimension); brain.select() repeat cost uses only driver/engine/mode",
+    "fix": "Add `line` and `primary_sku` to the IDEA schema. select() adds a repeat cost of 0.6 for the same primary_sku and 0.4 for the same line. Every intake test line gets at least 1 slate slot. A SKU with ≤2 units in stock may appear in at most 1 slate idea. Exploration novelty also scores a new line, SKU or location."
+   },
+   {
+    "what": "The owner card is stale, duplicated and partly English, and it defers the asks the revision actually needs.",
+    "evidence": "questions.json holds the 3 intake questions plus «Permissions tap card … (merges the 3 intake clarifying questions)», so the same questions appear twice. It asks for «WhatsApp chat export: 15–30 recent customer chats» although revised DR-privacy says «no raw WhatsApp export is requested or accepted». Its facts item: «ID03.comment_prompt_ru: absolute/superlative claim without a backing fact: 'лучше'; … no cable price is show; … fallback CTA « (и ещё 2)». That is English validator text, cut mid-word, about ideas not in the slate. The deadline «Ответ до 10.10 18:00» sits on a card emitted on 10.10 at 15:40, routed via two intermediaries. Meanwhile the amp question, the 15.12 verdict date, the approval of the word codes and quick reply, and Instagram/TikTok access are all in questions_deferred.json.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "A8/B1/G5 owner_asks; brain.owner_card() (intake first, budget filled in insertion order, dedupe on exact text, facts item made of validator strings cut to 90 chars)",
+    "fix": "owner_card is built only from the final campaign.owner_asks, which must absorb the intake and inputs asks. Facts are rendered as Russian questions per ledger gap, for slate ideas only. Every deadline is re-dated to card time + 24 h. The run fails if any owner string contains a Latin field token (regex `\\b\\w+\\.\\w+_ru\\b`) or an input label with no Russian `how`."
+   },
+   {
+    "what": "There is no customer evidence at all. The Tier-0 fetches the agent planned, all of public data it could have fetched itself, were never run, so the hero tension and the bottleneck are guesses.",
+    "evidence": "E44: «We have no customer-language inputs: no WhatsApp export, no public reviews, no post comments … every customer-language item below is a hypothesis». E50: «[Q] Hypothesised recurring questions … 0 counted». inputs.missing lists as `who: agent` with full fetch plans: 2GIS/Google/Yandex reviews, comments from the top 30 own YouTube videos, peer Shorts outliers, demand phrases, Kaspi position and the calendar. checks.fetched_facts shows only 4 product pages were re-fetched. The A3 Kaspi price check was never done, even though «The PX-770 price changed sharply within 16 h: 695 913 ₸ … vs 521 935 ₸» (E23).",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "B2 Tier 0 ('always run') and the step table ('code runs the agent fetches'); brain.run() has no fetch stage between steps 2 and 3",
+    "fix": "After step 2, code executes every `who: agent` missing item, logging any 403/429, and writes the results to research/. Step 3 for sales_push may not start with 0 customer_language evidence unless every one of those fetches is logged as blocked."
+   },
+   {
+    "what": "The hero insight's strength is inflated, so an unsourced tension drives most of the slate.",
+    "evidence": "I01 has «strength»: 4. Its tension «cheap = toy sound» rests on E50 (assumption, 0 counted) and on long-form title performance E01/E02, which L003/B2 say does not carry over to Shorts. The remaining evidence is only prices and specs (E12–E17). I01 is cited by 6 ideas, including 4 slate ideas.",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "C5 strength caps are applied to all cited evidence, so verified product facts lift an assumption-only tension",
+    "fix": "C5: compute the cap only from evidence that supports the `tension` (customer_language or behaviour kinds). Product, price and spec facts don't count toward it. A tension with no customer_language or behaviour evidence gets strength ≤2, and code enforces this via evidence kinds."
+   },
+   {
+    "what": "The shoot card contradicts itself and the method, and the shot order breaks the physical sequence.",
+    "evidence": "Tip: «громкий комбик или барабаны — не ближе 1 метра, иначе звук хрипит». Shots 1/4/7: «Телефон в 20 см от динамика». METHOD D9: «звук товара — 20–30 см». Shot 7 «Первый аккорд» comes before shot 12 «Второй конец кабеля в комбик, включаете», so staff play before plugging in. Shot 6 «Тот же кадр: поверните ручку gain» comes 5 items after its frame (shot 1). Shot 3 «один палец зажимает одну струну на 3-м ладу» never says укулеле and sits among the guitar shots. No shot names the AS-100BK, although the captions say «Alston AS-100BK». «Отправьте как файл» is missing although D9 lists it. The mic tip is iOS-only («Пункт управления»), and the card has six «⭐ САМОЕ ВАЖНОЕ» markers.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 shoot-card phone rules; shootcard.TIPS_RU, order_by_location() (sorts by kind across ideas), render_card_ru() (no product names)",
+    "fix": "Order shots by (location, idea, original index). Prefix each shot with the product from facts_used. Generate the distance tip from D9 (20–30 cm; amps through a cable or as set by the drive test). Always include «отправьте как файл (документ)». Allow at most 1 star per idea. Code check: a what_ru starting «Тот же кадр» must directly follow its predecessor."
+   },
+   {
+    "what": "The staff-minute model underestimates real store time by 2–3×, so the 20-minute promise is false.",
+    "evidence": "The card gives «~15 мин» for 15 shots × 2 takes, 2 locations, plugging in, tuning and powering the amp, then moving to the piano. The boss review: «Realistically that is 30–45 minutes, not 15». The veteran: «2–3× the hard 17 min/week cap» (fatal). The revised campaign itself admits: «formula minutes undercount real store time». The card says «из 20» instead of 17.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D9 minute formula (2 + 1/location + Σ(seconds×takes/60 + 0.5)) and ruling 0.1.4, implemented in shootcard",
+    "fix": "D9 formula adds setup per product (amp+guitar 3 min, digital piano 1 min, acoustic 0.5 min). Until the week-0 timed session, multiply by an interruption factor of 1.5. The week-1 card is capped at 12 min, 1 location and 4 ideas. The card prints «из 17»."
+   },
+   {
+    "what": "The hero and the piano ear test depend on two unchecked things: a staff member who can play cleanly, and phone-mic tone. The likely outcome is the store's own clip answering «да, игрушка».",
+    "evidence": "ID01 risks: «NEEDS FACT: a staff member who can play 3 basic chords cleanly (staff reality scan)». The card is issued anyway. The ID01 hook is «Гитара за 59 800 ₸ — игрушка?», recorded at 20 cm from a 30 W transistor amp on a weak phone. The veteran (after): «The hook asks «игрушка?» and the audio answers «да»». Also: «128 vs 192 polyphony is inaudible in a 4-bar phrase». The digital pianos and the amp have headphone/line outputs, but no idea records through them.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D9 Producibility (phone-mic only, no direct-capture option); D5 hooks (no guard on hooks that invite a negative verdict on the client's own product)",
+    "fix": "D9: any product with an audio output (digital piano, amp headphone/line out, synth) is recorded by cable into the phone (TRRS/USB-C adapter from store stock), with the room mic used only for touch sounds. Ideas that need playing skill carry `needs_skill`, and code keeps them off the card until the reality scan confirms a player. D5: a hook asking viewers to judge the client's product negatively needs a passed week-0 blind listen test."
+   },
+   {
+    "what": "The attribution scheme contradicts itself, and the plan's counting depends on account access that the owner card never requests.",
+    "evidence": "The revised campaign: «Render {CODE} as the word «ГИТАРА» / «УКУЛЕЛЕ»», and Direct and «цена» comments are «logged per video by the agent». Yet code wrote «Напишите в WhatsApp BA28 — подскажем…» into ID01 and attribution_codes {\"ID23\":\"BA23\",…,\"ID15\":\"BA32\"}. The Instagram/TikTok access ask («Дайте доступ к Instagram…») is in questions_deferred.json, so the agent can neither count Direct and comments nor publish.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "L3/F9 per-video codes vs the F13 revision; brain.run() assigns make_code unconditionally after the revision; owner_card defers the access ask",
+    "fix": "Add campaign.attribution_mode {per_video_code | line_word_plus_suffix}, and make_code renders according to it. Code refuses to emit the owner card if any channel counted in measurement.attribution (Direct, comments, TikTok) lacks an access or 'publish yourself' ask on the card."
+   },
+   {
+    "what": "Several truth problems in the slate get past the rails: dropped fact qualifiers, an implied 'only difference' claim, an unfilled placeholder, and facts_used ids marked do_not_use.",
+    "evidence": "ID23: «Гитара + комбик — больше 100 000 ₸ / Значит, доставка по Казахстану бесплатно». The fact delivery_free_100k says «(наземным транспортом)», and the Astana courier is free only over 20 kg (delivery_astana). ID08 in the slate: «Разница на бумаге — полифония: 128 и 192» implies this is the only difference; the boss: «a knowledgeable commenter will publicly disprove». ID19 in the slate shows «Ответ: [по исходному тесту]» on screen. facts_used still cites as100_price, u246_price and usc40_price, which this run's own fetch marked «do_not_use: true … superseded by web_…».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "C6 truth rails; checks.check_text matches numbers only; no placeholder check; facts_used is never validated",
+    "fix": "Rails: on-screen text paraphrasing a fact must keep the fact's parenthetical qualifiers and conditions. Any `[` or `]` in an audience string is an error. Every facts_used id must be usable at check time. A «разница — X» or an only-difference framing needs a fact taken from a full spec-table diff."
+   },
+   {
+    "what": "The review step runs without the method and judges prose instead of the deliverables, so the approval flags are meaningless.",
+    "evidence": "brain.run() calls the reviewers with the system prompt «You are » + persona only, with no METHOD F13. Results: the boss gave «score»: 6 with «would_approve»: true (before and after); the veteran gave 6 and true after. F13 says «would_approve: true only if there is no fatal refutation and score ≥ 7». The review bundle is intake + slate + campaign, so neither reviewer ever saw shoot_card_week1_ru.txt or questions.json.",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "F13 Review; brain.run() review calls",
+    "fix": "The review system prompt = METHOD F13 + persona. The bundle includes the regenerated shoot card and owner card. Code sets would_approve = (no fatal and score ≥ 7) regardless of what the model returns."
+   },
+   {
+    "what": "Slate ideas whose hook isn't paid off, or that fall under D10 anti-patterns.",
+    "evidence": "ID11 hook «Первая электрогитара: от коробки до звука», but there is no box anywhere; the first shot is «штекер кабеля входит в гнездо гитары». ID06's «проверьте три вещи» are spec readings, with «Сервис Casio — в Алматы» as the payoff (the veteran: «a reason for an Astana parent not to buy»). ID08 is a screen recording of product pages with prices, i.e. the price slide banned by L005/D10. ID15 carries a «постановка» label on a POV joke with brand_link 2.",
+    "severity": "minor",
+    "cause": "model_noncompliance",
+    "method_section": "D10 Anti-patterns (hook with no payoff, price slide); D1 payoff",
+    "fix": "Make D10 a code check: every concrete noun in hook_ru (коробка, «три вещи», etc.) must appear in first_frame or a worker_shot what_ru. mode=screen built on product pages with prices is blocked unless real-sound footage covers ≥50% of the runtime."
+   },
+   {
+    "what": "The method's top-ranked owner input (chat export) is mis-costed and a privacy risk, and the run asked for it.",
+    "evidence": "B3 rank 1 sets «WhatsApp chat export … owner, 3» minutes. WhatsApp exports one chat at a time (⋮ → Экспорт чата → Без медиа → share), so 15–30 chats is roughly 10–20 min. The boss review: «Exporting them to an outside AI vendor before anyone strips the names … is a personal-data risk under Kazakhstan's personal-data law». It is still on the final owner card.",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "B1 Privacy / B3 rank 1",
+    "fix": "B3 rank 1 default becomes the staff's local 5-row weekly tally (new chats, first-reply time on 10 chats, chats ending in payment, top 3 questions, Instagram price asks). A raw export is asked for only after the owner confirms a legal basis, with names removed on the phone first, and is costed at 0.7 min per chat."
+   },
+   {
+    "what": "Week 0 posts nothing despite a library of 379 own videos, and no idea re-cuts the channel's proven short clips. The boss who asked for sales waits until 21.10.",
+    "evidence": "weeks[0]: «No posts». The zero-staff ID19 and ID16 exist. E04 lists own clips under 90 s with plain model names at 13 000–32 000 views. E18: the Cort X100 from the 64 000-view video is in stock (2 units). Insight I02 (search-intent model clips) produced only 1 idea, ID20, which is not a model clip. The boss after the revision: «получил: неделю подсчётов без постов».",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "F6 Calendar (week 0: 'No posts, or 1–2 baseline posts'); E3 zero-staff rule; C4 'Generative ≥5 ideas'",
+    "fix": "F6: when ≥2 zero-staff ideas exist, week 0 publishes them (they also give the platform baseline). E3: at least 1 zero-staff re-cut of the client's own top-3 outliers whose model is still in stock. C4: an insight with fewer than 3 ideas in the batch must be dropped or its strength lowered."
+   }
+  ],
+  "code_issues": [
+   "brain.run(): the shoot card, manifest, attribution_codes and owner card come from step-5 ideas and selection. CAMPAIGN_SCHEMA has no idea-patch field, so the step-7 revision can only add prose ('REVISED ID08…') and never changes ideas.json or shoot_card_week1_ru.txt.",
+   "brain.select(): the MMR repeat cost covers only driver (0.6), engine (0.5) and mode (0.15), and exploration novelty uses driver/engine only. As a result 4 of 8 slate ideas share the SKU pair AS-100BK + Hibilly (2 units in stock) and one location, while ID03 (prior 3.808) was dropped.",
+   "brain.owner_card(): intake questions always come first. The budget is filled in insertion order, so stale `inputs` asks use it up before the revised `campaign` asks, which get deferred. Dedupe is exact text only, so the 'tap card' that merges the intake questions is kept alongside them. The facts item joins raw English validator messages cut at [:90] ('no cable price is show', 'fallback CTA « (и ещё 2)'). It includes needs_facts from non-slate ideas (ID03, ID21), and intake deadlines (10.10 18:00) are not re-based to card time.",
+   "brain.render_md(): uses i.get('driver_mechanism') and i.get('engine'), keys that don't exist, so it renders 'relief () ·  · conversion'. Owner questions appear as English `input` labels without the Russian `how`. reviews_after is not rendered at all, and the persona is cut to 'Boss of Muzzone (music instrument store,'.",
+   "Review calls in brain.run() use the system prompt 'You are ' + persona with no METHOD F13, so would_approve isn't tied to score ≥7 and no fatal (the boss returned 6/true). The bundle excludes the shoot card and owner card, so reviewers can't see what staff and the owner receive.",
+   "shootcard.TIPS_RU: 'громкий комбик или барабаны — не ближе 1 метра' contradicts D9 (20–30 cm) and the card's own shots at 20 cm. 'отправьте как файл' is missing, and the mic-mode tip is iOS-only.",
+   "shootcard.order_by_location() sorts by kind across ideas. That breaks the 'Тот же кадр' continuity (shot 6 refers back to shot 1) and puts 'Первый аккорд' (7) before plugging the cable into the amp (12). render_card_ru() never names the product or which idea a shot belongs to, so the ukulele shot 3 doesn't say укулеле.",
+   "shootcard minute model: SETUP_MIN=1 per location and OVERHEAD_MIN=0.5 per shot, with no gear setup, gives 15.0 min for 15 shots × 2 takes in 2 rooms. plan_week() is passed capacity 20 and the card prints 'из 20' instead of 17.",
+   "checks.ABSOLUTE_CLAIM regex `лучш\\w+` flags audience questions ('Какая звучит лучше на ваш слух?'). There is no check for `[...]` placeholders in audience strings (slate ID19 'Ответ: [по исходному тесту]'), and facts_used ids are never validated against do_not_use (as100_price, u246_price and usc40_price were superseded during this run).",
+   "acquire.fill_facts was triggered by flags that are not missing facts ('лучше', '60 000 ₸') and re-fetched 4 pages that could not resolve them. It never re-fetched hib_price/hib_instock, which 4 slate ideas depend on.",
+   "No Tier-0 fetch stage exists between steps 2 and 3, although the METHOD step table says code 'Runs the agent fetches'. All the `who: agent` missing items (reviews, YouTube comments, Kaspi, search suggestions, calendar) were planned but never executed.",
+   "The stress board's fatal_after=0 and approve_after=2 come from reviewers reading the revised prose. The actual shoot_card_week1_ru.txt still contains the veteran's fatal case (15 shots, 2 locations, '~15 мин')."
+  ]
+ },
+ {
+  "case": "dental: a hypothetical Almaty implant clinic with an empty facts ledger. Boss request: «Нужно больше пациентов на импланты.» The run finished: intake → inputs → insights (one source-fix) → 24 ideas (one rails-fix) → code slate of 8 → campaign → boss and veteran attack → one revision → re-review. dental.log: \"questions for the owner: 15\", \"slate: ['ID05','ID20','ID14','ID04','ID21','ID02','ID03','ID11']; week 1 filmed ['ID05','ID20','ID14','ID04','ID02','ID03'] in 16.1 min\". Code version at run time: 472b542. The owner-card fix 63c890a landed after this run.",
+  "verdict": "The revised strategy is close to what a good strategist would recommend. It contacts the clinic's own patients (people given an implant plan who never started), measured as a separate arm with the reply keyword «ВРАЧ». The surgeon becomes the hero («Вопрос хирургу»), price is answered without figures, and there are compliance gates. Truth discipline is strong: no numbers, no «без боли», and no «Нам пишут» without ≥2 real messages (C6.5 followed). The intake push_back is honest and in Russian.\n\nThe deliverables people would actually act on contradict that strategy and are unsafe.\n- **Staff shoot card:** written by code from the slate chosen before the review. Its shots 1–2 are sterilisation footage marked «⭐ САМОЕ ВАЖНОЕ». It includes the patient testimonial (ID20) that the revision removed for legal risk, and surgeon answers whose medical facts are not yet confirmed. It is worded for a music shop («соцсети магазина», «комбик или барабаны»).\n- **Owner card:** 15 items. Capacity, faces and prices are each asked twice. Some items are English labels, it includes staff tasks and items marked \"deferred\", and the facts line is cut off mid-word. Meanwhile all 10 revised Russian owner asks, including permission for the main lever, were deferred.\n- **Selection:** code dropped the existing price idea (ID06), which sits on the bottleneck the agent itself had hypothesised, in favour of a coffee-bean wildcard and a reply video that cannot exist in week 1.\n- **Evidence:** none was gathered. All 36 evidence items are assumptions or cross-vertical KB learnings, and all 10 insights are strength 2.\n- **Where the main lever came from:** a simulated boss who invented «сотни» patients in the patient-records system (MIS). Its default is «да, первая волна 16.10», which breaks L8.\n- **Offer:** a remote review of the patient's X-ray in WhatsApp, which is close to a teleconsultation.\n- **Success metric:** undefined. It is named as coded bookings, but the target is a multiple of total bookings, and it now includes returning patients even though the intake said \"new patients\".\n\nNot usable without fixes. Most root causes are code (stale card and slate, owner card, no fetch step, NEEDS FACT never gating selection) and method (F13 personas, A6 warm-base trigger, F4 offers for medical clinics, A4 metric definition).",
+  "would_a_real_boss_use_it": false,
+  "best_part": "ID05 «Когда хирург сам отговаривает от импланта». It is an honest_signal anti-sell aimed at the real fear of private clinics («насчитают на миллион»), and both reviewers picked it as best in both rounds. It is hands plus close voice, so it is producible, it is specific to implants, and it has a natural share line («вот, не все разводят»). Second best is ID14, the adult child deciding for a parent («POV: мама говорит „мне уже не надо“»), which gives a real family-chat share route. At plan level, the revision's three-way reporting (base arm «ВРАЧ» / content-coded floor / total vs a 4-week MIS baseline) is the right measurement idea. The empty-ledger truth discipline also held across all 24 ideas: zero invented numbers, prices, brands or outcome words.",
+  "failures": [
+   {
+    "what": "The week-1 staff shoot card and manifest come from the slate chosen before the review, so they contradict the revised plan. They film the removed patient testimonial and sterilisation episode, leave out ID11, and schedule surgeon answers whose facts are still blocked.",
+    "evidence": "shoot_card_week1_ru.txt #12: «Пациент (только с письменным согласием) говорит своими словами… — 15 сек.»; #1–2 are ID02 sterilisation shots marked «⭐ САМОЕ ВАЖНОЕ». campaign.md: «ID20 is removed», «Sterilisation is no longer the hero… ID02 runs… only in week 2». Revised week 1 is «ID05, ID04, ID03, ID14, ID11», but the same file says «Week 1 filming fits the budget: 16.1 min (ID05, ID20, ID14, ID04, ID02, ID03)». DR0(1): «unconfirmed ideas are never filmed», yet card #10–11 have the surgeon answer ID04/ID05 before the anaesthesia wording and his criteria are confirmed.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "F1 (weeks[1] = slate), F13 (revision), DR0; brain.py lines 564 and 627-632 (plan_week and render_card_ru on the pre-revision `chosen`)",
+    "fix": "Rule in code: build the shoot card and manifest only after the revision, from final_campaign.weeks[1].idea_ids, minus every idea the revision removed or marked blocked, minus ideas with unconfirmed NEEDS FACT. Abort if the card's idea set differs from that list. campaign.md must print the recomputed minutes."
+   },
+   {
+    "what": "Code never sees the NEEDS FACT items the model declared, so selection treats ideas that cannot be produced as ready.",
+    "evidence": "selection.json shows \"needs_facts\": [] and \"blocked\": [] for all 8 slate ideas. Yet ID04 facts_used says «NEEDED: anaesthesia protocol in the doctor's own wording, signed off», and its risk says «(otherwise the hook has no payoff and the idea is blocked)». ID20 needs «written patient consent» and «legal OK on patient testimonials». ID05 needs «surgeon confirms he does advise against implants».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "L2, C6.2 (NEEDS FACT → owner question, idea stays in pool); brain.py check_idea lines 261-289 count only R6 hits in audience strings, and the risks parse runs after selection (lines 616-619)",
+    "fix": "Parse 'NEEDED:' in facts_used and 'NEEDS FACT' in risks before select(). An idea whose hook payoff, consent or legal basis is unconfirmed becomes 'gated': it can be in the slate but not in a filming week until confirmed. Each week must hold ≥2 zero-fact reserve ideas."
+   },
+   {
+    "what": "The slate leaves out the price/friction insight on the bottleneck the agent itself hypothesised. Code picked a wildcard and a reply video that can only start in week 2 over ID06, the existing price idea. The revision could not swap it back, so it planned to re-create ID06 in a second step-4 run.",
+    "evidence": "ID06 «Из чего складывается цена импланта», prior 3.218, objective_fit 4, was not selected. ID11 coffee bean (3.141, explore) and ID21 (3.192) were selected, although ID21's own risk reads «Depends on real comments existing (none yet)». Both reviewers flagged price as a major miss: «ни один ролик в слейте на него не отвечает». Revision: «NEXT BATCH (priority, mid-cycle step-4 run 2026-10-14): «От чего зависит цена импланта»». No insight on price, the myth or the trigger moment (I03, I10, I05, I06) is covered in the slate.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "E1/E3 (insight coverage), F1 ('later weeks may list other ideas from step 4'), F13 ('swap among existing idea ids'); brain.py select() lines 354-381 and prompt6 (slate only)",
+    "fix": "Selection rule: ≥2 slate slots go to ideas citing the highest-ranked insight on the stated bottleneck (consideration/conversion), and ideas that need data which cannot exist yet (reply, audience_vote) are not eligible for week-1 slots. The revision prompt receives the full idea pool. The revision may return `swaps:[{out,in}]`, and code re-runs plan_week on the swapped slate."
+   },
+   {
+    "what": "No evidence was collected. Every insight is the model's prior, so the run never saw the category's real conventions, real patient wording or the actual medical-advertising law text, although all of these are public.",
+    "evidence": "insights.json: all 36 evidence items have source «assumption:…» or a KB learning. E35: «Demand-phrase candidates, NOT YET FETCHED». E21–E25: «peer scan pending». All 10 insights are «PROVISIONAL», strength 2. inputs.json lists agent fetches (peer outliers, reviews, demand phrases, «Public text of RK medical-advertising rules», calendar) as who=agent, but none ran. The language-law, licence-number and testimonial-ban points came only from the reviewers' memory.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "B2 'Tier 0: automated… always run'; step table 'Runs the agent fetches'",
+    "fix": "Add a step 2b in code that runs every who=agent `missing` item with WebSearch/WebFetch enabled (llm.py currently passes --tools \"\") and stores results as file: evidence. Gate: step 3 may not run with 0 non-assumption evidence while any who=agent fetch is pending; it returns status research_blocked instead. Peer, review and law fetches do not depend on the client's own links."
+   },
+   {
+    "what": "The owner card is long, duplicated, partly in English and stale. Meanwhile the revised campaign's sharp Russian asks, including permission for the primary lever, were all deferred.",
+    "evidence": "questions.json has 15 items. The intake asks capacity, faces and prices, and these are asked again inside «Permissions tap card» (А, В) and «Money map» (item 2), although inputs.json says «merged… so the owner is not asked twice». Items include «Links to the clinic's own accounts (Instagram handle, website…)», staff tasks («Week-0 baseline count: admin labels…», «Staff reality scan») and explicitly deferred items («Offer approval (deferred…)», «Boost budget… (deferred until a post qualifies under F10)»). The facts line is English, truncated «(otherwise the ho», and asks about removed ID20. All 10 campaign owner_asks («Главный быстрый шаг — ваша база…») are in questions_deferred.json. Deadline «до 10.10 12:00» falls on a Saturday, under 24 h after the run.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "L5, L9, A8, B3; brain.py owner_card lines 405-436 (intake first, inputs before campaign, exact-text dedupe, facts text truncated to 90 characters) and render_md printing q['q']. Partly fixed in 63c890a, but replaying it on this run still yields duplicates, English labels and the base ask deferred.",
+    "fix": "Code rule: the onboarding card is built from the FINAL campaign.owner_asks, which are written last, in Russian, and state what they replace. Intake and inputs asks are added only if no campaign ask supersedes them, and only for who=owner. The facts line is generated in Russian from the ideas' facts_used, with no truncation and excluding removed ideas. The deadline is ≥1 working day after delivery."
+   },
+   {
+    "what": "Business facts invented by the simulated boss became the plan's primary lever and its stated 'owner approval'.",
+    "evidence": "reviews.json boss: «Таких у нас в МИС сотни». The revised campaign makes the base «PRIMARY lever for the deadline» and its measurement says «the owner's «сотни» is unverified». risks[3]: «a sales task the owner explicitly requested and approves». owner_asks[2].why: «The boss asked for budget at onboarding». The client is hypothetical; nobody stated that an MIS (patient-records system) or such a list exists.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "F13 (review personas)",
+    "fix": "F13 rule: personas attack the plan and may not add facts, assets, approvals or requests on the business's behalf. The revision must rewrite any such persona claim as `[ASSUMPTION] … | verify: owner ask` and may not cite it as owner intent. Code: flag review text that asserts quantities or possessions («у нас…», numbers) and pass it to the revision as an assumption."
+   },
+   {
+    "what": "The first-pass plan treated cold organic reels on a ~3k account as the only lever for a high-ticket, multi-week decision. The warm base was only a fallback until a simulated reviewer called it fatal.",
+    "evidence": "intake REALISM: «Warm-base (WhatsApp Status to existing patients) is the fallback lever»; own math «~2–43 coded consultations». Boss review: «самый дешёвый и быстрый источник, наша собственная база, стоит в плане запасным вариантом… severity: fatal».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A6 (the time lever only triggers when the deadline is <14 days), A3",
+    "fix": "A6 rule: if the sale is high-ticket with a multi-step decision (or sales_push with ≤6 weeks), the first campaign must include a warm-base arm aimed at unconverted leads (unstarted plans, past enquiries), with its own keyword, a consent-basis owner ask and capacity sizing. Organic content is the second layer, and a reach-only plan fails review automatically."
+   },
+   {
+    "what": "Contacting patients from medical records is set to 'yes' by default, which breaks L8 in a medical-privacy context.",
+    "evidence": "owner_asks[0]: «писать лично, волнами по ≤40 человек… По умолчанию: да, первая волна 16.10». The message text reads «вы у нас лечились. Если вы ещё думаете об импланте…». reviews_after boss: «uses health information from medical records for marketing. Medical secrecy and the RK personal-data law apply… still schedules wave 1 for 16.10».",
+    "severity": "major",
+    "cause": "model_noncompliance",
+    "method_section": "L8 (no customer contact without the owner's approval), A7 precedence (law, consent first)",
+    "fix": "Code check: any owner_ask or channel that involves customer contact, health data or spend must default to «нет / не начинаем»; a default of «да» is an error that triggers a fix pass. Base-arm texts may not mention treatment history until the owner confirms the legal basis in writing."
+   },
+   {
+    "what": "The offer is a remote opinion on the patient's own X-ray or photo via WhatsApp: close to a teleconsultation, with health images in a chat app, liability, and new daily surgeon work.",
+    "evidence": "offer: «Пришлите в WhatsApp код {CODE} и фото или снимок — хирург-имплантолог предварительно подскажет, какие этапы обычно нужны». Quick reply: «Пришлите, пожалуйста, фото или снимок и напишите, какой зуб беспокоит». reviews_after boss: «in effect a teleconsultation. It creates liability… gives the patient a reason not to come in».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "F4 (non-price offer list: «free consultation or selection by WhatsApp video»), A5 REGULATED",
+    "fix": "F4 rule: in REGULATED medical or dental, an offer may not involve any assessment of a patient's own images, symptoms or case outside an in-person visit. Allowed: slot holds, an admin callback, a described consultation format, and only owner-confirmed terms."
+   },
+   {
+    "what": "Staff, admin and surgeon load is far above the 20-minute budget. The model knowingly broke L5, and code only counts filming minutes.",
+    "evidence": "Week-1 worker_ask_ru: shoot «~9 минут» + «прочитать казахские строки к 5 роликам (~4 минуты)» + admin «волна 2… метки… лист звонков». Week 3: «Метки и лист звонков — до 2 минут в день». owner_asks[0]: «тратить на это до 15 минут в день». risks[3]: «outside the METHOD's 17 staff minutes… judgment call». A new 15-min/week surgeon budget line, plus a week-0 session (fact sheet + 4 answers × 3 takes + 8 templates) that both after-reviewers called unrealistic.",
+    "severity": "major",
+    "cause": "model_noncompliance",
+    "method_section": "L5, F7 ('Never add a task without removing one')",
+    "fix": "Schema: worker asks become a list of {role, task_ru, minutes}. Code sums minutes per role per week and rejects any week where staff is >20 min, or where a role (admin, surgeon) has a nonzero cap the owner never approved (the default cap is 0)."
+   },
+   {
+    "what": "The success metric is undefined: it is named as a coded count, the target is a multiple of total bookings, and it now mixes in returning patients although the intake said new patients.",
+    "evidence": "intake: «Increase booked implant consultations from new patients». Metric name: «Coded implant consultations booked». Target: «1.5× the weekly baseline of implant-consultation bookings» (total). The revised metric counts «video code or «ВРАЧ»», where segment A is «implant consultation/plan given but treatment not started». On 2026-11-15 there is no single number to compare with 1.5×.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A4 (target format), F9 (coded = floor, total = estimate)",
+    "fix": "A4 rule: the target multiple applies to exactly one named series from one source (e.g. MIS: first implant consultations of new patients per week). Coded counts are diagnostics, never the target. Warm-base bookings are reported as a separate line, and the brief states explicitly whether they count toward the target."
+   },
+   {
+    "what": "Idea-level fixes from the review never reach the ideas, so the copy staff film and the editor burns in is the version the reviewers rejected.",
+    "evidence": "ID11 hook «Настоящий имплант. Какого он размера?» next to on-screen «Демонстрационный образец», flagged in both review rounds. ID03 «Выбираете клинику для импланта? Смотрите сюда / Пакет вскрывают при вас?»; reviews_after: «the slate entry, which is what staff will film from, still has the old hook». The ideas' CTAs still read «расскажем, как проходит консультация» while the campaign defines a different offer CTA.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F13 ('fix… CTA, offer'); CAMPAIGN_SCHEMA has no field for idea edits",
+    "fix": "Add `idea_patches[] {id, field, value}` to the revision schema. Code applies the patches, re-runs check_idea and saves ideas.json. Any idea with an unresolved major issue from either review round is blocked from the card."
+   },
+   {
+    "what": "The medical answers in talk shots are improvised on camera, so the doctor's sign-off can only happen after filming, and a regulated slip such as «не больно» is likely.",
+    "evidence": "Card #11: «Хирург… когда он советует подождать или другой вариант. — 15 сек. Скажите: «Бывает, я советую не ставить имплант. Объясню, когда.»». ID04: «отвечает своими словами, без обещаний»; the veteran warns the answer collapses to «ощущения индивидуальны» with no payoff.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D9 (say_ru ≤12 words 'in the worker's own words'), C6.10",
+    "fix": "D9/C6 rule: in REGULATED categories every talk shot carries the full doctor-approved answer text (≤40 words) as a dated ledger fact before the shot can enter a card. The card prints it as a teleprompter, and the edit must match it."
+   },
+   {
+    "what": "Most of the batch is the category cliché: sterilisation pouches and top-down gloved hands. The original hero was sterilisation, and it still opens the shoot card.",
+    "evidence": "Pouch or sterilisation ideas: ID01, ID02, ID03, ID10, ID12, ID18, ID19. The first campaign was named «Behind the door…» (tape). Veteran: «Autoclave, pouch and washer reels are the most overused dental content in the CIS… saves from other dentists, not inquiries». E21–E25 «peer scan pending», so the convention was never checked.",
+    "severity": "major",
+    "cause": "inputs",
+    "method_section": "B2 peer outliers, C1 'category conventions', D10 near-duplicate",
+    "fix": "The agent could have fetched this: a peer scan of 10–20 Almaty implant accounts finds it. Rule: an idea whose engine plus first-frame type matches a fetched category convention gets brand_link ≤2 and cannot be the hero. Code adds first-frame type as a diversity dimension in select()."
+   },
+   {
+    "what": "The shoot card uses the retail/music-shop template in a dental clinic, with a sound-distance rule that contradicts the method.",
+    "evidence": "«Это ИИ-ассистент MetaPrompt: я веду соцсети магазина вместе с владельцем.» «Звук важен: инструмент в 30–50 см от телефона; громкий комбик или барабаны — не ближе 1 метра». The method rule is 20–30 cm for product sound. 6 of 12 shots are marked «⭐ САМОЕ ВАЖНОЕ».",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "D9 shoot-card phone rules; shootcard.py lines 118 and 126",
+    "fix": "Take the card text from profile.name and profile.vertical, with no vertical-specific lines in the generic template. Use the 20–30 cm constant from D9, and star at most one hook per filming location."
+   },
+   {
+    "what": "Attribution codes are hardcoded to campaign index 1, so every client and every sprint reuses BA23–BA32.",
+    "evidence": "dental attribution_codes: ID05 BA23 … ID11 BA32. salon, coffee and b2b get exactly the same BA23…BA32. The next dental sprint would reissue BA23 inside the 30-day attribution window.",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "L3/F9 per-video codes; brain.py line 610 make_code(1, n + 1)",
+    "fix": "Persist a per-client code counter (e.g. in engine_state.json) and never reissue a code to the same client within 90 days."
+   },
+   {
+    "what": "The review gate is not enforced and the owner-facing file hides the remaining problems: the after-review 'approves' at score 6, and campaign.md shows only the before-scores and has render bugs.",
+    "evidence": "reviews_after: score 6, would_approve true (F13: true only if score ≥7). campaign.md shows only «Владелец стоматологии в Алматы (гипотети: 5/10, approve=False», even though the after-review lists 6 majors (offer, legal basis, ID03 stale). Render bug: «Driver · engine · funnel: honest_signal () ·  · trust».",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "F13; brain.py render_md line 663 (reads nonexistent 'driver_mechanism' and 'engine'), persona[:40]",
+    "fix": "Code sets would_approve = (score ≥ 7 and no fatal). Render both review rounds. A major after-review point tagged legal or consent blocks the named idea or channel. Use engine_key(i) in the render."
+   },
+   {
+    "what": "Code checks fight the method and the case: the H4 'is it specific?' warning fires on 22 of 24 hooks in a regulated case with an empty ledger, and the bait regex bans the method's own guess-hook pattern.",
+    "evidence": "checks.json: «ID01.hook: H4 no number or model/brand token: is it specific?» repeated on 22 ideas. ID11 and ID12 risks: «FIXED after H2: «Угадайте…» imperative removed (the bait lexicon flags it even though D3 lists it as the guess pattern)… noted as a METHOD/code conflict».",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "D3/D5 ('Угадайте…') vs checks.py bait regex; H4",
+    "fix": "Turn H4 off when the ledger is empty or REGULATED is set. Whitelist «Угадайте» when format=guess and the reveal is a ledger fact or filmed, or remove it from D3/D5 so the method and the code agree."
+   },
+   {
+    "what": "The planned WhatsApp price reply is the evasive dead-end the agent itself hypothesised as where chats die.",
+    "evidence": "channels[1]: «Точную сумму врач называет после осмотра — она зависит от снимка, кости, импланта и коронки. Подобрать время на консультацию?». E10: «the clinic answers «только на консультации» without a next step, and the chat stalls». reviews_after: «Every clinic in Almaty gives the evasive answer the plan proposes».",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "A8 Q4 / A5 PRICES default (no prices) with no rule for services where price is the top question",
+    "fix": "A8 rule: when a price question is a hypothesised or counted top-3 question, the first price ask is for a dated «от … ₸» range plus what it includes. Until it arrives, the quick reply must offer two concrete next steps (a slot option, or a callback from the admin with the price list) rather than «после осмотра» alone."
+   }
+  ],
+  "code_issues": [
+   "brain.py:564 and 627-632: plan_week, the manifest and shoot_card_week1_ru.txt are built from the pre-revision `chosen` and never recomputed from the revised campaign.weeks[1]. This is how ID20 (removed) and ID02 (moved to week 2) end up on the staff card, and ID11 is missing from it.",
+   "brain.py:261-289 check_idea: only R6 hits in audience strings become needs_facts. 'NEEDED:' in facts_used and 'NEEDS FACT' in risks are ignored until after selection (lines 616-619), so selection.json shows needs_facts [] and blocked [] for ideas the model itself called blocked.",
+   "brain.py:354-381 select(): diversity covers only driver/format/mode. There is no insight or bottleneck coverage, no time-gating (ID21 'reply' needs comments that don't exist yet), no first-frame-type diversity, and exploration picks by driver novelty. As a result ID06 (price, objective_fit 4) loses to ID11 and ID21.",
+   "brain.py:573-600: prompt6 and the revision prompt pass only slate ideas. CAMPAIGN_SCHEMA has no swaps or idea_patches field, so F13's 'swap among existing idea ids' and the reviewers' copy fixes (ID11 hook, ID03 hook, CTAs) cannot be applied. ideas.json stays at the version the reviewers rejected.",
+   "brain.py:405-436 owner_card (run at 472b542): 15 items, intake questions first, inputs before campaign asks, dedupe by exact text only, no who=owner filter, English 'input' labels shown, facts text truncated to [:90] ('(otherwise the ho'), and facts listed for removed ideas (ID20). Replaying the current version on this run still gives duplicates (intake Q2/Q3 vs the permissions card), English labels, and all revised campaign owner_asks deferred.",
+   "brain.py:610 make_code(1, n + 1): the campaign index is hardcoded, so every client and sprint gets BA23–BA32. Codes are reused across sprints inside the 30-day attribution window.",
+   "brain.py:663 render_md reads i.get('driver_mechanism') and i.get('engine'), which are not in the IDEA schema, so it always renders 'honest_signal () ·  · trust'. persona[:40] truncation; reviews_after is never rendered.",
+   "shootcard.py:118 and 126: the generic card hardcodes 'я веду соцсети магазина' and 'громкий комбик или барабаны', plus 'инструмент в 30–50 см', which contradicts the D9 20–30 cm rule.",
+   "No Tier-0 agent fetch exists in brain.py, and llm.py runs judgment steps with --tools \"\". The METHOD step table claims code 'Runs the agent fetches', but nothing ran: 0 fetched evidence.",
+   "Staff minutes are recomputed only from worker_shots. worker_ask_ru tasks (Kazakh reading, admin outreach 15 min/day, labels and phone log) and surgeon/patient time are never counted against L5.",
+   "REVIEW gate: would_approve is not checked against score (score 6 with approve=true passes), and majors from reviews_after (legal basis, teleconsult offer) block nothing.",
+   "checks: H4 'no number or model/brand token' fires on 22 of 24 hooks even though numbers are banned (empty ledger, REGULATED). The bait regex 'угадай' contradicts METHOD D3/D5's own guess-hook pattern."
+  ]
+ },
+ {
+  "case": "coffee (hypothetical specialty coffee shop, Astana, empty fact ledger). Boss request: «Через 3 недели открываем вторую точку на Левом берегу. Нужен ажиотаж.» Run files: /tmp/claude-0/-home-user-flystuff/ed90e34e-b470-5816-9bae-4695c8c48b9b/scratchpad/brain/stress_v1/coffee/. Method: /home/user/flystuff/smm_agent/brain/METHOD_v1.md. Code: /home/user/flystuff/smm_agent/smm/brain.py, smm/shootcard.py, smm/agent.py",
+  "verdict": "The run finished every step (intake, inputs, insights, 24 ideas, selection, campaign, two reviews, one revision, and a re-review). It is still not executable, because the documents that actually reach people contradict the plan. Both reviewers rejected v1 at 5/10, and the model then wrote a much better v2. v2 shows the address and landmark openly, uses a one-word «ЛЕВЫЙ» reminder, adds a window poster on the new site, a 2GIS card, a counter card at location 1, a preview evening for regulars and a geo-boost, and drops ID06 and ID19. Code never carried v2 into the outputs. The staff card (shoot_card_week1_ru.txt) is still the pre-revision plan: 8 of its 11 shots are for content v2 dropped or rewrote, including the line «Честно: в первый день не приходите», which the boss called fatal. The owner message is 4/7 English or English-laced and asks the superseded v1 questions. Its default «точные детали отправляем лично тем, кто напишет код» locks in the address-gate both reviewers rejected. The v2 truth-gate ask (address, landmark, permission to film the new site), the boost budget and the named reply person are all in questions_deferred.json. campaign.md is the owner-facing summary, and it is in English. It prints the v1 metric (40/80/150) and the v1 hooks next to the v2 strategy (60/120/250).\n\nOn substance, only one slate idea is strong for this objective: ID13, the POV about the other bank. ID03 (as re-specced in v2) and ID18 are conditional: ID03 only works if the landmark can be named, and ID18 only if the owner sends archive photos. ID06 works against what the boss asked for. ID17, ID18, ID19 and ID24 depend on inputs that cannot exist in week 1. The week-1 session needs both sites, across the river, although the stated constraint is one session at one site. Weeks 2–3, the conversion window, carry only 2 posts each. Truth discipline was good: nothing invented reached audience copy, and every gap was flagged as NEEDS FACT. The selection code ignored those flags, though. Both re-reviews 'approved' at a score of 6, which breaks F13's rule that approval needs ≥7.",
+  "would_a_real_boss_use_it": false,
+  "best_part": "The revised channel layer in campaign.json. A window poster on the covered shopfront (QR plus its own code) reaches people who walk past every day. The new location's 2GIS card goes live before opening. A counter card at location 1 and a preview evening reach the warm base. The geo-boost is decided at onboarding, not at D−11. A «ЛЕВЫЙ» POS button gives attribution at the till. Together this admits that a ~2.1k Reels account cannot reach Левый берег on its own (REALISM ratio ≈1–33) and supplies the local levers that actually work. Truth gating was also good: no date, address, offer, menu item or number was invented anywhere, and every gap became a NEEDS FACT. The re-reviews were sharp and concrete (stale slate cards, «левый» = shady in slang, Instagram DM reminder delivery, two sites in one session).",
+  "failures": [
+   {
+    "what": "The staff shoot card is the pre-revision plan. 8 of its 11 shots film content the revised campaign dropped or rewrote, including the anti-demand line the boss called fatal.",
+    "evidence": "shoot_card_week1_ru.txt: «8. Бариста в тихом углу… Скажите: «Честно: в первый день не приходите, если торопитесь на работу.»»; «7. … Скажите: «Дату скажем, когда будем уверены. Напишите код — пришлём лично.»»; «2. Выливаете тестовый шот в слив на новой точке»; «1. Открываете дверь новой точки и медленно идёте по пустой комнате». campaign.json, by contrast: risks «DROPPED: ID06 … ID19 (test-shot tally) dropped»; series role «It never says «дату назовём, когда будем уверены»»; «The tamper/beans/empty-room hint cards are removed»; hero frame 1 = «the view out of the new window». The card says «Всего ~14 мин», but weeks[1].worker_ask_ru says «~9 минут». Both reviews_after raised it as major: «Если персонал снимет по этим карточкам, мы получим ролики, которые противоречат и плакату, и 2ГИС, и мне.»",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "F13 (revision) and E1/step 5 (code writes the card); brain.py run() renders the card from the pre-revision `chosen`/`week_shots` (lines 563-564, 627-632)",
+    "fix": "Rule (code + F13): the shoot card, manifest, codes and owner card are written only after the final 6_campaign, and weeks[1].idea_ids is the filming set. When the revision re-specs an idea, it must return the full idea object in a new 6_campaign.revised_ideas[] field. That object goes back through check_idea/H1–H3 and replaces the step-4 version. Ideas the revision drops are removed from the card and from the code list. The card is refused if any of its strings matches a phrase the campaign marks as banned."
+   },
+   {
+    "what": "The owner message is half English, asks superseded v1 questions with defaults that lock in the rejected mechanic, and defers every critical v2 ask.",
+    "evidence": "Rendered by smm.agent.owner_message(questions.json): «4. Permissions tap card: filming regulars, filming the new site before opening, prices and drink names on screen, opted-in contact base (~1 мин)»; «5. Account links and insights: Instagram handle…»; «6. Money map: menu photo with prices…»; «7. Подтвердите или поправьте… факты для роликов: owner confirms the Левый берег location…; owner agrees to say the first days are for getting used to the bar (owner)…» (that fact is for ID06, which v2 dropped). Item 1 default: «2 — точные детали отправляем лично тем, кто напишет код». The v2 asks «Подтвердите письменно сегодня: 1) вторая точка — по адресу ___; в роликах можно назвать ориентир ___…», the boost budget and the named reply person are all in questions_deferred.json. The deadline «Ответ до 10.10 12:00» had already passed when the card was written (10.10 15:29).",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "L9 (owner text in Russian), L5, A8, F1.12; brain.py owner_card() lines 405-436 (intake first, no supersede); brain.py line 502 stores the English `input` as q; agent.py owner_message() lines 63-79 prints q['q'] and drops the Russian `how`",
+    "fix": "Rule (code): the owner card is built from the final 6_campaign.owner_asks first. Intake clarifying questions survive only if the campaign lists them in a keeps_intake_questions field. Each rendered item is the Russian ask/how text, and an item with more than 20% Latin letters is a hard error. NEEDS FACT items are kept only for ideas in the final weeks[1]. Deadlines are recomputed at render time as now + 24 h."
+   },
+   {
+    "what": "The method's coded-chat CTA (L3/D6) forced a 'DM a code to get the address' gate on a walk-in café. That was v1's core mechanic, and the per-video CTAs still carry it.",
+    "evidence": "Intake constraint: «Until then the copy says «скоро на Левом берегу» and exact details go privately to people who send the code». CTA (cta_ru): «Напишите BA23 — пришлём дату открытия и адрес лично». The creator review rated it fatal: «Nobody in Астана DMs a code to a coffee shop to find out where it is… it wants a 2GIS card for the new location live before opening, and that card publishes the address.» The intake itself admitted: «JUDGMENT (the method does not cover this): A2 assumes WhatsApp closes the sale, but a coffee shop closes at the counter.»",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "L3, D6 (cta_ru must contain {CODE} and promise something), A2 launch_or_event row, A5 DATES/ADDRESS",
+    "fix": "Add to L3/A2: for walk-in businesses (cafés, restaurants, salons without booking), the countable action is a reminder keyword in comments/DM, a till code or button, or a 2GIS save. A CTA must never gate public information (address, landmark, hours) behind a message. The address or landmark of a site that will have a public map card is asked as one yes/no question, defaulting to 'name it once the 2GIS card is live'."
+   },
+   {
+    "what": "The reframe demoted the boss's explicit goal ('ажиотаж') to SECONDARY, and the unknown-capacity default produced anti-demand content that was selected and scheduled for filming.",
+    "evidence": "Intake: «A one-day queue for photos is not the goal.»; «SECONDARY: opening-day buzz… It gets at most 20% of slots»; «CAPACITY: new-location throughput is unknown… The CTA spreads first visits over the first 14 days». ID06 hook «Честно: в первый день не приходите» is in the slate and in week1_filmed. The boss rated it fatal: «Tells people to stay away when I asked for buzz… Embarrassing for the brand.»",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A1.3 (fork choice), A1.2 SECONDARY ≤20% rule, A3 Fulfilment row, A5 CAPACITY default",
+    "fix": "A1.3: the boss's named outcome (ажиотаж, вирусный, очередь) is never demoted to SECONDARY. Re-express it as a metric (opening-day plus opening-week POS checks) and keep it primary or co-primary. A5: CAPACITY 'unknown' is not 'full'. Demand-suppressing content ('не приходите', anti_sell on visiting) is banned unless DR10 has fired on measured data."
+   },
+   {
+    "what": "Selection put ideas whose inputs cannot exist in week 1 into the slate, and scheduled two of them for filming. The card also co-schedules contradictory site states.",
+    "evidence": "Slate includes ID17 (risks: «Depends on a real comment existing; week 2 at the earliest»), ID18 («NEEDS FACT: archive photos exist (owner…); otherwise drop»), ID24 (facts_used: «NEEDED: a real unusual order from the staff voice note») and ID19 (tally kept over several setup days, «number goes on screen only once it is in the ledger»). selection.json shows «needs_facts»: [] for all 8, and week1_filmed includes ID19 and ID24. Card shot 10 «Повторяете странный заказ» names no order. Shot 2 «Выливаете тестовый шот в слив на новой точке» (machine running) is planned for the same session as shot 1 «медленно идёте по пустой комнате» (ID03 empty room).",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "E1/D4.7 (producibility), G+1 needs_facts; brain.py select()/plan_week() ignore risks and facts_used NEEDED entries; needs_facts comes only from R6 rail hits (lines 264-267, 565-567)",
+    "fix": "Ideas carry needs_facts[] and depends_on[] as schema fields (G+1). At card time, code marks an idea 'not ready' if any dependency is unmet. A not-ready idea can sit in the slate as a reserve but is never put in week1_filmed. Each worker shot declares site_state (e.g. «пустое помещение» / «машина установлена»), and code refuses to put conflicting states for the same site in one session."
+   },
+   {
+    "what": "The week-1 card needs both sites (across the river) and a 'тихий угол' with no named site. This breaks the stated one-site constraint, and the minute model charges only 1 minute per location.",
+    "evidence": "Intake: «Staff are also busy setting up location 2, so the shoot runs in one session at location 1 or on the new site. (stated)». The card has «📍 новая точка» (6 shots), «📍 тихий угол», and «📍 бар» with «Выносите чашку с паром из двери первой точки». Minutes = 2 + 3 locations + shots = 14.1. Creator re-review: «ID13 (location 1 door) and ID24 (location 1 bar) can't be shot in the same 9 minutes as the new-site window shots without travel across the river.»",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D9 minute model (card_minutes = 2 + 1 × distinct_locations + …) and location naming rule",
+    "fix": "D9: location is written 'site/spot' (e.g. «новая точка/окно», «первая точка/бар»). Code builds one card per site. A week may use a second site only as a separate card with its own ≤17-minute budget and an owner-confirmed second session. When a constraint says 'one site', one site per week is a hard limit."
+   },
+   {
+    "what": "Later weeks are starved: the campaign step sees only the 8-idea slate, so weeks 2 and 3 (D−11 to D+2, the conversion window) carry 2 posts each.",
+    "evidence": "weeks[2].idea_ids = [\"ID04\",\"ID17\"] and weeks[3].idea_ids = [\"ID05\",\"ID17\"]. ID17 is conditional, and ID04 was never shown to the campaign step (checks.json: «campaign uses idea ID04 that is not in the slate»). Pre-opening total = 5+2+2 = 9 posts, against the intake REALISM assumption «15 posts in 3 weeks». Launch-specific pool ideas were never considered: ID08 «Знакомьтесь: этот человек откроет новый бар» (prior 3.42, brand_link 5), ID15 «Холодное утро на Левом берегу», ID16 window vote, ID22 opening-day-in-life. The risks field fills the gap with «NEXT BATCH: hero episodes 3+».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F1 (later weeks may list other step-4 ideas as provisional), F6 (date-bound: conversion in last 10 days), E4 (5 base videos/week); brain.py prompt6 line 576 passes only slate ideas",
+    "fix": "Code passes the full scored pool plus a provisional per-week slate (select() run per week) to step 6. F1 rule: for date-bound requests, every pre-deadline week schedules ≥4 base posts, drawn from the pool or as NEXT BATCH placeholders that name an insight and format. A6 ach_views is recomputed from the scheduled post count."
+   },
+   {
+    "what": "The revision raised the targets without recomputing realism, and two different primary metrics survive into owner-facing output.",
+    "evidence": "Intake: «conservative 40 / expected 80 / stretch 150 coded sign-ups», with REALISM «ratio ≈ 1–33, so stretch to unrealistic organically». campaign.measurement: «Target by 30.10: conservative 60 / expected 120 / stretch 250… raised from v1's 40/80/150 because the keyword takes one tap». The scheduled pre-opening posts fell from 15 to 9 at the same time. campaign.md still prints the v1 metric. Boss re-review: «Я не понимаю, по какой из них меня будут отчитывать в понедельник. Получается, что цель подвинули задним числом.»",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A6 realism math, A4 target, F9, F13 revision",
+    "fix": "F13: a revision that changes the success metric, the measured action or the post count must output a new REALISM line (req_views, ach_views, ratio). A target may rise only when ach_views or a measured rate rises. Code overwrites intake.success_metric with the campaign's metric and renders only that one."
+   },
+   {
+    "what": "Client-independent Tier-0 agent inputs were listed but never fetched, so all 10 insights are assumption-only (strength ≤2) and the 'break the convention' ideas rest on guessed conventions.",
+    "evidence": "E04: «Nothing has been ingested yet… every customer-side theme below is a hypothesis»; E17/E18/E19: «Assumed category convention (peer scan not run)». I01 content_reality: «C4 test 1 (evidenced) is not yet met». inputs.missing lists peer outliers, demand phrases («кофейня Левый берег»), calendar (25 October Republic Day, school holidays) and weather as who: agent, owner_minutes 0, and none ran. brain.py has no executor for who=agent items, and the stress harness passes --no-fetch.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "B1/B2 Tier 0 ('always run'); step table row 2 ('Runs the agent fetches'); brain.py run() lines 497-504",
+    "fix": "Gate between steps 2 and 3: code executes every who=agent input that does not depend on the client's own accounts (peer outliers, demand phrases, holiday calendar, weather) and stores the results as files. Step 3 cannot start while one of these is unrun, unless it is logged as blocked (403/429). For hypothetical clients, own-footprint fetches are skipped but category, city and calendar fetches still run."
+   },
+   {
+    "what": "Exploration slots and diversity penalties spent scarce launch slots on off-objective arms. A launch-critical idea lost to an anti-objective one.",
+    "evidence": "selection.json: ID19 «why»: «explore» and ID24 «why»: «explore» (ID24 objective_fit 2, «Странный заказ, который бариста правда сделал»). ID06 (prior 3.295) was chosen over ID08 (prior 3.423, brand_link 5, objective_fit 4) because ID08 shares the 'story' driver with ID18 (−0.6 penalty). Boss: «ID24 has objective_fit 2, the lowest on the slate, and doesn't sell the opening». In the pool, 6/24 ideas are generic coffee content with brand_link 2 (ID01, ID02, ID12, ID20, ID21, ID23).",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "E1, ruling 0.1.9 (~25% exploration), E3 batch composition",
+    "fix": "For date-bound requests with ≤5 weeks to the date: exploration slots are drawn only from ideas with objective_fit ≥3, and ≥60% of the slate must carry the dated objective (site, launch or moment content). E3 diversity minimums apply to the pool, not to the slate. The code's novelty pick filters on objective_fit before maximising novelty."
+   },
+   {
+    "what": "v1 relied on Reels from a ~2.1k account despite its own REALISM verdict. Physical and local launch levers appeared only after a reviewer supplied them.",
+    "evidence": "Intake REALISM: «ratio ≈ 1–33, so stretch to unrealistic organically». v1 levers were only «warm base…, a 2GIS card…, owner-approved geo-boost». Creator v1 review: «It leaves out the channels that actually reach a new Астана neighbourhood… the residential complex and office-building chats… The other is the covered shopfront itself.» Re-review gaps: ОСИ/КСК gatekeepers and local micro-bloggers/city pages are still missing.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A6 lever list, F5 channels table",
+    "fix": "A6/F5: when the ratio is >3, or the target is a new physical site, the campaign must include ≥2 non-video local levers from a launch list: signage on the site with a QR code and its own code, a 2GIS card, building/ОСИ-КСК chat announcements, a counter card at the existing site, local city pages or micro-blogger barter (owner-approved), and a geo-boost."
+   },
+   {
+    "what": "The core v2 promise «напомним в день открытия» has no deliverable mechanism. The broadcast plan targets contacts who are not WhatsApp contacts.",
+    "evidence": "v2 auto-reply: «Записали: напомним о дне открытия новой точки здесь, в директе». The WhatsApp Status/broadcast channel says the opening-day message «goes only to contacts who sent «ЛЕВЫЙ»», but those people commented or DMed on Instagram and gave no phone number. Creator: «Automated comment-to-DM tools can't message people two to three weeks later… becomes 60–250 near-identical DMs sent by hand». Boss: «в Instagram нет встроенного автоответа в директ на комментарий: нужен сторонний сервис».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D6 (CTA promises only what staff can keep), F5 WhatsApp/broadcast rows",
+    "fix": "F5: every CTA promise names its delivery mechanism, the responsible person and a volume cap. A promise to message someone more than 24 h later on Instagram needs a native mechanism (a Stories countdown with 'Напомнить', or saving the WhatsApp number); otherwise the promise is banned. A WhatsApp broadcast goes only to contacts who themselves messaged that WhatsApp number."
+   },
+   {
+    "what": "The default opening offer is weak and the method's non-price offer menu does not fit a café launch, so 'ажиотаж' has no reason to come.",
+    "evidence": "v2 offer default: «Неделя первых соседей… доска «Первые соседи», каждый гость может написать своё имя или улицу». Boss re-review: «Это не повод ехать в новую кофейню… Дать мне 2–3 готовых варианта акции с ценой для меня… Посчитать стоимость через мой средний чек.»",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "F4 (non-price list: consultation, reservation hold, try in store, photo of item, delivery threshold)",
+    "fix": "F4: add a hospitality/launch menu: free filter coffee in the first opening hour, a second drink by keyword for 14 days with a daily cap, double loyalty stamps in opening week. Require 2–3 options, each with cost = daily_cap × days × avg_check × (1 − gross_margin), using the owner's numbers or labelled ranges. The owner picks one with one tap, and the default stays 'none'."
+   },
+   {
+    "what": "Revision defaults make the v2 hero unproducible: the permissions default bans window views, and the v2 owner-ask default bans the landmark and the new site.",
+    "evidence": "inputs permissions how: «Новую точку… снимать: … 2 — да, но без вывески и вида из окна… По умолчанию: 2». v2 owner ask: «По умолчанию… снимаем только первую точку, ориентир не называем». The v2 hero ritual says «frame 1 is the view out of the new window… with the landmark name». Creator re-review: «With the owner-asks default set to «nothing named», the hero series becomes a generic empty-room video.»",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A8 defaults, F13 revision",
+    "fix": "F13: after a revision, each owner-question default is checked against the first_frame of every idea scheduled in weeks 1–2. If a default bans an element of a scheduled hero frame, either the default flips (opt-out, e.g. 'name the ЖК already public on 2GIS') or the hero changes. Code treats a default that forbids a scheduled first_frame element as an error."
+   },
+   {
+    "what": "The shoot card template is the music store's: wrong business noun, instrument and amp distance rules that contradict the shots, and no consent step before face shots.",
+    "evidence": "shoot_card_week1_ru.txt: «Это ИИ-ассистент MetaPrompt: я веду соцсети магазина»; «Звук важен: инструмент в 30–50 см от телефона; громкий комбик или барабаны — не ближе 1 метра»; «не «Изоляция голоса» (она вырезает звук инструмента)». The shots meanwhile say «Телефон в 20 см от носика кофемолки». ID05 and ID06 have people_on_camera 1, but the card has no on-camera consent line (consent appears only in staff_asks.json).",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 shoot-card phone rules, L6/C6 consent; shootcard.py TIPS_RU and header lines 113-127",
+    "fix": "Rule (code): card tips are generated from the D9 generic phone rules plus a per-vertical tips file selected by profile.vertical, and the header uses profile.name. When any shot has people_on_camera > 0, the card's first line for that person is the consent recording «Я, [имя], согласен(на)…»."
+   },
+   {
+    "what": "Campaign-level audience copy never passes the truth and hook rails.",
+    "evidence": "New strings in v2 were never checked: single_minded_message_ru «Узнаёте это место? Скоро здесь кофе», the poster «Что тут будет? Кофейня. Напишите „ЛЕВЫЙ“…», the auto-reply «…напомним о дне открытия… в директе», the bio «откроемся [дата]», the re-specced ID03/ID05 hooks, and the offer «Слово «ЛЕВЫЙ» пробивается на кассе отдельной кнопкой» (an unconfirmed POS capability stated as fact). checks.json has no campaign text checks. v2 risks: «Both go back through the H1–H3 rails before publishing», but no code does this.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "C6.1 (single_minded_message_ru and worker_ask_ru are rail-checked like audience strings)",
+    "fix": "Code runs check_text/check_hook on single_minded_message_ru, worker_ask_ru, offer.proposal and every quoted «…» Russian string in channels[].role, and on revised_ideas. A violation becomes a NEEDS FACT owner item or blocks the campaign."
+   },
+   {
+    "what": "Per-video WhatsApp codes collide across runs, and codes were assigned to ideas the revision dropped.",
+    "evidence": "campaign.attribution_codes: ID03 BA23 … ID06 BA27, ID19 BA29, ID24 BA32. muzzone-viral and muzzone-sales (same client) also both use BA23–BA32. brain.py line 610: make_code(1, n + 1), with the campaign index fixed at 1.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "L3, F9 attribution (30-day window)",
+    "fix": "Code: a per-client monotonic campaign counter stored in the client folder, and no code may be reused within 60 days. Codes are assigned only to final weeks[1] ideas plus source codes (poster, counter card, chats) named in channels."
+   },
+   {
+    "what": "Owner onboarding asks exceed the budget, and the weekly standing ask is counted as onboarding.",
+    "evidence": "campaign.owner_asks minutes: 2+2+1+2+2+1+2+1+5 = 18 (>15), across 9 asks with nested choices. week 0 ai_work itself says «Batch all owner asks into one message of ≤13 min». The boss re-review repeats the sum.",
+    "severity": "minor",
+    "cause": "model_noncompliance",
+    "method_section": "L5, G2 (owner minutes ≤15 at onboarding)",
+    "fix": "Code check: reject 6_campaign if the onboarding owner_asks total more than 15 minutes or more than 5 items. Standing weekly asks go in a separate weekly_owner_ask field with ≤5 minutes."
+   },
+   {
+    "what": "The reviewers approved at score 6, which F13 forbids, and the stress board counts it as approval.",
+    "evidence": "reviews_after.json: boss «score 6 approve True»; veteran_creator «score 6 approve True». F13: «would_approve: true only if there is no fatal refutation and score ≥ 7». stress_v1_B.log reports «approve_after»: 2 for coffee.",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "F13 review; brain.py lines 592-594 call reviewers without the METHOD, and REVIEW_SCHEMA does not enforce the rule",
+    "fix": "Code: send the F13 rules in the reviewer system prompt, and set would_approve = (score ≥ 7 and no fatal refutation) after parsing. The board counts only that derived value."
+   },
+   {
+    "what": "campaign.md (owner-facing) is English, internally contradictory, and has empty fields.",
+    "evidence": "«Driver · engine · funnel: curiosity_gap () ·  · attention»; «Week 1 filming fits the budget: 14.1 min (ID03, ID13, ID06, ID05, ID19, ID24)», listing dropped ideas; the v1 «Success metric … 40 / expected 80 / stretch 150» next to the v2 big idea; only the «Attack before revision» scores are shown.",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "L9; brain.py render_md() lines 647-683",
+    "fix": "Code: render the owner summary in Russian from the final campaign, the final weeks[1] and the final metric only. Remove the driver_mechanism/engine placeholders, and show the post-revision review scores."
+   },
+   {
+    "what": "The keyword «ЛЕВЫЙ» carries a pejorative slang meaning and was never vetted.",
+    "evidence": "Creator re-review: «In Russian slang «левый» means «random, shady, fake», as in «левый чувак» or «левый товар». A café asking people to comment «ЛЕВЫЙ» invites jokes like «левый кофе».»",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "D6 / L3 (the method defines codes, not viewer keywords)",
+    "fix": "D6: a viewer keyword must be ≤6 letters, neutral in RU and KZ slang (checked by 2 staff aged 18–30 before printing), and must pass check_text. Comment keywords also must not read as engagement bait («+», «хочу»)."
+   }
+  ],
+  "code_issues": [
+   "brain.py run() lines 563-564 and 627-632: the shoot card, manifest and selection come from the pre-revision `chosen`/`week_shots`. Ideas the revision drops (ID06, ID19) stay on the staff card, and re-specced ideas (ID03, ID05) keep their v1 shots and lines.",
+   "brain.py owner_card() lines 405-436: intake clarifying questions always come first, with no supersede logic, so v1 questions win and the v2 campaign owner_asks (truth gate, boost, reply person) are pushed into questions_deferred.json.",
+   "agent.py owner_message() lines 63-79, together with brain.py line 502: inputs items store the English `input` name as q, and the Russian `how` is never rendered, so the owner sees «Permissions tap card: filming regulars…», «Money map: menu photo with prices…».",
+   "brain.py lines 433-434 and 617-619: the 'facts' owner item concatenates English NEEDS FACT risk text into a Russian sentence and includes facts for ideas the revision dropped (ID06 «owner agrees to say the first days are for getting used to the bar»).",
+   "brain.py line 610: make_code(1, n + 1) fixes the campaign index at 1, so every run for every client reuses BA23–BA32 (muzzone-viral and muzzone-sales collide). Codes are also burned into cta_ru for dropped ideas.",
+   "brain.py prompt4 lines 529-530 tells the model to put 'NEEDED: …' in facts_used, contradicting METHOD G4 (facts_used = ledger ids) and C6.2. facts_used is never validated, and these entries never reach selection or needs_facts.",
+   "brain.py check_idea/select: needs_facts is filled only from R6 rail hits, so all 8 slate ideas show needs_facts [] and the stress board reports needs_facts 0, while every slate idea has NEEDED/NEEDS FACT entries. Dependencies do not block week1_filmed (ID19 and ID24 were filmed).",
+   "brain.py select() lines 373-380: exploration maximises novelty with the prior only as a tie-break and ignores objective_fit (ID24 objective_fit 2 was picked). The 0.6 driver-repeat penalty in mmr (lines 366-367) dropped ID08 (prior 3.42, launch-critical) below ID06 (3.295, anti-objective).",
+   "brain.py prompt6 line 576: the campaign step receives only the slate ideas, so weeks 2–4 cannot schedule pool ideas as F1 allows. The campaign check (line 622) then flags provisional ID04 as an error, a false positive against F1.",
+   "shootcard.py lines 113-127: TIPS_RU and the header are Muzzone-specific («магазина», «инструмент в 30–50 см», «комбик или барабаны», «звук инструмента») and are sent to coffee baristas. There is no consent line for shots with people_on_camera > 0.",
+   "shootcard/brain minute model: «новая точка» and «бар» (different buildings across the river) each cost 1 minute as 'locations', with no travel cost and no enforcement of a stated one-site constraint.",
+   "brain.py: campaign-level audience strings (single_minded_message_ru, worker_ask_ru, offer.proposal, poster/counter-card/auto-reply text in channels) never go through check_text/check_hook, although METHOD C6.1 requires it.",
+   "brain.py lines 592-594: reviewers run without the METHOD/F13, and would_approve=True at score 6 is accepted. The stress board counts approve_after=2.",
+   "brain.py render_md() lines 663 and 671: reads non-existent keys driver_mechanism/engine («curiosity_gap () ·  · attention»), prints the v1 intake metric and v1 hooks beside the v2 campaign, lists dropped ideas in 'Week 1 filming', shows only pre-revision scores, and is English in a file agent.py calls '(owner)'.",
+   "checks.py H4 warning («no number or model/brand token: is it specific?») fires on 23/24 hooks for an empty-ledger client. It is pure noise and hides real warnings.",
+   "brain.py lines 497-504: who=agent inputs (peer outliers, demand phrases, calendar, weather) are listed and never executed. The only fetch is acquire.fill_facts for R6 needs, and the stress harness disables even that with --no-fetch.",
+   "Question deadlines are absolute strings written at intake time («Ответ до 10.10 12:00»), and the owner card was emitted at 10.10 15:29 with the deadlines already past. Nothing recomputes them at render time.",
+   "brain.py line 40: the default METHOD_PATH brain/METHOD.md does not exist (only METHOD_v1.md), so `python -m smm.agent` without --method raises FileNotFoundError."
+  ]
+ },
+ {
+  "case": "b2b: hypothetical Karaganda supplier of dry mixes and insulation to companies, with an empty facts ledger. Boss request: «Мы продаём только компаниям. Нам вообще нужны соцсети?» The run finished: intake, inputs, insights, 24 ideas, an 8-idea slate, campaign, reviews, one revision, re-review, owner card and week-1 shoot card. Log: \"questions for the owner: 12 ... week 1 filmed ['ID14','ID10','ID19','ID07','ID13','ID17','ID02'] in 15.2 min\".",
+  "verdict": "The strategy starts right. It treats the question as something to test, not something to argue about, it fixes the verdict before the test starts, and it keeps every audience string free of invented facts. The revision improves attribution a lot: inquiries count by any route, reps ask «Откуда узнали?», and the verdict divides by total hours across all staff.\n\nWhat would actually reach people is broken, though, and nothing could ever be published.\n- **The staff card is stale.** The code-written week-1 card still has staff film content the revision retired or banned: water poured «на глаз» (ID13), «пальцем проводите по инею на плёнке» (against the new FROST RULE), the late-truck POV (ID10, held) and the truck tally (ID17, dropped).\n- **The owner card is stale too.** It carries the pre-revision asks. Eight of its 12 items reach the owner as English labels, and one repeats the privacy promise the boss reviewer called false: «наружу ничего не попадает».\n- **The blocking ask is deferred.** The blocking \"fact pack\" (what the business can truthfully say) gates every post, yet it sits in questions_deferred. This still happens with the current owner_card code.\n\nThe ideas are weak for this audience. Reviewers held, dropped or rewrote 6 of the 8 slate ideas. Of the two that survive as written, ID14 is an advert (\"how to message us\") and ID02 is generic stretch-film ASMR. ID10, ID19 and ID07 put on our own premises the very failures (a late truck, frost on our stock) customers could blame us for. ID13 lectures professionals on their own trade.\n\nThe test design leans toward NO:\n- a brand-new, one-city account with 0 ₸;\n- forwarding by reps defaulted to \"no\", even though the intake itself calls reps the stronger lever;\n- 2GIS treated as a mere \"control\";\n- a threshold of \"3 inquiries + 1 invoice\" that is noise;\n- no step that fetched outside data, so the seasonal premise (\"first frost\" in late October in Karaganda) is likely stale.\n\nAfter revision the creator reviewer still rejects (5/10). The boss reviewer \"approves\" at 6/10, which F13 forbids. Nobody should run this as is. The strategic core can be saved once the code issues below are fixed.",
+  "would_a_real_boss_use_it": false,
+  "best_part": "The honest framing with a verdict fixed in advance. The push_back says: «Честно: заранее этого не знает никто, поэтому предлагаем не спорить, а проверить за 4 недели... если не наберём — прямо скажем «не нужно» и остановимся». It also states that «Для B2B ролики сами по себе слабы». The revision then words a NO as «органика нового аккаунта за 4 недели не дала» instead of «соцсети не нужны». Two more things are good:\n- It replaced codes the viewer must type with counting by any route: a pre-filled message from the bio link, the phone number on the end card, and the reps' «Откуда узнали?». It also divides by total hours across everyone, not just the shoot card.\n- The truth discipline with an empty ledger is exemplary. No delivery, stock, spec, price or city claim appears in any audience string, and every gap became a NEEDS FACT.",
+  "failures": [
+   {
+    "what": "The week-1 staff shoot card was written before the revision and contradicts the final campaign. Staff would film retired, held, dropped and forbidden content.",
+    "evidence": "shoot_card_week1_ru.txt includes:\n- shot 2 «Крупно: льёте воду в смесь, потом миксер в ведре» (ID13), although the campaign says «ID13's «вода на глаз» shortcut and its «постановка» are retired»;\n- shot 3 «Макро: пальцем проводите по инею на плёнке», against the decision rule \"FROST RULE: ... Any clip showing frost on our pallets or film is discarded\";\n- shot 12 «пальцы барабанят по обмотанной стопке» (ID10, \"held\");\n- shot 13 «ставите палочку на листе у ворот» (ID17, \"dropped\").\nThe revised weeks[1].worker_ask_ru instead says «Съёмка во вторник 27.10, ~8 минут, одно место — склад ... палец на строке «расход» ... расчёт ручкой на картоне». selection.week1_filmed still lists ID10 and ID17.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "E1 (code writes the shoot card) / F13 (revision). Code: brain.run computes plan_week(chosen) at step 5 (line 564) and writes the card at lines 627–632 without recomputing after the revision.",
+    "fix": "Code: after step 7, rebuild the week from the FINAL campaign: plan_week over the ideas in camp.weeks[week==1].idea_ids, then regenerate manifest_week1.json and shoot_card_week1_ru.txt. Add a hard check error if any card shot belongs to an idea that is not in the final weeks[1] or that a decision rule names as held or dropped. Method F13: 'the revised campaign is the only source for filming; an idea whose content the revision changes cannot be filmed until it is re-emitted through step 4.'"
+   },
+   {
+    "what": "The owner card ships the pre-revision asks, half as English labels and one with a false privacy promise. All 7 revised owner_asks are deferred, including the BLOCKING fact pack, so the campaign's publishing gate can never open.",
+    "evidence": "Rendered owner message:\n- Items 4–11 are English, e.g. \"4. Company identity: legal/trade name as on 2GIS...\" and \"7. Money map: brands and SKU lines...\".\n- Item 5's ask says «Имена, номера ... удаляем сразу, наружу ничего не попадает». The boss review rated this major: \"That isn't true. The export of my clients' chats goes to an AI service\".\n- Item 12 is raw rail output about ideas that are not in the slate: \"ID15.on_screen_ru[2]: absolute/superlative claim without a backing fact: 'лучший'...\".\n- The threshold question still says «по коду из ролика ... Ответ до 10.10 12:00». The campaign changed this to any route, a 14.10 deadline and a 23.11 verdict.\n- questions_deferred.json holds «Без этого ролики не выйдут — ... склад ... ваш, в Караганде...» and the honest rewrite «Честно: всё присланное обрабатывает ИИ-сервис вне компании».\n- Replaying the run with the current owner_card (after commit 63c890a) gives 7 items that are still the stale intake and inputs asks; all 7 campaign asks remain deferred.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "L5/L9, A8, F1 (owner_asks). Code: owner_card() in brain.py lines 405–436 orders intake → inputs → campaign with no supersession. brain.py line 502 stores the English `input` as `q`, and agent.owner_message line 77 prints q['q'] instead of the Russian `how`. Facts questions are built from all 24 ideas (lines 553–555).",
+    "fix": "Code:\n- Build the card from the FINAL campaign.owner_asks first. They supersede intake and inputs asks on the same topic.\n- Then add intake questions that were not superseded, at most 3 questions plus 4 asks in total.\n- Never defer an ask marked blocking. Add `blocking: bool` to owner_asks in G5.\n- Reject any owner-facing item with no Cyrillic text.\n- owner_message prints `how` for inputs items.\n- Build facts items only for week-1 ideas, phrased in Russian by the model, never as raw rail output.\nMethod F1: 'owner_asks is the complete onboarding card (≤7 items, ≤15 min); anything not in it is not sent.'"
+   },
+   {
+    "what": "The test is organic-only, a design that answers 'can a brand-new one-city account get leads in 4 weeks?', not 'does this B2B firm need social?'. The strongest lever, the reps, is defaulted off, and 2GIS is demoted to a 'control'.",
+    "evidence": "- Intake SECONDARY: \"direct outreach by reps ... is flagged as the stronger lever and tracked as a separately coded arm, not counted in the 'new inquiries' verdict\".\n- Owner ask default: «По умолчанию: шаблоны не используем, пересылку не делаем».\n- Campaign: \"The honest prior for a new Instagram account in one city in November is low: probably 0–3 new-client inquiries\".\n- REALISM: \"20 posts × 300-view median × 1.8 ≈ 10.8k\", with no allowance for most views coming from outside Karaganda.\n- Creator after-review: \"At these numbers the verdict is NO almost by construction ... Make seeding part of the main arm\".\n- Boss after-review: «Сделать 2ГИС ... основной витриной».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A2 (should_we_do_social row: 'A 4-week test: coded chats per staff hour'), A6 (realism), F5 (no B2B seeding channel)",
+    "fix": "A2 should_we_do_social: the test has 3 arms fixed in advance, each with its own code family:\n- (a) shop window: 2GIS card plus profile, one-off setup;\n- (b) warm distribution: reps forward the week's best video to their own prospects, and the desk posts it in ≤3 local professional chats the owner approves;\n- (c) organic posting.\nArm (b) is ONE yes/no among the first 3 onboarding items; L8 approval is kept. The verdict reports new companies per total hour for each arm.\nF5: add a 'B2B seeding' row.\nA6: for city-bounded objectives, multiply ach_views by local_share ([ASSUMPTION] 0.2 for a new account) until the audience-city data arrives."
+   },
+   {
+    "what": "The YES threshold is a small count with no money attached, so the verdict is noise. The owner's economics are never asked for before the test.",
+    "evidence": "- Intake: \"YES if at least 3 are qualified and at least 1 reaches an offer or invoice\".\n- Boss review: \"the YES bar ... is noise: a single existing client using a code can push it through\".\n- Boss after-review: «Один счёт на 15 мешков от бригады с ИП формально даёт «ДА» ... Добавить ... минимальную сумму».\n- Campaign risks defer \"average order value, gross margin and close rate\" to a post-verdict boost.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A4 (success metric) / A2 should_we_do_social / A8 question bank",
+    "fix": "A4: for should_we_do_social, YES only if both hold:\n- (first-invoice value of NEW companies in the window × the owner's stated margin) ≥ (total logged person-hours × the owner's stated hourly cost);\n- at least 1 invoice.\nA8 adds one numeric question: «Средний первый заказ новой компании и ваша маржа, %? По умолчанию: …». When n<5, the verdict text is «сигнал есть / сигнала нет», never «нужны / не нужны»."
+   },
+   {
+    "what": "The slate is led by ideas that show our own failures or lecture professionals. Selection ranked them high and only the reviewers caught them.",
+    "evidence": "Slate ranks, with priors:\n- ID10 «POV: бригада на объекте, а машины нет», #2, 3.538;\n- ID19 «Первый мороз», #3, with frost wiped off our own film;\n- ID07, #4, frost brushed off our pallet;\n- ID13 «Воду в смесь «на глаз»? Читаем мешок», #6.\nBoss review: \"showing frost and snow on our own stock is shooting ourselves in the foot\" and \"[ID10] is reminding its audience of the pain of late deliveries\". Creator review on ID13: \"«мы на глаз мешаем 20 лет, учитель нашёлся» is the guaranteed reply\".",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D10 (anti-patterns), D2 failure modes, E2 rubric",
+    "fix": "D10: add two rows.\n- 'Self-incriminating frame': the video dramatises a failure customers could blame on us (late truck, frozen or damp stock, defects) on our premises or products, with no ledger fact that we solve it. Drop it, or move the problem off our premises.\n- 'Lecturing the pro' (b2b): a practical_value video for professionals must give what the pro cannot read off the bag or know from experience (stock, batch date, brand availability, lead time).\nE2: either anti-pattern caps truth and share_save at 2."
+   },
+   {
+    "what": "ID14 is an instruction for contacting the business. It fails the L4 logo test, yet it was scored as the best idea in the batch.",
+    "evidence": "ID14 hook «Прораб, ИП или закупщик? Пишите так» with rubric objective_fit 5, share_save 4, comment 4 (prior 3.628, slate #1), and why_share_or_save \"Screenshot-ready template for any supplier inquiry\". Creator after-review: \"It is an instruction on how to write to us, which is advertising. Nobody saves or forwards a template for writing to a supplier they do not know yet\".",
+    "severity": "major",
+    "cause": "model_noncompliance",
+    "method_section": "L4 (logo test), E2 (honest scoring: a 5 needs a nameable reason; share_save 5 needs a specific recipient)",
+    "fix": "E2: an idea whose payoff is how to contact this business («как нам написать», templates, «как заказать») is a pinned utility post with share_save ≤2 and objective_fit ≤3. Add `pinned_utility: true` to G4. Code pins it in week 0 and excludes it from the slate and from the ≥15-post verdict count."
+   },
+   {
+    "what": "Customer quotes with zero chats behind them pass the rails, and the model's own NEEDS FACT flags do not stop filming. ID07, built on an invented chat quote, is on the week-1 card.",
+    "evidence": "- ID07 hook «Нам пишут: «Что с мешками в мороз?»». E29 says \"There are 0 counted customer verbatims\", and E14 says its phrases \"are NOT customer verbatims\".\n- ID07 risks: \"NEEDS FACT: ≥2 matching chats (owner export)\".\n- Yet selection.json shows ID07 with \"needs_facts\": [] and \"blocked\": [], and ID07 shots 5 and 9 are on the shoot card.\n- The same pattern appears in ID05 «Нам пишут: «Сколько мешков на объект?»» and ID06 «Нам пишут: «А разгрузка есть?»».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "C6.5 (private chats only as a paraphrase, and only with ≥2 real messages), L2. Code: check_text has no rule for attributed quotes; selection's needs_facts comes only from R6 hits (brain.py line 567) and ignores the model's 'NEEDS FACT' in risks.",
+    "fix": "Code rail R7: hook or on-screen text matching «(Нам|Нас) (пишут|спрашивают)|Клиенты (часто )?(пишут|спрашивают)» followed by a quote is an error unless facts_used cites a customer_language evidence id with count ≥2. Selection: an idea whose risks hold an unresolved 'NEEDS FACT' on its hook or payoff is 'pending'. It stays in the pool, but plan_week does not film it until the fact id exists."
+   },
+   {
+    "what": "Selection and the minute plan ignore what each idea needs before it can exist. An impossible idea takes a slate slot, and filmed ideas depend on footage nobody shoots.",
+    "evidence": "- ID21 is in the week-1 slate with code BA27, although its risk says \"Only possible once real comments exist (week 2+)\" and no account exists yet.\n- ID10's payoff is \"real loading footage (ID03 library)\", but ID03 is neither in the slate nor filmed; checks.json says \"campaign uses idea ID03 that is not in the slate\".\n- ID17's shot needs a tally sheet kept for a week («ставите палочку на листе у ворот»), described as \"a standing habit of about 1 min per week outside the card\".",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "E1 / D9; G4 has no field for preconditions. Code: select() in brain.py lines 354–381 and plan_week() lines 384–395.",
+    "fix": "G4 + code: add `requires` (fact ids, idea ids whose footage is needed, 'comments', 'weather:frost', 'habit≥7d') and `earliest_week`. select() skips ideas whose requirements are unmet in the planned week. plan_week either films the needed footage in the same session or drops the dependent idea. A habit outside the card counts toward the 20 minutes."
+   },
+   {
+    "what": "No outside data was fetched, so every insight is a strategist's guess. The seasonal premise behind two slate ideas is probably wrong.",
+    "evidence": "- E29: \"No Tier-0 fetches have run yet: no 2GIS card, public reviews, peer outliers, demand phrases or Kaspi data\".\n- All 9 insights are strength 1–2 and \"fail C4 test 1\".\n- E18 claims \"first frosts arrive\" in the 2026-10-19 → 11-15 window, with source \"assumption: regional climate knowledge\".\n- Creator review: \"In Karaganda the first frosts usually come in late September or early October. By 10-19 «первый мороз» is old news\".\n- Peer outliers, demand phrases and weather or climate normals do not depend on the client's name.\n- The agent could have fetched all of these.",
+    "severity": "major",
+    "cause": "inputs",
+    "method_section": "B2 Tier 0 ('always run'); step table: 'Runs the agent fetches'. Code: brain.py implements no Tier-0 fetch (fetch only fills product-page facts), and stress.case_cmd passes --no-fetch for hypothetical clients.",
+    "fix": "Code runs the B2 fetches that do not need the client's identity before step 3, for every client including hypothetical ones: peer outliers for vertical and city, demand phrases, weather and climate normals. C1/check_insights: reject a weather or calendar `moment` evidence item whose source is 'assumption:' when the item can be fetched; it must cite a URL."
+   },
+   {
+    "what": "The run's own outputs contradict each other on dates, cost and what counts, which is exactly what a skeptical owner will seize on.",
+    "evidence": "- campaign.md header (from the intake): \"by 2026-11-16\", \"Qualified coded B2B inquiries per staff hour\", and push_back «до 20 минут в неделю у сотрудника и до 5 минут у вас».\n- Revised campaign: verdict \"2026-11-23\", inquiries counted by \"ANY route\", total cost \"about 130 min including about 70 min of week-0 setup\".\n- campaign.md still lists ID10, ID17 and ID13 («Воду на глаз») under 'Test slate' and says \"Week 1 filming fits the budget: 15.2 min (ID14, ID10, ID19, ID07, ID13, ID17, ID02)\".\n- Boss after-review: «В резюме итог 16.11, в кампании 23.11 ... проще всего сказать „вы сами не знаете, что меряете“».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F13 (the revision outputs only 6_campaign); code render_md() in brain.py lines 647–683 reads steps['intake'] and selection",
+    "fix": "Method F13: the revision also emits a `1_intake` patch (success_metric, push_back, by_when) that replaces the stored intake. Code: render_md takes the metric, dates and push_back from the final campaign, lists only the ideas the final weeks[1] schedules, and shows the reviews_after scores. Add a check error when intake.by_when differs from the campaign's verdict date."
+   },
+   {
+    "what": "The revision turned ID13 into a different hero idea under the same id. The new concept never went through step-4 checks, and its arm labels are wrong. An existing idea that fit, ID05, was never offered to the revision step.",
+    "evidence": "- Hero series «Считаем по паспорту», idea_ids [\"ID13\"], whose role says the «на глаз» opening and «постановка» are retired and the hook is \"generated at edit time\".\n- Campaign risk: \"ID13 keeps its step-4 slugs (myth_check / curiosity_gap) although the reworked episodes behave like check_before_buy / practical_value. That pollutes pooled arms.\"\n- ID05 «Нам пишут: «Сколько мешков на объект?»» (practical_value, prior 3.321) already held this concept but was not in the slate.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F1/F13 ('never invent idea ids'; 'swap among existing idea ids'), L7 (arms must be honest). Code: prompt6 at brain.py line 576 passes only the slate ideas.",
+    "fix": "Code: pass the full step-4 pool (ideas with their priors and check results) to the campaign and revision steps, and re-check the campaign against it. F13: week 1 may swap in any step-4 idea that passed checks. Reusing an id whose hook, first_frame or format changed is a check error; the new concept goes to 'NEXT BATCH' or through step 4."
+   },
+   {
+    "what": "The review step runs without the METHOD, so F13's persona checklists and approval rule are never applied.",
+    "evidence": "In reviews_after.json the boss has \"score 6 approve True\", while F13 says \"would_approve: true only if there is no fatal refutation and score ≥ 7\". The review's system prompt is only \"You are \" + persona + \" Attack the plan; be concrete...\" (brain.py line 592), so persona names are free text: \"veteran_creator: short-form creator ... Has run construction-supply and warehouse accounts\".",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "F13 / G6",
+    "fix": "Code: include F13 and G6 in the review system prompt, make persona an enum {boss, veteran_creator}, and set would_approve = (score ≥ 7 and no fatal refutation) in code, overriding the model. If the post-revision reviews still contain major issues, list them in the campaign's risks as «OPEN:» lines shown to the owner."
+   },
+   {
+    "what": "The shoot card template is the music-store client's and leaves out what staff need to know.",
+    "evidence": "- Card header: «я веду соцсети магазина».\n- Tips: «громкий комбик или барабаны — не ближе 1 метра» and «не «Изоляция голоса» (она вырезает звук инструмента)».\n- Shot 8 «пальцы печатают сообщение-шаблон в пустом чате» never gives the template text.\n- Shot 9 has staff say «Читаю дословно, что производитель пишет про хранение» but never gives the line to read.\n- Frost shots 3 and 7 have no fallback if there is no frost.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 (shoot-card phone rules), F7. Code: shootcard.TIPS_RU (lines 113–121) and the render_card_ru header (line 126) are hardcoded.",
+    "fix": "Code: build the header from profile.name and vertical. Choose tips per vertical, or have the model generate `tips_ru` that are checked against the vertical. Each card line prints the exact text the shot must show or read (from on_screen_ru and say_ru), plus «если нет — пропустите» for any shot that needs weather or props."
+   },
+   {
+    "what": "The minute model ignores prep, mess and downtime, so the 15.2-minute card is not realistic.",
+    "evidence": "ID13's shot «льёте воду в смесь, потом миксер в ведре» is costed as 10 s × 2 takes. Creator: \"opening a bag, water, a bucket, a drill mixer, dust and cleanup ... Realistically it's 15 or more minutes\". The revised week-1 ask «погрузчик на 10 минут остановить» costs warehouse downtime that nobody counts (boss after-review).",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "D9 (card_minutes formula)",
+    "fix": "D9/G4: add `prep` to each worker shot: none (+0), props (+2), mess or cleanup (+5), equipment downtime (needs an owner OK). Code adds it to card_minutes. A shot with downtime cannot go on a card without the owner's yes."
+   },
+   {
+    "what": "The intake's 3 clarifying questions missed what this B2B test actually needed, and the deadline was under 24 hours.",
+    "evidence": "- The intake spent Q3 on faces (the default already covers faces) and did not ask what the company can truthfully claim: own warehouse, city, delivery, top SKUs. That ask only appeared later in the campaign as a «блокирующий» fact pack.\n- The questions say «Ответ до 10.10 12:00» for a run that finished on 10.09 at 19:07, about 17 hours.",
+    "severity": "minor",
+    "cause": "method",
+    "method_section": "A8 (question bank and the 24-hour deadline)",
+    "fix": "A8: add a question bank for b2b and should_we_do_social: (1) a value-based threshold, (2) a yes/no fact pack (own warehouse in the city, delivery, 5 usual SKUs, contact), (3) warm distribution yes/no. Faces stay at the default with no question. Code computes the deadline as run time + 24 h and overwrites the model's date."
+   },
+   {
+    "what": "Noisy and false-positive checks reach the owner.",
+    "evidence": "- checks.json: the warning \"H4 no number or model/brand token\" fires on 22 of 24 hooks, although with an empty ledger numbers are forbidden.\n- R6 flags 'лучшему' in «Ранжирую звуки склада: от худшего к лучшему» and 'лучший' in «мы, скорее всего, не лучший вариант».\n- Both go to the owner as item 12, in English.",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "C6.3 / D5; checks.py H4 (around line 120) and ABSOLUTE_CLAIM (line 52)",
+    "fix": "Code: skip H4 when the ledger has no usable number or brand facts. R6-CLAIM exempts negated or self-deprecating forms («не лучший») and rankings inside the video («от худшего к лучшему»). Rail output never goes to the owner verbatim."
+   }
+  ],
+  "code_issues": [
+   "brain.py run() lines 564 and 627–632: the week-1 shoot card and manifest come from the step-5 slate and are never rebuilt from the revised campaign.weeks[1]. In this run the card films retired or forbidden shots: ID13 water pour, frost on film, ID10, ID17.",
+   "brain.py owner_card() lines 405–436: no supersession. Intake and inputs asks fill the card first, and all 7 revised campaign.owner_asks are deferred, including the blocking fact pack. Replaying this run with the current code (after commit 63c890a) still defers all 7.",
+   "brain.py line 502 stores the English missing[].input as `q`. agent.owner_message line 77 prints q['q'], so the owner receives English items such as 'Company identity: legal/trade name as on 2GIS...'.",
+   "brain.py lines 553–555: facts questions are generated for all 24 ideas, including ID15 and ID23 outside the slate, and pasted verbatim as English rail output into a Russian owner message (questions.json item 12).",
+   "brain.py lines 576 and 597: the campaign and revision prompts get only the slate ideas, so the revision cannot swap in ID05 or ID08. It repurposed ID13 instead, polluting the myth_check/curiosity_gap arms.",
+   "brain.py lines 588–606: review calls carry no METHOD or F13 text. would_approve is not enforced (boss after-review: score 6, would_approve True). Persona is free text.",
+   "brain.py select() and plan_week(): no preconditions or dependencies. ID21 (needs comments, week 2+) took a slate slot, and ID10's payoff needs ID03 footage that was never filmed.",
+   "brain.py check_idea / checks.check_text: no rail for attributed customer quotes («Нам пишут: „…“» with 0 chats). The model's 'NEEDS FACT' risks do not reach selection.needs_facts (line 567) or blocking, so ID07 is filmed in week 1.",
+   "brain.py render_md() lines 647–683: header metric, dates and push_back come from the stale intake. Slate ideas the final campaign held or dropped are still listed. Line 663 reads non-existent fields 'driver_mechanism' and 'engine', printing 'practical_value () ·  ·'.",
+   "shootcard.py lines 113–126: TIPS_RU and the header are hardcoded for a music store («соцсети магазина», «громкий комбик или барабаны», «звук инструмента»). render_card_ru prints neither the text a shot must show nor fallbacks.",
+   "brain.py implements no B2 Tier-0 fetch (peers, demand phrases, weather); `fetch` only fills product-page facts. stress.py case_cmd also passes --no-fetch for hypothetical clients, so step 3 ran on zero external evidence.",
+   "brain.py check_insights() line 314 accepts evidence labelled confidence 'verified' when its source is 'assumption: …' (E01, E08, E19, E21, E25, E26, E29).",
+   "checks.py: the H4 'no number or model/brand token' warning fires on 22/24 hooks when the ledger is empty (pure noise). The ABSOLUTE_CLAIM regex flags «не лучший вариант» and «от худшего к лучшему» as superlative claims."
+  ]
+ },
+ {
+  "case": "salon: a hypothetical mid-price salon in Шымкент with 8 masters and an empty facts ledger. Boss request: «Конкуренты дешевле, клиенты уходят. Что делать?». Run dir: /tmp/claude-0/-home-user-flystuff/ed90e34e-b470-5816-9bae-4695c8c48b9b/scratchpad/brain/stress_v1/salon/ (log: ../salon.log). It was run with the brain.py from commit 472b542 (before 63c890a changed the owner card) under `--no-fetch`.",
+  "verdict": "The run finished. Every artefact exists: intake, inputs, insights, 24 ideas, selection, campaign revision 2, reviews before and after, the questions files, campaign.md and shoot_card_week1_ru.txt. The diagnosis and conversion layer are good. The run diagnoses before it films (intake Q1 «Кто именно уходит? … 3 — клиенты ушли вслед за мастером»). It adds DR0 (fix slow replies or master churn before content), a quick reply that sends the price with a next step («Хотите, подберём мастера и время? Какой день вам удобнее?»), a no-discount reactivation arm and the MASTER1 master-flight guard. Both personas named this layer the best part.\n\nThe video side does not answer the boss's question. None of the 8 slate ideas shows why the price is worth paying. The four price/backstage ideas in the pool (ID03, ID04, ID05, ID06) lost to a POV, an ASMR loop and an anti-sell («Честно: иногда салон вам не нужен», which ranked #2). 7 of the 8 are about nails. The evidence base is 100% assumption because nothing was fetched.\n\nThe revision then made week 1 depend on two «NEXT BATCH» hero episodes that do not exist. One of them is a re-invention of ID05, which the campaign step never saw. As a result the boss persona went from 6/10 and approve to 5/10 and reject, with a new fatal: «Главных роликов в плане нет».\n\nWhat the code would actually send is worse than the plan:\n- **Shoot card:** it films 7 pre-revision ideas, including the unapproved ID19 and the blocked ID13. The steps are in an impossible order («6. Ноготь после снятия» before «9. снятие гель-лака»). The tips come from the music-store template («комбик или барабаны»).\n- **Owner message:** 13 items, 9 of them English internal labels. It asks the owner to confirm a regex hit. Every campaign ask the plan depends on is left out (reactivation approval, hygiene tick-list, quick-reply approval, master names).\n\nAs delivered, it is not usable.",
+  "would_a_real_boss_use_it": false,
+  "best_part": "Week 0 diagnoses before anything is filmed, with a non-content fix first. Intake Q1 separates the three ways clients leave: «новые: узнают цену и не записываются / постоянные перестали возвращаться / ушли вслед за мастером». DR0 says «if the export shows a median first reply over 60 min … or that most lost clients left with a departed master, fixing replies or staffing comes first». The after-price quick reply «[цена из прайса]. Хотите, подберём мастера и время? Какой день вам удобнее?» needs no staff minutes and goes at the exact leak the boss describes. MASTER1 (booking only through the salon number, and master names only with the owner's «да») shows real salon know-how. Both reviewers, before and after the revision, picked this layer as the best idea.",
+  "failures": [
+   {
+    "what": "The week-1 artefacts code writes contradict the revised campaign. The shoot card films the wrong ideas and none of the hero.",
+    "evidence": "shoot_card_week1_ru.txt / selection.json `week1_filmed: [ID15, ID19, ID20, ID17, ID24, ID13, ID01]`, 13 shots, 16.7 min. Shot 12 is ID19: «Честно: иногда салон вам не нужен. Вот что можно дома.» Shots 6 and 9 are ID13. The revised campaign.json weeks[1] says: «ID19, ID13 and ID09 are out of week 1. The card is capped at 4 ideas» and publishes «hero E1 hygiene … (NEXT BATCH)» and «hero E2 … (NEXT BATCH)», which have no shots. campaign.md shows both «Week 1 filming fits the budget: 16.7 min (ID15, ID19, ID20, ID17, ID24, ID13, ID01)» and a Weeks section listing ID01, ID20, ID17.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "E1 (code writes the card), F1 (weeks[1] = slate); brain.run calls plan_week() before step 6/7",
+    "fix": "Code rule: generate the shoot card, manifest and WhatsApp codes only after step 7, from the final campaign's weeks[1].idea_ids. The campaign check must reject a weeks[1] id that is not a validated idea with worker_shots, or that is marked NEXT BATCH. Any idea whose risks contain an unanswered «owner approval before shooting» is excluded from the card."
+   },
+   {
+    "what": "The owner message that would actually be sent is unreadable, duplicated, and leaves out every approval the final plan depends on.",
+    "evidence": "Rendering questions.json with agent.owner_message gives 13 items. Examples: «4. WhatsApp chat export: 15–30 recent client chats, without media (~3 мин)», «6. Money map: price-list photo (dated), 3 services to fill…», «9. Staff reality scan: 3 test clips… (~0 мин)». Item 13 reads «Подтвердите… ID15.comment_prompt_ru: scarcity/urgency claim without a backing fact: 'последний день'». Item 5 («Permissions tap card: who leaves, who may be filmed…») repeats items 1–3. All 10 campaign owner_asks are in questions_deferred.json, including the reactivation approval («По умолчанию: 3, не пишем») and the hygiene tick-list («По умолчанию: такой ролик не снимаем»). The plan's ~40% warm-base arm and hero E1 therefore default to off.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "L5, L9 (owner text in Russian), A8, B1, G2; brain.owner_card and agent.owner_message",
+    "fix": "Code rules: (1) every owner item carries a Russian `ask_ru` (the `how` field for inputs), checked for Cyrillic, and English `input` labels are never rendered. (2) Facts items are rendered from the idea's Russian NEEDS FACT text, never from rail messages. (3) Dedupe by a `key` field, so inputs reference intake question ids instead of restating them. (4) Post-revision campaign owner_asks supersede the intake and inputs asks they cover, and take priority within the 7-item, 15-minute cap. Commit 63c890a already moved staff asks off the card; the English labels, the fact-item wording and the campaign-ask starvation are still in HEAD."
+   },
+   {
+    "what": "The slate does not answer «why pay more», the boss's actual problem. The pool's price/backstage ideas were never selected, and the campaign step could not see them.",
+    "evidence": "Slate: ID15 POV той, ID19 anti-sell, ID20 той tips, ID17 character, ID24 care, ID13 myth, ID01 ASMR, ID09 insider check. Not selected: ID05 «Что происходит до того, как вы сели» (prior 3.128), ID04 «За что вы платите в маникюре» (3.051), ID03 (3.128), ID06 «Нам пишут: «А сколько стоит?»» (3.013). ID19 ranked #2 at 3.462. Creator: «fatal … None of the 8 ideas shows what the price pays for». The revision then invented «NEXT BATCH … E1 «Что делаются до того, как вы сели в кресло»», which is ID05's hook, because prompt6 passes only `[i for i in ideas if i['id'] in chosen]`.",
+    "severity": "fatal",
+    "cause": "code",
+    "method_section": "E1 (selection), F1 (weeks[1] must be slate ids), F13; brain.select() and prompt6",
+    "fix": "Selection rule in code: the slate must contain at least 2 ideas whose insight is the A3 bottleneck insight, or whose format is a primary engine for the request_type (price_pressure: why_it_costs, backstage, process_full, wa_question). It must also contain at least 1 idea for each of the top-3 insights by strength. Pass the full validated pool to steps 6 and 7. A swap into week 1 goes back through code's selection instead of becoming NEXT BATCH."
+   },
+   {
+    "what": "The truth rubric systematically down-ranks proof ideas that need a yes/no owner confirmation, and up-ranks claimless staged or ASMR content.",
+    "evidence": "ID05 (show the station routine, only if confirmed) has truth 2, and ID04 has truth 2. ID15 (staged POV) has truth 3, and ID01 (ASMR) has truth 3. Every insight is assumption-only, yet scores vary with how much an idea claims, not with whether what it shows will be real.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "E2 truth anchors («3 = Verified but needs a NEEDS FACT … 1 = Rests on an assumption»)",
+    "fix": "Rewrite the E2 truth anchor. Score whether what is shown will be real. A NEEDS FACT that is a yes/no owner confirmation of a filmable routine is a gate handled by code, not a score penalty. Truth ≤2 only for ideas whose message would still be unproven after filming."
+   },
+   {
+    "what": "All on one service line. 20 of 24 ideas and 7 of 8 slate ideas are about nails, and no idea covers brows or lashes, although which services lose clients and where the free slots are is a stated unknown.",
+    "evidence": "32 of 44 worker shots are at «маникюрный стол». Boss: «Почти весь слейт про маникюр (7 из 8 идей)… ролики нагонят запись туда, где и так занято». The revision says «non-nail by default», but no non-nail idea exists, and intake Q3's default was «1 — на будни днём». Creator after: «no hair or brow idea exists. So in practice ID17 and E2 will be shot at the manicure table».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "D9/E3 «≤3 distinct location names across the batch»; E3 has no service-line dimension; A7's diagnostic spread applies only to vague requests",
+    "fix": "E3: add a `line` dimension. When the losing line or free capacity is unknown, cover at least 3 service lines, with no line above 50% of the ideas. Apply the location cap to each weekly card (in code), not to the batch. A7: the diagnostic spread also triggers when every insight is assumption-only."
+   },
+   {
+    "what": "The shoot card is physically unproducible in 17 minutes. Steps are out of process order and need incompatible nail states.",
+    "evidence": "Card order: «6. Ноготь после снятия крупно…» comes before «9. Сверху: снятие гель-лака пилкой без перерыва». One session needs bare nails (shot 2), gel to remove (9), a fresh shade matching a fabric (7), a lifted edge (8) and a finished manicure holding a glass (10). Creator: «Realistically that is 35–50 minutes of standby… the card won't get finished».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 minute model; shootcard.order_by_location (sorts by shot kind across ideas)",
+    "fix": "G4/D9: add `worker_shots[].needs_state` (e.g. «голые ногти», «свежее покрытие», «отошёл край») and `capture: staged|during_service`. Code keeps each idea's shots together in process order, plans during_service shots as a separate window, and rejects a card that needs conflicting states on one person's nails in one session."
+   },
+   {
+    "what": "The shoot card text is a hard-coded music-store template. It contradicts the close-sound rule and assumes an iPhone.",
+    "evidence": "«Это ИИ-ассистент MetaPrompt: я веду соцсети магазина…», «Звук важен: инструмент в 30–50 см от телефона; громкий комбик или барабаны — не ближе 1 метра», «Если в Пункте управления есть «Режим микрофона»». ID01's shots specify «в 20–30 см».",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "D9 shoot-card phone rules; shootcard.TIPS_RU and the render_card_ru header",
+    "fix": "Template the card header and tips from profile.vertical (per-vertical tip sets: salon = 20–30 cm tool sound, hair dryer off). A code check fails any tip whose distance contradicts the card's own shots. Add an Android variant for the microphone and focus tips."
+   },
+   {
+    "what": "The primary objective targets new inquiries, though «клиенты уходят» means existing clients leave. Retention was capped at ≤20% even though the push_back calls it the fastest lever.",
+    "evidence": "intake: «Fork: (a) new inquiries that stall after the price, (b) regulars who lapse, (c) clients who follow a master who left. Chose (a)… because it is measurable through codes»; «SECONDARY… ≤20% of slots»; push_back: «самый быстрый рычаг — вернуть тех, кто уже был у вас». Boss (major): «на них отведено не больше 20%». The revision raised it to 40% as «Strategist judgment beyond METHOD».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A1.2 (SECONDARY ≤20% of slots), A1.3 (fork criteria: measurable first)",
+    "fix": "A1.3: rank fork branches first by likelihood given the boss's literal words and vertical base rates. Solve measurability by defining a measure for that branch (lapse or rebooking rate from the booking journal), never by switching branches. A1.2: the 20% cap applies only to video slots, never to non-video warm-base actions that A6 names as the lever."
+   },
+   {
+    "what": "Success is measured on a partial, gameable channel: WhatsApp bookings only.",
+    "evidence": "success_metric: «WhatsApp bookings at current (undiscounted) prices per week». Boss: «Часть клиенток записывается звонком, приходит без записи или пишет в директ… график покажет «рост», а реальной загрузки не прибавится». The revision did not fix it. The plan's own CTAs push bookings into WhatsApp, which would inflate the metric.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A4 / L3 («In this market, sales close in WhatsApp chats and on Kaspi»)",
+    "fix": "A4: the primary metric comes from the business's system of record for the outcome (booking journal, YClients/Altegio or POS: total visits per week by service, as one admin number a week, ≤1 min). WhatsApp codes and «откуда узнали?» are attribution only."
+   },
+   {
+    "what": "Nothing was fetched, so every insight rests on guesses.",
+    "evidence": "inputs.json lists all 7 `who: agent` rows (2GIS card, reviews, peer outliers, demand phrases, competitor prices, calendar, KB) as missing. insights.json: 31 of 32 evidence items are `assumption`, and every insight reads «PROVISIONAL… C4 test 1 (evidenced) fails… capped at 2». E25 guesses the category conventions, so ID01 claims «It breaks the hypothesised category convention», while the creator says nail ASMR is «one of the most saturated nail formats». The stress harness passes `--no-fetch`. brain.py has no step-2 fetch executor; acquire.fill_facts only re-fetches e-commerce product pages.",
+    "severity": "major",
+    "cause": "inputs",
+    "method_section": "B1/B2 Tier 0 «always run»; method header table «2 inputs → Runs the agent fetches»",
+    "fix": "The agent could have fetched peer outliers in Шымкент, RU/KZ demand phrases and calendar dates (Республика күні, той season), even for a hypothetical client. Code rule: execute every `who: agent` row of 2_inputs before step 3 and write the results as evidence with URLs. For a hypothetical client, skip only the own-footprint fetch."
+   },
+   {
+    "what": "The hero proof is a legal minimum (sterilisation), which does not explain a ~30% gap and implies a comparison.",
+    "evidence": "Hero E1: «steriliser, sealed pouch opened on camera, new file, desk wiped». Boss after: «стерилизатор, крафт-пакет и новая пилка — это санитарные требования, их обязан выполнять и дешёвый салон… Знающие клиентки ответят «а что, где-то не так?»». Creator after: «Sterilisation and kraft-pouch reels are the most overused salon trope in KZ beauty Instagram… reads as an implied «а у других грязно»».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "C4/C5 distinctiveness; C6.8 covers only named competitors",
+    "fix": "New C6/D10 rule: a practice that is legally required or standard across the category cannot be the value proof or hero in a price_pressure brief. It may appear as one beat inside a person-led episode. Price_value proof must be something the business does beyond the minimum, confirmed by the owner (service duration, number of steps, materials brand, aftercare or redo policy)."
+   },
+   {
+    "what": "The one-shot revision traded the creator's fatal for the boss's fatal. Week 1 now depends on ideas that do not exist.",
+    "evidence": "Reviews before: boss 6 (approve), creator 5 (reject, 1 fatal). Reviews after: boss 5 (reject, fatal: «Главных роликов в плане нет: они помечены NEXT BATCH и появятся только 16.10»), creator 6. risks: «NEXT BATCH (URGENT, week-0 step-4 rerun by 10-16): hero «Вблизи у мастера» E1…». Week 1 «Wed: hero E1… (NEXT BATCH)… Sat: hero E2… (NEXT BATCH)».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "F13 («never invent idea ids; a gap that needs a new idea goes into risks as NEXT BATCH»; exactly one revision)",
+    "fix": "F13: when a fatal or major refutation needs an idea outside the slate, code first tries a pool swap by re-selection. Otherwise it runs a targeted step 4 (2–4 ideas) through the rails and selection before the revision. A campaign whose weeks[1] contains a NEXT BATCH item fails the campaign check. Re-attack once more if the score falls."
+   },
+   {
+    "what": "The chat-export ask makes an untrue privacy claim to the owner.",
+    "evidence": "inputs.json and owner_asks: «Имена и номера удаляем сразу, наружу ничего не попадает». Boss after: «Это неправда: экспорт уходит ИИ-ассистенту, то есть за пределы салона… по закону РК о персональных данных у меня нет согласия на их передачу». The wording comes word for word from METHOD B3's example phrasing.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "B3 «Phrasing for `how`»",
+    "fix": "Replace the B3 template with a true statement: the file goes to the AI assistant, names and numbers are replaced on upload, and it is stored for N days. Always offer a zero-transfer alternative: the admin fills a 4-column tally (date, service, booked yes/no, where the chat stopped). Add to C6 that owner and staff messages fall under the truth rails too."
+   },
+   {
+    "what": "The reactivation template impersonates a master, and its selection and volume rules are unworkable. It stays in the final plan.",
+    "evidence": "channels: «Template: «Здравствуйте, {имя}! Это {имя мастера}, ваш мастер из салона…»», sent by the admin. «The admin finds them in her own WhatsApp chat list, sorted by date». «up to 20 messages a day». Creator after: «Sending «Это {имя мастера}…» … while the admin types is impersonation… WhatsApp's chat list doesn't show 'last booking'… can get reported and the number limited».",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "L8 and F5 cover approval, not sender truthfulness or the risk to the only booking number",
+    "fix": "New C6/F5 rule: outbound customer messages name their real sender. First person in someone's name is allowed only when that person sends it. Lapsed clients are selected from the booking journal, not from the chat list. New outbound volume is capped at ≤10/day for the first 3 days, with a block/report check before scaling."
+   },
+   {
+    "what": "The staff time budget is broken in week 0 and weeks 1–2.",
+    "evidence": "Code card 16.7 min plus worker_ask «Плюс 3 минуты: проверить казахские подписи» = 19.7, above the 17 planned. risks: «reactivation messaging… (≈10 min/day)… is NOT counted in the ≤17-minute filming budget». Week 0 adds a ~10 min reality scan, a 2–3 min voice note, KZ dictation, a ~5 min proof folder and label setup. Boss after: «20 сообщений в день плюс ответы, реально 30–40 минут».",
+    "severity": "major",
+    "cause": "model_noncompliance",
+    "method_section": "L5 (staff ≤20 min/week including safety; ≤17 planned), F7",
+    "fix": "Code rule: every worker_ask item carries `minutes`. Code sums the card plus all asks per week and rejects any total above 17. Admin chat work beyond 2 min/week becomes an explicit owner time ask («администратору ~N мин/день — есть ли?») with a default of no."
+   },
+   {
+    "what": "The anti-sell wildcard was scored as a mainstream idea and put on week 1's card, against the brief's interest.",
+    "evidence": "ID19 «Честно: иногда салон вам не нужен… Это можно дома»: rubric stop 4, share_save 4, comment 4, objective_fit 3, prior 3.462, selected as «prior+data», not as exploration. Its own risks say «Owner approval required before shooting», yet it is card shot 12. Boss: «Рядом с дешёвыми конкурентами это читается как «экономьте»».",
+    "severity": "major",
+    "cause": "model_noncompliance",
+    "method_section": "E2 («Score wildcards honestly low where they are weak… Do not inflate clever ideas»)",
+    "fix": "E2: objective_fit ≤2 for any idea whose message can be read as a reason not to buy the client's core service in the request's context (e.g. price_pressure plus an anti_sell of the core line). A wildcard label caps every criterion except stop at 3."
+   },
+   {
+    "what": "WhatsApp codes repeat across runs and clients, which will corrupt attribution.",
+    "evidence": "brain.py:610 `make_code(1, n + 1)`, so every run gets BA23…BA32 (campaign.json attribution_codes). loop.record_leads builds `code_to_idea` across all runs, so later runs overwrite earlier ones inside the 30-day window. The week-1 hero (NEXT BATCH) has no code, while ID01, «filmed but not published alone», holds BA29.",
+    "severity": "major",
+    "cause": "code",
+    "method_section": "L3 / F9 attribution; brain.run and loop.record_leads",
+    "fix": "Code rule: keep a persisted per-client code counter, so a code is never reused within 60 days. Assign codes after the revision to week-1 ids that will actually be published. Fail record_leads if one code maps to two ideas."
+   },
+   {
+    "what": "The non-discount price options the owner asked about («Что делать?») are never offered.",
+    "evidence": "Boss after (major): «план закрывает и все ценовые ходы без скидок: время подешевле в будние дни, линейку «топ-мастер / мастер», абонементы и комплексы. Конкурентов не проверили… ни один вариант мне не предложили». The competitor price-list fetch stayed in `missing`.",
+    "severity": "major",
+    "cause": "method",
+    "method_section": "A2 price_pressure row, A3 «Non-marketing fix to flag: A real price or assortment gap», F4",
+    "fix": "A2 price_pressure: the deliverable includes a Russian options note of ≤5 lines. It gives 2–3 price-architecture moves that keep the list price (master tiers, an off-peak or weekday rate, a bundle or abonement, an express service), each with what it would test. The owner decides. The internal competitor price check runs before step 3."
+   },
+   {
+    "what": "Truth-rail false positives become nonsense owner questions.",
+    "evidence": "checks.json: ID15 comment prompt «Вы заранее или в последний день?» and ID20 «Записаться заранее, не в последний день» are flagged as «scarcity/urgency claim without a backing fact: 'последний день'». Both are routed to the owner verbatim (questions.json item 13).",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "C6.4; checks.SCARCITY regex `последний\\s+день`",
+    "fix": "The scarcity rail fires only when the phrase is tied to an offer, slot, stock or date (co-occurs with «акция/скидка/осталось/успейте/мест» or a date), not in a question or advice. Rail hits go to the model for a rewrite, never verbatim to the owner."
+   },
+   {
+    "what": "Generic comment prompts on the slate.",
+    "evidence": "ID01 «Какой звук в салоне вы любите?», ID09 «На что вы смотрите первым?», ID17 «А вы бы попросили?». Creator: «generic open questions… Binary, pick-a-side prompts do much better».",
+    "severity": "minor",
+    "cause": "model_noncompliance",
+    "method_section": "D6 (answerable in ≤3 words with a real split; answers seed the next video)",
+    "fix": "D6 code check: comment_prompt_ru must offer an explicit split (e.g. «X или Y?» or a numbered 1/2 choice) or name the viewer's own past experience. Open «какой/что вы любите» prompts score comment ≤2."
+   },
+   {
+    "what": "campaign.md misreports the plan.",
+    "evidence": "«Driver · engine · funnel: identity () ·  · attention» (render_md reads nonexistent keys `driver_mechanism` and `engine`). «Attack before revision» shows only «6/10, approve=True» although the re-attack rejected. The week-1 filmed list contradicts the Weeks section.",
+    "severity": "minor",
+    "cause": "code",
+    "method_section": "brain.render_md",
+    "fix": "Render from schema fields (`format`), show reviews_after next to reviews, and take the week-1 list from the post-revision card (see fix 1)."
+   }
+  ],
+  "code_issues": [
+   "brain.run calls plan_week(), writes the shoot card and assigns codes from the pre-campaign selection, and never regenerates them from the revised weeks[1]. So the card films ID19 and ID13, which the revision removed, and nothing for the hero.",
+   "The step 6, revision and review prompts receive only the 8 slate ideas, not the validated pool. The revision re-invented ID05 («Что происходит до того, как вы сели») as «NEXT BATCH E1».",
+   "select() has no coverage constraint for insight, bottleneck engine or service line. `blocked` covers only ideas with errors, not NEEDS FACT items that block shooting («Owner approval required before shooting»).",
+   "owner_card/owner_message render `q` = the inputs' English `input` label instead of the Russian `how`. Facts items are raw English rail messages. Dedupe is a 120-character text prefix, so «who leaves» is asked twice. Campaign owner_asks come last and are always starved (in HEAD, slots = 7−3−1 = 3 are used up by the inputs asks). At run time (472b542) staff asks were also on the owner card, at 0 minutes each.",
+   "brain.py:610 make_code(1, n+1) is constant, so every run and client gets BA23…BA32. loop.record_leads overwrites code→idea across runs.",
+   "shootcard.order_by_location sorts by shot kind across ideas («Ноготь после снятия» comes before «снятие гель-лака»). The minute model counts only footage seconds, not the process states the shots need.",
+   "shootcard.TIPS_RU and the header are hard-coded for the music store: «соцсети магазина», «комбик или барабаны», «30–50 см», and iPhone-only «Пункт управления».",
+   "checks.SCARCITY matches «последний день» in a question or advice (ID15, ID20). These become owner questions.",
+   "There is no step-2 executor for `who: agent` inputs; acquire.fill_facts handles only e-commerce product pages. stress.py adds --no-fetch for hypothetical clients, so the evidence base is 100% assumption.",
+   "Staff minutes are checked only for filming shots. worker_ask_ru items (KZ check, reactivation ≈10 min/day, labels, reality scan) are never summed against the 17-minute plan.",
+   "render_md reads nonexistent keys (driver_mechanism, engine), prints only pre-revision review scores, and mixes the pre-revision filmed list with the post-revision weeks.",
+   "Reviewers get neither METHOD nor the idea pool, so the creator's fatal could not be answered with an existing idea (ID05/ID04)."
+  ]
+ }
+]
