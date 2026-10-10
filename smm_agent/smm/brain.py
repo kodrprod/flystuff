@@ -406,6 +406,7 @@ def plan_week(chosen: list[dict], capacity_min: float = 20.0) -> tuple[list[str]
 # ----------------------------------------------------------------- the owner card (code)
 
 OWNER_MINUTES_CAP = 15          # onboarding batch; later weeks <= 5 (method L5)
+MIN_WEEK1 = 2                   # at least this many ready (fact-complete) ideas are filmed/published in week 1
 OWNER_MAX_ITEMS = 7             # stress test: owners answered 2 of 8+ asks; a card longer than this is not read
 MIN_ITEM_MINUTES = 1.0          # reading and answering anything costs at least a minute, whatever the model claims
 
@@ -566,6 +567,16 @@ def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, ga
         elif x in gated:
             problems.append(f"week 1 idea {x} waits for owner facts and is not filmed until they are confirmed")
     film = [byid[x] for x in want if x in byid and x not in blocked and x not in gated]
+    if len(film) < MIN_WEEK1:
+        # stress test: when every planned idea waits for facts, week 1 was empty. Fill it with the best ideas that
+        # need no unconfirmed fact (reserves), so the staff still film something true this week.
+        w = load_weights()
+        reserves = sorted((i for i in ideas if i["id"] not in blocked and i["id"] not in gated and not i.get("_dropped")
+                           and i["id"] not in {f["id"] for f in film}), key=lambda i: -prior_score(i, w))
+        add = reserves[:MIN_WEEK1 - len(film)]
+        film += add
+        if add:
+            problems.append(f"week 1 had {len(film) - len(add)} ready ideas; reserves added: {[i['id'] for i in add]}")
     for f in film:
         f.setdefault("_value", prior_score(f, load_weights()))
     filmed_ids, shots, minutes = plan_week(film, capacity_min)
@@ -598,6 +609,9 @@ def deliverables(client: Client, camp: dict, ideas: list[dict], blocked: set, ga
                 if q:
                     items.append({"from": "facts", "q": f"{x}: {q}"})
             for need in declared_needs(idea):
+                if latin_share(need) > 0.2:          # the model wrote the fact in English: never shown to the owner
+                    problems.append(f"{x}: NEEDS FACT not in Russian, kept internal: {need[:80]}")
+                    continue
                 items.append({"from": "facts", "q": f"{x}: Подтвердите для ролика «{idea.get('hook_ru', '')}»: {need}"})
     seen, clean = set(), []
     for q in items:
@@ -851,9 +865,10 @@ def render_md(br: BrainRun, ideas: list[dict], final: dict) -> str:
         L += [f"**Push back (to the owner):** {it['push_back']}", ""]
     L += ["## Big idea", cp["big_idea"], "", f"> {cp['single_minded_message_ru']}", "", cp["why_this_wins"], "",
           f"## Week 1: filmed and published ({len(final['week1'])} videos, {final['minutes']:.1f} staff min)", ""]
+    planned = set(week1_of(cp))
     for iid in final["week1"]:
         i = byid[iid]
-        L += [f"### {iid} · {i.get('title', '')}",
+        L += [f"### {iid} · {i.get('title', '')}" + ("" if iid in planned else "  (RESERVE: the plan's week-1 ideas wait for facts)"),
               f"- Hook: «{i.get('hook_ru', '')}»  — first frame: {i.get('first_frame', '')}",
               f"- What happens: {i.get('what_happens', '')}",
               f"- Driver · format · funnel: {i.get('driver')} · {i.get('format')} · {i.get('funnel')}",
