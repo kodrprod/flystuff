@@ -1,0 +1,196 @@
+{
+ "have": [
+  {
+   "input": "Client profile (HYPOTHETICAL; every detail is an assumption)",
+   "what_it_gives": "Planning assumptions only, no ledger facts: one specialty coffee shop in Астана with loyal regulars. Baristas aged 20–25 say they are willing to be filmed, but each one still needs to give consent on camera. A second location opens on Левый берег in about 3 weeks (assumed 2026-10-30). Languages are ru/kk. Instagram has about 2.1k followers (assumed, handle unknown). Sales are walk-in, plus a 2GIS card. Staff have 20 min/week, one phone, and audio works only close to the phone. Known unknowns: exact opening date and address, menu prices, any opening offer."
+  },
+  {
+   "input": "Fact ledger (facts_usable = [], facts_not_usable = [])",
+   "what_it_gives": "0 usable facts. Until owner answers or agent fetches add dated facts, audience copy cannot contain any price, menu item, number, date, address, countdown, offer or superlative. Copy says only «скоро на Левом берегу»."
+  },
+  {
+   "input": "Files",
+   "what_it_gives": "None. No chat export, reviews, price list, proof footage or account metrics have been ingested. Every evidence item in step 3 depends on the fetches and asks below."
+  },
+  {
+   "input": "Step-1 intake brief",
+   "what_it_gives": "request_type launch_or_event. Primary metric: coded opening sign-ups (40 conservative / 80 expected / 150 stretch, baseline 0, all assumed; re-fixed on 2026-10-16). Business metric: Левый берег POS checks on days 1–28. Bottleneck: awareness in the new catchment (likely). REALISM ratio ≈1–33, so organic alone is stretch to unrealistic. Levers: warm base, a 2GIS card for location 2, and a geo-boost the owner approves. The intake's 3 clarifying questions (date and address, opening offer, which channel to send people to) are already in the batched owner message and cost about 2 owner minutes. They are not repeated here, and they count toward the 15-minute onboarding budget."
+  },
+  {
+   "input": "Learnings L001, L003 (measured)",
+   "what_it_gives": "The text judge is barely better than chance on Shorts (ρ 0.11 overall, 0.07 retail, n=1,172). Long-form title patterns did not replicate. So rubric scores are priors only, the slate must be diverse and cheap, and no hook formula is assumed to work."
+  },
+  {
+   "input": "Learnings L005 (expert judgment), L006 (measured, correlational)",
+   "what_it_gives": "No price or menu slides made from photos. Brand-only product demos performed poorly (median 390 views vs a 2,300 channel median, n=48). So every coffee or process clip needs a guest's question, a human angle or real sound. A latte-art pour set to music is not enough on its own."
+  },
+  {
+   "input": "Sales channels: walk-in + 2GIS (no Kaspi)",
+   "what_it_gives": "The B2 Kaspi price-position check does not apply and is skipped. Attribution has to rely on codes, POS checks and an at-till «Откуда узнали?» tally."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Own footprint fetch: Instagram (last 15 posts, bio, highlights, comments), 2GIS card for location 1, search for TikTok/YouTube, and a check for an existing 2GIS card for location 2",
+   "why_it_matters": "Gives the account's real Reels median and its outliers at 3× the median or more (the A6 realism math and the DR2 threshold depend on these). It also gives ledger facts with URL and fetch date: hours, location 1 address, any menu or prices listed on 2GIS, any published offers. Rating and review count serve as proof. Comments may already ask «когда на Левом?», which would be demand evidence. It also shows whether location 2 has a 2GIS card yet, and that card is a pre-opening lever.",
+   "how": "Agent: search Instagram and 2GIS Астана by the business name. If the name is ambiguous (the client is hypothetical), wait for the links from the owner's account ask (item 10). Then fetch the last 15 Reels (views, date, length, first-frame type, faces yes/no), compute views ÷ median, and tag outliers at 3× or more with their mechanism. Pull all post comments that contain questions. From 2GIS take rating, review count, hours, address and the menu or price block if present, each with URL and fetch date (prices expire after 7 days). Search 2GIS for a location-2 card. Search TikTok and YouTube for the brand. If blocked (403/429), log it, do not bypass it, and ask for a screenshot only if a step is blocked without it.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Pooled specialty_coffee peer median as the baseline, labelled an assumption. No rating or review-count claims in copy.",
+   "blocks_step": "4_ideas: rating/review-count/hours claims (until fetched)"
+  },
+  {
+   "input": "Public reviews and comments: 2GIS (plus Google/Yandex maps if cards exist) and own Instagram comments",
+   "why_it_matters": "Our only verbatim customer language until the chat/DM export arrives. Codes C2 tags: J (what regulars praise, e.g. a drink or a barista ritual), X (complaints to fix before inviting a new crowd), Q, and M (morning, route or «по дороге» moments). This feeds the «why switch from my usual coffee place» consideration insight and the hook vocabulary.",
+   "how": "Agent: scrape all reviews with dates and code each one C2 with counts and source. Replace names with cust_### on ingest. Flag recurring X complaints for push_back, because a new location amplifies service problems. Count mentions of Левый берег, офис, учёба, по пути, specific baristas and specific drinks. Public reviews may be quoted without names; nothing is published from this step.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Peer-comment language plus the barista weekly voice note. Frequencies stay `likely`.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Peer outliers: 10–20 specialty coffee accounts (Astana first, then Almaty, then RU-language CIS), with a focus on pre-opening and second-location posts",
+   "why_it_matters": "Gives launch-specific mechanisms (build-up from construction to first pour, «открываем кофейню: день N» series, barista character formats). Also the category conventions to break (latte-art pour with music, flat-lay cups) and the pooled vertical median we use until there are 10 own posts. Peer comments add the questions buyers ask.",
+   "how": "Agent: take posts from the last 90 days that reached 3× or more of their own channel's median. Record the mechanism only: D3 engine, first-frame type, length, faces yes/no, sound type. Record comment questions, and list 3–5 conventions that nearly every peer follows. Store everything in research/peers.json as hypotheses, not winners. Never copy a post 1:1, and never name peers in content.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Method defaults for engines. Convention-breaking ideas lose their evidence and are scored as wildcards.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Demand phrases for Левый берег and the coffee category (RU/KZ)",
+   "why_it_matters": "Gives local search words for hooks, captions and the Shorts title line, e.g. «кофейня Левый берег», «где позавтракать Астана», «кофе с собой …», «где поработать с ноутбуком». The aim is to help the algorithm and the boost reach people on Left Bank.",
+   "how": "Agent: collect TikTok, YouTube, Google and Yandex autosuggest for category × Астана × Левый берег, in RU and in KZ (Kazakh phrasing only for discovery; KZ copy needs a native-speaker check). Record each phrase with its source and date.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Generic category wording in captions. Hooks rely on customer language only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Calendar and weather for Астана, 2026-10-10 to 2026-11-27",
+   "why_it_matters": "Moment cues that fall inside the launch window: first frost or snow («греемся по дороге на работу»), the 25 October Republic Day holiday, school autumn holidays and the student semester rhythm. Each must be checked against the opening date, both for moment ideas planned 10–14 days ahead and to avoid opening into a holiday lull.",
+   "how": "Agent: verify the 2026 public-holiday and school-holiday dates from official KZ sources. Pull the 14-day forecast weekly and re-check it on shoot-card day. Mark each moment with an enter-calendar date.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Drop weather and holiday angles. Moment ideas are framed by weekday or time of day only.",
+   "blocks_step": "4_ideas: dated moment ideas"
+  },
+  {
+   "input": "Catchment map around the new Левый берег address",
+   "why_it_matters": "Defines the real audience by situation: offices, business centres, universities and residential complexes within a 10-minute walk. This shapes local and pov_situation hooks, the boost radius and where the CTA points. The count of nearby coffee places is internal context only and is never named. JUDGMENT: the method has no launch-catchment input; I added it because the bottleneck is awareness in a specific area.",
+   "how": "Agent: after the owner confirms the address (intake Q1), use 2GIS to list categories of nearby buildings within roughly 800 m. Note foot-traffic anchors and how people commute there (bus stops, parking). Store it internally. Competitor names never enter content.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "«Левый берег» in general terms. Boost radius is decided only after the address is known.",
+   "blocks_step": "6_campaign: boost radius and building-specific local hooks (needs intake Q1 address)"
+  },
+  {
+   "input": "Knowledge base: pooled specialty_coffee driver/format posteriors, vertical median and hook graveyard",
+   "why_it_matters": "Gives a prior for the arms and a platform baseline for a new or small account. None was supplied (the learnings are vertical «any»).",
+   "how": "Agent: query the store for vertical=specialty_coffee (or fall back to the food_service / retail vertical). Only use tags with 30 or more observations, respect each entry's strength label, and never carry long-form findings over to short-form.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Flat priors. Peer outliers are used as the vertical median, labelled an assumption.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Weekly trend scan (structure trends first)",
+   "why_it_matters": "Gives up to 2 trend-dependent ideas per batch. Evergreen structures such as «день из жизни бариста», «открываем вторую точку» and POV fit both the launch and baristas who are willing to appear on camera.",
+   "how": "Agent: scan RU-language CIS coffee and food TikTok/Reels each Monday. Write D8 trend cards that pass all five D7 checks. Business accounts may use commercial-library sounds only.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No trend ideas, evergreen structures only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Permissions tap card: filming regulars, filming the new site before opening, prices and drink names on screen, opted-in contact base",
+   "why_it_matters": "These are hard constraints that cannot be fetched. They decide whether regulars can appear (the strongest warm-base proof), whether pre-opening build-up footage at the new site is allowed, and whether a WhatsApp broadcast lever exists. Highest value per owner minute.",
+   "how": "«Ответьте цифрами, до 10.10 12:00. 1) Постоянных гостей снимать: 1 — нет; 2 — да, только с их согласия на камеру. По умолчанию: 1. 2) Новую точку до открытия (ремонт, оборудование, первые пробные чашки) снимать: 1 — да; 2 — да, но без вывески и вида из окна; 3 — нет. По умолчанию: 2. 3) Названия напитков и цены в роликах: 1 — можно по меню (фото в п. ниже); 2 — нельзя. По умолчанию: 2. 4) Есть ли гости, которые сами согласились получать ваши сообщения (рассылка WhatsApp, карта лояльности)? 1 — нет; 2 — да, примерно сколько. По умолчанию: 1. 5) Бариста на первой точке может неделю спрашивать гостей «Вы живёте или работаете на Левом берегу?» и ставить палочку: 1 — да; 2 — нет. По умолчанию: 2.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "A5 defaults: no regulars on camera, new site filmed without signage or window views, no drink names or prices on screen, no broadcast (WhatsApp Status and in-store mention only), no till tally.",
+   "blocks_step": "publish: regulars' faces; 4_ideas: price/drink-name claims; 6_campaign: broadcast lever"
+  },
+  {
+   "input": "Account links and insights: Instagram handle, 2GIS link(s), which accounts exist (TikTok, YouTube, WhatsApp Business), plus Instagram insight screenshots",
+   "why_it_matters": "Unlocks the own-footprint fetch if the name search fails. Insights give the real reach baseline, sends and saves, and the audience-city share, which shows how much of the current audience is in Астана. A missing TikTok, YouTube or WhatsApp Business account becomes a setup task for week 0.",
+   "how": "«Пришлите ссылки на Instagram и 2ГИС (если найдём сами — этот пункт пропустим). Отметьте, что есть: TikTok / YouTube / WhatsApp Business / карточка новой точки в 2ГИС. И 3 скрина из Instagram: Профессиональная панель → Статистика → «Охваченные аккаунты» (30 дней), «Ваша аудитория» (города) и любой последний Reels → «Статистика». До 12.10.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Public counts only, flagged as reduced metrics. The audience-city share is unknown, so the warm-base size stays an assumption. Missing accounts are set up by the agent as drafts for the owner to approve.",
+   "blocks_step": "none (A6 realism re-fix on 2026-10-16 uses public counts if missing)"
+  },
+  {
+   "input": "Money map: menu photo with prices, location 1 POS daily checks (last 4 weeks), new-location capacity, lines to push",
+   "why_it_matters": "Turns the business objective into a number (≥50% of location 1's average daily checks). Gives dated menu and price facts (usable for 7 days or less) so the copy can say anything concrete. Sets new-site throughput for the capacity guardrail (DR10) and tells us which line to push (morning take-away, breakfasts, a working spot). The average check feeds the boost cap.",
+   "how": "«Пришлите до 12.10: 1) фото меню с ценами (и будет ли на новой точке такое же: да/нет); 2) скрин из кассы: сколько чеков в день и средний чек на первой точке за последние 4 недели; 3) сколько гостей в час новая точка спокойно обслужит в первые 2 недели и сколько там мест; 4) что хотите продвигать на Левом берегу: 1 — кофе с собой утром, 2 — завтраки/обеды, 3 — место поработать/посидеть, 4 — другое. По умолчанию: 1. Цифры остаются внутри, в роликах их не будет.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "No prices or drink names beyond what 2GIS shows with a fetch date. The business objective stays a ratio with no absolute target. Capacity is unknown, so the CTA spreads first visits over 14 days and copy never says «быстро» or «без очереди». Push line defaults to morning take-away (labelled an assumption).",
+   "blocks_step": "4_ideas: price/menu claims and budget_ladder/guess engines; 6_campaign: DR10 capacity number and boost cap"
+  },
+  {
+   "input": "Customer chat/DM sample: WhatsApp export (15–30 chats, no media) or 10 Instagram DM screenshots",
+   "why_it_matters": "Shows real questions and words («а есть безлактозное?», «можно с ноутбуком?», «когда на Левом?») and the median reply time, which is a guardrail before codes go live. JUDGMENT: a walk-in coffee shop gets fewer chats than the method assumes, so this ranks below the money map. An answer of «почти не пишут» is still useful, because it tells us the code channel has to be set up from scratch.",
+   "how": "«Если гости пишут вам в WhatsApp: откройте чат с гостем → ⋮ (или имя контакта) → «Экспорт чата» → «Без медиафайлов», 15–30 последних чатов. Если пишут в основном в директ — 10 скринов последних вопросов гостей. Если почти не пишут — просто ответьте «нет». Имена и номера удаляем сразу, наружу ничего не попадает. До 12.10.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Reviews, peer comments and the barista weekly voice note. Frequencies become `likely`, and the reply time becomes an assumption that is measured from the first coded chats.",
+   "blocks_step": "none (wa_question engine waits for a counted Q cluster)"
+  },
+  {
+   "input": "Optional owner voice note (≤3 min): why Левый берег, what stays the same and what changes, what regulars already ask, what must not be shown",
+   "why_it_matters": "The launch's own story is not online anywhere: why there, the same baristas or new ones, the same coffee or new items. It feeds the hero series and backstage/character ideas, and it sets boundaries (unfinished interior, landlord, signage). Owner statements stay `likely` and are usable only as «мы делаем X», never as superiority.",
+   "how": "«По желанию, голосовое до 3 минут, до 13.10: 1) Почему именно Левый берег и что там будет так же, а что по-другому? 2) Что постоянные гости уже спрашивают про вторую точку? 3) Что нельзя показывать? Можно пропустить.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Skip it. No story-engine claims about the founding or the new location. Pre-opening content is limited to what the camera shows (build-up, baristas, process).",
+   "blocks_step": "4_ideas: story/real_case claims about why or what is new at location 2"
+  },
+  {
+   "input": "Staff reality scan at both sites: location 1 (a line spoken at 30 cm, grinder or steam-wand sound at 20–30 cm, the room) plus a 2-minute silent walkthrough of the new site",
+   "why_it_matters": "Gives location names for the shoot card (e.g. «бар», «окно», «новая точка»), the real audio distance with machine noise, light, and whether the new site is filmable now. Close-sound coffee ideas and the build-up series depend on this.",
+   "how": "Staff, about 12 minutes once, by 13.10: «Снимите на первой точке 3 коротких видео по 10 секунд, вертикально: 1) скажите любую фразу, телефон в 30 см от рта; 2) кофемолка или пар для молока, телефон в 20–30 см; 3) зал целиком. На новой точке — медленно пройдите с телефоном 2 минуты без слов, без вывески и вида из окна. Отправьте как файлы.» Staff minutes count toward the week-0 budget; no posts that week.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Worst case: speech only with the phone at the mouth in a quiet corner, no wide shots, machine sound only at 20 cm with the machine off for talk shots. Pre-opening content comes from location 1 only.",
+   "blocks_step": "4_ideas: producibility and location names (ideas still drafted with worst-case defaults)"
+  },
+  {
+   "input": "Proof folder: about 20 real photos and videos from staff phones (latte art, the bar in action, the new site's build progress)",
+   "why_it_matters": "Gives zero-staff-minute ideas (re-cuts, build-up carousels) and the first proof assets. It also shows filmable realities: rituals, odd orders, sounds.",
+   "how": "Staff, about 3 minutes: «Скиньте до 13.10 до 20 своих фото и видео с работы — кофе, бар, новая точка на ремонте. Отправляйте как файл, не как фото. Гости в кадре — не страшно, их лица мы замажем.» Faces of guests without consent are always blurred and never published.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Staff film proof footage in the week-1 session. Zero-minute ideas drop to re-cuts of past posts only.",
+   "blocks_step": "4_ideas: zero-staff-minute ideas"
+  },
+  {
+   "input": "Barista on-camera consent (each barista who will show their face)",
+   "why_it_matters": "The profile says the baristas are willing, but the face constraint requires consent recorded on camera, per person, before their first face shot is published. Barista character and job_reality-style ideas depend on it.",
+   "how": "Staff, about 1 minute per barista, at the start of the first shoot: «Телефон в 30 см: “Я, [имя], согласен(на), чтобы меня снимали для соцсетей кофейни”. Это видео никуда не выкладываем, храним внутри.» Anyone can say no; no one dances or acts unless they volunteer.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hands and voice only for that barista. Ideas with faces are held, not dropped.",
+   "blocks_step": "publish: barista faces"
+  },
+  {
+   "input": "Weekly barista voice note: «3 вопроса гостей за неделю (особенно про новую точку) + 1 случай»",
+   "why_it_matters": "For a walk-in shop, the counter is where customer language lives. This is the cheapest fresh source of Q, B and M clusters and of real moments for reply or real_case ideas. It also partly replaces a thin chat export.",
+   "how": "Staff, 1 minute a week, every Monday: «Голосовое 30 секунд: какие 3 вопроса гости задавали за неделю (особенно про вторую точку) и один случай, когда гость удивился или засмеялся. Имена не нужны.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Comments and reviews only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Opening-week at-till tally «Откуда узнали?» at location 2 (days 1–14)",
+   "why_it_matters": "Gives offline attribution for the business metric. Codes undercount walk-ins, so the tally separates video, regulars, passers-by and 2GIS. Also counts sign-up codes mentioned at the till, to estimate the opt-in-to-visit rate.",
+   "how": "Staff, 1 tap per guest, opening days 1–14 only, if the owner agrees (customer contact): a paper or phone tally sheet the agent supplies, with options «видео / первая точка / шли мимо / 2ГИС / другое» plus «назвал код». The owner is asked for one tap in the week before opening, not now.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "POS checks compared with the ratio target only, labelled directional. The opt-in-to-visit rate stays an assumption.",
+   "blocks_step": "6_campaign: offline attribution in measurement"
+  }
+ ]
+}

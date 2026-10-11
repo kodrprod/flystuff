@@ -1,0 +1,236 @@
+{
+ "have": [
+  {
+   "input": "Site crawl muzzone.kz (2026-10-08/09): ledger facts",
+   "what_it_gives": "55 usable ledger facts, each with a URL and fetch date. Contacts: wa, phone_city, phone_mobile, address (ул. Кажымукана, 14, НП-6), hours (пн–пт 10–19, сб 10–17). Policies, valid ≤90 days: returns_14d plus returns_conditions and returns_cost (delivery is withheld both ways, +3% on cash on delivery), warranty (12 months minimum), warranty_casio (2 years, service in Almaty only), delivery_free_100k, delivery_astana (free courier only above 20 kg AND above 15 000 ₸), pickup_reserve (3 working days), payments (Kaspi QR/Pay/перевод, Visa/MC, Apple Pay, cash). Dated prices, valid ≤7 days, re-fetched before publishing: as100 59 800 ₸, u246 22 100 ₸, usc40 32 901 ₸, uf330 64 501 ₸, hib 56 576 ₸ (was 70 720), mapex 283 296 ₸ (was 354 120), PX-770 521 935 ₸ (3 pcs, 2026-10-09), AP-270 734 886 ₸ (5 pcs, 2026-10-09). Specs for all 8 SKUs. 5 facts are blocked as do_not_use: px770_price, px770_instock, ap270_price, ap270_instock, diff_pno. Hygiene flags, never repeated in video copy: «100% оригинальный товар» (absolute claim with no third-party source) and the offer of delivery compensation in exchange for a review or video (an incentivised review). The site gives no end date and no reason for «Финальная распродажа»."
+  },
+  {
+   "input": "catalog_listings.json (6 site listing pages, fetched 2026-10-08)",
+   "what_it_gives": "Catalogue depth by listing. The sale list (/rasprodazha.html) has 535 items, and the sampled items carry 20–30% discounts (e.g. Gretsch Electromatic Jet 472 680 → 378 144 ₸; Blackstar HTV-212 257 400 → 180 180 ₸). This is listing data only: prices must be re-fetched from the product page before any use."
+  },
+  {
+   "input": "stock_sample.json (135 product pages re-fetched 2026-10-08)",
+   "what_it_gives": "Availability and stock_qty for each page, e.g. Zildjian 19\" K Sweet Crash 1 pc, Hercules MS434B 51 pcs. Many sale items have 1–2 pcs, so scarcity claims are banned and stock must be re-checked within 48 h of publishing. Expires for stock use on 2026-10-10."
+  },
+  {
+   "input": "products_batch001.json (12 product records)",
+   "what_it_gives": "Full spec tables and availability for 12 SKUs, e.g. Cort X100 OPBK 98 280 ₸, OutOfStock. Useful for spec-true captions and for avoiding out-of-stock items."
+  },
+  {
+   "input": "youtube_channel.json (own YouTube, fetched 2026-10-08)",
+   "what_it_gives": "379 videos, 3 620 subscribers, median 2 300 views, best 64 000 (beginner electric-guitar demo), last upload 2026-05-10. The 8 newest videos have null view counts. Content mix: sound demos, guitar comparisons (e.g. 3 Fender Strats), artist interviews (median 118, n=4), Enya Cyber-G lessons (234–276 views), cymbal/drum brand demos (median 390, n=48; L006). It is also a library of the store's own footage for zero-staff-minute re-cuts, though mostly horizontal long-form. No per-post comments were extracted."
+  },
+  {
+   "input": "peer_channels_meta.json (13 YouTube channels)",
+   "what_it_gives": "Channel-level medians only: 6 retail (Мир Музыки 2 500, Ловец Нот 762, JAM 1 900, MAJOR-MUSIC 23 500, Рок-н-Ролл 1 100, Гитарная лавка 4 000; median ≈2 200), 4 review (1 200–5 800) and 3 lessons channels (4 400–8 950). None is from Kazakhstan, and all are long-form YouTube. There are no per-post outliers, no mechanisms, no comments and no TikTok or Reels data, so this cannot be used for engine priors yet."
+  },
+  {
+   "input": "Knowledge base learnings L001–L006",
+   "what_it_gives": "L001/L003: text judgment barely predicts Shorts (ρ 0.11; 0.07 in retail), so rubric scores are priors only, and long-form title tricks did not replicate. L002/L004: beginner framing, comparisons and plain model-name titles worked on long-form or search, so keep them as an optional YouTube search line. L005: no price slides. L006: demos need a buyer question. There are no pooled driver or format posteriors for this vertical yet, and the graveyard is empty."
+  },
+  {
+   "input": "Intake brief (step 1)",
+   "what_it_gives": "Objective: coded WhatsApp chats from new first-instrument buyers (beginner guitars, ukuleles, digital pianos), 2026-10-19 → 2026-11-15, target 8/20/35, baseline from the week-0 count. Clarifying questions Q1 (why «Финальная»), Q2 (lines to push) and Q3 (who may be filmed) are already drafted and are merged into the owner asks below rather than asked twice."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Own footprint completion: YouTube per-post data and comments, VK/Facebook, TikTok account search",
+   "why_it_matters": "Gives real customer questions (Q/F/B codes) for free, which matters while there is no chat export yet. Also yields a per-post outlier list (≥3× median) with the mechanism of each, and whether a Muzzone TikTok already exists. If it does, the owner ask shrinks to granting access, and its last 15 posts become the baseline.",
+   "how": "Agent: (1) re-fetch view counts for the 8 newest YouTube videos; split Shorts (≤60 s) from long-form, compute views ÷ median per format, list ≥3× outliers with engine, first-frame type, length and faces. (2) Pull comments from the top 20 videos by views (start with the 64k beginner-guitar demo), strip names to cust_###, code with C2, count. (3) Fetch public VK muzzoneastana and FB muzzonemusicshop posts + comments. (4) Search TikTok for muzzone / muzzone_astana / muzzone.kz handles. Instagram muzzone_astana blocks anonymous fetch: log it, don't bypass; covered by the owner screenshot ask.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Rely on L002/L006 and peer comments. Customer-language frequencies are labelled `likely`.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Reviews: 2GIS, Google Maps, Yandex Maps, Kaspi shop reviews",
+   "why_it_matters": "Verbatim fears, delights and complaints with counts and dates. These are the second independent source type that makes insights convergent, they are quotable publicly («из отзыва в 2ГИС»), and they reveal any recurring complaint (X code) that has to be fixed before more content.",
+   "how": "Agent: find the 2GIS card for «Muzzone, Кажымукана 14», plus the Google and Yandex cards and the Kaspi merchant page. Extract rating, review count and every review text with its date. Strip names and code with C2. If a page is blocked (403/429), log it, don't bypass, and ask for a screenshot only if step 3 stalls.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "YouTube and VK comments plus the chat export. No review-based proof content.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "First-instrument ledger re-fetch (beginner guitars incl. classical 1/2–3/4 sizes, acoustic, ukulele soprano/concert, digital pianos, starter accessories)",
+   "why_it_matters": "The chosen line now has only 6 usable price facts (as100, u246, usc40, uf330, PX-770, AP-270). budget_ladder, guess and who_is_it_for need at least 3 real in-stock price points per line, and the facts used must be ≤7 days old (stock ≤48 h).",
+   "how": "Agent: crawl the site categories for classical, acoustic and electric guitars, ukuleles, digital pianos and accessories (тюнер, чехол, струны, банкетка, наушники). For each in-stock SKU record price, old_price, stock_qty, specs, URL and fetch time. Pick 3–5 price points per line. Re-fetch every SKU used in a video ≤48 h before publishing. Never use the do_not_use piano facts.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Price-led ideas use only the 6 current first-instrument facts. Everything else is NEEDS FACT.",
+   "blocks_step": "4_ideas: price/stock claims beyond the 8 ledger SKUs"
+  },
+  {
+   "input": "Kaspi position for the same SKUs",
+   "why_it_matters": "A3 disguised-problem check. If Muzzone's price on Kaspi is far above other sellers of the same SKU, content will not convert, and that goes into push_back. It also shows whether Muzzone sells on Kaspi, which changes the CTA and attribution plan.",
+   "how": "Agent: search kaspi.kz for as100, u246, usc40, uf330, PX-770, AP-270 and 5 beginner SKUs from the re-fetch. Record the number of sellers, Muzzone's presence and position, and the price vs the median seller, dated. This is internal only and is never used for a «дешевле» claim.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Kaspi attribution is dropped. The non-marketing check is marked 'not done' in step 3.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Site service and policy pages: about, FAQ, services, installment wording, sale page text",
+   "why_it_matters": "Finds out whether the store offers setup services (настройка, замена струн, сборка пианино), whether customers can try instruments in the showroom, and the exact rassrochka wording. These facts enable why_it_costs, policy_story and backstage engines without asking the owner. Re-reading the sale page checks for any stated end date or reason.",
+   "how": "Agent: crawl the site menu and footer pages, product-page tabs and the /rasprodazha.html header. Store exact wording with URL and date. Flag hygiene errors such as typos, old claims, the review-compensation clause and «100% оригинальный»; never repeat them.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No service or showroom-try claims; ask in the permissions card instead.",
+   "blocks_step": "4_ideas: service/«попробовать в зале» claims"
+  },
+  {
+   "input": "Peer short-form outliers (TikTok, Reels, Shorts), Kazakhstan first",
+   "why_it_matters": "The current peer file is long-form YouTube channel medians with no Kazakh accounts and no mechanisms. Short-form mechanisms (engine, first frame, length, faces), comment questions and 3–5 category conventions are needed for D-step diversity and the pooled TikTok baseline for a cold-start account.",
+   "how": "Agent: find 10–20 music-instrument shops, teachers and repair accounts on TikTok, Instagram and Shorts, starting with Astana and Almaty, then RU-language CIS. Keep posts from the last 90 days at ≥3× the account's own median. Record mechanism only, plus comment questions and category conventions. Build the pooled retail TikTok median for leading indicators.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use the YouTube peer median (≈2 200) as an upper-bound reference and label the conventions as assumptions.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Demand phrases RU/KZ",
+   "why_it_matters": "Search suggestions supply the exact wording people use («какую гитару купить новичку», «пианино для ребёнка», «укулеле или гитара», «…Астана»), which becomes hooks and captions for the who_is_it_for, check_before_buy and wa_question engines, and Shorts titles for the search line (L004).",
+   "how": "Agent: collect TikTok, YouTube, Google and Yandex autocomplete for category × {купить, для начинающих, для ребёнка, сколько стоит, как выбрать, Астана} in RU and KZ (KZ phrases marked for native check).",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use YouTube comment wording only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Calendar and weather 2026-10-19 → 2026-11-15, plus pre-plan for the next sprint",
+   "why_it_matters": "Moments only enter the calendar 10–14 days ahead. Candidates: school autumn holidays (dates to verify), the first frost or snow in Astana (instrument delivery and acclimatisation in the cold is a hypothesis to verify with the store), 11.11 marketplace sales (only if the client takes part), and New Year gift content from about 2026-11-20.",
+   "how": "Agent: verify the 2026 KZ school holiday dates and the Astana weather forecast, check whether Muzzone participates in marketplace sale days (site/Kaspi banners), and build the moment list. Avoid political framing of state holidays.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No moment ideas in weeks 1–2.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Weekly trend scan (TikTok KZ, music niche)",
+   "why_it_matters": "Supplies at most 2 trend cards per batch, with structure trends preferred and licensing checked for a business account.",
+   "how": "Agent: each Monday, scan the TikTok KZ For You feed, music-niche hashtags and the commercial sound library. Write D8 trend cards with first-seen date and expiry.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No trend ideas. Use evergreen structures (POV, «что можно купить за…»).",
+   "blocks_step": "none"
+  },
+  {
+   "input": "WhatsApp chat export: 15–30 recent customer chats, no media",
+   "why_it_matters": "The most valuable input. It gives the real questions with counts, where chats die (after the price? after «подумаю»?), median first-reply time (the guardrail), close rate, comparisons («на Kaspi дешевле»), the 4-week inbound baseline, and which instruments beginners and parents ask about. It also unlocks «Нам пишут: …» hooks, which require at least 2 matching real messages.",
+   "how": "«Здравствуйте! Я — ИИ-ассистент, который будет готовить для Muzzone короткие видео (через Андрея и Павла). Самое полезное для старта: откройте в WhatsApp магазина (+7 701 098 77 34) чат с клиентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Пришлите 15–30 последних чатов с покупателями, лучше тех, кто спрашивал про первую гитару, укулеле или пианино. Имена и номера удаляем сразу, наружу ничего не попадает. Если чаты ведёт продавец, он может сделать это сам.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Use reviews, YouTube/VK comments and the staff voice note. Frequencies become `likely`, the baseline comes from the week-0 count, the close rate stays an assumption, and there are no «Нам пишут» chat-paraphrase hooks.",
+   "blocks_step": "4_ideas: «Нам пишут: …» chat-paraphrase hooks; measurement: 4-week baseline and close rate"
+  },
+  {
+   "input": "TikTok account: exists or not, and access",
+   "why_it_matters": "The request is about TikTok. Without an account and owner consent, nothing can be published there, and an existing account changes the baseline from cold start to its own last 15 posts.",
+   "how": "«Есть ли у магазина аккаунт в TikTok? 1 — есть (пришлите ссылку и, через Андрея, доступ), 2 — нет, создаём новый на почту магазина: от вас только код подтверждения из SMS, 1 минута, 3 — TikTok пока не нужен, начинаем с Reels и Shorts. По умолчанию: 2. Без вашего „да“ ничего не публикуем. Ответ до 12.10 12:00.» (The agent searches TikTok first. If it finds an account, the question becomes «Это ваш аккаунт? 1 — да, 2 — нет».)",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "Publish on Reels and YouTube Shorts only (Instagram and YouTube already exist). The TikTok cold start slips by a week.",
+   "blocks_step": "publish: TikTok"
+  },
+  {
+   "input": "Permissions tap card: sale reason, faces, prices, offers, trying instruments in store (merges intake Q1 + Q3)",
+   "why_it_matters": "Sets the hard constraints. If «Финальная распродажа» means a closure, the whole objective switches to a dated clearance push. Faces decide whether the character, talk and mastery-with-face engines are possible. Trying instruments in the showroom is the most natural non-price CTA.",
+   "how": "«Пять коротких вопросов, ответ цифрами: (1) Почему распродажа называется «Финальная»? 1 — магазин закрывается или переезжает, 2 — уходим от части брендов (каких?), 3 — просто название. По умолчанию: 3, слово «финальная» и сроки в роликах не используем. (2) Кого можно снимать? 1 — только руки, инструменты и голос, 2 — продавцов с лицом (с их согласия), 3 — и покупателей (с согласия; дети — только с письменного разрешения родителя). По умолчанию: 1. (3) Цены в роликах: 1 — можно, только с сайта, проверяем перед публикацией, 2 — нельзя. По умолчанию: 1. (4) Новые акции по коду из ролика: 1 — нет, 2 — обсудим. По умолчанию: 1. (5) Может ли покупатель прийти и попробовать инструмент в зале (сыграть, послушать)? 1 — да, любой, 2 — да, кроме некоторых, 3 — нет. По умолчанию: в роликах не обещаем. Ответ до 10.10 12:00.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "A5 defaults: hands, instruments and voice only; site prices re-checked; no offers; no «финальная» or deadlines; no «приходите попробовать» claim.",
+   "blocks_step": "publish: faces; 4_ideas: «попробовать в зале» CTA; 1_intake: objective switch if closure"
+  },
+  {
+   "input": "Money map: lines to push or avoid, floor stock that can be played (merges intake Q2)",
+   "why_it_matters": "Confirms the first-instrument fork, or redirects it to margin or stock the owner actually wants to move. It excludes brands being dropped, so we never drive chats to items that won't be restocked, and it tells us which instruments are physically on the floor to film. Prices are already on the site, so no price list is asked for.",
+   "how": "«(1) Что важнее продавать через ролики до 15 ноября? 1 — гитары и укулеле для начинающих, 2 — цифровые пианино, 3 — ударные и тарелки, 4 — товары из «Распродажи», 5 — неважно, главное — новые обращения. Можно два. По умолчанию: 1 и 2. (2) Что НЕ продвигать (нет поставок, уходит из ассортимента)? Одной строкой или «нет». (3) Какие инструменты стоят в зале и их можно включить или сыграть для съёмки? Можно ответить фото зала. Ответ до 12.10 12:00.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Push first instruments (intake default). Infer floor stock from the staff reality scan. Margins stay unknown, so no line is weighted by margin.",
+   "blocks_step": "6_campaign: line priorities (selection proceeds on the default)"
+  },
+  {
+   "input": "Account insights: Instagram muzzone_astana (blocked to the agent), optionally YouTube Studio",
+   "why_it_matters": "Gives the Reels baseline (median of the last 15 Reels), the audience city split (Astana vs other cities, which tests the geography assumption), and saves, shares and hold, which public counts don't show. Without it, the Instagram leading indicators are reduced.",
+   "how": "«Instagram muzzone_astana: откройте „Профессиональная панель“ → „Статистика“ → последние 30 дней и пришлите 3 скриншота: охват, аудитория (города) и список последних Reels с просмотрами. Или дайте доступ через Андрея (2 минуты один раз). По умолчанию: смотрим только публичные цифры.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Use public counts only; Instagram metrics flagged as reduced. Use the pooled retail median until 10 own posts exist.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Optional owner voice note (≤3 min)",
+   "why_it_matters": "Stories, myths and limits only the owner knows: who buys a first instrument here, what beginners or parents misunderstand most, what must never be shown. These stay `likely` until filmed, and they enable real_case, myth_check and anti_sell engines.",
+   "how": "«По желанию, голосовое до 3 минут: 1) один случай, когда покупатель первого инструмента ушёл очень довольным; 2) что новички или родители чаще всего понимают неправильно при выборе; 3) что в магазине нельзя показывать. Можно пропустить.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Skip. No story-engine claims; myths come only from comments and search phrases.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Staff reality scan (staff 10 min once, week 0)",
+   "why_it_matters": "A music store is a noisy room: other instruments, background music and customers testing gear. Real audio distance, a quiet spot, light, location names, and whether any seller can play 10 clean seconds (hands only) decide what is producible on one weak phone.",
+   "how": "«Здравствуйте! Я — ИИ-ассистент, готовлю для магазина короткие видео. Один раз, около 10 минут: 1) телефон в 20–30 см от струн — проведите по струнам гитары 5 секунд; 2) телефон в 20 см от клавиш — сыграйте 3 ноты на пианино; 3) телефон у лица в 30 см — скажите любую фразу; 4) 10 секунд тишины в зале, как он звучит обычно; 5) 2 минуты пройдите по залу без звука, вертикально. Напишите, как называете места (зал, гитары, пианино, касса, склад) и кто из вас может сыграть 10 секунд — в кадре только руки. Видео отправляйте как файл.» (Owner relays it; 0 owner minutes.)",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Assume the worst case: speech only with the phone at the mouth, instrument sound only at 20–30 cm, no wide shots, no playing shots until someone volunteers.",
+   "blocks_step": "4_ideas: producibility (location names, playing shots); week-1 shoot card"
+  },
+  {
+   "input": "WhatsApp labels + week-0 inbound count (staff ~2 min setup, then ~1 min/day)",
+   "why_it_matters": "The primary metric is coded chats from new contacts. Without the «Видео» and «Оплачен» labels and a count for 2026-10-12–18, there is no baseline and no way to count codes or sales.",
+   "how": "«В WhatsApp Business магазина создайте две метки: „Видео“ (человек написал код из ролика) и „Оплачен“. С 12 по 18 октября отмечайте каждый новый чат от покупателя меткой „Неделя 0“ — это нужно, чтобы понять, сколько обращений обычно. Кто отвечает в WhatsApp в рабочее время? Напишите одним сообщением.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Count codes from the weekly export only. The baseline becomes the week-1 codeless count, estimate only.",
+   "blocks_step": "measurement: baseline and coded-chat counting"
+  },
+  {
+   "input": "Proof folder: 20 existing photos and videos from the store phone (staff ~3 min)",
+   "why_it_matters": "Zero-staff-minute footage of real instruments in hands, sound, unboxing and handover, for ≥2 zero-minute ideas and proof inserts. Vertical phone footage is better than re-cutting the horizontal YouTube library.",
+   "how": "«Пришлите, пожалуйста, до 20 видео и фото из телефона магазина: инструмент в руках, звук крупно, упаковка, выдача покупки (без лиц покупателей). Отправлять как файлы, не как фото — так не теряется качество.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Re-cut the store's own YouTube videos (379, mostly horizontal) and film proof in week 1.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Weekly staff voice note: «3 вопроса покупателей за неделю + 1 случай» (staff 1 min/week from week 1)",
+   "why_it_matters": "Fresh customer language and moments every week for wa_question and reply engines, and a third independent source type for convergence.",
+   "how": "«Раз в неделю, голосовое на 30–60 секунд: какие 3 вопроса покупатели задавали чаще всего и один интересный случай. Имена не называйте.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use comments and chats only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Customer consent clips (from week 2, only if the owner allows option 3)",
+   "why_it_matters": "Unlocks real_case and before/after moments of a first-instrument handover, the strongest proof for beginner buyers.",
+   "how": "Staff trigger (week 2+): «Если покупатель сам обрадовался или заиграл — спросите: „Можно снять 10 секунд для нашего инстаграма?“ Снимайте, только если он ответил „да“ в камеру. Дети — только с письменного разрешения родителя.»",
+   "who": "customer",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hands-only handover shots, no customer faces or voices.",
+   "blocks_step": "publish: customer faces/voices"
+  },
+  {
+   "input": "Boost budget (deferred to week 2, ~1 owner min then; not in this batch)",
+   "why_it_matters": "Only after a post qualifies (DR2 + ≥1 coded chat). The cap comes from real numbers: CPQC_cap = avg_order × margin × close_rate × 0.3.",
+   "how": "Asked in the week-2 batch with real numbers: «Ролик „{название}“ набрал в {x} раза больше обычного и привёл {n} обращений. Продвинуть его в Астане? 1 — да, до {сумма} ₸, 2 — нет. По умолчанию: нет.»",
+   "who": "owner",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Organic only (budget 0 ₸).",
+   "blocks_step": "boost (F10 DR9)"
+  },
+  {
+   "input": "Offer approval (only if F4 later needs one; not in this batch)",
+   "why_it_matters": "Default is no offer. Existing site sale prices may be referenced exactly. A new non-price offer (e.g. help choosing by WhatsApp video) would need exact terms and the owner's «да».",
+   "how": "Only if needed in week 3: «Готовы по коду из ролика [точное предложение] до [дата]? 1 — да, 2 — нет. По умолчанию: без акций.»",
+   "who": "owner",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No offer.",
+   "blocks_step": "6_campaign: new offer"
+  }
+ ]
+}

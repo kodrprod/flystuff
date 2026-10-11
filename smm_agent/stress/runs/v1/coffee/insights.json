@@ -1,0 +1,377 @@
+{
+ "evidence": [
+  {
+   "id": "E01",
+   "kind": "fact",
+   "claim": "The client runs one specialty coffee shop in Астана (location 1). It is a single location today.",
+   "source": "assumption: client profile (HYPOTHETICAL; the profile note says every detail is an assumption and the ledger is empty)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E02",
+   "kind": "fact",
+   "claim": "The owner states that a second location opens on Левый берег «через 3 недели». The exact opening date and address are not confirmed.",
+   "source": "assumption: boss request verbatim 2026-10-09 «Через 3 недели открываем вторую точку на Левом берегу» + profile.known_unknowns; not in ledger",
+   "confidence": "likely"
+  },
+  {
+   "id": "E03",
+   "kind": "constraint",
+   "claim": "The ledger is empty (facts_usable = []). No price, menu item, opening date, address, offer or number may appear in audience copy until the owner confirms it in writing.",
+   "source": "assumption: observed directly in step input — facts_usable=[], facts_not_usable=[], known_unknowns = date/address, menu prices, opening offer",
+   "confidence": "verified"
+  },
+  {
+   "id": "E04",
+   "kind": "constraint",
+   "claim": "Nothing has been ingested yet: no WhatsApp chats, 2GIS reviews, own-post history, peer outliers or demand phrases (files = []). This client has zero verbatim customer language, so every customer-side theme below is a hypothesis.",
+   "source": "assumption: observed directly in step input — files=[]; Tier-0 fetches not yet run",
+   "confidence": "verified"
+  },
+  {
+   "id": "E05",
+   "kind": "behaviour",
+   "claim": "Location 1 has «loyal regulars» (profile wording). How many there are, how often they visit and where they live or work are unknown.",
+   "source": "assumption: client profile what_they_sell «loyal regulars»",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E06",
+   "kind": "constraint",
+   "claim": "Baristas aged 20–25 are willing to be filmed (profile). No on-camera consent has been recorded yet, so faces need consent before the first face shot.",
+   "source": "assumption: client profile «baristas 20-25 willing to be filmed»; intake FILMING constraint",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E07",
+   "kind": "constraint",
+   "claim": "Staff have 20 minutes a week, one phone, and audio that is good only close to the phone. Planned load is ≤17 min/week, with sound and speech within about 30 cm.",
+   "source": "assumption: client profile staff_capacity {minutes_per_week:20, device:one phone, audio:good only close}",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E08",
+   "kind": "constraint",
+   "claim": "Staff are also busy setting up location 2, so all filming fits into one session a week at location 1 or the new site.",
+   "source": "assumption: intake brief STAFF constraint",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E09",
+   "kind": "fact",
+   "claim": "The listed sales channels are walk-in and 2GIS only. No WhatsApp Business number, Kaspi, TikTok or YouTube is listed, so the code destination (WhatsApp vs Instagram DM) waits on intake Q3.",
+   "source": "assumption: client profile sales_channels [walk-in, 2GIS]; intake ACCOUNTS + clarifying question 3",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E10",
+   "kind": "performance",
+   "claim": "Instagram has ~2.1k followers (assumed, unverified). The Reels median over the last 15 posts is unknown; the intake planning range is 300–1,000 views. No own outliers have been identified.",
+   "source": "assumption: client profile social.instagram «~2.1k followers (assumed)»; intake REALISM line",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E11",
+   "kind": "moment",
+   "claim": "Opening day is assumed to be 2026-10-30, which is D−21 from today. The build-up window runs D−21 to D, with reach first, consideration from D−14 and conversion in the last 10 days.",
+   "source": "assumption: intake [ASSUMPTION] opening date 2026-10-30; verify via Q1 by 2026-10-10 12:00",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E12",
+   "kind": "moment",
+   "claim": "Late October to November in Астана brings cold mornings and possibly the first snow, which is a cue for a warm drink on the morning commute.",
+   "source": "assumption: intake weather assumption; forecast to be checked at shoot-card time",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E13",
+   "kind": "behaviour",
+   "claim": "Hypothesis: people near the new address already have a morning coffee habit (another café, an office machine, home). Switching risks a bad cup and lost minutes before work (JTBD habit and anxiety forces). 0 observations.",
+   "source": "assumption: intake BOTTLENECK line «зачем менять свою привычную кофейню»; no chats or reviews ingested",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E14",
+   "kind": "behaviour",
+   "claim": "Hypothesis: some location-1 regulars live or work on Левый берег, and location 1 is not on Левый берег.",
+   "source": "assumption: intake [ASSUMPTION]; verify by a one-week barista tally at location 1 by 2026-10-14",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E15",
+   "kind": "behaviour",
+   "claim": "Hypothesised recurring question after any «скоро на Левом берегу» post: [Q] «А где именно? Когда открываетесь?» Wording is predicted, not verbatim; 0/0 observed.",
+   "source": "assumption: predicted from E02/E03 (date and address withheld); to be replaced by real comment and DM counts in week 1",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E16",
+   "kind": "behaviour",
+   "claim": "Hypothesised regular's fear about a second location: [F] «а там будет так же?», plus «не уйдут ли наши бариста». Loyalty is assumed to attach to people and process. 0 observed.",
+   "source": "assumption: inferred from E05 (loyal regulars) + E06; verify via staff voice note «что спрашивают постоянные про новую точку»",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E17",
+   "kind": "market",
+   "claim": "Assumed category convention (peer scan not run): specialty coffee accounts post latte-art pours over trending music on a styled background, so the bar's real sound is buried.",
+   "source": "assumption: strategist category knowledge; replace with B2 peer-outlier scan of 10–20 Астана/CIS coffee accounts",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E18",
+   "kind": "market",
+   "claim": "Assumed category convention (peer scan not run): pre-opening posts are «скоро открытие» posters, countdown graphics or a covered-shopfront photo. Peers rarely show the inside during fit-out.",
+   "source": "assumption: strategist category knowledge; verify in peer scan",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E19",
+   "kind": "market",
+   "claim": "Assumed category convention (peer scan not run): cup-in-hand shots against a cityscape or interior. Baristas appear as hands, rarely as named recurring people.",
+   "source": "assumption: strategist category knowledge; verify in peer scan",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E20",
+   "kind": "proof_asset",
+   "claim": "Reality inventory, not yet scanned: the espresso bar at location 1. The grinder, tamping, knock box and steam wand are audible at 20–30 cm. Location name: «бар».",
+   "source": "assumption: standard equipment of a specialty espresso bar; confirm with staff reality scan (B3 rank 7)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E21",
+   "kind": "proof_asset",
+   "claim": "Reality inventory, not yet scanned: the new site during fit-out, with an empty room, equipment arriving and being unwrapped, and a first test shot on the new machine. Location name: «новая точка». Light and noise are unknown.",
+   "source": "assumption: intake [ASSUMPTION] new site filmable now; verify via staff reality scan",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E22",
+   "kind": "proof_asset",
+   "claim": "Morning dial-in (tasting and adjusting espresso before opening) is a common specialty ritual. Whether this shop does it daily, and who will do it at location 2, is unconfirmed.",
+   "source": "assumption: specialty-coffee category practice; NEEDS owner/staff confirmation before any «каждое утро» claim",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E23",
+   "kind": "market",
+   "claim": "Левый берег is Астана's administrative and business district with dense office buildings, which suggests a morning and lunch office catchment. The actual catchment depends on the unconfirmed address.",
+   "source": "assumption: general city knowledge, not fetched; refine once the address is confirmed (2GIS map of the radius)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E24",
+   "kind": "market",
+   "claim": "Hypothesised belief among non-specialty drinkers: [B] «спешелти — это пафосно, долго и дорого». No source; peer comments not mined.",
+   "source": "assumption: strategist category knowledge; verify by mining peer comment sections in the B2 scan",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E25",
+   "kind": "constraint",
+   "claim": "Capacity at the new location is unknown. No «очередь», «мест мало», «успейте» or «только в день открытия». The CTA spreads first visits over 14 days.",
+   "source": "assumption: intake CAPACITY constraint (default)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E26",
+   "kind": "constraint",
+   "claim": "No 2GIS card for location 2 is known to exist, and local search demand («кофейня Левый берег», «кофе рядом») has not been fetched, so the new location is currently unfindable by search.",
+   "source": "assumption: intake ACCOUNTS line + B2 demand-phrase fetch not yet run",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E27",
+   "kind": "market",
+   "claim": "Cross-client learning L001: a blind text judge ranks Shorts performance barely above chance (Spearman 0.11 overall, 0.07 retail, CI includes 0; n=1172 peer Shorts). Every insight and idea score here is a prior only.",
+   "source": "assumption: knowledge-base learning L001 (strength: measured, dated 2026-10-08) as passed in step input; underlying experiment file not provided to this step",
+   "confidence": "likely"
+  },
+  {
+   "id": "E28",
+   "kind": "market",
+   "claim": "Cross-client learning L006: brand-only product demo clips had a median of 390 views vs a 2300 channel median (n=48). Scope caveat: correlational, a music-retail YouTube channel with mixed lengths. Pure espresso or pour demos should be tied to a viewer question or a human angle.",
+   "source": "assumption: knowledge-base learning L006 (strength: measured (correlational), other client and vertical, dated 2026-10-08) as passed in step input; research file not provided to this step",
+   "confidence": "likely"
+  },
+  {
+   "id": "E29",
+   "kind": "constraint",
+   "claim": "Cross-client learning L005: polished motion-graphic price slides were judged useless. No menu or price slide for the opening, even after prices are confirmed.",
+   "source": "assumption: learnings L005 (owner feedback 2026-10-08, expert judgment; no file)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E30",
+   "kind": "market",
+   "claim": "Cross-client learning L003: long-form title patterns (для начинающих, vs) did not replicate on Shorts (median relative views 1.00 and 0.99). No hook formula is assumed to transfer.",
+   "source": "assumption: knowledge-base learning L003 (strength: measured, dated 2026-10-08) as passed in step input; underlying experiment file not provided to this step",
+   "confidence": "likely"
+  },
+  {
+   "id": "E31",
+   "kind": "constraint",
+   "claim": "Languages are ru and kk. Russian on screen; Kazakh captions only after a native speaker checks them.",
+   "source": "assumption: client profile languages [ru, kk] + method L9",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E32",
+   "kind": "constraint",
+   "claim": "The owner's word «ажиотаж» (1/1 request) is read as sustained first-month visits. A one-day crowd is SECONDARY (≤20% of slots) because new-location capacity is unknown.",
+   "source": "assumption: boss request verbatim + intake LADDER and SECONDARY lines",
+   "confidence": "likely"
+  }
+ ],
+ "insights": [
+  {
+   "id": "I01",
+   "insight": "[tension] When a new coffee spot appears on their morning route on Левый берег, a person who already has a coffee habit wants a better cup closer to work. But an unknown place risks a bad cup and lost minutes before the workday, so they stay with their usual café or the office machine. We can show the real people and the real bar process that location 1's regulars keep coming back for, so the new spot stops being unknown. This moves coded sign-ups because the code is the only way to get the date and address.",
+   "tension": "Wants a better morning coffee nearby vs habit plus the fear of wasting a rushed morning on an unknown place.",
+   "evidence_ids": [
+    "E13",
+    "E05",
+    "E06",
+    "E20",
+    "E23",
+    "E04"
+   ],
+   "who_feels_it": "Someone whose daily walk or drive to an office or home on Левый берег passes the new address and who already buys coffee somewhere else before work.",
+   "content_reality": "Barista hands, plus faces only after consent is recorded on camera, working the espresso machine and milk at «бар» (location 1), and later at «новая точка». HYPOTHESIS: every business-specific item is an assumption, so strength is capped at 2 and C4 test 1 (evidenced) is not yet met. NEEDS FACT before any claim: whether the same baristas or beans will work at location 2. Until confirmed, use recognition content only («знакомо?»), with no «те же бариста» or quality claim.",
+   "strength": 2
+  },
+  {
+   "id": "I02",
+   "insight": "[friction] When someone sees «скоро на Левом берегу», they want to try it once it opens. But there is no date, no address and no 2GIS card to save, so the intent evaporates long before opening day. We can openly show the friction («дату пока не называем — напишите код, сообщим первыми лично») and then actually reply fast. This is the direct conversion step to the primary metric (coded sign-ups) and builds the opted-in list for opening-day broadcast.",
+   "tension": "Wants to remember and come vs having nothing concrete to remember it by (no date, address or map pin).",
+   "evidence_ids": [
+    "E02",
+    "E03",
+    "E15",
+    "E26",
+    "E09",
+    "E25"
+   ],
+   "who_feels_it": "Viewers in the new catchment who are mildly curious but will not follow an account for three weeks to catch the announcement.",
+   "content_reality": "The closed or empty «новая точка» seen from inside, plus a screen-mode anonymised reply card showing what a person gets after sending the code (no real chat screenshot). This is a process promise, not a product claim, so it is truthful only if someone answers coded messages within 15 min in working hours (guardrail). The destination depends on intake Q3 (WhatsApp vs Instagram DM). HYPOTHESIS, strength capped at 2.",
+   "strength": 2
+  },
+  {
+   "id": "I03",
+   "insight": "[moment] When a covered shopfront on their daily route is being fitted out, neighbours want to know «что тут будет?». But hoardings and «скоро открытие» posters say nothing, so they guess and walk on. We can show the inside of the new site week by week (empty room, machine unwrapped, first test shot), which is the opposite of the countdown-poster convention. Each episode ends with the code for the date, so curiosity converts into sign-ups during D−21 to D.",
+   "tension": "Curiosity about a closed space they pass every day vs nothing visible from the street.",
+   "evidence_ids": [
+    "E21",
+    "E18",
+    "E11",
+    "E23",
+    "E03"
+   ],
+   "who_feels_it": "People who walk or drive past the new address daily during the three weeks before opening.",
+   "content_reality": "«новая точка» during fit-out: boxes opened by hand, machine switched on for the first time, first test shot poured close to the phone. Light and noise are unknown until the reality scan. No dates, countdown or address on screen until the owner confirms them in writing. HYPOTHESIS: E21 is assumed and the site must be filmable. Strength capped at 2. Series-able (one episode per week of fit-out).",
+   "strength": 2
+  },
+  {
+   "id": "I04",
+   "insight": "[proof] When a location-1 regular hears about a second location, they want their coffee closer to where they live or work. But they fear «там будет так же?» and that their own bar will lose its people, so they wait and see instead of trying it early. We can show the same morning ritual (dial-in tasting) at «бар» and then the first dial-in at «новая точка». This turns warm-base regulars on Левый берег into early sign-ups and repeat visitors, the cheapest lever in the REALISM math.",
+   "tension": "Wants the familiar coffee closer vs fear that the copy will not match the original and that their own bar changes.",
+   "evidence_ids": [
+    "E05",
+    "E14",
+    "E16",
+    "E22",
+    "E06"
+   ],
+   "who_feels_it": "Existing regulars of location 1 who live or work on Левый берег and currently cross the city for their usual cup.",
+   "content_reality": "Dial-in ritual at «бар»: shot pulled, tasted, grinder adjusted, filmed at 30 cm. The same ritual later at «новая точка». NO PROOF YET: the ritual and the location-2 staffing are unconfirmed (E22), so until the owner confirms, this is recognition content only («как мы настраиваем кофе утром») with no «так же, как на первой точке» claim. HYPOTHESIS, strength capped at 2.",
+   "strength": 2
+  },
+  {
+   "id": "I05",
+   "insight": "[identity] When choosing a regular coffee spot, people want to be a known face («мой бариста знает мой заказ»). But at a new place everyone is a stranger, so they default to where they are already known. We can introduce the baristas as a recurring cast (who they are, what they drink themselves, who will stand behind the new bar) so that the new catchment meets the people before the place. This builds the pull that brings first visits and later repeats.",
+   "tension": "Wants a place where they are recognised vs a new spot where they know nobody.",
+   "evidence_ids": [
+    "E05",
+    "E06",
+    "E16",
+    "E19"
+   ],
+   "who_feels_it": "Morning regulars-to-be who value routine and small talk, plus location-1 regulars who follow their favourite barista.",
+   "content_reality": "Barista close-talk with the phone at 30 cm in a quiet spot at «бар» (faces only after consent is recorded on camera), and hands making their own drink. Which barista moves to location 2 is a NEEDS FACT (owner). Loyalty-to-people is a hypothesis (E16, 0 observed). Recognition and character content only. Strength capped at 2.",
+   "strength": 2
+  },
+  {
+   "id": "I06",
+   "insight": "[content_reality] The bar's raw sounds (grinder burst, tamp, knock box, steam-wand hiss rising as milk heats) are heard up close only by the person standing at the counter, and category posts usually bury them under music. We can record them at 20–30 cm, which is the weak phone's one strength. To avoid the pure-demo underperformance seen in L006, the sound is tied to a viewer question (guess the sound, the stage, the drink). Effect on the objective: reach and recall in the new catchment, with a code end-card.",
+   "tension": "Outsider curiosity gap: «снаружи этого никто не слышит» vs the music-over-latte-art convention.",
+   "evidence_ids": [
+    "E20",
+    "E07",
+    "E17",
+    "E28"
+   ],
+   "who_feels_it": "Anyone scrolling in Астана, especially coffee drinkers who never stand close to the machine.",
+   "content_reality": "«бар» at location 1: grinder, tamp, knock box and steam wand recorded with the phone resting 20–30 cm away, no talking. Later the first steam-wand hiss at «новая точка». Contains no claims. Strength 2 (type cap 3, lowered because all evidence is assumption and the reality scan has not been done).",
+   "strength": 2
+  },
+  {
+   "id": "I07",
+   "insight": "[myth] When non-specialty drinkers walk past a specialty café, they may want something better than a chain or a vending machine. But they may believe «спешелти — это пафосно, долго и дорого», so they never step in. We can show the process plainly and without price: what the barista actually checks and why the drink takes the time it does, framed as the barista's opinion. This lowers the consideration barrier behind awareness in a catchment where the brand is unknown.",
+   "tension": "Curious about better coffee vs a belief that the place is pretentious, slow or not for them.",
+   "evidence_ids": [
+    "E24",
+    "E13",
+    "E03",
+    "E29",
+    "E20"
+   ],
+   "who_feels_it": "Office workers near the new address who drink instant, chain or machine coffee and feel out of place in a «modern» café.",
+   "content_reality": "Barista hands and a close voice-over at «бар» walking through one drink. NO PROOF and NO PRICE: the belief itself is unsourced (E24), and price or «недорого» claims are banned until there is a dated menu (E03). Explanation and recognition only, framed as «бариста считает». No speed claims. HYPOTHESIS, strength capped at 2.",
+   "strength": 2
+  },
+  {
+   "id": "I08",
+   "insight": "[identity] WILDCARD. When a location-1 regular commutes across the river for their usual coffee, they want it without the trip. But their favourite place is «на том берегу», so they either make the trip or settle. A benign «левый берег / правый берег» commute in-joke (about the trip and the weather, never about people) can give Левый берег viewers a local reason to share. The payoff, «теперь и на этом берегу», points to the code for the date.",
+   "tension": "Loyalty to a place vs the daily friction of getting there from the other bank.",
+   "evidence_ids": [
+    "E14",
+    "E23",
+    "E01",
+    "E12"
+   ],
+   "who_feels_it": "People who live on one bank and work on the other, especially location-1 regulars based on Левый берег.",
+   "content_reality": "Real footage only: a cup carried out of «бар», a window view, labelled POV text. No identifiable passers-by. Location 1 being off Левый берег is itself an assumption (E14). Risk: the joke must stay benign under the AVOID constraint. Thin, assumption-only evidence, so strength 1. Kept as a high-distinctiveness wildcard.",
+   "strength": 1
+  },
+  {
+   "id": "I09",
+   "insight": "[moment] When the first cold mornings hit Астана, commuters want something warm in hand on the way to work, but the usual stop is out of the way, so they skip it or grab whatever is closest. A real weather cue (steam from a cup at the door of the new site) ties the new location to the commute moment. Effect on the objective: a recall cue near opening week. Low distinctiveness, because peers post «согрейся» content.",
+   "tension": "Wants warmth on the cold walk to work vs no convenient stop on the route yet.",
+   "evidence_ids": [
+    "E12",
+    "E11",
+    "E23",
+    "E25"
+   ],
+   "who_feels_it": "Morning walkers and bus commuters around the new address on cold or snowy days.",
+   "content_reality": "Steam rising from a cup held at the door of «новая точка» or «бар» on a genuinely cold morning, filmed when it happens (if-then trigger). No health or «согреет» claims, no date. Weather is an assumption to check against the forecast. Strength 1 (generic moment, assumption-only).",
+   "strength": 1
+  },
+  {
+   "id": "I10",
+   "insight": "[identity] WILDCARD. When a new place opens in their neighbourhood, people want it to feel like theirs, but a brand that arrives fully formed feels like outsiders moving in, so locals stay indifferent. If the owner lets the Левый берег audience decide one real detail (a drink name, what is written on the window, the opening playlist), carries it out and shows it, the vote gives viewers a stake before opening, and voters become sign-ups.",
+   "tension": "Wants a neighbourhood place of their own vs a new business that ignores them.",
+   "evidence_ids": [
+    "E02",
+    "E18",
+    "E32",
+    "E03"
+   ],
+   "who_feels_it": "Residents and office workers near the new address who comment on local happenings.",
+   "content_reality": "Window or chalkboard at «новая точка» showing the winning choice by hand, filmed close. NEEDS FACT (owner): which detail the audience may genuinely decide. Without it the idea cannot run, because asking and not following through breaks the participation rule. No evidence of demand, so strength 1. A high-variance exploration bet.",
+   "strength": 1
+  }
+ ]
+}

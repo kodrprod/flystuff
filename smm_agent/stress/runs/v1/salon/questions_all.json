@@ -1,0 +1,162 @@
+[
+ {
+  "from": "intake",
+  "q": "Кто именно уходит? 1 — новые: пишут, узнают цену и не записываются; 2 — постоянные клиенты перестали возвращаться; 3 — клиенты ушли вслед за мастером, который ушёл или работает отдельно; 4 — не знаю. По умолчанию: 1. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "intake",
+  "q": "Кого можно снимать? 1 — только руки мастеров и голос; 2 — мастеров с лицом (только тех, кто согласен); 3 — и клиентов (если они согласятся на камеру). По умолчанию: 1. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "intake",
+  "q": "Куда звать новых клиентов? 1 — на будни днём; 2 — к конкретным мастерам или на конкретные услуги, где есть окна (напишите какие); 3 — свободно почти всё. По умолчанию: 1, без обещаний «свободно сегодня». Ответ до 10.10 12:00."
+ },
+ {
+  "from": "inputs",
+  "q": "WhatsApp chat export: 15–30 recent client chats, without media",
+  "how": "«Здравствуйте! Я — ИИ-ассистент, помогаю вашему салону с роликами. Чтобы понять, где теряются клиенты, пришлите, пожалуйста, переписки: откройте чат с клиентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Нужно 15–30 последних чатов с новыми клиентами, особенно с теми, кто спросил цену и не записался. Имена и номера удаляем сразу, наружу ничего не попадает. До 12.10.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Permissions tap card: who leaves, who may be filmed, where to steer bookings, prices in videos",
+  "how": "«Ответьте цифрами, займёт минуту: (1) Кто уходит? 1 — новые: узнают цену и не записываются; 2 — постоянные перестали возвращаться; 3 — ушли вслед за мастером; 4 — не знаю. По умолчанию: 1. (2) Кого можно снимать? 1 — только руки мастеров и голос; 2 — мастеров с лицом (кто согласен); 3 — и клиентов (с их согласия). По умолчанию: 1. (3) Куда звать новых? 1 — будни днём; 2 — к мастерам/услугам, где есть окна (каким?); 3 — почти всё свободно. По умолчанию: 1. (4) Цены в роликах: 1 — можно, по прайсу; 2 — нельзя. По умолчанию: 2. Ответ до 10.10 12:00, иначе работаем по умолчанию.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Money map: price-list photo (dated), 3 services to fill, services not to push, free slots per week by master/day",
+  "how": "«Пришлите, пожалуйста: 1) фото актуального прайса (или скрин из 2ГИС/Инстаграма) — в роликах цены только из него; 2) три услуги, на которые хотите больше записей; 3) что НЕ продвигать (мастера заняты); 4) примерно сколько свободных окон в неделю и в какие дни/у каких мастеров. Можно голосовым. До 12.10.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Account insights: Instagram/TikTok access or screenshots, and whether accounts exist",
+  "how": "Agent checks first. Send only if an account was found or none exists: «Если есть Инстаграм/ТикТок салона: пришлите 2 скриншота из „Статистики“ за 30 дней (охват и аудитория-города) или дайте доступ. Если аккаунта нет — создать новый? 1 — да, 2 — нет, 3 — используем личный мастера. По умолчанию: 1 (только Reels + TikTok). До 12.10.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Proof folder: ~20 real photos and videos of masters' work, sent as files",
+  "how": "Staff, ~5 min of the admin's time, no owner minutes: «Я — ИИ-ассистент салона. Соберите, пожалуйста, у мастеров 20 настоящих фото и видео работ и процесса (руки, инструменты, крупно) и отправьте ФАЙЛАМИ, не фото — так не теряется качество. Без лиц клиентов; если лицо попало — мы его размоем или не возьмём. До 13.10.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Staff reality scan: 3 test clips (speech at 30 cm, a tool sound at 30 cm such as a file, clippers or a hair dryer, the room) plus a 2-minute silent walkthrough",
+  "how": "Staff, 10 min once: «Снимите, пожалуйста, вертикально, без зума: 1) скажите одну фразу, держа телефон в 30 см от лица, в самом тихом углу; 2) 10 секунд звука работы крупно — пилка, машинка или фен в 20–30 см; 3) 10 секунд общего плана зала; 4) 2 минуты молча пройдите по салону, задержитесь у каждого рабочего места и у окна. Выключите музыку. Отправьте файлами. До 13.10.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Masters' individual consent to appear (face and/or voice)",
+  "how": "Staff, ~1 min per master, after the owner picks option 2 in the tap card: «Мастер сам решает. Кто готов появляться в роликах — с лицом или только голосом и руками — запишите короткое видео: „Я, [имя], согласна, чтобы салон публиковал ролики со мной“. Отказаться можно в любой момент — ролики уберём.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Week-0 baseline tally and WhatsApp labels «Видео» and «Записан»",
+  "how": "Staff/admin, ~2 min setup plus ~1 min a day: «В WhatsApp Business создайте ярлыки „Видео“ и „Записан“. С 12.10 ставьте „Записан“ каждому, кто записался. Новым клиентам без кода пишите: „Подскажите, откуда о нас узнали?“. Ответы отмечайте ярлыком или пишите одним словом в заметку.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Optional owner voice note (price-pressure version)",
+  "how": "«Если есть 3 минуты — одно голосовое: 1) Один случай, когда клиент сказал „дорого“ или ушёл в дешёвый салон, а потом вернулся — что произошло? 2) Что клиенты чаще всего не знают о том, как у вас делают услугу (стерилизация, материалы, время)? 3) Что нельзя показывать в роликах? По желанию, до 14.10.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Weekly staff voice note: «3 вопроса клиентов за неделю + 1 случай» (from week 1)",
+  "how": "Staff, ~1 min/week: «Каждую пятницу — голосовое 30 секунд: какие 3 вопроса клиенты задавали чаще всего (особенно про цену и „почему так“) и один случай недели. Имена клиентов не называйте.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Offer approval: non-price only (e.g. free WhatsApp consultation or a reservation hold). DEFERRED, not in the onboarding batch.",
+  "how": "Later weekly batch, only if F4 triggers: «Можно ли в роликах предлагать по коду бесплатную консультацию мастера в WhatsApp (фото ногтей/волос → совет, что подойдёт) до [дата]? 1 — да, 2 — нет. По умолчанию: нет.»",
+  "minutes": 1
+ },
+ {
+  "from": "inputs",
+  "q": "Boost budget. DEFERRED until a post qualifies under F10 DR2.",
+  "how": "Later weekly batch, only after a DR2 breakout with ≥1 coded chat: «Ролик „[название]“ набрал в [x] раз больше обычного, по нему написали [n]. Продвинуть в Шымкенте до [сумма] ₸ с остановкой, если за [сумма×5] ₸ меньше 3 записей? 1 — да, 2 — нет. По умолчанию: нет.»",
+  "minutes": 1
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ID15 can be produced: ID15.comment_prompt_ru: scarcity/urgency claim without a backing fact: 'последний день'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ID20 can be produced: ID20.on_screen_ru[2]: scarcity/urgency claim without a backing fact: 'последний день'"
+ },
+ {
+  "from": "facts",
+  "q": "ID13: belief source (C6.11). If it is not found in customer language, reframe as «Нас часто спрашивают…» only with ≥2 chats"
+ },
+ {
+  "from": "facts",
+  "q": "ID09: master's actual checks"
+ },
+ {
+  "from": "campaign",
+  "q": "Здравствуйте, это ИИ-ассистент вашего салона. Три коротких вопроса: 1) Кто уходит — новые после цены / постоянные / вслед за мастером / не знаю? 2) Кого снимать — только руки и голос / мастеров с лицом (с их согласия) / и клиентов (с их согласия)? 3) Где больше всего свободных окон — маникюр / волосы / брови и ресницы / почти везде (если можно — у каких мастеров и в какие дни)? Если нет ответа до 10.10 12:00 — по умолчанию: новые клиенты; только руки и голос; зовём на будни днём, без обещаний «свободно сегодня».",
+  "why": "Sets the primary loss branch, consent, and which service at least 2 of the week-1 videos must cover (free capacity).",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Пришлите экспорт 15–30 последних чатов с клиентами: откройте чат → ⋮ → «Экспорт чата» → «Без медиафайлов». Имена и номера удаляем сразу, наружу ничего не попадает. Если не получится до 14.10 — по умолчанию считаем записи недели 0 вручную.",
+  "why": "Gives the baseline, close rate, reply time and where chats die. It grounds or kills the assumption-only insights and calibrates reactivation.",
+  "minutes": 3
+ },
+ {
+  "from": "campaign",
+  "q": "Фото действующего прайса (с датой). По умолчанию: цен в роликах и ответах не называем.",
+  "why": "Price facts for the after-price quick reply only. Never used for comparisons.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Мастера: 1) Чьё имя можно называть в роликах — напишите имена или «никто» (по умолчанию — никто, ролики только от имени салона, запись только через номер салона). 2) Кто из мастеров согласен на свой голос, а кто — и на лицо? 3) Кто из мастеров или администраторов будет 3–5 минут в неделю проверять казахские подписи? По умолчанию: голос без имени не используем, подписи на казахском не публикуем.",
+  "why": "Balances the owner's master-flight risk against the person series, and assigns the native-speaker KZ check that makes bilingual той content possible (L9).",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Возврат постоянных клиенток: можно ли администратору написать лично тем, кто не был 6–10 недель, без скидки, от имени их мастера: «Здравствуйте, {имя}! Это {имя мастера}, ваш мастер из салона. Давно не виделись — есть свободное время {день/время}. Записать вас?» 1 — да, так; 2 — да, но от имени салона, без имени мастера; 3 — нет. По умолчанию: 3, не пишем.",
+  "why": "This is the fastest lever in a 4-week window (REALISM). Contacting customers needs the owner's explicit approval (L8). This also decides whether masters are named in private messages.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Что у вас делается для КАЖДОЙ клиентки (отметьте номера): 1 — инструменты из сухожара в запечатанном крафт-пакете, вскрываем при клиентке; 2 — новая пилка на каждую клиентку; 3 — стол и лампу протираем перед каждой; 4 — ничего из этого. По умолчанию: такой ролик не снимаем.",
+  "why": "The hero hygiene episode is the main answer to «зачем платить больше». We show only what is done every time; the camera verifies it, and the owner statement becomes a «мы делаем X» fact.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Есть ли у салона Instagram и TikTok? Пришлите названия или «нет». Можно ли завести TikTok (1 — да, 2 — нет) и включить в Instagram автоответ на слово «МАСТЕР» со ссылкой на WhatsApp салона (1 — да, 2 — нет)? По умолчанию: публикуем только туда, где аккаунт есть, без автоответа.",
+  "why": "Channel plan, baselines, and tap-only attribution through Instagram Direct.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Мы пришлём 4 готовых ответа для WhatsApp (на код из видео, после цены, «откуда узнали?», просьба об отзыве в 2ГИС). Ответьте «да» или поправьте. По умолчанию: не используем, пока не одобрите.",
+  "why": "The conversion layer is the cheapest lever to stop the decline, and outward messages need the owner's approval (L8).",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "(Неделя 2, в еженедельном сообщении) Можно ли выпустить ролик, где мастер честно говорит: вот это можно сделать дома между визитами, а вот это лучше у мастера? 1 — да, 2 — нет. По умолчанию: 2, ролик не снимаем.",
+  "why": "ID19 is an anti-sell wildcard planned for week 3 and needs the owner's explicit «да». It is deferred so onboarding stays within 15 minutes.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "(Неделя 2, в еженедельном сообщении) Может ли администратор в WhatsApp посмотреть фото ногтей клиентки и подсказать, что подойдёт, до записи? 1 — да, 2 — нет. По умолчанию: 2, такое не обещаем.",
+  "why": "Needed for the ID09 CTA in week 3 and the candidate non-price offer. We never promise what staff won't do.",
+  "minutes": 1
+ }
+]

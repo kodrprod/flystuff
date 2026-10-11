@@ -1,0 +1,451 @@
+{
+ "evidence": [
+  {
+   "id": "E01",
+   "kind": "fact",
+   "claim": "The store is at Астана, ул. Кажымукана, 14, НП-6. Applicants must be able to commute there.",
+   "source": "fact:address",
+   "confidence": "verified"
+  },
+  {
+   "id": "E02",
+   "kind": "fact",
+   "claim": "The store's listed WhatsApp is +7 701 0987734. It is the natural channel for coded «РАБОТА» applications, and it is also the sales line.",
+   "source": "fact:wa",
+   "confidence": "verified"
+  },
+  {
+   "id": "E03",
+   "kind": "constraint",
+   "claim": "The published hours are phone hours only: пн–пт 10:00–19:00, сб 10:00–17:00. They are NOT shift hours and cannot be used as a schedule claim in hiring copy.",
+   "source": "fact:hours",
+   "confidence": "verified"
+  },
+  {
+   "id": "E04",
+   "kind": "constraint",
+   "claim": "The ledger has no job facts: no pay, schedule, shift length, requirements, trial period or sales target. No vacancy page was found in the 2026-10-08 crawl.",
+   "source": "https://muzzone.kz",
+   "confidence": "likely"
+  },
+  {
+   "id": "E05",
+   "kind": "constraint",
+   "claim": "Consent to show faces has not been asked. Who may be filmed is an open owner question, so the default is hands, instruments and voice only.",
+   "source": "assumption: client profile staff_capacity.people_on_camera = «unknown: consent not yet asked» (stated via MetaPrompt; no written owner answer yet)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E06",
+   "kind": "constraint",
+   "claim": "Staff have one mid/low-quality phone. Audio is good only when the phone is held close to the instrument or mouth (≈30 cm), and the planned budget is ≤17 staff minutes a week.",
+   "source": "assumption: client profile staff_capacity, stated via MetaPrompt and not yet tested by a reality scan",
+   "confidence": "likely"
+  },
+  {
+   "id": "E07",
+   "kind": "fact",
+   "claim": "Catalogue depth from the site listings: electric guitars 512, acoustic guitars 383, digital pianos 133 (median 631 280 ₸), ukulele + accessories 163, kids' keyboards 3. A consultant has to navigate roughly 1 190+ instrument listings.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/catalog_listings.json#lists",
+   "confidence": "verified"
+  },
+  {
+   "id": "E08",
+   "kind": "fact",
+   "claim": "The site section «Распродажа» is titled «Финальная распродажа». It lists 535 SKUs, all with old prices, at discounts of 20% (233), 25% (149), 30% (60), 40% (25), 50% (24) and 70% (24). The reason and end date are unknown.",
+   "source": "fact:sale_page",
+   "confidence": "verified"
+  },
+  {
+   "id": "E09",
+   "kind": "fact",
+   "claim": "Brands named in the sale list include Sabian (94 SKUs), Mapex (57), Zildjian (52), Blackstar (37) and Hibilly (22), counted by brand name in item titles (prior-session count, not recomputed this step). Many cymbals and drums are on the floor or in stock.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/catalog_listings.json#lists.sale.items",
+   "confidence": "likely"
+  },
+  {
+   "id": "E10",
+   "kind": "fact",
+   "claim": "Casio PX-770 and Casio Celviano AP-270 both have 88 keys, no Bluetooth and no auto-accompaniment. Polyphony is 128 vs 192 (see also fact:ap270_specs). This is a typical 'what's the difference?' question a consultant must answer.",
+   "source": "fact:px770_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E11",
+   "kind": "fact",
+   "claim": "Per the site on 2026-10-09, PX-770 shows 3 in stock and AP-270 shows 5 in stock (see fact:web_cifrovoe_pianino_casio_celviano_ap_270_bkc7_qty), so both can be filmed side by side. Stock facts expire in 48 h.",
+   "source": "fact:web_cifrovoe_pianino_casio_px_770_bkc7_qty",
+   "confidence": "verified"
+  },
+  {
+   "id": "E12",
+   "kind": "constraint",
+   "claim": "The PX-770 price differs between fetches one day apart: 695 913 ₸ (fact:px770_price, 2026-10-08) vs 521 935 ₸ (2026-10-09). No PX-770 price may appear in any copy without a same-week re-fetch, and the piano price difference (diff_pno) is unreliable.",
+   "source": "fact:web_cifrovoe_pianino_casio_px_770_bkc7_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E13",
+   "kind": "fact",
+   "claim": "There are three in-stock concert ukuleles with different builds. Caesar U-246 has a spruce top and mahogany back/sides (fact:u246_specs). Caesar US-C40 has a solid spruce top and rosewood back/sides. Alston UF-330 is all maple (fact:uf330_specs). All three come with a case. 'Ель vs массив ели' is the kind of detail a consultant must explain.",
+   "source": "fact:usc40_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E14",
+   "kind": "fact",
+   "claim": "Casio has a 2-year manufacturer warranty, but service is only at the service centre in Almaty. A consultant must tell Astana buyers this unwelcome detail.",
+   "source": "fact:warranty_casio",
+   "confidence": "verified"
+  },
+  {
+   "id": "E15",
+   "kind": "fact",
+   "claim": "When goods of proper quality are returned, delivery both ways is withheld (+3% for cash on delivery). Staff have to explain return costs honestly.",
+   "source": "fact:returns_cost",
+   "confidence": "verified"
+  },
+  {
+   "id": "E16",
+   "kind": "fact",
+   "claim": "The store compensates return delivery in exchange for an honest review or a video on social media. The store already treats customer video as legitimate input.",
+   "source": "fact:returns_cost",
+   "confidence": "verified"
+  },
+  {
+   "id": "E17",
+   "kind": "fact",
+   "claim": "The Astana courier is free only for orders over 20 kg and over 15 000 ₸, so heavy goods (drum kits, pianos) are a normal part of the business.",
+   "source": "fact:delivery_astana",
+   "confidence": "verified"
+  },
+  {
+   "id": "E18",
+   "kind": "fact",
+   "claim": "A Mapex Comet 5-drum kit (poplar shells) is in stock per the site. It is a physical, filmable object on the floor.",
+   "source": "fact:mapex_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E19",
+   "kind": "fact",
+   "claim": "A Hibilly Retro 30R Cream combo amp (30 W, 1×10\", transistor) is in stock per the site. It is a close-sound source for a 'what the shift sounds like' shot.",
+   "source": "fact:hib_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E20",
+   "kind": "performance",
+   "claim": "Own YouTube: 3 620 subscribers, 379 videos, median 2 300 views, last upload 2026-05-10. The channel has been near-dormant for about 5 months, and a job seeker checking the store sees no recent activity.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#channel_followers_at_fetch",
+   "confidence": "verified"
+  },
+  {
+   "id": "E21",
+   "kind": "performance",
+   "claim": "On own long-form YouTube, beginner-framed titles (n=8) had a median of 15 500 views and head-to-head titles (n=8) a median of 16 000, vs a channel median of 2 300 (title-pattern classification from a prior session, not recomputed this step). Most of the audience are buyers seeking advice. This did NOT replicate on Shorts (L003).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#videos",
+   "confidence": "likely"
+  },
+  {
+   "id": "E22",
+   "kind": "performance",
+   "claim": "The best own video is «CORT X100 – Электрогитара для начинающих», with 64 000 views (147 s).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=128",
+   "confidence": "verified"
+  },
+  {
+   "id": "E23",
+   "kind": "performance",
+   "claim": "Brand-only cymbal/drum demo clips had a median of 390 views (n=48) and artist interviews a median of 118 (n=4), vs a 2 300 channel median. Demos without a human or question angle under-perform (L006).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#videos",
+   "confidence": "verified"
+  },
+  {
+   "id": "E24",
+   "kind": "proof_asset",
+   "claim": "The store has hosted at least one in-store clinic: «Мастер-класс Drumbassadors МузZone Астана» (332 views, 7 738 s). The date is unknown and it is an old upload (pos 354 of 379).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=354",
+   "confidence": "verified"
+  },
+  {
+   "id": "E25",
+   "kind": "proof_asset",
+   "claim": "Clinic recordings on the channel drew high views: Guthrie Govan Part 1 (39 000), Anton Davidyants clinic (40 000) and his bass comparison (61 000). The venue is not stated in these titles; that they happened at the store is inferred.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=355,356,371",
+   "confidence": "likely"
+  },
+  {
+   "id": "E26",
+   "kind": "proof_asset",
+   "claim": "Bands and players were recorded in the store: «Группа SILKWAY в магазине МузZONE Астана» (499 and 255 views), «Komancheros в гостях у МузZone» (7 000 and 1 500), «Gergo Borlai в гостях у Музzone» (1 000). These are old uploads; whether such visits still happen is unknown.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=248,309,310,357,358",
+   "confidence": "verified"
+  },
+  {
+   "id": "E27",
+   "kind": "proof_asset",
+   "claim": "The series «Юные гости магазина МузZone» has 7 videos of named children testing pianos, drums and a flute in the store. Views range from 457 to 5 200 (median 746). Serving children and parents is part of store life. These clips must NOT be reused (minors; parental consent unknown for new use).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=146,193,194,195,350,359,360",
+   "confidence": "verified"
+  },
+  {
+   "id": "E28",
+   "kind": "proof_asset",
+   "claim": "The newest uploads are interviews with local musicians whose titles name the theme «Как заработать музыкой» (Селана; группа «3.31»). Musicians' livelihoods are already a topic on the store's channel. Views are not shown in the listing.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=2,4",
+   "confidence": "verified"
+  },
+  {
+   "id": "E29",
+   "kind": "proof_asset",
+   "claim": "The channel holds 300+ instrument demos played on camera (Cort, Fender, Takamine, Mapex, Casio). Someone connected to the store plays at demo level, but who (staff or guests) is unknown.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#videos",
+   "confidence": "likely"
+  },
+  {
+   "id": "E30",
+   "kind": "market",
+   "claim": "Peer Shorts baseline across 6 RU/UA music-retail channels: medians range from 762 to 23 500 views (median of the 6 channel medians ≈ 2 200). The closest in size is «Ловец Нот» (3 540 subs, median 762). This is a pooled reference until Muzzone has 10 own short-form posts; it is for product content, not job posts.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/peer_channels_meta.json",
+   "confidence": "likely"
+  },
+  {
+   "id": "E31",
+   "kind": "market",
+   "claim": "No hiring content was sampled from any peer, so there is no peer mechanism for job posts. Category convention [assumption]: job posts are a static text card «Требуется продавец-консультант» with no conditions or real footage, a convention to break.",
+   "source": "assumption: peer research covered product/review/lesson Shorts only (peer_channels_meta.json); job-post convention is a category guess",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E32",
+   "kind": "performance",
+   "claim": "A blind text judge predicts Shorts performance at Spearman 0.11 overall and 0.07 for retail (CI includes 0, n=1 172). Insight strength and idea scores are priors only.",
+   "source": "assumption: knowledge-base learning L001 (strength «measured»); the experiment file is not among this client's input files",
+   "confidence": "likely"
+  },
+  {
+   "id": "E33",
+   "kind": "constraint",
+   "claim": "Instagram muzzone_astana blocks anonymous fetch, so there is no Reels baseline. No TikTok is linked from the site, and its ownership is unknown.",
+   "source": "assumption: client profile social.instagram («not analysed: blocks anonymous fetch») and social.tiktok («none linked from the site; ownership unknown»)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E34",
+   "kind": "constraint",
+   "claim": "Site hygiene problems: the old city name «Нур-Султан» still appears in places, and the blog's last post is from 2021. Never repeat these in copy. They add to the 'inactive store' signal a seeker may notice.",
+   "source": "assumption: prior-session crawl observation of https://muzzone.kz (not in this step's input files); agent re-checks on next crawl",
+   "confidence": "likely"
+  },
+  {
+   "id": "E35",
+   "kind": "proof_asset",
+   "claim": "An archive video «Замена струн на акустической гитаре» (854 views) shows a hands-only store skill with close sound, the kind of real task a new consultant would learn.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=361",
+   "confidence": "verified"
+  },
+  {
+   "id": "E36",
+   "kind": "behaviour",
+   "claim": "There is no seeker-side or chat data: no WhatsApp export, no applicant history, and no reviews among the inputs (2GIS returned 403 and Kaspi timed out in a prior session). Median reply time, close rate, where chats die and seeker language are all unknown. No theme is convergent yet.",
+   "source": "assumption: absence of chat/review/applicant files in this step's client inputs; fetch errors per prior-session log",
+   "confidence": "likely"
+  },
+  {
+   "id": "E37",
+   "kind": "customer_language",
+   "claim": "[F] Hypothesised job-seeker fears, NOT verbatim: unclear or late pay, unpaid trial days («стажировка бесплатно»), rude management, a hidden sales plan, and «продавец = стоять и впаривать». Count 0 real messages so far.",
+   "source": "assumption: method A7 hiring archetypes + intake; to be replaced by real applicant chats from week 1",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E38",
+   "kind": "customer_language",
+   "claim": "[D] Hypothesised pull for musicians, NOT verbatim: a day job that keeps them around instruments and other musicians instead of away from music. Count 0 real messages so far.",
+   "source": "assumption: category hypothesis; verify via owner/staff voice note and first applicant chats",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E39",
+   "kind": "moment",
+   "claim": "[M] Hypothesised moment: in October–November, music students and recent graduates in Astana settle their semester schedules and look for part-time or first jobs. A hire trained before the December gift season would matter to a retailer.",
+   "source": "assumption: academic and retail calendar; store's December peak not confirmed by owner",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E40",
+   "kind": "constraint",
+   "claim": "The owner is reachable only via Andrey and Pavel. Whether «Финальная распродажа» means a closure, a brand exit or a seasonal sale is an open question.",
+   "source": "assumption: client profile owner_access («via Andrey (MetaPrompt) and Pavel») and known_unknowns (reason for «Финальная распродажа»)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E41",
+   "kind": "constraint",
+   "claim": "The site states «100% оригинальный товар». Under truth rail 3 it may not be used in audience copy without a dated third-party source, because owner or site belief is not a source.",
+   "source": "fact:original",
+   "confidence": "verified"
+  },
+  {
+   "id": "E42",
+   "kind": "proof_asset",
+   "claim": "The channel already ran a comparison including the AP-270: «Китаец Lexington DP791 VS Японец Casio Celviano AP-270» (1 100 views). Comparison questions are a real, recurring part of consulting here.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=14",
+   "confidence": "verified"
+  },
+  {
+   "id": "E43",
+   "kind": "performance",
+   "claim": "Lesson videos on own YouTube had a median of 643 views (n=33) vs a 2 300 channel median (title classification from a prior session, not recomputed this step), so teaching content alone under-performed on this channel (long-form, correlational).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#videos",
+   "confidence": "likely"
+  },
+  {
+   "id": "E44",
+   "kind": "market",
+   "claim": "Category convention on own and peer music channels: an instrument demo played by a musician with a product-name title. Hands, instrument and close sound are the native visual language of this category.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#videos",
+   "confidence": "likely"
+  }
+ ],
+ "insights": [
+  {
+   "id": "I01",
+   "insight": "[hidden_knowledge] When a musician in Astana sees a vacancy for «продавец-консультант», the friend everyone asks «какую гитару взять?» wants a job where that knowledge counts. But they assume a shop job means reading price tags and pushing whatever is on the shelf, so they stay in unrelated jobs or give advice for free. We can show the real consulting moments on the floor: two in-stock 88-key Casios that differ in polyphony (128 vs 192), and three in-stock concert ukuleles in spruce, solid spruce and maple, framed as «а вы бы ответили покупателю?». The questions are drawn from 1 190+ instrument listings. This moves qualified coded applications because the people who can answer self-select, and that matches screen question 1.",
+   "tension": "Wants a job where knowing instruments matters vs the belief that a shop job is just pushing whatever sells.",
+   "evidence_ids": [
+    "E07",
+    "E10",
+    "E11",
+    "E13",
+    "E42",
+    "E21",
+    "E44",
+    "E38"
+   ],
+   "who_feels_it": "Someone who plays guitar, piano or ukulele, is the go-to advisor among friends, and has a day job unrelated to music or none at all.",
+   "content_reality": "Hands and instruments on the floor, provisionally «торговый зал» (exact names after the staff reality scan). Shots: PX-770 and AP-270 side by side (stock re-checked within 48 h; no PX-770 price, see E12); three ukuleles laid out at «прилавок» with close strum sound at 30 cm. No faces needed. Specs only from ledger facts.",
+   "strength": 4
+  },
+  {
+   "id": "I02",
+   "insight": "[tension] When a job seeker in Astana sees a shop vacancy on social media, they want to know what the shift is really like and what it pays. But they fear unpaid trial days, late pay and glossy vacancies that hide a sales plan [assumption, E37], so they skip posts with no conditions or apply and then ghost. We cannot show pay or schedule yet: there are no ledger facts. We can show verified unglamorous parts of the job that the store's own policies prove: telling an Astana buyer that Casio service is only in Almaty, explaining that a return costs delivery both ways, and handling heavy goods such as a 5-drum kit (the store's courier rule starts at 20 kg). Showing the hard parts first (anti_sell, job_reality) is believed because it argues against the store's own interest. It filters out bad fits and raises the share of applicants who pass the screen.",
+   "tension": "Wants an honest picture of the job vs fear that vacancies hide unpaid trials, late pay and pressure.",
+   "evidence_ids": [
+    "E37",
+    "E04",
+    "E14",
+    "E15",
+    "E17",
+    "E18",
+    "E03"
+   ],
+   "who_feels_it": "Someone who has been burned by a retail or service job, or knows someone who was, and now reads vacancies looking for the catch.",
+   "content_reality": "Hands-only shots: a hand on the Mapex kit at «торговый зал», a voice line recorded at 30 cm in «тихий угол» (e.g. the Casio-service-in-Almaty explanation). Owner must confirm that these tasks are really part of the consultant's job (NEEDS FACT). Pay, schedule, trial terms: no proof, so recognition content only (no claims) until the owner states them in writing.",
+   "strength": 3
+  },
+  {
+   "id": "I03",
+   "insight": "[proof] When a musician weighs up a day job, they want to stay inside the scene (good gear, other players, bands walking in), but most day jobs pull them away from music, so they trade music for pay [assumption, E38]. Muzzone's own archive shows bands and players recorded in the store (SILKWAY, Komancheros, Gergo Borlai), an in-store Drumbassadors clinic, and high-view clinic recordings. Its newest uploads are interviews titled «Как заработать музыкой». We can re-cut the store's own archive at zero staff minutes as «кто сюда заходит». This moves applications from musicians by making the workplace part of the scene, but only after the owner confirms such visits still happen; otherwise it is framed as history. Children's clips are excluded.",
+   "tension": "Wants to stay close to music and musicians vs the belief that a day job means leaving the scene.",
+   "evidence_ids": [
+    "E24",
+    "E25",
+    "E26",
+    "E28",
+    "E38",
+    "E27"
+   ],
+   "who_feels_it": "A gigging or student musician in Astana who needs steady income but doesn't want a job that cuts them off from music people.",
+   "content_reality": "Zero-minute re-cuts from the store's own YouTube archive (youtube_channel.json pos 248, 309, 310, 354, 357, 358), with owner OK to reuse performers' footage for hiring. Never reuse «Юные гости» clips (minors). Archive dates are unknown, so «здесь играли…», never «каждую неделю у нас…», until the owner confirms frequency (NEEDS FACT).",
+   "strength": 3
+  },
+  {
+   "id": "I04",
+   "insight": "[content_reality] Outsiders never hear a music store from behind the counter. A real shift sounds like an amp being switched on, a cymbal checked, strings changed and tuned. The store has the objects: an in-stock Hibilly Retro 30R amp, a large cymbal and drum range (Sabian, Zildjian and Mapex dominate the sale list), and an archive string-change skill. One weak phone at 30 cm is good at exactly this kind of close sound. Plain cymbal demos flopped on the channel (median 390), so the sound must carry the job framing «так звучит смена продавца»; then it is a reach and recognition piece for musicians.",
+   "tension": "Curiosity gap: nobody outside hears what a shift in a music store sounds like.",
+   "evidence_ids": [
+    "E19",
+    "E09",
+    "E35",
+    "E06",
+    "E23",
+    "E44"
+   ],
+   "who_feels_it": "Musicians and music students scrolling the feed, for whom instrument sounds are an instant pull.",
+   "content_reality": "Close-sound shots, hands only: amp power-on and first chord at «торговый зал» (phone 20–30 cm from the speaker), cymbal tap, a string change and tuning at «прилавок». Stock re-checked within 48 h if the item is named. No claims, so recognition content only.",
+   "strength": 3
+  },
+  {
+   "id": "I05",
+   "insight": "[friction] When a musician sees a job they like, they want to reply right away, but a formal CV or a job-site form feels like a barrier for a shop job, so they postpone it and forget [assumption]. The store already lives in WhatsApp (listed number) and already accepts customer videos as honest input (it compensates return delivery for a review or video). We can show how simple applying is: send the code, answer 3 short questions in WhatsApp, and optionally attach 20 seconds of playing, if the owner approves this. Lowering the step from CV to chat raises coded applications per 1 000 views, and the 3 questions keep them qualified.",
+   "tension": "Wants to apply on impulse vs CV and form friction that kills the impulse.",
+   "evidence_ids": [
+    "E02",
+    "E16",
+    "E37",
+    "E36"
+   ],
+   "who_feels_it": "A musician who would never write a CV for a shop job but would happily send a voice or video message.",
+   "content_reality": "Screen-type content: an anonymised mock-up of the 3-question chat over hands-on-instrument footage from «торговый зал». The 3-question screen and any «пришлите 20 секунд игры» option need owner approval (NEEDS FACT). Until then it is a CTA mechanic only, with no promises about response time beyond the guardrail of 1 working day once approved.",
+   "strength": 3
+  },
+  {
+   "id": "I06",
+   "insight": "[tension] When a seeker checks out a store before applying, they want to know it will still be there in a year. But Muzzone shows signals of winding down: «Финальная распродажа» on 535 SKUs, a YouTube channel silent since May 2026, and (per a prior crawl) «Нур-Султан» still on the site. A seeker may conclude «закрываются» and not apply [assumption]. If the owner confirms the store is not closing, the act of hiring plus a visible weekly posting rhythm is the strongest counter-signal: a store that is adding a person and posting every week. This removes a silent reason not to apply. Content must never mention or deny the sale or closure without the owner's written statement.",
+   "tension": "Wants a stable job vs the fear that the store is closing, read from the sale banner and inactive channels.",
+   "evidence_ids": [
+    "E08",
+    "E20",
+    "E34",
+    "E40",
+    "E37"
+   ],
+   "who_feels_it": "A careful applicant who googles the store and its socials before sending anything.",
+   "content_reality": "No proof until the owner confirms the store's continuity in writing (NEEDS FACT, ask in week 0). Until then it shapes only cadence and tone (consistent weekly posting, a present-tense workplace) and nothing on screen. Also a go/no-go check: if the store is closing, hiring content would mislead, so stop and re-brief.",
+   "strength": 2
+  },
+  {
+   "id": "I07",
+   "insight": "[moment] In October–November, music students and recent graduates in Astana settle their schedules and look for part-time or first jobs [assumption]. Livelihood is already a theme on the store's channel («Как заработать музыкой»). We can frame the vacancy as a music-adjacent income option for this autumn, using only true calendar statements, and run it before the December gift season. Timing the ask to when seekers are actively looking raises applications per view. Any vacancy deadline or start date needs the owner's confirmation; there is no urgency language without it.",
+   "tension": "Needs income that fits a study or gig schedule vs most jobs not fitting around music.",
+   "evidence_ids": [
+    "E39",
+    "E28",
+    "E04"
+   ],
+   "who_feels_it": "A music-college student or recent graduate in Astana, looking in autumn for a job that fits around classes or gigs.",
+   "content_reality": "Recognition content only: hands on instruments at «торговый зал» with a calendar-true line. Schedule flexibility, part-time options and start date are NEEDS FACT (owner). Without them the moment frames who the video is for and makes no promises.",
+   "strength": 2
+  },
+  {
+   "id": "I08",
+   "insight": "[identity] Wildcard: the people who watch music-store videos are mostly buyers seeking advice (beginner and comparison titles drew about 7× the channel median on long-form; the best video, 64 000 views, was a beginner guitar). The ideal applicant is the person they ask. Viewers who are not themselves candidates want to help their «гитарист-друг» find work, but job posts don't give them a reason to forward, so the ideal candidate never sees it. A piece built around «скинь тому, кто тебе выбирал гитару» turns the advice-seeking audience into a referral channel. It moves applications through shares rather than direct views, so the share rate is the metric to watch.",
+   "tension": "Wants to help a musician friend vs job posts giving no hook to forward them.",
+   "evidence_ids": [
+    "E21",
+    "E22",
+    "E20",
+    "E38"
+   ],
+   "who_feels_it": "A beginner or parent who once asked a musician friend which instrument to buy, and that friend who knows instruments.",
+   "content_reality": "Hands at «торговый зал» picking up a beginner electric guitar (an in-stock model per the ledger, e.g. Alston AS-100BK, re-checked within 48 h), with the forwarding line on screen. Evidence of the forwarding behaviour is thin (long-form only, does not transfer to Shorts per L003), so treat it as a high-variance test with no claims.",
+   "strength": 2
+  },
+  {
+   "id": "I09",
+   "insight": "[myth] Wildcard: when a seeker watches the store's archive (300+ demos played at a high level), they may believe a consultant here must be a virtuoso on every instrument, so capable people who play one instrument, or sell well and play little, never apply [assumption]. Whether this is a myth or a real requirement depends on the owner's answer (intake Q2; default «главное опыт продаж, в инструментах научим»). If the owner confirms, a myth_check that admits the limit («на всём играть не обязательно») widens the qualified pool. If the owner wants strong players, the same insight flips into an honest filter.",
+   "tension": "Wants the job vs the belief that it requires virtuoso playing on everything.",
+   "evidence_ids": [
+    "E29",
+    "E37",
+    "E04",
+    "E43"
+   ],
+   "who_feels_it": "A person with retail experience who plays one instrument at an amateur level and is intimidated by the store's demo videos.",
+   "content_reality": "No proof until the owner answers the requirements question (NEEDS FACT). Then a voice-only line at 30 cm in «тихий угол» over hands-on-instrument footage at «торговый зал». Until then it is not used.",
+   "strength": 2
+  }
+ ]
+}

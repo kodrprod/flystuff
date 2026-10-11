@@ -1,0 +1,242 @@
+[
+ {
+  "case": "muzzone-viral",
+  "model_calls": 0,
+  "replayed_steps": 12,
+  "verify_problems": [],
+  "week1": [
+   "ID14",
+   "ID06"
+  ],
+  "week1_minutes": 7.4,
+  "owner_items": 7,
+  "code_checks": [
+   "week 1 idea ID01 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID03 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID13 waits for owner facts and is not filmed until they are confirmed",
+   "ID09: NEEDS FACT not in Russian, kept internal: can staff send sound samples via WhatsApp? (owner) — else CTA «подскажем укулеле",
+   "задание сотрудникам: number '20.10' not backed by a usable fact",
+   "задание сотрудникам: number '15' not backed by a usable fact",
+   "задание сотрудникам: number '60' not backed by a usable fact",
+   "задание сотрудникам: number '16.10' not backed by a usable fact"
+  ],
+  "patches": {
+   "patched": [],
+   "dropped": [],
+   "unknown": []
+  },
+  "old_shots": 11,
+  "old_shots_outside_final_week1": 3,
+  "old_ideas_outside": [
+   "ID05",
+   "ID19"
+  ]
+ },
+ {
+  "case": "muzzone-sales",
+  "model_calls": 0,
+  "replayed_steps": 12,
+  "verify_problems": [],
+  "week1": [
+   "ID06",
+   "ID13"
+  ],
+  "week1_minutes": 6.6,
+  "owner_items": 7,
+  "code_checks": [
+   "week 1 idea ID01 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID14 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID23 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID19 is blocked (failed checks or dropped by the revision)",
+   "week 1 had 0 ready ideas; reserves added: ['ID06', 'ID13']",
+   "ID01: NEEDS FACT not in Russian, kept internal: a staff member who can play 3 basic chords cleanly (staff reality scan)",
+   "ID23: NEEDS FACT not in Russian, kept internal: cable price and whether a cable is included (owner/agent re-fetch); no cable pri",
+   "ID23: NEEDS FACT not in Russian, kept internal: cable price and whether a cable is included (owner/agent re-fetch); no cable pri",
+   "ID08: NEEDS FACT not in Russian, kept internal: owner OK for the promise «сыграем обе модели по видео» (non-price service); fall",
+   "ID01: NEEDS FACT not in Russian, kept internal: a staff member who can play 3 basic chords cleanly (staff reality scan)",
+   "ID11: NEEDS FACT not in Russian, kept internal: whether a cable comes with the guitar or the amp, and its price; nothing about c",
+   "задание сотрудникам: number '20.10' not backed by a usable fact"
+  ],
+  "patches": {
+   "patched": [],
+   "dropped": [],
+   "unknown": []
+  },
+  "old_shots": 15,
+  "old_shots_outside_final_week1": 8,
+  "old_ideas_outside": [
+   "ID06",
+   "ID11",
+   "ID15"
+  ]
+ },
+ {
+  "case": "dental",
+  "model_calls": 0,
+  "replayed_steps": 12,
+  "verify_problems": [],
+  "week1": [
+   "ID14",
+   "ID12"
+  ],
+  "week1_minutes": 6.9,
+  "owner_items": 7,
+  "code_checks": [
+   "week 1 idea ID05 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID04 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID03 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID11 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 had 1 ready ideas; reserves added: ['ID12']",
+   "ID05: NEEDS FACT not in Russian, kept internal: the surgeon's real criteria for advising against (surgeon)",
+   "ID05: NEEDS FACT not in Russian, kept internal: no-obligation consultation (owner)",
+   "ID04: NEEDS FACT not in Russian, kept internal: anaesthesia/sensation answer wording, approved by the responsible doctor (otherw",
+   "ID03: NEEDS FACT not in Russian, kept internal: pouch opened in front of patient; plan explained on model (doctor)",
+   "ID11: NEEDS FACT not in Russian, kept internal: demo sample (owner)",
+   "ID05: NEEDS FACT not in Russian, kept internal: the surgeon's real criteria for advising against (surgeon)",
+   "ID05: NEEDS FACT not in Russian, kept internal: no-obligation consultation (owner)",
+   "ID20: NEEDS FACT not in Russian, kept internal: written consent + legal OK on patient testimonials in RK medical advertising (ow",
+   "ID04: NEEDS FACT not in Russian, kept internal: anaesthesia/sensation answer wording, approved by the responsible doctor (otherw",
+   "ID02: NEEDS FACT not in Russian, kept internal: real reprocessing protocol and step order (owner + responsible doctor)",
+   "ID03: NEEDS FACT not in Russian, kept internal: pouch opened in front of patient; plan explained on model (doctor)",
+   "ID11: NEEDS FACT not in Russian, kept internal: demo sample (owner)",
+   "owner item not in Russian, not sent: Завести TikTok и YouTube: 1 — да, сами; 2 — дайте доступ нам; 3 — только Instagr"
+  ],
+  "patches": {
+   "patched": [],
+   "dropped": [],
+   "unknown": []
+  },
+  "old_shots": 12,
+  "old_shots_outside_final_week1": 3,
+  "old_ideas_outside": [
+   "ID02",
+   "ID20"
+  ]
+ },
+ {
+  "case": "coffee",
+  "model_calls": 0,
+  "replayed_steps": 12,
+  "verify_problems": [],
+  "week1": [
+   "ID14",
+   "ID07"
+  ],
+  "week1_minutes": 6.5,
+  "owner_items": 7,
+  "code_checks": [
+   "week 1 idea ID03 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID13 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID24 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID18 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID05 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 had 0 ready ideas; reserves added: ['ID14', 'ID07']",
+   "ID03: NEEDS FACT not in Russian, kept internal: owner confirms the Левый берег location and that the site may be filmed (owner)",
+   "ID13: NEEDS FACT not in Russian, kept internal: location 1 really is off Левый берег; if not, drop the idea (owner)",
+   "ID24: NEEDS FACT not in Russian, kept internal: the order is real and anonymised (staff)",
+   "ID18: NEEDS FACT not in Russian, kept internal: archive photos exist (owner, 1 min); otherwise drop",
+   "ID05: NEEDS FACT not in Russian, kept internal: Q1 answer (date and address withheld vs confirmed); if confirmed, answer with th",
+   "ID03: NEEDS FACT not in Russian, kept internal: owner confirms the Левый берег location and that the site may be filmed (owner)",
+   "ID18: NEEDS FACT not in Russian, kept internal: archive photos exist (owner, 1 min); otherwise drop",
+   "ID13: NEEDS FACT not in Russian, kept internal: location 1 really is off Левый берег; if not, drop the idea (owner)",
+   "ID06: NEEDS FACT not in Russian, kept internal: owner agrees to say the first days are for getting used to the bar (owner)",
+   "ID05: NEEDS FACT not in Russian, kept internal: Q1 answer (date and address withheld vs confirmed); if confirmed, answer with th",
+   "ID19: NEEDS FACT not in Russian, kept internal: staff must actually tally; the number goes on screen only once it is in the ledg",
+   "ID24: NEEDS FACT not in Russian, kept internal: the order is real and anonymised (staff)",
+   "предложение: number '6 дней' not backed by a usable fact",
+   "предложение: number '13 дней' not backed by a usable fact",
+   "предложение: scarcity/urgency claim without a backing fact: 'успейте'",
+   "задание сотрудникам: number '13.10' not backed by a usable fact"
+  ],
+  "patches": {
+   "patched": [],
+   "dropped": [],
+   "unknown": []
+  },
+  "old_shots": 11,
+  "old_shots_outside_final_week1": 4,
+  "old_ideas_outside": [
+   "ID06",
+   "ID19"
+  ]
+ },
+ {
+  "case": "b2b",
+  "model_calls": 0,
+  "replayed_steps": 12,
+  "verify_problems": [],
+  "week1": [
+   "ID19",
+   "ID10"
+  ],
+  "week1_minutes": 6.1,
+  "owner_items": 7,
+  "code_checks": [
+   "week 1 idea ID14 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID13 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID02 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 idea ID07 waits for owner facts and is not filmed until they are confirmed",
+   "week 1 had 1 ready ideas; reserves added: ['ID10']",
+   "ID14: NEEDS FACT not in Russian, kept internal: Q2 answer (owner)",
+   "ID14: NEEDS FACT not in Russian, kept internal: «быстрее считаем» depends on the reply guardrail (≤15 min median). Check the rep",
+   "ID13: NEEDS FACT not in Russian, kept internal: label mixing text (staff film + agent ledger)",
+   "ID13: NEEDS FACT not in Russian, kept internal: owner permits using one bag",
+   "ID02: NEEDS FACT not in Russian, kept internal: owner confirms that wrapping is standard for every outgoing pallet before any fo",
+   "ID07: NEEDS FACT not in Russian, kept internal: datasheet or label text (staff film + agent ledger). No temperature statement of",
+   "ID07: NEEDS FACT not in Russian, kept internal: ≥2 matching chats (owner export)",
+   "ID14: NEEDS FACT not in Russian, kept internal: Q2 answer (owner)",
+   "ID14: NEEDS FACT not in Russian, kept internal: «быстрее считаем» depends on the reply guardrail (≤15 min median). Check the rep",
+   "ID07: NEEDS FACT not in Russian, kept internal: datasheet or label text (staff film + agent ledger). No temperature statement of",
+   "ID07: NEEDS FACT not in Russian, kept internal: ≥2 matching chats (owner export)",
+   "ID13: NEEDS FACT not in Russian, kept internal: label mixing text (staff film + agent ledger)",
+   "ID13: NEEDS FACT not in Russian, kept internal: owner permits using one bag",
+   "ID17: NEEDS FACT not in Russian, kept internal: the counted number and its period (staff tally)",
+   "ID02: NEEDS FACT not in Russian, kept internal: owner confirms that wrapping is standard for every outgoing pallet before any fo",
+   "задание сотрудникам: number '27.10' not backed by a usable fact",
+   "задание сотрудникам: number '10' not backed by a usable fact"
+  ],
+  "patches": {
+   "patched": [],
+   "dropped": [],
+   "unknown": []
+  },
+  "old_shots": 13,
+  "old_shots_outside_final_week1": 2,
+  "old_ideas_outside": [
+   "ID10",
+   "ID17"
+  ]
+ },
+ {
+  "case": "salon",
+  "model_calls": 0,
+  "replayed_steps": 12,
+  "verify_problems": [],
+  "week1": [
+   "ID01",
+   "ID20",
+   "ID17"
+  ],
+  "week1_minutes": 10.4,
+  "owner_items": 7,
+  "code_checks": [
+   "ID13: NEEDS FACT not in Russian, kept internal: belief source (C6.11). If it is not found in customer language, reframe as «Нас ",
+   "ID09: NEEDS FACT not in Russian, kept internal: master's actual checks",
+   "задание сотрудникам: number '20.10' not backed by a usable fact",
+   "задание сотрудникам: number '10' not backed by a usable fact"
+  ],
+  "patches": {
+   "patched": [],
+   "dropped": [],
+   "unknown": []
+  },
+  "old_shots": 13,
+  "old_shots_outside_final_week1": 7,
+  "old_ideas_outside": [
+   "ID13",
+   "ID15",
+   "ID19",
+   "ID24"
+  ]
+ }
+]

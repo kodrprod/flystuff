@@ -1,0 +1,95 @@
+{
+ "slate": [
+  {
+   "id": "ID05",
+   "prior": 3.615,
+   "value": 3.615,
+   "why": "prior+data",
+   "driver": "honest_signal",
+   "engine": "anti_sell",
+   "staff_min": 4.1,
+   "needs_facts": []
+  },
+  {
+   "id": "ID20",
+   "prior": 3.397,
+   "value": 3.397,
+   "why": "prior+data",
+   "driver": "story",
+   "engine": "real_case",
+   "staff_min": 2.2,
+   "needs_facts": []
+  },
+  {
+   "id": "ID14",
+   "prior": 3.487,
+   "value": 3.487,
+   "why": "prior+data",
+   "driver": "identity",
+   "engine": "pov_situation",
+   "staff_min": 2.5,
+   "needs_facts": []
+  },
+  {
+   "id": "ID04",
+   "prior": 3.346,
+   "value": 3.346,
+   "why": "prior+data",
+   "driver": "relief",
+   "engine": "wa_question",
+   "staff_min": 4.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID21",
+   "prior": 3.192,
+   "value": 3.192,
+   "why": "prior+data",
+   "driver": "participation",
+   "engine": "reply",
+   "staff_min": 0.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID02",
+   "prior": 3.333,
+   "value": 3.333,
+   "why": "prior+data",
+   "driver": "social_currency",
+   "engine": "backstage",
+   "staff_min": 2.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID03",
+   "prior": 3.231,
+   "value": 3.231,
+   "why": "explore",
+   "driver": "practical_value",
+   "engine": "check_before_buy",
+   "staff_min": 4.6,
+   "needs_facts": []
+  },
+  {
+   "id": "ID11",
+   "prior": 3.141,
+   "value": 3.141,
+   "why": "explore",
+   "driver": "amusement_awe",
+   "engine": "guess",
+   "staff_min": 2.5,
+   "needs_facts": []
+  }
+ ],
+ "blocked": [],
+ "week1_filmed": [
+  "ID05",
+  "ID20",
+  "ID14",
+  "ID04",
+  "ID02",
+  "ID03"
+ ],
+ "week1_minutes": 16.1,
+ "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"
+}

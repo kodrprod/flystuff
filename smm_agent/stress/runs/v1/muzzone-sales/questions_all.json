@@ -1,0 +1,148 @@
+[
+ {
+  "from": "intake",
+  "q": "Что важнее продать в ближайшие 5 недель: 1 — цифровые пианино, 2 — электрогитары и комбики для начинающих, 3 — укулеле, 4 — товары из раздела «Распродажа», 5 — пробуем всё понемногу и смотрим, что сработает? По умолчанию: 5. Ответ до 10.10 18:00."
+ },
+ {
+  "from": "intake",
+  "q": "Почему распродажа на сайте называется «Финальная»: 1 — магазин закрывается или переезжает, 2 — уходим от этих брендов/моделей, 3 — обычная распродажа без срока, 4 — есть дата окончания (напишите дату)? По умолчанию: слово «финальная» и любые сроки в роликах не используем, скидки показываем только как на сайте. Ответ до 10.10 18:00."
+ },
+ {
+  "from": "intake",
+  "q": "Кого можно снимать: 1 — только руки, инструменты и голос, 2 — продавцов с лицом (с их согласия), 3 — и покупателей (с их согласия)? По умолчанию: 1. Ответ до 10.10 18:00."
+ },
+ {
+  "from": "inputs",
+  "q": "WhatsApp chat export: 15–30 recent customer chats, without media",
+  "how": "«Откройте чат с покупателем в WhatsApp магазина → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Пришлите 15–30 последних чатов за сентябрь–октябрь, по возможности разных: пианино, гитары, укулеле, распродажа. Имена и номера удаляем сразу, наружу ничего не попадает. Если покупателям отвечают с другого номера, не +7 701 0987734, напишите, с какого. По умолчанию: считаем обращения сами с 12.10.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Permissions tap card: faces, sale wording, priority line, TikTok, WhatsApp number (merges the 3 intake clarifying questions)",
+  "how": "«Ответьте цифрами одной строкой (по умолчанию — в скобках). 1) Кого можно снимать: 1 — только руки, инструменты и голос; 2 — продавцов с лицом (с их согласия); 3 — и покупателей (с их согласия) [1]. 2) Почему распродажа называется «Финальная»: 1 — магазин закрывается или переезжает; 2 — уходим от этих моделей; 3 — обычная, без срока; 4 — есть дата окончания (какая?) [слово «финальная» и сроки в роликах не используем]. 3) Что важнее продать: 1 — пианино; 2 — электрогитары и комбики; 3 — укулеле; 4 — распродажа; 5 — всё понемногу [5]. 4) TikTok: 1 — нет, заведём новый; 2 — есть (напишите имя) [заводим новый]. 5) Клиентам в WhatsApp отвечают с +7 701 0987734: 1 — да; 2 — с другого номера (какого?) [1]. Ответ до 10.10 18:00, потом работаем по умолчанию.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Money map: lines to push or not push, store vs site prices, Kaspi seller status, sales by channel",
+  "how": "«Пришлите, пожалуйста (3 минуты): 1) 2–3 группы товаров, которые важнее всего продать, и что точно не продвигать (например, товар под заказ или с маленькой наценкой); 2) отличаются ли цены в магазине от сайта — если да, фото ценников или прайса; 3) продаёте ли через Kaspi магазин — да/нет; 4) примерно где больше продаж: WhatsApp, сайт, Kaspi, в зале. По умолчанию: цены только с сайта, 4 тестовые группы поровну.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Proof folder: 20 real photos and videos, or the source files of past YouTube videos",
+  "how": "«Пришлите файлами (в WhatsApp — через „Документ“, не через галерею) или ссылкой на Google Диск: 20 настоящих фото и видео из магазина — инструменты в руках, звук, упаковка, выдача заказа. Ещё лучше — доступ к исходникам ваших роликов для YouTube: там уже записан звук инструментов. По умолчанию: используем ваши опубликованные ролики с YouTube, остальное снимаем в первую неделю.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Account insights: Instagram and YouTube Studio",
+  "how": "«Скриншоты, 2 минуты: Instagram → Профессиональная панель → „Охваченные аккаунты“ и „Аудитория“ за 30 дней (города); YouTube Studio → Аналитика → „Аудитория“ (география) и вкладка Shorts. Или дайте доступ к аналитике (роль „Аналитик“ в YouTube и в Meta Business Suite). По умолчанию: работаем по публичным цифрам.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Optional owner voice note (≤2 min): buyer misconceptions and no-go topics",
+  "how": "«Если есть 2 минуты — голосовое: что покупатели чаще всего понимают неправильно, когда выбирают пианино или первую гитару? И что нельзя показывать в роликах? По умолчанию: пропускаем.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Offer approval (deferred; only if F4 needs one)",
+  "how": "Asked later in the weekly batch (~1 min) with exact Russian terms, dates and limits. Not part of onboarding.",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Boost budget (deferred until a post qualifies under DR2)",
+  "how": "Asked in week 2 (~1 min) with real numbers from qualifying posts. Not part of onboarding.",
+  "minutes": 0
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ID03 can be produced: ID03.comment_prompt_ru: absolute/superlative claim without a backing fact: 'лучше'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ID03 can be produced: ID03.on_screen_ru[5]: absolute/superlative claim without a backing fact: 'лучше'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ID21 can be produced: ID21.hook_ru: number '60 000 ₸' not backed by a usable fact"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ID21 can be produced: ID21.on_screen_ru[0]: number '60 000 ₸' not backed by a usable fact"
+ },
+ {
+  "from": "facts",
+  "q": "ID23: cable price and whether a cable is included (owner/agent re-fetch); no cable price is shown until confirmed"
+ },
+ {
+  "from": "facts",
+  "q": "ID08: owner OK for the promise «сыграем обе модели по видео» (non-price service); fallback CTA «подскажем, какой под вашу задачу»"
+ },
+ {
+  "from": "facts",
+  "q": "ID01: a staff member who can play 3 basic chords cleanly (staff reality scan)"
+ },
+ {
+  "from": "facts",
+  "q": "ID11: whether a cable comes with the guitar or the amp, and its price; nothing about cable inclusion is claimed until confirmed"
+ },
+ {
+  "from": "campaign",
+  "q": "Здравствуйте, я ИИ-ассистент по роликам для Muzzone. Выгрузку чатов не просим: переписка с покупателями остаётся в магазине. Вместо этого раз в неделю продавец заполняет таблицу из 5 строк (~3 минуты): сколько новых чатов, время первого ответа в 10 чатах, сколько закончились оплатой, 3 частых вопроса, сколько спросили цену в Instagram. Согласны? 1 — да, 2 — заполню сам(а), 3 — нет. По умолчанию: 1. Ответ до 14.10 18:00.",
+  "why": "Privacy-safe baseline: total inbound, reply time and close rate without customer personal data leaving the store (review fix). It decides DR-reply and the 2026-11-01 target re-fix.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Кого можно снимать: 1 — только руки, инструменты и голос, 2 — продавцов с лицом (с их согласия), 3 — и покупателей (с их согласия)? По умолчанию: 1. Ответ до 14.10 18:00.",
+  "why": "Hard consent constraint. All planned ideas are face-free, so the default blocks nothing.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Что важнее продать: 1 — пианино, 2 — электрогитары и комбики, 3 — укулеле, 4 — «Распродажа», 5 — пробуем всё и смотрим по цифрам? И почему распродажа «Финальная»: 1 — закрытие/переезд, 2 — уходим от этих моделей, 3 — обычная распродажа без срока, 4 — есть дата (какая)? По умолчанию: 5; слово «финальная» и сроки не используем.",
+  "why": "Line priority shifts slots. The sale reason is the only legitimate source of urgency.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Какой комбик для электрогитары у вас ПОСТОЯННО в наличии (не из распродажи), чтобы снимать с ним гитару Alston AS-100BK? Мы сами проверим сайт и пришлём 1–2 варианта — ответьте номером. Идёт ли кабель в комплекте с гитарой или комбиком? По умолчанию: берём вариант с сайта, где больше всего штук; про кабель не говорим.",
+  "why": "Replaces the 2-unit clearance Hibilly in the hero and basket pieces (review fix) and settles the cable NEEDS FACT for ID23 and ID11.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Можно ли обещать в роликах: А) «до оплаты пришлём видео именно вашего экземпляра», Б) «приходите или напишите — сыграем обе модели пианино, решите на слух»? 1 — оба, 2 — только Б, 3 — нет. По умолчанию: 3 (пишем «подскажем, какое под вашу задачу»).",
+  "why": "New non-price promises need the owner's «да» (L8, F4). Б gives the AP-270 a fair hearing in REVISED ID08.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Утвердите один раз: 1) слова для роликов — «ГИТАРА», «ПИАНИНО», «УКУЛЕЛЕ» (покупатель пишет одно слово в WhatsApp); 2) ответ в WhatsApp: «Здравствуйте! Подскажите, по какому ролику пишете — можно просто скриншот. И для кого инструмент — сразу скажем, что есть в наличии и что подойдёт.»; 3) ответ на комментарий «цена?», который ИИ-ассистент публикует в течение часа: «Цена на сайте сегодня — [цена с сайта]. Напишите в WhatsApp «ГИТАРА» — пришлём наличие и подскажем по комплекту.» Все остальные ответы — только после вашего «да». Кто отвечает в Instagram Direct? По умолчанию: всё утверждено, Direct — тот же продавец.",
+  "why": "KZ buyers write words, screenshots, Direct and comments, not codes (review fix). One approval covers the comment class (L8), and inquiries outside WhatsApp get counted.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Есть ли у магазина TikTok и Kaspi-магазин? Дайте доступ к Instagram (или пришлите скриншоты статистики за 30 дней: Профессиональная панель → Статистика). По умолчанию: TikTok создаём на номер магазина, Kaspi — только оплата, публикуем только после вашего «да».",
+  "why": "Baseline, publishing and comment/Direct counting depend on account access; the TikTok setup and Kaspi attribution depend on what exists.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Когда и по какому итогу решаем, работают ли соцсети? Пианино покупают не за неделю, поэтому предлагаем: 15.11 — смотрим обращения по роликам, 15.12 — итог по заказам (включая новогодний спрос). Порог к 15.12: 1 — от 6 заказов, 2 — от 12, 3 — от 20. По умолчанию: даты как предложено, порог 2.",
+  "why": "Pre-registers the verdict on a window long enough for the piano cycle and the gift peak (review fix). It also moves the intake's order date, which needs the owner's OK.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Каждую неделю (среда): одобрите ролики одним ответом — «да» или номера, которые убрать. По умолчанию: без вашего «да» ничего не публикуем.",
+  "why": "L8: nothing goes outward without approval. This is the weekly ≤5 min; not counted in onboarding (onboarding total = 10 min).",
+  "minutes": 5
+ }
+]

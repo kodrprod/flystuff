@@ -1,0 +1,114 @@
+[
+ {
+  "n": 1,
+  "shot_id": "BLIND-01_0",
+  "seconds": 10,
+  "kind": "demo",
+  "idea_id": "BLIND-01"
+ },
+ {
+  "n": 2,
+  "shot_id": "BLIND-01_1",
+  "seconds": 10,
+  "kind": "demo",
+  "idea_id": "BLIND-01"
+ },
+ {
+  "n": 3,
+  "shot_id": "ANAT-02_0",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ANAT-02"
+ },
+ {
+  "n": 4,
+  "shot_id": "BLIND-01_2",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "BLIND-01"
+ },
+ {
+  "n": 5,
+  "shot_id": "CHECK-03_0",
+  "seconds": 6,
+  "kind": "detail",
+  "idea_id": "CHECK-03"
+ },
+ {
+  "n": 6,
+  "shot_id": "CHECK-03_1",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "CHECK-03"
+ },
+ {
+  "n": 7,
+  "shot_id": "CHECK-03_2",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "CHECK-03"
+ },
+ {
+  "n": 8,
+  "shot_id": "FIRSTYEAR-15_0",
+  "seconds": 5,
+  "kind": "hook",
+  "idea_id": "FIRSTYEAR-15"
+ },
+ {
+  "n": 9,
+  "shot_id": "STAKES-11_0",
+  "seconds": 8,
+  "kind": "demo",
+  "idea_id": "STAKES-11"
+ },
+ {
+  "n": 10,
+  "shot_id": "STAKES-11_1",
+  "seconds": 8,
+  "kind": "demo",
+  "idea_id": "STAKES-11"
+ },
+ {
+  "n": 11,
+  "shot_id": "TIERS-07_0",
+  "seconds": 6,
+  "kind": "demo",
+  "idea_id": "TIERS-07"
+ },
+ {
+  "n": 12,
+  "shot_id": "TIERS-07_1",
+  "seconds": 6,
+  "kind": "demo",
+  "idea_id": "TIERS-07"
+ },
+ {
+  "n": 13,
+  "shot_id": "TIERS-07_2",
+  "seconds": 6,
+  "kind": "demo",
+  "idea_id": "TIERS-07"
+ },
+ {
+  "n": 14,
+  "shot_id": "STAKES-11_2",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "STAKES-11"
+ },
+ {
+  "n": 15,
+  "shot_id": "GIFT-05_0",
+  "seconds": 6,
+  "kind": "hook",
+  "idea_id": "GIFT-05"
+ },
+ {
+  "n": 16,
+  "shot_id": "GIFT-05_1",
+  "seconds": 4,
+  "kind": "detail",
+  "idea_id": "GIFT-05"
+ }
+]

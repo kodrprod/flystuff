@@ -1,0 +1,1352 @@
+[
+ {
+  "id": "BLIND-01",
+  "title": "Listening test: can you hear the 38 973 ₸ between Casio PX-770 and Celviano AP-270? (rewritten: guess game removed)",
+  "insight_ids": [
+   "INS1"
+  ],
+  "driver": "comment: asks musicians and teachers what they actually hear and whether it matters for a pupil. This is a real question, and the answers feed REPLY-19. watch: the same phrase on both pianos, with the one spec line that differs held back until the end",
+  "format": "E09 blind test rewritten as an open A/B listen with no guessing, 12–15 s, hands plus real close-up piano sound, loopable",
+  "funnel": "attention",
+  "hook_ru": "38 973 ₸ разницы. Это слышно?",
+  "first_frame": "Top-down vertical shot of two black digital pianos side by side. The hands are already mid-phrase on the left one, and the sound starts in frame 1. On-screen text: «38 973 ₸ разницы. Это слышно?». No logo, store name or «мы».",
+  "on_screen_ru": [
+   "38 973 ₸ разницы. Это слышно?",
+   "Casio PX-770 — 695 913 ₸",
+   "Casio Celviano AP-270 — 734 886 ₸",
+   "Одна фраза, один тембр, одна громкость",
+   "По карточкам: полифония 128 и 192",
+   "Что слышите вы?"
+  ],
+  "what_happens": "0–2 s: one short phrase on the PX-770, with the phone 20–30 cm from the speaker; the hook text sits over it. 2–5 s: the same phrase on the AP-270, with the model name and price captioned on each. 5–9 s: the two halves of the phrase alternate between the pianos so the ear can compare. 9–12 s: the one line where the two site cards differ (polyphony 128 vs 192) appears over a wide shot of both pianos. 12–14 s: the end frame cuts back to the first note so the video loops. We give no verdict either way; the viewer decides. Both pianos use the same preset and volume, logged by the editor.",
+  "why_stop": "Music starts in frame 1, and the hook asks a real question about money that every buyer comparing listings has: can you hear what the extra money buys?",
+  "why_share_or_save": "A parent who is choosing sends it to a partner («слышишь разницу?»). Musicians send it to friends to argue about whether price is audible.",
+  "comment_prompt_ru": "Музыканты и педагоги: что вы слышите — и важно ли это для ученика? Самые точные ответы проверим в следующем ролике.",
+  "cta_ru": "Хотите сравнить обе модели своими руками — напишите в WhatsApp слово СЛЫШНО1.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху, оба пианино в кадре. Руки играют одну и ту же короткую фразу на Casio PX-770. Телефон в 20–30 см от динамика.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Тот же ракурс, та же фраза, тот же тембр и громкость — на Casio AP-270.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Общий план сверху: оба пианино, руки убраны. Для финала.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 5,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Alternation cuts, burned-in captions, the spec-line text, the cover, and 2 hook variants with no guessing language: «Одна фраза на двух Casio. Разница — 38 973 ₸», «За что доплата — слышно?». Shots are reused in ANAT-02, YT-14, STATUS-18 and REPLY-19.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_price",
+   "ap270_price",
+   "diff_pno",
+   "px770_specs",
+   "ap270_specs",
+   "px770_instock",
+   "ap270_instock",
+   "NEEDED: re-verify both prices and stock on publish day (TTL 7 days from 2026-10-08)",
+   "NEEDED: worker confirms both models are on the showroom floor"
+  ],
+  "kpi": "Comments per 1k reach and hold3 vs the pooled music-retail median; secondary: СЛЫШНО1 codes",
+  "risks": [
+   "The earlier version was a guessing game («Угадайте…», «1 или 2?»), which the checks flagged as engagement bait. It now asks a real question with an expert invite, and the answers feed REPLY-19.",
+   "If presets or volume differ, the test is unfair and commenters will notice. Lock the same preset and volume on both.",
+   "We must not claim that polyphony 192 is audibly better, so the video gives no verdict.",
+   "Prices expire 2026-10-15 (TTL); re-check before publishing."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 5,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 4
+  }
+ },
+ {
+  "id": "ANAT-02",
+  "title": "Same 88 keys: what the 38 973 ₸ difference buys (price anatomy from the real spec cards)",
+  "insight_ids": [
+   "INS1",
+   "INS3"
+  ],
+  "driver": "save: a reference comparison you can read on pause; comment: «что ещё сравнить»",
+  "format": "E08 price anatomy, 18–22 s, site-card screen capture plus hands and sound",
+  "funnel": "consideration",
+  "hook_ru": "Одинаковые 88 клавиш. Зачем доплачивать?",
+  "first_frame": "Hands play the same chord on two pianos in quick succession, with the text over them. No prices in the first 2 s.",
+  "on_screen_ru": [
+   "Одинаковые 88 клавиш. Зачем доплачивать?",
+   "Casio PX-770 — 695 913 ₸",
+   "Casio Celviano AP-270 — 734 886 ₸",
+   "Разница — 38 973 ₸",
+   "В карточках совпадает: 88 клавиш, нет Bluetooth, нет автоаккомпанемента, банкетка не входит",
+   "Отличается: полифония 128 и 192",
+   "Полифония — это [NEEDED: формулировка, утверждённая магазином]",
+   "Остального в карточке нет — поэтому слушайте сами"
+  ],
+  "what_happens": "0–2 s: chord on both pianos. 2–5 s: the prices and the difference appear. 5–11 s: screen capture of the two real site cards, with a finger tapping each matching line. 11–15 s: the one differing line, polyphony, in plain words. 15–20 s: the same phrase on both, so the difference is heard, not just read. The video says plainly that the card does not list everything.",
+  "why_stop": "Calling out «88 keys everywhere, so why pay more» is exactly the confusion a buyer has while scrolling listings.",
+  "why_share_or_save": "It is a dense, saveable cheat-sheet for anyone comparing the two models, and it sends parents back to the listing.",
+  "comment_prompt_ru": "Какие две модели разобрать так же в следующий раз?",
+  "cta_ru": "Напишите в WhatsApp слово РАЗНИЦА1 — расскажем, чем ещё отличаются эти две модели, кроме карточки.",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Палец показывает строку «Полифония» на ценнике или экране рядом с пианино, крупно.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Screen capture of the two site cards, motion highlights on matching and differing lines, captions and edit. The demo audio reuses the BLIND-01 shots, so only one new shot is needed.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_price",
+   "ap270_price",
+   "diff_pno",
+   "px770_specs",
+   "ap270_specs",
+   "NEEDED: a derived fact with a plain-language definition of polyphony, approved by the store's expert",
+   "NEEDED: key action and speaker specs (EV27). Until then, say only «в карточке»."
+  ],
+  "kpi": "Saves per 1k reach; secondary: РАЗНИЦА1 codes",
+  "risks": [
+   "The video could imply the card lists every difference. Mitigated by the line «Остального в карточке нет».",
+   "We must not claim that 192 voices is audibly better for a beginner."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 5
+  }
+ },
+ {
+  "id": "CHECK-03",
+  "title": "3 things to check before paying for a digital piano",
+  "insight_ids": [
+   "INS3",
+   "INS6",
+   "INS2"
+  ],
+  "driver": "save: a numbered checklist you can read on pause",
+  "format": "E06 check before buying, 15–20 s, numbered, each point shown in a shot",
+  "funnel": "consideration",
+  "hook_ru": "Перед оплатой пианино проверьте 3 вещи",
+  "first_frame": "A hand holds a phone with a piano product card over real piano keys. A big «1/3» counter is in the corner.",
+  "on_screen_ru": [
+   "Перед оплатой пианино проверьте 3 вещи",
+   "1. Банкетка в комплекте? У Casio PX-770 и AP-270 — нет",
+   "2. Где ремонт по гарантии? Casio — 2 года, сервис только в Алматы",
+   "Минимальная гарантия у нас — 12 месяцев",
+   "3. Сколько стоит доставка? Заказ свыше 100 000 ₸ — бесплатно по Казахстану, наземным транспортом"
+  ],
+  "what_happens": "Each point gets about 5 s with a matching visual. Point 1: the empty floor in front of the piano where a bench would stand. Point 2: hands closing the key cover. Point 3: the store entrance or a packed box. Text stays readable on pause.",
+  "why_stop": "A true warning just before money changes hands, aimed at someone who is about to buy.",
+  "why_share_or_save": "High-ticket buyers save the checklist and come back to it. A parent forwards it to whoever is actually paying.",
+  "comment_prompt_ru": "Какой четвёртый пункт вы бы добавили? Лучший разберём отдельным роликом.",
+  "cta_ru": "Напишите в WhatsApp слово ПРОВЕРКА1 — ответим на эти 3 вопроса по любой модели в наличии.",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Пустое место на полу перед пианино, где обычно стоит банкетка. Камера медленно поднимается к клавишам.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Рука закрывает крышку клавиатуры, крупно, со звуком.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Вход в магазин с улицы, телефон в руке, 5 секунд.",
+     "location": "вход в магазин",
+     "seconds": 5,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Numbered motion text, captions and cover. A hook variant: «Не платите за пианино, пока не узнаете это». The lid-closing shot is reused in WARR-04 and FIRSTYEAR-15.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "warranty",
+   "warranty_casio",
+   "delivery_free_100k"
+  ],
+  "kpi": "Saves per 1k reach; secondary: ПРОВЕРКА1 codes",
+  "risks": [
+   "Mentioning that Casio service is in Almaty may cool interest in Casio. This is deliberate honesty, and the owner approves it.",
+   "If «Финальная распродажа» means the store is closing (Q2), pause the warranty line."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 5,
+   "share_save": 5,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 4
+  }
+ },
+ {
+  "id": "WARR-04",
+  "title": "Honest warranty answer: «It breaks in a year — where do I take it?»",
+  "insight_ids": [
+   "INS6"
+  ],
+  "driver": "convert: proof plus transparency for buyers close to purchase; save",
+  "format": "E05 question answered plus E17 counter-convention (saying what peers leave out), 12–15 s, AI voiceover or the worker's voice with the phone at the face if consent is given",
+  "funnel": "trust",
+  "hook_ru": "Сломается через год — куда везти?",
+  "first_frame": "Close-up: a hand slowly closes the key cover with a soft, real thud, and the question appears over it.",
+  "on_screen_ru": [
+   "Сломается через год — куда везти?",
+   "Минимальная гарантия у нас — 12 месяцев",
+   "Casio: гарантия производителя — 2 года",
+   "Но сервис Casio — только в Алматы",
+   "Лучше знать это до покупки",
+   "По другим брендам — спросите по конкретной модели"
+  ],
+  "what_happens": "Hook over the lid closing. Then hands on keys while the answer runs line by line. The payoff is a plain disclosure that most sellers leave out, followed by an invitation to ask about a specific model.",
+  "why_stop": "It names the fear every buyer spending 600 000 ₸ or more has but rarely sees answered.",
+  "why_share_or_save": "Buyers save it as proof before paying. A cautious partner gets it forwarded with «вот, гарантия есть».",
+  "comment_prompt_ru": "Какой вопрос про гарантию вы бы задали до покупки? Ответим следующим роликом.",
+  "cta_ru": "Напишите в WhatsApp слово ГАРАНТИЯ1 — расскажем, как работает гарантия на конкретную модель.",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Только если сотрудник согласен на голос: телефон у лица, без лица в кадре — снимаем руки. Читает с карточки.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Гарантия минимум год. У Casio — два, но сервис в Алматы.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "If voice consent is not given, an AI voiceover reads the same line. Captions and edit. The lid-closing and hands-on-keys shots are reused from CHECK-03 and BLIND-01.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "warranty",
+   "warranty_casio",
+   "NEEDED: how warranty service works for Kurzweil, Estrada and Gewa (owner)",
+   "NEEDED: Q2 answer on «Финальная распродажа» before publishing"
+  ],
+  "kpi": "Coded ГАРАНТИЯ1 inquiries per 1k reach; saves per 1k",
+  "risks": [
+   "If the store is closing or a brand is exiting, the video becomes misleading. It is blocked until Q2 is answered.",
+   "The owner may dislike disclosing that Casio service is in Almaty. Explicit approval is needed."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 5,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 4
+  }
+ },
+ {
+  "id": "GIFT-05",
+  "title": "POV: the piano is a New Year present and it has to stay hidden until the 31st",
+  "insight_ids": [
+   "INS2"
+  ],
+  "driver": "share: built-in recipient (the partner you hide presents with); comment: a real story prompt",
+  "format": "E12 POV with humour, 10–14 s, text over a real box and showroom footage",
+  "funnel": "conversion",
+  "hook_ru": "POV: пианино — подарок. Где прятать?",
+  "first_frame": "Top-down: a big piano box on the showroom floor, with hands trying to push it as if to hide it.",
+  "on_screen_ru": [
+   "POV: пианино — подарок. Где прятать до 31-го?",
+   "В шкаф не влезет",
+   "Под кровать — тоже",
+   "Вариант: пусть пока постоит в магазине",
+   "Резерв — 3 рабочих дня, продлить можно по просьбе",
+   "[NEEDED: до какой даты держим резерв в декабре]"
+  ],
+  "what_happens": "Three quick «where to hide it» jokes over real shots of the box. The turn comes when the box stays at the shop. The payoff is the reservation rule. Publish 2026-12-01 to 12-20 (pre-shot in the regular session).",
+  "why_stop": "A relatable December problem with a funny visual: hands versus a giant box.",
+  "why_share_or_save": "The video is for the partner or grandparent you plot presents with. It gets sent to them with no ask.",
+  "comment_prompt_ru": "Где вы прятали самый большой подарок от детей?",
+  "cta_ru": "Напишите в WhatsApp слово ПОДАРОК1 — подберём модель и договоримся, когда забрать.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: большая коробка с пианино на полу шоурума, руки пытаются её подвинуть.",
+     "location": "шоурум (не склад)",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Коробка крупно, рука хлопает по ней два раза.",
+     "location": "шоурум (не склад)",
+     "seconds": 4,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Joke captions, edit, cover and the reservation text. A variant hook: «Как спрятать пианино до Нового года?». The box shots are reused in REGION-12 and HANDOVER-20.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "pickup_reserve",
+   "address",
+   "NEEDED: owner confirms how long a reserve can be extended in December",
+   "NEEDED: Q3 delivery cut-off dates (no «успеем к Новому году» without them)",
+   "NEEDED: a packed piano box is available outside the back room"
+  ],
+  "kpi": "Shares per 1k reach; ПОДАРОК1 codes in December",
+  "risks": [
+   "It implies the piano can be held until the 31st without the owner confirming it. The NEEDED line blocks publishing.",
+   "The back room is off-limits by default; film only in the showroom."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 5
+  }
+ },
+ {
+  "id": "HOWTO-06",
+  "title": "Pinned: what happens after you write «ПИАНИНО» in WhatsApp",
+  "insight_ids": [
+   "INS1",
+   "INS2"
+  ],
+  "driver": "convert: removes friction by showing the exact next steps",
+  "format": "Conversion-layer video, 15–20 s: screen recording of a test WhatsApp chat plus two real shots; pinned on every platform",
+  "funnel": "conversion",
+  "hook_ru": "Написали «ПИАНИНО». Что дальше?",
+  "first_frame": "Phone screen: a WhatsApp chat with the word «ПИАНИНО» being typed and sent. It is a test chat between two staff phones, with no customer data.",
+  "on_screen_ru": [
+   "Написали «ПИАНИНО». Что дальше?",
+   "1. Спросим, для кого и какой бюджет",
+   "2. Пришлём модели, которые есть в наличии",
+   "3. Самовывоз: Астана, ул. Кажымукана, 14 — резерв 3 рабочих дня",
+   "4. Или доставка: заказ свыше 100 000 ₸ — бесплатно по Казахстану",
+   "5. Оплата: Kaspi QR, Kaspi Pay, карта, Apple Pay, наличные"
+  ],
+  "what_happens": "A screen recording of the approved quick-reply flow, step by step, cut with a real shot of the shop entrance and hands on keys. It ends on the chat waiting for the viewer's message.",
+  "why_stop": "Weak for cold reach by design. It serves people who already visit the profile, as part of the trust shelf.",
+  "why_share_or_save": "A saved «how to order» answer that a buyer forwards to whoever will pay.",
+  "comment_prompt_ru": "Что ещё вы хотели бы узнать до того, как написать?",
+  "cta_ru": "Напишите в WhatsApp слово ПИАНИНО — начнём с первого шага.",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [
+    {
+     "what_ru": "Запись экрана: со второго телефона отправить «ПИАНИНО» на рабочий WhatsApp и показать ответ-шаблон.",
+     "location": "любое место в магазине",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Step captions, edit, the cover for the pin, and the WA quick-reply template for the code (the owner approves it once). The entrance and keys shots are reused from CHECK-03.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "wa",
+   "address",
+   "pickup_reserve",
+   "delivery_free_100k",
+   "payments",
+   "NEEDED: owner approves steps 1–2 as the quick-reply script"
+  ],
+  "kpi": "wa.me clicks and ПИАНИНО codes per 1k profile visits; inquiry-to-order rate",
+  "risks": [
+   "If the WA reply time on piano inquiries is over 60 minutes, fix that before pinning (R7). Content cannot fix slow replies.",
+   "Any visible customer data in the recording would break privacy rules. Use a test chat only."
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 4,
+   "share_save": 2,
+   "comment": 1,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 5
+  }
+ },
+ {
+  "id": "TIERS-07",
+  "title": "Three budgets, one phrase: a digital piano at three real price points",
+  "insight_ids": [
+   "INS1",
+   "INS4"
+  ],
+  "driver": "save: budget tiers in one frame; share to the partner who sets the budget",
+  "format": "E20 budget tiers plus E11 sorter, 15–20 s, the same phrase on three in-stock models",
+  "funnel": "consideration",
+  "hook_ru": "Цифровое пианино: три бюджета",
+  "first_frame": "Hands mid-phrase on the cheapest in-stock model. A three-step price ladder graphic slides in on the side.",
+  "on_screen_ru": [
+   "Цифровое пианино: три бюджета",
+   "Estrada EDP-220BK — [NEEDED: цена]",
+   "Casio PX-S1100 — [NEEDED: цена]",
+   "Casio AP-300 — [NEEDED: цена]",
+   "Кому какое — [NEEDED: формулировки, утверждённые магазином]",
+   "Напишите бюджет — подскажем"
+  ],
+  "what_happens": "The same 4-second phrase on each of three pianos, cheapest to most expensive. The price and model name appear over each, and the final frame shows all three tiers. Sorter labels («для начала», etc.) are used only if the owner or store expert approves them.",
+  "why_stop": "It answers the question every parent has: what does a budget actually get me?",
+  "why_share_or_save": "It gets saved for the family budget conversation and forwarded to the partner.",
+  "comment_prompt_ru": "Какой бюджет вы закладываете на первое пианино?",
+  "cta_ru": "Напишите в WhatsApp слово БЮДЖЕТ1 и вашу сумму — пришлём, что есть в наличии.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Одна и та же фраза на Estrada EDP-220BK, телефон в 20–30 см от динамика.",
+     "location": "шоурум",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Та же фраза на Casio PX-S1100.",
+     "location": "шоурум",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Та же фраза на Casio AP-300.",
+     "location": "шоурум",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Tier ladder graphics, captions, edit and cover. These shots also feed RITUAL-13, VOTE-09 and STAKES-11.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: ledger entries (web, TTL 7d) for Estrada EDP-220BK 232 960 ₸, Casio PX-S1100BKC7 362 990 ₸, Casio AP-300 754 990 ₸ (EV05)",
+   "NEEDED: in-stock re-check on publish day",
+   "NEEDED: owner-approved 'who it's for' labels",
+   "delivery_free_100k"
+  ],
+  "kpi": "Saves per 1k reach; БЮДЖЕТ1 codes",
+  "risks": [
+   "Blocked until the prices are in the ledger.",
+   "Sorter labels are judgment claims, so the owner signs them off."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 5,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 5
+  }
+ },
+ {
+  "id": "NIGHT-08",
+  "title": "Wildcard: 22:00, scales still not played, and the neighbours are asleep",
+  "insight_ids": [
+   "INS5"
+  ],
+  "driver": "share: apartment-life identity («это про нас»); loop",
+  "format": "E04 close-sound mechanism plus E12 POV, 8–10 s, loopable",
+  "funnel": "attention",
+  "hook_ru": "POV: 22:00, а гаммы не сыграны",
+  "first_frame": "Extreme close-up of hands striking a loud chord, with real close sound.",
+  "on_screen_ru": [
+   "POV: 22:00, а гаммы не сыграны",
+   "(звук громкий)",
+   "щёлк",
+   "Соседи спят. Гаммы — играются"
+  ],
+  "what_happens": "0–2 s: a loud chord. 2–4 s: a hand plugs headphones into the piano (macro, the click is audible). 4–8 s: the same playing, and only the soft clack of keys is heard. 8–9 s: cut back to the loud chord, so the video loops.",
+  "why_stop": "A sudden loud chord, then silence, is a sound-based pattern break.",
+  "why_share_or_save": "Apartment families recognise the neighbour problem and send it to a partner or a parent group.",
+  "comment_prompt_ru": "До скольки у вас дома можно заниматься музыкой — и кто первым начинает стучать?",
+  "cta_ru": "Напишите в WhatsApp слово ТИХО1 — подскажем модели с выходом на наушники.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Макро: руки берут громкий аккорд, телефон в 20 см.",
+     "location": "шоурум",
+     "seconds": 4,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Макро: рука вставляет штекер наушников в разъём, щелчок слышен.",
+     "location": "шоурум",
+     "seconds": 4,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Те же руки играют в наушниках, слышен только стук клавиш.",
+     "location": "шоурум",
+     "seconds": 6,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "POV text, the loop edit, captions and cover. A variant hook: «Как заниматься и не поссориться с соседями».",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: headphone output confirmed for the model shown (spec fetch, EV27)",
+   "NEEDED: the store has headphones to use as a prop (business-owned)",
+   "NEEDED: assumption that apartment practice is a real buyer worry, to check in chats"
+  ],
+  "kpi": "Shares per 1k reach; hold3",
+  "risks": [
+   "It is blocked until the headphone output is confirmed per model; otherwise it implies a feature that may not exist.",
+   "The wildcard insight has no customer evidence yet (E=0)."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "VOTE-09",
+  "title": "White or black in the living room? A vote that decides which piano stands at the entrance",
+  "insight_ids": [
+   "INS9"
+  ],
+  "driver": "comment: a real A/B vote with a consequence",
+  "format": "E23 vote that changes reality, 8–12 s",
+  "funnel": "attention",
+  "hook_ru": "Белое или чёрное — в зал?",
+  "first_frame": "Two identical cabinet pianos, one white and one black, side by side. Hands play the same phrase on one, then the other.",
+  "on_screen_ru": [
+   "Белое или чёрное — в зал?",
+   "Модель одна — Casio AP-300",
+   "Цена одна — [NEEDED]",
+   "Пишите: белое или чёрное",
+   "Победитель встанет у входа в магазин на декабрь [NEEDED: решение владельца]"
+  ],
+  "what_happens": "A slow pan across both finishes with a phrase on each. The text sets up the vote, and the follow-up episode shows the winner placed at the entrance (E23 loop).",
+  "why_stop": "A pure taste choice with a clean visual contrast; anyone can answer in a second.",
+  "why_share_or_save": "A household debate («мне белое, мужу чёрное») that people tag each other into.",
+  "comment_prompt_ru": "Белое или чёрное — какое поставили бы у себя в зале?",
+  "cta_ru": "Выбираете пианино в зал — напишите в WhatsApp слово ЦВЕТ1, пришлём фото обоих вживую.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Медленная панорама: белое и чёрное Casio AP-300 рядом, на каждом одна фраза, телефон близко к динамику.",
+     "location": "шоурум",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Vote text, captions, cover, and the follow-up episode script showing the winner. The AP-300 shot is reused in TIERS-07.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: ledger entry for Casio AP-300 754 990 ₸ (same price across finishes, EV29) and stock re-check for WE and BK",
+   "NEEDED: owner agrees to move the winning finish to the entrance",
+   "NEEDED: both finishes on the floor"
+  ],
+  "kpi": "Comments per 1k reach; follows from the result episode",
+  "risks": [
+   "A vote with no real consequence would be bait. It needs the owner's yes before publishing.",
+   "AP-300BK stock is low (2 units per the sample); re-check before posting."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 5,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "SPEC-10",
+  "title": "Series «Переводчик с пианинного», ep. 1: «Банкетка: Нет»",
+  "insight_ids": [
+   "INS3"
+  ],
+  "driver": "follow: a named series with a fixed opening ritual; save",
+  "format": "E17 counter-convention plus E03, 8–12 s per episode; opening ritual: a finger taps one line of a real site spec card",
+  "funnel": "consideration",
+  "hook_ru": "«Банкетка: Нет». Что это значит?",
+  "first_frame": "Screen capture of the real site card. A finger taps the line «Банкетка: Нет» and it zooms. This is the ritual frame for every episode.",
+  "on_screen_ru": [
+   "Переводчик с пианинного",
+   "«Банкетка: Нет». Что это значит?",
+   "Банкетки в коробке нет — у Casio PX-770 и AP-270",
+   "Закладывайте её в бюджет отдельно",
+   "[NEEDED: цена банкетки из каталога]",
+   "Следующая строка: «Bluetooth: N»"
+  ],
+  "what_happens": "Ritual tap on the spec line, then a whip cut to the real piano with no bench in front of it, a one-line plain translation, and a teaser for the next line. Planned episodes: «Bluetooth: N», «Автоаккомпанемент: Нет», «Полифония: 192», «88 клавиш», each a single line from a real card.",
+  "why_stop": "Everyone who has read a spec card has felt lost; this calls that out directly.",
+  "why_share_or_save": "Each episode is a small decoder you save before buying, and the series promise drives follows.",
+  "comment_prompt_ru": "Какую строку из карточки пианино нам перевести следующей?",
+  "cta_ru": "Напишите в WhatsApp слово БАНКЕТКА1 — подберём банкетку к вашей модели.",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Пианино без банкетки, камера медленно опускается к пустому полу. (Можно взять кадр из CHECK-03.)",
+     "location": "шоурум",
+     "seconds": 5,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Screen capture of the site card, the ritual zoom, translation text, series title card and captions. Mostly reuses existing shots, so the marginal worker cost is about 1 minute.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "NEEDED: bench SKU and price from the catalogue, and its stock",
+   "NEEDED: approved plain-language translation for each future spec line"
+  ],
+  "kpi": "Follows per 1k reach; saves per 1k",
+  "risks": [
+   "Later episodes such as polyphony need approved derived definitions.",
+   "The series could slide into dry specs; each episode must be tied to a buyer consequence."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 4
+  }
+ },
+ {
+  "id": "STAKES-11",
+  "title": "Raise the stakes: a 10× price gap, the same phrase. Is it audible? (guessing language removed proactively)",
+  "insight_ids": [
+   "INS1"
+  ],
+  "driver": "comment: an opinion with high stakes (is a 10× price gap worth it?); watch until the reveal",
+  "format": "E09 blind listen, raised stakes, 12–15 s, no guessing call-to-action",
+  "funnel": "attention",
+  "hook_ru": "Разница в цене — в 10 раз. Слышно?",
+  "first_frame": "Close-up of hands mid-phrase on piano A, with «Пианино A» on screen. Neither cabinet is shown in full, to hide the price cues.",
+  "on_screen_ru": [
+   "Разница в цене — в 10 раз. Слышно?",
+   "Пианино A",
+   "Пианино B",
+   "Одна фраза. В кадре — только клавиши",
+   "Estrada EDP-200WH — [NEEDED: цена]",
+   "Dexibell VIVO H10 — [NEEDED: цена]",
+   "Стоит ли разница своих денег?"
+  ],
+  "what_happens": "The same phrase on both pianos, filmed only as close-ups of keys so the cabinets don't give it away. Then a fast A/B alternation and the reveal, with wide shots, model names and prices. We give no verdict; the closing line puts the value question to the viewer.",
+  "why_stop": "A 10× price gap is an outrageous number, and people want to test their own ears.",
+  "why_share_or_save": "Musicians and parents argue about whether price is audible, and send it to friends to settle the debate.",
+  "comment_prompt_ru": "Стоит ли разница в 10 раз своих денег — что именно вы слышите?",
+  "cta_ru": "Хотите сыграть на обоих сами — напишите в WhatsApp слово СЛУХ1.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Только клавиши крупно: фраза на Estrada EDP-200WH, телефон в 20–30 см от динамика.",
+     "location": "шоурум",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Та же фраза, тот же ракурс на Dexibell VIVO H10.",
+     "location": "шоурум",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Общий план обоих инструментов для раскрытия.",
+     "location": "шоурум",
+     "seconds": 5,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Masked framing, A/B edit, reveal, captions and 2 hook variants (a question type and a number type). No «угадайте» wording.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: ledger entries for Estrada EDP-200WH 200 720 ₸ and Dexibell VIVO H10 BK 2 075 617 ₸ (EV03), plus a derived ratio of about 10× (2 075 617 ÷ 200 720 ≈ 10.3)",
+   "NEEDED: both models on the showroom floor and in stock on publish day"
+  ],
+  "kpi": "Comments per 1k reach; hold3; tail hits (≥5× median)",
+  "risks": [
+   "My call, beyond the method: the BLIND-01 check failed on guessing language, so I removed «Какое?» and «A или B?» here too before it could fail the same check.",
+   "We are not trying to prove the cheap one is «just as good». We make no verdict and let the viewer judge.",
+   "The premium brand owner or supplier may dislike the framing; the owner approves it."
+  ],
+  "rubric": {
+   "stop": 5,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "REGION-12",
+  "title": "A piano from Astana to your city: how much is delivery?",
+  "insight_ids": [
+   "INS2"
+  ],
+  "driver": "share: relatives in the regions; convert",
+  "format": "E16 local truth, 10–12 s, a city call-out with real box footage; city hook variants",
+  "funnel": "consideration",
+  "hook_ru": "Пианино из Астаны в Павлодар — доставка?",
+  "first_frame": "Hands tape a piano box shut, with the tape sound close up and the city call-out in text.",
+  "on_screen_ru": [
+   "Пианино из Астаны в Павлодар — доставка?",
+   "Заказ свыше 100 000 ₸ —",
+   "доставка по Казахстану бесплатно",
+   "Наземным транспортом",
+   "Сроки — уточняйте по своему городу в WhatsApp"
+  ],
+  "what_happens": "Tape on the box, the box carried toward the door, and the answer revealed in two lines. City variants (Караганда, Кокшетау, Костанай, Павлодар) are re-cut from the same body as hook variants.",
+  "why_stop": "Naming the viewer's own city is a direct call-out.",
+  "why_share_or_save": "It gets sent to family in the regions who are choosing a piano for a grandchild.",
+  "comment_prompt_ru": "Из какого вы города? Ответим, сколько обычно едет доставка к вам.",
+  "cta_ru": "Напишите в WhatsApp слово ДОСТАВКА1 и ваш город — ответим по срокам и моделям в наличии.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Руки заклеивают коробку скотчем, крупно, звук скотча слышен.",
+     "location": "шоурум (не склад)",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Коробку несут к двери магазина, видно только руки и коробку.",
+     "location": "вход в магазин",
+     "seconds": 6,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "City hook variants, captions and cover. The box shots are reused in GIFT-05 and HANDOVER-20.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "delivery_free_100k",
+   "px770_price",
+   "ap270_price",
+   "NEEDED: delivery lead times by region (owner) before any timing words",
+   "NEEDED: the promised comment replies depend on real regional lead times"
+  ],
+  "kpi": "ДОСТАВКА1 codes per 1k reach; non-Astana share of piano inquiries",
+  "risks": [
+   "Never imply delivery before New Year without Q3 cut-off dates.",
+   "The comment promise requires staff to know lead times by city."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 5
+  }
+ },
+ {
+  "id": "RITUAL-13",
+  "title": "Series «Первая нота дня»: one phrase on a different in-stock piano each episode",
+  "insight_ids": [
+   "INS1"
+  ],
+  "driver": "follow: a recurring ritual with the same first frame; comment: choose tomorrow's piano",
+  "format": "E14 ritual plus E04 close sound, 6–8 s, loopable; one session yields 4 episodes",
+  "funnel": "attention",
+  "hook_ru": "Первая нота дня в магазине",
+  "first_frame": "Ritual frame: a top-down shot of closed piano keys, the lid lifts, and the first note sounds at 0.5 s.",
+  "on_screen_ru": [
+   "Первая нота дня",
+   "Сегодня: [модель]",
+   "Какое играем завтра?"
+  ],
+  "what_happens": "The same opening every time: lid up, one 5-second phrase recorded close, model name in the caption, lid down, and a loop. Viewers pick the next piano in the comments.",
+  "why_stop": "A satisfying sound-first micro-ritual; frame 1 is motion plus sound.",
+  "why_share_or_save": "Low share value; it builds a following and a habit, and the vote creates a reason to return.",
+  "comment_prompt_ru": "Какое пианино сыграть в следующей серии — назовите модель.",
+  "cta_ru": "Понравился звук — напишите в WhatsApp слово НОТА1 и номер серии.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: крышка поднимается, одна фраза 5 секунд, крышка опускается. Повторить на 4 разных пианино. Телефон в 20–30 см.",
+     "location": "шоурум",
+     "seconds": 8,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Series title, model captions, loop edit, and 4 episodes from one session. TIERS-07 demo shots can double as episodes.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "NEEDED: list of models currently on the floor and in stock (names only, no prices needed)"
+  ],
+  "kpi": "Follows per 1k reach; comments naming models",
+  "risks": [
+   "Pure demos underperformed on this channel (L006); the comment vote is the buyer-question tie-in. Retire the arm per R5 if it loses.",
+   "Never feature an out-of-stock model."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 5,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "YT-14",
+  "title": "YouTube search line: «Casio PX-770 или Casio Celviano AP-270» (Short plus 60–90 s vertical)",
+  "insight_ids": [
+   "INS1",
+   "INS3"
+  ],
+  "driver": "save: search-intent reference; convert from researchers",
+  "format": "YouTube Short (≤45 s) plus a 60–90 s vertical with a plain model-name title (L002/L004); also restarts the dormant channel",
+  "funnel": "consideration",
+  "hook_ru": "Casio PX-770 или AP-270?",
+  "first_frame": "Both pianos side by side, with the same chord played on each in the first 1.5 s.",
+  "on_screen_ru": [
+   "Casio PX-770 или Casio Celviano AP-270?",
+   "Casio PX-770 — 695 913 ₸",
+   "Casio Celviano AP-270 — 734 886 ₸",
+   "Разница — 38 973 ₸",
+   "Совпадает: 88 клавиш, нет Bluetooth, нет банкетки в комплекте",
+   "Полифония: 128 и 192",
+   "Тихо · громко · с педалью — слушайте"
+  ],
+  "what_happens": "A plain search title: «Casio PX-770 vs Casio Celviano AP-270: разница 38 973 ₸ — звук». Three sound tests (soft, loud, with sustain), recorded close on each model, then the matching specs and the one difference. The description links the existing AP-270 comparison video (EV19).",
+  "why_stop": "Weak in the feed by design; it is built for search, where buyers type model names (EV13: piano model titles get 1.35× the channel median).",
+  "why_share_or_save": "A buyer comparing exactly these two models finds it, watches all of it, and writes.",
+  "comment_prompt_ru": "Какие две модели сравнить следующими?",
+  "cta_ru": "Напишите в WhatsApp слово PX770 — ответим по обеим моделям и наличию.",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Тихая фраза на PX-770, потом на AP-270, телефон в 20–30 см.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 10,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Громкий аккорд на каждом.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 8,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Аккорд с педалью на каждом, нога на педали в кадре.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 10,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Search title and description, chapters, captions and edit. Reuses the BLIND-01 and ANAT-02 shots.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_price",
+   "ap270_price",
+   "diff_pno",
+   "px770_specs",
+   "ap270_specs",
+   "NEEDED: price and stock re-check on publish day; price lines removed from the evergreen description after the 7-day TTL"
+  ],
+  "kpi": "YouTube search views at 7 and 28 days; PX770 codes",
+  "risks": [
+   "Prices in an evergreen video go stale. Put the price only in the first-week version and keep the description dated.",
+   "The one earlier piano head-to-head did 0.48× (EV16), so this format is untested here; keep it short and sound-first."
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 5,
+   "share_save": 4,
+   "comment": 2,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 5
+  }
+ },
+ {
+  "id": "FIRSTYEAR-15",
+  "title": "«А если через полгода бросит?»: an honest answer to the parent's real fear",
+  "insight_ids": [
+   "INS4"
+  ],
+  "driver": "comment: parents share their own experience; share to other music-school parents",
+  "format": "E05 question plus E11 sorter, 12–15 s, hands and text with an AI voiceover",
+  "funnel": "consideration",
+  "hook_ru": "А если через полгода бросит?",
+  "first_frame": "An adult hand slowly lowers the key cover over the keys, with a soft real thud. The question is on screen.",
+  "on_screen_ru": [
+   "А если через полгода бросит?",
+   "Честно: этого не знает никто",
+   "Что знаем точно:",
+   "Цифровое пианино в наличии — от [NEEDED: цена]",
+   "Вернуть можно в течение 14 дней — только если инструментом не пользовались",
+   "Поэтому выбирайте по бюджету, а не на эмоциях",
+   "Напишите сумму — покажем, что есть"
+  ],
+  "what_happens": "The hook names the fear. The turn is an honest «nobody knows». The payoff gives two true anchors, the entry price and the real return conditions, then invites the parent to state a budget.",
+  "why_stop": "It says aloud the doubt parents feel but rarely voice to a seller.",
+  "why_share_or_save": "It gets forwarded in music-school parent chats as «вот честный ответ».",
+  "comment_prompt_ru": "Сколько ваш ребёнок уже занимается — и был ли момент «хочу бросить»?",
+  "cta_ru": "Напишите в WhatsApp слово ПЕРВЫЙ1 и ваш бюджет — пришлём, что есть в наличии.",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Рука медленно закрывает крышку клавиатуры. (Можно взять кадр из CHECK-03.)",
+     "location": "шоурум",
+     "seconds": 5,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "An AI voiceover in a calm parent-to-parent tone, captions, edit and cover. No children on camera.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "returns_14d",
+   "returns_conditions",
+   "NEEDED: ledger entry for the cheapest in-stock piano price (e.g. Estrada EDP-200WH 200 720 ₸, EV03)",
+   "Owner flag (non-marketing): instalments, rental or trade-in would resolve this tension; we do not claim any of them"
+  ],
+  "kpi": "Comments per 1k reach; ПЕРВЫЙ1 codes",
+  "risks": [
+   "The owner may not want return limits mentioned. They are true and protect trust, but explicit approval is needed.",
+   "The insight is a hypothesis with no chat evidence yet; re-rank after the chat sample arrives."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 5,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 4
+  }
+ },
+ {
+  "id": "ADULT-16",
+  "title": "POV: you're 35 and the piano is for you",
+  "insight_ids": [
+   "INS8"
+  ],
+  "driver": "share: adult-beginner identity; comment: age stories",
+  "format": "E12 POV, 8–10 s, an adult playing a slow, imperfect first chord recorded close",
+  "funnel": "attention",
+  "hook_ru": "POV: мне 35, пианино — себе",
+  "first_frame": "Adult hands hesitate over the keys, then press a first slow chord. Close sound; the hesitation is the hook.",
+  "on_screen_ru": [
+   "POV: мне 35, и пианино я покупаю себе",
+   "Не ребёнку. Себе.",
+   "Первый аккорд"
+  ],
+  "what_happens": "Hesitation, then a first slow chord that is a little imperfect, then a second, better one. The text lands on «Себе». It loops.",
+  "why_stop": "An unexpected twist on a category that is usually framed around children.",
+  "why_share_or_save": "Adults who «always wanted to» send it to a friend or partner: «это про меня».",
+  "comment_prompt_ru": "Во сколько лет вы начали играть — или всё ещё собираетесь?",
+  "cta_ru": "Напишите в WhatsApp слово СЕБЕ1 — подберём пианино для взрослого новичка.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Руки взрослого зависают над клавишами, потом медленно берут простой аккорд, не идеально. Телефон в 20–30 см.",
+     "location": "шоурум",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "POV text, captions, cover and a variant hook («Не поздно ли в 35?»).",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "NEEDED: the adult-beginner segment is unverified for pianos (EV22 is guitar only); check in chats"
+  ],
+  "kpi": "Shares per 1k reach; follows",
+  "risks": [
+   "It is weakly tied to the objective if adults are not real piano buyers here; this is a wildcard slot.",
+   "The playing must look honest, not staged by a pro."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "GIFTTIER-17",
+  "title": "A musical New Year gift in 3 budgets: ukulele, electric guitar, digital piano",
+  "insight_ids": [
+   "INS2"
+  ],
+  "driver": "save: gift tiers; share: «тому, кто ещё не придумал подарок»",
+  "format": "E20 budget tiers, 15–18 s, three real instruments each heard for 3 s, close sound; publish Dec 1–20",
+  "funnel": "consideration",
+  "hook_ru": "Музыкальный подарок: 3 бюджета",
+  "first_frame": "A close-up strum on a ukulele with real sound, and the text on screen.",
+  "on_screen_ru": [
+   "Музыкальный подарок: 3 бюджета",
+   "22 100 ₸ — укулеле Caesar U-246, чехол в комплекте",
+   "59 800 ₸ — электрогитара Alston AS-100BK",
+   "695 913 ₸ — цифровое пианино Casio PX-770, 88 клавиш",
+   "Для того, кто ещё не придумал подарок"
+  ],
+  "what_happens": "Ukulele strum, then an electric-guitar riff through a store amp, then a piano phrase. Each instrument gets a price line; the final frame shows all three. The piano is the top tier and the anchor.",
+  "why_stop": "A December gift problem with real sound in frame 1.",
+  "why_share_or_save": "Gift lists get saved. The built-in recipient is the person who hasn't chosen a present yet.",
+  "comment_prompt_ru": "Какой музыкальный подарок вы получили в детстве — и играете ли до сих пор?",
+  "cta_ru": "Напишите в WhatsApp слово ПОДАРОК2 и для кого подарок — предложим варианты в наличии.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Укулеле Caesar U-246, крупно, один бой, телефон в 20 см от деки.",
+     "location": "шоурум",
+     "seconds": 4,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Электрогитара Alston AS-100BK через комбик, рифф, телефон в 30 см от динамика комбика.",
+     "location": "шоурум",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Tier graphics, captions, cover and a seasonal variant hook. The piano clip is reused from BLIND-01.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "u246_price",
+   "u246_specs",
+   "u246_instock",
+   "as100_price",
+   "as100_instock",
+   "px770_price",
+   "px770_specs",
+   "px770_instock",
+   "NEEDED: re-verify all three prices and stock on publish day (TTL 7d)"
+  ],
+  "kpi": "Saves per 1k reach; ПОДАРОК2 codes, and the share that name the piano",
+  "risks": [
+   "The two lower tiers serve a secondary objective; keep within the 20% secondary cap.",
+   "The amp is shown but not priced. Do not imply it is included with the guitar."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 5,
+   "share_save": 5,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "STATUS-18",
+  "title": "WhatsApp Status for existing contacts: «Для тех, у кого ребёнок пошёл в музыкалку этой осенью»",
+  "insight_ids": [
+   "INS4",
+   "INS3"
+  ],
+  "driver": "share: referral from existing customers to the families they know",
+  "format": "Retention re-cut, 10–15 s, posted weekly to WA Status and to opted-in broadcasts only",
+  "funnel": "retention",
+  "hook_ru": "Ребёнок пошёл в музыкалку этой осенью?",
+  "first_frame": "Reused top-down shot of hands on keys, with sound from the first frame.",
+  "on_screen_ru": [
+   "Ребёнок пошёл в музыкалку этой осенью?",
+   "3 вещи проверить до покупки пианино",
+   "1. Банкетка в комплекте?",
+   "2. Где сервис по гарантии?",
+   "3. Сколько стоит доставка?",
+   "Ответы — по слову СЕМЬЯ1"
+  ],
+  "what_happens": "A condensed re-cut of CHECK-03 and BLIND-01 for people who already have the store's number. It reaches music-school parents through existing customers, with no new filming.",
+  "why_stop": "Contacts see it in Status, and a familiar sender earns attention.",
+  "why_share_or_save": "An existing customer screenshots or forwards it to a parent they know who is choosing a piano.",
+  "comment_prompt_ru": "Ответьте на статус: какой вопрос про пианино задать за вас?",
+  "cta_ru": "Напишите в WhatsApp слово СЕМЬЯ1 — ответим вам или тем, кому вы это покажете.",
+  "production": {
+   "mode": "ai",
+   "worker_shots": [],
+   "ai_parts": "A full re-cut from existing shots: captions, Status-format edit, and the broadcast text for opted-in contacts. No worker minutes needed.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "warranty_casio",
+   "delivery_free_100k",
+   "NEEDED: the opted-in broadcast list exists (owner)"
+  ],
+  "kpi": "СЕМЬЯ1 codes per week; Status views",
+  "risks": [
+   "Broadcasts go only to opted-in contacts; posting too often would make the WA number look like spam.",
+   "Status reach depends on the number of saved contacts, which is unknown."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 5,
+   "share_save": 4,
+   "comment": 2,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 4
+  }
+ },
+ {
+  "id": "REPLY-19",
+  "title": "Reply to a comment: we play what you asked for on both pianos",
+  "insight_ids": [
+   "INS1"
+  ],
+  "driver": "comment loop plus follow (E19)",
+  "format": "E19 reply with video, 10–15 s; triggered by R2 if BLIND-01 or STAKES-11 gets real requests",
+  "funnel": "retention",
+  "hook_ru": "Вы просили — играем на обоих",
+  "first_frame": "The platform's reply sticker with the real (public, anonymised) comment, over hands already playing.",
+  "on_screen_ru": [
+   "Вы просили — играем на обоих",
+   "[текст реального комментария]",
+   "Casio PX-770",
+   "Casio Celviano AP-270",
+   "Теперь слышно?"
+  ],
+  "what_happens": "The comment is shown, then the requested phrase or test is played on both pianos, recorded close, and the viewer is asked again. If the comment raised a question we can answer from the ledger, it is answered in a caption.",
+  "why_stop": "Commenters and their friends are notified; the visible request creates curiosity.",
+  "why_share_or_save": "The commenter shares the reply to their own request, and others see that the store listens.",
+  "comment_prompt_ru": "Что сыграть или проверить на этих двух пианино в следующий раз?",
+  "cta_ru": "Хотите услышать вживую — напишите в WhatsApp слово ОТВЕТ1.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Запрошенная фраза/проверка на первом пианино, телефон в 20–30 см.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "То же на втором пианино.",
+     "location": "шоурум, у двух пианино",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Choosing the comment (a draft that the owner approves), the reply-sticker edit, captions, and draft text replies to other comments.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "NEEDED: real comments from BLIND-01 or STAKES-11 (conditional idea)"
+  ],
+  "kpi": "Comments and follows per 1k reach vs the parent video",
+  "risks": [
+   "It only exists if real comments arrive; never invent a comment.",
+   "The request may need a skill the worker lacks; pick feasible requests."
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 5,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  }
+ },
+ {
+  "id": "HANDOVER-20",
+  "title": "Behind the counter: what happens to a piano before it's handed over",
+  "insight_ids": [
+   "INS6",
+   "INS1"
+  ],
+  "driver": "watch plus trust: a satisfying process with close sound; convert",
+  "format": "E03 behind the counter plus E04 close sound, 12–15 s, hands only",
+  "funnel": "trust",
+  "hook_ru": "Перед выдачей проверяем все 88 клавиш",
+  "first_frame": "A macro glissando across the keys, with the sound and visible motion in frame 1.",
+  "on_screen_ru": [
+   "Перед выдачей проверяем все 88 клавиш [NEEDED: подтверждение владельца]",
+   "Педаль",
+   "Включение",
+   "Упаковка",
+   "Теперь — ваше"
+  ],
+  "what_happens": "A full glissando across all keys, a foot on the sustain pedal with a chord, the power light, the cable coiled, and the box taped shut, with real sounds throughout. It ends on the closed box and loops to the glissando.",
+  "why_stop": "Fast motion plus a full-keyboard sound in the first second.",
+  "why_share_or_save": "Low share value; it builds trust for buyers close to deciding, and suits the trust shelf and Highlights.",
+  "comment_prompt_ru": "Что вы проверяете первым, когда привозят новую технику?",
+  "cta_ru": "Напишите в WhatsApp слово ВЫДАЧА1 — расскажем, как проходит выдача и доставка.",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Макро: глиссандо по всей клавиатуре, телефон в 20 см.",
+     "location": "шоурум / зона выдачи",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Нога нажимает педаль, рука берёт аккорд.",
+     "location": "шоурум / зона выдачи",
+     "seconds": 5,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Палец включает пианино, загорается индикатор, крупно.",
+     "location": "шоурум / зона выдачи",
+     "seconds": 4,
+     "takes": 1,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Process captions, the loop edit and cover. The taping shot is reused from REGION-12.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "original",
+   "NEEDED: owner confirms this pre-handover check actually happens",
+   "NEEDED: the handover area is permitted for filming (the back room is off-limits by default)"
+  ],
+  "kpi": "Hold3 and completion; ВЫДАЧА1 codes; profile visits per 1k",
+  "risks": [
+   "If the check isn't a real routine, this becomes a fake process. It is blocked until the owner confirms.",
+   "Use «100% оригинальный товар» only as the site's own claim, if at all."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 2,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 4
+  }
+ }
+]

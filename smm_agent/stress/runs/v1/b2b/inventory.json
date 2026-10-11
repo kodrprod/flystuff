@@ -1,0 +1,70 @@
+{
+ "profile": {
+  "name": "Поставщик стройматериалов (гипотетический), Караганда",
+  "vertical": "b2b_construction_materials",
+  "city": "Караганда",
+  "languages": [
+   "ru"
+  ],
+  "what_they_sell": "dry mixes and insulation to contractors and companies; warehouse, delivery trucks, ~40 SKUs; owner skeptical of social media",
+  "social": {},
+  "sales_channels": [
+   "phone",
+   "WhatsApp",
+   "tenders",
+   "sales reps"
+  ],
+  "staff_capacity": {
+   "minutes_per_week": 20,
+   "device": "one phone",
+   "audio": "good only close"
+  },
+  "known_unknowns": [
+   "who buys (foremen? procurement?)",
+   "prices/terms",
+   "delivery radius"
+  ],
+  "note": "HYPOTHETICAL client for stress-testing the method. Every detail below is an assumption, not a fact; the ledger is empty, so no number may appear in content until a real client confirms it."
+ },
+ "facts_usable": [],
+ "facts_not_usable": [],
+ "files": [],
+ "learnings": [
+  {
+   "id": "L001",
+   "vertical": "any",
+   "finding": "A blind text judge ranks short-form (Shorts) performance barely above chance: Spearman 0.11 overall, 0.07 for retail channels (CI includes 0), n=1172 peer Shorts.",
+   "use": "Treat every idea score as a prior only; maximise diverse cheap shots on goal and let audience data pick.",
+   "source": "experiments/002_shorts_scores_and_labels.json",
+   "date": "2026-10-08",
+   "strength": "measured"
+  },
+  {
+   "id": "L003",
+   "vertical": "any",
+   "finding": "Title patterns that won on long-form (для начинающих, vs/сравнение) did NOT replicate in Shorts: median relative views 1.00 and 0.99.",
+   "use": "Do not assume a hook formula; test it.",
+   "source": "experiments/002_shorts_scores_and_labels.json",
+   "date": "2026-10-08",
+   "strength": "measured"
+  },
+  {
+   "id": "L005",
+   "vertical": "any",
+   "finding": "Polished motion-graphic price slides made from catalogue photos were judged useless by the owner of MetaPrompt (looks good, says nothing a viewer cares about).",
+   "use": "No idea may rest on price + product photo alone; it needs a human moment, real sound, a question answered or a story.",
+   "source": "owner feedback 2026-10-08",
+   "date": "2026-10-08",
+   "strength": "expert judgment"
+  },
+  {
+   "id": "L006",
+   "vertical": "any",
+   "finding": "Brand-only cymbal/drum demo clips on the Muzzone channel had a median of 390 views vs 2300 channel median (n=48); interviews 118 (n=4).",
+   "use": "Product demos without a buyer question or human angle under-perform; tie demos to a buyer's question.",
+   "source": "clients/muzzone/research/youtube_channel.json",
+   "date": "2026-10-08",
+   "strength": "measured (correlational)"
+  }
+ ]
+}

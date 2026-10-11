@@ -1,0 +1,3 @@
+campaign: /tmp/claude-0/-home-user-flystuff/ed90e34e-b470-5816-9bae-4695c8c48b9b/scratchpad/brain/stress_v1/muzzone-sales/campaign.md
+questions for the owner: 7  (python -m smm.agent questions --client muzzone)
+slate: ['ID23', 'ID08', 'ID06', 'ID14', 'ID19', 'ID01', 'ID11', 'ID15']; week 1 filmed ['ID23', 'ID06', 'ID14', 'ID01', 'ID11', 'ID15'] in 15.0 min

@@ -1,0 +1,152 @@
+[
+ {
+  "from": "intake",
+  "q": "«Что для вас победа к 31 декабря: сколько цифровых пианино и каких моделей? По умолчанию: продвигаем модели, которых на сайте несколько штук в наличии (Estrada EDP-220BK, Casio PX-S1100BK, Casio AP-300WE, Kurzweil CUP E1/M1), цель — +10 продаж по кодовым словам из роликов сверх обычных. Верно? Ответ до 10.10, 18:00; без ответа — работаем по умолчанию.»"
+ },
+ {
+  "from": "intake",
+  "q": "«Почему именно до Нового года, и что означает «Финальная распродажа» на сайте: магазин закрывается, бренд уходит или это сезонная акция со сроком? По умолчанию: в роликах нет дедлайнов и слова «распродажа», скидки упоминаем только как на сайте, без срока. Ответ до 10.10, 18:00.»"
+ },
+ {
+  "from": "intake",
+  "q": "«До какой даты заказа вы точно доставите пианино к 31 декабря — по Астане и в регионы? По умолчанию: ни в одном ролике не обещаем «успеем к Новому году». Ответ до 10.10, 18:00.»"
+ },
+ {
+  "from": "inputs",
+  "q": "WhatsApp chat sample: export of the last 50+ chats about pianos (or 20 typical piano chats forwarded)",
+  "how": "Owner card item 1, sent via Andrey/Pavel; whoever runs the store WA exports chats. Strip PII at ingest.",
+  "minutes": 4
+ },
+ {
+  "from": "inputs",
+  "q": "Answers to the 3 A8 questions: win definition and models (Q1), why 'до Нового года' and what 'Финальная распродажа' means (Q2), delivery cut-off for 31.12 in Astana and the regions (Q3)",
+  "how": "Closed questions with defaults in the owner card; deadline 2026-10-10 18:00.",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Red lines and permissions: faces or voices of staff, store areas, prices on camera, children; plus a yes/no on removing the 'компенсация доставки за отзыв' clause",
+  "how": "Owner card tick boxes with defaults.",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Money map for pianos: a screenshot or photo of piano sales by model over the last 2–3 months, which models they want to push (margin), and where piano sales close (WA, store, site, Kaspi)",
+  "how": "Owner card: «скрин из 1С/Kaspi-кабинета или фото тетради» (via Andrey/Pavel).",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Account access or screenshots: Instagram insights (blocked to us), YouTube Studio, TikTok if it exists; plus the name of the person who answers WA and will tally codes",
+  "how": "Grant analyst access once, or send weekly screenshots; one line naming the WA responder.",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Proof folder: 10–20 real photos or videos of pianos (store floor, deliveries, setups at customers' homes with permission, warranty or service documents)",
+  "how": "«Перешлите из галереи» in the owner card.",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Worker reality scan, piano-specific: 15 × 5-second shots of the in-stock pianos side by side, close key and hammer-action sound, the headphone jack in use, pedals, box and unboxing, stand assembly, the floor model being tuned or dusted; 3 sound tests with the phone 20–30 cm from the speakers; 3 answers with the phone at the face",
+  "how": "Shoot card via Andrey/Pavel; one session.",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Insight prompts voice note (optional): «Что родители чаще всего понимают неправильно про цифровые пианино?», «Что вы делаете с пианино до продажи, чего никто не видит?», «Какую историю про покупателя пианино рассказываете чаще всего?»",
+  "how": "Voice note via Andrey/Pavel, marked optional.",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Customer micro-voice at piano pickup or delivery: «Почему выбрали это пианино / чего боялись?», recorded close with permission",
+  "how": "Added to the weekly shoot card from week 1; up to 5 a week.",
+  "minutes": 0
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea BLIND-01 can be produced: BLIND-01.comment_prompt_ru: absolute/superlative claim without a backing fact: 'Самые точные'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea CHECK-03 can be produced: CHECK-03.comment_prompt_ru: absolute/superlative claim without a backing fact: 'Лучший'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea WARR-04 can be produced: WARR-04.on_screen_ru[4]: absolute/superlative claim without a backing fact: 'Лучше'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea GIFT-05 can be produced: GIFT-05.comment_prompt_ru: absolute/superlative claim without a backing fact: 'самый большой'"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea GIFT-05 can be produced: GIFT-05.on_screen_ru[0]: number '31' not backed by a usable fact"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea NIGHT-08 can be produced: NIGHT-08.hook_ru: number '22' not backed by a usable fact"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea NIGHT-08 can be produced: NIGHT-08.on_screen_ru[0]: number '22' not backed by a usable fact"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ADULT-16 can be produced: ADULT-16.hook_ru: number '35' not backed by a usable fact"
+ },
+ {
+  "from": "facts",
+  "q": "Confirm before idea ADULT-16 can be produced: ADULT-16.on_screen_ru[0]: number '35' not backed by a usable fact"
+ },
+ {
+  "from": "campaign",
+  "q": "1) «Есть ли на цифровые пианино рассрочка — через Kaspi (Kaspi-магазин / Kaspi Red / рассрочка) или банк? Если да: на какой срок, сколько в месяц, есть ли переплата, какие модели. По умолчанию: в роликах нет ни слова о рассрочке и платежах в месяц.» Ответ до 10.10, 18:00.",
+  "why": "Instalments are the main local lever for a 230k–755k ₸ purchase. They change TIERS-07, GIFT-05 and FIRSTYEAR-15. Exact terms are required, because financial claims need conservative wording and the owner's sign-off.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "2) «Что для вас победа к 31.12 и почему именно к Новому году? Что значит «Финальная распродажа» — закрытие, уход бренда или акция со сроком? По умолчанию: цель +10 продаж по кодовым словам, в первую очередь Estrada EDP-220BK, Casio PX-S1100, AP-300 белое, Kurzweil CUP E1/M1; без слова «распродажа» и без дедлайнов.»",
+  "why": "Sets the target and the priority SKUs. Tells us whether any real deadline exists and whether warranty content is credible.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "3) «До какой даты заказа точно доставите пианино к 31.12 — по Астане и в регионы? До какой даты держите оплаченный подарок в магазине? По умолчанию: не обещаем «успеем к Новому году» и «до 31-го».»",
+  "why": "Unblocks GIFT-05 and every December timing claim. A real cut-off is the only truthful urgency.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Экспорт 50+ чатов WhatsApp про пианино за 2–3 месяца (или перешлите 20 типичных). Имена и номера удалим.",
+  "why": "Insights have no customer evidence yet. The chats show the real questions, how often instalments come up, where chats die, the conversion rate and the reply time.",
+  "minutes": 4
+ },
+ {
+  "from": "campaign",
+  "q": "Отметьте:\n☐ снимать только руки и процесс (по умолчанию)\n☐ можно голос продавца с телефоном у лица\n☐ покупатели могут прийти и сыграть на пианино в зале\n☐ гарантийный ремонт: принимаем в магазине и сами отправляем в сервис (да / нет / как иначе)\n☐ TikTok есть / можно открыть\n☐ доступ к статистике Instagram\n☐ есть кабель для записи звука с выхода на наушники в телефон\n☐ можно выделить время, чтобы продавец занёс карточку в 2–3 ближайшие музыкальные школы (по умолчанию: только через контакты и посетителей магазина)",
+  "why": "Covers the permissions gate (G2). Gives the warranty-handling wording the videos need instead of the Almaty line. Confirms the try-in-store CTA, the TikTok surface, local-audience metrics, line-out audio for YouTube, and whether teacher outreach can go beyond the content budget.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Послушайте 2 записи по 5 секунд (Casio PX-770 и AP-270, снято на телефон магазина): слышна ли разница? Если нет — звук в коротких роликах не используем.",
+  "why": "The sound-test gate: a comparison that sounds identical through a phone would talk buyers out of the pricier models and invite mockery from musicians.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Утвердите один раз: шаблоны быстрых ответов WhatsApp по кодовым словам; текст карточки для педагогов и родительских чатов; формулировки «для кого какая модель» и пунктов проверки перед покупкой. И решение: убрать с сайта компенсацию доставки за отзыв (рекомендуем).",
+  "why": "Judgment claims and expert wording need sign-off. Quick replies cut reply time. The review compensation likely breaks platform rules.",
+  "minutes": 3
+ },
+ {
+  "from": "campaign",
+  "q": "Каждую среду — одно нажатие: утвердить ролики недели. Ролики с ценами, рассрочкой, гарантией или сравнением «в 3 раза» — явное «да».",
+  "why": "Nothing posts without approval. Access goes through Andrey and Pavel, so a fixed slot avoids latency.",
+  "minutes": 5
+ }
+]

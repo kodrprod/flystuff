@@ -1,0 +1,93 @@
+[
+ {
+  "n": 1,
+  "shot_id": "ID01_0",
+  "seconds": 12,
+  "kind": "hook",
+  "idea_id": "ID01"
+ },
+ {
+  "n": 2,
+  "shot_id": "ID15_0",
+  "seconds": 6,
+  "kind": "hook",
+  "idea_id": "ID15"
+ },
+ {
+  "n": 3,
+  "shot_id": "ID20_0",
+  "seconds": 12,
+  "kind": "hook",
+  "idea_id": "ID20"
+ },
+ {
+  "n": 4,
+  "shot_id": "ID24_0",
+  "seconds": 12,
+  "kind": "demo",
+  "idea_id": "ID24"
+ },
+ {
+  "n": 5,
+  "shot_id": "ID01_1",
+  "seconds": 8,
+  "kind": "detail",
+  "idea_id": "ID01"
+ },
+ {
+  "n": 6,
+  "shot_id": "ID13_1",
+  "seconds": 8,
+  "kind": "detail",
+  "idea_id": "ID13"
+ },
+ {
+  "n": 7,
+  "shot_id": "ID20_1",
+  "seconds": 8,
+  "kind": "detail",
+  "idea_id": "ID20"
+ },
+ {
+  "n": 8,
+  "shot_id": "ID24_1",
+  "seconds": 8,
+  "kind": "detail",
+  "idea_id": "ID24"
+ },
+ {
+  "n": 9,
+  "shot_id": "ID13_0",
+  "seconds": 15,
+  "kind": "process",
+  "idea_id": "ID13"
+ },
+ {
+  "n": 10,
+  "shot_id": "ID15_1",
+  "seconds": 12,
+  "kind": "process",
+  "idea_id": "ID15"
+ },
+ {
+  "n": 11,
+  "shot_id": "ID17_0",
+  "seconds": 15,
+  "kind": "talk",
+  "idea_id": "ID17"
+ },
+ {
+  "n": 12,
+  "shot_id": "ID19_0",
+  "seconds": 15,
+  "kind": "talk",
+  "idea_id": "ID19"
+ },
+ {
+  "n": 13,
+  "shot_id": "ID17_1",
+  "seconds": 10,
+  "kind": "process",
+  "idea_id": "ID17"
+ }
+]

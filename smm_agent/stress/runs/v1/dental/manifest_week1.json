@@ -1,0 +1,86 @@
+[
+ {
+  "n": 1,
+  "shot_id": "ID02_0",
+  "seconds": 10,
+  "kind": "hook",
+  "idea_id": "ID02"
+ },
+ {
+  "n": 2,
+  "shot_id": "ID02_1",
+  "seconds": 10,
+  "kind": "process",
+  "idea_id": "ID02"
+ },
+ {
+  "n": 3,
+  "shot_id": "ID03_0",
+  "seconds": 8,
+  "kind": "hook",
+  "idea_id": "ID03"
+ },
+ {
+  "n": 4,
+  "shot_id": "ID04_1",
+  "seconds": 8,
+  "kind": "hook",
+  "idea_id": "ID04"
+ },
+ {
+  "n": 5,
+  "shot_id": "ID05_0",
+  "seconds": 10,
+  "kind": "hook",
+  "idea_id": "ID05"
+ },
+ {
+  "n": 6,
+  "shot_id": "ID03_1",
+  "seconds": 10,
+  "kind": "demo",
+  "idea_id": "ID03"
+ },
+ {
+  "n": 7,
+  "shot_id": "ID14_0",
+  "seconds": 8,
+  "kind": "hook",
+  "idea_id": "ID14"
+ },
+ {
+  "n": 8,
+  "shot_id": "ID14_1",
+  "seconds": 8,
+  "kind": "detail",
+  "idea_id": "ID14"
+ },
+ {
+  "n": 9,
+  "shot_id": "ID03_2",
+  "seconds": 10,
+  "kind": "talk",
+  "idea_id": "ID03"
+ },
+ {
+  "n": 10,
+  "shot_id": "ID04_0",
+  "seconds": 15,
+  "kind": "talk",
+  "idea_id": "ID04"
+ },
+ {
+  "n": 11,
+  "shot_id": "ID05_1",
+  "seconds": 15,
+  "kind": "talk",
+  "idea_id": "ID05"
+ },
+ {
+  "n": 12,
+  "shot_id": "ID20_0",
+  "seconds": 15,
+  "kind": "talk",
+  "idea_id": "ID20"
+ }
+]

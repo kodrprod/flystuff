@@ -1,0 +1,96 @@
+{
+ "slate": [
+  {
+   "id": "ID14",
+   "prior": 3.628,
+   "value": 3.628,
+   "why": "prior+data",
+   "driver": "practical_value",
+   "engine": "who_is_it_for",
+   "staff_min": 2.8,
+   "needs_facts": []
+  },
+  {
+   "id": "ID10",
+   "prior": 3.538,
+   "value": 3.538,
+   "why": "prior+data",
+   "driver": "identity",
+   "engine": "pov_situation",
+   "staff_min": 1.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID19",
+   "prior": 3.333,
+   "value": 3.333,
+   "why": "prior+data",
+   "driver": "moment_trigger",
+   "engine": "moment",
+   "staff_min": 2.4,
+   "needs_facts": []
+  },
+  {
+   "id": "ID07",
+   "prior": 3.321,
+   "value": 3.321,
+   "why": "prior+data",
+   "driver": "relief",
+   "engine": "wa_question",
+   "staff_min": 3.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID21",
+   "prior": 3.167,
+   "value": 3.167,
+   "why": "prior+data",
+   "driver": "participation",
+   "engine": "reply",
+   "staff_min": 0.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID13",
+   "prior": 3.154,
+   "value": 3.154,
+   "why": "prior+data",
+   "driver": "curiosity_gap",
+   "engine": "myth_check",
+   "staff_min": 4.4,
+   "needs_facts": []
+  },
+  {
+   "id": "ID17",
+   "prior": 3.128,
+   "value": 3.128,
+   "why": "explore",
+   "driver": "social_currency",
+   "engine": "real_number",
+   "staff_min": 1.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID02",
+   "prior": 2.974,
+   "value": 2.974,
+   "why": "explore",
+   "driver": "sensory",
+   "engine": "close_sound",
+   "staff_min": 2.6,
+   "needs_facts": []
+  }
+ ],
+ "blocked": [],
+ "week1_filmed": [
+  "ID14",
+  "ID10",
+  "ID19",
+  "ID07",
+  "ID13",
+  "ID17",
+  "ID02"
+ ],
+ "week1_minutes": 15.2,
+ "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"
+}

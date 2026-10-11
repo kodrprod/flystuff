@@ -1,0 +1,178 @@
+{
+ "insights": [],
+ "ideas": {
+  "ID01": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID01.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID02": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID02.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID03": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID03.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID04": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID04.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID05": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID05.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID06": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID06.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID07": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID07.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID08": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID08.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID09": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID09.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID10": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": []
+  },
+  "ID11": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": []
+  },
+  "ID12": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID12.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID13": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID13.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID14": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID14.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID15": {
+   "errors": [],
+   "needs_facts": [
+    "ID15.on_screen_ru[2]: absolute/superlative claim without a backing fact: 'лучший'",
+    "ID15.say_ru[1]: absolute/superlative claim without a backing fact: 'лучше'"
+   ],
+   "warnings": [
+    "ID15.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID16": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID16.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID17": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID17.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID18": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID18.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID19": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID19.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID20": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID20.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID21": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID21.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID22": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID22.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID23": {
+   "errors": [],
+   "needs_facts": [
+    "ID23.hook_ru: absolute/superlative claim without a backing fact: 'лучшему'",
+    "ID23.on_screen_ru[0]: absolute/superlative claim without a backing fact: 'лучшему'"
+   ],
+   "warnings": [
+    "ID23.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  },
+  "ID24": {
+   "errors": [],
+   "needs_facts": [],
+   "warnings": [
+    "ID24.hook: H4 no number or model/brand token: is it specific?"
+   ]
+  }
+ },
+ "campaign": [
+  "campaign uses idea ID03 that is not in the slate"
+ ]
+}

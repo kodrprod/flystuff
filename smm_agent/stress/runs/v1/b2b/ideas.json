@@ -1,0 +1,1543 @@
+[
+ {
+  "id": "ID01",
+  "title": "Bag thud on a pallet: close-sound loop",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Так звучит склад, если подойти вплотную",
+  "first_frame": "Top-down at 30 cm: a bag is already falling onto a pallet, with the thud and a dust puff in frame 1. No words in the first second. Hook text appears at about 1 s in the upper-middle safe zone.",
+  "on_screen_ru": [
+   "Так звучит склад, если подойти вплотную",
+   "А на объекте какой звук громче?"
+  ],
+  "what_happens": "0–1 s: the bag lands with a thud and dust, wordless. 1–5 s: a second bag lands and the hook text appears. 5–9 s: a hand slaps the top bag and dust rises in the backlight. This is the payoff: the full texture of the sound. 9–10 s: hard cut back to the falling bag, so it loops. No speech, no music. The caption carries a buyer question (E12): «Нужен материал на объект? Код — в WhatsApp». DM line: «послушай, как у них мешки падают». No real save reason; this is a reach shot.",
+  "why_stop": "The sound starts and something is moving in frame 1. It breaks the hypothesised category convention of catalogue bag photos with music (E23).",
+  "why_share_or_save": "Trade workers send satisfying-sound clips to each other («звук как у нас на объекте»). Little reason to save it.",
+  "comment_prompt_ru": "Какой звук на объекте бесит больше всего?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: бросаете мешок на поддон. Телефон лежит на краю поддона в 30 см, звук удара нужен. Секунда до и после.",
+     "location": "склад",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: ладонью хлопаете по верхнему мешку, пыль на свету. Телефон в 20–30 см.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Pick the best take, cut on the impact, loop end→start, light denoise that keeps the thud, burned-in RU captions, cover = frame 1. No music. Blur any faces or plates in the background.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Sensory metrics: 3-s hold, average % watched, loop rate. Business: profile visits per 1k and coded chats. Expected near 0, because this is a reach arm (DR7 watch).",
+  "risks": [
+   "The reality inventory is unconfirmed until the staff reality scan (E20)",
+   "Attention-only arm: cap under DR7 if it brings views but no codes",
+   "Insight I08 is a content reality, strength 2. There is no buyer link beyond the caption"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 1
+  },
+  "_prior": 2.795,
+  "_value": 2.795
+ },
+ {
+  "id": "ID02",
+  "title": "Stretch-film squeal around a pallet",
+  "insight_ids": [
+   "I08",
+   "I04"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Просто послушайте, как пеленают поддон",
+  "first_frame": "Side view at 30 cm: film is already running off the roll around the bag stack, and the squeal is audible from frame 1. Text appears at about 1 s in the upper-middle.",
+  "on_screen_ru": [
+   "Просто послушайте, как пеленают поддон",
+   "Зачем столько слоёв? Ваши версии"
+  ],
+  "what_happens": "0–1 s: film squeal, no words. 1–8 s: the roll goes round and the layers build up. 8–11 s: a hand presses the wrapped stack and it does not give. That is the payoff: you see and hear why the wrap matters. 11–12 s: loops back to the squeal. The comment answers seed a later reply video (ID21) in which the warehouse explains the wrap, but only after the owner confirms the practice. DM line: «звук — кайф, послушай».",
+  "why_stop": "Continuous high-pitched close sound plus circular motion in frame 1. Nobody outside a warehouse hears this.",
+  "why_share_or_save": "Sent as an ASMR-style clip between builders and loaders. Low save value.",
+  "comment_prompt_ru": "Как думаете, зачем столько слоёв?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp BA32",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Обматываете поддон плёнкой. Телефон на соседней стопке в 30 см — нужен скрип плёнки.",
+     "location": "склад",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: ладонь давит на обмотанную стопку, стопка не двигается.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Cut to the sound, seamless loop, captions, cover = frame 1. No music. Keep the original audio.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Loop rate and 3-s hold. Comments per 1k (answers feed ID21). Business: profile visits per 1k.",
+  "risks": [
+   "NEEDS FACT: owner confirms that wrapping is standard for every outgoing pallet before any follow-up says «всегда обматываем» (owner)",
+   "Reality inventory unconfirmed until the staff scan (E20)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 2.974,
+  "_value": 2.974,
+  "_why": "explore"
+ },
+ {
+  "id": "ID03",
+  "title": "From empty pallet to truck: full loading process",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "mastery",
+  "format": "process_full",
+  "funnel": "trust",
+  "hook_ru": "От пустого поддона до кузова",
+  "first_frame": "Top-down: an empty pallet, with two hands already dropping the first bag onto it in frame 1. Hook text in the upper-middle.",
+  "on_screen_ru": [
+   "От пустого поддона до кузова",
+   "Слой за слоем",
+   "Плёнка",
+   "Погрузка",
+   "Поехали"
+  ],
+  "what_happens": "0–4 s: the first layer is stacked, with jump cuts. 4–8 s: the layers rise. 8–12 s: film wrap with close sound. 12–17 s: the pallet goes into the truck (no plates). 17–19 s: the truck door closes. That is the payoff: a finished, wrapped load. 19–20 s: cut to an empty pallet, so it loops. Any speed-up is labelled «ускорено». No timing or radius claims. DM line: «вот так надо грузить, покажи нашим».",
+  "why_stop": "A transformation is under way from frame 1. The viewer holds the question «how does a heap of bags become a load?» until 17 s.",
+  "why_share_or_save": "Foremen send it to the people who load and unload for them. It also works as a legitimacy clip for procurement (E22).",
+  "comment_prompt_ru": "Вам привозили поддон, который развалился в дороге?",
+  "cta_ru": "Напишите в WhatsApp {CODE}: материал и объём — ответим",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: складываете мешки на пустой поддон, слой за слоем. Телефон закреплён над поддоном, без зума.",
+     "location": "склад",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Обмотка плёнкой крупно, телефон в 30 см.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Поддон заезжает в кузов, закрываете дверь. Номер машины не в кадре.",
+     "location": "погрузка",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Jump-cut compression with a visible «ускорено» label where sped up, stabilisation, captions, blur on plates, faces and documents, loop edit. Footage is reused as library for ID10, ID11, ID12 and ID23.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Average % watched, completion, shares per 1k. Business: profile visits per 1k and coded chats.",
+  "risks": [
+   "Plates and passers-by must be blurred",
+   "Forklift safety: the person filming stays out of the loading path",
+   "I01 is a hypothesis (strength 2); no on-time claim is made or implied"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 2
+  },
+  "_prior": 2.923,
+  "_value": 2.923
+ },
+ {
+  "id": "ID04",
+  "title": "Backstage: count against the order sheet before loading",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "social_currency",
+  "format": "backstage",
+  "funnel": "consideration",
+  "hook_ru": "Что происходит, пока вы ждёте машину",
+  "first_frame": "Close-up: a finger already moving down a column of bags while the other hand ticks a blurred order sheet. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Что происходит, пока вы ждёте машину",
+   "Пересчёт по накладной",
+   "Только потом — погрузка"
+  ],
+  "what_happens": "0–2 s: the finger counts bags. 2–8 s: voice-over: «Перед погрузкой пересчитываю мешки по накладной». 8–14 s: a tick on the sheet (details blurred), then the pallet goes to the truck (ID03 library). 14–16 s: payoff: the sheet is fully ticked and the truck door closes. 16–18 s: CTA. DM line: «скинь прорабу — вот что у них до отгрузки». Save: low.",
+  "why_stop": "Hands mid-count in frame 1. The hook names the customer's own waiting moment and reveals the side he never sees.",
+  "why_share_or_save": "A foreman forwards it to whoever receives deliveries for him. It is insider detail about how a supplier checks a load.",
+  "comment_prompt_ru": "Вы пересчитываете мешки при приёмке?",
+  "cta_ru": "Напишите в WhatsApp {CODE}: материал и объём — ответим",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: палец идёт по мешкам, другой рукой ставите галочку в накладной. Телефон в 30 см.",
+     "location": "погрузка",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта: одна фраза своими словами.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Перед погрузкой пересчитываю мешки по накладной.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Lay the voice-over on the counting shot, insert the ID03 loading clip, blur all document details and client names, captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms that a count against the order document is done before every loading"
+  ],
+  "kpi": "Shares per 1k and comments per 1k (split yes/no). Business: coded chats per 1k.",
+  "risks": [
+   "NEEDS FACT: count-before-loading ritual is real and routine (owner)",
+   "Documents must be fully blurred (B2B confidentiality)",
+   "The voice is a staff member: get verbal OK to use the voice"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.077,
+  "_value": 3.077
+ },
+ {
+  "id": "ID05",
+  "title": "WA question: how many bags for my job",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "practical_value",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "Нам пишут: «Сколько мешков на объект?»",
+  "first_frame": "Anonymised chat-bubble card (AI-typed, no names) in the upper-middle over a close-up of a hand turning a bag to its printed consumption line. Voice starts at 0.5 s.",
+  "on_screen_ru": [
+   "Нам пишут: «Сколько мешков на объект?»",
+   "Расход — на самом мешке",
+   "Площадь × толщина × расход",
+   "Делим на вес мешка",
+   "Запас — по опыту мастера"
+  ],
+  "what_happens": "0–1 s: chat bubble over the bag. 1–6 s: a finger on the consumption line. Label figures appear on screen only as printed and filmed, and the caption quotes them only once they are in the ledger. 6–18 s: hands write the formula in words on cardboard. 18–24 s: voice-over from the quiet corner. 24–27 s: payoff: the finished formula card fills the frame (screenshot-able). 27–30 s: CTA. Save: for the next estimate. DM line: «скинь бригадиру, пусть так считает».",
+  "why_stop": "The viewer's own recurring question in the first frame, plus a hand already moving on a real label.",
+  "why_share_or_save": "Saved by foremen for the next estimate. Forwarded to the person on the crew who does the estimates.",
+  "comment_prompt_ru": "Какой запас вы обычно берёте?",
+  "cta_ru": "Пришлите в WhatsApp {CODE}, материал и площадь — подскажем объём",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: поворачиваете мешок к строке с расходом, палец на строке. Телефон в 20 см, долгое нажатие для фокуса.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Сверху: маркером пишете формулу словами на картоне, без цифр.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Телефон в 30 см от рта, своими словами.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Площадь на расход с мешка, плюс небольшой запас.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Anonymised chat card built from a paraphrase of at least 2 real chats. Captions, punch-in on the label, formula card as the last frame and cover.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: at least 2 real chats asking how many bags are needed (WhatsApp export)",
+   "NEEDED: verbatim consumption line from the filmed bag label or a datasheet in the ledger",
+   "NEEDED: owner confirms staff will help calculate volume from area in WhatsApp"
+  ],
+  "kpi": "Saves per 1k (practical_value). Business: coded chats per 1k and the share of them that name company, material and volume (qualified).",
+  "risks": [
+   "NEEDS FACT: ≥2 matching chats before «Нам пишут» can be used (owner export)",
+   "NEEDS FACT: label consumption figures (staff film + agent ledger)",
+   "NEEDS FACT: the CTA promise «подскажем объём» (owner)",
+   "The «запас» advice is framed as the master's opinion, not a rule"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.321,
+  "_value": 3.321
+ },
+ {
+  "id": "ID06",
+  "title": "WA question: is unloading included?",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "relief",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "Нам пишут: «А разгрузка есть?»",
+  "first_frame": "Anonymised chat bubble upper-middle over hands sliding a bag off a loaded truck bed at the loading dock. Voice at 0.5 s.",
+  "on_screen_ru": [
+   "Нам пишут: «А разгрузка есть?»",
+   "Отвечаем как есть",
+   "Уточняйте разгрузку до заказа"
+  ],
+  "what_happens": "0–1 s: chat bubble. 1–10 s: voice-over gives the owner-confirmed unloading rule in plain words (it goes on screen only once it is in the ledger). 10–16 s: loading footage from the ID03 library. 16–18 s: payoff: the rule card is on screen, a clear answer. 18–20 s: CTA. DM line: «скинь, кто у нас заказывает — чтобы бригаду не держать».",
+  "why_stop": "Names the exact friction a foreman worries about with an idle crew (I01), as a question he has typed himself.",
+  "why_share_or_save": "Forwarded to whoever books deliveries for the crew. Saved as a reminder to ask before ordering.",
+  "comment_prompt_ru": "Разгружаете сами или берёте грузчиков?",
+  "cta_ru": "Напишите в WhatsApp {CODE}: объект и объём — скажем про разгрузку",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта: своими словами правило про разгрузку, которое утвердил владелец.",
+     "location": "тихий угол",
+     "seconds": 10,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Anonymised chat card, ID03 loading clips as B-roll (library/week1/ID03_*.mp4), captions. The rule appears as on-screen text only once it is a ledger fact.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: unloading policy (included or paid, which orders, any equipment) from the owner",
+   "NEEDED: at least 2 real chats asking about unloading"
+  ],
+  "kpi": "Saves per 1k (relief). Business: coded chats per 1k and qualified share.",
+  "risks": [
+   "NEEDS FACT: unloading policy (owner). The idea is blocked until then",
+   "NEEDS FACT: ≥2 matching chats (owner export)",
+   "Depends on ID03 footage existing"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 1,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.154,
+  "_value": 3.154
+ },
+ {
+  "id": "ID07",
+  "title": "WA question: bags and frost, read from the label",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "relief",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "Нам пишут: «Что с мешками в мороз?»",
+  "first_frame": "A hand brushing frost off the stretch film on a pallet at the warehouse door. Anonymised chat bubble in the upper-middle. Voice at 0.5 s.",
+  "on_screen_ru": [
+   "Нам пишут: «Что с мешками в мороз?»",
+   "Читаем, что пишет производитель",
+   "Условия хранения — на мешке",
+   "Работа в холод — в паспорте материала"
+  ],
+  "what_happens": "0–2 s: frost being brushed off. 2–8 s: the bag is turned to its storage-conditions line and the voice-over reads it verbatim. 8–16 s: talk: «смотрите паспорт материала». 16–20 s: payoff: the verbatim manufacturer line on screen. 20–22 s: CTA. Save: before winter deliveries. DM line: «скинь бригаде перед зимой».",
+  "why_stop": "Seasonal cue (frost) plus the viewer's own question in frame 1, at the exact moment brigades move indoors (E18).",
+  "why_share_or_save": "Saved by contractors planning November–March work. Sent to the crew lead who stores material on site.",
+  "comment_prompt_ru": "Зимой работаете или уходите на паузу?",
+  "cta_ru": "Напишите в WhatsApp BA26: какие работы зимой — подскажем материал",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: поворачиваете мешок к строке про хранение, палец на строке. Телефон в 20 см.",
+     "location": "склад",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Читаю дословно, что производитель пишет про хранение.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Anonymised chat card, frost B-roll from the ID19 shot or library, captions quoting only ledger text, cover.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: verbatim storage and application-temperature lines from the manufacturer label or datasheet (ledger, URL or file)",
+   "NEEDED: at least 2 real chats asking about frost"
+  ],
+  "kpi": "Saves per 1k. Business: coded chats per 1k in the frost weeks.",
+  "risks": [
+   "NEEDS FACT: datasheet or label text (staff film + agent ledger). No temperature statement of our own (E19)",
+   "NEEDS FACT: ≥2 matching chats (owner export)",
+   "Publish only once frost is real (agent weather fetch)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.321,
+  "_value": 3.321,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID08",
+  "title": "Accepting bags on site: check this first",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "practical_value",
+  "format": "check_before_buy",
+  "funnel": "consideration",
+  "hook_ru": "Принимаете мешки на объекте? Сначала проверьте это",
+  "first_frame": "Close-up: a hand already pressing into a sealed bag, with the bag filling more than half the frame. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Принимаете мешки на объекте? Сначала проверьте это",
+   "Нажмите: мешок мягкий, без комков",
+   "Шов и клапан целые",
+   "Дата изготовления — вот здесь",
+   "Так принимает наш кладовщик"
+  ],
+  "what_happens": "0–1 s: the press. 1–6 s: the press check, text only. 6–10 s: the seam and valve in close-up. 10–14 s: a finger on the printed date. 14–17 s: payoff: all checks done, and the bag goes onto the accepted pile. 17–19 s: CTA. Save: for the next delivery. DM line: «скинь бригадиру, пусть так принимает».",
+  "why_stop": "The hook calls out the exact moment a foreman faces (receiving a load) and a hand is already doing the check.",
+  "why_share_or_save": "A reference checklist kept for every delivery, and forwarded to the crew member who signs for loads.",
+  "comment_prompt_ru": "Что вы проверяете первым при приёмке?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: ладонью нажимаете на запечатанный мешок. Телефон в 25 см.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: палец ведёт по шву и клапану мешка.",
+     "location": "склад",
+     "seconds": 4,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Крупно: палец на дате изготовления на мешке, долгое нажатие для фокуса.",
+     "location": "склад",
+     "seconds": 4,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Text-only edit with burned-in captions, punch-ins, a checklist card as the payoff frame and cover. No voice needed.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms these checks are the warehouse's own acceptance practice",
+   "NEEDED: where the production date is printed on the filmed bags (camera verifies)"
+  ],
+  "kpi": "Saves per 1k (practical_value). Business: coded chats per 1k.",
+  "risks": [
+   "NEEDS FACT: the «Так принимает наш кладовщик» line needs owner confirmation",
+   "The checks are advice, not a claim about our stock quality",
+   "I04 is a hypothesis (strength 2)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.462,
+  "_value": 3.462
+ },
+ {
+  "id": "ID09",
+  "title": "Storing bags on site in winter",
+  "insight_ids": [
+   "I05",
+   "I04"
+  ],
+  "driver": "practical_value",
+  "format": "care_howto",
+  "funnel": "consideration",
+  "hook_ru": "Мешки на объекте зимой: где их держать",
+  "first_frame": "Close-up: a hand lifting the frosty edge of stretch film off a pallet, with frost visible. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Мешки на объекте зимой: где их держать",
+   "Совет кладовщика: поддон, не голый пол",
+   "Сверху — плёнка от снега",
+   "Точные условия — на самом мешке"
+  ],
+  "what_happens": "0–1 s: the film is lifted. 1–6 s: the pallet underside shows the bags off the floor. 6–10 s: the film cover. 10–15 s: the bag label storage line, verbatim from the ledger. 15–18 s: payoff: a three-line checklist card. 18–20 s: comment prompt. Save: before winter deliveries. DM line: «скинь бригаде — у нас мешки в подъезде лежат».",
+  "why_stop": "Frost on film is a seasonal visual anomaly in frame 1, and the hook names a winter problem foremen are facing now.",
+  "why_share_or_save": "Saved as winter site-storage reference and sent to the crew member responsible for storage.",
+  "comment_prompt_ru": "Где у вас мешки ночуют на объекте?",
+  "cta_ru": "Планируете зимние работы? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: приподнимаете край плёнки с инеем на поддоне. Телефон в 25 см.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Снизу сбоку: поддон под мешками, видно, что мешки не на полу.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Крупно: строка про хранение на мешке, палец на ней.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Text-only edit, checklist card, captions quoting only ledger label text, cover.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: verbatim storage conditions from the bag label or datasheet",
+   "NEEDED: warehouse confirms the advice as its own practice (framed as opinion)"
+  ],
+  "kpi": "Saves per 1k. Business: coded chats in the frost weeks.",
+  "risks": [
+   "NEEDS FACT: label storage text (staff film + agent ledger)",
+   "Generic-tip risk: anchored by the business's own pallets and label",
+   "Needs real frost on the shoot day"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 2.987,
+  "_value": 2.987
+ },
+ {
+  "id": "ID10",
+  "title": "POV: crew on site, truck not there",
+  "insight_ids": [
+   "I07",
+   "I01"
+  ],
+  "driver": "identity",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: бригада на объекте, а машины нет",
+  "first_frame": "Close-up: fingers drumming on a wrapped bag stack as a stand-in for waiting. A «POV · постановка» label sits top-left and the hook text upper-middle.",
+  "on_screen_ru": [
+   "POV: бригада на объекте, а машины нет",
+   "Заказчик уже звонил",
+   "Бригада курит",
+   "Вы звоните поставщику",
+   "А в это время на складе…",
+   "Знакомо? Сколько вы ждали?"
+  ],
+  "what_happens": "0–1 s: drumming fingers. 1–8 s: escalating text lines over the waiting. 8–14 s: the turn: real loading footage (ID03 library). 14–16 s: payoff: the truck door closes and the load moves, which brings relief without any timing claim. 16–18 s: CTA. Labelled as a staged POV. Nobody is mocked. DM line: «это же ты в прошлый вторник».",
+  "why_stop": "POV text names a costly situation every foreman recognises (I07). Motion in frame 1.",
+  "why_share_or_save": "Sent between foremen and to the crew («это мы»). Identity share, not a save.",
+  "comment_prompt_ru": "Сколько максимум ваша бригада ждала материал?",
+  "cta_ru": "Планируете объект? Напишите в WhatsApp BA24: материал и объём",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: пальцы барабанят по обмотанной стопке мешков. Телефон в 30 см.",
+     "location": "погрузка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "POV text animation, «постановка» label, B-roll from library/week1/ID03_*.mp4, captions. Licensed commercial-library music optional at low level.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Shares per 1k and comments per 1k. The answers are coded as evidence for I01 (wait times). Business: profile visits per 1k.",
+  "risks": [
+   "Must not imply on-time delivery: no «вовремя», no timing",
+   "Depends on ID03 footage",
+   "Never mock brigades or clients"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 5,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.538,
+  "_value": 3.538,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID11",
+  "title": "WILDCARD POV: foreman counts bags in his head (AI arithmetic overlay on library footage)",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "amusement_awe",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: прораб считает мешки в уме",
+  "first_frame": "Real library close-up of a tall wrapped bag stack, with AI-animated arithmetic text already scrolling over it in the upper half. A «POV» label sits top-left.",
+  "on_screen_ru": [
+   "POV: прораб считает мешки в уме",
+   "Площадь… умножить… плюс…",
+   "Минус то, что осталось с прошлого",
+   "Бригада просит «с запасом»",
+   "Итог: «возьмём побольше»",
+   "На бумаге вышло бы точнее"
+  ],
+  "what_happens": "0–1 s: the scrolling arithmetic over real stack footage. 1–9 s: the mental maths gets more tangled as AI motion text (no numbers), an abstract visual of a head-count spiralling. 9–12 s: the turn: «Итог: возьмём побольше». 12–14 s: payoff: a cut to the real cardboard formula from ID05. 14–15 s: soft CTA. DM line: «это ты на каждой смете».",
+  "why_stop": "A familiar absurdity in text over motion. Self-recognition humour.",
+  "why_share_or_save": "Sent to the colleague who always «берёт побольше».",
+  "comment_prompt_ru": "Считаете в голове, на бумаге или в телефоне?",
+  "cta_ru": "Напишите в WhatsApp {CODE}: материал и площадь",
+  "production": {
+   "mode": "ai",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. AI explainer of an abstract concept (a mental estimate spiralling out of control) as motion-text arithmetic, laid over real library clips: stack footage from library/reality_scan/2026-10/*.mp4 (week-0 staff scan) or library/week1/ID03_*.mp4; final frame is the real cardboard formula from library/week1/ID05_*.mp4. AI never depicts bags, the warehouse or people; it only animates text. POV label, captions, original room sound.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Shares per 1k. Comment split. Business: click-through to ID05 and coded chats.",
+  "risks": [
+   "Depends on reality-scan or week-1 footage existing (no proof folder yet); schedule after ID03/ID05 are shot",
+   "Humour must laugh with foremen, not at them"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.244,
+  "_value": 3.244
+ },
+ {
+  "id": "ID12",
+  "title": "WILDCARD three warehouse sounds: which one is the bag?",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "prediction_game",
+  "format": "guess",
+  "funnel": "attention",
+  "hook_ru": "Три звука склада. Какой из них — мешок?",
+  "first_frame": "Heavily blurred real footage with a pulsing waveform overlay as the first warehouse sound plays. The question text sits in the upper-middle.",
+  "on_screen_ru": [
+   "Три звука склада. Какой из них — мешок?",
+   "Звук 1",
+   "Звук 2",
+   "Звук 3",
+   "Ответ: звук 1 — мешок на поддон",
+   "Звук 2 — плёнка вокруг поддона",
+   "Звук 3 — смесь сыплется в ведро"
+  ],
+  "what_happens": "0–3 s: sound 1 with the picture blurred. 3–6 s: sound 2. 6–9 s: sound 3. 9–10 s: pause for the viewer's pick. 10–16 s: payoff: each clip is unblurred and labelled; the bag thud is revealed. 16–17 s: loop to the first blurred frame. The reveal is true by construction: exactly 3 real filmed clips. DM line: «послушай и скажи, где мешок».",
+  "why_stop": "A concrete question with a guaranteed answer, and the sound starts immediately.",
+  "why_share_or_save": "Sent to friends on the crew to compare picks. No save value.",
+  "comment_prompt_ru": "Какой звук был мешком: 1, 2 или 3?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: высыпаете смесь из открытого мешка в ведро. Телефон у ведра в 20–30 см — нужен шорох смеси. Тот же мешок, что для ID13.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Sounds 1 and 2 from library/week1/ID01_*.mp4 and ID02_*.mp4, sound 3 from this shot. Blur-to-reveal effect, waveform overlay, captions. Only sounds that were actually filmed are used, and the labels match the clips.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Comments per 1k and replay rate. Business: profile visits per 1k.",
+  "risks": [
+   "Structural count «Три» is true only if exactly 3 clips are shown",
+   "Depends on ID01 and ID02 footage existing",
+   "Uses the bag opened for ID13 (owner OK to open one bag needed)",
+   "Attention-only arm (DR7)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 1
+  },
+  "_prior": 2.705,
+  "_value": 2.705
+ },
+ {
+  "id": "ID13",
+  "title": "Water by eye? Read the bag",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "curiosity_gap",
+  "format": "myth_check",
+  "funnel": "consideration",
+  "hook_ru": "Воду в смесь «на глаз»? Читаем мешок",
+  "first_frame": "Close-up: water already pouring from a bucket into dry mix, with the stream filling the frame. A «постановка» tag sits top-left and the hook in the upper-middle.",
+  "on_screen_ru": [
+   "Воду в смесь «на глаз»? Читаем мешок",
+   "Постановка: льём на глаз",
+   "Стоп. Что пишет производитель?",
+   "Пропорция — на мешке, дословно",
+   "Мастер считает: мерить, а не угадывать"
+  ],
+  "what_happens": "0–2 s: the pour. 2–4 s: a hand stops the bucket. 4–10 s: the label's mixing instruction, captioned verbatim from the ledger. 10–18 s: voice-over. 18–24 s: payoff: the drill mixer in a measured batch, close sound, smooth mix. 24–26 s: CTA. Save: reference. DM line: «скинь новенькому в бригаде».",
+  "why_stop": "A pour already in motion plus a familiar shortcut challenged in the hook. The viewer waits for what the label says.",
+  "why_share_or_save": "Forwarded to junior crew members, and saved by people who mix themselves.",
+  "comment_prompt_ru": "Вы мерите воду или на глаз?",
+  "cta_ru": "Напишите в WhatsApp BA28: материал и объём — ответим",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: льёте воду в смесь, потом миксер в ведре. Телефон в 30 см, звук миксера нужен.",
+     "location": "склад",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: инструкция по замесу на мешке, палец на строке.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Пропорция — на мешке. Воду мерю, а не на глаз.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "«постановка» label, captions with verbatim label text only, punch-in on the label, cover = pour frame.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: verbatim water-to-mix ratio and mixing instruction from the filmed label or datasheet",
+   "NEEDED: owner OK to open one bag for filming"
+  ],
+  "kpi": "Average % watched (curiosity_gap) and saves per 1k. Business: coded chats per 1k.",
+  "risks": [
+   "NEEDS FACT: label mixing text (staff film + agent ledger)",
+   "NEEDS FACT: owner permits using one bag",
+   "Dust and mixer safety: gloves, phone on a stand"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 3.154,
+  "_value": 3.154,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID14",
+  "title": "Foreman, sole trader or procurement: how to write for a fast quote",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "practical_value",
+  "format": "who_is_it_for",
+  "funnel": "conversion",
+  "hook_ru": "Прораб, ИП или закупщик? Пишите так",
+  "first_frame": "Close-up: thumbs already typing a WhatsApp message on a phone (dummy chat, no real contact). Hook text in the upper-middle.",
+  "on_screen_ru": [
+   "Прораб, ИП или закупщик? Пишите так",
+   "Прораб: материал, площадь, район объекта",
+   "ИП: плюс реквизиты для счёта",
+   "Закупщик: спецификация файлом",
+   "Так меньше лишних вопросов"
+  ],
+  "what_happens": "0–1 s: typing. 1–7 s: profile 1 typed. 7–13 s: profile 2. 13–19 s: profile 3. 19–23 s: voice-over. 23–26 s: payoff: the full message template visible, ready to screenshot. 26–28 s: CTA with the same fields. Save: as a template. DM line: «скинь снабженцу».",
+  "why_stop": "The call-out names three buyer types in frame 1, and the viewer self-selects.",
+  "why_share_or_save": "Screenshot-ready template for any supplier inquiry. Forwarded to whoever handles procurement.",
+  "comment_prompt_ru": "Что бесит в переписке с поставщиком?",
+  "cta_ru": "Отправьте BA23 в WhatsApp с такими строками — ответим",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: пальцы печатают сообщение-шаблон в пустом чате. Телефон-камера в 30 см над экраном, без бликов.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Телефон в 30 см от рта, своими словами.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Чем точнее первое сообщение, тем быстрее считаем.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Dummy chat with no real numbers or names, text cards per profile, the template as the final frame and cover, captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner Q2 — which buyer types are served and whether sole traders and brigades are invoiced",
+   "NEEDED: what information the sales desk actually needs for a quote (owner or rep)"
+  ],
+  "kpi": "Saves per 1k. Business: qualified coded chats (company, material and volume named) per 1k. This is the closest proxy to the verdict.",
+  "risks": [
+   "NEEDS FACT: Q2 answer (owner)",
+   "NEEDS FACT: «быстрее считаем» depends on the reply guardrail (≤15 min median). Check the reply time first",
+   "No real chat screenshots"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 5
+  },
+  "_prior": 3.628,
+  "_value": 3.628,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID15",
+  "title": "WILDCARD anti-sell: who should not write here",
+  "insight_ids": [
+   "I09"
+  ],
+  "driver": "honest_signal",
+  "format": "anti_sell",
+  "funnel": "trust",
+  "hook_ru": "Кому сюда писать не стоит",
+  "first_frame": "Close-up: a hand stopping a single bag mid-slide at the pallet edge, palm out like a stop gesture. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Кому сюда писать не стоит",
+   "Если нужен мешок-другой для дома —",
+   "мы, скорее всего, не лучший вариант",
+   "Если у вас объект и бригада —",
+   "пишите, посчитаем объём"
+  ],
+  "what_happens": "0–1 s: the stop gesture. 1–8 s: who should not write, per the owner's rule. 8–14 s: who should. 14–18 s: voice-over. 18–20 s: payoff: loaded pallets, the serious-supplier image. 20–22 s: CTA. DM line: «скинь прорабу — это поставщик под объекты».",
+  "why_stop": "Arguing against the business's own interest is unexpected in frame 1.",
+  "why_share_or_save": "Contractors forward it as «поставщик для объектов». It also filters private callers.",
+  "comment_prompt_ru": "Вы берёте для объекта или для себя?",
+  "cta_ru": "С объектом и бригадой — напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: ладонь останавливает мешок на краю поддона. Телефон в 30 см.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта, правило владельца своими словами.",
+     "location": "тихий угол",
+     "seconds": 10,
+     "takes": 3,
+     "say_ru": "Работаем с объектами. Пару мешков для дома — лучше в магазине.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Pallet B-roll from the library, captions, cover.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner rule for private buyers or minimum order (Q2)",
+   "NEEDED: owner confirms the «посчитаем объём» service"
+  ],
+  "kpi": "Shares per 1k (honest_signal). Business: qualified share of coded chats versus the batch average.",
+  "risks": [
+   "NEEDS FACT: Q2 rule (owner). The idea is blocked until then",
+   "May deter private buyers the owner actually wants; owner approval required"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 1,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.846,
+  "_value": 2.846
+ },
+ {
+  "id": "ID16",
+  "title": "Policy story: what if the wrong material arrives",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "relief",
+  "format": "policy_story",
+  "funnel": "trust",
+  "hook_ru": "Что будет, если привезли не то?",
+  "first_frame": "Close-up: two hands swapping one bag on a pallet for another with a different label colour. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Что будет, если привезли не то?",
+   "Бывает и такое",
+   "Как это решается — по шагам",
+   "Пишите сразу, с фото мешка"
+  ],
+  "what_happens": "0–1 s: the swap. 1–4 s: the question. 4–14 s: the owner-approved procedure told as a short story (one real instance if available). 14–18 s: payoff: the corrected pallet is wrapped. 18–20 s: CTA. Save: as reassurance before a first order. DM line: «скинь, если боишься брать у новых».",
+  "why_stop": "Shows the feared moment (wrong bag) being physically fixed in frame 1.",
+  "why_share_or_save": "Procurement and new contractors save it as the answer to «а если что-то не так?».",
+  "comment_prompt_ru": "Вам меняли материал без спора?",
+  "cta_ru": "Напишите в WhatsApp {CODE}: материал и объём — ответим",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: снимаете один мешок с поддона и ставите другой. Телефон в 30 см.",
+     "location": "погрузка",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта, правило своими словами.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Если привезли не то — сразу пишите, с фото мешка.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Step cards with ledger policy text only, captions, cover.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner-confirmed or published replacement/return policy for a wrong or damaged delivery"
+  ],
+  "kpi": "Saves per 1k (relief). Business: coded chats from new contacts and the offer/invoice tag.",
+  "risks": [
+   "NEEDS FACT: replacement policy (owner). The idea is blocked until then",
+   "Do not imply an error rate"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 1,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.846,
+  "_value": 2.846
+ },
+ {
+  "id": "ID17",
+  "title": "Real number: trucks out of the gate this week",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "social_currency",
+  "format": "real_number",
+  "funnel": "trust",
+  "hook_ru": "Сколько машин ушло со склада за неделю?",
+  "first_frame": "Close-up: a hand adding one tick mark to a paper tally taped near the gate, with a truck pulling out out of focus behind (no plates). Text in the upper-middle.",
+  "on_screen_ru": [
+   "Сколько машин ушло со склада за неделю?",
+   "Считали палочками на листе у ворот",
+   "Ваша догадка?",
+   "Неделя и число — на листе"
+  ],
+  "what_happens": "0–1 s: a tick mark goes on. 1–6 s: tally montage. 6–9 s: a pause to guess. 9–13 s: payoff: the full sheet is revealed with the count and the dates of the week (camera-verified, period on screen). 13–15 s: a truck leaving, looping back to the tick. DM line: «смотри, они реально возят».",
+  "why_stop": "A counting gesture plus an honest numeric question. The viewer wants the number.",
+  "why_share_or_save": "Procurement shares it as proof the supplier is real and active (E22).",
+  "comment_prompt_ru": "Ваша догадка — напишите число",
+  "cta_ru": "Нужна машина на объект? Напишите в WhatsApp BA29",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: ставите палочку на листе у ворот, на фоне уходит машина без номера в кадре. Телефон в 30 см.",
+     "location": "погрузка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Tally montage, a reveal frame with the period caption, plate blur, captions. The staff tally itself is a standing habit of about 1 min per week outside the card.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: counted number of outgoing trucks for a stated week (staff tally sheet, filmed and stored in the ledger, 30-day validity)"
+  ],
+  "kpi": "Shares per 1k and comment guesses. Business: profile visits per 1k and the «смотрели профиль?» rep tally.",
+  "risks": [
+   "NEEDS FACT: the counted number and its period (staff tally)",
+   "The owner may consider volume confidential, so approval is needed",
+   "A small number could read as weak; the owner decides"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 5,
+   "objective_fit": 2
+  },
+  "_prior": 3.128,
+  "_value": 3.128,
+  "_why": "explore"
+ },
+ {
+  "id": "ID18",
+  "title": "Character: «Руки склада» — cross-stacking so loads don't slide",
+  "insight_ids": [
+   "I06",
+   "I01"
+  ],
+  "driver": "mastery",
+  "format": "character",
+  "funnel": "trust",
+  "hook_ru": "Он кладёт мешки так, чтобы не поехали",
+  "first_frame": "Top-down: two hands already turning a bag 90° to lock it into a cross-pattern layer. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Он кладёт мешки так, чтобы не поехали",
+   "Слой вдоль, слой поперёк",
+   "Руки склада. Серия первая"
+  ],
+  "what_happens": "0–2 s: the bag is turned. 2–10 s: a layer is built crosswise (real speed, or labelled «ускорено»). 10–16 s: voice-over from the same worker. 16–19 s: payoff: a hand pushes the finished stack and it does not shift. 19–20 s: loop. This is a series container: each episode shows one small skill by the same hands and voice. DM line: «покажи грузчикам, как надо».",
+  "why_stop": "A skilled hand movement in frame 1, plus a promise of the reason in the hook.",
+  "why_share_or_save": "Foremen send it to their loaders. Followers return for the recurring character.",
+  "comment_prompt_ru": "Как у вас на объекте складывают мешки?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: кладёте слой мешков крест-накрест к предыдущему. Телефон над поддоном, без зума.",
+     "location": "склад",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта, своими словами.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Кладу крест-накрест — так в дороге стопка не разъезжается.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Series title card in the same position each episode, captions, a disclosed speed-up if used, loop edit.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Follows per 1k and completion (mastery). Business: profile visits and coded chats.",
+  "risks": [
+   "The worker must volunteer for a recurring voice role",
+   "The spoken line is the worker's craft opinion, not a delivery guarantee"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 2
+  },
+  "_prior": 2.923,
+  "_value": 2.923
+ },
+ {
+  "id": "ID19",
+  "title": "First frost: crews move indoors",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "moment_trigger",
+  "format": "moment",
+  "funnel": "conversion",
+  "hook_ru": "Первый мороз — бригады уходят внутрь",
+  "first_frame": "Macro: frost crystals on stretch film over a pallet, with a fingertip already wiping a line through them. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Первый мороз — бригады уходят внутрь",
+   "Снаружи сезон закрывается",
+   "Что у вас по плану на зиму?",
+   "Материал под зимний объект — обсудим"
+  ],
+  "what_happens": "0–2 s: the frost is wiped. 2–6 s: snow at the warehouse door. 6–12 s: pallets inside (library). 12–16 s: payoff: a question card about winter plans. 16–18 s: CTA. Published only in the actual first-frost week (agent weather fetch). DM line: «скинь, кто на зиму объект ищет».",
+  "why_stop": "A real weather cue the viewer just felt himself, plus macro motion in frame 1.",
+  "why_share_or_save": "Timely; forwarded inside crews planning winter. Low save value.",
+  "comment_prompt_ru": "Какие работы у вас на зиму?",
+  "cta_ru": "Планируете зиму? Напишите в WhatsApp BA25: объект и материал",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Макро: пальцем проводите по инею на плёнке. Телефон в 15–20 см, долгое нажатие для фокуса.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Снег или иней у ворот склада, крупно, без людей и номеров.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Captions, question card, pallet B-roll from the library, cover = frost frame.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: agent weather fetch confirming the first frost in Karaganda in the publish week"
+  ],
+  "kpi": "Coded chats per 1k (moment_trigger conversion). Comments are coded as winter-demand evidence.",
+  "risks": [
+   "Timing depends on the weather; pre-shoot when frost appears",
+   "No temperature or suitability claims (E19)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 4
+  },
+  "_prior": 3.333,
+  "_value": 3.333,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID20",
+  "title": "WILDCARD local: Karaganda wind on a site",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "identity",
+  "format": "local",
+  "funnel": "attention",
+  "hook_ru": "Только в Караганде поймут этот ветер на объекте",
+  "first_frame": "Close-up at 20 cm: stretch film flapping violently on a pallet in the wind, with the noise of wind and film from frame 1. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Только в Караганде поймут этот ветер на объекте",
+   "Мешок держишь двумя руками",
+   "Плёнку — всем телом",
+   "Пыль — уже в глазах"
+  ],
+  "what_happens": "0–1 s: the film flaps. 1–8 s: escalating lines over the wind. 8–12 s: payoff: a hand finally tucks the film in and it goes quiet. 12–13 s: loop to the flapping. Filmed only on a genuinely windy day. DM line: «это наш объект в четверг».",
+  "why_stop": "Loud real sound and chaotic motion in frame 1, plus a city call-out.",
+  "why_share_or_save": "A local in-joke shared among Karaganda builders («это про нас»).",
+  "comment_prompt_ru": "Из какого вы района?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: плёнка хлопает на ветру у ворот. Телефон прикрыть рукой от ветра, в 20 см.",
+     "location": "погрузка",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Captions, loop edit, wind-noise limiting so the audio does not clip, cover.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Shares per 1k and city share of the audience. Business: district answers coded for delivery-radius planning, with no coverage claim.",
+  "risks": [
+   "The local joke needs a Karaganda local to check it",
+   "District answers must not be read as delivery-coverage promises (E27)",
+   "Attention-only arm (DR7)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 1
+  },
+  "_prior": 3.256,
+  "_value": 3.256
+ },
+ {
+  "id": "ID21",
+  "title": "Reply video to a real week-1 comment",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "participation",
+  "format": "reply",
+  "funnel": "retention",
+  "hook_ru": "Вы спросили в комментариях — отвечаем",
+  "first_frame": "A real public comment from the account's own post (username blurred) slides in over a library close-up of bags. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Вы спросили в комментариях — отвечаем",
+   "Вопрос — из комментария под роликом",
+   "Ответ — только проверенные факты"
+  ],
+  "what_happens": "0–1 s: the comment card. 1–4 s: matching library footage. 4–18 s: the answer, as captioned text or a labelled synthetic voice-over, using only owner-approved facts. 18–20 s: payoff: the answer card. 20–22 s: CTA. Week 2 onward, once comments exist. DM line: «тебе ответили, смотри».",
+  "why_stop": "The commenter and lurkers see their own question answered.",
+  "why_share_or_save": "The commenter shares it. Others save it if the answer is practical.",
+  "comment_prompt_ru": "Что разобрать следующим? Ответим видео",
+  "cta_ru": "Свой вопрос по объекту — в WhatsApp BA27",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. Comment screenshot from the account's own post (username blurred) over library/week1/*.mp4 clips, captions, and an optional synthetic voice-over labelled «озвучено ИИ». The answer text is approved by the owner.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: a real comment from week-1 posts",
+   "NEEDED: owner-approved facts for the answer"
+  ],
+  "kpi": "Comments per 1k and follows (participation). Business: coded chats per 1k.",
+  "risks": [
+   "Only possible once real comments exist (week 2+)",
+   "An answer containing claims needs ledger facts"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.167,
+  "_value": 3.167,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID22",
+  "title": "Vote: which foreman question we answer on Friday",
+  "insight_ids": [
+   "I03",
+   "I02"
+  ],
+  "driver": "participation",
+  "format": "audience_vote",
+  "funnel": "retention",
+  "hook_ru": "Какой вопрос прорабов разбираем в пятницу?",
+  "first_frame": "Two hands already holding up two pieces of cardboard with handwritten questions in front of a bag stack. Text in the upper-middle.",
+  "on_screen_ru": [
+   "Какой вопрос прорабов разбираем в пятницу?",
+   "Два вопроса — из ваших сообщений",
+   "Голосуйте: А или Б",
+   "В пятницу — ответ на победителя"
+  ],
+  "what_happens": "0–1 s: the cardboards. 1–8 s: each question is shown in close-up. 8–12 s: the vote call. 12–14 s: payoff: a promise card for the Friday answer. Friday's video (e.g. ID05 or ID07) delivers it and names the vote. DM line: «голосни за наш вопрос».",
+  "why_stop": "Handwritten real questions in frame 1. The viewer wants to see whether his own question is there.",
+  "why_share_or_save": "Shared to get a colleague's vote. The return visit happens on Friday.",
+  "comment_prompt_ru": "А или Б?",
+  "cta_ru": "Срочный вопрос по объекту? Пишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Держите перед стопкой мешков две картонки с вопросами, по очереди приближаете к камере. Телефон в 40 см на стопке.",
+     "location": "склад",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Vote cards, captions, pinned comment with options. Friday edit references the vote result.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: 2 real recurring questions from the WhatsApp export (≥2 chats each)",
+   "NEEDED: owner commits to answering the winner in Friday's video"
+  ],
+  "kpi": "Comments per 1k and return viewers on Friday. Business: coded chats on the Friday answer.",
+  "risks": [
+   "Asking and not following through kills trust; the Friday video must ship",
+   "NEEDS FACT: real questions (owner export)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 2.756,
+  "_value": 2.756
+ },
+ {
+  "id": "ID23",
+  "title": "WILDCARD trend structure: ranking warehouse sounds",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "amusement_awe",
+  "format": "trend_remix",
+  "funnel": "attention",
+  "hook_ru": "Ранжирую звуки склада: от худшего к лучшему",
+  "first_frame": "Real close-up of hand-cart wheels rolling over concrete, with the rumble already playing; a tier-list overlay (AI motion graphic) occupies the top half.",
+  "on_screen_ru": [
+   "Ранжирую звуки склада: от худшего к лучшему",
+   "Колёса тележки по бетону",
+   "Мешок на поддон",
+   "Плёнка вокруг поддона",
+   "Миксер в замесе",
+   "А ваш худший звук?"
+  ],
+  "what_happens": "0–2 s: the cart-wheel rumble is placed at the bottom of the tier list. 2–14 s: each next real sound plays and is ranked, with a playful disagreement beat in the middle. 14–17 s: payoff: the best sound revealed at the top. 17–18 s: the prompt for the viewer's worst site sound. DM line: «согласен с рейтингом?».",
+  "why_stop": "A familiar ranking structure plus a real sound onset in frame 1.",
+  "why_share_or_save": "Shared to argue about the ranking. No save value.",
+  "comment_prompt_ru": "А какой звук на объекте худший?",
+  "cta_ru": "Нужен материал на объект? Напишите в WhatsApp {CODE}",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно у колеса: катите тележку по бетону. Телефон на полу в 20–30 см — нужен грохот колёс. Секунда до и после.",
+     "location": "склад",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Cart-wheel sound from this shot; the other sounds only from filmed library clips (library/week1/ID01_*.mp4, ID02_*.mp4, ID13_*.mp4). AI tier-list motion graphic, captions. Original audio, no trending sound needed.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Shares and comments per 1k. Business: profile visits per 1k.",
+  "risks": [
+   "Trend-dependent (evergreen ranking structure, no expiry); counts toward the ≤2 trend cap",
+   "Only rank sounds that were actually filmed; depends on ID01, ID02 and ID13 footage",
+   "Attention-only arm (DR7)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 1
+  },
+  "_prior": 2.872,
+  "_value": 2.872
+ },
+ {
+  "id": "ID24",
+  "title": "Real case: call in the evening, crew starts in the morning",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "story",
+  "format": "real_case",
+  "funnel": "trust",
+  "hook_ru": "Позвонили вечером: бригада выходит утром",
+  "first_frame": "Low-light close-up: a hand switching on the warehouse light as the bags emerge from the dark. Text in the upper-middle. Voice at 0.5 s.",
+  "on_screen_ru": [
+   "Позвонили вечером: бригада выходит утром",
+   "Реальный случай, без имён",
+   "Что сделали — по шагам",
+   "Чем закончилось — честно"
+  ],
+  "what_happens": "0–1 s: the light comes on. 1–20 s: the voice-over tells one real, owner-confirmed case (want, obstacle, turn) over loading footage. 20–26 s: payoff: the true outcome, even if imperfect. 26–28 s: CTA. ≤40 s. The client is anonymised and nothing implies this is a standard service. DM line: «вот такого поставщика бы».",
+  "why_stop": "A time-pressure story set up in 5 words, and the light coming on is motion plus anomaly in frame 1.",
+  "why_share_or_save": "Foremen forward it as a story about a supplier who answered; it builds trust before a first order.",
+  "comment_prompt_ru": "Бывало, что материал нужен к утру?",
+  "cta_ru": "Объект на подходе? Напишите в WhatsApp {CODE} заранее",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: рука включает свет на складе, мешки выходят из темноты. Телефон в 30 см.",
+     "location": "склад",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Тихий угол, телефон в 30 см от рта: рассказываете подтверждённый случай своими словами.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Расскажу один случай — как было, без имён.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Loading B-roll from library/week1/ID03_*.mp4, captions, blur on all identifying details.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: one real case (date, what was ordered, what happened) confirmed by the owner, client anonymised or consenting"
+  ],
+  "kpi": "Completion and shares per 1k (story). Business: coded chats and the offer/invoice tag.",
+  "risks": [
+   "NEEDS FACT: the real case (owner). The idea is blocked until then",
+   "Must not imply after-hours or urgent delivery is standard (CAPACITY unknown)",
+   "Low-light footage on a weak phone"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 1,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.846,
+  "_value": 2.846
+ }
+]

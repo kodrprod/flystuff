@@ -1,0 +1,441 @@
+{
+ "evidence": [
+  {
+   "id": "EV01",
+   "kind": "fact",
+   "claim": "The site's digital-piano category lists about 133 models from 12 or more brands: Casio, Kurzweil, Korg, Gewa, Dexibell, Pearl River, Estrada, Flykeys, Donner, Medeli, Aileen/Lexington and Blackstar. That is a lot to choose from. Source list: lists.digital_pianos, fetched 2026-10-08.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/catalog_listings.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV02",
+   "kind": "fact",
+   "claim": "Listed digital-piano prices run from 46 182 ₸ (Blackstar Carry On Touch FP49T White, folding) to 2 867 955 ₸ (Dexibell VIVO H10 WHP). Almost every full-size model has 88 keys, so key count does not explain the price.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/catalog_listings.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV03",
+   "kind": "fact",
+   "claim": "Stock sample of 25 piano SKUs: 14 in stock (34 units) and 11 out of stock. The out-of-stock ones include PX-S1100CBC7, PX-870BKC7, AP-470BNC7, AP-550BNC7, AP-300BNC7, Pearl River V05/F-13W, Lexington DP730X W, Medeli UP82 and Blackstar FP88T/FP49T. In-stock prices run from 200 720 ₸ (Estrada EDP-200WH) to 2 075 617 ₸ (Dexibell VIVO H10 BK). Fetched 2026-10-08.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV04",
+   "kind": "fact",
+   "claim": "Correction to the intake: Casio PX-770 BKC7 shows stock_qty 3 and Casio AP-270 BKC7 shows stock_qty 5. Ledger facts px770_instock and ap270_instock agree that both are in stock. Total visible piano stock is about 42 units across 16 in-stock SKUs. Stock has a 7-day TTL and must be re-checked before any stock wording is used.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/products_batch001.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV05",
+   "kind": "fact",
+   "claim": "Models with the most stock: Estrada EDP-220BK 232 960 ₸ ×9; Casio PX-S1100BKC7 362 990 ₸ ×5; Casio AP-300WEC7 754 990 ₸ ×4; Kurzweil CUP E1 SR and CUP M1 SR 637 520 ₸ ×3 each; Casio AP-300BKC7 754 990 ₸ ×2. These prices are NOT yet in facts_usable. Each needs a ledger entry (web, TTL 7d) before it can appear in content.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV06",
+   "kind": "proof_asset",
+   "claim": "The only piano pair fully in the ledger is Casio PX-770 BKC7 (695 913 ₸, px770_price) vs Casio AP-270 BKC7 (734 886 ₸, ap270_price). Per px770_specs and ap270_specs, both have 88 keys, no Bluetooth, no auto-accompaniment and no bench in the box. Polyphony is 128 vs 192. The price difference is 38 973 ₸ (derived). This gives a real 'what the extra money buys' comparison.",
+   "source": "diff_pno",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV07",
+   "kind": "fact",
+   "claim": "Free ground delivery across Kazakhstan applies to orders over 100 000 ₸. Derived with EV03: every in-stock sampled piano costs more than 100 000 ₸, so all of them qualify. Delivery lead times and New Year cut-off dates are unknown.",
+   "source": "delivery_free_100k",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV08",
+   "kind": "constraint",
+   "claim": "Free courier within Astana applies only when the order weighs more than 20 kg and costs more than 15 000 ₸. The piano spec facts have no weight field, so we cannot say which models get free Astana courier.",
+   "source": "delivery_astana",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV09",
+   "kind": "proof_asset",
+   "claim": "The site states a minimum 12-month warranty on all goods. Two related ledger facts: warranty_casio (2-year manufacturer warranty, service only at the Almaty service centre, which must be disclosed whenever Casio warranty is mentioned) and original (the site claims «100% оригинальный товар»).",
+   "source": "warranty",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV10",
+   "kind": "constraint",
+   "claim": "The 14-day return (returns_14d) applies only to goods that are unused and still have packaging, labels and receipt. Delivery cost both ways is withheld, plus 3% for cash on delivery (returns_cost). So we cannot offer a 'try it at home and return it' message, and «без лишних вопросов» (returns_phrase) cannot be used without the conditions.",
+   "source": "returns_conditions",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV11",
+   "kind": "fact",
+   "claim": "Payment options: Kaspi QR, Kaspi Pay, Kaspi transfer, Visa/MasterCard, Apple Pay, and cash on delivery or pickup. No instalment or credit plan is published, so instalments are unknown and cannot be claimed.",
+   "source": "payments",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV12",
+   "kind": "constraint",
+   "claim": "The «Финальная распродажа» section (fact sale_page) lists 535 items, including piano lines: Gewa UP365/UP400/DP300G/DP345 at −20%; Kurzweil M100SR at −30%; Kurzweil M210 WH at −50% (352 794 ₸, was 705 588 ₸, stock unknown); Blackstar folding models at −30%. The reason and end date are unknown. To a high-ticket buyer, «финальная» can read as 'the shop is closing'.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/catalog_listings.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV13",
+   "kind": "performance",
+   "claim": "Muzzone's YouTube piano videos titled by model name have a median of 3 100 views, which is 1.35× the channel median of 2 300: Kurzweil KA130 11 000, M110 6 400, KA150 3 900, M210 3 100, Casio PX-860 2 700, M130 2 000, Casio GP300 2 000. KA130 reached 4.8×. Piano buyers search by model (consistent with learning L004). This is long-form, correlational and cumulative.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV14",
+   "kind": "performance",
+   "claim": "The «Юные гости / Гости магазина» piano clips, where children and guests play in the store, have a median of about 780 views, roughly 0.34× the channel median: KA150 5 200, AP 460 2 000, M110 821, M210 746, PX 770 663, PX760 457. They also put named children on camera, which our current defaults do not allow.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV15",
+   "kind": "performance",
+   "claim": "The 12-part piano lesson series «Интуитивная импровизация» got 2 500 views on lesson 1, then decayed to 203–852 views. Its median is about 317, roughly 0.14× the channel median. Lesson content does not attract piano buyers here.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV16",
+   "kind": "performance",
+   "claim": "The one piano head-to-head video, «Китаец Lexington DP791 VS Японец Casio Celviano AP-270» (995 s), got 1 100 views (0.48×). Guitar and amp head-to-heads did far better: Cort X300 vs KX300 got 28 000, Marshall CODE vs Mustang GT 24 000, Boss GT1 vs RP360XP 21 000. With only one piano example, we cannot conclude that comparisons fail for pianos. Length and framing may be the cause.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV17",
+   "kind": "performance",
+   "claim": "Beginner framing tops the channel: «CORT X100 — для начинающих» got 64 000 views (the best video), G100 19 000 and KX100 17 000. These are long-form guitar videos. Learning L003 says the same framing did not replicate in Shorts, so it is untested for piano Shorts.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV18",
+   "kind": "performance",
+   "claim": "The channel has been dormant since 2026-05-10. The newest 8 uploads have no view counts in the crawl, and interviews have a median of 118 views (L006). Brand-only cymbal and drum demos have a median of 390 views (n=48), so demos without a buyer question underperform.",
+   "source": "profile.social.youtube; clients/muzzone/research/youtube_channel.json; L006",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV19",
+   "kind": "proof_asset",
+   "claim": "Existing piano demo videos cover models that are in stock: the AP-270 comparison (AP-270 BKC7, 5 in stock per EV04) and a PX 770 in-store demo (PX-770 BKC7, 3 in stock). The PX 770 demo shows a named child, so consent must be checked before reuse. These videos can serve as proof links in WhatsApp quick replies and on the trust shelf without new filming.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV20",
+   "kind": "behaviour",
+   "claim": "The Astana store (ул. Кажымукана, 14, НП-6, fact address) has a history of in-store playing on its channel: young-guest piano tests, artist visits and masterclasses. It is likely a showroom where pianos can be played. Which pianos are on the floor now is unknown; the worker reality scan will confirm it.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "likely"
+  },
+  {
+   "id": "EV21",
+   "kind": "market",
+   "claim": "Piano-selection review channels have a CIS audience: «Pianoby - LIVE» has 65 100 followers and a 3 300 median; «PIANOBY» has 6 740 followers and a 1 200 median. We have channel metadata only. Their videos and comments have not been analysed yet, and those comments are the best substitute for customer language in this category.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/peer_channels_meta.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV22",
+   "kind": "market",
+   "claim": "An 'adult beginner' identity exists in the category: «Георгий Морев. Уроки гитары для взрослых» has 99 300 followers and an 8 950 median, the highest median among the peers. It is a guitar channel, so applying this to pianos is an assumption.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/peer_channels_meta.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV23",
+   "kind": "constraint",
+   "claim": "EVIDENCE GAP: there are no customer-voice atoms. No WhatsApp chats; no 2GIS, Google or Yandex reviews were fetched; Instagram blocked the crawl; peer comments were not scraped; autocomplete was not crawled. The language bank is empty, and no insight passes C4 test 1 (Evidenced) on customer sources. Every customer-side tension below is a hypothesis.",
+   "source": "profile.social.instagram (blocked), profile.known_unknowns, research file inventory",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV24",
+   "kind": "moment",
+   "claim": "New Year (2026-12-31) is the boss's deadline and probably a gift moment for a big family purchase. School winter break starts in late December. The push window is Dec 21–31, and gift-moment content should be pre-shot 2–3 weeks ahead (from about Dec 1). This comes from the boss's request plus the static calendar, with no client data on gift buying.",
+   "source": "boss request (verbatim) + static calendar",
+   "confidence": "assumption"
+  },
+  {
+   "id": "EV25",
+   "kind": "moment",
+   "claim": "The music-school term has been running since September. Pupils who started this autumn are likely to need a home instrument to practise on, so October to December is a natural window for parents to buy.",
+   "source": "static calendar; cross-client archetype (no client data)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "EV26",
+   "kind": "behaviour",
+   "claim": "Hypothesis: parents hesitate because they fear the child will quit, and because they rely on the teacher's one-line advice («нужно с молоточковой механикой», «акустика лучше»). This needs checking against the WhatsApp chat sample.",
+   "source": "category archetype (library); no client atoms",
+   "confidence": "assumption"
+  },
+  {
+   "id": "EV27",
+   "kind": "constraint",
+   "claim": "The fetched piano properties (px770_specs and ap270_specs; the properties in products_batch001.json are similar) cover only keys, polyphony, colour, bench, Bluetooth, DSP and auto-accompaniment. Key action (weighted or hammer), headphone outputs, weight, dimensions and stand or pedal contents are missing. Until we fetch them, we cannot claim anything about touch, silent practice, space or delivery weight.",
+   "source": "px770_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV28",
+   "kind": "moment",
+   "claim": "Hypothesis: many Astana families live in apartments, so practising without disturbing neighbours or a sleeping sibling is a reason to choose a digital piano with headphones. We have no client data on this, and headphone outputs per model are unverified (EV27).",
+   "source": "local culture assumption",
+   "confidence": "assumption"
+  },
+  {
+   "id": "EV29",
+   "kind": "fact",
+   "claim": "Casio AP-300 is listed in several finishes (BK, WE, BN, GB) at the same 754 990 ₸. White (WE) has the most stock (4 units) and BN is out of stock. The finish is a real choice at no extra cost, which may matter if the piano stands where guests see it.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV30",
+   "kind": "constraint",
+   "claim": "The shop's WhatsApp is +7 701 0987734. Calls are Mon–Fri 10:00–19:00 and Sat 10:00–17:00 (fact hours). WhatsApp reply time and the inquiry-to-order rate are unknown, so the chat funnel cannot be computed yet.",
+   "source": "wa",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV31",
+   "kind": "fact",
+   "claim": "A pickup reservation holds for 3 working days and can be extended on request. This helps with gift timing, for example reserving a model and collecting it before the holiday.",
+   "source": "pickup_reserve",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV32",
+   "kind": "behaviour",
+   "claim": "Likely filmable realities, to be confirmed by the worker reality scan: close-up of hands on keys with the phone ≤30 cm from the speaker; two pianos side by side playing the same phrase; headphones being plugged in (if the model has an output); the spec label or card; the sustain pedal; a packed piano box at pickup; the street entrance and the showroom floor.",
+   "source": "inferred from EV20 and product types; reality scan not yet done",
+   "confidence": "assumption"
+  },
+  {
+   "id": "EV33",
+   "kind": "constraint",
+   "claim": "The site offers to compensate delivery costs in exchange for a review or video. This may break platform rules on incentivised reviews. We will not use or promote it, and we flag it to the owner.",
+   "source": "returns_cost",
+   "confidence": "verified"
+  },
+  {
+   "id": "EV34",
+   "kind": "market",
+   "claim": "Category convention, seen on Muzzone's own channel and catalogue: a model-name title, a horizontal demo with a player and no buyer question, and product cards that list specs («Полифония: 192», «Bluetooth: N», «Банкетка: Нет») without explaining them (see also products_batch001.json, L005, L006). Peer short-form conventions have not been scanned yet.",
+   "source": "/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "likely"
+  },
+  {
+   "id": "EV35",
+   "kind": "performance",
+   "claim": "Cross-client learnings L001 and L003 (measured on peer Shorts, not on this client) show that text-based priors are close to useless for Shorts: Spearman 0.11 overall and 0.07 for retail. All insight and idea scores below are weak priors, not forecasts. Labelled an assumption because the source is outside the client ledger.",
+   "source": "cross-client learnings L001, L003",
+   "confidence": "assumption"
+  }
+ ],
+ "insights": [
+  {
+   "id": "INS1",
+   "insight": "RANK 1, category + business source, PROVISIONAL. Parents and adult beginners want a piano that will be 'enough' for years, because they are spending hundreds of thousands of ₸. But every listing says 88 keys while in-stock prices run from 200 720 to 2 075 617 ₸, and the product cards list jargon instead of differences a buyer can hear. So they delay, or default to the cheapest or most familiar listing. Customer voice: «Везде 88 клавиш — за что тогда платить в три раза больше?» Scores E1 / I2 / B3 / S2 / D2 / T2 = 12. Test 1 (Evidenced) FAILS on customer sources: we have only catalogue and channel data. Tests 2 to 4 likely pass. Test 5 (Answerable) passes only partly: the PX-770 vs AP-270 pair is fully in the ledger, and other models need ledger entries first.",
+   "tension": "Price vs risk. The category convention (identical spec cards, demos with no buyer question) vs what buyers need (to hear what the extra money buys).",
+   "evidence_ids": [
+    "EV01",
+    "EV02",
+    "EV03",
+    "EV05",
+    "EV06",
+    "EV13",
+    "EV16",
+    "EV34",
+    "EV23"
+   ],
+   "who_feels_it": "Buyers in Astana and across RK who compare piano listings online before writing to a shop: mainly parents of music-school pupils and adult beginners. This audience is assumed; verify it in chats.",
+   "content_reality": "Two in-stock pianos side by side, the same short phrase played on each, phone ≤30 cm from the speaker. The price is spoken or captioned inside the story, never shown as a slide. Engines: E09 blind test («Угадайте, где дороже»); E08 price anatomy (PX-770 vs AP-270: 38 973 ₸ difference, polyphony 128 vs 192); E20 three real price tiers; E11 sorter. Prices for Estrada EDP-220BK, PX-S1100BK and AP-300WE need ledger entries (EV05) before they appear in content.",
+   "strength": 12
+  },
+  {
+   "id": "INS2",
+   "insight": "RANK 2, culture / moment source, PROVISIONAL. Families who choose a piano as the New Year present want it to arrive on time and stay a surprise, because it is the year's big family gift. But it is a heavy, bulky item bought in the busiest weeks, and delivery cut-offs are not published. So they postpone to «после праздников» or buy something smaller. Customer voice: «Хочу подарить к Новому году — а как его привезти, чтобы успели и ребёнок не увидел?» Scores E1 / I3 / B3 / S2 / D1 / T2 = 12. Test 1 fails: the only evidence is the calendar and the boss's request. Tests 3 to 5 pass for free delivery and the 3-day reserve, but any timing claim is blocked until the owner answers Q3.",
+   "tension": "Time vs certainty: the wish for a perfect surprise vs the logistics of a 20+ kg box at peak season.",
+   "evidence_ids": [
+    "EV24",
+    "EV07",
+    "EV08",
+    "EV31",
+    "EV03",
+    "EV11"
+   ],
+   "who_feels_it": "Parents and relatives buying a gift in December, both in Astana and in the regions (free ground delivery across RK over 100 000 ₸).",
+   "content_reality": "A packed piano box at pickup; a 'what happens after you write' chain (code word → model → reserve for 3 working days → pickup or free RK delivery); hands tying a bow on the box if the shop has one (shop's own props only). Engines: E12 POV («POV: подарок весом с холодильник надо спрятать до 31-го»), E21, E05, E20 gift tiers. Pre-shoot from about Dec 1. No «успеем к Новому году» claim without the owner's cut-off dates (Q3).",
+   "strength": 12
+  },
+  {
+   "id": "INS3",
+   "insight": "RANK 3, category + business source, PROVISIONAL. Buyers read «Полифония 128 / 192», «Bluetooth: N», «Банкетка: Нет» and cannot translate that into 'is this fine for my child's practice?'. They also miss hidden extras: for example, the bench is not in the box for the PX-770 or AP-270. So they lean on a teacher's one-liner or a brand name. Customer voice: «Полифония 192 — это мне вообще надо? И банкетку отдельно покупать?» Scores E1 / I1 / B3 / S2 / D2 / T2 = 11.",
+   "tension": "Category convention vs need: spec sheets are written for insiders but bought by non-musicians who fear looking clueless («не разбираюсь, но не хочу переплатить»).",
+   "evidence_ids": [
+    "EV06",
+    "EV27",
+    "EV34",
+    "EV13",
+    "EV18"
+   ],
+   "who_feels_it": "First-time piano buyers who are not musicians: parents and gift buyers.",
+   "content_reality": "A finger points at the spec line on the screen or price tag, then a close-up demo on the keys. Engines: E06 «3 вещи проверить перед покупкой цифрового пианино» (one of them: is the bench included? per the ledger); E05 «Вопрос из WhatsApp»; E11. Every spec explanation needs a derived fact. A polyphony demo must not claim an audible difference we have not verified. Key-action and headphone specs must be fetched first (EV27). Strong save driver, and the same material doubles as YouTube search content (EV13).",
+   "strength": 11
+  },
+  {
+   "id": "INS4",
+   "insight": "RANK 4, customer source (hypothesis only), PROVISIONAL. Parents whose child has just started music school want a home instrument, because the teacher expects daily practice. But they fear spending 200 000 to 750 000 ₸ and then the child quitting in six months. So they buy a cheap keyboard, borrow one, or delay. Customer voice: «А если через полгода бросит — зачем мне пианино за полмиллиона?» Scores E1 / I3 / B3 / S1 / D1 / T1 = 10. Test 5 is weak: there are no rental, trade-in or instalment facts, and returns require the item to be unused (EV10). So we can show the entry tier and help people choose, but we cannot take the risk off them.",
+   "tension": "Price vs risk; the parent's ideal (a musical child) vs reality (an uncertain commitment).",
+   "evidence_ids": [
+    "EV25",
+    "EV26",
+    "EV03",
+    "EV10",
+    "EV11",
+    "EV14",
+    "EV23"
+   ],
+   "who_feels_it": "Parents of first- and second-year music-school pupils in Astana.",
+   "content_reality": "No children on camera (the default). Instead: adult hands on the keys of the cheapest in-stock model vs a mid-tier model; a tier sorter («первый год / если не бросил / на годы»); answers to WhatsApp questions. Engines: E11, E20, E05, and E22 only with owner permission for a real story. Non-marketing flag for the owner: an instalment, trade-in or rental option would resolve this tension, but only if the owner chooses to offer one. We will not invent one.",
+   "strength": 10
+  },
+  {
+   "id": "INS5",
+   "insight": "WILDCARD, culture source, low evidence and high showability. Astana families in apartments want the child to practise every day, but they dread neighbours knocking or a sibling waking up. That makes silent practice a hidden job a digital piano does. Customer voice: «Ей заниматься каждый день, а соседи уже стучат по батарее.» Scores E0 / I2 / B2 / S3 / D2 / T1 = 10. T rises to 2 once headphone outputs per model are in the ledger.",
+   "tension": "Private need vs social judgement: wanting daily practice vs not wanting to be the noisy neighbours.",
+   "evidence_ids": [
+    "EV28",
+    "EV27",
+    "EV32",
+    "EV05"
+   ],
+   "who_feels_it": "Parents in apartments, and adult beginners who practise in the evening.",
+   "content_reality": "A 2-second mechanism, loopable: the same chord played loud, then headphones plugged in, then silence in the room (close sound, phone ≤30 cm). Engines: E04, E12 POV («POV: 22:00, соседи спят, а у неё гаммы»), E16 local truth. Blocked until headphone output is confirmed per model (EV27).",
+   "strength": 10
+  },
+  {
+   "id": "INS6",
+   "insight": "HELD, business source; use it for the trust shelf and WhatsApp replies, not for reach. Someone about to spend 600 000 ₸ or more wants to know who fixes the piano if it breaks. Casio service is only in Almaty, and a site-wide «Финальная распродажа» of 535 items can read as 'the shop is closing'. Customer voice: «А если сломается через год — куда я его повезу? Вы вообще будете работать?» Scores E1 / I2 / B2 / S1 / D2 / T1 = 9.",
+   "tension": "Price vs risk; what the store signals («финальная распродажа») vs the trust needed for a purchase meant to last years.",
+   "evidence_ids": [
+    "EV09",
+    "EV12",
+    "EV29",
+    "EV33"
+   ],
+   "who_feels_it": "Buyers of mid-range and premium models (Casio AP-300, Kurzweil CUP, Gewa) who are close to buying.",
+   "content_reality": "An honest E05 answer card («Гарантия минимум 12 месяцев; у Casio — 2 года, сервис в Алматы») plus a 'how the warranty works' item on the pinned trust shelf. Non-marketing flag: what «Финальная распродажа» means (Q2) decides whether any warranty content is credible. If the store is closing, after-sales claims are paused.",
+   "strength": 9
+  },
+  {
+   "id": "INS7",
+   "insight": "HELD; the belief's truth is unknown, so T=0 and it is excluded from claim-bearing ideas. Myth: «Цифровое пианино — не настоящее, педагог не примет». The ledger does not say which models have a weighted or hammer action, so we cannot 'bust' the myth. For now it can be used only in empathy or recognition content with no claim, and it can be reactivated once key-action specs are fetched. Customer voice: «Педагог сказал — только с молоточковой механикой, а я не понимаю, какая где.» Scores E0 / I2 / B2 / S2 / D1 / T0 = 7.",
+   "tension": "Belief vs truth (a category myth), plus deference to the teacher.",
+   "evidence_ids": [
+    "EV26",
+    "EV27"
+   ],
+   "who_feels_it": "Parents whose child's teacher has an opinion on digital vs acoustic pianos.",
+   "content_reality": "After the spec fetch: close-up of key travel on two models (E01 / E09). Until then: nothing.",
+   "strength": 7
+  },
+  {
+   "id": "INS8",
+   "insight": "HELD, identity source. Adults who always wanted to play want a piano for themselves, but they fear it is 'too late' or self-indulgent, so they keep postponing. Customer voice: «Мне 35 — не поздно себе пианино покупать?» Peers show an adult-learner audience exists, but only for guitar. Muzzone's own piano lessons decayed to 0.14× median, so lessons are not the route to this audience. Scores E1 / I2 / B1 / S1 / D2 / T1 = 8.",
+   "tension": "Self-image vs behaviour; desire vs the social judgement of 'playing at your age'.",
+   "evidence_ids": [
+    "EV22",
+    "EV15",
+    "EV17"
+   ],
+   "who_feels_it": "Adult beginners, 25–50, buying for themselves.",
+   "content_reality": "Adult hands, a first chord, POV text. Engines: E12, and E11 with a 'for an adult beginner' profile inside the sorter. Re-rank after the chat sample.",
+   "strength": 8
+  },
+  {
+   "id": "INS9",
+   "insight": "HELD, backup wildcard, culture source. For many families a piano is also furniture in the room where guests sit, so the finish matters as much as the sound. They want it to look like an instrument, not a keyboard on a stool. Casio AP-300 comes in several finishes at the same 754 990 ₸, and the white one has the most stock. Customer voice: «Чтобы в зале стояло красиво, а не как синтезатор на табуретке.» Scores E0 / I1 / B2 / S3 / D2 / T2 = 10.",
+   "tension": "Private preference vs social judgement (guests in the living room); the cabinet piano vs the portable look.",
+   "evidence_ids": [
+    "EV29",
+    "EV05"
+   ],
+   "who_feels_it": "Gift buyers and families furnishing a living room.",
+   "content_reality": "The same model in different finishes in the showroom, or a cabinet model next to a slim one, with an E23 vote: «Белое или чёрное?». Prices need ledger entries first. Keep in reserve in case INS5 stays blocked by the spec fetch.",
+   "strength": 10
+  },
+  {
+   "id": "REJ1",
+   "insight": "REJECTED: «Люди хотят хороший звук и качество».",
+   "tension": "Nothing specific: no evidence-backed tension, and the evidence gap (EV23) means it is not even grounded in customer words.",
+   "evidence_ids": [
+    "EV23",
+    "EV34"
+   ],
+   "who_feels_it": "n/a",
+   "content_reality": "Fails test 3 (non-obvious). It is a platitude, and every peer's demo already implies it (EV34).",
+   "strength": 0
+  },
+  {
+   "id": "REJ2",
+   "insight": "REJECTED: «Скидки продают — разгоняем “Финальную распродажу”».",
+   "tension": "The only tension would be invented urgency.",
+   "evidence_ids": [
+    "EV12"
+   ],
+   "who_feels_it": "n/a",
+   "content_reality": "The reason and end date are unknown, so pushing it would be fake urgency (D7) and may signal that the shop is closing. Not an insight. Discounts may be mentioned only as published, with no deadline.",
+   "strength": 0
+  },
+  {
+   "id": "REJ3",
+   "insight": "REJECTED: «Дети за пианино — мило, это залетит».",
+   "tension": "Not a buyer tension.",
+   "evidence_ids": [
+    "EV14"
+   ],
+   "who_feels_it": "n/a",
+   "content_reality": "Children on camera are not allowed by default, and the old 'Юные гости' piano clips sat at 0.34× median.",
+   "strength": 0
+  },
+  {
+   "id": "REJ4",
+   "insight": "REJECTED: «Уроки игры приведут покупателей пианино».",
+   "tension": "No purchase tension.",
+   "evidence_ids": [
+    "EV15"
+   ],
+   "who_feels_it": "n/a",
+   "content_reality": "The improvisation lessons decayed to 0.14× median, and the 20-minute worker budget cannot sustain a lesson series.",
+   "strength": 0
+  },
+  {
+   "id": "REJ5",
+   "insight": "REJECTED as a hook rule: «Сравнения/“для начинающих” выиграют в Shorts».",
+   "tension": "n/a",
+   "evidence_ids": [
+    "EV16",
+    "EV17",
+    "EV35"
+   ],
+   "who_feels_it": "n/a",
+   "content_reality": "It did not replicate in Shorts (L003). Keep it for the YouTube search line only. In short-form a comparison has to earn its place with a real sound demo, not with the title.",
+   "strength": 0
+  }
+ ]
+}

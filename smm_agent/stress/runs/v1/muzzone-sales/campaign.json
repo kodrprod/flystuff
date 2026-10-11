@@ -1,0 +1,288 @@
+{
+ "name": "Muzzone: «Послушайте, прежде чем платить» (Sprint 1 revised: diagnostic sales push, posting 2026-10-21 → 2026-11-15 chats checkpoint, order verdict 2026-12-15)",
+ "big_idea": "An online buyer can't judge an instrument from a spec sheet or a price tag. So we play regularly stocked instruments up close in the Astana store: hands only, the phone near the strings, keys or speaker, recorded in a quiet hour. Where a second model is in stock, we play the two side by side so the buyer can hear the difference and decide by ear. We also state plainly what the whole start costs and what is and isn't in the box. Each episode ends with one word (ГИТАРА / ПИАНИНО / УКУЛЕЛЕ) that the viewer can send in WhatsApp, Direct or a comment to ask about that model. The in-stock catalogue supports 20+ episodes. Each one is proven by sound on camera, and each points at a countable inquiry.",
+ "single_minded_message_ru": "Послушайте, прежде чем платить",
+ "why_this_wins": "This is a reasoned bet and a learning plan, not a forecast (L1).\n(1) It sits on the strongest tension. I01 (strength 4; E01, E02, E12–E17, E50): buyers fear a cheap first guitar is a toy and can't hear that from a catalogue. ID01 answers this with the real sound of the AS-100BK (as100_price, 59 800 ₸, 11 in stock per the site sample, re-fetched on publish day).\nREVISED: the guitar+amp pieces are no longer built on the 2-unit clearance Hibilly. They use a regularly stocked amp (NEEDS FACT, fetched in week 0) priced above 40 200 ₸, so the basket still crosses delivery_free_100k. The Hibilly moves to a separate sale-line piece in the next batch.\n(2) The high-ticket line now runs as an ear test, not a spec screencast. REVISED ID08: the same phrase is played on the PX-770 and then the AP-270, with the phone fixed. On screen we show only verified differences: 128 vs 192 polyphony (px770_specs, ap270_specs), plus every other difference the agent's full spec-table fetch confirms. The AP-270 gets a fair hearing. The video does not tell anyone to buy the cheaper model.\nREVISED ID06: the checklist becomes three checks a parent can do by hand on the PX-770 (key resistance, pedals, headphone jack). Each is shown on camera, and spec wording waits for a NEEDS FACT. The Casio 2-year warranty and Almaty service (warranty_casio) move to the caption, stated honestly.\n(3) I06 plus delivery_free_100k make the content a basket (ID23). I07 pre-tests the gift line with the U-246 at 22 100 ₸ and the US-C40 at 32 901 ₸, both sold with a case (u246_specs, usc40_specs).\n(4) It avoids what already failed for this client: brand-only demos (L006: median 390 vs 2 300, n=48), price slides and screencasts (L005). Every piece opens on motion and real sound with no faces. Drive sound is used only if the week-0 phone test shows it doesn't clip, so the format can't make our own gear sound like a toy.\n(5) The message is true by construction (every episode plays the item), and it is not a superiority claim. [ASSUMPTION] peers don't say it; check against the peer scan.\n(6) Learning plan. Week 1 (2026-10-19…25): 4 posts across 4 drivers, from one guitar-wall session (guitar+amp ×3, ukulele ×1). Week 2: a separate 1-location piano session (ID06, ID08) plus banked ID11, ID15. Inquiries are counted across WhatsApp word codes, Direct/DMs and «цена» comments, because coded WhatsApp alone would undercount KZ buyers. On 2026-11-15 we read inquiries per line, counting open chats as well as closed ones. The should_we_do_social verdict on orders moves to 2026-12-15, so piano buying cycles and the New Year gift peak are inside the window.",
+ "series": [
+  {
+   "name": "«Игрушка или нет?»",
+   "role": "HERO. Funnel: attention→consideration. Metric: views_48h ÷ median, plus video-attributed inquiries per 1k per line. Fixed opening: frame 1 is a hand already playing a REGULARLY STOCKED instrument (≥2 units, not from the sale list), real sound from 0.0 s, recorded in the store's quiet hour, with the hook «[Инструмент] за [ledger price] — игрушка?» upper-middle. Structure: clean sound → one turn → the viewer judges by ear → same-day ledger price → CTA word. The turn is the gain knob ONLY if the week-0 drive test passed. Otherwise it is a pickup switch, a different chord or a different register. Variable per episode: the instrument. ≤3 staff min per episode, 1 location. Ep. 1 = ID01, shot with the replacement amp. Never built on 1–2-unit clearance stock.",
+   "idea_ids": [
+    "ID01"
+   ],
+   "cadence": "1 in week 1. From week 3: up to 2 per week if next-batch episodes are approved; code shifts this by data"
+  },
+  {
+   "name": "«Проверьте перед покупкой»",
+   "role": "PROOF + UTILITY. Funnel: consideration. Metric: saves per 1k and the inquiry→order rate on piano and guitar. Opening ritual: hands already doing the check (keys pressed slowly, jack click), and a hook naming the purchase situation. Structure: numbered checks a buyer can do with their own hands, each shown on a real in-stock item. Honest limits (warranty terms, service city) go in the caption, never as the payoff. Episodes: REVISED ID06 (keys / pedals / headphone jack on the PX-770) and ID11 (first electric guitar, box to first chord, with the replacement amp).",
+   "idea_ids": [
+    "ID06",
+    "ID11"
+   ],
+   "cadence": "1 per week in weeks 2–3, then by allocation"
+  },
+  {
+   "name": "«Послушайте разницу»",
+   "role": "CONSIDERATION + REACH. Funnel: consideration. Metric: completion, comments per 1k («А или Б?») and piano/guitar inquiries per 1k. Opening ritual: sound already playing on option A, with an A/B label upper-middle. Structure: the same phrase on two instruments, phone fixed → the stake → the true reveal or the verified spec difference → CTA word. Episodes: REVISED ID08 (PX-770 vs AP-270, filmed live, re-tagged by code as ab_compare / curiosity_gap) and ID19 (library ear test, zero staff minutes).",
+   "idea_ids": [
+    "ID19",
+    "ID08"
+   ],
+   "cadence": "1 per week from week 1"
+  },
+  {
+   "name": "«С чего начать»",
+   "role": "CONVERSION. Funnel: conversion. Metric: video-attributed inquiries per 1k, and orders over 100 000 ₸ (delivery_free_100k basket). Opening ritual: the instrument in action for a named starter situation (a first electric guitar, a gift for someone who doesn't play). Structure: the starter set at same-day ledger prices → what's included (case «Да», bench «Нет») → the free-delivery threshold only if same-day prices cross it → CTA word. ID23 is cut from week-1 guitar-wall footage, with no new shots.",
+   "idea_ids": [
+    "ID23",
+    "ID14"
+   ],
+   "cadence": "1–2 per week; paused per SKU by DR10"
+  },
+  {
+   "name": "«Звук вблизи»",
+   "role": "REACH. Funnel: attention. Metric: relative views and shares per 1k. Opening ritual: sound onset in frame 1, no talking, a «постановка» label where staged. ID15 (POV first overdrive) runs ONLY if the week-0 drive test passed; otherwise it is parked and its slot goes to the next-batch cymbal/drum loops (I08).",
+   "idea_ids": [
+    "ID15"
+   ],
+   "cadence": "from week 2: up to 1 per week (exploration slot)"
+  },
+  {
+   "name": "«Ответ на комментарий»",
+   "role": "REPLY. Funnel: retention/consideration. Metric: comments and follows per 1k. Starts once real comments exist. Built from library footage plus at most 1 new shot. No slate ids yet: next batch.",
+   "idea_ids": [],
+   "cadence": "from week 2: 1 per week if real comments exist"
+  }
+ ],
+ "offer": {
+  "needed": false,
+  "proposal": "Новых скидок не предлагаем. Уже действует и упоминается точно как на сайте: «Бесплатная доставка по Казахстану (наземным транспортом) при заказе свыше 100 000 ₸». Цены распродажи — только как опубликованы на сайте в день публикации, без слова «финальная» и без сроков. КАНДИДАТ (неценовое, только после вашего «да»): «Напишите слово из ролика в WhatsApp — до оплаты пришлём короткое видео именно того экземпляра, который вы покупаете: внешний вид и звук. Бесплатно, для товаров в наличии». И для пианино: «Приходите или напишите — сыграем обе модели, решите на слух». С недели 3 тестируем как вариант (с предложением / без) в серии «С чего начать».",
+  "fact_ids": [
+   "delivery_free_100k",
+   "sale_page"
+  ],
+  "needs_owner_approval": true
+ },
+ "channels": [
+  {
+   "channel": "WhatsApp chat (+7 701 0987734, fact wa)",
+   "role": "CONVERSION, where most inquiries close. REVISED CODES: viewers see one plain word per line, not alphanumeric codes: «ГИТАРА», «ПИАНИНО», «УКУЛЕЛЕ» (later «РАСПРОДАЖА»). Code renders {CODE} as that word on screen (≥2 s), in the caption and in the pinned comment. The per-video 2-letter suffix appears ONLY in the prefilled wa.me text (bio link, and anywhere else links are clickable). Quick reply, approved once: «Здравствуйте! Подскажите, по какому ролику пишете — можно просто скриншот. И для кого инструмент — сразу скажем, что есть в наличии и что подойдёт.» A screenshot counts as per-video attribution. Codeless chats get «Подскажите, откуда о нас узнали?». The handover reply asks for a 2GIS/Google review with no incentive; the site's «компенсация доставки за отзыв» clause is never promoted. Staff tap the labels «Видео» / «Оплачен» while replying; this is budgeted at 1 min/week inside the 17. Target: median first reply ≤15 min in working hours (пн–пт 10:00–19:00, сб 10:00–17:00, fact hours). Measured from the staff's weekly local tally, not a raw chat export."
+  },
+  {
+   "channel": "Instagram Reels + profile (muzzone_astana) incl. Direct",
+   "role": "Reach plus the shop window where KZ buyers check legitimacy. Reels have no clickable link, so the bio carries the wa.me link with a bio code. Direct messages and «цена?» / «есть в наличии?» comments COUNT as video-attributed inquiries, logged per video by the agent as counts only (no names stored). Comment rule: the owner approves ONE standing reply template, which the agent posts within 1 h in working hours: «Цена на сайте сегодня — [ledger price]. Напишите в WhatsApp «ГИТАРА» — пришлём наличие и подскажем по комплекту.» The price appears only if it was re-fetched that day; otherwise «Напишите в WhatsApp «ГИТАРА» — пришлём цену и наличие». Any other reply is drafted and held for approval. Judgement call beyond the METHOD: a pre-approved template is treated as the owner's L8 decision for this one reply class. Pins: ID01, ID06 and a «Как заказать» post (next batch). Bio, after approval: «Музыкальные инструменты · Астана, ул. Кажымукана, 14 · доставка по Казахстану» + the wa.me link."
+  },
+  {
+   "channel": "TikTok",
+   "role": "Fastest test bed for non-follower reach. Ownership unknown (owner ask). If there is no account, one is created in week 0 as a cold start, and no arm judgements are made on its first 5–10 posts. TikTok DMs and «цена» comments are counted like Instagram's. Original instrument sound only."
+  },
+  {
+   "channel": "YouTube Shorts + search line",
+   "role": "Zero-minute cross-post to the existing channel (3 620 subs, dormant since 2026-05-10). Secondary search line (≤20% effort) with plain model-name titles, e.g. «Casio PX-770 и AP-270 — звук рядом», because model-name titles win on search intent (L002, L004). L003 shows these titles don't transfer to the feed, so this line is measured separately."
+  },
+  {
+   "channel": "WhatsApp Status / broadcast",
+   "role": "Warm base from week 1: the week's 1–2 best videos go to Status. Broadcasts only to contacts who opted in. Dated availability appears only here, and only if re-checked the same day (≤48 h)."
+  },
+  {
+   "channel": "Kaspi",
+   "role": "Payment only (payments fact). No Kaspi shop in the inputs, so no SKU attribution. If the owner confirms a Kaspi store, add a directional featured-SKU vs prior-4-weeks read."
+  },
+  {
+   "channel": "2GIS / maps",
+   "role": "Proof and local intent: un-incentivised review requests at handover, plus a photo refresh from shoot stills. The agent fetches the card and rating."
+  },
+  {
+   "channel": "VK / Facebook",
+   "role": "Optional zero-minute cross-post with the same words. Not used for arm decisions."
+  },
+  {
+   "channel": "Paid boost (not active)",
+   "role": "Budget is 0 ₸. Deferred until a post meets DR2 + DR9. Cap = avg_order × gross_margin × close_rate × 0.3. The basket value is recomputed with the replacement amp's same-day price, and margin and close rate stay [ASSUMPTION] until the owner gives numbers. Stop-loss at 5× the cap with <3 attributed inquiries. Astana-radius click-to-WhatsApp only. Never with an unconfirmed offer or the word «финальная»."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Setup and baseline, 2026-10-12…18. No posts. (a) A TIMED staff test session that measures real minutes per shot and gives the planning factor for every later card. (b) A drive-audio test that gates overdrive content. (c) Selecting a regularly stocked amp for the guitar line. (d) A privacy-safe baseline: staff fill a 5-row tally locally, and no raw chat export leaves the store. (e) Quick reply, the comment template and word codes approved; profile and bio; TikTok decision.",
+   "idea_ids": [],
+   "worker_ask_ru": "Здравствуйте, я ИИ-ассистент магазина по роликам. На этой неделе ~15 минут, только руки и звук, лица не нужны. Перед началом и в конце посмотрите на часы и напишите, сколько минут заняло. Лучше в тихий час, когда в зале нет покупателей. Шаг 1 (3 мин): подключите гитару к комбику, который мы назовём в карточке. Телефон в 20–30 см от динамика, 10 секунд чистого звука. Шаг 2 (2 мин): громкость комбика на 2–3, gain на половину, телефон в 40–50 см и сбоку от динамика (не прямо в центр), 10 секунд с перегрузом. Шаг 3 (1 мин): 10 секунд пианино, телефон в 25 см от клавиш. Шаг 4 (1 мин): одна фраза, телефон у рта. Шаг 5 (2 мин): молча пройдитесь с телефоном по залу. Отправьте всё КАК ФАЙЛ (документ), не как видео, иначе WhatsApp сожмёт. Шаг 6 (3 мин, в субботу): заполните таблицу из 5 строк — сколько новых чатов за неделю, время первого ответа в 10 чатах, сколько закончились оплатой, 3 частых вопроса, сколько спросили цену в Instagram. И напишите, кто может сыграть 3 аккорда на гитаре и простую фразу на пианино.",
+   "ai_work": "Fetch the site's amp category. Pick a regularly stocked electric-guitar combo amp: not on the sale list, ≥2 units, price >40 200 ₸ so that AS-100BK + amp exceeds 100 000 ₸. Add its price, stock and specs to the ledger. If none qualifies, see DR-amp. Fetch the FULL spec tables of the PX-770 and AP-270 (speakers/output, cabinet, lid, pedals, key action, headphone jacks, tones). Add every verified difference as a ledger fact for ID08 and the hand-checks for ID06. Fetch the cable listing (cable NEEDS FACT). Analyse the timed test: real minutes per shot ÷ formula minutes = the planning factor. Listen to the drive clip for clipping or auto-gain pumping → pass/fail. Rename provisional locations from the walkthrough. Download library pos 200 (ID19); crop and blur faces and third-party brand names. Draft the RU quick reply, the comment template, the bio and the 5-row tally sheet. Fetch the pooled music_instruments_retail median per platform and the 2GIS card. Draft the batched owner message (≤10 min)."
+  },
+  {
+   "week": 1,
+   "goal": "Explore, 2026-10-19…25. ONE location (гитарная стена), ONE session in a quiet hour, 4 filmed worker ideas: ID01, ID11 and ID15 (shared amp setup and the same continuous clean→turn take) and ID14 (the ukulele hangs at the same wall, per the reality scan). ID23 is cut from the ID01/ID11 footage with no extra shots. Card by formula: 2 fixed + 1 location + 6 shots ≈ 4.8 = ~8 min, plus 3 min setup and tuning, plus 1 min sending files ≈ 12 min. This is then multiplied by the measured week-0 factor and capped at 12. Overflow cut order: drop ID15's gain macro → static ID14 case shot → move ID14 to week 2. Published (4 posts, 4 drivers): Wed ID01 (hero, strum at the amp); Thu ID14 (one-finger ukulele macro); Sat ID23 (cable into amp + running total); Sun ID19 (library A/B, zero staff). Piano content moves to week 2 to keep one location per session. Times: lunch and 19:00–22:00 Astana [ASSUMPTION].",
+   "idea_ids": [
+    "ID01",
+    "ID14",
+    "ID23",
+    "ID19"
+   ],
+   "worker_ask_ru": "Съёмка во вторник 20.10 в тихий час, до 12 минут, одно место — гитарная стена, только руки и звук. Шаг 1 (3 мин): гитару Alston в комбик из карточки, настроить. Шаг 2 (3 мин): один непрерывный дубль — 3 аккорда чисто, поворот ручки, те же 3 аккорда; телефон не двигать, 2 раза. Шаг 3 (2 мин): штекер в гитару крупно, потом в комбик, громкость с нуля. Шаг 4 (2 мин): укулеле — один палец, бой; потом в чехол и молнию. Шаг 5 (1 мин): отправить КАК ФАЙЛ. Плюс как всегда: ярлыки «Видео»/«Оплачен» (≈1 мин) и таблица в субботу (3 мин).",
+   "ai_work": "Edit 4 bodies + 2 edit-only hook variants each. If the drive test failed, ID01's turn is the pickup switch or a different chord, and the drive lines are rewritten accordingly. No music over the instrument and no EQ or compression that flatters the amp. Swap the Hibilly name and price for the replacement amp's ledger facts in ID01, ID23, ID11 and ID15 (on-screen lines and facts_used). ID23: recompute the >100 000 ₸ total from same-day prices, and hold the post if it doesn't cross; the cable line is used only once the cable fact is confirmed. Render {CODE} as the word «ГИТАРА» / «УКУЛЕЛЕ», with the per-video suffix in the prefilled link only. Same-day re-fetch of every price (≤7 d) and stock (≤48 h) before publishing (DR0). Cross-post to TikTok, Reels and Shorts (Shorts with plain model-name titles). Post approved «цена» comment replies within 1 h. Log Direct, DM and comment inquiries per video. Status post. 48 h reads. Monday owner report (F12)."
+  },
+  {
+   "week": 2,
+   "goal": "Explore + follow-up, 2026-10-26…11-01. Separate ONE-location piano session (зал с пианино), formula ~8 min plus 1 min setup, multiplied by the measured factor and capped at 12. It films REVISED ID06 (glissando hook; slow key press showing resistance; tap the pedals; plug in headphones) and REVISED ID08 (the same 4-bar phrase on the PX-770 then the AP-270, phone fixed at 25 cm). Publish ID06, ID08, the banked ID11, and ID15 only if the drive test passed. ID15's first frame repeats the ID01 take type, so it goes ≥7 days after ID01. Up to 2 DR2 follow-ups of week-1 breakouts, cut from banked footage where possible. First reply video if real comments exist. 2026-11-01: targets re-fixed as a multiple of the week-0 tally. The boost question is asked only if a post qualified with ≥1 attributed inquiry.",
+   "idea_ids": [
+    "ID06",
+    "ID08",
+    "ID11",
+    "ID15"
+   ],
+   "worker_ask_ru": "Съёмка во вторник 27.10 в тихий час, до 12 минут, одно место — зал с пианино, только руки и звук. Шаг 1 (1 мин): включить оба пианино, телефон на подставке в 25 см. Шаг 2 (4 мин): одна и та же короткая фраза на PX-770, потом на AP-270, телефон не двигать, по 2 раза. Шаг 3 (3 мин): медленно нажать клавишу крупно; нажать педали; вставить наушники в гнездо. Шаг 4 (1 мин): глиссандо по всем клавишам. Отправить КАК ФАЙЛ. Плюс ярлыки (≈1 мин), таблица в субботу (3 мин) и голосовое 30 секунд «3 вопроса покупателей за неделю».",
+   "ai_work": "Edit ID06 and ID08 from the new footage. Every on-screen spec line in ID06 and ID08 must map to a ledger fact from the week-0 full spec fetch; anything unverified is cut. ID06's warranty line goes in the caption from warranty_casio. ID08's prices come only from the web_cifrovoe_pianino_… ids, re-fetched the same day. Its CTA is the fallback until the owner OKs «сыграем обе». Edit ID11 and ID15 from banked footage. Write a true one-line results note for staff. Code comments and inquiries into evidence; update posteriors per line and per channel (WhatsApp / Direct / comments). Draft reply videos. Draft the target re-fix and, if eligible, the boost question with real numbers."
+  },
+  {
+   "week": 3,
+   "goal": "Focus, 2026-11-02…08. Thompson allocation across driver and format arms and the 4 lines. Hero 2 per week only if next-batch episodes exist. Conversion pieces only on SKUs passing DR10. DR5 check on ALL video-attributed inquiries. The non-price offer variant starts if the owner said «да». No ids pre-assigned; Monday data and the new step-4 batch decide.",
+   "idea_ids": [],
+   "worker_ask_ru": "Карточка на неделю: одно место, до 12 минут, шаги с минутами. Плюс ярлыки (≈1 мин), таблица в субботу (3 мин), голосовое «3 вопроса покупателей» (1 мин). Всего не больше 17 минут, новых задач не добавляем.",
+   "ai_work": "Allocation run. DR3 rescue re-cuts (new first frame + hook, repost ≥7 days later, once). DR4 notes. Mechanism check (each driver vs its own metric). Graveyard entries. Insight re-rank by attributed inquiries. Pre-plan the New Year gift moment (I07) 10–14 days ahead, for sprint 2."
+  },
+  {
+   "week": 4,
+   "goal": "Convert + checkpoint, 2026-11-09…15. Conversion within stock on the line with the most attributed inquiries per 1k. 2026-11-15 CHECKPOINT, not the verdict: inquiries per line (WhatsApp words + Direct/DM + «цена» comments), the share still open vs closed, and staff minutes per inquiry. Orders are reported as an interim floor. Choose the sprint-2 lines.",
+   "idea_ids": [],
+   "worker_ask_ru": "Карточка недели (до 12 минут, одно место), ярлыки, таблица в субботу и голосовое «3 вопроса покупателей». На следующей неделе пришлём итог: сколько людей спросили по роликам и сколько уже купили.",
+   "ai_work": "Final 7-day reads. RU checkpoint report with intervals («лидирует, рано судить» unless DR13 holds). learnings.jsonl entries with strength labels. Pooled tag export (no client quotes or prices). Sprint-2 brief: New Year gift line (ukulele, beginner guitar), sale line if the «Финальная» question is answered, piano follow-ups on still-open chats."
+  },
+  {
+   "week": 5,
+   "goal": "Sprint 2 (provisional), 2026-11-16…12-15. Same weekly rhythm and staff budget. Gift-moment episodes start 10–14 days ahead of the New Year peak. Open piano chats are followed up through the quick-reply flow. 2026-12-15: the pre-registered should_we_do_social VERDICT on orders from video-attributed inquiries, covering the longer piano cycle and the gift peak.",
+   "idea_ids": [],
+   "worker_ask_ru": "Как раньше: карточка до 12 минут в одном месте, ярлыки, таблица в субботу, голосовое. Всего не больше 17 минут в неделю.",
+   "ai_work": "Weekly allocation, edits, rails, reports. On 2026-12-15: verdict report against the owner's pre-registered threshold, plus options for the next quarter."
+  }
+ ],
+ "measurement": {
+  "success_metric": "Primary: orders from video-attributed inquiries across the 4 test lines (digital pianos, beginner electric guitar + amp, ukuleles, «Распродажа»). An inquiry counts if it is a WhatsApp chat with a line word or video screenshot, an Instagram Direct or TikTok DM that cites a video, or a «цена?» / «есть в наличии?» comment under a video. Coded WhatsApp chats remain a sub-count. Targets carried from the intake and re-dated per review: CHECKPOINT 2026-11-15, inquiries conservative 25 / expected 50 / stretch 80, reported with the open-vs-closed split. VERDICT 2026-12-15, orders conservative 6 / expected 12 / stretch 20. Baseline: 0 attributed. Total inbound and close rate come from the week-0 staff tally (2026-10-12…18). All targets are re-fixed as a multiple of that baseline on 2026-11-01. The date change needs the owner's confirmation (owner ask).",
+  "attribution": "Line word ({CODE} rendered as «ГИТАРА» / «ПИАНИНО» / «УКУЛЕЛЕ») on screen ≥2 s, in the caption and in the pinned comment. Per-video 2-letter suffix only in the prefilled wa.me text. The quick reply asks for the video or a screenshot, which gives per-video attribution. Direct, DM and comment inquiries are logged per video by the agent as counts, with no personal data stored. Staff labels «Видео» / «Оплачен» and the weekly 5-row tally give totals, reply time and close rate, all counted locally. NO raw chat export leaves the store unless legal grounds are confirmed and names are removed on the phone first. Codeless chats are asked «Откуда о нас узнали?». Attributed counts are reported as a FLOOR. Weekly total inbound vs the week-0 tally is reported as an ESTIMATE. Per-video attribution is weaker with word codes (judgement call accepted from review), so arm reads use per-video screenshots, Direct and comments plus per-line words. The YouTube search line is reported separately. No Kaspi attribution. Attribution window: 30 days per post, extended to the 2026-12-15 verdict for piano inquiries.",
+  "leading_indicators": [
+   "views_48h ÷ platform median: pooled music_instruments_retail median until 10 own posts, then the median of the last 15 own posts. TikTok is excluded from arm judgements for its first 5–10 posts",
+   "3-second hold / skip rate and average % watched vs account median",
+   "shares + saves per 1,000 views (saves for practical_value / check_before_buy, shares for identity, comments for ab_compare: the mechanism check)",
+   "video-attributed inquiries per 1,000 views, per line and per channel (WhatsApp word / screenshot, Direct/DM, «цена» comments)",
+   "inquiry→order rate and the share of inquiries still open at 7 and 30 days",
+   "profile visits per 1,000 views",
+   "staff minutes per attributed inquiry, using the measured week-0 planning factor (input to the should_we_do_social verdict)"
+  ],
+  "review_cadence": "Each post: 48 h read (allocation) and 7-day read (final). Weekly Monday read with the owner report (≤5 lines, ≤1 decision). Week-0 timed session sets the staff planning factor, re-checked whenever card completion falls below 80%. Target re-fix 2026-11-01. Inquiry checkpoint 2026-11-15 (report 2026-11-16). Order verdict 2026-12-15. Attribution window 30 days, extended to the verdict for piano inquiries."
+ },
+ "decision_rules": [
+  "DR0 Publish gate (truth): every price must come from a ledger fact ≤7 days old, and every stock mention from one ≤48 h old, re-fetched on publish day. Piano prices come only from the web_cifrovoe_pianino_… ids; px770_price, ap270_price and diff_pno are never used. Derived sums (guitar + amp >100 000 ₸) are recomputed from same-day prices, and the post is held if the sum doesn't cross. Every spec difference in ID06 and ID08 must map to a ledger fact from the full spec-table fetch; anything unverified is cut, never softened.",
+  "DR-amp (shoot gate): guitar+amp content is filmed only with a regularly stocked amp (not on the sale list, ≥2 units on shoot day, price >40 200 ₸). Stock is checked BEFORE the shoot, not just on publish day. If none qualifies: ID01 is shot on the AS-100BK through whichever in-stock amp has the most units, with no amp price and no basket claim; ID23 is held; and the Hibilly appears only in a sale-line piece (next batch).",
+  "DR-drive (audio gate): overdrive content (ID15, ID01's gain turn) runs only if the week-0 drive clip (amp master 2–3, gain ½, phone 40–50 cm off-axis, quiet hour) has no audible clipping or auto-gain pumping. If it fails, ID01's turn becomes a pickup switch, chord or register change, and ID15 is parked. No EQ or processing ever tries to rescue the sound.",
+  "DR-staff-time: every card is planned as formula minutes × the factor measured in the week-0 timed session, including setup and file sending, capped at 12 card minutes. Plus labels 1 + tally 3 + voice note 1 = ≤17 planned min a week. One location per session, ≤4 filmed ideas per card. If the forecast exceeds 12, the lowest-priority shot is cut before the card is sent.",
+  "DR1 Read: every post at 48 h and at 7 days, per platform against its own baseline.",
+  "DR2 Breakout: ≥3× platform median at 48 h, or shares+saves per 1k ≥2× median. Until there are 10 own posts, use the pooled vertical median, or [ASSUMPTION] 500 → ≥1 500 views if none is supplied. Action within 7 days: 2 follow-ups (part 2 or the same insight in a new format, plus a reply to the top comment), cut from banked footage where possible; pin if conversion-relevant; WhatsApp Status; boost-eligible. At ≥10× it becomes a series, and the owner hears «вирусный» only as a tail event.",
+  "DR3 Hook failure (3-s hold <0.7× account median): re-cut with a different first frame and hook from the edit-time variants, repost ≥7 days later. Once only.",
+  "DR4 Body failure (hold fine, completion <0.7× median): shorten and move the payoff earlier in that series' next episode.",
+  "DR5 Conversion-layer miss: cumulative views ≥30 000 by 2026-11-08 but ALL video-attributed inquiries (WhatsApp + Direct/DM + «цена» comments) below 9. Check the word visibility, the caption and pinned comment, the bio link, comment-reply latency (≤1 h) and WhatsApp reply time before making more content. Arms are never judged on coded WhatsApp alone.",
+  "DR-reply: if the week-0 tally shows a median first reply >60 min in working hours, conversion pieces (ID14, ID23, later conversion episodes) wait until the quick reply and a person on duty are in place. The owner is told this is the top leak.",
+  "DR6 Sales-handling miss: inquiries on plan but orders below 15% of inquiries at 30 days → report where chats stall (from the tally's top questions) and draft reply scripts. Price and offer stay the owner's call. Piano inquiries are judged at the 2026-12-15 verdict, not at 7 days.",
+  "DR7 Attention-only arm: ≥10 posts, ≥10 000 views and 0 attributed inquiries in any channel while other arms convert → capped at 1 post a week.",
+  "DR8 Retire: P(arm beats client median) <0.10 after ≥8 posts → exploration floor for this client. Its data stays in the pool.",
+  "DR-line (2026-11-15 checkpoint): a line with ≥3 posts and 0 attributed inquiries drops to 1 slot a week; the line with the most inquiries per 1k gets the slot. Allocation only, never a declared winner.",
+  "DR9 Boost: only DR2 posts with ≥1 attributed inquiry or a conversion role, within the owner's cap. Stop-loss at 5× the cap with <3 attributed inquiries, or when cost per inquiry rises 3 days in a row. Never with an unconfirmed offer, the word «финальная» or a SKU with ≤1 unit.",
+  "DR10 Capacity = stock: pause conversion pieces for a SKU when open attributed inquiries about it reach 80% of its re-fetched stock (e.g. PX-770 3 шт → at 3; AP-270 5 шт → at 4; the replacement amp → at 80% of its fetched count), or when stock is ≤1 without a same-day re-check. The slot shifts to an in-stock alternative or to trust/attention content. If inquiry volume pushes the median first reply above 15 min, conversion posting slows.",
+  "DR11 Honesty kill-switch: a comment credibly disputes a fact (price, spec, what's in the box, a difference claimed in ID08) → pause that series, verify against the site's full spec table, tell the owner the same day.",
+  "DR12 Pivot: at the 2026-11-15 checkpoint, no arm with P >0.6 and attributed inquiries <13 (25% of the expected 50) → rerun step 3 with fresh tallies and staff voice notes, diagnose the funnel, and send the owner options (another line, warm base, the non-price offer, boost, pause). Order-based pivots wait for 2026-12-15.",
+  "DR13 Claims: «winner» only with P(best) ≥0.9, n ≥10 per contender and an interval. Otherwise «лидирует, рано судить».",
+  "DR14 Staff: card completion <80% for 2 weeks → re-time a session, shorter takes, more face-free shots and zero-staff library re-cuts. Never more than 1 location per session.",
+  "DR15 Owner: >30% of ideas rejected → read the reasons and update constraints. A fact rejection means fixing the ledger first.",
+  "DR16 Flops are never deleted, except for truth, consent or legal problems.",
+  "DR-privacy: no raw WhatsApp export is requested or accepted until the owner confirms legal grounds for processing customer chats and names and numbers are removed on the phone before sending. Until then, only the staff's 5-row tally and anonymous counts are used.",
+  "DR-verdict (should_we_do_social, pre-registered, 2026-12-15): orders from video-attributed inquiries vs the owner's threshold (default ≥12 = continue; 6–11 = continue with review changes; <6 = DR12 report). Open inquiries are reported alongside. Staff minutes per order use the measured factor."
+ ],
+ "learning_questions": [
+  "Which line (digital piano / beginner guitar + regular amp / ukulele / sale) produces the most video-attributed inquiries per 1,000 views and per measured staff minute, and which has the best inquiry→order rate by 2026-12-15?",
+  "Where do KZ viewers actually inquire: the WhatsApp word, a WhatsApp screenshot, Instagram Direct/TikTok DM, or «цена» comments? Does a plain line word get typed more often than the old alphanumeric codes would have been?",
+  "Does the ear-test format (REVISED ID08 PX-770 vs AP-270, ID19) produce piano and guitar inquiries, and do piano inquiries convert within 30 days or only by the 2026-12-15 verdict?",
+  "Does the sound-first hero «Игрушка или нет?» produce inquiries or only hold and views, and does the drive or no-drive version (per DR-drive) matter?",
+  "What are the real staff minutes per filmed shot in this store (week-0 factor), and how many ideas a week does 17 minutes actually buy?"
+ ],
+ "owner_asks": [
+  {
+   "ask": "Здравствуйте, я ИИ-ассистент по роликам для Muzzone. Выгрузку чатов не просим: переписка с покупателями остаётся в магазине. Вместо этого раз в неделю продавец заполняет таблицу из 5 строк (~3 минуты): сколько новых чатов, время первого ответа в 10 чатах, сколько закончились оплатой, 3 частых вопроса, сколько спросили цену в Instagram. Согласны? 1 — да, 2 — заполню сам(а), 3 — нет. По умолчанию: 1. Ответ до 14.10 18:00.",
+   "why": "Privacy-safe baseline: total inbound, reply time and close rate without customer personal data leaving the store (review fix). It decides DR-reply and the 2026-11-01 target re-fix.",
+   "minutes": 1
+  },
+  {
+   "ask": "Кого можно снимать: 1 — только руки, инструменты и голос, 2 — продавцов с лицом (с их согласия), 3 — и покупателей (с их согласия)? По умолчанию: 1. Ответ до 14.10 18:00.",
+   "why": "Hard consent constraint. All planned ideas are face-free, so the default blocks nothing.",
+   "minutes": 1
+  },
+  {
+   "ask": "Что важнее продать: 1 — пианино, 2 — электрогитары и комбики, 3 — укулеле, 4 — «Распродажа», 5 — пробуем всё и смотрим по цифрам? И почему распродажа «Финальная»: 1 — закрытие/переезд, 2 — уходим от этих моделей, 3 — обычная распродажа без срока, 4 — есть дата (какая)? По умолчанию: 5; слово «финальная» и сроки не используем.",
+   "why": "Line priority shifts slots. The sale reason is the only legitimate source of urgency.",
+   "minutes": 1
+  },
+  {
+   "ask": "Какой комбик для электрогитары у вас ПОСТОЯННО в наличии (не из распродажи), чтобы снимать с ним гитару Alston AS-100BK? Мы сами проверим сайт и пришлём 1–2 варианта — ответьте номером. Идёт ли кабель в комплекте с гитарой или комбиком? По умолчанию: берём вариант с сайта, где больше всего штук; про кабель не говорим.",
+   "why": "Replaces the 2-unit clearance Hibilly in the hero and basket pieces (review fix) and settles the cable NEEDS FACT for ID23 and ID11.",
+   "minutes": 1
+  },
+  {
+   "ask": "Можно ли обещать в роликах: А) «до оплаты пришлём видео именно вашего экземпляра», Б) «приходите или напишите — сыграем обе модели пианино, решите на слух»? 1 — оба, 2 — только Б, 3 — нет. По умолчанию: 3 (пишем «подскажем, какое под вашу задачу»).",
+   "why": "New non-price promises need the owner's «да» (L8, F4). Б gives the AP-270 a fair hearing in REVISED ID08.",
+   "minutes": 1
+  },
+  {
+   "ask": "Утвердите один раз: 1) слова для роликов — «ГИТАРА», «ПИАНИНО», «УКУЛЕЛЕ» (покупатель пишет одно слово в WhatsApp); 2) ответ в WhatsApp: «Здравствуйте! Подскажите, по какому ролику пишете — можно просто скриншот. И для кого инструмент — сразу скажем, что есть в наличии и что подойдёт.»; 3) ответ на комментарий «цена?», который ИИ-ассистент публикует в течение часа: «Цена на сайте сегодня — [цена с сайта]. Напишите в WhatsApp «ГИТАРА» — пришлём наличие и подскажем по комплекту.» Все остальные ответы — только после вашего «да». Кто отвечает в Instagram Direct? По умолчанию: всё утверждено, Direct — тот же продавец.",
+   "why": "KZ buyers write words, screenshots, Direct and comments, not codes (review fix). One approval covers the comment class (L8), and inquiries outside WhatsApp get counted.",
+   "minutes": 2
+  },
+  {
+   "ask": "Есть ли у магазина TikTok и Kaspi-магазин? Дайте доступ к Instagram (или пришлите скриншоты статистики за 30 дней: Профессиональная панель → Статистика). По умолчанию: TikTok создаём на номер магазина, Kaspi — только оплата, публикуем только после вашего «да».",
+   "why": "Baseline, publishing and comment/Direct counting depend on account access; the TikTok setup and Kaspi attribution depend on what exists.",
+   "minutes": 2
+  },
+  {
+   "ask": "Когда и по какому итогу решаем, работают ли соцсети? Пианино покупают не за неделю, поэтому предлагаем: 15.11 — смотрим обращения по роликам, 15.12 — итог по заказам (включая новогодний спрос). Порог к 15.12: 1 — от 6 заказов, 2 — от 12, 3 — от 20. По умолчанию: даты как предложено, порог 2.",
+   "why": "Pre-registers the verdict on a window long enough for the piano cycle and the gift peak (review fix). It also moves the intake's order date, which needs the owner's OK.",
+   "minutes": 1
+  },
+  {
+   "ask": "Каждую неделю (среда): одобрите ролики одним ответом — «да» или номера, которые убрать. По умолчанию: без вашего «да» ничего не публикуем.",
+   "why": "L8: nothing goes outward without approval. This is the weekly ≤5 min; not counted in onboarding (onboarding total = 10 min).",
+   "minutes": 5
+  }
+ ],
+ "risks": [
+  "NEEDS FACT: a regularly stocked electric-guitar combo amp (not on the sale list, ≥2 units, price >40 200 ₸) with its price, stock and specs (agent fetch of the amp category, then owner confirms). It replaces the Hibilly in ID01, ID11, ID15 and ID23. The stock sample holds no non-sale amp; the only amps seen are the Hibilly (2 units, sale) and the Blackstar Debut 10E (1 unit, sale, 36 400 ₸). Fallback: DR-amp.",
+  "NEEDS FACT: the full spec tables of the PX-770 and AP-270 (speakers/output, cabinet, lid, key action, pedals, headphone jacks, tones) (agent re-fetch). REVISED ID08 may claim only verified differences; the old line «Разница на бумаге — полифония» is withdrawn. REVISED ID06's on-screen spec words («молоточковая механика», «3 педали») need the same facts. Until then only what the camera shows (a slow key press, the pedals, a headphone plug) is captioned, without spec terms.",
+  "NEEDS FACT: whether a cable is included with the AS-100BK or the replacement amp, and its price (agent re-fetch, then owner). Blocks the cable line in ID23 and any inclusion claim in ID11.",
+  "NEEDS FACT: a staff member who can play 3 clean guitar chords and a short piano phrase (week-0 test). Blocks ID01 and ID15 and REVISED ID08. Fallback: piano scale or single notes for ID08; for guitar, ID14 (one-finger chord) and the zero-staff ID19.",
+  "NEEDS FACT: owner OK for «сыграем обе модели» and «видео вашего экземпляра». Until then: «подскажем, какое под вашу задачу».",
+  "NEEDS FACT: reason and end date of «Финальная распродажа». Until answered: no «финальная», no deadline, no urgency.",
+  "NEEDS FACT: the store's quiet hour and real location names, including whether the ukuleles hang at the guitar wall (reality scan). The week-1 single-location plan assumes they do; if not, ID14 moves to week 2.",
+  "Judgement call: REVISED ID08 and ID06 keep their ids but change body and hook at edit time (ear test; hand-checks). Code must re-tag ID08 from honest_signal/anti_sell to curiosity_gap/ab_compare so the arm data is labelled correctly. The new hooks pass the same rails as hook variants (G+ 1). Hook «Учитель в музыкалке спросит…» is NOT used, because teachers' advice is not a ledger fact. Default hook: «Пианино в музыкалку: проверьте руками три вещи».",
+  "Judgement call: word codes («ГИТАРА» etc.) make per-video attribution weaker than unique codes. Mitigated by the per-video suffix in prefilled links, screenshots requested in the quick reply, and per-video Direct and comment logs. Code must support line-word rendering of {CODE} (G+ proposal).",
+  "Judgement call: the agent posts one owner-approved «цена» comment template without per-reply approval. If the owner declines, replies are drafted and approved in the weekly batch, which costs speed.",
+  "Privacy: raw WhatsApp exports are not requested (DR-privacy). Q/F clusters from chats will be thinner; insight evidence relies on the staff tally's top-3 questions, staff voice notes, comments and Direct counts.",
+  "Staff time: formula minutes undercount real store time. The week-0 timed session sets the factor; if it is above ~1.5, week 1 shrinks to ID01 + ID11 footage (ID23 still cut from it) and ID14 moves to week 2.",
+  "Audio: a weak phone may clip on overdrive even off-axis (DR-drive), and store noise or amp hum can ruin takes, so film only in the quiet hour. No EQ rescue, so failing takes are re-shot or the content type is dropped.",
+  "Week-1 line imbalance: guitar ×3 + ukulele ×1, with no piano until week 2. This is the cost of one location per session; piano arrives on 2026-10-28 or later.",
+  "Thin stock: the ukuleles (U-246 4, US-C40 3 in the 2026-10-08 sample), the PX-770 (3) and the AP-270 (5). DR10 pauses and swaps.",
+  "Price expiry: the 2026-10-08 facts expire 2026-10-15, before any publish. Every publish needs a same-day re-fetch (DR0).",
+  "Owner reachable only via Andrey and Pavel: approval delays may compress publish days. No publishing without approval (L8).",
+  "Cold start: new TikTok and a dormant Shorts channel. No arm judgement on the first 5–10 TikTok posts; the Instagram baseline is unknown until access or screenshots arrive.",
+  "Power: 4–5 posts a week cannot prove an arm in this window (~30 posts per arm for a 2× effect). Decisions are allocation only; knowledge comes from pooling.",
+  "Returns guardrail: overselling sound triggers 14-day returns with shipping withheld both ways (returns_cost). There is no flattering processing, and drive content is gated.",
+  "Never in audience copy: «100% оригинальный товар», the review-for-compensation clause, competitor or other-seller names, children at the piano without a parent's written OK.",
+  "NEXT BATCH: a «Распродажа» sale-line piece featuring the Hibilly Retro 30R at its published price (hib_price, hib_old), with its own stock gate (I09).",
+  "NEXT BATCH: hero «Игрушка или нет?» episodes 2–6 on regularly stocked SKUs (e.g. the U-246 ukulele, an in-stock digital piano), so the hero can run 2 per week from week 3.",
+  "NEXT BATCH: cymbal/drum close-sound loops (I08) to replace ID15 if the drive test fails; a policy_story on returns and warranty (I05); an exact-unit proof idea (I04); a pinned «Как заказать» post; reply videos from week-1 comments."
+ ],
+ "attribution_codes": {
+  "ID23": "BA23",
+  "ID08": "BA24",
+  "ID06": "BA25",
+  "ID14": "BA26",
+  "ID19": "BA27",
+  "ID01": "BA28",
+  "ID11": "BA29",
+  "ID15": "BA32"
+ }
+}

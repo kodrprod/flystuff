@@ -1,0 +1,221 @@
+{
+ "have": [
+  {
+   "input": "Site contact ledger (muzzone.kz/kontakty.html, fetched 2026-10-08): facts wa, phone_city, phone_mobile, address, hours",
+   "what_it_gives": "Where applications go: WhatsApp +7 701 0987734 (fact:wa). Where the job is: Астана, ул. Кажымукана 14, НП-6 (fact:address). fact:hours covers CALL hours only (пн–пт 10–19, сб 10–17); these are not shift hours and must not be used as a schedule. The site publishes no job facts: no vacancy page, pay, schedule or requirements."
+  },
+  {
+   "input": "Site policy ledger (garantii-i-vozvrat, dostavka-i-oplata, product pages; 2026-10-08): returns_14d, returns_conditions, returns_phrase, returns_cost, warranty, warranty_casio, delivery_free_100k, delivery_astana, pickup_reserve, payments",
+   "what_it_gives": "10 dated policy facts a consultant has to explain every day: 14-day return, ≥12-month warranty, Casio 2-year warranty with service only in Almaty, free delivery over 100 000 ₸, free Astana courier for orders over 20 kg and over 15 000 ₸, 3-working-day pickup reserve, 6 payment methods incl. Kaspi QR/Pay. This is honest job_reality material («вот что продавец объясняет каждый день»). Valid 90 days (until ~2026-01-06)."
+  },
+  {
+   "input": "Sale section (fact:sale_page, 2026-10-08)",
+   "what_it_gives": "The site-wide section is titled «Финальная распродажа» and gives no reason and no end date. For hiring this is a RISK, not a fact to use: job seekers may read it as the store closing. The store's operating status must be confirmed before any hiring video is published (see missing)."
+  },
+  {
+   "input": "Site claim fact:original («100% оригинальный товар»)",
+   "what_it_gives": "A claim the owner makes on the site. It contains «100%», so C6 rail 3 applies: it cannot appear in audience copy without a dated third-party source. Not needed for hiring."
+  },
+  {
+   "input": "Product ledger: 8 SKUs with price, stock flag and specs (2026-10-08/09): hib_*, mapex_*, as100_*, u246_*, usc40_*, uf330_*, px770_*, ap270_*",
+   "what_it_gives": "The range a consultant sells, from a 22 100 ₸ ukulele (u246_price) to a 734 886 ₸ digital piano (ap270_price), across amps, drums, electric guitars, ukuleles and digital pianos. Hiring copy does not need prices. HYGIENE FLAG: Casio PX-770 is listed at 695 913 ₸ (px770_price, 2026-10-08) and at 521 935 ₸ (web_..._px_770_price, 2026-10-09), so one of the two is wrong or the price changed. Do not use either until re-fetched. The derived facts hib_disc, mapex_disc, diff_uke and diff_pno have no source or date, so they cannot be used as standalone ledger facts."
+  },
+  {
+   "input": "clients/muzzone/research/catalog_listings.json (6 category lists), stock_sample.json (135 records with stock_qty), products_batch001.json (12 records)",
+   "what_it_gives": "How broad the assortment is, and so how much product knowledge the job needs: pianos, guitars, ukuleles, drums, amps, cymbals, pro audio, stands. Stock depth varies a lot, from 1 Zildjian 19\" K Sweet Crash to 51 Hercules MS434B stands, and some items are OutOfStock (e.g. Cort X100). This supports a 'what you need to know here' job_reality angle without inventing anything."
+  },
+  {
+   "input": "clients/muzzone/research/youtube_channel.json (fetched 2026-10-08)",
+   "what_it_gives": "Own history: 379 videos, 3 620 subscribers, median 2 300 views, best 64 000 (a beginner electric-guitar demo). Last upload was 2026-05-10, so the channel has been dormant about 5 months. View counts for the newest uploads came back null and need a re-fetch. The channel has interviews with KZ musicians (Селана, Orange Wall, «3.31», RELOCVNT), which means the store already has ties to the local music scene; those people are possible forwarders of a job post, subject to owner approval. L006: brand-only cymbal/drum demos have a median of 390 (n=48) and interviews 118 (n=4). All of this is long-form, so there is no Shorts/Reels/TikTok baseline."
+  },
+  {
+   "input": "clients/muzzone/research/peer_channels_meta.json",
+   "what_it_gives": "13 RU-language YouTube peers: 6 retail (Мир Музыки, Ловец Нот, JAM, MAJOR-MUSIC, Рок-н-Ролл, Гитарная лавка), 4 review and 3 lessons channels, with channel medians from 762 to 23 500 views. None is in Kazakhstan, and none has hiring content analysed. Usable only for a rough vertical view-median prior, not for job-post mechanisms."
+  },
+  {
+   "input": "Knowledge base learnings L001–L006",
+   "what_it_gives": "Text judging barely predicts Shorts results (ρ 0.11, retail 0.07), so scores are priors only. Long-form title tricks do not carry over (L003). No price slides (L005). Demos with no human angle under-perform (L006). There is no pooled prior for recruiting-funnel arms (job_reality, character, wa_question with the «РАБОТА» code family)."
+  },
+  {
+   "input": "Step-1 intake brief",
+   "what_it_gives": "Request type: hiring. Target: conservative 3 / expected 6 / stretch 10 qualified coded «РАБОТА» applicants by 2026-11-08, leading to 1 hire by about 2026-11-20 [ASSUMPTION]. Includes the default 3-question screen, the constraints (no job facts in copy until stated, no unpaid trial days, no discriminatory requirements) and 3 pending clarifying questions on job terms, candidate profile and faces. The B asks below are merged with those questions so the owner is not asked twice."
+  },
+  {
+   "input": "Profile: accounts and staff capacity",
+   "what_it_gives": "Instagram muzzone_astana exists but blocks anonymous fetch. VK muzzoneastana and FB muzzonemusicshop exist. TikTok is not linked from the site and ownership is unknown. Staff: 20 min/week, one mid/low phone, audio usable only close up, no consent asked yet. The owner can only be reached through Andrey/Pavel, so every human ask goes in one batched message."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Store status check: what «Финальная распродажа» means, plus public signs of a closure or move",
+   "why_it_matters": "Hiring videos for a store that is closing or moving would mislead job seekers. That is a truth and harm problem, not a style one. If the sale page or public sources give a reason (clearance, brand exit, move), the owner question gets narrower.",
+   "how": "Agent: re-fetch muzzone.kz/rasprodazha.html and the home page for banner text, dates and reasons. Search 2GIS/Google/Instagram/VK posts and news from the last 90 days for «закрытие», «переезд», «Muzzone». Log any 403/429 and do not bypass. Re-fetch the Casio PX-770 page to resolve the 695 913 / 521 935 ₸ conflict.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Confirmation comes from the owner's tap card (item 1 in the owner batch). Until then no hiring video is published.",
+   "blocks_step": "publish: all hiring videos (until store status confirmed)"
+  },
+  {
+   "input": "Muzzone's employer footprint: past and current vacancies on hh.kz, enbek.kz, olx.kz, Instagram/VK/FB job posts, employer reviews",
+   "why_it_matters": "Past postings may already state pay, schedule or requirements. We would carry those to the owner as candidate wording to confirm, not publish them directly. Posting frequency hints at turnover. Employer reviews show which seeker fears are real here. Having this cuts the owner's job-facts card to a one-tap confirmation.",
+   "how": "Agent: search hh.kz, enbek.kz and olx.kz for «Muzzone» / «Муззон» / «Кажымукана 14». Scan VK muzzoneastana and FB muzzonemusicshop for «вакансия», «требуется», «ищем». Record each text with URL and date. Strip any personal names.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Job facts come only from the owner card. Until the owner confirms, seeker-fear insights stay generic hypotheses capped at strength 2.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Local pay and conditions benchmark for retail sales consultants in Astana (music, electronics and sports retail)",
+   "why_it_matters": "The owner sets pay. A dated benchmark lets us warn the owner if the offer is far below the local market, which would leave even a perfect video with no qualified applicants. It also calibrates the screen and the qualified-rate assumption (30–50%). It is internal only: no «выше рынка» claims and no competitor names in copy.",
+   "how": "Agent: sample 20–40 current hh.kz and enbek.kz postings for «продавец-консультант» in Astana, prioritising music, electronics and sports retail. Record pay range, fixed vs percentage pay, schedule pattern (5/2, 2/2), requirements and trial terms, with URL and fetch date. Summarise as a median and a range.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No market context in the owner report, and the qualified-rate assumption stays at 30–50%.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Map cards (2GIS, Google, Yandex) for ул. Кажымукана 14: rating, review count, reviews mentioning продавец/консультант, store opening hours, photos",
+   "why_it_matters": "Reviews that praise or criticise consultants show what the job really is and what good looks like here, which is job_reality truth. Any recurring complaint about staff has to be fixed before recruiting content, not turned into content. Rating and review count are legitimacy proof that seekers check. The store's opening hours give context for the owner's schedule wording.",
+   "how": "Agent: fetch the three map cards. Extract rating, review count and date, and verbatim review lines coded with C2 (J/X/F) together with counts. Keep only lines about staff and service, without reviewer names. Record listed opening hours as a fact. Shift hours still come from the owner.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Staff-quality insights rely on the staff voice note and are labelled likely.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Job-seeker demand phrases in RU/KZ for Astana",
+   "why_it_matters": "Supplies the hook and caption vocabulary seekers actually search with, e.g. «работа для студента», «подработка», «работа музыканту», «без опыта». It also shows whether music-literate seekers search as musicians or as retail workers, which changes the hook archetype.",
+   "how": "Agent: collect Google, Yandex, TikTok and YouTube autosuggest and the related-search lists for «работа продавец консультант Астана», «вакансии музыкальный магазин», «подработка студенту Астана», «работа для музыканта Астана», «жұмыс Астана сатушы». Kazakh phrases are flagged for a native check before any use.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hooks use only the owner's and staff's own words plus the generic seeker-question cluster. Lower search relevance.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Peer hiring-content outliers: vacancy Reels/TikToks/Shorts from Astana and KZ retailers and RU-language music stores, last 90 days",
+   "why_it_matters": "No hiring content was analysed in the research files. Mechanisms from outliers (first frame, faces or not, real shift vs list of perks, length) plus the questions in their comments («зарплата?», «график?», «без опыта берёте?») give the seeker question cluster and category conventions to break. These are hypotheses, not winners.",
+   "how": "Agent: find 10–20 vacancy posts at ≥3× their own channel median. Record the mechanism only (engine, first-frame type, length, faces) and count comment questions using the C2 codes. If Instagram or TikTok blocks the fetch, log it and do not bypass.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Ideas rely on D3 job engines with no local convention list. More wildcards, honestly scored.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Local distribution map: where music-literate job seekers in Astana gather",
+   "why_it_matters": "The main realism risk is that organic reach is not local. Music colleges and the arts university, musician Telegram and VK groups, rehearsal bases and the musicians from the store's own YouTube interviews are warm, local, zero-budget reach for the same videos. Posting or outreach there is an owner-approved action (L8).",
+   "how": "Agent: compile a list with URLs and audience size of Astana music education institutions (career or student channels), public musician groups and chats in Telegram and VK, and the interview guests from youtube_channel.json. Contact nobody; this is only a list for the owner to approve.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Reach relies on Reels/Shorts organic plus hh.kz and enbek.kz.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Own channel refresh: Instagram public footprint (retry) and YouTube recent views, Shorts and comments",
+   "why_it_matters": "Instagram is the main local channel for hiring and nothing about it is known. The newest YouTube uploads came back with null views. Old videos where staff hands or voices appear could become zero-staff-minute job_reality or character re-cuts, but only with that person's consent.",
+   "how": "Agent: retry the public Instagram profile once by normal fetch, and log it if blocked (no bypass). Re-fetch the 15 newest YouTube videos with views and comments. Tag videos where a store employee plays or explains, by file and timestamp, for later consent checks.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Instagram baseline comes from the owner's screenshot. Otherwise use the pooled vertical median and flag that metrics are reduced.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Calendar context for a hiring push in Oct–Nov 2026",
+   "why_it_matters": "Explains why now. The pre-New-Year instrument-gift season is a likely staffing reason, but that is an assumption. Student timetables (part-time availability) matter if the owner accepts students. Knowing this avoids a moment claim we cannot back.",
+   "how": "Agent: note the academic calendar of Astana music colleges and the arts university (session dates, holidays), KZ public holidays in Nov–Dec 2026, and the year-end retail peak. Mark everything as context and never use it as an urgency claim.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No moment ideas in the hiring batch.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Owner tap card: store status, who may be filmed, TikTok, hire-by date (merged with intake Q3)",
+   "why_it_matters": "Store status gates publishing every hiring video. Face permission decides whether character and job_reality ideas can use faces or must stay hands and voice. The hire-by date decides whether organic content has time to learn (14 days or more) or whether job sites and the warm base must lead. A TikTok answer decides the channel mix.",
+   "how": "«Здравствуйте! Я ИИ-ассистент, помогаю найти продавца-консультанта через ролики. 4 коротких вопроса, ответьте цифрами:\n1) «Финальная распродажа» на сайте — это: 1 — распродажа остатков, магазин работает дальше; 2 — переезд; 3 — закрытие. По умолчанию ролики о вакансии не публикуем, пока не ответите.\n2) Кого можно снимать: 1 — только руки, инструменты и голос; 2 — сотрудников с лицом (с их согласия на камеру); 3 — и вас с лицом. По умолчанию: 1.\n3) TikTok магазина: 1 — есть (пришлите ссылку); 2 — нет, можно создать; 3 — не нужен. По умолчанию: 3.\n4) К какому числу нужен человек? По умолчанию: к 20.11.\nОтвет до 10.10 18:00.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Hands, instruments and voice only. Instagram Reels and YouTube Shorts only. Hire-by date 2026-11-20. Hiring videos are held until store status is confirmed.",
+   "blocks_step": "publish: all hiring videos (store status); publish: faces"
+  },
+  {
+   "input": "Owner job-facts card: pay wording, schedule, duties, who we look for, training/trial terms, who answers applicants, approval of the 3-question screen (merged with intake Q1/Q2)",
+   "why_it_matters": "In hiring, the job terms play the role the price list plays in sales. Without them, no video can say pay, schedule, «без опыта» or «обучим», and the most common seeker question («сколько платят?») can only be answered «напишите». Approving the screen and the applicant quick reply lets the qualified-applicant count start. Knowing who replies and how many chats per week they can handle sets the capacity guardrail.",
+   "how": "«Чтобы ролики о вакансии были честными, ответьте одной строкой на каждый пункт (можно голосом):\n1) Зарплата для роликов: сумма / «от … ₸» / оклад + процент / не называем. По умолчанию: не называем.\n2) График и дни выхода, часы смены.\n3) Кого берём: 1 — обязательно играет (на чём?); 2 — главное опыт продаж, в инструментах научим; 3 — можно без опыта, с интересом к музыке. По умолчанию: 2.\n4) Первые дни: оплачиваемое обучение / стажировка (оплачивается?) / сразу в штат.\n5) Кто будет отвечать кандидатам в WhatsApp и сколько откликов в неделю успеет разобрать? По умолчанию: тот же человек, до 10.\n6) Вопросы кандидату (ответьте «да» или поправьте): «На чём играете или в каких инструментах разбираетесь?», «Был ли опыт продаж или работы с людьми?», «С какого числа и в какие дни можете выходить?».\n7) Как искали продавца в прошлый раз и сколько было откликов?\nВ роликах — только то, что вы написали, слово в слово. Ответ до 10.10 18:00.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "No pay, schedule, requirement or training claims in any audience copy. CTAs offer «условия расскажем в WhatsApp». The default screen is used internally but not published as a requirement. Applicant capacity is assumed at 10 or fewer chats/week.",
+   "blocks_step": "4_ideas: pay/schedule/requirement/training claims; publish: applicant screen and quick reply"
+  },
+  {
+   "input": "Instagram account insights screenshots (muzzone_astana)",
+   "why_it_matters": "We can only fetch publicly, and that is blocked. Only the owner can show the share of the audience in Astana, which decides whether Instagram views can produce local applicants (the main realism risk). The screenshots also give a Reels baseline (median views over the last posts) to replace the 300–1 000 view assumption.",
+   "how": "«Пришлите 2 скриншота из Instagram: Профессиональная панель → Статистика → «Аудитория» (города) и «Охваченные аккаунты» за 30 дней. Если есть последние Reels — ещё скриншот со списком Reels и просмотрами. Пароль не нужен.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Use the pooled vertical median with a flag that metrics are reduced. The local share of reach stays an assumption, and the realism ratio stays at 0.1–5.3.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "WhatsApp chat export: 15–30 recent customer chats on +7 701 0987734, plus any messages from job seekers",
+   "why_it_matters": "In hiring the method's rank-1 input drops to rank 4, because the 'customer' is the job seeker (my judgment). It still gives the real daily questions a consultant answers, usable as a paraphrased «вот что спрашивают за смену» job_reality idea if ≥2 messages match. It also gives the current reply-time median for the guardrail that applicant chats must not slow buyer replies, and any past seeker messages.",
+   "how": "«Откройте чат с клиентом → ⋮ (или имя контакта) → «Экспорт чата» → «Без медиафайлов». Пришлите 15–30 последних чатов с покупателями и, если были, переписки с теми, кто спрашивал о работе. Имена и номера удаляем сразу, наружу ничего не попадает.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Daily-question content uses the staff voice note (likely). The reply-time guardrail is monitored from week 1 labels only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Optional owner voice note on the role",
+   "why_it_matters": "The owner's honest view of the job (what the best consultant did, why people left, what is hard) feeds honest_signal and job_reality ideas such as «кому эта работа не подойдёт». That reduces bad-fit applicants. These are owner statements, so they stay 'likely'.",
+   "how": "«По желанию, голосовое до 3 минут: 1) Каким был ваш лучший продавец и что он делал иначе? 2) Почему продавцы у вас уходили? 3) Что в этой работе честно тяжело? Отвечайте как есть — в ролики попадёт только то, что вы одобрите.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Skip it. The staff voice note covers job reality, and there are no anti_sell or honest_signal claims about past staff.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Staff 'real shift' voice note from whoever works the floor now",
+   "why_it_matters": "The current consultant is the most credible source of what the job really is: the typical day, the 3 most common customer questions, what they like and what is hard. That is the core evidence for job_reality, character and wa_question hiring ideas. It also asks whether they would appear on camera and how (hands, voice or face). That answer is not consent; consent is recorded on camera later.",
+   "how": "Сотруднику (через владельца), около 3 минут: «Я ИИ-ассистент магазина. Запишите голосовое 1–2 минуты: как проходит обычный день; 3 вопроса, которые покупатели задают чаще всего; что вам в работе нравится и что тяжело. И напишите: готовы ли появиться в ролике — 1 руки, 2 голос, 3 лицо, 4 нет. Ответ «нет» — нормально, на работу это не влияет.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Seeker-side insights stay category hypotheses (strength ≤2). Hands and voice only, no character series.",
+   "blocks_step": "4_ideas: character/job_reality ideas built on staff statements; publish: faces"
+  },
+  {
+   "input": "Proof folder: about 20 existing photos and videos from the store floor",
+   "why_it_matters": "Enables zero-staff-minute ideas (≥2 required by E3), such as re-cuts of real moments: unpacking a delivery, testing an amp, setting up a drum kit, the piano room. It also shows the real premises to seekers, which is legitimacy against the «Финальная распродажа» doubt.",
+   "how": "Сотруднику, около 3 минут: «Пришлите файлами (не фото в чат, а «Документ») 15–20 своих фото и видео из магазина: распаковка, настройка, проверка инструментов, зал, склад. Лица покупателей не нужны. Всё, где есть люди, без их согласия не публикуем.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Staff film proof footage during the week-1 session. No zero-minute ideas in batch 1.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Staff reality scan: 3 test clips plus a 2-minute silent walkthrough (once)",
+   "why_it_matters": "Sets real producibility: speech audio at 30 cm, the sound of a string or key at 20–30 cm, light and noise in the hall, and the named locations used on shoot cards (e.g. guitar wall, piano room, counter, storeroom). Staff week-0 total with the voice note and proof folder is about 16 minutes, under the 17-minute plan.",
+   "how": "Сотруднику, около 10 минут один раз: «1) Скажите фразу «Проверка звука» — телефон в 30 см от лица. 2) Проведите по струнам гитары или нажмите клавишу — телефон в 20–30 см. 3) Снимите зал 5 секунд. 4) Пройдите по магазину 2 минуты молча, вертикально, называя вслух места («стена гитар», «пианино», «касса»). Отправьте файлами.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Assume the worst case: speech only with the phone held close, no wide shots in dark areas, generic location names.",
+   "blocks_step": "4_ideas: producibility (locations and audio, soft)"
+  },
+  {
+   "input": "Weekly count of applications from other channels (hh.kz, enbek.kz, word of mouth)",
+   "why_it_matters": "This is the week-0 reference baseline the intake fixes the target against at the end of week 2. It also separates the effect of social video from job sites in the owner report.",
+   "how": "Asked in the week-1 and later weekly batch: «Сколько откликов на вакансию пришло за неделю НЕ по коду из ролика (hh.kz, enbek.kz, знакомые)? Одна цифра. По умолчанию: считаем 0.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "Count coded «РАБОТА» chats only. Attribution to other channels stays unknown.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Boost budget (deferred until a post qualifies under F10 DR2)",
+   "why_it_matters": "A small click-to-WhatsApp boost within an Astana radius on a proven hiring post may be the cheapest fix for the local-reach risk. Asking now, with no data, wastes owner minutes.",
+   "how": "Asked only after a post reaches ≥3× median at 48 h: «Ролик о вакансии «{название}» набрал {просмотры}. Продвинуть его по Астане с лимитом {сумма} ₸? 1 — да; 2 — нет. По умолчанию: нет.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "No boost, organic only.",
+   "blocks_step": "boost"
+  }
+ ]
+}

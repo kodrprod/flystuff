@@ -1,0 +1,132 @@
+[
+ {
+  "persona": "Owner and head of a hypothetical dental clinic in Almaty: 6 chairs, 2 implant surgeons, prices above average. I asked for more implant patients. I care about bookings, my staff's time, my licence and my reputation, and much less about Thompson sampling.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "The best part is the personal WhatsApp outreach to our own patients, keyword «ВРАЧ», in three segments. Segment A, people who got an implant plan but never started, is the most valuable. This is the only lever that can realistically fill implant consultations in October, and it is measured separately from the videos. On the content side, ID05 («Когда хирург сам отговаривает от импланта») is the strongest. It speaks directly to the fear patients have of private clinics, which is being upsold.",
+  "refutations": [
+   {
+    "target": "Base arm: messaging former patients from the MIS records (segments A/B/C)",
+    "why_fails": "The message «вы у нас лечились… если вы ещё думаете об импланте» uses health information from medical records for marketing. Medical secrecy and the RK personal-data law apply. The plan hides this under 'NEEDS FACT: consent-to-contact basis' but still schedules wave 1 for 16.10. That is only 6 days away, and nobody has checked whether our patient consent forms cover marketing contact at all. One patient complaint to the regulator costs me more than a whole sprint of bookings. Sending from the admin's WhatsApp at 20 messages an hour can also get our only booking number banned, and then the reply-time guardrail means nothing.",
+    "severity": "major",
+    "fix": "Before any message goes out, a lawyer checks the consent forms and confirms the legal basis in writing. If the forms don't cover it, send only to patients who agreed to contact. Remove the treatment detail from the text: just «клиника {название}, хирург-имплантолог отвечает на вопросы». Send from a separate WhatsApp Business number, never the main booking line. Keep wave 1 small, around 20 messages."
+   },
+   {
+    "target": "Offer: «пришлите фото или снимок — хирург предварительно подскажет этапы»",
+    "why_fails": "This is a remote opinion on a patient's own X-ray, which is in effect a teleconsultation. It creates liability if the surgeon misses something. It also brings sensitive medical images into WhatsApp. And it gives the patient a reason not to come in, because they already have an answer. With a cap of N replies a day it also creates a new unpaid daily task for a surgeon whose time is my most expensive resource.",
+    "severity": "major",
+    "fix": "Drop the X-ray review. Offer instead: «опишите ситуацию — администратор подберёт время консультации, хирург ответит на вопросы на приёме». If I still want something concrete, use a fixed, owner-confirmed consultation format, for example «план на модели челюсти + КТ при необходимости». The photo idea comes back only after a legal check and a written protocol."
+   },
+   {
+    "target": "Price handling: «Точную сумму врач называет после осмотра», and no numbers in content",
+    "why_fails": "Our prices are above average, and the first question in every chat is «сколько?». Every clinic in Almaty gives the evasive answer the plan proposes, and patients drop it and go to the clinic that names a figure. Segment A already saw a plan with a price and didn't go ahead. Most likely the reason was price, and the base message says nothing about it. The plan doesn't explain why to pay more at our clinic, so the price-dependency episode only describes the price without justifying it.",
+    "severity": "major",
+    "fix": "Make the «от … ₸» range the default as soon as I send a dated price list. I can do that this week. Add a quick reply that names what is included («в стоимость входит: …»). For segment A, write a separate message aimed at the price objection: what has changed, whether payment can be split, and who to ask. All of it confirmed by me."
+   },
+   {
+    "target": "Week-0 surgeon session: everything in one 15-minute session on 15.10",
+    "why_fails": "In 15 minutes the surgeon is supposed to fill in the fact sheet, record answers for 4 videos with 3 takes each, approve 8 comment templates and the base messages, and set his daily cap N. That is not realistic. If he is delayed even once, the hero series slips to week 2 and week 1 is left with a staged chat and a fist with a coffee bean. That is not 'more implant patients'.",
+    "severity": "major",
+    "fix": "Book two sessions of 20–25 minutes on 13.10 and 15.10, and I will block his schedule for them. Send the fact sheet and templates in advance so he only says yes or no. In the session he records answers only, starting with ID05 and ID04."
+   },
+   {
+    "target": "ID11: hook «Настоящий имплант» vs the label «Демонстрационный образец»",
+    "why_fails": "The hook says «real», but the on-screen label says it is a demo sample. That is a contradiction in medical advertising, and someone in the comments will point it out. The coffee bean also implies a size for 'an implant', but implants come in different sizes. The plan itself admits the idea has a weak link to bookings.",
+    "severity": "minor",
+    "fix": "Change the hook to «Так выглядит имплант. Какого он размера?» and keep the demo label. Keep ID11 only as a reserve, not a fixed week-1 slot."
+   },
+   {
+    "target": "ID03 in the slate still uses «Выбираете клинику для импланта? Смотрите сюда» and «Пакет вскрывают при вас?»",
+    "why_fails": "The campaign says ID03 was re-cut around our consultation, but the slate entry, which is what staff will film from, still has the old hook. That old hook is a veiled attack on other clinics. It could be read as unfair comparative advertising and would start a fight with colleagues.",
+    "severity": "minor",
+    "fix": "Update the slate entry (hook, on-screen lines, first frame) to the re-cut version before the Monday card goes to staff."
+   },
+   {
+    "target": "ID14: staged «мама говорит „мне уже не надо“» and «режет яблоко на кусочки»",
+    "why_fails": "A staged scene in medical advertising, plus a hint that an elderly woman can't chew, is borderline. Older viewers may take it as mockery. It also has a weak link to the clinic (brand_link 2).",
+    "severity": "minor",
+    "fix": "Keep the topic, which is adult children deciding for a parent, but drop the apple. Instead, end with the surgeon's answer to «Можно ли имплант в 60+? Решает врач после осмотра». Keep the «постановка» label."
+   },
+   {
+    "target": "Admin load and the owner's onboarding",
+    "why_fails": "The admin gets 15 minutes a day of outreach, plus labels, the phone log and quick replies, while also answering chats within 15 minutes. I get 10 asks with a reply deadline of Saturday 10.10 at 12:00, less than a day away. The lav mic price «около 1 500 ₸» is a guess, and it's embarrassing to put a guessed price in a message to the owner.",
+    "severity": "minor",
+    "fix": "Move the deadline to Monday 12.10. Merge the asks into 3 decisions: base and legal, price and offer, surgeon on camera. Remove the mic price or write 'look it up yourselves'. Name one admin who owns the base, and add up their real total minutes per day."
+   },
+   {
+    "target": "Plan complexity (DR0–DR16, Thompson sampling, pooled medians)",
+    "why_fails": "I don't need 16 rules. I need to know, every Monday, how many people booked an implant consultation and from where. The complexity also hides the honest truth: the base will deliver most of the result, and videos are a long-term investment.",
+    "severity": "minor",
+    "fix": "The weekly report to me is 3 lines: base «ВРАЧ» bookings, video-code bookings, total vs baseline. Keep the decision rules internal."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan/CIS (clinics, salons, HoReCa in Almaty and Astana)",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "The best idea is base outreach: personal WhatsApp messages to segment A, patients who got an implant plan but never started it. On a 3k-follower account, Reels at 500–1,500 views won't move bookings within 4 weeks, but a warm list will. On the content side, ID05 («Когда хирург сам отговаривает от импланта») is the one piece that breaks the dental promo pattern. It gets shared because «тут хоть честно». ID14 (mum slicing an apple) has the strongest share mechanic in the slate. Make the surgeon's face the hero, lead with price, and treat ID14 as the main reach play.",
+  "refutations": [
+   {
+    "target": "Base wave text (warm WhatsApp message to segments A/B/C)",
+    "why_fails": "The text is polite and generic, and it gives no reason to reply now. «Если вы ещё думаете об импланте, хирург может ответить на вопросы» reads like a mass broadcast, even when it is sent one by one. Segment A patients already had a consultation and know the surgeon can answer questions. They stalled on price, timing or fear, and nothing in this text addresses any of those. My guess is a 2–5% reply rate, below the plan's 5–15%.",
+    "severity": "major",
+    "fix": "Personalise from the patient's record: «{имя}, в {месяц/год} доктор {имя} составлял вам план по имплантации. Если вопрос ещё актуален — доктор может пересмотреть план, на этой неделе есть окна {дни}». Name the surgeon. Mention real free slots only when they are confirmed that day. Send it from the clinic number the patient already has saved. For segment B, refer to the extraction date. A specific reference is what gets replies in CIS WhatsApp."
+   },
+   {
+    "target": "No-face default / hands-only hero «Вопрос хирургу»",
+    "why_fails": "Every Almaty clinic posts gloved hands, trays, jaw models and pouches. A hands-only feed from a 3k account looks like stock footage and doesn't help anyone choose a surgeon. For a surgery decision, patients want to know who will operate. The plan says this itself, but then sets the owner ask default to option 2 (hands + name tag). By default, the hero series has no hero.",
+    "severity": "major",
+    "fix": "Make face consent the default ask, and send a 10-second sample of what the shot looks like. If the surgeon refuses, recruit the second implant surgeon or the chief doctor. If nobody agrees, demote «Вопрос хирургу» to a weekly Stories Q&A and invest in ID05/ID14 and the base arm. Don't run a hero series fronted by hands."
+   },
+   {
+    "target": "No prices anywhere; price episode only in NEXT BATCH",
+    "why_fails": "In Almaty, «сколько стоит имплант?» is the first comment and the first DM almost every time. Content without a figure, plus a CTA like «расскажем, как проходит консультация», brings in a stream of «цена?» messages that die after the reply «врач скажет после осмотра». That is the most common way clinic chats die locally, and the plan's own price script reproduces it. Competitors openly post «от 150 000 ₸».",
+    "severity": "major",
+    "fix": "Push the owner hard to allow at least a dated «от … ₸ за имплант, коронка отдельно» range. Make the price-dependency episode the week-1 lead, not a reserve. Make the price script end with a concrete next step: two named slot options, plus a request for a photo or X-ray to pre-review."
+   },
+   {
+    "target": "RU+KZ hook and CTA burned into every video + weekly native check as a publish gate (DR0)",
+    "why_fails": "Two hook lines in two languages in the top-middle zone halve readability in the first second, and the frame gets cluttered on a small phone. Making the Kazakh check a hard gate means one sick or absent staff member blocks the entire week's posts. With 17 staff minutes, adding 4 minutes of KZ reading every week is a real cost.",
+    "severity": "major",
+    "fix": "Make the frame-1 hook one language, and test RU-first vs KZ-first episodes as an experiment. Put the bilingual text in the caption and on the CTA end card. Pre-translate a fixed bank of CTA and label lines once in week 0, so the weekly check only covers new hooks. If the checker is unavailable, publish with the approved bank instead of blocking. The owner confirms what the law actually requires for organic posts."
+   },
+   {
+    "target": "Week-0 surgeon session: 15 minutes for fact sheet + 4 voice answers + template bank + cap N",
+    "why_fails": "Recording four usable spoken answers with three takes each, in a «тихий угол» of a working clinic, takes 15 minutes on its own. Add retakes after a drill noise or the admin calling out, plus reviewing 8 reply templates. A surgeon between patients won't do it in one sitting. The result will be ID04 and ID05 audio with background noise and «эээ», or the session slips, and the plan admits that a slip hollows out week 1.",
+    "severity": "major",
+    "fix": "Split the session. Send the fact sheet and the template bank as WhatsApp text for yes/no replies (async, 0 recording minutes). Use the live 15 minutes only for recording, two episodes per session, after hours, phone on books at 30 cm, with a 1-minute audio test first. Buy a lav mic (realistically 3–6k ₸, not 1,500) without waiting for a decision. It is the cheapest quality fix in the whole plan."
+   },
+   {
+    "target": "ID02 sterilisation backstage and the ID03 re-cut («как проходит наша консультация»)",
+    "why_fails": "Sterilisation pouches are the most overused dental Reel in the CIS. Nobody shares one from a 3k account, and showing a used instrument risks «фу» comments. The ID03 re-cut, «как проходит наша консультация», is a plain ad. With the 'check any clinic' lines removed, it has no share or save reason left. Both cost staff minutes and sign-off gates that ID05, ID14 and the price episode need more.",
+    "severity": "minor",
+    "fix": "Cut ID02 from this sprint, or keep it only as a 7-second Story. Replace the ID03 re-cut with «что хирург проверяет, прежде чем сказать „да“» (already in NEXT BATCH). That has a real payoff and practical value."
+   },
+   {
+    "target": "Attribution via per-video codes spoken + on screen + pinned comment",
+    "why_fails": "Local patients don't type codes. They write «здравствуйте, сколько стоит имплант» or just call. With 20 videos you get 20 codes, and the admin won't keep them straight. The coded floor will be near zero, so DR5 and DR7 will fire on noise and kill working arms.",
+    "severity": "major",
+    "fix": "Put one prefilled wa.me link per series in the bio and Stories, with the text prefilled (e.g. «Вопрос хирургу») so nobody has to type it. The admin asks one question: «видели нас в Instagram или получили сообщение?». Judge content on total uncoded inquiries vs baseline plus profile→WhatsApp clicks, not on video codes."
+   },
+   {
+    "target": "ID04 «Это больно?» without any claim",
+    "why_fails": "Once «без боли», «не почувствуете» and any protocol detail are banned, the answer becomes «ощущения индивидуальны, врач объяснит на приёме». That is a hook with no payoff, and viewers swipe and feel baited. The plan blocks the idea unless the protocol is confirmed, but week 1 still schedules it for Sunday.",
+    "severity": "minor",
+    "fix": "Rewrite the payoff around concrete, allowed process facts: what the anaesthesia is (an injection, like a filling), how long the appointment roughly takes, what the next day usually looks like, and what to do if it hurts. Each fact is in the surgeon's own words and signed off. Schedule ID04 only after the wording is approved."
+   },
+   {
+    "target": "Missing cheap channels: Instagram Stories Q&A and TikTok defaulted off",
+    "why_fails": "For a 3k local account, daily Stories (a question sticker, «спросите хирурга», a poll on the fear) bring more DMs than Reels and cost about 1 staff minute. They don't appear in the plan. TikTok is huge in Kazakhstan for the 25–45 adult children that ID14 targets, and cross-posting costs nothing. The default «только Instagram» throws that reach away.",
+    "severity": "minor",
+    "fix": "Add 3 Stories a week: a question sticker on Monday, the surgeon's answer on Wednesday, and a link sticker to WhatsApp on Friday. Make TikTok cross-posting the default unless the owner says no, with no judgement on the account's first 10 posts."
+   },
+   {
+    "target": "Plan complexity (DR0–DR16, Thompson allocation, 10 owner asks)",
+    "why_fails": "A 6-chair clinic owner gets about 14 minutes of numbered multiple-choice questions, a legal checklist and the base export all at once. Some answers won't come back by 10.10, so the defaults apply, and several defaults are 'block publishing'. The machinery is heavier than 20 posts justify.",
+    "severity": "minor",
+    "fix": "Cut onboarding to 4 must-answer asks: base outreach yes/no, surgeon face, price range, licence number. Mark everything else as asked in week 1. The owner sees one report line per week: inquiries vs baseline."
+   }
+  ]
+ }
+]

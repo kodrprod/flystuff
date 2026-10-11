@@ -1,0 +1,57 @@
+{
+ "request_type": "launch_or_event",
+ "reframed_request": "«Через 3 недели открываем вторую точку на Левом берегу. Нужен ажиотаж.» → Before the second location opens, build a list of nearby people who ask to be told when and where it opens, using a WhatsApp code from each video. Then turn that list, plus the first location's regulars, into steady paid visits at the Левый берег location over its first 4 weeks. A one-day queue for photos is not the goal.",
+ "business_objective": "Average daily POS checks at the Левый берег location over days 1–28 after opening (assumed 2026-10-30 to 2026-11-27) reach at least 50% of location 1's average daily checks over the 4 weeks before. Both the 50% ratio and the opening date are assumptions. The absolute number will be set once the owner sends location 1's POS average.",
+ "marketing_objective": "The audience is people within walking distance of the new Левый берег address who are looking for a place for their morning or lunch coffee: office workers, residents and students. A second group is location 1's regulars who live or work on Левый берег. Before opening day (assumed 2026-10-30), they send a coded message asking for the exact opening date and address. They then make their first paid visit at the new location within 14 days of opening (by 2026-11-13).",
+ "success_metric": {
+  "name": "Coded opening sign-ups for the new location (people who send a video's code to get the opening date and address)",
+  "how_measured": "Messages that contain a per-video code ({CODE}), counted from the weekly WhatsApp chat export or Instagram DMs (whichever channel Q3 picks) and deduplicated by contact. Supporting directional count: Левый берег POS checks for days 1–14, plus a barista tick sheet asking «Откуда узнали?» (1 tap per guest, opening week only).",
+  "target": "conservative 40 / expected 80 / stretch 150 coded sign-ups. These are assumptions: no baseline exists. The target is re-fixed on 2026-10-16 from week-1 coded chats per 1k views. Baseline: 0 (a new location with no list).",
+  "by_when": "2026-10-30"
+ },
+ "leading_indicators": [
+  "views_48h ÷ the account's Reels median over its last 15 posts (pooled specialty_coffee median until there are 10 own posts per platform)",
+  "shares + saves per 1,000 views (the «скинь коллеге, рядом с офисом откроется» signal)",
+  "coded sign-ups per 1,000 views",
+  "profile visits per 1,000 views"
+ ],
+ "constraints": [
+  "BUDGET: 0 ₸ (default). The boost question is asked once a pre-opening post qualifies (DR2), which is expected in week 2.",
+  "OWNER: ≤15 min onboarding, ≤5 min/week (default)",
+  "STAFF: ≤17 planned min/week, 20 including safety margin. One phone; audio usable only close to the phone. Staff are also busy setting up location 2, so the shoot runs in one session at location 1 or on the new site. (stated)",
+  "FILMING: baristas aged 20–25 are willing to appear (stated). Each barista's consent is recorded on camera before their first face shot. Regulars and customers only with consent recorded on camera. No minors without a parent's written OK. (stated + default)",
+  "PRICES: none usable. The ledger is empty, so no prices, menu items or numbers appear in content until there is a dated menu or price-list photo (evidence: facts_usable = [])",
+  "OFFER: none (default). An opening offer is a known unknown; nothing like «бесплатно», «скидка» or «первым N гостям» without the owner's exact terms (Q2).",
+  "DATES/ADDRESS: no opening date, address or countdown in audience copy until the owner confirms them in writing (evidence: known_unknowns). Until then the copy says «скоро на Левом берегу» and exact details go privately to people who send the code.",
+  "CAPACITY: new-location throughput is unknown. No «очередь», «мест мало», «успейте» or «только в день открытия». The CTA spreads first visits over the first 14 days instead of piling them onto day 1. (default)",
+  "REGULATED: not a regulated category. Still no health or energy claims about coffee or caffeine. (default)",
+  "AVOID: politics, religion, ethnicity, mocking customers, naming competitors or other Левый берег coffee shops. Правый/Левый берег jokes only if benign and about commuting or weather, never about people. (default)",
+  "ACCOUNTS: Instagram ~2.1k followers (assumed, unverified) and a 2GIS card for location 1 (stated sales channel). Unknown: TikTok, YouTube, WhatsApp Business number, and a 2GIS card for the new location. Missing accounts become owner asks in step 2. Business accounts use commercial-library music only. (stated + default)",
+  "LANGUAGE: Russian on screen. Kazakh captions only after a native speaker checks them. (stated languages ru/kk + L9)",
+  "APPROVAL: the owner approves each weekly batch explicitly. Any opening offer, any new face and any spend need explicit approval. (default)",
+  "GUARDRAIL: median first reply to coded messages ≤15 min in working hours",
+  "GUARDRAIL: location 1's daily checks stay at or above its 4-week average while staff and attention shift to the opening (cannibalisation and service check)",
+  "GUARDRAIL: location 1's 2GIS rating does not drop below its current value; the new location's first reviews are monitored daily in weeks 1–2 after opening"
+ ],
+ "assumptions": [
+  "LADDER: «ажиотаж» → so that people come at opening → so that some of them become regulars → so that location 2 reaches normal daily checks quickly. The first number counted weekly is daily POS checks at location 2. Fork: an opening-day crowd (one day, visible, little value) vs sustained first-month visits (measurable, larger value). Chosen: sustained visits. The opening-day buzz is kept as SECONDARY.",
+  "JUDGMENT (the method does not cover this): A2 assumes WhatsApp closes the sale, but a coffee shop closes at the counter. So the countable pre-opening action is a coded opt-in for the date and address, and the business outcome is POS checks. Coded opt-ins later double as an opted-in list for an opening-day broadcast.",
+  "BOTTLENECK: awareness in the new catchment. Confidence: likely, by construction, since a new location has no footprint on Левый берег. A consideration layer probably sits behind it: «зачем менять свою привычную кофейню». Evidence: profile only (one location, loyal regulars); no chats or reviews ingested yet.",
+  "SECONDARY: opening-day buzz (a visible crowd, guests posting). It gets at most 20% of slots and is served by the same series. A conflicting ask («ажиотаж» vs unknown capacity) is resolved by steering visits across the first 14 days.",
+  "SECONDARY (possible, not stated): location 2 may need to hire baristas. If so, it needs a separate hiring brief with the РАБОТА code family and does not take launch slots.",
+  "REALISM: req_chats = 80 expected sign-ups (baseline 0; close rate not applicable because the sign-up is the outcome). req_views = 80 ÷ (0.3–3 per 1k [ASSUMPTION]) = 27k–267k. ach_views = 15 posts in 3 weeks × 300–1,000 median Reels views [ASSUMPTION for a ~2.1k account] × 1.8 = 8.1k–27k. ratio ≈ 1–33, so stretch to unrealistic organically. Time: 21 days is above 14 but too short for organic arms to learn. Levers: warm base (location 1 regulars via in-store mention and WhatsApp Status to opted-in contacts only), a 2GIS card for the new location before opening, and an owner-approved geo-boost of the best pre-opening post around the new address. Capacity: unknown, so the CTA spreads visits.",
+  "[ASSUMPTION] Opening date is 2026-10-30 (3 weeks from 2026-10-09) | if wrong: the back-plan shifts (reach from D−21, consideration from D−14, conversion in the last 10 days) and the metric date moves | verify: Q1 by 2026-10-10 12:00",
+  "[ASSUMPTION] Location 1 is not on Левый берег, and some of its regulars live or work there | if wrong: pushing regulars to location 2 cannibalises location 1 and the warm-base lever shrinks | verify: one-week barista tally «Левый берег — рядом с работой или домом?» at location 1 plus the owner's money map in step 2, by 2026-10-14",
+  "[ASSUMPTION] Both locations record daily checks in a POS the owner can read | if wrong: a manual daily count by the shift lead (≤1 min per day) | verify: step 2 owner ask",
+  "[ASSUMPTION] The new site can be filmed now (renovation, equipment arriving, first test shots), giving pre-opening build-up content with zero new locations to set up | if wrong: pre-opening content comes from location 1 (baristas, process, regulars) | verify: step 2 staff reality scan",
+  "[ASSUMPTION] The Instagram Reels median is 300–1,000 views and no TikTok exists | if wrong: ach_views and the targets rescale | verify: agent fetches the last 15 posts in step 2, by 2026-10-11",
+  "[ASSUMPTION] Late October–November in Астана brings cold and first snow, a «по дороге на работу, греемся» moment cue | if wrong: drop the weather angle | verify: forecast at shoot-card time",
+  "[ASSUMPTION] The opt-in to visit rate is unknown; 30–50% is a placeholder for planning the opening-day list only, never a claim | if wrong: the business-objective forecast changes, not the content | verify: count sign-up codes redeemed or mentioned at the till in days 1–14"
+ ],
+ "clarifying_questions": [
+  "Дата и адрес второй точки: 1 — подтверждены, пришлите точную дату и адрес, их можно называть в роликах; 2 — могут сдвинуться, в роликах пишем только «скоро на Левом берегу». По умолчанию: 2 — точные детали отправляем лично тем, кто напишет код. Ответ до 10.10 12:00.",
+  "Будет ли акция к открытию: 1 — нет; 2 — да, напишите точно, что предлагаете, для кого, с какой по какую дату и есть ли лимит в день. По умолчанию: 1 — зовём без скидок и подарков. Ответ до 10.10 12:00.",
+  "Куда звать людей из роликов до открытия: 1 — в WhatsApp кофейни (пришлите номер; в рабочее время там отвечают в течение 15 минут); 2 — в директ Instagram; 3 — никуда, только подписка на Instagram. По умолчанию: 2. Ответ до 10.10 12:00."
+ ],
+ "push_back": "Гарантировать ажиотаж за 3 недели не может никто: охват коротких видео непредсказуем, а алгоритму нужно время, чтобы найти людей именно с Левого берега. Поэтому успех считаем не в просмотрах. Считаем, сколько людей написали код из ролика, чтобы узнать дату и адрес, и сколько чеков будет на новой точке в первые 4 недели. По расчёту одной органики, скорее всего, не хватит, поэтому главные рычаги — ваши постоянные гости (бариста на первой точке, Статус WhatsApp), карточка новой точки в 2ГИС до открытия и, если решите, недорогое продвижение лучшего ролика вокруг нового адреса; дату, адрес и акции в роликах не называем, пока вы их не подтвердите."
+}

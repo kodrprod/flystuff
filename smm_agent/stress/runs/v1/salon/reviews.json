@@ -1,0 +1,144 @@
+[
+ {
+  "persona": "Владелица салона красоты в Шымкенте (8 мастеров). Цены снижать не хочу, клиенты уходят к тем, кто дешевле. Своё время и рабочее время мастеров считаю в деньгах.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "Неделя 0: сначала разобрать переписку в WhatsApp (где обрывается запись, как быстро отвечаем) и только потом снимать ролики. Плюс готовый ответ, где после цены сразу идёт следующий шаг: «Хотите, подберём мастера и время? Какой день удобнее?». Это бесплатно, почти не отнимает времени у мастеров и бьёт ровно в мою боль: человек узнал цену и пропал. Если ответы окажутся медленными, это правило вообще избавит меня от лишних роликов.",
+  "refutations": [
+   {
+    "target": "Распределение усилий: «тёплая база — самый быстрый рычаг», но на удержание выделено ≤20% слотов",
+    "why_fails": "План сам признаёт, что одних роликов за 4 недели не хватит (REALISM 0.6–5.9), а самое быстрое — вернуть тех, кто уже ходил. При этом на них отведено не больше 20%, и это один ролик про уход за ногтями в статусах. Нет ни одного адресного сообщения тем, кто перестал приходить. Главные силы уходят в охват, хотя сам план считает его малореальным.",
+    "severity": "major",
+    "fix": "Добавить в неделю 1 отдельную задачу: администратор находит в экспорте клиенток, которые не были 6–10 недель, и пишет им личное сообщение без скидки (от их мастера, с предложением свободного времени). Текст одобряю один раз. Долю удержания поднять до 40% на первые 2 недели."
+   },
+   {
+    "target": "Серия «Руки мастера» (ID17): голос и имя мастера, CTA «к этому мастеру»",
+    "why_fails": "В плане сказано, что клиенты часто уходят вслед за мастером. Если я на свои деньги и время раскручу голос и имя конкретного мастера, а она уйдёт или начнёт брать клиентов на дому, вся эта аудитория уйдёт с ней. Мой риск в плане не учтён.",
+    "severity": "major",
+    "fix": "Сначала задать мне вопрос 1 (уходят ли за мастером). Если да, в роликах говорит «мастер салона» и стоит бренд салона, без имени. Запись идёт через номер салона, а не через личный номер мастера. Имя только с моего отдельного «да» для каждого мастера."
+   },
+   {
+    "target": "Язык контента: только русский, казахский «опционально после проверки»",
+    "why_fails": "В Шымкенте большая часть моих клиенток говорит по-казахски, особенно та аудитория, у которой той. Ролики «Перед тоем» только на русском выглядят чужими и теряют ровно тех, кого мы зовём.",
+    "severity": "major",
+    "fix": "Субтитры KZ+RU по умолчанию хотя бы для серии «Перед тоем» и для хуков. Носителя языка для проверки найти среди моих мастеров или администраторов (5 минут в неделю), а не держать это в плане как необязательное."
+   },
+   {
+    "target": "Почти весь слейт про маникюр (7 из 8 идей)",
+    "why_fails": "У меня 8 мастеров, и если пустые окна у парикмахеров или бровистов, ролики нагонят запись туда, где и так занято. Сам план признаёт этот риск, но откладывает его на «следующий пакет». Тогда это не решает мою задачу заполнить свободные окна.",
+    "severity": "major",
+    "fix": "До недели 1 по моему ответу на вопрос 3 переставить слейт: минимум 2 из 5 роликов первой недели должны быть про услугу, где реально есть окна."
+   },
+   {
+    "target": "ID19 «Честно: иногда салон вам не нужен»",
+    "why_fails": "Клиенты и так уходят, а я ещё сама объясняю, что можно обойтись без салона. Рядом с дешёвыми конкурентами это читается как «экономьте». Подписывать такое мне неудобно.",
+    "severity": "minor",
+    "fix": "По умолчанию стоит «нет», и пусть так и остаётся. Если хотите что-то честное, сделайте формат «что дома делать НЕ надо и почему» без заголовка против салона."
+   },
+   {
+    "target": "ID01 «Звук кресла» (ASMR) в первой же неделе",
+    "why_fails": "Связь с записью план сам оценивает как слабую (objective_fit 2). Это время мастера и место в первой неделе, которое не приводит записей. Мне нужны записи, а не просмотры.",
+    "severity": "minor",
+    "fix": "Снимать только как запасной видеоряд для других роликов, а в первой неделе выпустить вместо него ролик про услугу с окнами или ID24 для тёплой базы."
+   },
+   {
+    "target": "Мера успеха: только записи через WhatsApp",
+    "why_fails": "Часть клиенток записывается звонком, приходит без записи или пишет в директ Instagram. Если клиентки перейдут со звонков на WhatsApp, график покажет «рост», а реальной загрузки не прибавится.",
+    "severity": "minor",
+    "fix": "Добавить одну цифру из журнала записей или кассы: общее число визитов в неделю против 4 недель до старта. Её я могу присылать раз в неделю одной строкой."
+   },
+   {
+    "target": "Сроки ответов и нагрузка на меня: ответ «до 10.10 12:00», 8 вопросов, утверждение каждой пачки",
+    "why_fails": "Сегодня 09.10, на ответы остаётся меньше суток. В сумме вопросы занимают ровно 15 минут, а дальше ещё еженедельное утверждение 5–7 роликов с вариантами хуков. Это больше обещанных 5 минут в неделю. Метки «Видео»/«Записан» тоже работа администратора, а в 17 минутах её не посчитали.",
+    "severity": "minor",
+    "fix": "Сдвинуть срок до 12.10. Утверждение сделать одним сообщением со списком «да/нет» и превью. Время администратора на метки (≈5 мин/день) посчитать честно и согласовать со мной."
+   },
+   {
+    "target": "Экспорт переписки с клиентами",
+    "why_fails": "Это персональные данные клиенток (Закон РК о персональных данных). Если что-то утечёт, позор будет мой, а не ИИ.",
+    "severity": "minor",
+    "fix": "Написать, куда и кто загружает файл, когда его удаляют. Предложить вариант: администратор сам убирает номера и имена перед отправкой."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan/CIS (salons, cafes, service shops in Shymkent, Almaty and Tashkent), filming on budget phones with busy staff",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "The WhatsApp layer is the best idea, not any of the videos. It sends the price together with a next-step question («Хотите, подберём мастера и время? Какой день удобнее?»), checks reply time first, and runs DR0 (fix slow replies or master churn before making content). In a Shymkent salon with a 0 ₸ budget and 4 weeks, this is the only part that can realistically stop the decline. Of the videos, ID15 «Перед тоем» is the best fit: October–November is peak той season in the south. Keep it in week 1, but rewrite it as described below.",
+  "refutations": [
+   {
+    "target": "Slate as a whole vs the brief ('конкуренты дешевле, клиенты уходят')",
+    "why_fails": "The client's problem is 'why pay more'. None of the 8 ideas shows what the price pays for. why_it_costs / process_full is pushed to NEXT BATCH. In the CIS the proven answer to a cheaper salon next door is showing your own hygiene and materials, without comparing to anyone: the dry-heat steriliser, opening the sealed craft pouch in front of the client, a new single-use file, the brand of the gel bottle, how long a proper service takes. None of this is a comparison, so it fits the PRICE POSITION rule. It needs no price fact. It takes about 3 minutes to film at the station. Instead the slate leads with ASMR and a wildcard telling people to do it at home. A salon owner under price pressure would look at this batch and ask 'where is the reason to pay?'",
+    "severity": "fatal",
+    "fix": "Move why_it_costs / process_full into week 1 as two episodes. (1) «Что происходит до того, как вы сели в кресло»: steriliser, sealed pouch opened on camera, new file, desk wiped. (2) «Почему маникюр у нас идёт 1,5 часа» or a similar line, only after a master confirms the real steps. Both go in «Глазами мастера», with no price and no 'у других'. Drop ID19 or ID01 from week 1 to make room."
+   },
+   {
+    "target": "Attribution: per-video {CODE} typed into WhatsApp",
+    "why_fails": "People in Shymkent don't type codes from Reels. They tap the link, send «Здравствуйте, сколько стоит?» or write in Instagram Direct. The coded count will be close to zero, and DR5, DR7 and Thompson allocation will then make decisions on noise. Instagram Direct is also missing as a booking channel, even though it is where most beauty inquiries in KZ actually start.",
+    "severity": "major",
+    "fix": "Make the prefilled wa.me link carry the code. Put it in the bio or link-in-bio, in the story link sticker and in the TikTok bio. The viewer only taps; she never types. Add Instagram Direct with a keyword auto-reply ('напишите МАСТЕР') and the same «Видео»/«Записан» labels. Use one code per series, not per video, so counts reach a readable size. Treat admin-asked 'откуда узнали' as the primary source."
+   },
+   {
+    "target": "Big idea «Познакомьтесь с мастером до записи» + no faces, no names by default",
+    "why_fails": "You can't 'meet' a master from anonymous hands. In CIS beauty, clients follow a person: her face, her name, her personal Instagram. With the default (hands only, no voice, no name), ID17 becomes text over hands. The hero series then loses the one thing the big idea promises, and every nail macro looks like every other salon's.",
+    "severity": "major",
+    "fix": "Make getting one master's consent to show her face and name a week-0 task, not an optional ask. Offer her something in return: tag her personal account and pin her episode. If nobody agrees, rename the hero series to something honest about what we can show, such as «Мастер считает», and stop promising 'meet the master'."
+   },
+   {
+    "target": "Warm base: 'Status + broadcast to opted-in'",
+    "why_fails": "The plan itself says the fastest lever is lapsed regulars, yet the only action is posting videos to Status. Status gets seen by maybe 10–20% of contacts and does not bring lapsed clients back. What works in KZ salons is a personal message from the client's own master.",
+    "severity": "major",
+    "fix": "From the export, list clients who haven't booked in 6+ weeks. Write a short personal reactivation line that the admin sends from the salon WhatsApp in the master's name: «Айгерим, здравствуйте! Это Динара, ваш мастер. Давно не виделись — есть окно во вторник/среду днём, записать?». Only to existing clients who have chatted with the salon before, no discount, with the owner's OK. Track replies as their own arm."
+   },
+   {
+    "target": "Shooting 7 ideas on Tue 10-20 in 16.7 staff minutes",
+    "why_fails": "The numbers only add up on paper. The gel brush pull, the finished-nail payoffs, removal on a staff member's nail and the lifted-edge shot each depend on a specific moment in a real service. Someone waits for that moment, re-sets the phone, asks the client, and gets the music turned off. Realistically that is 35–50 minutes of standby. Masters with clients won't do it, and the card won't get finished (DR14 will trigger in week 2).",
+    "severity": "major",
+    "fix": "Cap it at 4 ideas per shoot day. Split it into two 10-minute windows, morning before the first client and the dead hour after lunch, using a staff member's own nails for every staged shot. Pre-film a 'payoff bank' of finished nails at the end of each day for 2 minutes. Cut ID13 and ID09 from the first card."
+   },
+   {
+    "target": "Language: RU-only captions in Шымкент, KZ only 'after a native check'",
+    "why_fails": "Шымкент is one of the most Kazakh-speaking cities in the country. Той content in Russian only feels foreign to exactly the women who organise the той. Kazakh or mixed-language hooks usually get more local reach and shares there.",
+    "severity": "major",
+    "fix": "Ask the masters in week 0, since they are native speakers, to dictate Kazakh hook lines for ID15 and ID20. Publish both as bilingual hooks (KZ big, RU small) and A/B one той episode in KZ only."
+   },
+   {
+    "target": "ID01 «Так звучит маникюр вблизи» (close-sound ASMR)",
+    "why_fails": "Nail-filing ASMR is one of the most saturated nail formats in RU/KZ, so it is no longer a 'convention break' (E25 is unverified). «Включите звук» is a dead cliché. A weak phone in a working salon picks up hairdryer and chatter. Brand link is 2 and objective fit is 2, and it opens the week as the first public post of a salon that has a price problem.",
+    "severity": "major",
+    "fix": "Keep the footage as B-roll and don't publish it in the week-1 slot. If you post it, use the sound as the hook for a proof piece: «Звук новой пилки — её открыли при вас». The ASMR hook then carries a hygiene and value message."
+   },
+   {
+    "target": "ID15 POV той, and the «постановка» label",
+    "why_fails": "The situation is strong, but there is a contradiction. The CTA asks for the той date, and the capacity rule forbids promising anything. The viewer who 'has no manicure for tomorrow' gets «подскажем время», which means nothing to her. The label is also not the problem it's flagged as: everyone knows POV is staged.",
+    "severity": "minor",
+    "fix": "Rewrite the payoff toward booking ahead: «Не будь этой девушкой — напишите дату тоя сейчас, мастер закрепит время». Keep a small «постановка» tag at the bottom and don't make it a big frame of its own."
+   },
+   {
+    "target": "ID19 anti-sell 'иногда салон вам не нужен'",
+    "why_fails": "In the middle of price pressure, the default owner answer will be «2 — нет». If she says yes, it confirms to price-sensitive viewers that they can skip you. It is a reasonable wildcard for a healthy salon, but this week it is the wrong one.",
+    "severity": "minor",
+    "fix": "Swap it for a myth or honest-signal piece that defends value: «Почему мастер не будет торопиться, даже если вы спешите». Hold the anti-sell idea for a later sprint."
+   },
+   {
+    "target": "Coverage: 7/8 ideas are nails",
+    "why_fails": "8 masters probably include hair and brows/lashes, and that may be where the free slots are. Nail content will fill nail chairs, which may already be the busiest.",
+    "severity": "major",
+    "fix": "Make sure week 1 has at least 2 non-nail episodes. Brow mapping macro with thread and pencil and hair-wash or blow-dry close sound are both hands-only and quick to film. Choose which services to cover only after the owner answers question 3."
+   },
+   {
+    "target": "Comment prompts («Какой звук в салоне вы любите?», «На что вы смотрите первым?»)",
+    "why_fails": "These are generic open questions and won't get comments from local followers. Binary, pick-a-side prompts do much better in KZ beauty accounts.",
+    "severity": "minor",
+    "fix": "Switch to either/or prompts: «Квадрат или миндаль перед тоем? 1 или 2», «Сами снимаете гель — да/нет», «Нюд или красный на той?»."
+   },
+   {
+    "target": "Owner asks: 8 separate asks",
+    "why_fails": "The constraint is ≤15 minutes of onboarding. Eight asks is about 15 minutes on paper, but in practice the owner answers 3 and ignores the rest. Then all the defaults apply, and with faces off, voice off and anti-sell off, the slate shrinks to nail macros.",
+    "severity": "minor",
+    "fix": "Bundle everything into one voice-note-friendly message: 4 numbered yes/no answers plus 2 attachments (export, price photo). Put master consent and the export first."
+   }
+  ]
+ }
+]

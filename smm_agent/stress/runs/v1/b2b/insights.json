@@ -1,0 +1,333 @@
+{
+ "evidence": [
+  {
+   "id": "E01",
+   "kind": "constraint",
+   "claim": "The ledger is empty: facts_usable = [], facts_not_usable = [], files = []. No price, number, stock, delivery, lead-time, spec or superiority claim can appear in any audience string until a real fact is added.",
+   "source": "assumption: client inputs JSON for this step (facts_usable=[], files=[]); no file path supplied",
+   "confidence": "verified"
+  },
+  {
+   "id": "E02",
+   "kind": "fact",
+   "claim": "The business sells dry mixes and insulation to contractors and companies, about 40 SKUs (hypothetical profile, not confirmed).",
+   "source": "assumption: client profile.what_they_sell, marked HYPOTHETICAL",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E03",
+   "kind": "fact",
+   "claim": "The business has its own warehouse and delivery trucks (hypothetical profile, not confirmed). Delivery radius is unknown.",
+   "source": "assumption: client profile.what_they_sell + known_unknowns, marked HYPOTHETICAL",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E04",
+   "kind": "fact",
+   "claim": "Current sales channels are phone, WhatsApp, tenders and sales reps. There is no social or marketplace channel.",
+   "source": "assumption: client profile.sales_channels, marked HYPOTHETICAL",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E05",
+   "kind": "constraint",
+   "claim": "Staff capacity is 20 min/week (17 planned) with one phone, and audio is usable only close to the phone (about 30 cm).",
+   "source": "assumption: client profile.staff_capacity, marked HYPOTHETICAL",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E06",
+   "kind": "constraint",
+   "claim": "No social accounts are known (profile.social is empty), so there is no platform baseline and no past posts to re-cut. The agent search of Instagram/TikTok/YouTube/2GIS has not run yet.",
+   "source": "assumption: client profile.social = {}; agent search pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E07",
+   "kind": "constraint",
+   "claim": "The owner is skeptical and frames the business as company-only. Verbatim: «Мы продаём только компаниям. Нам вообще нужны соцсети?» (1 owner message). Content has to earn its keep in counted company inquiries, not views.",
+   "source": "assumption: boss's verbatim request in this step's input (no file path supplied)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E08",
+   "kind": "constraint",
+   "claim": "The profile lists three open unknowns: who actually buys (foremen or procurement), prices and terms, and delivery radius.",
+   "source": "assumption: client profile.known_unknowns",
+   "confidence": "verified"
+  },
+  {
+   "id": "E09",
+   "kind": "performance",
+   "claim": "A blind LLM text judge ranked short-form performance barely above chance: Spearman 0.11 overall and 0.07 for retail (CI includes 0), n=1172 peer Shorts. Insight strength and idea scores here are priors only.",
+   "source": "assumption: knowledge-base learning L001 (strength: measured), which cites experiments/002_shorts_scores_and_labels.json; file not supplied in this client's inputs",
+   "confidence": "likely"
+  },
+  {
+   "id": "E10",
+   "kind": "performance",
+   "claim": "Long-form title patterns (для начинающих, vs/сравнение) did not replicate on Shorts: median relative views 1.00 and 0.99. No hook formula is assumed for this client.",
+   "source": "assumption: knowledge-base learning L003 (strength: measured), which cites experiments/002_shorts_scores_and_labels.json; file not supplied in this client's inputs",
+   "confidence": "likely"
+  },
+  {
+   "id": "E11",
+   "kind": "market",
+   "claim": "Polished motion-graphic price slides built from catalogue photos were judged useless (they look good but say nothing a viewer cares about). A catalogue of ~40 bag photos must not become slides.",
+   "source": "assumption: owner feedback 2026-10-08, learning L005 (expert judgment, no file)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E12",
+   "kind": "performance",
+   "claim": "Brand-only product demo clips on the Muzzone channel had a median of 390 views against a 2300 channel median (n=48), and interviews 118 (n=4). Scope warning: these appear to be long videos, so transferring this to Shorts and to B2B construction is unverified. Treat it only as 'tie demos to a buyer's question'.",
+   "source": "assumption: knowledge-base learning L006 (strength: measured, correlational), which cites clients/muzzone/research/youtube_channel.json; another client's data, not in this client's inputs",
+   "confidence": "likely"
+  },
+  {
+   "id": "E13",
+   "kind": "market",
+   "claim": "Hypothesis: for small and mid-size orders, first contact comes from a foreman or brigade lead by WhatsApp or phone, while procurement handles large orders and tenders. 0 chats counted so far.",
+   "source": "assumption: strategist judgment on the KZ/CIS building-materials trade + intake assumption; verify with WhatsApp export and rep tally by 2026-10-16",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E14",
+   "kind": "market",
+   "claim": "Hypothesis [F]: the foreman's main fear is a brigade sitting idle because material arrived late, short or without unloading. Phrases to listen for: «бригада стоит», «когда привезёте?», «разгрузка есть?». 0/0 counted; these are NOT customer verbatims.",
+   "source": "assumption: strategist judgment; to be coded against WhatsApp export (B3 rank 1)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E15",
+   "kind": "market",
+   "claim": "Hypothesis [F]: bags get rejected on site when they are damp, caked or torn. Phrases to listen for: «комки», «отсырел», «мешки рваные». 0/0 counted.",
+   "source": "assumption: strategist judgment; verify via chat export, rep voice note and any public reviews",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E16",
+   "kind": "market",
+   "claim": "Hypothesis [Q]: foremen work out quantity from area × consumption printed on the bag, and mistakes lead to a second delivery or leftovers. Phrase to listen for: «сколько мешков на … м²?». 0/0 counted.",
+   "source": "assumption: strategist judgment; verify via chat export + demand-phrase fetch (Yandex/Google/TikTok suggestions, Karaganda)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E17",
+   "kind": "proof_asset",
+   "claim": "The manufacturer's printed bag label (composition, consumption, storage conditions) is filmable, and once filmed it is a primary third-party source. A spec may be quoted only verbatim from the filmed label or a datasheet stored in the ledger.",
+   "source": "assumption: generic packaging practice; becomes verified only when staff film the actual labels (reality scan)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E18",
+   "kind": "moment",
+   "claim": "Test window 2026-10-19 → 2026-11-15 falls at the end of the outdoor season in Karaganda: first frosts arrive, exterior and facade work winds down, and interior finishing and insulation continue. Brigades plan winter work now.",
+   "source": "assumption: regional climate knowledge; verify with agent weather/calendar fetch before week 1",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E19",
+   "kind": "constraint",
+   "claim": "Technical and safety specs (морозостойкость, теплопроводность, расход на м², ГОСТ, класс горючести, работа при минусе) may appear only verbatim from manufacturer datasheets stored in the ledger with a URL or file. No promises about the finished building.",
+   "source": "assumption: intake constraint REGULATED (judgment), this brief",
+   "confidence": "verified"
+  },
+  {
+   "id": "E20",
+   "kind": "proof_asset",
+   "claim": "Candidate reality inventory, unverified until the staff scan: a bag dropped onto a pallet (thud), stretch-film wrapping a pallet, a hand cart or forklift moving, a truck being loaded, dry mix poured into a bucket and stirred with a drill mixer. Each is a short process audible within 30 cm. Location names to confirm: «склад», «погрузка», «тихий угол».",
+   "source": "assumption: profile mentions warehouse + trucks; verify with staff reality scan (B3 rank 7) in week 0",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E21",
+   "kind": "constraint",
+   "claim": "Filming is hands, bags, mixing, pallets, loading, trucks and voice only. No faces. No customer sites, customer workers, client logos or vehicle plates (blur them). This is the default until Q3 is answered.",
+   "source": "assumption: intake constraint FILMING (default pending owner Q3)",
+   "confidence": "verified"
+  },
+  {
+   "id": "E22",
+   "kind": "market",
+   "claim": "Hypothesis: procurement staff and new contractors check that a supplier is real (warehouse exists, trucks, Instagram/2GIS presence, quality documents such as сертификаты/паспорта качества and closing documents) before a first order. This value is invisible to WhatsApp codes.",
+   "source": "assumption: strategist judgment + intake SECONDARY (shop-window legitimacy); verify via rep question «смотрели наш профиль?» on new calls",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E23",
+   "kind": "market",
+   "claim": "Hypothesised category convention for CIS building-materials accounts: catalogue bag photos with price text and music, or a wide warehouse pan with music. Few accounts answer a foreman's concrete question with close sound. Not yet checked: the peer outlier scan (10–20 accounts) has not run.",
+   "source": "assumption: strategist judgment; verify with agent peer scan (B2 Tier 0) before step 4",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E24",
+   "kind": "constraint",
+   "claim": "Content reaching a general Karaganda audience will also attract private individuals wanting a few bags. They are routed by the owner's rule (Q2) and never counted as qualified. A minimum-order rule is unknown.",
+   "source": "assumption: intake GUARDRAIL + clarifying question Q2 (default 2)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E25",
+   "kind": "constraint",
+   "claim": "The verdict was set before the test starts: YES if at least 3 qualified coded inquiries (company or ИП + material + approximate volume) and at least 1 reaching an offer or invoice by 2026-11-16, at 0 ₸ and ≤20 staff min/week. The threshold is a default pending owner Q1.",
+   "source": "assumption: intake success_metric + VERDICT assumption (this brief)",
+   "confidence": "verified"
+  },
+  {
+   "id": "E26",
+   "kind": "constraint",
+   "claim": "No prices, no offer, and no «в наличии», «доставим завтра», delivery-radius, minimum-order or lead-time claims until these are confirmed in the ledger.",
+   "source": "assumption: intake constraints PRICES / OFFER / CAPACITY (defaults)",
+   "confidence": "verified"
+  },
+  {
+   "id": "E27",
+   "kind": "market",
+   "claim": "Local vocabulary candidates: Karaganda districts (Юго-Восток, Майкудук, Пришахтинск, Сортировка) and words such as «объект», «прораб», «бригада». Use them as recognition vocabulary only, never as a delivery-coverage claim, because the radius is unknown (E03).",
+   "source": "assumption: local geography knowledge; verify with demand-phrase fetch and owner money map",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E28",
+   "kind": "behaviour",
+   "claim": "Hypothesis: small-volume contractors find it hard to get a fast quote because reps and tenders focus on large accounts, so the friction sits in the first WhatsApp reply. Median reply time and where chats die are unknown.",
+   "source": "assumption: inferred from sales-channel mix (E04) + intake BOTTLENECK alternative; verify with WhatsApp export (reply time, drop points)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E29",
+   "kind": "constraint",
+   "claim": "No Tier-0 fetches have run yet: no 2GIS card, public reviews, peer outliers, demand phrases or Kaspi data. There are 0 counted customer verbatims, so every insight below fails C4 test 1 (Evidenced) until step-2 inputs arrive.",
+   "source": "assumption: files=[] in client inputs; fetch plan in step 2",
+   "confidence": "verified"
+  }
+ ],
+ "insights": [
+  {
+   "id": "I01",
+   "insight": "[tension] When a foreman has a brigade booked for a finishing or insulation day on a Karaganda site, he wants the material there before the crew arrives. He fears the truck will be late, short or have no unloading, and that the brigade will sit idle on his money. So he over-orders, buys at a markup from the nearest yard, or phones the supplier repeatedly. We can show the real loading ritual (bags counted onto a pallet by hand, wrapped, loaded, truck leaving) without promising any time or radius. This moves coded inquiries because it is the job the supplier actually does for small and mid-size contractors. HYPOTHESIS: fails C4 test 1 (0 counted verbatims, E29). Kept at the assumption cap instead of dropped, because a should_we_do_social test needs testable shots on goal (judgment, METHOD gap). Rank 1 because it sits closest to the qualified-inquiry metric.",
+   "tension": "Wants the material on site before the crew, but fears idle-brigade cost from late, short or unloaded deliveries.",
+   "evidence_ids": [
+    "E03",
+    "E13",
+    "E14",
+    "E20",
+    "E26"
+   ],
+   "who_feels_it": "A foreman or brigade lead in Karaganda with a crew booked for interior finishing or insulation in the next 1–4 weeks, ordering tens of bags for one site.",
+   "content_reality": "«склад» / «погрузка»: hands counting bags onto a pallet, stretch-film wrap sound at 30 cm, truck loading, no plates. NO PROOF of timing or radius → recognition and question content only. No «вовремя», «завтра» or district coverage claims until the ledger has them.",
+   "strength": 2
+  },
+  {
+   "id": "I02",
+   "insight": "[friction] When a small contractor needs a quote for one site, he wants a fast answer in WhatsApp («сколько будет N мешков с доставкой?»). But the reps and tenders are built for big accounts, so he expects a slow reply or a callback, and he messages several suppliers and takes whoever answers first. We can show the person who answers WhatsApp handling a real (anonymised) question with hands and voice. This moves coded qualified inquiries because the CTA asks for exactly what qualification needs: company or ИП, material and volume. HYPOTHESIS (E28): the median reply time is unknown. If the export shows replies over 60 minutes, that is the leak to fix before content. Rejected sibling: a price_pressure insight («у других дешевле»), dropped because there are no prices or comparison data (E26).",
+   "tension": "Wants a quick per-site quote, but expects big-supplier slowness, so shops around and takes the first answer.",
+   "evidence_ids": [
+    "E04",
+    "E13",
+    "E25",
+    "E28"
+   ],
+   "who_feels_it": "An ИП or brigade lead with a mid-size order who is not on any rep's account list, messaging from a site in the evening.",
+   "content_reality": "«тихий угол»: hands on the phone typing an anonymised reply, voice-over at 30 cm. Only questions really received may be shown, paraphrased («Нам пишут: …») after 2 or more matching chats. Until the export arrives → question and recognition content only.",
+   "strength": 2
+  },
+  {
+   "id": "I03",
+   "insight": "[hidden_knowledge] When estimating a job, a foreman wants to order the right number of bags once. He works from area × the consumption printed on the bag, and a wrong layer thickness or wastage assumption means a second delivery (crew idle) or paid-for leftovers, so he rounds up heavily or runs out mid-job. We can show the manufacturer's own bag label on camera and do the arithmetic on paper with hands, quoting only what the filmed label says. This moves inquiries because the natural next step is «пришлите площадь — посчитаем». HYPOTHESIS (E16): calculation questions not yet counted. Rejected sibling: a myth insight «все смеси одинаковые», dropped because testing it needs datasheets and invites comparative claims (E19).",
+   "tension": "Wants to order once and exactly, but the label-based estimate is error-prone, so he over-orders or runs short.",
+   "evidence_ids": [
+    "E16",
+    "E17",
+    "E19",
+    "E02"
+   ],
+   "who_feels_it": "A foreman pricing a plaster, screed or tile-adhesive job by m² for a client who will not pay for a second delivery.",
+   "content_reality": "«склад» or «тихий угол»: close-up of a real bag label + hands writing the sum on cardboard. A proof asset only after the label is filmed (E17). No consumption numbers in copy until the label or datasheet is in the ledger → NEEDS FACT for every figure.",
+   "strength": 2
+  },
+  {
+   "id": "I04",
+   "insight": "[proof] When material is delivered to site, the foreman wants bags he can use straight away. He fears damp, caked or torn bags that he will have to reject in front of the crew, so he inspects every bag, refuses whole loads or sticks with one known yard. We can show how bags are actually stored and handled (on pallets, wrapped, a hand pressing a bag to show it is loose), only what the camera sees. This moves trust before the first order and the offer/invoice step of the verdict. HYPOTHESIS (E15): damage complaints not yet counted. Storage claims are limited to what is visibly filmed (the camera verifies).",
+   "tension": "Wants usable bags on arrival, but fears damp, caked or torn stock and the embarrassment of rejecting a load on site.",
+   "evidence_ids": [
+    "E15",
+    "E20",
+    "E21"
+   ],
+   "who_feels_it": "A brigade lead taking a delivery on site who answers to the site owner for every wasted bag.",
+   "content_reality": "«склад»: hand pressing a sealed bag, pallet under film, close sound of the wrap. Visible storage only. NO claims of «сухой склад», «отапливаемый» or «не бывает комков» until owner-confirmed and filmed.",
+   "strength": 2
+  },
+  {
+   "id": "I05",
+   "insight": "[moment] When the first frosts come to Karaganda in late October, brigades move indoors and plan winter interior finishing and insulation. They want to keep the crew working, but they are unsure what can be stored, mixed or applied in the cold, so they delay orders or ask around on site. We can show the question being taken seriously and the manufacturer's label or datasheet line being read on camera, with no temperature promise of our own. This moves coded inquiries timed to the test window. HYPOTHESIS (E18): a seasonal pattern from regional knowledge, with no inquiry data by week. A NO verdict in November means 'no for this winter'.",
+   "tension": "Wants to keep the brigade busy through winter, but is unsure which materials and conditions work in the cold.",
+   "evidence_ids": [
+    "E18",
+    "E19",
+    "E17",
+    "E13"
+   ],
+   "who_feels_it": "A contractor in Karaganda whose outdoor jobs end with the first frost and who is lining up interior and insulation work for November–March.",
+   "content_reality": "«склад»: frost or snow visible at the warehouse door + hands turning a bag to the storage-conditions line on the label. NO PROOF → question format only («Нам пишут: …»). Every temperature or морозостойкость statement is a NEEDS FACT from the datasheet.",
+   "strength": 2
+  },
+  {
+   "id": "I06",
+   "insight": "[job] When a procurement officer or a contractor new to this supplier is about to place a first order, they want proof the supplier is real: a warehouse, trucks, documents. They fear paying up front to a reseller with no stock, so they stay with known suppliers or ask for references. We can show the real warehouse and the paperwork ritual at handover (documents in hand, details blurred). This moves the offer/invoice half of the verdict and profile visits, though not coded chats (directional only). HYPOTHESIS (E22): shop-window value comes from the intake SECONDARY and is unmeasured by codes.",
+   "tension": "Wants to try a new supplier, but fears an unverifiable middleman, so defaults to known suppliers.",
+   "evidence_ids": [
+    "E22",
+    "E03",
+    "E07",
+    "E06"
+   ],
+   "who_feels_it": "A procurement officer or a growing contractor checking a supplier's Instagram or 2GIS card before the first invoice.",
+   "content_reality": "«склад» / «погрузка»: real pallets, truck loading, hands passing a folder of documents with details blurred. No «официальный дилер», certificate names or years-on-market claims until they are ledger facts.",
+   "strength": 2
+  },
+  {
+   "id": "I07",
+   "insight": "[identity] When something goes wrong on site (material late, wrong quantity, a crack after drying), the foreman takes the blame from the client even when the supplier caused it. He wants a supplier who understands that pressure but rarely feels understood, so he sticks with whoever has not let him down yet. We can name his situation in his own words as text over real warehouse footage (labelled POV), never mocking brigades or clients. This builds recognition and shares among foremen, which is the B2B share signal. HYPOTHESIS: no counted language yet (E14, E27); hook vocabulary must come from the chat export.",
+   "tension": "Wants to be seen as reliable by his client, but carries the blame for supplier failures he cannot control.",
+   "evidence_ids": [
+    "E14",
+    "E27",
+    "E13"
+   ],
+   "who_feels_it": "A foreman or brigade lead juggling 2–3 Karaganda sites who is the client's single point of blame.",
+   "content_reality": "«склад» / «погрузка»: real loading and pallet footage with on-screen POV text, labelled «POV». Recognition content only. No faces (E21), no client sites.",
+   "strength": 2
+  },
+  {
+   "id": "I08",
+   "insight": "[content_reality] Outsiders never hear a building-materials warehouse up close: a 25 kg bag landing on a pallet, stretch film squealing around a stack, a drill mixer biting into a fresh batch. These close sounds are what a weak phone at 30 cm records best, and they break the hypothesised catalogue-photo convention (E23). They exist as cheap, high-variance reach shots and as the visual bed for I01–I07. The tension is only curiosity («снаружи этого никто не слышит»). The link to inquiries is weak and indirect (follows, profile visits), and E12 warns that demos without a buyer question tend to under-perform, so each sound clip should carry a buyer-question caption.",
+   "tension": "Outsider curiosity (nobody hears this from outside) versus the risk of being an attention-only arm with no B2B buyer link.",
+   "evidence_ids": [
+    "E20",
+    "E05",
+    "E23",
+    "E12"
+   ],
+   "who_feels_it": "Any trade worker or curious local scrolling Reels or TikTok in Karaganda. The buyer is reached only incidentally.",
+   "content_reality": "«склад»: bag drop, pallet wrap and mixer, each 6–12 s, phone at 20–30 cm, no speech. Zero claims. The inventory is unconfirmed until the staff reality scan.",
+   "strength": 2
+  },
+  {
+   "id": "I09",
+   "insight": "[tension] WILDCARD (honest_signal): when someone needs only a few bags, they want a quick, cheap answer, but a company-only supplier wastes their time and the supplier's. Saying openly who should NOT contact this supplier (and where they are better served) is an against-interest signal that real contractors may trust more, and it filters private callers before they consume reply time (E24). It is thin: the minimum-order or routing rule is unknown, so the idea cannot be made until the owner answers Q2 and states a rule.",
+   "tension": "Wants to look open to everyone, versus the real cost of serving tiny private orders. Honesty about the limit may raise B2B trust.",
+   "evidence_ids": [
+    "E24",
+    "E07",
+    "E26"
+   ],
+   "who_feels_it": "A private homeowner after a few bags (filtered out) and a contractor who reads the filter as a sign of seriousness.",
+   "content_reality": "«тихий угол»: hands, voice-over at 30 cm, real pallets in the background. NO RULE YET → blocked by NEEDS FACT: minimum order or private-buyer routing rule (owner, Q2). No anti_sell claim until then.",
+   "strength": 1
+  }
+ ]
+}

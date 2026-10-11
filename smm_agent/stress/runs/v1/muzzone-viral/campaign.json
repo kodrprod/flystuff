@@ -1,0 +1,284 @@
+{
+ "name": "Muzzone — «Слушаем вблизи» (first-instrument sprint, 2026-10-12 → 2026-11-15), revision 2 after boss + creator review",
+ "big_idea": "Online, every instrument is silent and every spec sheet reads like code. A first-time buyer can't hear the difference between a 22 100 ₸ ukulele and a 64 501 ₸ one, and can't see what a digital piano box is missing. Muzzone lets them hear and see real, in-stock instruments up close, side by side, with fresh ledger prices. The next step is always a chat: «напишите — подскажем под ваш бюджет и что есть сейчас». Tests: (1) It can run to 20+ episodes: every in-stock beginner pair or trio of ukuleles, guitars, amps, pianos and, if stocked, dombras, plus every recurring buyer question. (2) It is provable on camera, because the sound and the close-up are the proof. Claims are limited to what the ledger or the camera verifies; polyphony was dropped because a phone mic cannot show it. (3) Every episode ends in the measured action, a coded or otherwise attributed inquiry.",
+ "single_minded_message_ru": "Сначала послушайте вблизи, потом выбирайте",
+ "why_this_wins": "This is evidence plus a learning plan, not a forecast (L001: a text judge predicts retail Shorts at ρ 0.07).\n(1) Top tension I01 (strength 4): first-time buyers can't judge sound from specs and fear wasting money. 8/8 of Muzzone's beginner titles got ≥11 000 views, the best 64 000 (E38, E39). We dramatise the tension rather than the phrase «для начинающих», which did not replicate on Shorts (E40, L003).\n(2) Close sound is what one weak phone can do, if it is handled honestly: own short guitar-sound clips got 14 000–32 000 views (I02: E42, E43), while brand-only cymbal demos sat at a 390 median (L006). So every clip answers a buyer question. After the creator review, the audio protocol now protects the comparison itself: ukuleles tuned with a clip-on tuner, ID03 shot as one continuous fixed-distance take, phone noise suppression off.\n(3) Claims shrink to what is provable. ID05 no longer 'shows' polyphony and uses no AI voice. It runs only on staff-confirmed visible or audible differences, in a staff member's own voice, or it is killed. ID06's checks are now things parents actually get wrong (key weight, headphone outputs, bench and pedals). ID19 drops the unverified Astana courier line and the unconfirmed cash-on-delivery line.\n(4) Conversion is measured the way KZ buyers actually behave: word codes (proposed to code), a templated reply to «цена?» comments, platform DMs and comment-to-chat handoffs as tier 2, and new-contact inbound vs week 0 as the main decision read.\n(5) Learning plan: week 1 publishes 4–5 bodies across 5 drivers and 5 formats (prediction_game/guess, curiosity_gap/ab_compare, identity/pov_situation, practical_value/check_before_buy, honest_signal/who_is_it_for). Each body gets 2 hook variants and is uploaded natively, as a clean master with no watermark, to TikTok, Reels and Shorts. Each platform is read against its own baseline. Per-client reads are allocation signals only; arm knowledge comes from pooling identical slugs across clients.\nKnown gap: the slate has no dombra, which is the most local first instrument. It is a week-0 site fetch plus one owner question, and a NEXT BATCH idea for week 2.",
+ "series": [
+  {
+   "name": "«Слушаем вблизи»",
+   "role": "HERO. Reach + consideration. Metrics: views_48h ÷ platform median, avg % watched and comments per 1k, then attributed inquiries per 1k per instrument line. Opening ritual: frame 1 is hands already playing and sound onset at 0 s, a small «№N» top-left, hook upper-middle, price tags hidden until the reveal. Fixed structure: the same phrase on 2–3 in-stock, tuned instruments at the same phone distance → the turn (reveal, plug-in or a confirmed difference) → ledger prices re-fetched on publish day → «подскажем под ваш бюджет». The variable is the instrument set. Stranger test: episode 7 is «две акустики, одна фраза — какая дороже?». ID05 is conditional: it is rebuilt without polyphony, using staff-confirmed differences (key action, cabinet and look, headphone quiet practice) in a staff member's own voice; if nothing is confirmed by 2026-10-23 it is killed and its slot goes to a second «guess» episode (NEXT BATCH).",
+   "idea_ids": [
+    "ID01",
+    "ID03",
+    "ID05"
+   ],
+   "cadence": "2/week. Week 1: ID01 Wed 21.10, ID03 Fri 23.10. ID05 only from week 2 and only if confirmed. Each episode ≤4 staff min, including tuning and set-up."
+  },
+  {
+   "name": "«Перед покупкой»",
+   "role": "UTILITY / proof. Metrics: saves per 1k, then attributed inquiries naming an instrument type. Opening: a close physical action with sound (a key pressed and released, not a glissando), then a numbered or either/or promise paid off in ≤25 s. ID06 is rebuilt around checks parents actually get wrong: key weight, number of headphone outputs, bench and pedal unit in the box. The warranty line comes with an action: «Гарантия Casio 2 года, сервис в Алматы» + «Как обратиться в сервис — подскажем». Opinions are labelled «так считает наш консультант».",
+   "idea_ids": [
+    "ID06",
+    "ID13"
+   ],
+   "cadence": "1–2/week. Week 1: ID06 Sat 24.10. ID13 Sun 25.10 if its 10-s voice line was recorded in the week-1 session, otherwise week 2."
+  },
+  {
+   "name": "«Как заказать в другой город»",
+   "role": "CONVERSION / relief for buyers outside Astana (I07). Not a feed test slot in week 1. It is a pinned post plus an Instagram highlight («Как заказать»). Feed episodes are built only around a real outgoing order: «Упаковываем укулеле в [город]», with tape, box and a label showing the city only, no names or addresses. Delivery time is either a staff-confirmed range or «сроки уточним в WhatsApp». Lines allowed now: free delivery across Kazakhstan above 100 000 ₸ by ground transport (delivery_free_100k), and «Оплата: Kaspi или карта» (payments). The Astana courier rule (delivery_astana) is held until the agent re-reads the site verbatim and quotes it with the page reference. Cash on receipt is held until Andrey/Pavel confirm it for regional delivery. Metrics: attributed inquiries from outside Astana per 1k, and the city split.",
+   "idea_ids": [
+    "ID19"
+   ],
+   "cadence": "Pinned and highlight from week 1, built from week-1 footage with zero staff minutes. Feed episodes from week 2, only when a real out-of-city order is packed (if-then trigger on the card, ~1.6 min)."
+  },
+  {
+   "name": "«Отвечаем видео»",
+   "role": "REPLY. Comments and follows per 1k, plus attributed inquiries. Opening: the platform's native reply sticker with a real comment, then close footage that answers it. Zero staff minutes when library takes cover the answer. Built only from a real, answerable comment. «Цена?» comments are answered in text by the approved template, not by a video.",
+   "idea_ids": [
+    "ID24"
+   ],
+   "cadence": "From week 2: 1/week when an answerable comment exists, otherwise the slot goes to a reserve body."
+  }
+ ],
+ "offer": {
+  "needed": false,
+  "proposal": "Новых акций нет. Уже действует и можно упоминать как есть: при самовывозе резерв держится 3 рабочих дня, можно попросить продлить (pickup_reserve). Цены «Распродажи» показываем ровно как на сайте, без слова «финальная», без сроков и без «осталось N». Кандидат на неделю 3, только после „да“ владельца и без скидки: «Напишите в WhatsApp {CODE} — до оплаты пришлём видео именно вашего инструмента: как он звучит вблизи». Условия: только для товаров, которые есть в наличии по данным сайта на день ответа; видео присылаем в рабочие часы; это не бронь и не скидка. Проверяем как вариант CTA (с предложением / без) внутри одной серии.",
+  "fact_ids": [
+   "pickup_reserve",
+   "hours"
+  ],
+  "needs_owner_approval": true
+ },
+ "channels": [
+  {
+   "channel": "TikTok",
+   "role": "The boss's channel and the main test bed for non-follower reach. Set-up rule, in the owner ask: the owner or staff create the account from the shop phone in Astana on a Kazakhstan SIM, with no VPN. Every upload is made from a device physically in Kazakhstan with no VPN, by Andrey/Pavel if they are in KZ or otherwise staff at ~1 min per post, so the For You page seeds Kazakhstan, not another country. Uploads are native: clean masters with no watermark and no re-upload from another platform. Arms are not judged on the first 10 posts. Original instrument sound only. Per-video wa.me links don't exist on TikTok, and [ASSUMPTION] a new business account's bio link may be limited, so the code goes on screen ≥2 s, in the caption and in a pinned comment. The WhatsApp number (wa fact) goes in the bio as text. If the owner never sets up TikTok, the sprint runs on Reels + Shorts and this is reported plainly."
+  },
+  {
+   "channel": "Instagram Reels + profile (muzzone_astana)",
+   "role": "Reach, plus the shop window where KZ buyers check legitimacy. Native upload of the clean master with a Reels cover; never a TikTok export with a watermark. Pin 3: the ID19 «Как заказать» post, ID06, and the best «Слушаем вблизи» episode by 48-h read. Bio: what we sell / «Астана, ул. Кажымукана, 14» (address) / call hours Mon–Fri 10:00–19:00, Sat 10:00–17:00 (hours) / a wa.me link with a bio code. Highlights: «Как заказать», «Доставка и возврат». No «Цены» highlight, because prices move (E26). Instagram DMs and comment handoffs are counted as tier 2."
+  },
+  {
+   "channel": "YouTube Shorts",
+   "role": "Native upload of every clean master. The channel has 3 620 subscribers and has been dormant since 2026-05-10. Read against its own Shorts baseline; [ASSUMPTION] the 2 300 channel median includes long-form, so it is replaced after 10 new Shorts. Optional search line (L004): plain model-name titles on YouTube only («Alston AS-100BK без комбика и с комбиком», «Укулеле Caesar U-246, US-C40, Alston UF-330: звук»), never used as a TikTok hook formula (L003)."
+  },
+  {
+   "channel": "WhatsApp chat (+7 701 0987734, wa fact)",
+   "role": "CONVERSION. Codes: we propose to code that each video's code be a short Russian word for its line plus a digit (e.g. УКУЛЕЛЕ 1, КОМБИК 1, ПИАНИНО 1), so viewers can type it and per-video attribution survives. Code assigns them; copy uses {CODE}. Quick reply (RU, approved once): «Здравствуйте! Вы по видео {CODE}. Подскажите примерный бюджет — сразу скажем, что есть сейчас под него и как забрать или доставить в ваш город.» Codeless chats get «Подскажите, откуда о нас узнали?». Staff labels in WhatsApp Business: «Новый» on every chat with no earlier history on the shop phone, «Видео» when the person mentions a video, code or TikTok/Instagram, and «Оплачен». The handover reply asks for a 2GIS/Google review with no incentive; the review-for-delivery compensation in returns_cost is never mentioned. Target: median first reply ≤15 min in working hours, which are assumed to be the call hours until the owner confirms. A median over 60 min is reported as the top leak before any more content is made. Privacy: by default nothing personal leaves the shop; only label counts and the staff voice note do."
+  },
+  {
+   "channel": "Comments (TikTok / Reels / Shorts)",
+   "role": "The KZ default is to ask «цена?» in the comments. The agent drafts a reply to every «цена/сколько/есть?» comment within working hours, from a template the owner approves once: «Сейчас [модель] — [цена с сайта на дату] ₸. Напишите в WhatsApp слово {CODE} — подскажем, что есть сейчас. Номер в профиле.» The price comes only from a ledger fact ≤7 days old; if none is fresh, the price line is dropped. Comment-to-chat handoffs are counted as tier 2. Kazakh-language comments are welcome; replies in Kazakh only after a native-speaker check."
+  },
+  {
+   "channel": "WhatsApp Status / broadcast",
+   "role": "The week's best video goes on Status (free). Broadcasts only to opted-in contacts. No urgency and no «финальная» until the owner confirms a reason and date; then this becomes the main channel for true, dated sale news."
+  },
+  {
+   "channel": "Kaspi",
+   "role": "Payment methods are listed on product pages (payments). In week 0 the agent fetches whether a Kaspi shop exists and its price position. If it exists: directional attribution only (featured-SKU orders vs their own prior 4 weeks), always labelled. Never a basis for «дешевле»."
+  },
+  {
+   "channel": "2GIS / Google maps",
+   "role": "Proof and local intent for Astana pickup buyers. Agent fetches the rating and reviews in week 0. A review request goes in the handover quick reply. Photo refresh uses stills of hands and instruments from the shoot."
+  },
+  {
+   "channel": "Paid boost (optional, off by default)",
+   "role": "Budget 0 ₸. Asked in week 2 only if a post meets DR2 and DR9. Click-to-WhatsApp, Astana radius first. Ceiling CPQC_cap = avg_order × gross_margin × close_rate × 0.3; margin and average order come from the owner (NEEDS FACT), close rate from «Оплачен»/«Видео» label counts. No number is invented. Stop-loss: after spending 5× the cap, stop if there are fewer than 3 coded chats; also stop if cost per coded chat rises 3 days in a row."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Setup, 2026-10-12 → 10-18. No posts. The first owner message opens with the scale statement: «Цель месяца — около 20 обращений в WhatsApp от новых людей, а не миллион просмотров. Слово „вирусный“ используем только от 100 000 просмотров.» Count the baseline with staff labels: new-contact inbound for the week, with no chat export needed. Owner sets up or confirms TikTok (KZ SIM, shop phone, Astana, no VPN). Codes, quick replies, comment-reply template, profiles. Staff reality scan. Settle Q1 «Финальная»; if it means closure, rewrite the brief. Week-1 shoot card sent Fri 16.10.",
+   "idea_ids": [],
+   "worker_ask_ru": "Здравствуйте, это ИИ-ассистент, который готовит ролики для Muzzone. Один раз, ~14 минут, лица не нужны. 1) Три пробных клипа: фраза в 30 см от телефона, звук гитары в 20 см, комбик на громкости 2–3 с 60 см. Перед этим отключите в настройках камеры или диктофона шумоподавление, если оно есть. 2) Две минуты тихо пройдите с телефоном по магазину. 3) Голосовое: кто сыграет аккорд До на укулеле; есть ли в магазине тюнер-прищепка; у PX-770 и AP-270 — тяжёлые клавиши или лёгкие, сколько выходов на наушники, входят ли педали, чем отличаются, кроме цены (только то, в чём уверены); примерно сколько дней идёт доставка в Караганду, Шымкент и Алматы; продаёте ли домбры, в том числе детские. 4) Включите в WhatsApp Business ярлыки «Новый», «Видео», «Оплачен» и с понедельника ставьте «Новый» на каждый новый чат. Инструкцию пришлём.",
+   "ai_work": "Re-fetch all slate prices and stock. Re-read the delivery page verbatim (delivery_astana: the «более 20 кг» wording) and the payment terms on 2–3 other product pages; record exact quotes with URLs. Search the full site catalogue for «домбра». Fetch the Kaspi shop and price position, and 2GIS/Google rating and reviews. Add a derived ledger fact for the ID03 sum (as100_price + hib_price = 116 376 ₸, valid only while both are fresh). Draft the quick replies, codeless-chat question, «цена?» comment template, bio text, highlight covers and the TikTok set-up instruction (KZ SIM, no VPN, native uploads). Send code the word-code proposal. Build the week-1 card at ≤15 planned minutes including tuning and amp set-up. Draft the batched owner message (13.5 min)."
+  },
+  {
+   "week": 1,
+   "goal": "Explore, 2026-10-19 → 10-25. One shoot on Tue 20.10, 2 locations (гитарная стена, пианино), 4 bodies instead of 7, because the reviewed estimate for 7 bodies was unrealistic. Model minutes: 2 fixed + 2 locations + ID01 3.25 (incl. 2 min tuning) + ID03 2.4 (incl. 1 min amp set-up) + ID14 1.8 + ID06 2.1 = 13.6, plus an optional 1.0-min ID13 voice line recorded at the piano with the phone at the mouth = 14.6, plus labels ≤2 = 16.6 ≤17. Staff report their actual time; DR14 re-fits the next card. After Wednesday approval, publish: Wed ID01 (hero ep. 1), Thu ID14 (POV wildcard), Fri ID03 (hero ep. 2), Sat ID06 (rebuilt checks), Sun ID13 (if the line was recorded). No two consecutive first frames are the same type. ID19 is a pinned post and highlight only, not a feed test slot. ID05 is not shot. Sale items stay ≤20% of slots (ID03 only).",
+   "idea_ids": [
+    "ID01",
+    "ID14",
+    "ID03",
+    "ID06",
+    "ID13"
+   ],
+   "worker_ask_ru": "Съёмка во вторник 20.10, ~15 минут, гитарная стена и пианино, лица не нужны. Перед съёмкой настройте три укулеле тюнером; комбик на 2–3, телефон закреплён в 60 см, шумоподавление выключено. Подробную карточку пришлём в пятницу 16.10. Если останется минута — одна фраза у пианино, телефон у рта.",
+   "ai_work": "Edit 4–5 bodies, each with 2 hook variants under the same rails. ID01: three tuned takes, loudness-matched with no EQ, reveal order randomised, numbering matches the footage. ID03: one continuous take (unplugged → jack click → same strum through the amp), no gain riding in the edit, so the contrast stays honest. ID06 is rebuilt: hook on a key press and release at 20 cm, not a glissando. Lines: «Нажмите клавишу: тяжёлая или лёгкая?», «Сколько выходов на наушники?», «Банкетка и педали в комплекте?», «У PX-770 банкетки нет» (px770_specs), «Гарантия Casio 2 года, сервис в Алматы» (warranty_casio), «Как обратиться в сервис — подскажем». A model-specific answer for keys, outputs or pedals appears only if staff confirmed it or it is visibly filmed; otherwise the check stays a question. Exactly three numbered checks. ID03 delivery wording follows the ledger: «Бесплатная доставка по Казахстану свыше 100 000 ₸, наземным транспортом». ID19 pinned post and highlight from week-1 footage plus ledger-only text: no Astana courier line until the verbatim re-read, «Kaspi или карта» only, «сроки уточним в WhatsApp». Export clean masters and upload natively to each platform. Re-fetch prices on publish day and stock ≤48 h before. Draft «цена?» replies daily. Ingest 48-h metrics, tier-2 DMs and handoffs, and label counts. Owner report on Monday with absolute numbers."
+  },
+  {
+   "week": 2,
+   "goal": "Explore + follow-up, 2026-10-26 → 11-01. ID05 only if staff confirmed real differences by 23.10: rebuilt on key action close-up, cabinet and look, headphone quiet practice, in a staff member's own voice from a talk shot in «тихий угол»; no polyphony, no AI voice, no AI diagram, no «спросите консультанта». Otherwise ID05 is killed and a second «guess» episode comes from the next batch. ID24 if a real, answerable ukulele comment exists. ID19 feed episode only if a real out-of-city order was packed on camera. ID13 if not published in week 1. NEXT BATCH: a dombra episode («домбра или укулеле для ребёнка?», guess or who_is_it_for) if dombras are stocked, with Kazakh words checked by a native speaker. DR2 follow-ups. Re-fix the target as a multiple of the week-0 baseline on 2026-11-01. Boost question only if a post qualifies.",
+   "idea_ids": [
+    "ID05",
+    "ID24",
+    "ID19",
+    "ID13"
+   ],
+   "worker_ask_ru": "Съёмка во вторник 27.10 по карточке, всего не больше 17 минут в неделю. Каждую неделю: 1) если упаковываете заказ в другой город — снимите 10 секунд: скотч, коробка, наклейка с городом (без имени и адреса); 2) одно необычное видео за неделю, 10 секунд; 3) голосовое на 30 секунд: 3 вопроса покупателей за неделю; 4) ярлыки «Новый», «Видео», «Оплачен» и в понедельник скриншот с числом чатов по ярлыкам. Пришлём одной строкой, сколько посмотрели и сколько написали.",
+   "ai_work": "Edit reserve and new bodies with variants. ID24 reply card from week-1 raw takes (zero staff minutes). ID05 rebuild only on confirmed facts. Re-fetch prices and stock. Code comments, label counts and the staff voice note into evidence. Graveyard failed hooks with reasons. Update arm posteriors. Recompute the realism math with own rates, using tiers 1+2. Draft the boost question with a computed cap only if DR2 + DR9 are met. Owner report ≤5 lines with absolute numbers."
+  },
+  {
+   "week": 3,
+   "goal": "Focus, 2026-11-02 → 11-08. Code's Thompson allocation. Hero 2/week. Conversion pieces on the line with the most attributed inquiries per 1k: real-order packing, return policy with its real costs, starter sets. DR3 rescue re-cuts (≥7 days later, once). Test the per-unit-video offer as a CTA variant only after the owner's «да». First boost only if approved and DR9 is met. DR5 check on tiers 1+2 and new-contact inbound.",
+   "idea_ids": [],
+   "worker_ask_ru": "Съёмка во вторник 03.11 по карточке; остальное как обычно: упаковка в другой город, одно необычное видео, голосовое с 3 вопросами, ярлыки и скриншот. Новых задач не добавляем.",
+   "ai_work": "Idea ids come from code's weekly selection; rescue re-cuts keep their original ids. Edits, variants, rails, publish-day re-fetch, native uploads, comment-reply drafts. If approved, the offer/no-offer pair within one series. Boost monitoring if approved. Mechanism check: each driver vs its own metric. Pre-plan New Year first-instrument gift content (shoot in week 4, publish from about 2026-11-20)."
+  },
+  {
+   "week": 4,
+   "goal": "Convert + review, 2026-11-09 → 11-15. Conversion push on in-stock first-instrument lines with no scarcity or urgency. Primary read: attributed inquiries (tiers 1+2) vs target, and new-contact inbound vs week 0. DR12 pivot check. Learnings with strength labels. Choose next sprint's arms, including New Year content pre-shot this week.",
+   "idea_ids": [],
+   "worker_ask_ru": "Съёмка во вторник 10.11 по карточке, включая 1–2 кадра к Новому году на будущее; остальное как обычно. Итоги месяца пришлём.",
+   "ai_work": "Final 7-day reads. Sprint report in absolute numbers: tier 1 coded chats (floor), tier 2 DMs and handoffs, new-contact inbound vs week 0, «Оплачен». Breakouts reported as «N просмотров, в X раз выше обычного»; «вирусный» only at ≥100 000 views and ≥10× median. learnings.jsonl entries with strength labels, including the word-code typing rate. Insight re-rank by attributed inquiries. Pool arms with identical slugs. Next-sprint brief."
+  }
+ ],
+ "measurement": {
+  "success_metric": "Attributed WhatsApp-bound inquiries from new contacts on first-instrument lines (beginner guitars, ukuleles, digital pianos; dombras if stocked), 2026-10-19 → 2026-11-15. Tier 1 = coded WhatsApp chats (floor). Tier 2 = TikTok/Instagram DMs, comment→WhatsApp handoffs and calls where the person names a video. Target on tiers 1+2: conservative 8 / expected 20 / stretch 35. Main decision read: new-contact inbound per week (WhatsApp label «Новый») vs the week-0 baseline (2026-10-12–18); the target is re-fixed as a multiple of it on 2026-11-01. Sales come from «Оплачен». JUDGMENT: the brief's coded-only metric is widened after review, because KZ viewers rarely type codes.",
+  "attribution": "Codes: word codes (proposed to code, e.g. УКУЛЕЛЕ 1), on screen ≥2 s at the end, in the caption and in the pinned comment. wa.me links only where clickable (Instagram bio, YouTube description); TikTok carries the number as text in the bio. «Новый» is decided by staff on the shop phone (no earlier chat history), so no phone numbers leave the shop. Tier 2: the agent logs DMs and comment handoffs it drafted replies for; staff label «Видео» on chats and calls that mention a video. Codeless chats get «Подскажите, откуда о нас узнали?». In store: «назовите слово из ролика» at the counter. Kaspi: featured-SKU orders vs their own prior 4 weeks, only if a shop exists, labelled directional. Privacy: label counts and voice notes by default. A chat export only if the owner chooses option 2, with names and numbers replaced by cust_### on ingest, the raw file deleted within 7 days, anonymised text internal and deleted by 2026-12-15, never published. Attribution window: 30 days per post.",
+  "leading_indicators": [
+   "views_48h ÷ platform median: TikTok uses the pooled retail median until 10 own posts, then its last 15; Reels and Shorts their own last 15. Breakout ≥3×. «Вирусный» only at ≥100 000 views AND ≥10× median, always reported as absolute views + multiple and as a tail event",
+   "3-second hold / skip rate and average % watched vs account median",
+   "shares + saves per 1,000 views (practical_value and identity read on saves and shares; prediction_game on comments)",
+   "«цена?»-type comments and DMs per 1,000 views, and the handoff rate to WhatsApp",
+   "coded-chat share of tier 1+2 (does anyone type the word code?)",
+   "attributed inquiries per 1,000 views by instrument line"
+  ],
+  "review_cadence": "Each post is read at 48 h (allocation) and 7 days (final). Weekly read every Monday (10-26, 11-02, 11-09) with the label-count screenshot and an owner report (≤5 lines, absolute numbers, at most 1 decision). Target re-fix 2026-11-01. Phase review 2026-11-16. Allocation metric: relative views + shares + saves until 20 tier-1 coded chats in total; after that, attributed inquiries per 1,000 views. Weekly mechanism check: each driver vs its own metric."
+ },
+ "decision_rules": [
+  "DR1 Read: every post on every platform at 48 h and 7 days. No arm is judged on TikTok before 10 posts (cold start).",
+  "DR2 Breakout: ≥3× platform median at 48 h, or shares+saves per 1k ≥2× account median. TikTok uses the pooled retail median until 10 own posts; Shorts use [ASSUMPTION] 6 900 views (3 × 2 300) until 10 new Shorts. Within 7 days: 2 follow-ups (a part 2 or the same insight in a new format, plus a reply to the top comment). Pin if conversion-relevant, put on WhatsApp Status, boost-eligible. Owner wording is always absolute: «N просмотров, в X раз выше нашего обычного». «Вирусный» only at ≥100 000 views AND ≥10× median, with «это редкий всплеск, не план». A series is created at ≥10× regardless of the word. ID14 becomes a series («POV: вы не музыкант») only through this rule.",
+  "DR3 Hook failure: 3-s hold <0.7× account median → re-cut with a new first frame and hook text, repost ≥7 days later, once only.",
+  "DR4 Body failure: hold fine, completion <0.7× median → shorten and move the payoff earlier in the next episode. No repost as is.",
+  "DR5 Conversion-layer miss: views on plan but tiers 1+2 <5 by 2026-11-08 AND new-contact inbound not above week 0 → before more content, check the code on screen ≥2 s, in the caption and pinned comment, the bio number or link, «цена?» reply speed, and the median first reply. If tier 2 is healthy but tier 1 ≈0, the codes aren't being typed: change the code wording, not the content.",
+  "DR6 Sales-handling miss: inquiries on plan but «Оплачен» low → report where chats die (from staff voice notes, or the export if option 2) and draft reply scripts. Price and offers are the owner's call.",
+  "DR7 Attention-only arm: ≥10 posts, ≥10 000 views, 0 tier 1+2 inquiries while other arms convert → cap at 2 posts/week (JUDGMENT: relaxed from 1 because reach is part of this awareness brief).",
+  "DR8 Retire: P(arm beats client median) <0.10 after ≥8 posts → exploration floor; data stays in the pool.",
+  "DR9 Boost: only DR2 posts with ≥1 attributed inquiry or a conversion role, within the owner's cap, never with an unconfirmed offer, never on a featured SKU with re-fetched stock ≤2. Stop at the stop-loss (5× cap with <3 coded chats) or when cost per coded chat rises 3 days in a row.",
+  "DR10 Capacity (stock + reply): a featured SKU out of stock on re-fetch → unpin and swap the CTA to «подскажем похожее, что есть сейчас». Median first reply >60 min in working hours → pause conversion pieces and report the leak; >15 min → flag in the owner report.",
+  "DR11 Honesty kill-switch: a comment credibly disputes a price, spec, stock, delivery or policy line → pause that series, re-fetch and verify, tell the owner the same day. Publish-day re-fetch is mandatory (prices moved 25% in a day, E26). Delivery and payment lines publish only as verbatim site quotes or owner-confirmed answers.",
+  "DR12 Pivot: by week 4–6, no arm with P >0.6 and tiers 1+2 <5 by 2026-11-15 with new-contact inbound flat vs week 0 → rerun step 3 with fresh voice notes and comments, diagnose the funnel, and send the owner an honest report with options (another line, warm base, offer, boost, pause).",
+  "DR13 Claims: «winner» only with P(best) ≥0.9, n ≥10 per contender and an interval; otherwise «лидирует, рано судить».",
+  "DR14 Staff: staff report actual shoot minutes. If an actual session exceeds 20 min, or card completion is <80% for 2 weeks → next card has ≤3 bodies, 1–2 locations, face-free only, shorter takes.",
+  "DR15 Owner: rejections >30% of a batch → read the reasons and update constraints. A fact rejection fixes the ledger the same day.",
+  "DR16 Never delete flops, except for truth, consent or legal problems.",
+  "DR17 (judgment) Secondary sale: ≤1 of 5 weekly base videos features a «Распродажа» item; no «финальная», no end date, no «осталось N». If Q1 = closure or brand exit, stop the awareness build-up and rewrite as a dated sales_push using the warm base.",
+  "DR18 (judgment) ID05 gate: if by 2026-10-23 staff have confirmed no visible or audible PX-770 vs AP-270 difference, ID05 is killed and the hero slot goes to a second «guess» episode from the next batch. Polyphony is never the payoff and there is no AI voice-over.",
+  "DR19 (judgment) Comment replies: every «цена/сколько/есть?» comment gets the owner-approved template within working hours, with a ledger price ≤7 days old or no price at all. Any reply outside the template goes into the weekly approval batch."
+ ],
+ "learning_questions": [
+  "Do by-ear comparison episodes (guess / ab_compare in «Слушаем вблизи») produce attributed inquiries (tiers 1+2), or only views and comments?",
+  "Which first-instrument line (ukulele, electric starter set, digital piano, dombra if stocked) brings the most attributed inquiries per 1,000 views from new contacts?",
+  "Do KZ viewers type word codes at all? What share of attributed inquiries is tier 1 (coded) vs tier 2 (DM, «цена?» comment handoff, call)?",
+  "Does the identity/POV parent framing (ID14) earn shares that turn into inquiries about a child's instrument, or only views?",
+  "Measured on a KZ-seeded cold-start TikTok vs the existing Reels and dormant Shorts, which platform gives the most attributed inquiries per staff minute by week 4?"
+ ],
+ "owner_asks": [
+  {
+   "ask": "Коротко о цели (это сообщение готовит ИИ-ассистент): цель месяца — около 20 обращений в WhatsApp от новых людей, а не миллион просмотров. Отчёты будут в точных цифрах («8 400 просмотров, в 12 раз выше обычного»); слово «вирусный» используем только от 100 000 просмотров. Ответьте «ок» или напишите, что считать успехом иначе. По умолчанию: так и считаем. Ответ до 14.10 12:00.",
+   "why": "The boss review: say the real scale up front and never stretch the word «вирусный».",
+   "minutes": 0.5
+  },
+  {
+   "ask": "Почему распродажа на сайте называется «Финальная»? 1 — магазин закрывается или переезжает, 2 — уходим от части брендов (каких?), 3 — просто название, магазин работает дальше. По умолчанию: 3, слово «финальная» и сроки в роликах не используем. Ответ до 14.10 12:00.",
+   "why": "A closure or brand exit would invalidate the awareness objective.",
+   "minutes": 1
+  },
+  {
+   "ask": "Какие товары важнее продавать через ролики до 15 ноября? 1 — гитары и укулеле для начинающих, 2 — цифровые пианино, 3 — домбры, 4 — ударные и тарелки, 5 — «Распродажа», 6 — неважно, главное — новые обращения. Можно два. Домбры (в том числе детские) сейчас продаёте? да/нет. По умолчанию: 1 и 2; домбры — по данным сайта. Ответ до 14.10 12:00.",
+   "why": "Sets the conversion and hero lines. The dombra answer decides the most local first-instrument episode for week 2. The agent checks the site first, and the owner confirms in-store stock.",
+   "minutes": 1
+  },
+  {
+   "ask": "TikTok: 1 — аккаунт уже есть (пришлите название), 2 — нет: создайте его, пожалуйста, с телефона магазина в Астане, на казахстанской SIM-карте, без VPN (≈5 минут, инструкцию пришлём). Кто нажимает «опубликовать» после вашего «да»: А — Андрей/Павел с устройства в Казахстане без VPN, Б — сотрудник с телефона магазина (~1 минута на ролик). По умолчанию: пока аккаунта нет, публикуем в Reels и YouTube Shorts; публикует А. Ответ до 14.10 12:00.",
+   "why": "An account registered or posted to from outside KZ, or via VPN, seeds the wrong country. We never create outward accounts without the owner.",
+   "minutes": 3
+  },
+  {
+   "ask": "Как считаем новые обращения, не передавая нам личные данные клиентов: 1 — сотрудник ставит в WhatsApp Business ярлык «Новый» на каждый новый чат и раз в неделю присылает скриншот с числом чатов по ярлыкам; 2 — то же плюс выгрузка 15–30 чатов без медиа: на нашей стороне имена и номера сразу заменяем на cust_###, исходный файл удаляем в течение 7 дней, обезличенный текст удаляем до 15.12.2026, наружу ничего не попадает. Соответствие закону РК о персональных данных — ваше решение, юридических советов мы не даём. По умолчанию: 1. Ответ до 14.10 12:00.",
+   "why": "Fixes the privacy contradiction: «new contact» is decided in the shop and no numbers leave it by default. The export is optional, with written storage and deletion terms.",
+   "minutes": 2
+  },
+  {
+   "ask": "Кого можно снимать: 1 — только руки, инструменты и голос, 2 — продавцов с лицом (с их согласия), 3 — и покупателей (с согласия; дети — только с письменного разрешения родителя)? По умолчанию: 1. Ответ до 14.10 12:00.",
+   "why": "Consent gate for faces. Week 1 is face-free either way.",
+   "minutes": 1
+  },
+  {
+   "ask": "Утвердите один раз тексты: (а) ответ в WhatsApp: «Здравствуйте! Вы по видео {CODE}. Подскажите примерный бюджет — сразу скажем, что есть сейчас под него и как забрать или доставить в ваш город.»; (б) «Подскажите, откуда о нас узнали?»; (в) ответ на комментарий «цена?»: «Сейчас [модель] — [цена с сайта] ₸. Напишите в WhatsApp слово {CODE} — подскажем, что есть сейчас. Номер в профиле.» WhatsApp отвечает в часы звонков (пн–пт 10–19, сб 10–17)? 1 — да, 2 — другие часы (какие?). По умолчанию: тексты не используем, часы как у звонков. Ответ до 14.10 12:00.",
+   "why": "Conversion layer, comment handoff (tier 2) and the reply-time guardrail. These go to customers, so they need approval (L8).",
+   "minutes": 1.5
+  },
+  {
+   "ask": "Доставка, для точности в роликах: 1) оплата наличными при получении работает и при доставке в другие города? да/нет; 2) курьер по Астане бесплатно — при каком весе и сумме (на сайте сказано «более 20 кг и свыше 15 000 ₸», это верно?); 3) примерные сроки до Караганды, Шымкента, Алматы. По умолчанию: в роликах только «Kaspi или карта» и «сроки уточним в WhatsApp», про курьера по Астане не говорим.",
+   "why": "Fixes the ID19 truth risks before anything about delivery is published.",
+   "minutes": 1
+  },
+  {
+   "ask": "Пришлите скриншоты статистики Instagram за 30 дней: охват, просмотры Reels, города аудитории. По умолчанию: считаем по открытым цифрам.",
+   "why": "Gives the Reels baseline and the audience city split for breakout thresholds and the geography assumption.",
+   "minutes": 2
+  },
+  {
+   "ask": "Каждую среду — одно сообщение с роликами недели: ответьте «да» или напишите, что убрать. По умолчанию: без вашего «да» ничего не публикуем.",
+   "why": "L8 weekly approval, kept at 3 min so week-2 extra questions fit the 5-min weekly cap.",
+   "minutes": 3
+  },
+  {
+   "ask": "(Неделя 2, только если ролик набрал в 3+ раза больше обычного и принёс обращения) Готовы потратить на его продвижение до N ₸? Подскажите среднюю наценку на такие инструменты в %, чтобы мы посчитали предел цены за обращение. По умолчанию: без рекламы.",
+   "why": "The boost cap needs margin and average order. Deferred until a post qualifies (DR9).",
+   "minutes": 1
+  },
+  {
+   "ask": "(Неделя 2) Можем ли до оплаты присылать покупателю короткое видео именно его инструмента — как он звучит вблизи? 1 — да, 2 — нет. По умолчанию: 2, такое не обещаем.",
+   "why": "Non-price offer candidate for week 3 that resolves the I03 friction. Needs owner approval and staff capacity.",
+   "minutes": 1
+  }
+ ],
+ "risks": [
+  "NEEDS FACT: delivery_astana as stored («более 20 кг и свыше 15 000 ₸») looks inverted. The agent re-reads https://muzzone.kz/dostavka-i-oplata.html verbatim and the owner confirms. Until then the line is not used anywhere (agent re-fetch + owner)",
+  "NEEDS FACT: cash on receipt for regional delivery. The payments fact came from one product page (PX-770). Until Andrey/Pavel confirm, video copy says only «Kaspi или карта» (owner + agent re-fetch on 2–3 other product pages)",
+  "NEEDS FACT: delivery time ranges to Karaganda, Shymkent and Almaty (staff/owner). Until then «сроки уточним в WhatsApp»",
+  "NEEDS FACT: PX-770 and AP-270 key action (weighted or not), number of headphone outputs, whether a pedal unit is included, and any other real differences (staff). ID06 shows them as open questions until confirmed; ID05 is killed by DR18 if nothing is confirmed by 2026-10-23",
+  "NEEDS FACT: ledger entry for the derived sum 116 376 ₸ (as100_price + hib_price) in ID03 (agent; valid only while both prices are ≤7 days old)",
+  "NEEDS FACT: reason for «Финальная распродажа» (owner). Closure or brand exit means the brief is rewritten",
+  "NEEDS FACT: TikTok account status, and who uploads from a device in KZ without VPN (owner)",
+  "NEEDS FACT: whether the shop uses WhatsApp Business (labels exist only there). If not, staff keep a tally in a note and the label minutes are re-estimated",
+  "NEEDS FACT: dombra range and stock (agent site fetch first, then owner)",
+  "NEEDS FACT: a clip-on tuner available for the shoot (staff, week-0 voice note). Without it, ID01 is not shot, because a detuned comparison is dishonest",
+  "NEEDS FACT: WhatsApp working hours; gross margin and average order for the boost cap; whether staff can send per-unit videos (owner)",
+  "Audio honesty: weak-phone auto gain flattens the ID03 contrast and the amp can clip. Mitigated by one continuous take at a fixed 50–70 cm, amp on 2–3 and noise suppression off where available; no gain riding in the edit. JUDGMENT: this overrides the D9 20–30 cm rule for amps",
+  "Staff time: the code model may not include tuning and amp set-up minutes. They are added manually here (ID01 +2, ID03 +1). Week 1 is cut from 7 to 4–5 bodies to stay ≤17 planned min; actual time is measured and DR14 re-fits the card",
+  "Attribution: word codes are a proposal to code (G+); until code adopts them, codes may be less typeable and tier 1 will undercount. Tiers 2 and 3 cover this gap",
+  "Privacy: default option 1 sends no personal data out. If option 2 is chosen, the storage and deletion terms are our proposal and must be confirmed in writing by Andrey/MetaPrompt. Legal compliance is the owner's decision (we give no legal advice)",
+  "TikTok seeding: a VPN or foreign device at registration or upload can send the account to the wrong country; watermarked cross-posts get suppressed. Covered by the owner ask and native clean-master uploads, but not verifiable by us",
+  "Price volatility: the PX-770 moved 25% in a day (E26). Every price is re-fetched on the publish day and stock ≤48 h before; stale facts trigger DR11",
+  "Stock: Hibilly 2 pcs; many sale items have 1–2. No scarcity words, no boost on them (DR9); ID03 is pulled or its CTA swapped if the Hibilly sells out",
+  "First-frame repetition: ID01 (close uke strum) and ID13 (split frame opening on a uke chord) are kept 4 days apart. ID06 now opens on a key press, not a glissando. ID05, if it survives, runs ≥7 days after ID06",
+  "Owner access is indirect (via Andrey/Pavel). Late approvals slip cadence; this is reported, not hidden",
+  "Cold-start TikTok: reach in weeks 1–4 is highly variable. No absolute-view targets, no promise of «вирусный»",
+  "ID14 has a weak brand link (2). It stays an honest wildcard and scales only through DR2",
+  "ID24 needs a real answerable ukulele comment; if none exists it is skipped",
+  "Policy facts expire 90 days after 2026-10-08 (2027-01-06); re-fetch before re-use",
+  "Kazakh captions and replies only after a native-speaker check",
+  "The site's delivery compensation in exchange for a review or video (returns_cost) is never promoted, and «100% оригинальный товар» is not repeated",
+  "NEXT BATCH: dombra episode («домбра или укулеле для ребёнка?», guess or who_is_it_for) for week 2 if stocked; Kazakh words native-checked",
+  "NEXT BATCH: a second «Слушаем вблизи» guess episode (e.g. two acoustic guitars or two small amps) to take ID05's slot if DR18 kills it, and to keep the hero series in one arm",
+  "NEXT BATCH: «Упаковываем в [город]» real-order episode as a proper idea with its own hook and shots (ID19 rebuilt around it), plus return-policy and warranty episodes with their real conditions and costs",
+  "NEXT BATCH: a reply idea for non-ukulele comments (ID24 is ukulele-specific)",
+  "NEXT BATCH: New Year first-instrument gift content, shot in week 4 and published from about 2026-11-20"
+ ],
+ "attribution_codes": {
+  "ID19": "BA23",
+  "ID06": "BA24",
+  "ID13": "BA25",
+  "ID03": "BA26",
+  "ID05": "BA27",
+  "ID24": "BA28",
+  "ID01": "BA29",
+  "ID14": "BA32"
+ }
+}

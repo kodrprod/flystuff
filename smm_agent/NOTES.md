@@ -99,6 +99,19 @@ Next (in order, after the usage reset):
 5. BRAIN.md (owner overview of the brain) and SUMMARY.md update from v2 results.
 Rule learned: 8 parallel brain runs exhaust a usage window; run <=3 at a time; commit only when tests return rc 0.
 
+**Handoff 2026-10-11 (this container is discarded; development continues in a new session)**
+Added to the repo from the container: `stress/runs/v1/<case>/` (8 cases: 6 complete runs + partial hiring/pianos; every
+step JSON, campaign.md, shoot card, questions) with `<case>.tape.jsonl` (replay with `python -m smm.replay --runs
+stress/runs/v1 --method brain/METHOD_v1.md --out <dir>`), `board.json`, `replay_report_current_code.json`;
+`brain/runs/provisional-pianos/` + tape (first full real run, strategist-draft method); `brain/drafts_v1/` (the 5 expert
+method drafts); `tools/workflows/` (workflow scripts incl. revise_v2.js, schema export, and `journals/` = cached
+agent results of all workflows, incl. the v1 audits and the v2 draft/attacks).
+Skipped (and why): subagent transcripts `~/.claude/projects/.../subagents/**/agent-*.jsonl` (~1 MB each, full chat logs,
+results already in journals); `scratchpad/brain/replay_v1/` run folders and `_clients` sandbox copies (regenerated
+by `smm.replay`); `scratchpad/probe_*`, `t.log`, `*.bak` (debug); pytest tmp media (synthetic test clips, regenerated
+by tests); `node_modules` (reinstall: `npm i` in smm/motion_engine + playwright symlink, see NOTES 0). No secrets
+existed in the container (no HF_KEY / API keys were ever set).
+
 ## 1. Goal and definition of done
 
 **Goal.** An autonomous system that runs short-video social media for MetaPrompt's

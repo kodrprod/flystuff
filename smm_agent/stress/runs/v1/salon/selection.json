@@ -1,0 +1,100 @@
+{
+ "slate": [
+  {
+   "id": "ID15",
+   "prior": 3.487,
+   "value": 3.487,
+   "why": "prior+data",
+   "driver": "identity",
+   "engine": "pov_situation",
+   "staff_min": 2.6,
+   "needs_facts": [
+    "ID15.comment_prompt_ru: scarcity/urgency claim without a backing fact: 'последний день'"
+   ]
+  },
+  {
+   "id": "ID19",
+   "prior": 3.462,
+   "value": 3.462,
+   "why": "prior+data",
+   "driver": "honest_signal",
+   "engine": "anti_sell",
+   "staff_min": 2.2,
+   "needs_facts": []
+  },
+  {
+   "id": "ID20",
+   "prior": 3.372,
+   "value": 3.372,
+   "why": "prior+data",
+   "driver": "moment_trigger",
+   "engine": "moment",
+   "staff_min": 2.7,
+   "needs_facts": [
+    "ID20.on_screen_ru[2]: scarcity/urgency claim without a backing fact: 'последний день'"
+   ]
+  },
+  {
+   "id": "ID17",
+   "prior": 3.256,
+   "value": 3.256,
+   "why": "prior+data",
+   "driver": "mastery",
+   "engine": "character",
+   "staff_min": 4.1,
+   "needs_facts": []
+  },
+  {
+   "id": "ID24",
+   "prior": 3.321,
+   "value": 3.321,
+   "why": "prior+data",
+   "driver": "practical_value",
+   "engine": "care_howto",
+   "staff_min": 2.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID13",
+   "prior": 3.269,
+   "value": 3.269,
+   "why": "prior+data",
+   "driver": "curiosity_gap",
+   "engine": "myth_check",
+   "staff_min": 2.8,
+   "needs_facts": []
+  },
+  {
+   "id": "ID01",
+   "prior": 3.167,
+   "value": 3.167,
+   "why": "explore",
+   "driver": "sensory",
+   "engine": "close_sound",
+   "staff_min": 2.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID09",
+   "prior": 3.167,
+   "value": 3.167,
+   "why": "explore",
+   "driver": "social_currency",
+   "engine": "check_before_buy",
+   "staff_min": 3.4,
+   "needs_facts": []
+  }
+ ],
+ "blocked": [],
+ "week1_filmed": [
+  "ID15",
+  "ID19",
+  "ID20",
+  "ID17",
+  "ID24",
+  "ID13",
+  "ID01"
+ ],
+ "week1_minutes": 16.7,
+ "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"
+}

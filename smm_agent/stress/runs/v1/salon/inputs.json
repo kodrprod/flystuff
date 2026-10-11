@@ -1,0 +1,193 @@
+{
+ "have": [
+  {
+   "input": "Boss request (verbatim) + step-1 intake brief",
+   "what_it_gives": "request_type = price_pressure. SECONDARY = retention_or_loyalty, capped at ≤20% of slots. Business objective: by 2026-11-15, weekly WhatsApp bookings at unchanged prices return to the pre-campaign baseline (conservative), +10% (expected) or +20% (stretch). Constraints: no price cuts; no comparisons or competitors; hands and voice only until consent; no prices until in the ledger. Guardrails: first reply ≤15 min, chat→booking rate ≥ baseline, 2GIS rating not below current. Three clarifying questions are queued: who leaves, who may be filmed, where to steer bookings. Bottleneck hypothesis: consideration/conversion after the price is sent, ~30% confidence. REALISM ratio 0.6–5.9; every input is an assumption."
+  },
+  {
+   "input": "Client profile (HYPOTHETICAL; every field is an assumption)",
+   "what_it_gives": "Vertical beauty_salon, Шымкент, RU/KK. Mid-price, '8 masters' (unverified). Sales channels: WhatsApp booking, 2GIS, walk-in. Owner perception: nearby salons are ~30% cheaper (internal context only, never in content). Owner reports good 2GIS reviews (unverified). Staff: 20 min/week, one phone, audio usable only close up. Known unknowns: exact prices, which services lose clients, masters' consent. Instagram is 'unknown'; TikTok is not mentioned."
+  },
+  {
+   "input": "Fact ledger (facts_usable = [], facts_not_usable = [], files = [])",
+   "what_it_gives": "Zero usable facts. No price, number, hours, address, rating, review count, service list, policy or capability may appear in any audience string yet. Every such idea carries a NEEDS FACT until an agent fetch or an owner input fills the ledger."
+  },
+  {
+   "input": "Knowledge base learnings L001, L003, L005, L006",
+   "what_it_gives": "L001 (measured): the text judge scores Shorts at Spearman 0.11 (0.07 retail, CI includes 0, n=1172), so rubric scores are priors only and the batch must be wide and cheap. L003 (measured): long-form title tricks ('для начинающих', 'vs') have median relative views of 1.00/0.99 on Shorts, so no hook formula is assumed. L005 (expert judgment): price slides are useless, so why_it_costs must be shown with hands, sound and process, never as a price card; this matters a lot for a price_pressure brief. L006 (measured, correlational): demos with no buyer question underperform (390 vs 2,300 median, n=48), so every process clip is tied to a client question or doubt. There are no beauty_salon-specific pooled priors and no graveyard entries."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Own footprint fetch: 2GIS card, Instagram/TikTok/YouTube search, website if any",
+   "why_it_matters": "This is the only way to fill the empty ledger without owner minutes. It gives the service list, any published prices (dated), hours, address, rating and review count, and any published offers. It also tests the assumption of no medical-cosmetic services (REGULATED). It confirms whether Instagram or TikTok exists, and the last 15 posts give the account median and its ≥3× outliers. Hygiene errors are flagged and never repeated.",
+   "how": "Agent: search 2GIS Шымкент for the salon by name or address, fetch the card and price tab, and record each fact with URL and fetch date (prices expire after 7 days). Search Instagram/TikTok/YouTube by name and by 2GIS links. If found, pull the last 15 posts with views/likes/comments, compute views ÷ median, and list outliers and posts whose comments ask questions. On 403/429, log it and don't bypass. Ask for a screenshot only if a step is blocked. NOTE: the client is hypothetical, so the fetch may find nothing; then everything stays an assumption.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "The ledger stays empty and content runs on recognition, question and process ideas with no claims. Account median = pooled beauty_salon median. Account existence becomes part of the owner's account ask.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Public reviews: 2GIS (plus Google/Yandex maps and own-post comments), coded with C2",
+   "why_it_matters": "For a price_pressure brief, reviews are the cheapest evidence of what people say they pay for here (J: delight details, e.g. a master's care, durability, cleanliness) and of any complaints (X: to be fixed first, never content). They show whether 'дорого' appears publicly and whether reviews name masters (a signal of master-led loyalty). They also verify or refute the 'good reviews' claim and set the rating guardrail baseline.",
+   "how": "Agent: fetch all 2GIS reviews with dates. Strip client names and keep master names internal only. Code each review Q/F/D/M/C/B/W/J/X with counts and dates, plus JTBD force. Flag the review trend over the last 6 months (falling rating or volume = a possible non-marketing cause). Repeat for Google/Yandex if cards exist.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Customer language comes only from the chat export and peer comments. Frequencies become 'likely'. The rating guardrail is set at the week-1 fetch.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Peer outliers: 10–20 beauty salons and masters (Шымкент first, then RU-language CIS)",
+   "why_it_matters": "These show which mechanisms (engine, first-frame type, length, faces or not) beat their own channel median in this category. They reveal the category conventions to break (e.g. a finished-nails photo with music, or a 'было/стало' with no process). Questions from peer comments substitute for missing chat data. All findings are hypotheses, not winners.",
+   "how": "Agent: find 10–20 Шымкент salons and nail/brow/hair masters on Instagram and TikTok, then 10 RU-language CIS accounts. Keep posts from the last 90 days at ≥3× their own channel median. Record the mechanism only, plus the questions in their comments (especially about price, durability and hygiene). List 3–5 conventions that nearly every peer follows. Do not copy any content.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Engines are spread evenly across D3 with no category-convention insight. The distinctiveness factor is scored conservatively.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Demand phrases RU/KZ (TikTok, YouTube and Google/Yandex suggestions)",
+   "why_it_matters": "Search phrases become hook and caption vocabulary in the customer's own words, and they show which price and quality doubts people actually type (e.g. «почему маникюр так дорого», «сколько держится», «как выбрать мастера», «маникюр Шымкент»).",
+   "how": "Agent: collect autocomplete for [service] + Шымкент, «сколько стоит [service]», «почему [service] дорого», «как выбрать мастера [service]», «сколько держится [service]», and KZ variants (Kazakh flagged for a native check). Do this for manicure, hair, brows and lashes, or for the services confirmed on 2GIS.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hooks come from chat and review language only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Nearby salons' public price lists (internal context only)",
+   "why_it_matters": "This tests the owner's '~30% cheaper' perception per service. If the gap is real only on some services, the price-value insight focuses there. If Kaspi or 2GIS prices are far off, it may be a non-marketing issue for push_back. It is NEVER used as «дешевле/дороже» or named in content.",
+   "how": "Agent: read public 2GIS and Instagram price lists of 5–10 salons within the same district, dated. Store them in research/ as internal-only and mark every entry DO-NOT-PUBLISH. Run this only after our own prices are known; otherwise record the ranges only.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "The 30% gap stays an [ASSUMPTION]. The why_it_costs insight is built on process and doubt, not on a gap size.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Calendar and weather, 2026-10-19 → 2026-11-15 and the lead-in to December",
+   "why_it_matters": "Moment-trigger ideas need real dates 10–14 days ahead: autumn той/wedding season, first frost (dry hands and hair, care content), the day off around Республика күні (25.10, verify), and early bookings for December corporate parties and New Year. These are reasons to book now that need no discount.",
+   "how": "Agent: build a dated list of holidays and days off for 2026 (verify official dates), the Шымкент weather forecast with the first cold snap, and wedding-season signals from peer posts. Mark each with an entry date 10–14 days ahead.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Moment ideas use situational triggers only (e.g. 'перед тоем'), with no dates on screen.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Knowledge base: pooled beauty_salon driver/format posteriors and graveyard",
+   "why_it_matters": "These give priors for the code's arms. Only the four generic learnings are in hand; no vertical data was supplied.",
+   "how": "Agent: query learnings.jsonl and the pooled store for vertical=beauty_salon on all platforms, and use only tags with ≥30 observations. Load graveyard hooks for the vertical. Respect strength labels and never carry long-form findings over.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Uniform priors plus L001/L003/L005/L006; exploration as set by code.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "WhatsApp chat export: 15–30 recent client chats, without media",
+   "why_it_matters": "This decides the whole diagnosis. It shows where chats die (after the price? after «подумаю»? after a slow reply?), the median first reply, the close rate, weekly inquiries (the baseline the targets hang on), the exact objection wording («дорого», «а там дешевле», «а мастер Х ещё работает?»), and which services are asked about and lost. If reply time or scripts are the leak, push_back shifts to fixing the WhatsApp layer before content.",
+   "how": "«Здравствуйте! Я — ИИ-ассистент, помогаю вашему салону с роликами. Чтобы понять, где теряются клиенты, пришлите, пожалуйста, переписки: откройте чат с клиентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Нужно 15–30 последних чатов с новыми клиентами, особенно с теми, кто спросил цену и не записался. Имена и номера удаляем сразу, наружу ничего не попадает. До 12.10.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Reviews, peer comments and the staff voice note supply the language, and frequencies become 'likely'. Baseline = the week-0 count from admin labels, with the target multiple fixed at the end of week 2. Close rate and reply time stay assumptions, and REALISM stays illustrative.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Permissions tap card: who leaves, who may be filmed, where to steer bookings, prices in videos",
+   "why_it_matters": "These are the hard constraints and the main fork of the 'чтобы что?' ladder. If clients leave after a master (branch c), the problem is not price content, and that is stated in push_back. Face permission, price permission and the free-slot direction change which ideas are publishable and which CTA is honest. This carries intake questions 1–3 plus the prices question in one message.",
+   "how": "«Ответьте цифрами, займёт минуту: (1) Кто уходит? 1 — новые: узнают цену и не записываются; 2 — постоянные перестали возвращаться; 3 — ушли вслед за мастером; 4 — не знаю. По умолчанию: 1. (2) Кого можно снимать? 1 — только руки мастеров и голос; 2 — мастеров с лицом (кто согласен); 3 — и клиентов (с их согласия). По умолчанию: 1. (3) Куда звать новых? 1 — будни днём; 2 — к мастерам/услугам, где есть окна (каким?); 3 — почти всё свободно. По умолчанию: 1. (4) Цены в роликах: 1 — можно, по прайсу; 2 — нельзя. По умолчанию: 2. Ответ до 10.10 12:00, иначе работаем по умолчанию.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "A5 and intake defaults apply: hands and voice only, no prices on screen, steer to weekday daytime with no 'свободно сегодня', and branch 1 (new clients who stall after the price) is primary.",
+   "blocks_step": "publish: faces; 4_ideas: price claims, slot-steering CTA wording"
+  },
+  {
+   "input": "Money map: price-list photo (dated), 3 services to fill, services not to push, free slots per week by master/day",
+   "why_it_matters": "It puts the first dated prices in the ledger, which unlocks budget_ladder and why_it_costs with real numbers instead of a vague claim. The push services and free slots tie the CTA and DR10 to real capacity (ledger currently: unknown). 'Not to push' prevents demand for fully booked masters, and it shows which services the owner thinks lose clients.",
+   "how": "«Пришлите, пожалуйста: 1) фото актуального прайса (или скрин из 2ГИС/Инстаграма) — в роликах цены только из него; 2) три услуги, на которые хотите больше записей; 3) что НЕ продвигать (мастера заняты); 4) примерно сколько свободных окон в неделю и в какие дни/у каких мастеров. Можно голосовым. До 12.10.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Push lines are inferred from 2GIS service depth and review mentions ('likely'). There are no price or number claims beyond prices published online ≤7 days old. CTAs offer 'подберём время' with no availability claim.",
+   "blocks_step": "4_ideas: price claims (budget_ladder, why_it_costs with numbers); 6_campaign: capacity rule DR10"
+  },
+  {
+   "input": "Account insights: Instagram/TikTok access or screenshots, and whether accounts exist",
+   "why_it_matters": "Gives the platform baselines (median views, hold, shares, saves, audience city) the leading indicators and DR2/DR3 thresholds depend on. If there is no account, the owner must decide whether to create one, because the agent can't do that without approval (L8).",
+   "how": "Agent checks first. Send only if an account was found or none exists: «Если есть Инстаграм/ТикТок салона: пришлите 2 скриншота из „Статистики“ за 30 дней (охват и аудитория-города) или дайте доступ. Если аккаунта нет — создать новый? 1 — да, 2 — нет, 3 — используем личный мастера. По умолчанию: 1 (только Reels + TikTok). До 12.10.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Public counts only, flagged as reduced metrics. Pooled beauty_salon median until 10 own posts. Cold-start rules for any new account.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Proof folder: ~20 real photos and videos of masters' work, sent as files",
+   "why_it_matters": "Masters usually keep portfolio clips on their phones. This gives zero-staff-minute ideas (re-cuts, reply videos), proof assets for why_it_costs and relief engines, and a reality inventory of processes, tools and sounds. It saves staff minutes in week 1.",
+   "how": "Staff, ~5 min of the admin's time, no owner minutes: «Я — ИИ-ассистент салона. Соберите, пожалуйста, у мастеров 20 настоящих фото и видео работ и процесса (руки, инструменты, крупно) и отправьте ФАЙЛАМИ, не фото — так не теряется качество. Без лиц клиентов; если лицо попало — мы его размоем или не возьмём. До 13.10.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Staff film proof clips in the week-1 session, which leaves fewer minutes for other ideas. There are no zero-staff-minute ideas in week 1.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Staff reality scan: 3 test clips (speech at 30 cm, a tool sound at 30 cm such as a file, clippers or a hair dryer, the room) plus a 2-minute silent walkthrough",
+   "why_it_matters": "It shows the real audio distance, light and noise (dryers, music), and the filmable spots with names (e.g. «маникюрный стол», «кресло у окна», «тихий угол»). Ideas use those names so code can merge locations and keep the shoot card ≤17 min.",
+   "how": "Staff, 10 min once: «Снимите, пожалуйста, вертикально, без зума: 1) скажите одну фразу, держа телефон в 30 см от лица, в самом тихом углу; 2) 10 секунд звука работы крупно — пилка, машинка или фен в 20–30 см; 3) 10 секунд общего плана зала; 4) 2 минуты молча пройдите по салону, задержитесь у каждого рабочего места и у окна. Выключите музыку. Отправьте файлами. До 13.10.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Assume the worst case: speech only with the phone at the mouth in a quiet corner, no wide shots, close-ups at the work tables only. Location names are taken from the walkthrough of the 2GIS photos.",
+   "blocks_step": "4_ideas: producibility scoring (proceeds on worst-case defaults)"
+  },
+  {
+   "input": "Masters' individual consent to appear (face and/or voice)",
+   "why_it_matters": "The owner cannot consent for a master. Each willing master unlocks the character engine and face-in-frame-1 variants for the shared experiment. Masters may also prefer voice only.",
+   "how": "Staff, ~1 min per master, after the owner picks option 2 in the tap card: «Мастер сам решает. Кто готов появляться в роликах — с лицом или только голосом и руками — запишите короткое видео: „Я, [имя], согласна, чтобы салон публиковал ролики со мной“. Отказаться можно в любой момент — ролики уберём.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Every idea has people_on_camera = 0: hands, tools, voice-over in a quiet corner.",
+   "blocks_step": "publish: master faces"
+  },
+  {
+   "input": "Week-0 baseline tally and WhatsApp labels «Видео» and «Записан»",
+   "why_it_matters": "If there is no export, the target depends on this. It is also needed from day 1 to count coded chats, the chat→booking rate (guardrail) and codeless sources.",
+   "how": "Staff/admin, ~2 min setup plus ~1 min a day: «В WhatsApp Business создайте ярлыки „Видео“ и „Записан“. С 12.10 ставьте „Записан“ каждому, кто записался. Новым клиентам без кода пишите: „Подскажите, откуда о нас узнали?“. Ответы отмечайте ярлыком или пишите одним словом в заметку.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Total weekly inbound is estimated from the export only. The chat→booking guardrail can't be checked, which is flagged in the weekly report.",
+   "blocks_step": "6_campaign: measurement baseline (falls back to the export)"
+  },
+  {
+   "input": "Optional owner voice note (price-pressure version)",
+   "why_it_matters": "It gives stories and myths specific to why people pay more here, plus filming boundaries. Owner statements stay 'likely' until filmed or documented. It feeds real_case, anti_sell and why_it_costs with process steps the owner confirms.",
+   "how": "«Если есть 3 минуты — одно голосовое: 1) Один случай, когда клиент сказал „дорого“ или ушёл в дешёвый салон, а потом вернулся — что произошло? 2) Что клиенты чаще всего не знают о том, как у вас делают услугу (стерилизация, материалы, время)? 3) Что нельзя показывать в роликах? По желанию, до 14.10.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Skip it. No story-engine or process-superiority claims. why_it_costs shows only steps visible on camera.",
+   "blocks_step": "4_ideas: real_case/story claims, owner-confirmed process steps in why_it_costs"
+  },
+  {
+   "input": "Weekly staff voice note: «3 вопроса клиентов за неделю + 1 случай» (from week 1)",
+   "why_it_matters": "It gives fresh client language, especially price and value questions asked at the desk, which rarely reach WhatsApp. It also feeds reply and wa_question episodes and the weekly re-ranking of insights.",
+   "how": "Staff, ~1 min/week: «Каждую пятницу — голосовое 30 секунд: какие 3 вопроса клиенты задавали чаще всего (особенно про цену и „почему так“) и один случай недели. Имена клиентов не называйте.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Comments and chats only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Offer approval: non-price only (e.g. free WhatsApp consultation or a reservation hold). DEFERRED, not in the onboarding batch.",
+   "why_it_matters": "Offers are not needed by default (owner keeps prices). Ask only if week-2/3 data shows the conversion layer needs a push. A non-price offer can then be tested against no offer within the same series.",
+   "how": "Later weekly batch, only if F4 triggers: «Можно ли в роликах предлагать по коду бесплатную консультацию мастера в WhatsApp (фото ногтей/волос → совет, что подойдёт) до [дата]? 1 — да, 2 — нет. По умолчанию: нет.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "No offer. CTAs offer only help staff can keep (e.g. «подскажем, к какому мастеру и когда»).",
+   "blocks_step": "6_campaign: offer field"
+  },
+  {
+   "input": "Boost budget. DEFERRED until a post qualifies under F10 DR2.",
+   "why_it_matters": "A paid boost of a proven post is the main lever if organic reach can't meet the target (the REALISM ratio is up to 5.9). It is asked with real numbers in week 2, never at onboarding.",
+   "how": "Later weekly batch, only after a DR2 breakout with ≥1 coded chat: «Ролик „[название]“ набрал в [x] раз больше обычного, по нему написали [n]. Продвинуть в Шымкенте до [сумма] ₸ с остановкой, если за [сумма×5] ₸ меньше 3 записей? 1 — да, 2 — нет. По умолчанию: нет.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "No boost; organic plus the warm base (Status, broadcast to contacts who opted in).",
+   "blocks_step": "6_campaign: paid boost (DR9)"
+  }
+ ]
+}

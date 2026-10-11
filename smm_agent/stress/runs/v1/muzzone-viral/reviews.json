@@ -1,0 +1,132 @@
+[
+ {
+  "persona": "Владелец Muzzone, который попросил «Сделайте нас вирусными в TikTok». Смотрю на план с трёх сторон: решает ли он мою задачу, стоит ли он времени сотрудников и нет ли в нём неправды или риска опозориться.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "Лучшее в плане — серия «Слушаем вблизи», особенно ID01 (три укулеле, один аккорд: «Где дорогая?») и ID03 (электрогитара без комбика и с комбиком). Звук слышен с первого кадра. Зрителю хочется угадать и отправить ролик другу. Цены видно, а в конце естественно звучит «напишите в WhatsApp, подскажем под бюджет». Каждый ролик стоит около 4 минут работы сотрудника, лица не нужны. Это реально наше преимущество: инструменты есть в наличии, и их можно услышать. Ещё одна сильная идея — ID19 о доставке в другие города, но только после того, как исправят формулировку (см. ниже).",
+  "refutations": [
+   {
+    "target": "ID19 — строка «По Астане курьер бесплатно: тяжелее 20 кг и дороже 15 000 ₸»",
+    "why_fails": "Так не бывает: бесплатный курьер только для заказов ТЯЖЕЛЕЕ 20 кг выглядит как перевёрнутое условие. Скорее всего, факт delivery_astana прочитан неверно (на сайте, вероятно, «до 20 кг»). Если это выйдет в ролике о том, «кто платит за доставку», и окажется неправдой, нас поймают в комментариях на главном обещании ролика. Строка «наличные при получении» взята с одной страницы товара (PX-770). Её применяют к доставке по всему Казахстану, а это не проверено.",
+    "severity": "major",
+    "fix": "До монтажа дословно перечитать правило доставки по Астане на сайте и вставить в ролик цитату со ссылкой на страницу. Оплату при получении для регионов подтвердить у Андрея или Павла. Пока не подтвердят, оставить только «Kaspi или карта»."
+   },
+   {
+    "target": "ID05 — «PX-770 vs AP-270: what polyphony means, shown»",
+    "why_fails": "Одно и то же арпеджио на педали не исчерпает ни 128, ни 192 голоса, поэтому разницы будет не слышно. Получается, ролик «показывает» полифонию, которую показать нельзя, и молча подталкивает к мысли, что 213 тыс. ₸ разницы — это полифония. Фраза «Остальные отличия — спросите консультанта» выглядит как уход от ответа. А ИИ-озвучка в магазине живого звука противоречит самой идее серии.",
+    "severity": "major",
+    "fix": "Убрать «shown». Либо построить ролик на реальных отличиях, которые подтвердят продавцы (клавиатура, корпус, динамики), и дать живой голос консультанта, либо снять ID05 со слейта, пока ответа нет. Озвучку делает человек, а не ИИ."
+   },
+   {
+    "target": "Определение «вирусный» = ≥10× от общей медианы розницы (≈300–1 000 просмотров)",
+    "why_fails": "Выходит, мне доложат «вирусный» про ролик с 3–10 тысячами просмотров. Это подмена моего слова, и в разговоре с партнёрами это будет неловко. При этом ожидаемый итог — 20 обращений за месяц. Это честно, но совсем не «вирусно». Отговорку про «редкий всплеск» вы прописали, а прямо мне про масштаб не сказали.",
+    "severity": "major",
+    "fix": "В отчётах писать только абсолютные цифры («ролик набрал 8 400 просмотров, в 12 раз выше нашего обычного»). Слово «вирусный» использовать только от ~100 тыс. просмотров. В первом же сообщении прямо сказать: цель месяца — 20 обращений, а не миллион просмотров."
+   },
+   {
+    "target": "Владелец — выгрузка чатов WhatsApp («Имена и номера удаляем сразу») при метрике «новый контакт = номер без истории»",
+    "why_fails": "Одно противоречит другому: если номера удалить, нельзя проверить, новый ли это контакт. Сами клиентские переписки уходят внешнему ИИ-подрядчику, а это персональные данные покупателей. Если об этом узнают, будет и юридический риск по закону РК о персональных данных, и удар по репутации.",
+    "severity": "major",
+    "fix": "Пусть сотрудник сам помечает новые контакты ярлыком «Новый» прямо в WhatsApp, а наружу уходит только обезличенный текст или счётчики. Либо номера хэшировать на нашей стороне. Нужно письменно указать, где хранятся данные и когда их удаляют."
+   },
+   {
+    "target": "Сроки ответов и время владельца",
+    "why_fails": "В intake вопросы стоят «до 10.10 12:00», а это сегодня, при том что связь со мной идёт через Андрея и Павла. В owner_asks тот же вопрос стоит уже «до 14.10». Всего просьб ко мне 10 штук примерно на 18 минут, а договорённость была не больше 15 минут на старт. Одобрение в среду и публикация в среду тоже не выдержат цепочки через посредников.",
+    "severity": "minor",
+    "fix": "Один срок — 14.10. В одном сообщении три вопроса (финальная распродажа, TikTok-аккаунт, кого можно снимать), остальное в неделю 1. Утверждение в понедельник, публикация со среды."
+   },
+   {
+    "target": "TikTok — аккаунта нет, есть запасной план «Reels + Shorts»",
+    "why_fails": "Я просил именно TikTok. Если аккаунт не появится к 14.10, весь «тест на TikTok» превратится в перепосты в Reels и Shorts. При этом первые 10 постов нового аккаунта по вашим же правилам ничего не дают для выводов, то есть почти весь спринт.",
+    "severity": "minor",
+    "fix": "Создание аккаунта поставить первым пунктом, на 2 минуты: прислать мне пошаговую инструкцию. Сказать прямо, что надёжные выводы по TikTok будут только после спринта, и предложить 1–2 поста в день вместо 5 в неделю, раз работы на ролик мало."
+   },
+   {
+    "target": "ID03 — хиро-ролик на товаре из распродажи (Hibilly, 2 шт., «Было 70 720 ₸»)",
+    "why_fails": "Лучшая идея держится на комбике, которого осталось 2 штуки и который относится к «Финальной распродаже» с непонятной причиной. Если его купят в первые дни, ролик-лидер теряет смысл. Если «финальная» значит уход бренда, призыв в ролике начинает вводить в заблуждение.",
+    "severity": "minor",
+    "fix": "Снять второй вариант с комбиком, которого много на складе и который не в распродаже. Публиковать тот, что актуален по остаткам за 48 часов. Старую цену показывать, только если она реально действовала на сайте."
+   },
+   {
+    "target": "ID06 — проверка №3 «Где сервис: Casio — Алматы»",
+    "why_fails": "Честно, но мы сами делаем главным аргументом ролика о покупке то, что ремонт будет в другом городе. Плюс «Банкетки нет ни у одного» не подкреплено фактом в facts_used для AP-270.",
+    "severity": "minor",
+    "fix": "Сервис упомянуть в одной строке вместе с тем, как магазин помогает с гарантийным случаем, но только после подтверждения у сотрудников. Отсутствие банкетки проверить по карточкам обоих товаров. Если в ролике показан PX-770, говорить только про него."
+   },
+   {
+    "target": "Нагрузка на сотрудников: 7 роликов за 15 минут съёмки, затем неделя 2 с дополнительными задачами",
+    "why_fails": "7 сюжетов по 2–3 дубля с живой игрой за 14,9 минуты рассчитаны впритык и без запаса на покупателей в зале. С недели 2 добавляются «звук по просьбе», «необычное видео» и голосовое, и в 17 минут это реально не влезает.",
+    "severity": "minor",
+    "fix": "Неделя 1 — максимум 5 сюжетов за съёмку. Записывать фактические минуты. Если выходит больше 20 минут, автоматически убирать «необычное видео»."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local retail in Kazakhstan/CIS. I judge whether one staff member with a weak phone can shoot it in 20 minutes, whether people in Astana will stop for it and forward it, and whether it turns into WhatsApp messages rather than just views.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "ID03 (electric guitar unplugged, then through the combo) is the best piece on the slate. The contrast happens on camera, a teen forwards it to a parent («вот что мне надо, не только гитару»), it leads into a real starter set, and it can be shot in one take. ID01 (blind ukulele) is a close second and is the most natural comment-bait. Build the hero series on these two formats only. The stronger idea the slate is missing is the apartment angle that is everywhere in the CIS: «пианино в квартире: соседи vs наушники». Film the acoustic-style sound, then the same passage with headphones plugged in, so all you hear is the clack of the keys. Add the line «играйте в 23:00». It is concrete, everyone in a high-rise relates to it, and it is easy to send to your spouse. That fits Astana far better than polyphony.",
+  "refutations": [
+   {
+    "target": "ID05: PX-770 vs AP-270 polyphony «shown, not told»",
+    "why_fails": "You cannot hear 128 vs 192 polyphony in an arpeggio recorded on a weak phone mic, and TikTok's AAC compression makes it worse. The video promises to show the difference and can't, so the payoff is an AI diagram plus a synthetic voice-over labelled «озвучка ИИ». For a local shop, a robot voice is the quickest way to lose trust, and the comments will say «разницы ноль». It is also a 520–735k ₸ purchase being explained through a spec almost nobody searches for.",
+    "severity": "major",
+    "fix": "Drop polyphony. Replace it with differences you can see and hear that staff can confirm: a close-up of the key action and touch, the cabinet and look in a living room, and the headphone and quiet-practice scenario. Have a staff member say it in their own voice. If no differences are confirmed, kill ID05 and use the slot for a second «guess» episode."
+   },
+   {
+    "target": "ID03 / ID01 audio on a weak phone",
+    "why_fails": "Cheap Android phones apply automatic gain control and noise suppression. The phone will boost the quiet unplugged strum and squash the amp, so the 'wow, it's quiet' contrast flattens out. The amp will also clip at 30 cm. In ID01, the three ukuleles on the shop wall are almost certainly out of tune with each other, and a detuned chord on the cheap one makes the comparison dishonest in either direction.",
+    "severity": "major",
+    "fix": "Shoot ID03 as one continuous take: unplugged, then the jack click, then plugged in, with the phone fixed in place 50–70 cm away and the amp on 2–3. Do not shoot separate clips. Turn off noise suppression or use the voice-recorder mode if the phone has one. Add 'tune all three ukuleles with a clip-on tuner' to the shoot card (+2 min) and add that time to the 14.9-minute estimate. That estimate is already unrealistic for 7 bodies across 3 locations with 2–3 takes each, so plan for 20–25 minutes or split the shoot into two sessions."
+   },
+   {
+    "target": "ID19: delivery policy as a feed post in week 1",
+    "why_fails": "Text cards about delivery thresholds and payment methods over a zipper sound are a pure ad. On a cold-start TikTok they will get the floor of 200–300 views and spend 1 of the 5 early posts that set the account's audience signal. It also leaves out what people actually ask: «сколько дней до Караганды?»",
+    "severity": "major",
+    "fix": "Keep ID19 as a pinned post and Instagram highlight («Как заказать»). Don't count it as a feed test slot in week 1. If you do post it, build it around a real order: «Упаковываем укулеле в Шымкент», with tape, box and label (city only), and answer the delivery-time question honestly with a range staff confirm, or with «уточним в WhatsApp»."
+   },
+   {
+    "target": "ID06: «три проверки» content",
+    "why_fails": "Check 1 (88 keys) is something anyone shopping for a piano already knows. Check 3 is 'service is in Almaty', which is honest but sounds like a negative to an Astana buyer when you don't give the next step. All you can save is the bench point. The glissando opening is one of the most overused piano hooks there is.",
+    "severity": "major",
+    "fix": "Use checks a parent actually gets wrong: weighted (hammer) keys vs light keys (show the key bounce in close-up), whether it has a headphone jack and how many, and whether a bench or 3-pedal unit is included. Keep the warranty line as 'гарантия 2 года, по сервису подскажем в WhatsApp' so it is honest and comes with an action. Open on the key-weight press, not a glissando."
+   },
+   {
+    "target": "Attribution: typed codes as the only success metric",
+    "why_fails": "KZ viewers don't type codes. They write «цена?» in the comments, DM on TikTok or Instagram, or call. TikTok shows one bio link at most, and a business link can be limited on a new account, so per-video wa.me links don't exist there. The plan will report «4 coded chats» while the inbox fills up, and DR5/DR12 will fire for the wrong reason.",
+    "severity": "major",
+    "fix": "Use short word codes that read naturally, like «УКУЛЕЛЕ», «КОМБИК», «ПИАНИНО». Add a reply rule for comments: answer every «цена» comment with the code and the WhatsApp number. Count TikTok and Instagram DMs and comment-to-chat handoffs as a second tier. Treat total inbound vs week 0 as the main read, not just a footnote."
+   },
+   {
+    "target": "TikTok account setup / cross-posting",
+    "why_fails": "The plan doesn't say how the account gets set up. If it is registered or posted to from a phone on a VPN or a foreign SIM, or by an agency outside KZ, the For You page serves it to the wrong country and the 'cold start' never reaches Astana. Re-uploading TikTok exports with the watermark to Reels or Shorts gets them suppressed.",
+    "severity": "major",
+    "fix": "The owner or staff creates the account on a KZ SIM, from the shop phone, in Astana, with no VPN. Export clean masters with no watermark and upload natively to each platform. Add one line to the owner ask covering this."
+   },
+   {
+    "target": "Missing dombra / local first-instrument reality",
+    "why_fails": "In Kazakhstan the dombra is one of the most common first instruments for a child, because of school, family and music schools. Leaving it out of 'first instrument for a child' means the plan misses the most local, most shareable content (dombra vs ukulele, how to choose one for a child). Everything on the slate is generic Western beginner retail that any shop in Moscow could post.",
+    "severity": "major",
+    "fix": "Add one owner question: do you sell dombras or have them in stock? If yes, a «домбра или укулеле для ребёнка?» guess or who-is-it-for episode goes into week 2, with Kazakh-language comments welcome and the RU caption checked by a native speaker."
+   },
+   {
+    "target": "ID14: POV with no person",
+    "why_fails": "A 'POV' clip that is just a phone panning along a guitar wall with thought bubbles is the most generic shop-TikTok format there is. With no face and no voice, nothing about it is recognisably Muzzone (brand link 2). It will be scrolled past as stock footage.",
+    "severity": "minor",
+    "fix": "Add a real voice: the consultant answers off-camera in 1–2 sentences («Классика, нейлон — пальцам легче. Размер скажем по возрасту.»). This needs a staff-confirmed fact. Or have the hand pick up the guitar and the consultant's line be the payoff. Keep it as a wildcard."
+   },
+   {
+    "target": "Faceless strategy overall",
+    "why_fails": "Local shop accounts in the CIS spread through a recognisable seller personality: a recurring voice and their phrases. Hands-only clips with burned-in text read as catalogue content and rarely build followers or trust strong enough to get a DM about a 500k ₸ purchase.",
+    "severity": "minor",
+    "fix": "Push the consent question to the owner harder. Even without faces, use one consistent staff voice reading the hook and the verdict in every hero episode. Start that from week 2 if the week-0 voice test sounds clean."
+   },
+   {
+    "target": "Endings with price reveals and sums",
+    "why_fails": "Ending every video on «Гитара — 59 800 ₸ / Комбик — 56 576 ₸ / Вместе — 116 376 ₸ / доставка…» turns the payoff into a price list. Retention drops at the price card, and the loop is lost.",
+    "severity": "minor",
+    "fix": "Show at most one price line on screen and put the rest in the caption and the WhatsApp reply. End on the sound, the reveal or the verdict, then the code for 2 seconds."
+   }
+  ]
+ }
+]

@@ -1,0 +1,187 @@
+{
+ "have": [
+  {
+   "input": "Site crawl, muzzone.kz (2026-10-08/09): usable ledger facts",
+   "what_it_gives": "Facts with URLs and dates for contacts (wa, phone_city, phone_mobile, address), call hours Mon–Fri 10–19 and Sat 10–17 (hours), payments including Kaspi QR/Pay/перевод, cards, Apple Pay and cash (payments), 3-working-day pickup reserve (pickup_reserve), free KZ delivery over 100 000 ₸ (delivery_free_100k), free Astana courier over 20 kg and 15 000 ₸ (delivery_astana), 14-day return with conditions, two-way delivery withheld (returns_14d, returns_conditions, returns_cost), 12-month minimum warranty (warranty), and Casio 2-year warranty with service only in Almaty (warranty_casio). These are policy facts, usable for 90 days, and they feed relief and policy_story content. Hygiene flags (not to be repeated): «100% оригинальный товар» (original), «Финальная распродажа» with no reason or date (sale_page), and the clause offering delivery compensation for an honest review."
+  },
+  {
+   "input": "Digital piano price and stock facts in the ledger",
+   "what_it_gives": "Only 2 piano SKUs are in the ledger. Casio AP-270 BKC7 is 734 886 ₸ on both 2026-10-08 and 2026-10-09, with 5 in stock per the site, so its price is stable and usable until 2026-10-16. Casio PX-770 BKC7 has a PRICE CONFLICT on the same URL: 695 913 ₸ on 10-08 vs 521 935 ₸ on 10-09, with 3 in stock. It is blocked from copy, and diff_pno (38 973 ₸) is stale. Specs for both: 88 keys, polyphony 128 vs 192, no Bluetooth, no bench. The high-stock push SKUs from intake (Estrada EDP-220BK 9 units, Casio PX-S1100BKC7 5, AP-300WEC7 4) are in research files only, not yet ledger facts."
+  },
+  {
+   "input": "clients/muzzone/research/catalog_listings.json + stock_sample.json + products_batch001.json",
+   "what_it_gives": "6 catalogue lists. The sale list (/rasprodazha.html) has 535 items with old/new price and discount_pct (20–30% seen). There are 135 stock-sampled product pages with stock_qty and 12 fully parsed product records (properties, old_price, availability). Per intake: 25 digital piano listings sampled, 11 out of stock, 16 in stock ≈ 42 units, many of them single units. This is the base for the daily stock-decrement sales proxy and the in-stock-only CTA guardrail."
+  },
+  {
+   "input": "clients/muzzone/research/youtube_channel.json (fetched 2026-10-08)",
+   "what_it_gives": "Own long-form history: 379 videos, 3 620 subs, median 2 300 views, best 64 000 (a beginner electric guitar demo), dormant since 2026-05-10. Views are null for the newest uploads in the scrape (e.g. pos 0 «ESTRADA ES1 SP1 – Демонстрация звука»), so the recent baseline is incomplete. The piano lesson series «Интуитивная импровизация на фортепиано» (lessons 6–8) got 634 / 281 / 307 views, below the median. Guitar model-name titles do well (e.g. Cort GA MEDX 12 000, Cort CR100 11 000). Brand-only drum/cymbal demos median 390 (n=48); interviews 118 (n=4) (L006). No Shorts/Reels/TikTok baseline yet."
+  },
+  {
+   "input": "clients/muzzone/research/peer_channels_meta.json",
+   "what_it_gives": "Channel-level metadata only for 13 YouTube peers: 6 retail (Мир Музыки 2 500 median, Ловец Нот 762, JAM 1 900, MAJOR-MUSIC 23 500, Рок-н-Ролл 1 100, Гитарная лавка 4 000), 4 review (2 piano-specific: Pianoby LIVE 3 300 and PIANOBY 1 200; 2 guitar), and 3 lessons (4 400–8 950). Mostly guitar-focused. None is confirmed as Kazakhstan-based, and there is no post-level outlier mining yet."
+  },
+  {
+   "input": "Knowledge base learnings L001–L006",
+   "what_it_gives": "Text-judge scores are priors only on Shorts: ρ 0.11, retail 0.07 (L001). Long-form beginner and vs titles won about 7× (L002) but did not replicate on Shorts (L003). Plain model-name titles win on search (L004), which supports a separate YouTube search line. Price slides are banned (L005). Demos must be tied to a buyer's question (L006)."
+  },
+  {
+   "input": "Step-1 intake brief",
+   "what_it_gives": "sales_push objective: +10 digital pianos above baseline (5 / 10 / 20) by 2026-12-31. Bottleneck hypothesis: consideration, low-to-medium confidence. Two audiences: parents buying a New Year gift, and adults restarting piano. Constraints: faces not allowed until consent, no installment claim, no «Финальная», no PX-770 price. 3 owner questions are already queued (reason for the deadline and the sale, monthly baseline, which models to push). They are merged into the money-map ask below so the owner pays no extra minutes."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Daily re-fetch of every digital piano product page (price, availability, stock_qty) + delivery/installment pages",
+   "why_it_matters": "It puts the high-stock push SKUs (EDP-220BK, PX-S1100, AP-300WE) and every other in-stock piano into the ledger with prices ≤7 days old, so price claims and budget_ladder ideas become possible. It resolves or escalates the PX-770 price conflict. It starts the zero-owner-minute baseline (stock decrements per week) needed to fix the target on 2026-10-26. It also checks whether the site states regional delivery lead times or any installment (рассрочка) option, so the owner is not asked for what is published.",
+   "how": "Agent: crawl the site's digital-piano category daily at about 09:00 Astana time, plus every piano URL in stock_sample.json. Store price, old_price, availability and stock_qty with timestamps as new ledger facts. Flag any price that changes between fetches as a CONFLICT that is not usable in copy. Re-fetch /dostavka-i-oplata.html and product pages for lead-time and «рассрочка/кредит/Kaspi Red» wording. On 403/429, log it and back off; do not bypass.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Only AP-270 (734 886 ₸, stable) can carry a price. All other pianos get no price on screen, and baseline comes from the owner's figure only.",
+   "blocks_step": "4_ideas: price claims for any piano other than AP-270"
+  },
+  {
+   "input": "Public reviews: 2GIS, Google Maps, Yandex Maps cards for Muzzone Astana (Кажымукана 14) + Kaspi shop reviews if a shop exists",
+   "why_it_matters": "These give a rating and review count (proof), plus verbatim customer language coded with C2 at zero owner cost: fears about delivery, damage, warranty, «не подошло», and delight details. It is the main source of convergent evidence until a chat export arrives, and it checks for a reputation problem before more demand is pushed.",
+   "how": "Agent: fetch the 2GIS, Google and Yandex cards and all visible reviews with dates. Code each one Q/F/D/M/C/B/W/J/X, filtering separately for piano, delivery and warranty mentions. Strip names on ingest (cust_###). Search Kaspi for a «Muzzone» seller and pull its rating and reviews. Do not bypass if blocked.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Peer comments plus demand phrases. Customer-language frequencies are labelled likely.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Kaspi position for the same piano SKUs (AP-270, PX-S1100, EDP-220BK, AP-300WE, PX-770)",
+   "why_it_matters": "This is a disguised non-marketing check. If the same SKU is much cheaper from other Kaspi sellers, content alone cannot sell the piano, and the owner hears that in push_back. It also tells us whether Muzzone itself sells on Kaspi, which changes the attribution plan. It is never a basis for a «дешевле» claim.",
+   "how": "Agent: search kaspi.kz by exact model for each SKU, Astana region. Record the price range, the number of sellers, whether Muzzone is among them, and the date. Store it internally as market evidence only.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Flag price position as unknown in risks; DR6 sales-handling analysis relies on chat export only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Own YouTube completion: Shorts subset, missing view counts, piano-video comments",
+   "why_it_matters": "The current 2 300 median is long-form and probably overstates short-form reach. A Shorts-only median and its outliers (≥3×) give the real realism baseline and the DR2 threshold. Questions in comments on piano videos are free Q-cluster evidence. Original piano clips (the ESTRADA ES1 SP1 sound demo, the improvisation lessons) are candidate zero-staff-minute library footage.",
+   "how": "Agent: re-fetch the channel's /shorts and /videos tabs to fill the null view counts. Split by duration ≤60 s. Compute the median and the 3× outliers for the last 15 Shorts. Pull the comments on every video whose title has «пианино/фортепиано/piano/Casio/Estrada/Celviano» and code the questions with C2. Search TikTok and Instagram for a «muzzone» account; do not bypass the Instagram login wall.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use the pooled music-retail peer median (762–4 000 for retail peers) as the platform baseline until 10 own posts exist, and label it as such.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Peer outlier mining: digital-piano posts from 10–20 accounts, local first (Astana and Almaty music shops on Instagram and TikTok), then RU-language piano channels (Pianoby, Pianoby LIVE, retail peers)",
+   "why_it_matters": "The current peer set is mostly guitar and has no confirmed Kazakhstan account. Piano-specific outliers (≥3× own median, last 90 days) give mechanism hypotheses (engine, first frame, length, faces) and the category conventions to break. Questions in their comments («какое для ребёнка?», «взвешенная клавиатура?») add Q/F evidence.",
+   "how": "Agent: find 5–10 Kazakhstan music shops via 2GIS category «музыкальные инструменты» in Astana and Almaty and their linked social accounts. Pull the last 90 days of posts with views. Keep posts ≥3× the channel median that feature pianos. Record the mechanism only, plus coded comment questions. Do the same for the piano posts of the 13 peers in peer_channels_meta.json. Never store or reuse their content.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use D3 engines from first principles. The category conventions become assumptions (cap insight strength at 3 where they matter).",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Demand phrases RU/KZ: digital piano + gift/child + Astana/Kazakhstan",
+   "why_it_matters": "These provide the customer's own search words for hooks, captions and plain model-name YouTube titles (L004), and show which doubts people type (weighted keys, which model for a beginner, a piano «в подарок ребёнку», «для музыкальной школы»).",
+   "how": "Agent: collect YouTube, Google, Yandex and TikTok autosuggest for seeds such as «цифровое пианино», «электронное пианино для ребёнка», «какое цифровое пианино выбрать», «Casio Privia/Celviano», «пианино в подарок», «цифровое пианино Астана», «цифровое пианино для музыкальной школы», and KZ equivalents («сандық пианино», to be checked by a native speaker). Keep the top suggestions with source and date.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hooks use generic category wording, and brand_link scores stay lower.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Calendar 2026: New Year, KZ school winter break, music-school term and recital dates, first snow and frost in Astana, marketplace sale days",
+   "why_it_matters": "These are moment triggers for the gift season, and they let moments be planned 10–14 days ahead. They also set the realistic last order date for regional delivery, which is where conversion content should stop.",
+   "how": "Agent: verify the 2026–27 KZ school winter-break dates (Ministry of Education), typical music-school winter recital periods, the Astana first-snow climatology, and Kaspi sale days (used only if Muzzone sells on Kaspi). Dates are verified, not remembered.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Only 31.12 is used as a moment, with no other date-bound copy.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "WhatsApp chat export: 15–30 recent customer chats, ideally including piano inquiries",
+   "why_it_matters": "This is the highest-value input. It gives the real piano questions and fears with counts, where chats die (after the price? after delivery cost? after «подумаю»?), the median first reply, the close rate (replacing the 10–25% assumption in REALISM), and the weekly inquiry baseline. It confirms or overturns the consideration-bottleneck hypothesis, and if reply time is over 60 minutes, that becomes the top leak before more content.",
+   "how": "Здравствуйте! Я ИИ-ассистент, который готовит ролики для Muzzone. Попросите, пожалуйста, того, у кого телефон с WhatsApp магазина (+7 701 0987734): откройте чат с клиентом → ⋮ (или имя контакта) → «Экспорт чата» → «Без медиафайлов». Пришлите 15–30 последних чатов, лучше всего те, где спрашивали про пианино. Имена и номера удаляем сразу, наружу ничего не попадает. Если не успеете до {дата} 12:00 — начнём с отзывов и комментариев.",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Reviews plus peer comments plus the staff voice note. Frequencies become likely. Close rate and baseline stay assumptions (REALISM range kept at 10–25%), and the target is fixed from stock-decrement counts on 2026-10-26.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Permissions tap card: faces, prices in videos, TikTok account, approval route",
+   "why_it_matters": "These are hard constraints. Faces decide whether staff can appear (e.g. a consultant answering «какое пианино для ребёнка?»). Children on camera need a parent's written OK. The card also says whether site prices may be shown, whether a TikTok account exists (or should be created), and who gives the weekly «да» (Andrey, Pavel or the owner) to keep approval latency low.",
+   "how": "Ответьте цифрами, одним сообщением: 1) Кого можно снимать: 1 — только руки и голос, 2 — сотрудников с лицом (с их согласия), 3 — и покупателей (с их согласия). По умолчанию: 1. 2) Цены в роликах: 1 — можно, только с сайта, 2 — нельзя. По умолчанию: 1. 3) TikTok у магазина: 1 — есть (пришлите ник), 2 — нет, можно завести, 3 — не нужен. По умолчанию: 2. 4) Кто одобряет ролики каждую неделю: 1 — вы, 2 — Павел, 3 — Андрей. По умолчанию: 1. Ответ до {дата} 12:00.",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "A5 defaults: hands, keys and voice only, site prices only, TikTok not used until confirmed, owner approves via Andrey/Pavel.",
+   "blocks_step": "publish: faces; publish: TikTok channel"
+  },
+  {
+   "input": "Money map for pianos (merges intake Q1–Q3): monthly sales, models to push or not, reason and date of the sale, delivery lead time, installment, PX-770 price",
+   "why_it_matters": "It sets the baseline and the absolute target, and the push SKUs (stock vs margin). It says whether «Финальная распродажа» is a real deadline (the only legitimate urgency) or a closure that rebuilds the whole objective, and gives the real December delivery and assembly lead time to regions (the conversion cut-off). It also answers whether installment exists, which is a strong non-price lever for a 200k–2M ₸ gift, and which PX-770 price is correct.",
+   "how": "Коротко по пианино (можно голосом): 1) Сколько цифровых пианино обычно продаёте в месяц? По умолчанию: считаем по остаткам на сайте. 2) Какие 2–3 модели продвигать в первую очередь, а какие не трогать? По умолчанию: те, которых больше всего на складе (Estrada EDP-220BK, Casio PX-S1100, AP-270, AP-300 белое). 3) «Финальная распродажа» на сайте — это: 1 — сезонная распродажа, 2 — магазин или направление закрывается, 3 — освобождаем склад. Есть ли дата окончания? По умолчанию: 1, сроков в роликах не называем. 4) За сколько дней пианино доезжает в регионы в декабре, нужна ли сборка? По умолчанию: про сроки доставки не говорим. 5) Есть ли рассрочка (Kaspi Red или другая)? По умолчанию: нет, не упоминаем. 6) Цена Casio PX-770 сейчас 521 935 ₸ или 695 913 ₸? По умолчанию: цену этой модели не показываем. Ответ до {дата} 12:00.",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Push the high-stock SKUs. Baseline comes from the stock-decrement proxy. No urgency, no delivery-time or installment claims, no PX-770 price. Catalogue depth is used to infer the push lines (likely).",
+   "blocks_step": "4_ideas: urgency/deadline claims, installment claims, PX-770 price, delivery-time claims; 1_intake target fixed by 2026-10-26"
+  },
+  {
+   "input": "Proof folder: about 20 real photos and videos of pianos in the store, deliveries, setups at customers' homes (no faces or with consent), plus original files of the store's own YouTube piano videos",
+   "why_it_matters": "It gives zero-staff-minute footage (re-cuts of the ESTRADA ES1 SP1 sound demo and the piano lessons are already filmed). It also gives proof of delivery and setup that answers the 'how will a 1–2M ₸ piano reach me' fear, plus filmable realities for the reality inventory. This saves staff minutes for the hero series.",
+   "how": "Пришлите, пожалуйста, файлами (не сжатыми фото в чате) 15–20 реальных фото или видео: пианино в зале, упаковка, доставка, пианино у покупателей дома (без лиц или с их согласия), и, если сохранились, исходники ваших роликов про пианино с YouTube. По умолчанию: снимем всё сами на первой неделе.",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Staff film proof in week 1 inside the 17-minute budget, and fewer zero-minute ideas. YouTube re-cuts wait for the files.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Account insights: Instagram muzzone_astana + YouTube Studio (last 15 posts)",
+   "why_it_matters": "Instagram blocks anonymous fetch, so we have no Reels baseline, no audience-city split (Astana vs regions, which matters for delivery content), and no saves or sends. Without them, DR2/DR3 thresholds and the realism math rest on the long-form YouTube median.",
+   "how": "Пришлите 3 скриншота: Instagram → Профессиональная панель → «Охваченные аккаунты» (за 30 дней, с городами) и список последних Reels с просмотрами; YouTube Studio → «Аналитика» → «Контент» → Shorts. Либо дайте доступ «аналитик» Павлу. По умолчанию: работаем по открытым цифрам.",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Public counts only, with a flag that metrics are reduced. Pooled peer medians serve as the baseline until 10 own posts exist.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Staff reality scan: 3 test clips + 2-minute silent walkthrough of the piano zone",
+   "why_it_matters": "This confirms which pianos are on display, plugged in and playable, how they sound with the phone at 20–30 cm from the keys vs the speaker, the room noise and light, whether there is a quiet corner for talk shots, and whether anyone on staff can play a few bars (hands only). It gives the named locations that D9 needs and makes the 17-minute card realistic.",
+   "how": "Для сотрудника (≈10 минут, один раз): 1) Сыграйте 10 секунд на любом пианино в зале, телефон лежит на пюпитре или рядом с клавишами в 20–30 см. 2) Скажите одну фразу, держа телефон в 30 см от лица, в самом тихом месте магазина. 3) Снимите 10 секунд зала с пианино без звука. 4) Пройдите с телефоном 2 минуты по залу молча: где стоят пианино, где окно, где тихо. Лица не нужны. Отправьте файлами. Ещё одно: кто из сотрудников может сыграть пару тактов (только руки)?",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Assume the worst case: speech only with the phone at the mouth in a quiet corner, piano sound only from the phone placed on the instrument, no wide shots, and a generic location name «зал».",
+   "blocks_step": "4_ideas: producibility (location names, playable models)"
+  },
+  {
+   "input": "Optional owner voice note (one question)",
+   "why_it_matters": "A myth or belief cluster (B) for myth_check and check_before_buy, e.g. what buyers get wrong about digital pianos for children. It stays likely until chats or reviews converge.",
+   "how": "Необязательно, до 1 минуты голосом: «Что покупатели цифровых пианино чаще всего понимают неправильно или о чём жалеют после покупки?» По умолчанию: пропускаем.",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "Skip it. Myths come only from reviews, peer comments and search phrases. No myth_check idea is built without proof.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Weekly staff voice note: «3 вопроса покупателей про пианино за неделю + 1 случай»",
+   "why_it_matters": "Fresh piano-buyer language and moments each week through December (who buys, for whom, what stalls). It feeds wa_question and reply episodes and re-ranks insights.",
+   "how": "Для сотрудника, раз в неделю (≈1 минута): запишите голосовое на 30 секунд: «Три вопроса, которые задавали покупатели про пианино на этой неделе, и один случай». Начинаем с первой недели съёмок.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use comments and the weekly chat ingest only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Offer approval (deferred; only if F4 needs a push, earliest week 3)",
+   "why_it_matters": "A non-price offer (e.g. a WhatsApp video of the exact instrument before dispatch, or an extended reserve beyond 3 working days) may lift December conversion. Any new offer needs the owner's «да».",
+   "how": "Не в первом сообщении; спросим только если понадобится, с точными условиями: «Готовы по коду из ролика [точное предложение] до [дата]? По умолчанию: без акций.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "No offer. Only published terms are used (free delivery over 100 000 ₸, 14-day return, warranty).",
+   "blocks_step": "6_campaign: any new offer"
+  },
+  {
+   "input": "Boost budget (deferred; only when a post qualifies under DR2/DR9)",
+   "why_it_matters": "The intake REALISM says +20 units likely needs an approved click-to-WhatsApp boost of proven posts. The cap is set from real avg_order × margin × close_rate once known.",
+   "how": "Не в первом сообщении; спросим с реальными цифрами, когда ролик наберёт ≥3× обычных просмотров: «Ролик „…“ набрал …; готовы потратить до … ₸ на продвижение в Астане? По умолчанию: не продвигаем.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "No boost, organic plus warm-base levers only.",
+   "blocks_step": "publish: paid boost"
+  }
+ ]
+}

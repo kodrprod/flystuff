@@ -1,0 +1,196 @@
+{
+ "have": [
+  {
+   "input": "Site footprint, crawled 2026-10-08 (facts_usable: contacts, hours, address, warranty, returns, delivery, payments, '100% оригинальный товар')",
+   "what_it_gives": "`web` facts with sources for the trust and conversion layer: minimum 12-month warranty; Casio 2-year manufacturer warranty, serviced only in Almaty (must be disclosed); 14-day return, with delivery both ways withheld (so «без лишних вопросов» can only be quoted with its conditions); free RK ground delivery over 100 000 ₸; free Astana courier over 20 kg and 15 000 ₸; Kaspi QR/Pay/transfer, cards and cash; 3-working-day pickup reserve; WA +7 701 0987734 for the CTA. TTL 7 days on anything price-like."
+  },
+  {
+   "input": "Piano facts in the ledger: Casio PX-770 BKC7 (695 913 ₸) and Casio Celviano AP-270 BKC7 (734 886 ₸), with specs and in-stock flags; diff_pno 38 973 ₸ (derived)",
+   "what_it_gives": "Usable literals for one price-anatomy or sorter idea (E08/E11), e.g. polyphony 128 vs 192 at a 38 973 ₸ gap. Stock quantity is unknown for both. They are not the stock-priority models, so on their own they cannot carry the campaign."
+  },
+  {
+   "input": "stock_sample.json (135 SKUs, stock_qty, 2026-10-08) and catalog_listings.json (6 lists)",
+   "what_it_gives": "Week-0 stock snapshot. Per the intake: about 34+ piano units across 14 in-stock SKUs and 11 out-of-stock SKUs; Estrada EDP-220BK 9, Casio PX-S1100BK 5, AP-300WE 4, Kurzweil CUP E1/M1 3 each. This is the G6 fulfilment check and the base for the weekly sales proxy (stock drop on promoted vs unpromoted SKUs). Note: some fetches failed (connection reset), so the snapshot has gaps."
+  },
+  {
+   "input": "YouTube channel export (379 videos, 3 620 subs, median 2 300 views, last upload 2026-05-10) plus learnings L002, L004, L006",
+   "what_it_gives": "Own-performance baseline for the search line: model-name and comparison titles pull search traffic (ρ 0.44 on long-form), while brand-only demos and interviews underperform (390 and 118 median). A piano asset already exists (ESTRADA ES1 SP1 sound demo). Gap: the newest videos have views = null, so recent performance cannot be read."
+  },
+  {
+   "input": "Peer channel metadata (13 YouTube channels, including Pianoby and Pianoby-LIVE piano reviewers)",
+   "what_it_gives": "Peer medians for normalisation and the 3× outlier search. Limits: YouTube only, mostly RU/UA rather than Astana or KZ, guitar-heavy, and no comments harvested yet, so it gives no customer language."
+  },
+  {
+   "input": "Cross-client learnings L001–L006",
+   "what_it_gives": "Ground rules for scoring. The text judge is near-chance on Shorts (0.07 for retail), so rubric scores are priors only. Long-form title tricks do not transfer to Shorts. Price slides over catalogue photos are banned (L005)."
+  },
+  {
+   "input": "Intake brief (type S, ladder, assumed +10 units / 50 coded inquiries, back-plan Oct 12 → Dec 31, constraints, 3 A8 questions, push-back)",
+   "what_it_gives": "Campaign frame and defaults: 0 ₸ paid; hands and process only; no children; no 'Финальная распродажа' urgency; no 'успеем к Новому году'; out-of-stock SKUs never promoted; the incentivised-review delivery refund is flagged and not used."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Ledger facts for the stock-priority pianos (Estrada EDP-220BK, Casio PX-S1100BK, AP-300WE/BK, Kurzweil CUP E1/M1, plus discounted Gewa UP365 and Kurzweil M100SR): price, old price, keys/action, polyphony, speakers, headphone outputs, stand/bench included, stock_qty",
+   "why_it_matters": "The campaign is meant to push these SKUs, but the ledger has usable facts only for PX-770 and AP-270. Without these facts every sorter, budget-tier or price-anatomy idea (E11/E20/E08) about the priority models fails G1 truth.",
+   "how": "Re-crawl each piano product page into Fact objects (`web` provenance, 7-day TTL). Discounts become `derived` facts that list their inputs. Re-verify on every publish day.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Restrict claim-bearing piano ideas to PX-770 and AP-270, and keep the priority models in no-claim formats (sound and touch, hands only).",
+   "blocks_step": "C5 proof bank, C8 claim ledger, E1 gate G1 for every piano idea"
+  },
+  {
+   "input": "Weekly piano stock re-crawl (second snapshot 2026-10-15, then every Monday)",
+   "why_it_matters": "This is the only sales baseline we can get without owner minutes. It feeds the R9 capacity guardrail (stop pushing a SKU that sells out) and the weak difference-in-differences attribution.",
+   "how": "Scheduled crawler over all piano SKUs, with a diff of stock_qty against the last snapshot.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Attribution falls back to WA codes only. No stock claims are made.",
+   "blocks_step": "A5 baseline/targets, F9 measurement, R9"
+  },
+  {
+   "input": "Demand questions: autocomplete in RU and KZ (YouTube, TikTok, Google, Yandex) for «цифровое пианино…», «какое пианино купить ребенку», «пианино для музыкальной школы», «взвешенные клавиши», «пианино в подарок», «пианино Астана»",
+   "why_it_matters": "With no chats, this is the cheapest proxy for real QUESTION and MOMENT atoms. It tests the assumption that parents of music-school pupils and gift buyers are the core buyers, and it gives model and intent titles for the YouTube search line.",
+   "how": "Autocomplete crawl, then tag atoms QUESTION, MOMENT and BELIEF.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Rely on peer comments and the chat sample.",
+   "blocks_step": "C2/C3 clustering, C5 moment and belief banks, YouTube title plan"
+  },
+  {
+   "input": "Peer comments under digital-piano videos (Pianoby, Pianoby-LIVE, retail peers) plus a local KZ/CIS TikTok and Reels scan for «цифровое пианино» (Astana first)",
+   "why_it_matters": "This supplies customer language for the whole category: fears such as «клавиши не те» and «учитель не одобрит», comparisons with acoustic pianos and marketplaces, and saturated angles. It also lists the 5 category conventions to break. The current peer set has no comments and no local short-form.",
+   "how": "Comment scrape of the top 20 piano videos plus 3× outliers; manual or automated TikTok/Reels search in RU and KZ; anonymise at ingest.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use the cross-client library archetypes for music retail, with E capped at 1 for any insight that rests on them.",
+   "blocks_step": "C3 conventions, C4 category insights, D5 trend pass"
+  },
+  {
+   "input": "Public reviews: 2GIS, Google Maps, Yandex Maps (plus Kaspi shop reviews if a shop exists)",
+   "why_it_matters": "These are the only public customer verbatims (anonymised, verbatim_ok) and our proof-bank source. They may also show after-sales or 'Финальная распродажа' worries that affect the warranty reason-to-believe.",
+   "how": "Crawl. If 2GIS blocks it (403), add a 2-minute screenshot ask to the owner card.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Skip; proof comes from site facts and worker footage.",
+   "blocks_step": "C2 atoms, C5 proof bank, C4 test 1 (evidence)"
+  },
+  {
+   "input": "Account footprint check: Muzzone TikTok, Kaspi shop, Instagram public grid; re-fetch YouTube per-video views (newest = null) and comments on Muzzone piano videos",
+   "why_it_matters": "This decides the test surface (open a TikTok or use an existing one), whether Kaspi SKU attribution is possible, and the own-median baseline. Comments on piano demos are our own customers' language.",
+   "how": "Search the platforms and Kaspi for Muzzone; use the YouTube Data API or RSS re-fetch. Instagram stays blocked and is covered by the owner access item.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Assume no TikTok and no Kaspi shop; use the pooled music-retail median, flagged as such.",
+   "blocks_step": "A6 accounts, F5 channel roles, F9 normalisation"
+  },
+  {
+   "input": "Calendar verification for 2026: Black Friday 2026-11-27, Kaspi sale events Nov–Dec, school winter-break start, music-school concert or exam dates in Astana, New Year",
+   "why_it_matters": "A real date is the only legitimate source of urgency, and the push window is Dec 21–31. Gift and «к концерту» moments must be pre-shot 2–3 weeks ahead.",
+   "how": "Static calendar plus a web check.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use the static calendar, with no date-based urgency in copy.",
+   "blocks_step": "F6 calendar/back-plan, C5 moment bank"
+  },
+  {
+   "input": "WhatsApp chat sample: export of the last 50+ chats about pianos (or 20 typical piano chats forwarded)",
+   "why_it_matters": "This is the highest-value input. It shows the real questions, the objections, where piano chats die (after price? after delivery? after the warranty answer?), the WA reply time (R7 guardrail) and the real inquiry-to-order rate, which replaces the invented 20%. It is the only way to confirm or overturn the 'consideration' bottleneck.",
+   "how": "Owner card item 1, sent via Andrey/Pavel; whoever runs the store WA exports chats. Strip PII at ingest.",
+   "who": "owner",
+   "owner_minutes": 4,
+   "fallback_if_missing": "Worker voice note «10 вопросов про пианино, которые задают каждый день» (2 min of worker time), then peer comments. Bottleneck stays at low confidence; targets stay assumed.",
+   "blocks_step": "C2/C3 (ChatFunnel), A3 bottleneck confidence, A5 inquiry targets"
+  },
+  {
+   "input": "Answers to the 3 A8 questions: win definition and models (Q1), why 'до Нового года' and what 'Финальная распродажа' means (Q2), delivery cut-off for 31.12 in Astana and the regions (Q3)",
+   "why_it_matters": "Q2 is critical. If the store is closing or a brand is leaving, the 12-month warranty reason-to-believe and the whole trust angle may be untrue, and a real end date would become legitimate urgency. Q1 replaces the placeholder +10 target. Q3 is the only basis for any «успеем к Новому году» claim.",
+   "how": "Closed questions with defaults in the owner card; deadline 2026-10-10 18:00.",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Use the intake defaults: +10 coded sales on the ≥3-unit models; no deadline, no «распродажа» wording, no delivery-by-NY promise. Warranty is quoted only exactly as on the site.",
+   "blocks_step": "A5 targets, C7 SMP/RTB, F6 push-week copy"
+  },
+  {
+   "input": "Red lines and permissions: faces or voices of staff, store areas, prices on camera, children; plus a yes/no on removing the 'компенсация доставки за отзыв' clause",
+   "why_it_matters": "This decides whether a talk-to-camera seller (E05 «Вопрос из WhatsApp», E22) and a character series are possible, or whether everything is hands, keys and sound. The review clause is a platform-rules risk that we will not use.",
+   "how": "Owner card tick boxes with defaults.",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Hands and process only; no faces, voices, customers or children; site prices only; the clause is ignored and flagged again in the first report.",
+   "blocks_step": "E1 gate G2, D6 production modes, F2 character series"
+  },
+  {
+   "input": "Money map for pianos: a screenshot or photo of piano sales by model over the last 2–3 months, which models they want to push (margin), and where piano sales close (WA, store, site, Kaspi)",
+   "why_it_matters": "The current priority list comes from stock counts, not margin. A high-stock, low-margin model could soak up the conversion slots. It also gives the real weekly baseline.",
+   "how": "Owner card: «скрин из 1С/Kaspi-кабинета или фото тетради» (via Andrey/Pavel).",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Prioritise by stock depth (≥3 units), marked as an assumption; baseline comes from the weekly stock diff.",
+   "blocks_step": "A2 line choice, C6 B-score, F3 conversion slots"
+  },
+  {
+   "input": "Account access or screenshots: Instagram insights (blocked to us), YouTube Studio, TikTok if it exists; plus the name of the person who answers WA and will tally codes",
+   "why_it_matters": "Without insights we get public views only, with no hold3, saves, shares or non-follower reach, so the E-score and R1/R7 rules run degraded. Code logging needs a named person.",
+   "how": "Grant analyst access once, or send weekly screenshots; one line naming the WA responder.",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Public view counts only, with reduced metrics flagged. Codes are tallied by whoever answers WA, inside the worker budget.",
+   "blocks_step": "F9 measurement, G6 TestPlan reward"
+  },
+  {
+   "input": "Proof folder: 10–20 real photos or videos of pianos (store floor, deliveries, setups at customers' homes with permission, warranty or service documents)",
+   "why_it_matters": "These give visual proof for the trust shelf and E03/E22 cases at no shoot cost. Lowest owner priority, because the worker can film store-floor proof in week 1.",
+   "how": "«Перешлите из галереи» in the owner card.",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "The worker films proof shots in week 1; no customer-home footage.",
+   "blocks_step": "C5 proof bank (trust-shelf items)"
+  },
+  {
+   "input": "Worker reality scan, piano-specific: 15 × 5-second shots of the in-stock pianos side by side, close key and hammer-action sound, the headphone jack in use, pedals, box and unboxing, stand assembly, the floor model being tuned or dusted; 3 sound tests with the phone 20–30 cm from the speakers; 3 answers with the phone at the face",
+   "why_it_matters": "It builds the reality bank: can the phone capture usable piano sound near the speakers, what is filmable, and does the worker want to be on camera? Piano ideas live or die on real sound (E04/E09 blind test). Replaces the week-0 shoot.",
+   "how": "Shoot card via Andrey/Pavel; one session.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Existing YouTube footage (ESTRADA ES1 sound demo, older piano demos) re-cut for vertical, plus text and b-roll ideas.",
+   "blocks_step": "C5 reality bank, D6 producibility, first ShootCard"
+  },
+  {
+   "input": "Insight prompts voice note (optional): «Что родители чаще всего понимают неправильно про цифровые пианино?», «Что вы делаете с пианино до продажи, чего никто не видит?», «Какую историю про покупателя пианино рассказываете чаще всего?»",
+   "why_it_matters": "These are business-source insights (C4 source 4): hidden realities and the category myths staff hear. Optional; they never block work.",
+   "how": "Voice note via Andrey/Pavel, marked optional.",
+   "who": "owner",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Skipped by default; worker reality scan plus chats.",
+   "blocks_step": "C4 business insights (non-blocking)"
+  },
+  {
+   "input": "Customer micro-voice at piano pickup or delivery: «Почему выбрали это пианино / чего боялись?», recorded close with permission",
+   "why_it_matters": "These are the freshest FEAR and ALTERNATIVE atoms from real piano buyers, and R8 rethink fuel. Piano purchases are infrequent, so volume will be low.",
+   "how": "Added to the weekly shoot card from week 1; up to 5 a week.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Reviews plus chats.",
+   "blocks_step": "C2 atoms (ongoing), F10 learning loop"
+  },
+  {
+   "input": "Native Kazakh reviewer for any KZ captions or hooks",
+   "why_it_matters": "The profile lists kk as a language. KZ copy may not go out unchecked (ground rule 8).",
+   "how": "MetaPrompt team reviewer, or a bilingual staff member, per batch.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Russian-only copy.",
+   "blocks_step": "D8 KZ caption variants"
+  },
+  {
+   "input": "Brand basics (logo, colours)",
+   "why_it_matters": "Covers and the end frame only; low value.",
+   "how": "Pull from muzzone.kz.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Neutral captions.",
+   "blocks_step": "F8 covers (non-blocking)"
+  }
+ ]
+}

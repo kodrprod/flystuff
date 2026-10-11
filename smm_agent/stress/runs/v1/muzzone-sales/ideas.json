@@ -1,0 +1,1617 @@
+[
+ {
+  "id": "ID01",
+  "title": "Is a 59 800 ₸ guitar a toy? Clean vs drive through the Hibilly",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "curiosity_gap",
+  "format": "myth_check",
+  "funnel": "consideration",
+  "hook_ru": "Гитара за 59 800 ₸ — игрушка?",
+  "first_frame": "Close-up from 20 cm: a hand already strumming the black AS-100BK; the cream Hibilly speaker grille fills the lower 40% of the frame; the hook sits in the upper-middle; the clean chord is audible from 0.0 s",
+  "on_screen_ru": [
+   "Гитара за 59 800 ₸ — игрушка?",
+   "Alston AS-100BK + комбик Hibilly Retro 30R",
+   "Сначала чистый звук",
+   "Теперь перегруз",
+   "Гитара — 59 800 ₸, комбик — 56 576 ₸",
+   "Игрушка или нет — решайте сами"
+  ],
+  "what_happens": "0–1 s: clean chord already ringing, hook on screen. 1–8 s: three clean chords (the claim being tested). 8–9 s: hand turns the gain knob (the turn). 9–17 s: the same three chords with drive (payoff: the viewer judges by ear). 17–20 s: price lines, then the CTA. Ending loops to the clean first chord. DM line: «смотри, вот за эти деньги, не игрушка же?». Save reason: a parent or beginner keeps it as a reference sound for a first guitar.",
+  "why_stop": "Real chord sound in frame 1, plus a hook that states the exact fear (cheap = toy) with a real ledger price",
+  "why_share_or_save": "Sent by a teen to a parent (or the reverse) when they are deciding on a first guitar; saved as a sound reference",
+  "comment_prompt_ru": "Ваша первая гитара была дешёвой или дорогой?",
+  "cta_ru": "Напишите в WhatsApp BA28 — подскажем, что ещё нужно для старта",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Гитара подключена к комбику Hibilly. Телефон на стуле в 20 см от динамика, в кадре рука на струнах. Чистый звук, 3 аккорда.",
+     "location": "гитарная стена",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Тот же кадр: поверните ручку gain, сыграйте те же 3 аккорда. Телефон не двигать.",
+     "location": "гитарная стена",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Pick best takes; cut on the gain-knob turn; burned-in RU captions; cover = frame 1 with hook; loop the end to the first chord; no music over the real sound",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "as100_price",
+   "as100_specs",
+   "hib_price",
+   "hib_specs"
+  ],
+  "kpi": "3-s hold and completion vs median; coded guitar+amp chats per 1k views",
+  "risks": [
+   "Prices dated 2026-10-08 expire 2026-10-15: agent re-fetches as100_price and hib_price on publish day",
+   "NEEDS FACT: a staff member who can play 3 basic chords cleanly (staff reality scan)",
+   "The belief «дешёвая = игрушка» is a hypothesis (E50), not counted from chats",
+   "Guardrail: phone audio must not oversell the sound; no EQ that changes the amp tone"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 4
+  },
+  "_prior": 3.731,
+  "_value": 3.731,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID02",
+  "title": "Cream amp, one gain knob: wordless sound loop",
+  "insight_ids": [
+   "I01",
+   "I09"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Кремовый комбик: крутим одну ручку",
+  "first_frame": "Macro at 20 cm: a finger already turning the gain knob on the cream Hibilly panel while a chord sustains; the text appears at about 1 s, upper-middle",
+  "on_screen_ru": [
+   "Кремовый комбик: крутим одну ручку",
+   "Hibilly Retro 30R: 30 Вт, динамик 10\"",
+   "На сайте: 56 576 ₸, было 70 720 ₸"
+  ],
+  "what_happens": "0–1 s: knob turning, the tone shifts audibly. 1–8 s: knob slowly from clean to full gain over a held chord (payoff: the full sweep). 8–11 s: slow pan across the cream panel with specs text. 11–12 s: the price line, then a loop back to the knob at the clean position. DM line: «послушай, как он раскачивается». Save reason: guitarists keep tone references.",
+  "why_stop": "Sound onset and motion in frame 1; the unusual cream finish is visually distinct from the black amps peers show",
+  "why_share_or_save": "Sent to a guitarist friend who wants a small amp; saved as a tone reference",
+  "comment_prompt_ru": "Чистый звук или перегруз — вам что ближе?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — проверим, есть ли этот комбик сейчас",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Макро: палец медленно крутит ручку gain, вторая рука держит аккорд. Телефон в 20 см от динамика — звук нужен.",
+     "location": "гитарная стена",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Медленно проведите телефоном вдоль кремовой панели комбика, 20 см.",
+     "location": "гитарная стена",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Loop edit end→start; captions; cover = knob macro; denoise only room hiss, not the amp",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "hib_specs",
+   "hib_price",
+   "hib_old"
+  ],
+  "kpi": "Loop rate, average % watched and shares per 1k; coded amp chats",
+  "risks": [
+   "Sale item, only 2 units in the 2026-10-08 sample: re-check stock (hib_instock) on publish day and drop the CTA if sold out",
+   "Prices expire 2026-10-15: re-fetch",
+   "Never use «финальная» or a reason for the discount until the owner answers",
+   "Show old→new price only as published; the 20% figure is derived, so it is not shown"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.41,
+  "_value": 3.41
+ },
+ {
+  "id": "ID03",
+  "title": "Ukulele ladder: three real price points, same chord",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "practical_value",
+  "format": "budget_ladder",
+  "funnel": "consideration",
+  "hook_ru": "Что меняется в укулеле с ценой",
+  "first_frame": "Top-down at 20 cm: a hand already strumming the first concert ukulele; the three ukes lie side by side and fill the frame; the hook is upper-middle",
+  "on_screen_ru": [
+   "Что меняется в укулеле с ценой",
+   "Caesar U-246 — 22 100 ₸, верх: ель",
+   "Caesar US-C40 — 32 901 ₸, массив ели",
+   "Alston UF-330 — 64 501 ₸, клён",
+   "Чехол — у всех трёх в комплекте",
+   "Какая звучит лучше на ваш слух?"
+  ],
+  "what_happens": "0–1 s: the strum is already sounding. 1–5 s: U-246, same chord. 5–9 s: US-C40. 9–13 s: UF-330 (the turn: the maple top looks and sounds different). 13–18 s: macro of the three tops with wood labels. 18–21 s: «чехол у всех трёх» (payoff: you know what each budget gets). 21–23 s: CTA. DM line: «смотри, вот разница за 22 и за 64 тысячи». Save reason: kept until the gift or purchase date.",
+  "why_stop": "Three instruments in one frame plus live sound; the hook names the exact question a gift buyer has",
+  "why_share_or_save": "Saved by a gift buyer to choose later; sent to a partner: «какую берём?»",
+  "comment_prompt_ru": "Какая звучит лучше: первая, вторая или третья?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем, какую взять под ваш бюджет",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Три укулеле рядом. Сверху в 20 см: один и тот же аккорд на каждой по очереди, по 4 секунды.",
+     "location": "гитарная стена",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Макро: медленно проведите телефоном над верхними деками трёх укулеле, 15 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Cut per instrument with price/wood captions; level-match loudness without changing tone; cover = three ukes; no music",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "u246_price",
+   "usc40_price",
+   "uf330_price",
+   "u246_specs",
+   "usc40_specs",
+   "uf330_specs"
+  ],
+  "kpi": "Saves per 1k and comment split; coded ukulele chats",
+  "risks": [
+   "Prices dated 2026-10-08 expire 2026-10-15: re-fetch all three on publish day",
+   "Thin stock (4 uke models in stock in the sample): re-check u246_instock, usc40_instock, uf330_instock and drop any sold-out rung",
+   "No claim that the more expensive one «звучит лучше»: the viewer judges"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 4
+  },
+  "_prior": 3.808,
+  "_value": 3.808
+ },
+ {
+  "id": "ID04",
+  "title": "Blind ukulele test: which of three is the 64 501 ₸ one",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "prediction_game",
+  "format": "guess",
+  "funnel": "attention",
+  "hook_ru": "Одна из трёх стоит 64 501 ₸",
+  "first_frame": "Tight close-up at 20 cm on strings and a strumming hand, with the body and logo cropped out; a big «A» label and the hook in the upper-middle; the sound is already playing",
+  "on_screen_ru": [
+   "Одна из трёх стоит 64 501 ₸",
+   "A",
+   "B",
+   "C",
+   "Это Alston UF-330 — 64 501 ₸",
+   "Остальные — 22 100 ₸ и 32 901 ₸"
+  ],
+  "what_happens": "0–1 s: strum A with the hook (the stake: one of these costs nearly three times the cheapest). 1–4 s: A. 4–7 s: B. 7–10 s: C (the viewer holds an answer by ear). 10–15 s: reveal: hands lift each uke to the camera and the price appears under each (payoff, true order from the edit). 15–17 s: CTA. DM line: «послушай, сможешь по звуку понять, какая дорогая?». Save reason: none; this is a reach and comment piece.",
+  "why_stop": "A concrete price stake in frame 1 with real sound; the viewer commits to an answer before the reveal",
+  "why_share_or_save": "Sent to a musician friend as an ear test: «по звуку поймёшь?»",
+  "comment_prompt_ru": "На слух какая: A, B или C?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — расскажем, чем они отличаются",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно только струны и рука, корпус и надпись не в кадре. Один аккорд на каждой укулеле по очереди, телефон в 20 см.",
+     "location": "гитарная стена",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки по очереди поднимают каждую укулеле к камере головкой грифа вперёд.",
+     "location": "гитарная стена",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Randomise the A/B/C order in the edit and write the reveal to match the actual order; captions; cover = «A» frame with the 64 501 ₸ hook",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "uf330_price",
+   "u246_price",
+   "usc40_price"
+  ],
+  "kpi": "Comments per 1k and completion; coded ukulele chats",
+  "risks": [
+   "Hook rewritten after H2 flag: no «угадайте» wording; the stake is the ledger price itself",
+   "The reveal must match the real order of clips (editor check)",
+   "Prices expire 2026-10-15: re-fetch; drop the idea if UF-330 is sold out (uf330_instock)",
+   "Can share the shoot session with ID03 (same location); the bodies must differ (blind vs labelled) and not run in the same week"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.551,
+  "_value": 3.551
+ },
+ {
+  "id": "ID05",
+  "title": "Two Casio pianos, one phrase: can you hear the price gap?",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "curiosity_gap",
+  "format": "ab_compare",
+  "funnel": "consideration",
+  "hook_ru": "Два Casio, одна мелодия. Слышна разница?",
+  "first_frame": "Hands already playing a simple phrase on the PX-770; the phone is 25 cm above the speaker area; the keys fill 60% of the frame; the hook is upper-middle",
+  "on_screen_ru": [
+   "Два Casio, одна мелодия. Слышна разница?",
+   "Casio PX-770",
+   "Casio Celviano AP-270",
+   "У обоих 88 клавиш",
+   "Полифония: 128 и 192",
+   "PX-770 — 521 935 ₸",
+   "AP-270 — 734 886 ₸"
+  ],
+  "what_happens": "0–1 s: the phrase starts on the PX-770. 1–8 s: PX-770. 8–15 s: the same phrase on the AP-270, from the same distance. 15–19 s: on-paper differences (88 keys each; polyphony 128 vs 192). 19–23 s: both prices (payoff: what the money buys on paper, and the viewer's own ear). 23–25 s: CTA. DM line: «послушай, есть разница? нам какой брать?». Save reason: a parent keeps it until the teacher's advice or the store visit.",
+  "why_stop": "Live piano sound at onset, plus a two-option stake the viewer can answer by ear",
+  "why_share_or_save": "A parent sends it to a spouse or the music teacher: «есть разница?»",
+  "comment_prompt_ru": "Слышите разницу? Да, нет или чуть-чуть",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем, какой из двух под вашу задачу",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Casio PX-770: сыграйте одну простую фразу. Телефон в 25 см над клавишами, ближе к динамику.",
+     "location": "зал с пианино",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Casio AP-270: та же фраза, телефон так же в 25 см, та же громкость.",
+     "location": "зал с пианино",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Крупно названия моделей на корпусе, по 2 секунды каждое.",
+     "location": "зал с пианино",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Match loudness between clips; captions; split-screen label; cover = both pianos",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "web_cifrovoe_pianino_casio_px_770_bkc7_price",
+   "web_cifrovoe_pianino_casio_celviano_ap_270_bkc7_price"
+  ],
+  "kpi": "Shares and saves per 1k; coded piano chats (high ticket)",
+  "risks": [
+   "Piano prices are volatile (PX-770 moved 695 913 → 521 935 ₸ in 16 h): re-fetch on publish day; if they changed, update the lines or drop them",
+   "NEEDS FACT: a staff member who can play the same short phrase on both",
+   "A phone mic under-represents piano sound; captions must not claim one «звучит лучше»",
+   "The 212 951 ₸ difference is derived and is not shown; only the two ledger prices are shown"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 4
+  },
+  "_prior": 3.679,
+  "_value": 3.679
+ },
+ {
+  "id": "ID06",
+  "title": "Piano for music school: three checks before you pay",
+  "insight_ids": [
+   "I03",
+   "I06"
+  ],
+  "driver": "practical_value",
+  "format": "check_before_buy",
+  "funnel": "consideration",
+  "hook_ru": "Пианино в музыкалку: проверьте три вещи",
+  "first_frame": "A hand already doing a fast glissando across all keys of the PX-770, filmed at 25 cm along the keyboard; the hook is upper-middle",
+  "on_screen_ru": [
+   "Пианино в музыкалку: проверьте три вещи",
+   "1. Клавиш — 88, как у этих Casio",
+   "2. Банкетки в комплекте у этих моделей нет",
+   "3. Гарантия Casio — 2 года",
+   "Сервис Casio — в Алматы",
+   "Сохраните, чтобы не забыть в магазине"
+  ],
+  "what_happens": "0–2 s: glissando across 88 keys. 2–7 s: check 1 (keys). 7–12 s: check 2, the empty spot in front of the piano and «банкетки в комплекте нет» (the surprise). 12–18 s: check 3, the Casio logo plus the warranty and the Almaty service (payoff: the honest inconvenient part). 18–20 s: save prompt and CTA. DM line: «скинь в чат родителей класса». Save reason: a checklist for the store visit.",
+  "why_stop": "Sound and motion across the whole keyboard; the hook names the exact situation (a child in music school)",
+  "why_share_or_save": "Saved as a checklist; forwarded to a class parents' chat",
+  "comment_prompt_ru": "Банкетку покупали отдельно или обходились стулом?",
+  "cta_ru": "Напишите в WhatsApp BA25 — пришлём, что входит в комплект нужной модели",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Глиссандо по всем клавишам PX-770, телефон в 25 см вдоль клавиатуры — звук нужен.",
+     "location": "зал с пианино",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Пустое место перед пианино, где обычно стоит банкетка: медленно опустите телефон к полу.",
+     "location": "зал с пианино",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Крупно логотип Casio на корпусе, 15 см.",
+     "location": "зал с пианино",
+     "seconds": 4,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Numbered captions; optional synthetic voice-over labelled «озвучено ИИ»; cover = keyboard with «3 проверки»",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "warranty_casio"
+  ],
+  "kpi": "Saves per 1k; coded piano chats",
+  "risks": [
+   "The structural count «три» must match the 3 checks shown",
+   "The bench line applies only to the PX-770/AP-270; the edit must show those models",
+   "Wording «88, как у этих Casio» is a fact about these models, not a rule for all pianos"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.705,
+  "_value": 3.705,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID07",
+  "title": "Returns told straight, including the cost",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "relief",
+  "format": "policy_story",
+  "funnel": "trust",
+  "hook_ru": "Что будет, если инструмент не подошёл",
+  "first_frame": "Hands already zipping a ukulele into its case with the tag visible, at 25 cm; the hook is upper-middle",
+  "on_screen_ru": [
+   "Что будет, если инструмент не подошёл",
+   "Вернуть можно в течение 14 дней",
+   "Если товаром не пользовались",
+   "Сохраните упаковку, ярлыки и чек",
+   "Доставку в обе стороны удержат",
+   "При наложенном платеже — ещё 3%",
+   "Гарантия — минимум 12 месяцев"
+  ],
+  "what_happens": "0–2 s: the case closes. 2–8 s: the voice says the 14-day rule over a hand holding the tag. 8–14 s: conditions: unused, packaging, labels, receipt. 14–20 s: the honest catch, delivery both ways is withheld, +3% for cash on delivery (the turn: an admitted cost). 20–24 s: 12-month warranty (payoff). 24–26 s: CTA. DM line: «вот условия, читай до заказа». Save reason: kept by out-of-town buyers until they order.",
+  "why_stop": "A fear stated plainly in frame 1; admitting the cost is unusual for a shop",
+  "why_share_or_save": "Saved by a remote buyer before ordering; sent to whoever pays",
+  "comment_prompt_ru": "Вы читаете условия возврата до покупки? Да или нет",
+  "cta_ru": "Напишите в WhatsApp {CODE} — ответим про возврат и гарантию до покупки",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Руки застёгивают укулеле в чехол, ярлык виден. Телефон в 25 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Телефон у рта, тихий угол: скажите фразу своими словами.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Вернуть можно за 14 дней, но доставку туда-обратно удержат.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice-over over the case B-roll plus library hands-on-instrument clips; policy captions; cover with hook",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "returns_14d",
+   "returns_conditions",
+   "returns_cost",
+   "warranty"
+  ],
+  "kpi": "Saves per 1k; chat→order rate for out-of-town coded chats; returns guardrail",
+  "risks": [
+   "Never mention the delivery-compensation-for-review clause (incentivised review)",
+   "Policy facts are valid 90 days from 2026-10-08",
+   "Staff voice: consent to use the voice (no face)"
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 5,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.295,
+  "_value": 3.295
+ },
+ {
+  "id": "ID08",
+  "title": "Don't overpay for a piano until you compare this (zero staff)",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "honest_signal",
+  "format": "anti_sell",
+  "funnel": "consideration",
+  "hook_ru": "Не переплачивайте за пианино, пока не сравните",
+  "first_frame": "Library footage: hands on AP-270 keys mid-phrase (cropped from the own comparison video); the hook is upper-middle, and the two spec cards slide in at 1 s",
+  "on_screen_ru": [
+   "Не переплачивайте за пианино, пока не сравните",
+   "PX-770 и AP-270: 88 клавиш у обоих",
+   "Bluetooth — нет у обоих",
+   "Банкетки в комплекте нет у обоих",
+   "Разница на бумаге — полифония: 128 и 192",
+   "PX-770 — 521 935 ₸",
+   "AP-270 — 734 886 ₸",
+   "Нужна ли разница — решите на слух"
+  ],
+  "what_happens": "0–2 s: hands playing plus the hook. 2–10 s: a screen recording of both product pages, specs highlighted: what is the same. 10–14 s: the one on-paper difference (the turn). 14–18 s: both prices. 18–22 s: «решите на слух» over a piano phrase (payoff: the shop is telling you the cheaper one may be enough). 22–24 s: CTA. DM line: «смотри, на бумаге почти одно и то же». Save reason: reference before the store visit.",
+  "why_stop": "A shop warning against overpaying contradicts the expected sales pitch",
+  "why_share_or_save": "Sent by a parent to a spouse to settle the «какой брать» argument",
+  "comment_prompt_ru": "Что для вас важнее: звук, клавиатура или цена?",
+  "cta_ru": "Напишите в WhatsApp BA24 — сыграем обе модели по видео",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Agent screen-records https://muzzone.kz/cifrovoe-pianino-casio-px-770-bkc7.html and https://muzzone.kz/cifrovoe-pianino-casio-celviano-ap-270-bkc7.html on publish day; B-roll = own video youtube_channel.json pos 14 (AP-270 comparison), cropped to hands and keys, the other brand's name not shown; captions; cover with hook",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "ap270_specs",
+   "web_cifrovoe_pianino_casio_px_770_bkc7_price",
+   "web_cifrovoe_pianino_casio_celviano_ap_270_bkc7_price"
+  ],
+  "kpi": "Shares per 1k; coded piano chats and their chat→order rate",
+  "risks": [
+   "NEEDS FACT: owner OK for the promise «сыграем обе модели по видео» (non-price service); fallback CTA «подскажем, какой под вашу задачу»",
+   "Piano prices are volatile: re-fetch on publish day",
+   "Library clip pos 14 may show faces or a third-party brand: crop to hands, blur if needed",
+   "Don't say «хватит дешёвой» as a fact; the viewer decides by ear"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.731,
+  "_value": 3.731,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID09",
+  "title": "What happens to a guitar before it ships",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "social_currency",
+  "format": "backstage",
+  "funnel": "trust",
+  "hook_ru": "Что происходит с гитарой перед отправкой",
+  "first_frame": "Hands already turning a tuning peg with a clip tuner visible, at 20 cm; the open string sound is audible; the hook is upper-middle",
+  "on_screen_ru": [
+   "Что происходит с гитарой перед отправкой",
+   "Достаём со склада",
+   "Настраиваем",
+   "Проверяем звук",
+   "Упаковываем"
+  ],
+  "what_happens": "0–2 s: a tuning peg turns, the tuner needle settles. 2–8 s: tuning. 8–13 s: a sound check, one chord through the amp. 13–19 s: packing (payoff: the unseen care before delivery). 19–21 s: CTA. DM line: «смотри, они перед отправкой проверяют». Save reason: low; this is a trust piece.",
+  "why_stop": "A rarely seen insider process with a tuning sound at onset",
+  "why_share_or_save": "Sent to someone hesitant about ordering an instrument by delivery",
+  "comment_prompt_ru": "Заказывали инструмент с доставкой? Как приехал?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — расскажем, как отправим в ваш город",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: руки настраивают гитару, тюнер на голове грифа виден. Телефон в 20 см.",
+     "location": "гитарная стена",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки упаковывают гитару так, как вы делаете это обычно перед отправкой.",
+     "location": "гитарная стена",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Jump cuts; step captions; cover = tuner macro",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Shares per 1k; coded out-of-town chats",
+  "risks": [
+   "NEEDS FACT: does the store actually tune and sound-check every instrument before shipping, and how is it packed? (owner) Every step on screen must be confirmed or removed",
+   "Don't invent a QC ritual for the video"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.936,
+  "_value": 2.936
+ },
+ {
+  "id": "ID10",
+  "title": "«Is it really in stock?» answered with a video of the exact unit",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "relief",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "Нам пишут: «Она правда есть в наличии?»",
+  "first_frame": "An anonymised chat-bubble card over a hand already lifting the AS-100BK off the wall; the hook is upper-middle",
+  "on_screen_ru": [
+   "Нам пишут: «Она правда есть в наличии?»",
+   "Отвечаем видео: вот эта гитара",
+   "Alston AS-100BK — 59 800 ₸",
+   "Проверим склад и снимем ваш экземпляр"
+  ],
+  "what_happens": "0–1 s: the chat card plus the hand reaching for the guitar. 1–8 s: the guitar comes off the wall, one chord through the amp at 25 cm. 8–13 s: close-up of the body (payoff: this is what you receive as the answer). 13–18 s: the staff voice explains the process. 18–20 s: CTA. DM line: «пиши им модель, они снимут». Save reason: an out-of-town buyer keeps it for when they choose a model.",
+  "why_stop": "The viewer's own doubt in their own words, followed immediately by physical proof",
+  "why_share_or_save": "Sent to a friend in another city who is looking for an instrument",
+  "comment_prompt_ru": "Какой инструмент проверить в следующем видео? Напишите модель",
+  "cta_ru": "Напишите в WhatsApp {CODE} и модель — проверим наличие и пришлём видео",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Рука снимает гитару со стены, играет один аккорд через комбик. Телефон в 25 см.",
+     "location": "гитарная стена",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Телефон у рта, тихий угол.",
+     "location": "тихий угол",
+     "seconds": 6,
+     "takes": 3,
+     "say_ru": "Пишите модель — проверим и снимем именно её.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Anonymised chat card (paraphrase, no names or numbers); captions; cover = chat card + guitar",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "as100_price",
+   "as100_instock"
+  ],
+  "kpi": "Coded chats per 1k; chat→order rate",
+  "risks": [
+   "NEEDS FACT: at least 2 real customer messages asking about stock (from the WhatsApp export) before using «Нам пишут»; otherwise switch the hook to «Есть ли она в наличии? Проверяем»",
+   "NEEDS FACT: owner approval of the non-price service «видео вашего экземпляра до оплаты»",
+   "Price expires 2026-10-15; stock claim must be ≤48 h old"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 5
+  },
+  "_prior": 3.295,
+  "_value": 3.295
+ },
+ {
+  "id": "ID11",
+  "title": "First electric guitar: from box to first chord",
+  "insight_ids": [
+   "I06",
+   "I01"
+  ],
+  "driver": "mastery",
+  "format": "process_full",
+  "funnel": "consideration",
+  "hook_ru": "Первая электрогитара: от коробки до звука",
+  "first_frame": "Close-up at 20 cm: a hand already pushing a cable jack into the AS-100BK; the click is audible; the hook is upper-middle",
+  "on_screen_ru": [
+   "Первая электрогитара: от коробки до звука",
+   "Гитара: Alston AS-100BK",
+   "Комбик: Hibilly Retro 30R",
+   "Кабель — в гитару, потом в комбик",
+   "Громкость — сначала на ноль",
+   "Первый аккорд"
+  ],
+  "what_happens": "0–2 s: the jack clicks into the guitar. 2–6 s: the other end goes into the amp. 6–10 s: power on, volume from zero (the safe-start detail). 10–16 s: the first chord rings out (payoff). 16–18 s: CTA. DM line: «вот, всё что нужно, чтобы начать». Save reason: a beginner keeps the setup order.",
+  "why_stop": "A tactile action with sound in frame 1; the hook names the exact beginner moment",
+  "why_share_or_save": "Sent by a teen to a parent: «вот что нужно купить»",
+  "comment_prompt_ru": "Что пугало вас больше всего перед первой гитарой?",
+  "cta_ru": "Напишите в WhatsApp BA29 — скажем, что из этого нужно докупить",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: штекер кабеля входит в гнездо гитары, щелчок. Телефон в 20 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Второй конец кабеля в комбик, включаете, громкость с нуля чуть вверх.",
+     "location": "гитарная стена",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Первый аккорд, телефон в 20 см от динамика.",
+     "location": "гитарная стена",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Jump cuts; step captions; cover = jack macro",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "as100_specs",
+   "hib_specs"
+  ],
+  "kpi": "Saves per 1k; coded guitar+amp chats",
+  "risks": [
+   "NEEDS FACT: whether a cable comes with the guitar or the amp, and its price; nothing about cable inclusion is claimed until confirmed",
+   "«Громкость сначала на ноль» is general practice, presented as a step, not a product claim"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.603,
+  "_value": 3.603,
+  "_why": "explore"
+ },
+ {
+  "id": "ID12",
+  "title": "First instrument: ukulele or electric guitar?",
+  "insight_ids": [
+   "I07",
+   "I06"
+  ],
+  "driver": "honest_signal",
+  "format": "who_is_it_for",
+  "funnel": "consideration",
+  "hook_ru": "Первый инструмент: укулеле или электрогитара?",
+  "first_frame": "Split frame: a ukulele strum on the left and the electric guitar through the amp on the right, both already playing; the hook is upper-middle",
+  "on_screen_ru": [
+   "Первый инструмент: укулеле или электрогитара?",
+   "Укулеле: в чехле, без проводов, 22 100 ₸",
+   "Электрогитара: 59 800 ₸ + нужен комбик",
+   "Комбик Hibilly — 56 576 ₸",
+   "Совет продавца:",
+   "Петь дома под аккорды — укулеле",
+   "Перегруз и рок — электрогитара"
+  ],
+  "what_happens": "0–1 s: both sounds. 1–7 s: the ukulele profile and what you get. 7–13 s: the electric profile and the honest add-on (an amp is needed). 13–19 s: the staff advice by situation (payoff). 19–21 s: CTA. DM line: «тебе что больше подходит?». Save reason: a gift buyer keeps it.",
+  "why_stop": "Two contrasting sounds at once, and a binary choice the viewer already faces",
+  "why_share_or_save": "Sent to a sibling or child: «тебе что?»",
+  "comment_prompt_ru": "Вы бы начали с чего: укулеле или гитара?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — поможем выбрать под того, кто будет играть",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Укулеле: простой бой, телефон в 20 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Электрогитара через комбик: тот же ритм, телефон в 20 см от динамика.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Split screen; profile captions; cover = split frame",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "u246_price",
+   "u246_specs",
+   "as100_price",
+   "hib_price"
+  ],
+  "kpi": "Shares per 1k; coded chats split by uke vs guitar",
+  "risks": [
+   "NEEDS FACT: staff/owner agrees with the «совет продавца» lines (opinion, labelled)",
+   "Prices expire 2026-10-15: re-fetch",
+   "Footage overlaps ID21: different first frame and edit, not published within 7 days of each other"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.705,
+  "_value": 3.705
+ },
+ {
+  "id": "ID13",
+  "title": "Child started music school: home piano, the practical version",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "moment_trigger",
+  "format": "moment",
+  "funnel": "conversion",
+  "hook_ru": "Ребёнок пошёл в музыкалку? Пианино для дома",
+  "first_frame": "Adult hands already playing a simple scale on the PX-770 at 25 cm; the hook is upper-middle",
+  "on_screen_ru": [
+   "Ребёнок пошёл в музыкалку? Пианино для дома",
+   "Casio PX-770: 88 клавиш",
+   "Гарантия Casio — 2 года",
+   "Цена на сайте сегодня: 521 935 ₸",
+   "Доставка по Казахстану бесплатно от 100 000 ₸"
+  ],
+  "what_happens": "0–2 s: the scale. 2–8 s: a simple étude-like phrase (the sound). 8–12 s: 88 keys, glissando. 12–16 s: warranty. 16–20 s: today's price and free delivery across Kazakhstan (payoff: the practical answer for a parent). 20–22 s: CTA. DM line: «скинь в чат родителей». Save reason: kept until the parents decide.",
+  "why_stop": "A call-out naming a current life moment, with the piano sound at onset",
+  "why_share_or_save": "Forwarded to a class parents' WhatsApp chat",
+  "comment_prompt_ru": "Ваш ребёнок в каком классе музыкалки?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем модель под уровень ребёнка",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Руки взрослого играют гамму на PX-770, телефон в 25 см над клавишами.",
+     "location": "зал с пианино",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Глиссандо по всей клавиатуре, телефон движется вдоль клавиш.",
+     "location": "зал с пианино",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Captions; cover with hook; no child on camera; no AI image of a child",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "px770_specs",
+   "warranty_casio",
+   "web_cifrovoe_pianino_casio_px_770_bkc7_price",
+   "delivery_free_100k"
+  ],
+  "kpi": "Coded piano chats per 1k; piano orders",
+  "risks": [
+   "The music-school moment is an assumption (E48): test now, re-rank by coded chats",
+   "Piano price is volatile: re-fetch on publish day",
+   "Astana courier terms depend on weight (>20 kg), not in the ledger, so they are not claimed",
+   "Minors only with a parent's written OK; this version has none"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.705,
+  "_value": 3.705
+ },
+ {
+  "id": "ID14",
+  "title": "Gift for someone who doesn't play: the one-finger ukulele chord",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "moment_trigger",
+  "format": "moment",
+  "funnel": "conversion",
+  "hook_ru": "Если дарите инструмент тому, кто не играет",
+  "first_frame": "Macro at 20 cm: one finger pressing a single string on the ukulele and a strum already ringing; the hook is upper-middle",
+  "on_screen_ru": [
+   "Если дарите инструмент тому, кто не играет",
+   "Аккорд До на укулеле — одним пальцем",
+   "Чехол уже в комплекте",
+   "Caesar U-246 — 22 100 ₸",
+   "Caesar US-C40 — 32 901 ₸"
+  ],
+  "what_happens": "0–2 s: one finger, one chord. 2–7 s: shown again slowly (payoff: a non-player can do it, true by construction on camera). 7–11 s: the ukulele goes into its case, zip (gift-ready). 11–15 s: two price points. 15–17 s: CTA. DM line: «вот что подарим». Save reason: kept for the holiday shortlist.",
+  "why_stop": "A surprising, visible micro-skill in frame 1, plus a call-out to gift buyers",
+  "why_share_or_save": "Saved for New Year or a birthday; sent to the co-gifter",
+  "comment_prompt_ru": "Кому бы вы такое подарили? Одним словом",
+  "cta_ru": "Напишите в WhatsApp BA26 — подскажем, какую укулеле подарить",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Макро: один палец зажимает одну струну на 3-м ладу, бой по струнам. Телефон в 20 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки кладут укулеле в чехол и застёгивают молнию.",
+     "location": "гитарная стена",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Slow-mo repeat of the finger; captions; cover = finger macro",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "u246_specs",
+   "usc40_specs",
+   "u246_price",
+   "usc40_price"
+  ],
+  "kpi": "Saves per 1k; coded ukulele chats",
+  "risks": [
+   "Gift timing is an assumption (E49): pre-test now, scale 10–14 days before New Year",
+   "Prices expire 2026-10-15; stock is thin, so re-check",
+   "The chord shown must really be C (3rd fret, A string); verify in the edit"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.795,
+  "_value": 3.795,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID15",
+  "title": "POV: you just turned on overdrive for the first time",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "identity",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: вы впервые включили перегруз",
+  "first_frame": "A hand gently strumming a clean chord on the AS-100BK at 20 cm; the POV text is upper-middle and a small «постановка» label is in the corner",
+  "on_screen_ru": [
+   "POV: вы впервые включили перегруз",
+   "постановка",
+   "Сначала тихо и прилично",
+   "А потом ручка gain",
+   "Alston AS-100BK + Hibilly Retro 30R"
+  ],
+  "what_happens": "0–3 s: polite clean strumming. 3–4 s: a finger twists the gain (the turn). 4–8 s: a big distorted chord; the hand freezes, then plays it again (payoff: the joy every beginner remembers). 8–10 s: the gear names, loop to the clean start. DM line: «это ты в 15 лет». Save reason: none; reach and identity.",
+  "why_stop": "A recognisable moment named in the POV text, with the sound contrast arriving within 4 s",
+  "why_share_or_save": "Sent to a friend who plays: «это же ты»",
+  "comment_prompt_ru": "Какую песню вы сыграли бы первой?",
+  "cta_ru": "Напишите в WhatsApp BA32 — подберём гитару и комбик для первого перегруза",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Тихий чистый бой, потом резко поверните gain и ударьте аккорд. Телефон в 20 см от динамика.",
+     "location": "гитарная стена",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Макро: палец крутит ручку gain до упора.",
+     "location": "гитарная стена",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Timing the text to the beat; «постановка» label; captions; loop",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "as100_specs",
+   "hib_specs"
+  ],
+  "kpi": "Shares per 1k and relative views; coded chats (secondary)",
+  "risks": [
+   "WILDCARD: identity/POV untested for this client",
+   "Same gear as ID01/ID02: not in the same week as ID02 (similar knob first frame)",
+   "No volume or loudness claims"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.449,
+  "_value": 3.449,
+  "_why": "explore"
+ },
+ {
+  "id": "ID16",
+  "title": "One splash hit, close up (library re-cut, zero staff)",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Сплэш 10 дюймов. Один удар",
+  "first_frame": "Library macro: the stick already striking the 10\" splash and the cymbal shimmering; the text appears at 1 s upper-middle",
+  "on_screen_ru": [
+   "Сплэш 10 дюймов. Один удар",
+   "PAISTE PST X Swiss Splash 10\"",
+   "Слушайте затухание"
+  ],
+  "what_happens": "0–1 s: the hit. 1–6 s: the decay with the cymbal vibrating in macro (payoff: the sound you can't hear in a catalogue). 6–9 s: a second hit, loop back to the first. DM line: «послушай этот сплэш». Save reason: drummers keep cymbal references.",
+  "why_stop": "The strike is sound onset in frame 1; very short sound-only clips were the drum outliers on the channel (E06)",
+  "why_share_or_save": "Sent to a drummer friend",
+  "comment_prompt_ru": "Сплэш или крэш — что у вас на установке?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — скажем, какие тарелки сейчас в наличии",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. Download the owner's own video youtube_channel.json pos 288 («PAISTE PST X Swiss Splash 10\"», 21 s) from the channel's Studio; trim to 8–9 s, loop end→start, captions, no music. Alternate cut: pos 344 (Кахон LP1426)",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Loop rate and relative views; profile visits per 1k",
+  "risks": [
+   "Judgement call beyond the METHOD: the mode enum has no 'library re-cut' value and worker/mixed require new shots, so zero-staff library re-cuts are tagged 'screen' (as ID08). Proposed for G+: a 'library' container",
+   "NEEDS FACT: is the PST X Swiss Splash 10\" still sold and in stock? (agent re-fetch); if not, the caption only names it and the CTA asks what is available, with no price",
+   "Judgement call beyond the METHOD: drums are kept library-only to stay within 3 shoot locations until the reality scan names a drum corner",
+   "Conversion is weak and niche; attention arm"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 4,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 3.231,
+  "_value": 3.231
+ },
+ {
+  "id": "ID17",
+  "title": "The seller plays today's arrival (hands + voice character)",
+  "insight_ids": [
+   "I10"
+  ],
+  "driver": "mastery",
+  "format": "character",
+  "funnel": "attention",
+  "hook_ru": "Продавец играет то, что сегодня привезли",
+  "first_frame": "Hands already playing a riff on the new arrival at 20 cm; the hook is upper-middle; no face",
+  "on_screen_ru": [
+   "Продавец играет то, что сегодня привезли",
+   "[модель — из поставки дня]",
+   "Мнение продавца:"
+  ],
+  "what_happens": "0–1 s: the riff. 1–10 s: a short passage on the new instrument (sound). 10–16 s: a one-line opinion in the seller's voice, phone at the mouth, labelled «мнение продавца» (the turn). 16–20 s: one more phrase (payoff), then CTA. Series «Что пришло сегодня». DM line: «зацени новинку». Save reason: low.",
+  "why_stop": "A skilled hand in motion with live sound; player-led content outdraws store channels (E11, E41)",
+  "why_share_or_save": "Sent to a musician friend who follows new gear",
+  "comment_prompt_ru": "Что сыграть на следующей новинке?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — расскажем про эту модель подробнее",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сыграйте 10 секунд на новом инструменте, телефон в 20 см от струн или динамика.",
+     "location": "гитарная стена",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Телефон у рта: одна фраза, что вам понравилось.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Мне нравится вот это — послушайте сами.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Captions with the model name from the ledger after the agent fetches the product page; «мнение продавца» label; cover = hands on instrument",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Follows and completion; series retention across episodes",
+  "risks": [
+   "WILDCARD: depends on a staff member who plays well and volunteers (NEEDS FACT: who, consent for voice)",
+   "NEEDS FACT: a real new arrival that week; «сегодня привезли» must be true per episode",
+   "Model name and price must be ledger-fetched before publishing",
+   "Talking heads flopped on this channel (E05), so the face stays off"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.808,
+  "_value": 2.808
+ },
+ {
+  "id": "ID18",
+  "title": "You decide what we play next (vote with staff voice)",
+  "insight_ids": [
+   "I10",
+   "I08"
+  ],
+  "driver": "participation",
+  "format": "audience_vote",
+  "funnel": "attention",
+  "hook_ru": "Решаете вы: что сыграем на следующей неделе?",
+  "first_frame": "A fast 3-way split of library clips (guitar, piano, ukulele photo), each already moving or sounding; the staff voice starts at 0.5 s; the hook is upper-middle",
+  "on_screen_ru": [
+   "Решаете вы: что сыграем на следующей неделе?",
+   "1 — электрогитара",
+   "2 — цифровое пианино",
+   "3 — укулеле",
+   "Победитель — в следующем ролике"
+  ],
+  "what_happens": "0–2 s: three clips flash with sound while the staff voice asks the question. 2–8 s: each option for 2 s with its number. 8–10 s: «победитель — в следующем ролике» (payoff: the viewer changes what the shop films). Next week: the winning instrument is filmed and the result is shown. DM line: «голосуй за пианино». Save reason: none.",
+  "why_stop": "Fast sound changes, a real person's voice and a direct stake in frame 1",
+  "why_share_or_save": "Sent to a friend to rally votes for their instrument",
+  "comment_prompt_ru": "Ваш голос: 1, 2 или 3?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — если хотите услышать конкретную модель",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Телефон у рта, тихий угол: задайте вопрос своими словами, спокойно.",
+     "location": "тихий угол",
+     "seconds": 5,
+     "takes": 3,
+     "say_ru": "Решаете вы: что сыграем в следующем ролике?",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Staff voice over library clips: own video youtube_channel.json pos 128 (Cort X100 demo, crop to hands), pos 252 (Kurzweil KA130 piano); ukulele = the site product photo of Caesar U-246 with a light Ken Burns move (business's own photo, shown as a photo); captions; numbered cover",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Comments per 1k; return viewers on the follow-up episode",
+  "risks": [
+   "WILDCARD: participation untested here",
+   "Owner must agree to film the winner the following week (1 slot on the shoot card); asking and not following through is the failure mode",
+   "Library models may no longer be sold: no model names or prices in this video",
+   "Staff voice used: consent to use the voice (no face)"
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 4,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 2.821,
+  "_value": 2.821
+ },
+ {
+  "id": "ID19",
+  "title": "Cheap guitar + expensive amp, or the reverse? Ear test (library re-cut)",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "prediction_game",
+  "format": "ab_compare",
+  "funnel": "attention",
+  "hook_ru": "Дешёвая гитара + дорогой комбик или наоборот?",
+  "first_frame": "Library: a hand mid-riff with an «А» label; the hook is upper-middle; the sound is already playing",
+  "on_screen_ru": [
+   "Дешёвая гитара + дорогой комбик или наоборот?",
+   "Вариант А",
+   "Вариант Б",
+   "Где дешёвая гитара?",
+   "Ответ: [по исходному тесту]"
+  ],
+  "what_happens": "0–1 s: riff A. 1–8 s: A. 8–15 s: B, the same riff. 15–17 s: «где дешёвая гитара?» (the stake). 17–22 s: the reveal from the original test (payoff). 22–24 s: CTA. DM line: «послушай, где дешёвая гитара?». Save reason: for beginners planning a budget split.",
+  "why_stop": "A two-option ear test about a real budget dilemma, with sound at onset",
+  "why_share_or_save": "Sent to a guitarist friend as a test of their ear",
+  "comment_prompt_ru": "Ваш ответ: А или Б?",
+  "cta_ru": "Напишите в WhatsApp BA27 — подберём пару гитара + комбик под ваш бюджет",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. Download own video youtube_channel.json pos 200 («ТЕСТ: Дешевая гитара и дорогой усилитель или НАОБОРОТ???»); cut the same riff for both setups to 7 s each, crop to hands and gear, keep the original sound; A/B label cards and the reveal text taken from the original test; captions",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Comments per 1k and completion; coded guitar+amp chats",
+  "risks": [
+   "Judgement call beyond the METHOD: zero-staff library re-cut with label cards tagged 'screen' because worker/mixed require new shots",
+   "The reveal must match the original video exactly (editor checks)",
+   "Gear in the original test may not be sold now: no prices or availability claims",
+   "Crop or blur the player's face if visible"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.59,
+  "_value": 3.59,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID20",
+  "title": "Reply video to a real week-1 comment",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "participation",
+  "format": "reply",
+  "funnel": "retention",
+  "hook_ru": "Отвечаем на ваш комментарий",
+  "first_frame": "The comment sticker (anonymised) over the instrument it asks about, already playing; the hook is upper-middle",
+  "on_screen_ru": [
+   "Отвечаем на ваш комментарий",
+   "[текст комментария, без имени]",
+   "[ответ — по фактам из реестра]"
+  ],
+  "what_happens": "0–2 s: the comment plus the instrument sound. 2–15 s: the answer shown on the real instrument from week-1 footage or the library (payoff: the asked-about thing is shown). 15–17 s: CTA. DM line: depends on the comment. Save reason: depends on the comment.",
+  "why_stop": "The commenter and lurkers with the same question recognise it instantly",
+  "why_share_or_save": "The commenter shares it; others with the same question save it",
+  "comment_prompt_ru": "Что ещё показать? Ответим видео",
+  "cta_ru": "Напишите в WhatsApp {CODE} — ответим и про вашу модель",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. Built in week 2: anonymised comment card over unused takes of week-1 shoots plus library clips (youtube_channel.json, model-name clips such as pos 223, 212); captions",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Comments and follows per 1k; coded chats",
+  "risks": [
+   "Needs a real comment with a real question; if none qualifies by week 2, the idea is dropped",
+   "If the answer needs new footage, it becomes a normal shoot-card item next week (mode changes to mixed)",
+   "Any spec or price in the answer must be ledger-backed and re-fetched",
+   "Never mock the commenter"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.167,
+  "_value": 3.167
+ },
+ {
+  "id": "ID21",
+  "title": "«What can you buy for under 60 000 ₸» in a music store (evergreen structure)",
+  "insight_ids": [
+   "I07",
+   "I06"
+  ],
+  "driver": "practical_value",
+  "format": "trend_remix",
+  "funnel": "attention",
+  "hook_ru": "Что можно купить до 60 000 ₸",
+  "first_frame": "Hands already strumming the U-246 at 20 cm, with a running price counter in the upper-middle under the hook",
+  "on_screen_ru": [
+   "Что можно купить до 60 000 ₸",
+   "Укулеле Caesar U-246 — 22 100 ₸",
+   "Укулеле Caesar US-C40 — 32 901 ₸",
+   "Комбик Hibilly Retro 30R — 56 576 ₸",
+   "Электрогитара Alston AS-100BK — 59 800 ₸",
+   "Что бы выбрали вы?"
+  ],
+  "what_happens": "0–3 s: U-246 strum. 3–6 s: US-C40 strum. 6–10 s: the Hibilly with a chord. 10–15 s: AS-100BK through the amp (payoff: four real options in one budget). 15–17 s: question, CTA. DM line: «вот на что хватит, что берём?». Save reason: a gift-budget reference.",
+  "why_stop": "A familiar evergreen structure with a concrete budget and live sound changing every 3 s",
+  "why_share_or_save": "Saved by a gift buyer with a fixed budget; sent to a co-gifter",
+  "comment_prompt_ru": "Что бы вы взяли: 1, 2, 3 или 4?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подберём вариант под ваш бюджет",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Две укулеле по очереди: короткий бой на каждой, телефон в 20 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Электрогитара через комбик Hibilly: 2 аккорда, телефон в 20 см от динамика.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Price counter captions; cover = budget text; can reuse takes from the ID12 session but with a different edit and first frame",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "u246_price",
+   "usc40_price",
+   "hib_price",
+   "as100_price"
+  ],
+  "kpi": "Saves per 1k; coded chats by line",
+  "risks": [
+   "Trend-dependent (evergreen structure, exempt from freshness)",
+   "NEEDS FACT: rail check on the budget framing «до 60 000 ₸» (not a ledger price; true only because all 4 shown prices are below it). If the rail blocks it, swap the hook for «Четыре инструмента дешевле 60 тысяч» or drop the number",
+   "All prices expire 2026-10-15: re-fetch; drop any sold-out item"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.397,
+  "_value": 3.397
+ },
+ {
+  "id": "ID22",
+  "title": "Instrument in from the frost: open the case right away?",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "moment_trigger",
+  "format": "care_howto",
+  "funnel": "retention",
+  "hook_ru": "Гитара с мороза: открывать чехол сразу?",
+  "first_frame": "Hands already setting a frosted guitar case down by the wall, a hand reaching for the zip and stopping; the hook is upper-middle",
+  "on_screen_ru": [
+   "Гитара с мороза: открывать чехол сразу?",
+   "Продавец советует: не спешите",
+   "Почему — объясняет он сам"
+  ],
+  "what_happens": "0–2 s: the hand stops at the zip. 2–8 s: the seller's voice-over with the advice (opinion, labelled). 8–14 s: the case rests, then is opened (payoff: the routine to follow). 14–16 s: CTA. DM line: «скинь тому, кто зимой таскает гитару». Save reason: winter care reference.",
+  "why_stop": "A local, seasonal moment every Astana musician lives through, and a held action in frame 1",
+  "why_share_or_save": "Saved for winter; sent to a guitarist friend",
+  "comment_prompt_ru": "Вы открываете чехол сразу или ждёте?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — ответим на вопросы по уходу",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Руки ставят чехол с гитарой у стены, тянутся к молнии и останавливаются. Телефон в 30 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Телефон у рта, тихий угол: совет своими словами.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "С мороза чехол сразу не открывайте — пусть согреется.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Captions; «совет продавца» label; post on the first real frost day in Astana (weather trigger)",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Saves per 1k; follows",
+  "risks": [
+   "WILDCARD: care content is untested for this client",
+   "NEEDS FACT: the staff's/owner's actual advice and how long to wait; nothing beyond what they confirm is shown (framed as opinion)",
+   "Timing: publish only when the first frost hits"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 2.885,
+  "_value": 2.885
+ },
+ {
+  "id": "ID23",
+  "title": "What it really costs to start on electric guitar",
+  "insight_ids": [
+   "I06",
+   "I01"
+  ],
+  "driver": "relief",
+  "format": "why_it_costs",
+  "funnel": "conversion",
+  "hook_ru": "Сколько на самом деле стоит начать на электрогитаре",
+  "first_frame": "Hands already setting the AS-100BK down on the counter at 30 cm, with a running total counter in the upper-middle under the hook",
+  "on_screen_ru": [
+   "Сколько на самом деле стоит начать на электрогитаре",
+   "Гитара Alston AS-100BK — 59 800 ₸",
+   "Комбик Hibilly Retro 30R — 56 576 ₸",
+   "И кабель — без него не подключить",
+   "Гитара + комбик — больше 100 000 ₸",
+   "Значит, доставка по Казахстану бесплатно"
+  ],
+  "what_happens": "0–2 s: the guitar lands on the counter. 2–6 s: guitar price. 6–10 s: the amp joins, price. 10–13 s: the cable (the forgotten item). 13–18 s: the total crosses 100 000 ₸, so free delivery across Kazakhstan (payoff). 18–20 s: one chord through the set, then CTA. DM line: «вот сколько надо на старт». Save reason: the budget for a first rig.",
+  "why_stop": "The hidden-cost fear named in the hook; a physical item placed in frame 1",
+  "why_share_or_save": "Sent by a teen to a parent with the real total; saved as a shopping list",
+  "comment_prompt_ru": "Сколько вы потратили на первый комплект?",
+  "cta_ru": "Напишите в WhatsApp BA23 — соберём комплект и посчитаем итог",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Руки кладут гитару на прилавок, телефон сверху в 30 см.",
+     "location": "гитарная стена",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки ставят рядом комбик Hibilly.",
+     "location": "гитарная стена",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Руки кладут кабель между гитарой и комбиком.",
+     "location": "гитарная стена",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Running total captions; cover = the three items; one-chord sound tail from ID01 takes if available",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "as100_price",
+   "hib_price",
+   "delivery_free_100k"
+  ],
+  "kpi": "Coded guitar+amp chats per 1k; orders above 100 000 ₸",
+  "risks": [
+   "NEEDS FACT: cable price and whether a cable is included (owner/agent re-fetch); no cable price is shown until confirmed",
+   "The sum >100 000 ₸ is derived from same-day prices: recompute on publish day (prices expire 2026-10-15)",
+   "Hibilly is a 2-unit sale item: re-check stock"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 4,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 5
+  },
+  "_prior": 3.885,
+  "_value": 3.885,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID24",
+  "title": "Not in Astana? How the instrument gets to you",
+  "insight_ids": [
+   "I04",
+   "I05"
+  ],
+  "driver": "relief",
+  "format": "policy_story",
+  "funnel": "trust",
+  "hook_ru": "Живёте не в Астане? Как едет инструмент",
+  "first_frame": "Hands already zipping a ukulele case and lifting it off the counter at 30 cm; the hook is upper-middle",
+  "on_screen_ru": [
+   "Живёте не в Астане? Как едет инструмент",
+   "Доставка по Казахстану — бесплатно от 100 000 ₸",
+   "Наземным транспортом",
+   "Оплата: Kaspi QR, Kaspi Pay, перевод, карта",
+   "Можно наличными при получении",
+   "В Астане — самовывоз, резерв 3 рабочих дня"
+  ],
+  "what_happens": "0–2 s: the case zips and lifts. 2–8 s: delivery terms. 8–14 s: payment options, incl. cash on receipt (the reassurance). 14–18 s: the Astana pickup reserve. 18–20 s: CTA (payoff: the whole path is clear). DM line: «скинь маме в Караганду». Save reason: kept until ordering.",
+  "why_stop": "A call-out to out-of-town buyers who assume an Astana shop is not for them",
+  "why_share_or_save": "Sent to a friend or relative in another city",
+  "comment_prompt_ru": "Из какого вы города?",
+  "cta_ru": "Напишите в WhatsApp {CODE} и город — расскажем, как доставим",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Руки застёгивают чехол укулеле и поднимают его с прилавка. Телефон в 30 см.",
+     "location": "гитарная стена",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Policy captions over the case shot plus library B-roll of instruments; cover with hook; answers to «Из какого вы города?» seed reply videos",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "delivery_free_100k",
+   "payments",
+   "pickup_reserve"
+  ],
+  "kpi": "Coded out-of-town chats per 1k; comment city split",
+  "risks": [
+   "Don't promise delivery times (not in the ledger)",
+   "Policy facts valid 90 days from 2026-10-08",
+   "Pairs with ID07 (returns): don't publish both in the same week"
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 5,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 4
+  },
+  "_prior": 3.705,
+  "_value": 3.705
+ }
+]

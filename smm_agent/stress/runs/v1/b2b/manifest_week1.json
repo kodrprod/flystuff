@@ -1,0 +1,93 @@
+[
+ {
+  "n": 1,
+  "shot_id": "ID02_0",
+  "seconds": 12,
+  "kind": "hook",
+  "idea_id": "ID02"
+ },
+ {
+  "n": 2,
+  "shot_id": "ID13_0",
+  "seconds": 10,
+  "kind": "hook",
+  "idea_id": "ID13"
+ },
+ {
+  "n": 3,
+  "shot_id": "ID19_0",
+  "seconds": 6,
+  "kind": "hook",
+  "idea_id": "ID19"
+ },
+ {
+  "n": 4,
+  "shot_id": "ID02_1",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ID02"
+ },
+ {
+  "n": 5,
+  "shot_id": "ID07_0",
+  "seconds": 8,
+  "kind": "detail",
+  "idea_id": "ID07"
+ },
+ {
+  "n": 6,
+  "shot_id": "ID13_1",
+  "seconds": 6,
+  "kind": "detail",
+  "idea_id": "ID13"
+ },
+ {
+  "n": 7,
+  "shot_id": "ID19_1",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ID19"
+ },
+ {
+  "n": 8,
+  "shot_id": "ID14_0",
+  "seconds": 12,
+  "kind": "demo",
+  "idea_id": "ID14"
+ },
+ {
+  "n": 9,
+  "shot_id": "ID07_1",
+  "seconds": 8,
+  "kind": "talk",
+  "idea_id": "ID07"
+ },
+ {
+  "n": 10,
+  "shot_id": "ID13_2",
+  "seconds": 8,
+  "kind": "talk",
+  "idea_id": "ID13"
+ },
+ {
+  "n": 11,
+  "shot_id": "ID14_1",
+  "seconds": 8,
+  "kind": "talk",
+  "idea_id": "ID14"
+ },
+ {
+  "n": 12,
+  "shot_id": "ID10_0",
+  "seconds": 6,
+  "kind": "hook",
+  "idea_id": "ID10"
+ },
+ {
+  "n": 13,
+  "shot_id": "ID17_0",
+  "seconds": 6,
+  "kind": "hook",
+  "idea_id": "ID17"
+ }
+]

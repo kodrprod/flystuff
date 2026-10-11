@@ -1,0 +1,114 @@
+[
+ {
+  "persona": "Владелец Muzzone (босс). Просил: «Сделайте нас вирусными в TikTok». Читаю через Андрея/Павла, времени мало, бюджет 0 ₸.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "Серия «Слушаем вблизи» (ID01: три укулеле, один аккорд, «где дорогая?», ID03: электрогитара без комбика и с комбиком). Это дёшево: руки, инструменты и живой звук без лиц, около 3 минут сотрудника на ролик. Видно, что продаём именно мы. Есть понятный следующий шаг: написать в WhatsApp. Если угадаем, из этого выйдет 20+ серий. Ещё хорошо, что мне честно говорят про масштаб: цель — около 20 новых обращений, а «вирусный» означает от 100 000 просмотров.",
+  "refutations": [
+   {
+    "target": "TikTok-канал: по умолчанию «пока аккаунта нет, публикуем в Reels и YouTube Shorts»",
+    "why_fails": "Я просил именно TikTok. Если мой ответ по TikTok задержится, план по умолчанию тихо уходит в Reels и Shorts, а мне потом напишут «так и было оговорено». Аккаунта нет, кто его создаёт, неясно. Андрей и Павел могут быть не в Казахстане. При этом недели 1–2 уже расписаны под публикации.",
+    "severity": "major",
+    "fix": "В неделе 0 сделать создание TikTok-аккаунта задачей с именем исполнителя и сроком 16.10: сотрудник создаёт его с телефона магазина за 5 минут по инструкции и сам публикует. Если к 16.10 аккаунта нет, напомнить мне один раз отдельным сообщением. Перенос в Reels/Shorts не должен быть молчаливым вариантом по умолчанию."
+   },
+   {
+    "target": "Карточки слейта (ID05, ID06, ID19) расходятся с исправленной кампанией",
+    "why_fails": "В слейте ID05 всё ещё с полифонией, ИИ-озвучкой и фразой «спросите консультанта». ID06 начинается с глиссандо и проверяет старые пункты. В ID19 остались курьер по Астане и оплата наличными, хотя кампания эти строки сама запрещает. Если продавец или монтаж возьмут не ту карточку, в сеть уйдёт неподтверждённое обещание о доставке или оплате. Отвечать за это придётся мне.",
+    "severity": "major",
+    "fix": "Переписать карточки ID05, ID06 и ID19 в слейте под ревизию 2 или удалить старые версии. На утверждение мне и на съёмку должна идти одна версия на каждый ролик."
+   },
+   {
+    "target": "Мой лимит времени: ≤15 минут на запуск",
+    "why_fails": "Вопросы недели 0 занимают 0,5+1+1+3+2+1+1,5+1+2+3 = 16 минут, а в сумме с вопросами недели 2 выходит 18. Это сверх обещанного. Кроме того, в брифе я должен был ответить до 10.10 12:00, а в кампании стоит 14.10, а сегодня уже 10.10. Какой срок настоящий, непонятно.",
+    "severity": "major",
+    "fix": "Оставить 4 обязательных вопроса: «Финальная» распродажа, TikTok, тексты ответов, кого снимать. Скриншоты Instagram и уточнения по доставке перенести на неделю 1 или передать агенту и сотруднику. Указать один срок для всех ответов."
+   },
+   {
+    "target": "Скрытые затраты времени сотрудников: публикация, ответы на «цена?», ярлыки",
+    "why_fails": "В бюджет «≤17 минут в неделю» не вошли 15 загрузок в неделю (5 роликов × 3 платформы, по минуте на загрузку). Не вошли и ответы на каждый комментарий «цена?» в рабочие часы: агент их только составляет, а публиковать кто-то должен руками. И ярлык «Новый» нужно ставить на каждый новый чат каждый день. На деле это легко 30–40 минут в неделю, то есть план недооценивает время в 2 раза.",
+    "severity": "major",
+    "fix": "Посчитать в бюджете загрузку и ответы на комментарии поимённо: кто делает и сколько минут. Если выходит больше 20 минут, грузить только в TikTok и Reels, а Shorts отложить. Или пусть Андрей/Павел грузят удалённо с подтверждённого устройства в Казахстане."
+   },
+   {
+    "target": "Базовая неделя 0 (12–18.10) по ярлыкам «Новый»",
+    "why_fails": "Ярлыки должны стоять с понедельника 12.10. Но мои ответы ждут до 14.10, а инструкцию сотруднику «пришлём». Значит, базовая неделя посчитается за 3–4 дня, и это меньше полной недели. Тогда пересчёт цели 01.11 «во сколько раз больше обычного» получится завышенным, и отчёт будет врать в нашу пользу.",
+    "severity": "major",
+    "fix": "Отправить инструкцию по ярлыкам сегодня отдельно от моих вопросов. Если неделя 0 неполная, пересчитать её на 7 дней и прямо написать об этом в отчёте. Или взять как базу 4 недели переписки до кампании, посчитанные по ярлыкам задним числом."
+   },
+   {
+    "target": "ID06 и ID13: «сервис Casio в Алматы» и «не берите дорогое сразу»",
+    "why_fails": "Честно, но в продающем ролике мы сами выставляем слабое место: магазин в Астане, а сервис в Алматы. А совет «не берите дорогое сразу» срезает средний чек как раз на пианино за 520–735 тыс. ₸. Наценки моей вы не знаете, но уже ведёте покупателя к дешёвому.",
+    "severity": "minor",
+    "fix": "Строку про сервис оставить, но только вместе с решением: «отправку в сервис берём на себя», если я это подтвержу. Иначе убрать её из хука и с экрана, оставить в ответах в WhatsApp. Совет консультанта сформулировать так: «начните с [модель], если не уверены», без противопоставления дорогому."
+   },
+   {
+    "target": "ID03: «Вместе — 116 376 ₸» рядом с «Было 70 720 ₸»",
+    "why_fails": "Зритель поймёт это как готовый комплект или акцию «гитара + комбик», а такого предложения у нас нет. Плюс комбика в наличии 2 штуки, и на распродажном товаре вопрос «Финальная» ещё не решён. Купят один, и через день ролик станет неправдой.",
+    "severity": "minor",
+    "fix": "Подписать «если брать оба по ценам сайта на [дату]», без слова «комплект». В день публикации проверить наличие. Пока я не ответил про «Финальную», в первую неделю показать гитару не с распродажным комбиком."
+   },
+   {
+    "target": "Цель «20 обращений» при холодном старте",
+    "why_fails": "По вашим же правилам на TikTok нельзя судить, пока нет 10 постов, а в первую неделю их будет 4–5. Получается, к пересмотру цели 01.11 по TikTok будет около 10 постов и разброс в 10 раз. Я рискую потратить месяц и узнать только, что «рано судить».",
+    "severity": "minor",
+    "fix": "Дать мне одну проверку на 01.11 с понятным решением: если на всех платформах вместе меньше 5 обращений и новых чатов не больше, чем в неделю 0, сокращаем до 3 роликов в неделю и смотрим, где теряются клиенты. Если больше, продолжаем."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan and the CIS. I check whether a piece is generic or ad-like, whether one weak phone can shoot it in 20 minutes, and whether it will spread and bring inquiries.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "ID01 «Три укулеле, один аккорд. Где дорогая?» is the best idea. It has sound in frame 1, a stake viewers can act on, an answer by about 15 s, and it can run as a series. Its strongest form is to make the likely result the payoff: when viewers can't hear the difference, the honest line «не слышите разницы — не переплачивайте за первую» builds trust and gets shared. In KZ that does more than any price reveal. Runner-up and cheapest to add: a POV parent episode built as a screen recording of a WhatsApp chat («мам, купи гитару» → «а какую?»). It uses zero staff minutes and is a very native format here.",
+  "refutations": [
+   {
+    "target": "ID01 blind ukulele: audible difference on a weak phone",
+    "why_fails": "A cheap phone mic at 20 cm, auto gain, TikTok's AAC compression and the viewer's phone speaker together all but erase the difference between a 22 100 ₸ and a 64 501 ₸ ukulele. Most comments will say «одинаково» or «наугад». The plan reveals prices as if the difference were real and gives no answer to «you can't hear it». Also, on_screen_ru lists a fixed answer order (2 = UF-330) while what_happens says the order is randomised. If the editor follows the card, the reveal is wrong.",
+    "severity": "major",
+    "fix": "Add a planned branch for the likely result. Reveal card 2: «Не услышали разницы? Для первой укулеле это нормальный ответ — разница в дереве, ладах и строе, а не в цене на слух» (stating the differences needs a staff-confirmed fact). Have staff play one recognisable pattern, not a single strum, because a 4-s melodic phrase shows tone better than one chord. Generate on_screen_ru answer cards from the final randomised order, never from the card template."
+   },
+   {
+    "target": "Staff time budget: native uploads not counted",
+    "why_fails": "Native uploads from a KZ device with no VPN, 5 bodies with 2 hook variants on 3 platforms, cost about 1 min per post just for TikTok if option Б is chosen. That adds 5 min/week to the week-1 total of 16.6 = 21.6 min, over the 17-min cap and even the 20-min safety line. Hook variants on Reels and Shorts add more. On a real week with a customer at the counter, the shoot drops to 2 bodies.",
+    "severity": "major",
+    "fix": "Make option А (Andrey/Pavel upload) the hard default and put staff uploads inside the budget. Schedule Instagram and YouTube from Meta Business Suite and YouTube Studio scheduling, which needs no staff. Cut hook variants to TikTok only in week 1. Drop the optional ID13 voice line from the 17-min card unless the measured shoot time comes in under 12 min."
+   },
+   {
+    "target": "ID06 «Перед покупкой» checks shown as open questions",
+    "why_fails": "A checklist save-piece whose answers are «Нажмите клавишу: тяжёлая или лёгкая?», «Сколько выходов на наушники?» with no answer gives nothing to save. Viewers can't press a key through the screen. The PX-770 and AP-270 key action, headphone jacks and built-in 3-pedal unit are public manufacturer specs. Leaving them as «questions» is laziness, not caution, and it makes the piece read as filler.",
+    "severity": "major",
+    "fix": "In week 0, have the agent pull the Casio official spec pages, and staff confirm with one sentence in the voice note. Publish ID06 only with answered checks («3 педали встроены в корпус», «2 выхода на наушники — можно играть вдвоём тихо»). The headphone line is the real parent hook: quiet practice in an apartment. If the answers aren't confirmed by Fri 16.10, swap Sat 24.10 for ID13 or a reserve."
+   },
+   {
+    "target": "Whole slate: faceless, voiceless, no local flavour",
+    "why_fails": "Hands plus instrument plus burned-in captions is the format every music store in the CIS already posts. It reads as catalogue content. In KZ TikTok, local shop accounts grow on a recognisable person or voice, humour, and Astana or Kazakh-language markers. None of the 5 week-1 videos says «Астана», uses Kazakh, or has a human voice beyond one optional line. The dombra, the most local first instrument and the most likely shared piece, is pushed to «week 2 if stocked».",
+    "severity": "major",
+    "fix": "Even with no faces, give the series a voice. Have one seller record a 3–5 s voice line per episode in their own words, e.g. «Слушаем вблизи, Астана, Кажымукана 14», plus the payoff line. Do the dombra stock check in week 0 (one site search plus one voice-note question) and slot a dombra-vs-ukulele guess episode in week 1 if stocked. Make Q3 option 2 (seller face with consent) the recommended answer, not just one option."
+   },
+   {
+    "target": "ID14 POV parent: a hand hovering over a wall",
+    "why_fails": "A POV with no person, no voice and only thought-bubble captions over a slow pan is a low-energy stock shot. The opening frame (a wall of guitars) is generic, the hook relies only on text, and the brand link is rated 2. It will sit at about the median.",
+    "severity": "minor",
+    "fix": "Rebuild it in screen mode with zero staff minutes. Show a screen recording of a staged WhatsApp chat labelled «постановка»: child «мам, хочу гитару 🎸», parent «какую??», then three questions (классика/электро? размер? бросит?). Cut to one strum of a real guitar and «Спросите нас — мы подскажем» + {CODE}. This chat format is native in KZ, people share it with the other parent, and it saves shoot time."
+   },
+   {
+    "target": "ID03 electric unplugged vs amp: the contrast is flattened",
+    "why_fails": "The plan correctly names the auto-gain problem, but «noise suppression off» isn't available on most cheap Android cameras. AGC will raise the unplugged strum and pull down the amp, so the «вот так тихо» hook may not land. A bare strummed chord through a small combo also sounds thin on a phone.",
+    "severity": "minor",
+    "fix": "Add a visual proof of loudness that survives AGC. Start with a close-up of the volume knob being turned to 3. Hold the phone still for the whole take and play a simple original power-chord riff, not a cover, to avoid melody rights on a business account. Test one 10-s take in the week-0 scan and decide from it, not in the edit."
+   },
+   {
+    "target": "Approval chain and owner onboarding time",
+    "why_fails": "The week-0 owner asks add up to about 16 min against the 15-min cap. They reach the owner only through Andrey/Pavel. The plan's answer dates (14.10) conflict with the intake (10.10 12:00). Publishing waits for a Wednesday «да» on a Tuesday shoot, so one late reply slips the whole week and kills the cold-start cadence TikTok needs.",
+    "severity": "minor",
+    "fix": "Cut week 0 to the 5 asks that block publishing (Финальная, TikTok, faces, templates, upload person). Move Instagram stats, delivery details and the scale note to week 2. Add a standing rule: if there is no reply by Thursday 12:00, publish only the face-free, price-free cuts (ID14, ID01 without the price reveal), which carry no truth risk. Settle the deadline on one date."
+   },
+   {
+    "target": "Posting times not specified",
+    "why_fails": "The days are set but not the hours. A KZ local audience is on TikTok and Reels mostly 19:00–23:00 Astana time and around lunch. Posting during shop hours right after approval wastes the first-hour signal on a new account.",
+    "severity": "minor",
+    "fix": "Default posting time: 20:00–21:00 Astana time, with Saturday at 12:00 as the alternative. «Цена?» comment replies batched next morning at 10:00 when WhatsApp staffing starts. Log the posting time per post so slot effects can be pooled later."
+   }
+  ]
+ }
+]

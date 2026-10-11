@@ -1,0 +1,120 @@
+[
+ {
+  "persona": "Владелец гипотетического поставщика стройматериалов в Караганде (сухие смеси, утеплитель, продаём только компаниям). К соцсетям отношусь скептически: время менеджеров и склада для меня дороже любых просмотров.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "На мой вопрос план отвечает честно: «не знаем, проверим за 4 недели, порог заранее, при неудаче — стоп». Полезнее всего три вещи. Первая — привести в порядок карточку в 2ГИС со своей ссылкой в WhatsApp. Вторая — чтобы менеджеры у каждого нового клиента спрашивали «Откуда узнали?». Третья — сделать рекламной фразой услугу «Пришлите площадь — посчитаем мешки». Это работает и без роликов: даже при итоге «НЕТ» у меня остаются витрина в 2ГИС и данные о том, откуда приходят новые клиенты. Ещё хорошо, что ролик с опозданием машины придержали, нет цен и лиц, и решение «нет» сформулировано без потери лица: «органика нового аккаунта за 4 недели не дала».",
+  "refutations": [
+   {
+    "target": "Обещание по времени: «до 20 минут в неделю у сотрудника и до 5 минут у вас»",
+    "why_fails": "В разных частях плана разные цифры. В резюме — 80 минут на всё, в замерах — около 130 минут вместе с 70 минутами подготовки. Сверх этого идут: ответы в WhatsApp по 5 минут на каждый чат, по 0,5 минуты на метку, 20 минут на заведение аккаунта, 22 минуты съёмок в нулевую неделю, 10+5+5 минут менеджера. В первую неделю ещё и погрузчик просят остановить на 10 минут, а это уже простой склада, и он нигде не учтён. Мне продали «20 минут», а на деле нагрузка ложится на троих и растёт с каждым обращением.",
+    "severity": "major",
+    "fix": "Одна строка в первом сообщении мне: «всего ≈130–180 мин за 6 недель на всех, вот разбивка по людям». Погрузчик не останавливать, снимать в обед или после смены. Потолок по времени для менеджеров записать заранее, а не только считать его по факту."
+   },
+   {
+    "target": "Сроки и порог итога расходятся между документами",
+    "why_fails": "В резюме итог 16.11, в кампании 23.11. «Нулевая неделя» на деле длится две недели. В резюме стоят «закодированные обращения», а в кампании засчитывается любой путь, включая слова «из соцсетей». Скептику с такими расхождениями проще всего сказать «вы сами не знаете, что меряете».",
+    "severity": "major",
+    "fix": "Одна дата итога (23.11) и одно определение засчитанного обращения во всех текстах для меня и персонала. Старую версию убрать."
+   },
+   {
+    "target": "Итог «ДА» = 3 новые компании и 1 счёт",
+    "why_fails": "Один счёт на 15 мешков от бригады с ИП формально даёт «ДА» и запускает следующий спринт b2b_leads, то есть постоянную нагрузку на людей. Нижней границы по сумме или марже нет. При трёх случаях это шум: одного случайного клиента, который «видел в инсте», хватит, чтобы повернуть решение в любую сторону.",
+    "severity": "major",
+    "fix": "Добавить в критерий «ДА» минимальную сумму: суммарные счета новым клиентам ≥ N ₸, N называю я. Решение «ДА» сформулировать как «продолжаем ещё 4 недели с тем же порогом», а не «запускаем лидогенерацию»."
+   },
+   {
+    "target": "Главная рубрика «Считаем по паспорту» и обещание «посчитаем мешки»",
+    "why_fails": "Прорабу читают вслух этикетку, которую он сам читает 20 лет. Есть риск выглядеть как «учим бригаду их работе», от чего план сам отказался в ID13. Кроме того, «посчитаем» означает ответственность. Недосчитали — бригада стоит, виноват поставщик. Пересчитали — клиент решит, что мы навязываем лишнее. Ни запаса на отходы, ни оговорки в плане нет.",
+    "severity": "major",
+    "fix": "В каждом расчёте подпись «ориентировочно, по данным производителя, без учёта основания и отходов, окончательно — менеджер». Акцент сместить с «читаем этикетку» на «вы пишете площадь — мы присылаем расчёт и счёт». Перед запуском проверить на двух знакомых прорабах, не выглядит ли это снисходительно."
+   },
+   {
+    "target": "«≈40 позиций × несколько строк на этикетке = больше 20 выпусков»",
+    "why_fails": "В ведомости пусто, сколько у меня позиций, никто не знает. Число 40 выдумано. Если обещанные 20+ выпусков не наберутся, рубрика заглохнет на третьей неделе.",
+    "severity": "minor",
+    "fix": "Считать выпуски от 5 ходовых позиций из пакета фактов. Честный запас — 10–15 выпусков, на остальное есть ответы на комментарии."
+   },
+   {
+    "target": "Сложность для моих людей (Thompson, DR1–DR16, Trial Reels, сводные медианы, 5 вопросов о данных)",
+    "why_fails": "Для 20 роликов это перебор. Семь пунктов в первом сообщении мне, шесть из которых блокируют запуск, — это не «одно короткое сообщение». Тут велик риск, что я просто не отвечу, и тест сам перейдёт в «НЕ ЯСНО».",
+    "severity": "major",
+    "fix": "Мне — максимум 3 вопроса: порог, пакет фактов, «да» на аккаунты. Остальное принять по умолчанию и показать одной строкой «если не против — молчание = ок» (кроме фактов). Правила решений держать у себя и не присылать."
+   },
+   {
+    "target": "Instagram как главный канал, 2ГИС только как «контрольная группа»",
+    "why_fails": "В Караганде B2B-закупщик ищет поставщика в 2ГИС, на Satu.kz и по сарафанному радио, а не в ленте. Карточка 2ГИС с фото, часами работы и WhatsApp — самое дешёвое, что вообще может дать результат, а здесь она во второй роли. Satu.kz и WhatsApp-каталог не упомянуты вовсе.",
+    "severity": "major",
+    "fix": "Сделать 2ГИС (и, если подходит, Satu.kz или каталог в WhatsApp Business) основной витриной в нулевую неделю, это около 30 минут один раз. Instagram — проверочная ветка поверх витрины. В итоге сравнивать стоимость часа по каждому каналу."
+   },
+   {
+    "target": "Автоответ на слово «расчёт» в комментариях",
+    "why_fails": "В самом плане сказано, что для этого может понадобиться сторонний сервис (ManyChat и т.п.). Бесплатный тариф ограничен, а бюджет 0 ₸. Ещё один инструмент, который кто-то будет настраивать.",
+    "severity": "minor",
+    "fix": "Убрать. Хватит ссылки wa.me в профиле и номера телефона на концовке."
+   },
+   {
+    "target": "Ролик со звуком плёнки (ID02) и съёмка заморозков",
+    "why_fails": "Звук плёнки ничего не продаёт: это просмотры не из Караганды и не от покупателей. Заморозки в последнюю неделю октября не гарантированы, слот будет висеть.",
+    "severity": "minor",
+    "fix": "ID02 заменить вторым роликом «как заказать» или «дата изготовления на мешке». Заморозки снимать только если они уже есть на улице, а не держать для них место."
+   },
+   {
+    "target": "Первая съёмка 13.10 раньше, чем я отвечу (срок 14.10)",
+    "why_fails": "Склад тратит время на «скан реальности» до того, как я согласился на тест вообще.",
+    "severity": "minor",
+    "fix": "Перенести первую съёмку на день после моего «да». Если нужно, сдвинуть даты на 2–3 дня."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan and the CIS, focused on what one weak phone can shoot in 20 minutes and what actually brings inquiries in Karaganda",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "The «Вопрос из WhatsApp» series (ID07 and the questions from the rep's list). Real questions that clients have asked at least twice, filmed on real bags, with a frost or storage moment. This is the only format that speaks to a brigade lead in his own words, and it is cheap to shoot. It also turns into an inquiry naturally («а у вас есть под минус?»). ID14 is fine as a pinned «как заказать» post, but it should not count as one of the distribution posts.",
+  "refutations": [
+   {
+    "target": "Hero series «Считаем по паспорту» (single-minded message «Пришлите площадь — посчитаем мешки»)",
+    "why_fails": "A foreman or brigade lead does not need a warehouse to count bags. He counts them on his phone in 10 seconds and knows the consumption figures from practice. Area-to-bags content and 'how much do I need' calculations are what DIY builders and private buyers look for, and the plan excludes them from the verdict. The hero series will pull people doing their own apartment renovation into WhatsApp. They are counted as unqualified, they use up the desk's time, and the denominator grows. On top of that, reading the label line and doing arithmetic on cardboard is visually a lecture: zero stop power, and a pro scrolls past.",
+    "severity": "major",
+    "fix": "Keep the label, but change the angle to the pro's real pain: what is actually in stock in Karaganda right now, which brand and SKU, and in what volume. Hook: «Ceresit CT 17 / Knauf Ротбанд / Технониколь — что сейчас на складе в Караганде» (using the 5 SKUs from the fact pack, without promising stock: «обычно держим»). The pallet with the brand name in frame 1, the brand in the caption and hashtags (people search by brand), and the CTA «пишите позицию и объём». Keep counting as a quick-reply service in WhatsApp, not as content."
+   },
+   {
+    "target": "Distribution: a new Instagram account in one city with 0 ₸ and no seeding (rep forwarding is off by default)",
+    "why_fails": "A new B2B account in Karaganda will get 100–300 views on most posts, and most of those viewers will not be in Karaganda. At these numbers the verdict is NO almost by construction. That NO says nothing about whether video works for this company. It only says no seeding was done. In Kazakhstan, foremen and brigades live in WhatsApp groups, Telegram chats («Стройка Караганда», прорабы, бригады ищут работу) and on 2GIS. Real local businesses start their first views exactly there.",
+    "severity": "major",
+    "fix": "Make seeding part of the main arm, not an option. Each post goes into 2–3 local WhatsApp or Telegram builder chats (owner-approved list, about 2 min a week for the desk, logged). Staff and reps put it in their own WhatsApp Status. Use a separate code family so it can be counted. Rep forwarding to their own contacts can stay a control arm, but switch it on by default and ask the owner for a «нет», not a «да»."
+   },
+   {
+    "target": "Owner onboarding: 7 asks in one batched message, with numbered options, a fact pack that blocks publishing, and reminders",
+    "why_fails": "A skeptical owner with a limit of 5 minutes a week gets a mini-contract with 20+ decisions about thresholds, «стоп» rules, auto-DMs and chat export. In real life he will reply «давайте потом» or answer only the first two points. Because the fact pack blocks publishing, the plan's main risk is that nothing ever starts. The calendar has already slipped once (intake says 10-19 → 11-15, the campaign says 10-26 → 11-22), and every reminder pushes it a week deeper into winter.",
+    "severity": "major",
+    "fix": "First message: only 3 questions, answered «да/нет» plus one line. (1) Is the warehouse yours and in Karaganda, and which number goes in the videos? (2) Name 5 items that are always in stock. (3) Shall we start with Instagram and 2ГИС on 26.10, no faces and no prices? Everything else (threshold, private buyers, templates, forwarding) runs on defaults with an «если против — напишите» line, and goes into a second message after the first videos are live. Align the dates with the intake."
+   },
+   {
+    "target": "ID14 «Прораб, ИП или закупщик? Пишите так» counted as a weekly post",
+    "why_fails": "It is an instruction on how to write to us, which is advertising. Nobody saves or forwards a template for writing to a supplier they do not know yet. As a pinned post it works; as one of the 5 weekly posts it is a wasted slot that pulls the views median down.",
+    "severity": "minor",
+    "fix": "Pin it once in week 1 and do not count it toward the 15 posts needed for the verdict. Use the slot for one more real question from the rep's list."
+   },
+   {
+    "target": "Staff card «погрузчик на 10 минут остановить», plus cardboard arithmetic plus talk in one 8-minute session",
+    "why_fails": "Stopping the forklift during the working day costs the warehouse real money, and the plan does not count that cost. Writing on cardboard and filming hands with one weak phone at 30 cm means focus problems and retakes. In practice it will take 15–20 minutes, not 8. In week 0 the staff need about 22 minutes in a single week, which already breaks the 20-minute limit.",
+    "severity": "minor",
+    "fix": "Shoot when the forklift is idle anyway (before opening or at lunch). Drop the cardboard and show the result as a text card in the edit. Split the week-0 bank into two sessions of 10 minutes or less in different weeks, or reduce it to 3 SKUs."
+   },
+   {
+    "target": "ID02 wrap sound and ID19 first frost as reach probes",
+    "why_fails": "The wrap ASMR gets views from everywhere except Karaganda foremen, so it brings no inquiries and pulls Karaganda's share of the audience down. The first frost in Karaganda usually comes in October, so by 26.10 the 'moment' has probably already passed, and a 'first frost' post in November looks stale.",
+    "severity": "minor",
+    "fix": "Use ID02 only as B-roll and drop it as a standalone post. Turn ID19 into «Работаете зимой внутри? Что берут бригады в ноябре», tied to the season rather than to the first frost."
+   },
+   {
+    "target": "«расчёт» comment keyword → auto-DM at 0 ₸",
+    "why_fails": "Instagram auto-DMs need ManyChat or a similar tool. The free tier has limits, setup takes 30+ minutes, and the desk will not manage it alone. Foremen in Kazakhstan do not type keywords anyway; they write «сколько?» or «есть?» in the comments, or they call.",
+    "severity": "minor",
+    "fix": "Drop the auto-DM. The desk replies to comments by hand with one template. The phone number and the wa.me link on the end card already carry the conversion."
+   }
+  ]
+ }
+]

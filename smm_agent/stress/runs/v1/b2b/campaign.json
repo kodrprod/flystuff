@@ -1,0 +1,266 @@
+{
+ "name": "«Считаем по паспорту»: 4-week should-we-do-social test, revised (Karaganda, B2B dry mixes and insulation; Instagram + 2GIS first)",
+ "big_idea": "A foreman's estimate depends on numbers already printed on the bag: consumption per m², layer thickness and how long the material keeps. A Karaganda warehouse that reads those numbers from the manufacturer's label on camera, does the bag count for his area and asks for one message («материал и площадь») is a supplier worth writing to. Episode supply: about 40 SKUs × several label lines gives more than 20 episodes. Proof on camera: the filmed label and the arithmetic done by hand on cardboard. Pointer to the measured action: «пришлите площадь — посчитаем». Every episode ends on the same local end card, so viewers and the platform read the account as a Karaganda supplier and not as generic warehouse content. Gate: no post goes out until the owner has answered the week-0 fact pack (own warehouse in Karaganda, delivery in Karaganda, 5 usually-stocked SKUs, the phone number, and whether the desk counts bags). Silence from the owner is never treated as «нет»; it blocks publishing and triggers reminders.",
+ "single_minded_message_ru": "Пришлите площадь — посчитаем мешки по паспорту",
+ "why_this_wins": "This is not a forecast. The honest prior for a new Instagram account in one city in November is low: probably 0–3 new-client inquiries. The plan is built so that either answer, YES or NO, can be trusted. Here is how the revision changes the plan.\n\n**1. Each post now gives a reason to write (fixes the fatal review point).**\n- The old slate showed warehouse rituals but never said what is sold, where, or what happens when you write.\n- Now a fact pack is blocking in week 0: own warehouse in Karaganda, delivery inside Karaganda, 5 usually-stocked SKUs, the phone number, and whether the desk counts bags from an area. Every post ends on a fixed card: «Сухие смеси и утеплитель · склад в Караганде · пишите материал и объём». The bio, caption, hashtags and location tag carry the same line.\n- Outdoor shots show local cues (gate, yard, snow).\n- A NO can therefore come from the market, not from empty posts.\n\n**2. The hero is now a service, not a lecture.** I03 (E16, E17, E19) plus I02 (E04, E25): reading the label for the foreman and counting his bags turns the message into the CTA. ID13's «вода на глаз» shortcut and its «постановка» are retired, because brigades would read them as being taught their own job. Mixing is shot at most once, as a library clip.\n\n**3. Attribution matches how foremen actually behave.**\n- One prefilled wa.me link in the bio per platform: «Здравствуйте, я из Instagram. Материал: … Площадь/объём: …».\n- The phone number in large text on the end card.\n- A comment keyword «расчёт» that sends an auto-DM.\n- Reps ask new callers one question: «Откуда узнали?».\n- Per-video codes are kept as per-video detail only.\n- The verdict counts every NEW company that came from social media, by any route. This removes the strong NO bias that typed codes alone would create.\n\n**4. The verdict cannot be pushed through by noise.**\n- Only companies not already in the CRM or the reps' lists count, and at least one invoice (not just an offer) must be issued to one of them.\n- Two control arms are counted separately on the same per-hour basis: rep forwarding (if approved) and a 2GIS link with its own prefill.\n- The final decision is therefore 'which channel, at what cost per hour', not just 'video: yes or no'.\n- A NO is worded «органика нового аккаунта за 4 недели не дала».\n\n**5. Cost is counted honestly.**\n- One sheet records every minute: cards, the voice note, the desk's labelling and replies, the reps' question, setup one-offs and the owner's minutes. The verdict is calculated per total hour.\n- The truck tally (ID17) is dropped. Each chat gets one label. Weekly cards are capped at 3–4 shots in one location. The agent edits at least 2 of the 5 weekly posts from week-0 library footage.\n\n**6. Reputation risks removed.**\n- ID10 (late-truck POV) is held until delivery facts exist and the owner says «да».\n- Frost is filmed only outside (gate, yard, sky), and stock only indoors.\n- ID02 (wrap sound) runs once in the whole test.\n\n**Learning plan**\n- About 20 Instagram posts in the shared driver and format slugs, pooled into the b2b_construction_materials vertical.\n- TikTok and Shorts are added only if Instagram shows life by the end of week 2.\n- Instagram audience-city share is tracked, to check the reach is actually local.\n\n**METHOD gaps (judgment)**\n- F3 has no mix for should_we_do_social. Used: about 50% hero utility, 30% conversion questions, 20% reach and moment probes.\n- Standing owner approval with silent consent is used only if the owner opts in once (L8 is kept as a one-time human decision).",
+ "series": [
+  {
+   "name": "Считаем по паспорту",
+   "role": "HERO. Consideration → conversion. Metrics: saves/1k, and messages that include an area or volume per 1k views (the verdict proxy).\n- **Opening ritual:** frame 1 is a finger already on the consumption or storage line of a real bag label, filmed indoors. The hook is generated at edit time under the rails, e.g. «Сколько мешков на вашу площадь? Считаем».\n- **Fixed structure:** label line read verbatim from the ledger → hands do the arithmetic on cardboard for an example area, labelled «пример» → result card «расчёт по данным производителя» → the fixed Karaganda end card with {CODE} and the phone number.\n- **Episode variable:** the SKU or the label line: consumption per m², layer thickness, how long an opened bag keeps (only if the label states it), pot life.\n- **No shortcut-shaming:** ID13's «на глаз» opening and its «постановка» are retired. A mixing clip is used only if one was filmed once in week 0, and then reused.\n- **Cost:** each episode is ≤3 staff minutes at «склад», or 0 minutes when built from week-0 label B-roll.\n- **Episode 7 test:** «Утеплитель: сколько упаковок на стену?» A stranger could guess it and would still watch.\n- Every figure is a NEEDS FACT until the filmed label is in the ledger.",
+   "idea_ids": [
+    "ID13"
+   ],
+   "cadence": "2 per week from week 1, at least 1 of them built from library footage. Thompson allocation may change this from week 3."
+  },
+  {
+   "name": "Вопрос из WhatsApp",
+   "role": "Conversion. Metric: social-sourced new-company inquiries per 1k views, and saves/1k.\n- **Opening ritual:** thumbs already typing in frame 1, or an anonymised question card. Hook: «Нам пишут: …» or a call-out to the buyer type.\n- **ID14** is the message template and is pinned as «как заказать». Its fields match the bio prefill: материал, площадь/объём, район объекта, компания/ИП.\n- **Later episodes** use the ID07 wa_question template with questions from the rep's list. Only questions the rep marked as asked ≥2 times are used, and always paraphrased.\n- **ID07's frost question** runs only in a real-frost week, with frost filmed outside the warehouse.",
+   "idea_ids": [
+    "ID14",
+    "ID07"
+   ],
+   "cadence": "1 per week. ID14 in week 1. ID07 or another rep-list question from week 2."
+  },
+  {
+   "name": "Ответ на комментарий",
+   "role": "Participation and retention. Metric: comments/1k and follows.\n- **Opening ritual:** a real public comment card (username blurred) slides in over library footage.\n- **Cost:** zero staff minutes.\n- **Facts:** the answer uses only ledger facts. Comments asking «а сколько мешков на…» are answered as «Считаем по паспорту» episodes, so this series feeds the hero.",
+   "idea_ids": [
+    "ID21"
+   ],
+   "cadence": "1 per week from week 2, only if a usable real comment exists. Otherwise the slot goes to the hero."
+  },
+  {
+   "name": "Разовые пробы (не серия)",
+   "role": "Reach and moment probes with a strict cap, so they cannot use up the test.\n- **ID02 (wrap sound):** 1 post in the whole test. Caption carries a buyer question and the post ends on the Karaganda end card.\n- **ID19 (first frost):** only in the actual first-frost week. Frost is filmed on the gate, yard or sky; stock appears only indoors.\n- **Metric:** views_48h ÷ median, and Karaganda share of reached accounts.\n- **Held:** ID10 is held (see decision rules).",
+   "idea_ids": [
+    "ID02",
+    "ID19",
+    "ID10"
+   ],
+   "cadence": "ID02: once (week 1). ID19: once, in the frost week. ID10: 0 until released by its rule."
+  }
+ ],
+ "offer": {
+  "needed": false,
+  "proposal": "",
+  "fact_ids": [],
+  "needs_owner_approval": false
+ },
+ "channels": [
+  {
+   "channel": "Instagram Reels + profile (the only video platform in weeks 1–2)",
+   "role": "Main test bed and shop window.\n- **Account:** created by the WhatsApp desk person with the owner's «да» (about 20 min, counted in the total-time sheet).\n- **Bio** (after the fact pack): «Сухие смеси и утеплитель · склад в Караганде · пишите материал и объём», plus one wa.me link prefilled with «Здравствуйте, я из Instagram. Материал: … Площадь/объём: …».\n- **Every post:** location tag Караганда, with #караганда #стройкакараганда #прорабкараганда in the caption (used, never tested).\n- **Pins:** ID14 («как заказать»), the best «Считаем по паспорту» episode, and the best proof post.\n- **Highlights:** «Как заказать» and «Склад». No «Цены».\n- **Hook variants** go to Trial Reels where available.\n- **Comment keyword «расчёт»** triggers an auto-DM with the template (owner-approved text). «+» is not used, because D6 bans it as bait.\n- Commercial-library music only."
+  },
+  {
+   "channel": "End card (every video)",
+   "role": "Fixed local card for the last 2 seconds: «Сухие смеси и утеплитель · склад в Караганде · пишите материал и объём», the phone number in large text, and {CODE}.\n- **Gating:** every element needs its fact-pack id. Without the fact pack, nothing publishes.\n- **Judgment deviation from D6:** D6 keeps phone numbers out of cta_ru. Here the number goes on the end card only, as a ledger fact, because foremen call rather than type codes."
+  },
+  {
+   "channel": "WhatsApp chat (conversion)",
+   "role": "Where most inquiries land.\n- **Quick reply** (owner approves once): «Здравствуйте! Вы из Instagram/по видео {CODE}. Подскажите: компания или ИП, какой материал и площадь или объём — посчитаем количество и передадим менеджеру по наличию и условиям.» The «посчитаем» wording is used only if fact-pack item 5 = да.\n- **Codeless chats:** «Подскажите, откуда о нас узнали?»\n- **Private buyers:** a polite reply following the owner's rule. Counted separately, never qualified.\n- **One label only:** «Соцсети», on any chat that came via a code, the prefill or «из инстаграма» (about 0.5 min per chat, counted).\n- **Guardrail:** median first reply ≤15 min in working hours. Over 60 min is reported as the top leak, and conversion posts pause."
+  },
+  {
+   "channel": "Sales reps: «Откуда узнали?» + forwarding control arm",
+   "role": "**One question only:** reps ask NEW company callers «Откуда узнали?» and write «соцсети / 2ГИС / другое» in their existing notes (about 0.5 min per new caller, counted).\n- **Forwarding arm** (only with the owner's «да»): reps forward the week's best video to prospects under a separate code family. Their minutes and resulting inquiries are reported as their own channel per hour, not as organic.\n- **Week 4 one-off review** (about 5 min): the rep marks which social-labelled chats are new companies (not in the CRM or their lists) and which received an invoice."
+  },
+  {
+   "channel": "2GIS (control arm)",
+   "role": "The desk claims or verifies the card. The agent refreshes its photos with real indoor stock and outdoor gate shots (no plates, no faces). It gets its own WhatsApp link prefilled «Здравствуйте, я из 2ГИС», and its inquiries are reported per hour as a cheap comparison channel. Review requests go out only after the owner approves the text, and are never incentivised."
+  },
+  {
+   "channel": "TikTok + YouTube Shorts (from week 3, conditional)",
+   "role": "Added only if Instagram shows life by 2026-11-08: ≥1 social-sourced new-company inquiry, OR median shares+saves/1k ≥ the pooled median, OR Karaganda ≥30% of reached accounts. Setup is about 15 desk minutes (counted) plus 1 owner tap. Each platform has its own prefilled bio link and is judged against its own baseline. TikTok reach is expected to be mostly outside Karaganda, so the local end card and city text matter even more there."
+  },
+  {
+   "channel": "WhatsApp Status / broadcast",
+   "role": "Off. Contact with existing clients needs the owner's explicit «да», would be a separate code family, and is excluded from the new-client verdict."
+  },
+  {
+   "channel": "Paid boost",
+   "role": "None during the test (0 ₸): the verdict must reflect organic reach. After a YES, a boost of DR2 posts can be proposed with cap CPQC = avg_order × gross_margin × close_rate × 0.3 and a stop-loss at 5× the cap with fewer than 3 coded chats. The inputs are NEEDS FACT."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Setup, 2026-10-12 → 10-25 (two calendar weeks, because the timeline shifts by one week). No posts.\n- **Owner:** one batched message today (≤12 min). Answer deadline 10.14 12:00, i.e. 3 working days.\n- **Fact pack is BLOCKING:** reminders go out on 10.14 and 10.16, and silence is never read as «нет». If it is still unanswered on 10.23, week 1 slips and the whole calendar moves with it.\n- **Desk:** creates Instagram and claims 2GIS after the owner's «да».\n- **Rep:** writes the list of the 10 most frequent questions with rough counts (about 10 min). Does a one-off retro count of new companies invoiced in August–September (about 5 min) to set the baseline of new clients per week.\n- **Staff, session 1 (Tue 10.13, about 10 min):** reality scan.\n- **Staff, session 2 (Tue 10.20, about 12 min):** a 2-week B-roll bank at «склад»: label lines on 5 usually-stocked SKUs, the wrap squeal, bags indoors, the gate and yard outside (local cue), and the typing demo.\n- **Agent:** opens the total-time sheet, with every minute logged from day 1.",
+   "idea_ids": [],
+   "worker_ask_ru": "Здравствуйте, это AI-ассистент. Две короткие съёмки. Вт 13.10, ~10 минут: 3 тестовых клипа (фраза — телефон в 30 см от рта, звук мешка — в 30 см, общий вид склада) и 2 минуты прогулки без звука. Вт 20.10, ~12 минут, только склад: крупно строки на 5 ходовых мешках (расход, толщина слоя, хранение), плёнка на поддоне, мешки в помещении, пальцы печатают сообщение, а ещё 10 секунд ворот и двора снаружи. Лица и номера машин не снимаем. Иней и снег — только снаружи, мешки — только в помещении. Кто отвечает в WhatsApp: по инструкции создать Instagram и подтвердить 2ГИС (~20 минут, после «да» владельца). Менеджеру: список 10 частых вопросов клиентов и примерно сколько раз каждый (~10 минут).",
+   "ai_work": "Search for any existing Instagram/TikTok/YouTube/2GIS presence. Write step-by-step setup instructions for the desk.\n- **Drafts in Russian:** bio, highlights, end card, quick replies, the «расчёт» auto-DM and the private-buyer reply.\n- **Rep's question list:** ingest it as evidence (confidence 'likely'). Only questions marked as asked ≥2 times may be paraphrased.\n- **If the owner chose cleaned chats instead:** process them only after the rep has removed names, numbers, prices and site names. Raw text stays internal.\n- **Label lines:** transcribe them verbatim into the ledger with file paths and dates.\n- **Fact-pack answers:** turn them into ledger ids.\n- **Weather:** fetch for frost timing.\n- **Baseline:** pooled b2b median, or log the 300-view [ASSUMPTION].\n- **Total-time sheet:** open it. Columns: cards, voice note, desk labels (0.5 min per chat [ASSUMPTION]), desk replies to social chats (5 min per chat [ASSUMPTION], checked once with the desk in week 2), rep question (0.5 min per new caller), setup one-offs, owner minutes.\n- Code assigns the WhatsApp codes."
+  },
+  {
+   "week": 1,
+   "goal": "Explore, 2026-10-26 → 11-01, Instagram only. 5 posts across at least 4 drivers. 2 of them are built from week-0 library footage, so the staff card stays at 3–4 shots in one location.\n- **ID14:** typing template, pinned as «как заказать».\n- **ID13 episode 1:** «Сколько мешков на вашу площадь? Считаем», using new arithmetic shots.\n- **ID13 episode 2:** another SKU's label line, from the library.\n- **ID02:** the only wrap-sound post in the test, from the library, with the end card.\n- **Slot 5:** ID19 if the weather fetch confirms frost (gate/yard frost only). Otherwise ID07, if its label line and the rep-list frost question are in the ledger. Otherwise a third hero episode from the library. ID19 and ID07 never run in the same week.\n- **Not this week:** ID10 is held and ID17 is dropped.",
+   "idea_ids": [
+    "ID14",
+    "ID13",
+    "ID02",
+    "ID19",
+    "ID07"
+   ],
+   "worker_ask_ru": "Съёмка во вторник 27.10, ~8 минут, одно место — склад (погрузчик на 10 минут остановить): палец на строке «расход» на мешке, расчёт ручкой на картоне, пальцы печатают сообщение, одна фраза — телефон у рта. Если утром иней на воротах — 6 секунд снаружи, мешки в кадр не берём. Лица не нужны. Кто отвечает в WhatsApp — одна метка «Соцсети». Менеджерам — новых клиентов спрашивать «Откуда узнали?». Карточку пришлём.",
+   "ai_work": "Edit 5 bodies plus 2 hook variants each, under the same rails. Variants go to Trial Reels where available.\n- **Every post:** the Karaganda end card (fact-pack ids), burned-in Russian captions, a cover from frame 1, «Караганда» in the on-screen text and caption, location tag and hashtags.\n- **ID13:** the «на глаз» opening and «постановка» are replaced by the numbers-first label structure, and the label is quoted verbatim from the ledger.\n- **ID19/ID07:** the first frame is outdoor frost (gate or yard), then a cut to bags indoors. Frost never appears on stock.\n- **Publishing:** with the owner's standing approval, publish Thursday 12:00 after a Wednesday preview unless he says «стоп». Without it, publish on his explicit «да».\n- **Comments:** triage daily and draft replies (only pre-approved templates go out without the owner). Keep the «расчёт» auto-DM running.\n- **Reads:** 48 h reads. Update the total-time sheet."
+  },
+  {
+   "week": 2,
+   "goal": "Explore and follow up, 2026-11-02 → 11-08. Provisional; data decides.\n- Hero ×2 (≥1 from the library).\n- «Вопрос из WhatsApp» episode (ID07 template).\n- First ID21 reply, if a real comment exists.\n- ID19 or ID07 in the frost week, if not used yet.\n- DR2 follow-ups replace planned slots.\n- **End-of-week platform check (11.08):** add TikTok and Shorts from week 3 only if Instagram shows life (see channels).\n- Replace the REALISM assumptions with measured medians.",
+   "idea_ids": [
+    "ID13",
+    "ID07",
+    "ID21",
+    "ID14",
+    "ID19"
+   ],
+   "worker_ask_ru": "Карточка недели: ~8 минут, только склад, 3–4 кадра. Одна привычка: голосовое на 30 секунд «3 вопроса клиентов за неделю». В WhatsApp — только метка «Соцсети». Менеджерам — «Откуда узнали?» у новых клиентов. Больше ничего.",
+   "ai_work": "Edits, variants, end cards. Build ID21 from a blurred comment over library clips, with the answer text taken from ledger facts.\n- **Evidence:** code the voice note, comments and chats.\n- **Desk check:** one question to the desk to verify the per-chat minute estimates.\n- **Platform check:** run it, and if it passes, send the TikTok/Shorts setup instructions with one owner tap.\n- **Reporting:** the 5-line owner report, with the total minutes to date, and a true results line for staff."
+  },
+  {
+   "week": 3,
+   "goal": "Focus, 2026-11-09 → 11-15.\n- Thompson allocation across the arms.\n- Hero ×2 and a «Вопрос из WhatsApp» episode.\n- ID21 if comments exist.\n- ID03 (step-4 loading idea) and ID10 only if the delivery facts are in the ledger and the owner says «да». Otherwise those slots go to the hero.\n- DR5 conversion-layer check before more content.\n- Cross-posting to TikTok and Shorts only if the week-2 check passed.\n- No boost.",
+   "idea_ids": [
+    "ID13",
+    "ID14",
+    "ID21",
+    "ID03",
+    "ID10"
+   ],
+   "worker_ask_ru": "Карточка недели: ~8 минут, склад, 3–4 кадра. Голосовое «3 вопроса за неделю». Метка «Соцсети». «Откуда узнали?» у новых клиентов.",
+   "ai_work": "Allocation update. DR3 re-cut of any hook failure, once only. Mechanism check: saves for the practical_value hero, comments for participation, loop for sensory.\n- **Geography:** check the Instagram audience-city share (Karaganda %).\n- **Reporting:** owner report, total-time sheet and staff results line."
+  },
+  {
+   "week": 4,
+   "goal": "Convert and give the verdict, 2026-11-16 → 11-22. The verdict goes out on 2026-11-23.\n- Last posts within capacity.\n- **Rep one-off review (about 5 min):** mark which social-labelled inquiries are new companies, and which received an invoice.\n- **Per-channel comparison:** organic video vs 2GIS vs rep forwarding, as new qualified companies per total hour.\n- **Pre-registered verdict:**\n  - **YES:** ≥ threshold new companies AND ≥1 invoice → next sprint is b2b_leads.\n  - **NO:** «органика нового аккаунта за 4 недели не дала» → stop video; keep 2GIS and a static profile; offer a spring re-test.\n  - **INCONCLUSIVE:** fewer than 15 posts → extend by 2 weeks, once.",
+   "idea_ids": [
+    "ID13",
+    "ID14",
+    "ID07",
+    "ID21",
+    "ID03"
+   ],
+   "worker_ask_ru": "Последняя карточка теста: ~8 минут, склад. Голосовое «3 вопроса». Менеджеру в пятницу 20.11 — 5 минут: отметить в списке, кто из написавших — новая компания и кому выставлен счёт.",
+   "ai_work": "Final 7-day reads. Count the verdict from the «Соцсети» labels, prefill messages, keyword DMs, codes and the rep's review.\n- **Per total hour:** new qualified companies, with an interval. No arm is called a 'winner'.\n- **Verdict report:** 5 lines in Russian, with true numbers, total minutes by person and the one decision.\n- **Learnings:** learnings.jsonl entries labelled 'measured (correlational)' or 'hypothesis' for the pooled b2b vertical."
+  }
+ ],
+ "measurement": {
+  "success_metric": "New qualified company inquiries from social media per TOTAL hour over the test (posts 2026-10-26 → 11-22), plus at least one invoice issued to a new client.\n- **New:** not in the CRM or the reps' lists, checked by the rep in week 4.\n- **Qualified:** names the company or ИП, the material and an area or volume. Partial inquiries are reported separately; private buyers never count.\n- **Source = social** by ANY route: a per-video code, the bio prefill, the «расчёт» keyword DM, or a rep's «Откуда узнали?» answer «соцсети».\n- **Total hour:** every minute in the total-time sheet, covering cards, the voice note, desk labels and replies, the rep question, setup one-offs and the owner. Estimated at about 130 min including about 70 min of week-0 setup.\n- **Target:** conservative 2 / expected 5 / stretch 10 new qualified companies, which is about 0.9 / 2.3 / 4.6 per total hour.\n- **Baseline:** the rep's retro count of new companies invoiced per week in August–September.\n- **Verdict on 2026-11-23:** YES = ≥3 (default until the owner answers) AND ≥1 invoice to one of them.\n- **Control channels:** 2GIS and rep forwarding are reported on the same per-hour basis.",
+  "attribution": "**Primary (all routes count toward the verdict):**\n- One wa.me link per platform in the bio, prefilled with «Здравствуйте, я из Instagram/TikTok/YouTube…».\n- Per-video {CODE} on the end card for ≥2 s, in the caption and in the pinned comment.\n- The phone number on the end card. Phone callers are captured by the reps' «Откуда узнали?».\n- The «расчёт» comment keyword, which sends an auto-DM.\n- The desk's single label «Соцсети».\n\n**Per-video detail:** codes and the 48 h timing only. Codes are a floor.\n\n**Kept separate:**\n- 2GIS has its own prefill («я из 2ГИС») and is a control channel.\n- Rep forwarding uses its own code family and is a control channel.\n- Status and broadcast are off.\n\n**Invoice and new-client status:** one rep review in week 4. No weekly tagging.\n\n**Window:** 30 days per source. Inquiries after 11-22 go in an addendum and do not change the verdict.\n\n**Not applicable:** Kaspi.",
+  "leading_indicators": [
+   "views_48h ÷ the platform median, as a log ratio per engine. Uses the pooled b2b median ([ASSUMPTION] 300) until 10 own posts per platform",
+   "Karaganda share of reached accounts (Instagram audience city), which checks the reach is local",
+   "Shares + saves per 1,000 views (a forward to a foreman or procurement is the B2B share signal)",
+   "Social-sourced messages per 1,000 views from all routes, and the share of them that include material + area/volume",
+   "«расчёт» keyword DMs per 1,000 views",
+   "3-second hold and average % watched vs the account median"
+  ],
+  "review_cadence": "- **Per post:** 48 h read (allocation) and 7-day read (final).\n- **Weekly (Monday):** campaign read, a 5-line Russian owner report with cumulative total minutes, and an update of the total-time sheet.\n- **2026-11-08:** platform-expansion check and REALISM replacement.\n- **2026-11-20:** the rep's new-client and invoice review.\n- **2026-11-23:** verdict.\n- **Attribution window:** 30 days."
+ },
+ "decision_rules": [
+  "FACT-PACK GATE: no post publishes until the fact pack is answered (own warehouse in Karaganda, delivery in Karaganda, 5 usually-stocked SKUs, the phone number, whether the desk counts bags). Silence is never «нет». The agent re-asks on 10.14 and 10.16. If it is unanswered by 10.23, every date shifts by 1 week. An answer of «нет» to «посчитаем» changes the end card and message to «пишите материал и объём» and drops the counting promise.",
+  "PUBLISHING CONSENT: if the owner opts in once to standing approval of the rails, posts with no prices, no new facts, no faces, no offers and no volume numbers publish Thursday 12:00 after a Wednesday preview unless he writes «стоп». Anything new still needs an explicit «да». Two «стоп» in the test revert to explicit weekly approval. Without the opt-in, publishing needs his explicit «да» each week.",
+  "DR1 Read: every post at 48 h and 7 days, on each platform against its own baseline.",
+  "DR2 Breakout: ≥3× the platform median at 48 h (≈ ≥900 views on the 300-view [ASSUMPTION], replaced by the own last-15 median after 10 posts), or shares+saves/1k ≥2× the median.\n- Within 7 days, 2 follow-ups that replace planned slots, so the card stays ≤3–4 shots.\n- Pin it if it is conversion-relevant.\n- No boost during the test.\n- At ≥10× (≈ ≥3,000 views) it becomes a series, reported as a tail event, not a plan.",
+  "DR3 Hook failure: 3-s hold <0.7× the account median → re-cut with a different first frame and hook, repost ≥7 days later, once only.",
+  "DR4 Body failure: hold OK but completion <0.7× the median → shorten and move the result card earlier in the next episode.",
+  "DR5 Conversion-layer miss: by the end of week 3, cumulative views ≥8,000 (≈15 posts × 300 × 1.8) but <2 social-sourced messages from all routes → before more content, check the end card, the bio prefill link, the keyword auto-DM, whether reps are asking «Откуда узнали?», and reply time.",
+  "Reply guardrail: median first reply in working hours >60 min → reported as the top leak, and conversion posts pause until it is ≤15 min.",
+  "DR6 Sales-handling miss: ≥3 new qualified companies but 0 invoices → report where those chats stopped and draft reply scripts. Price and terms stay the owner's call.",
+  "PLATFORM EXPANSION (11.08): add TikTok and Shorts only if Instagram has ≥1 social-sourced new-company inquiry, OR median shares+saves/1k ≥ the pooled median, OR Karaganda ≥30% of reached accounts. Otherwise stay Instagram-only and save the setup minutes.",
+  "ID10 RELEASE: the late-truck POV stays held until delivery facts are ledger ids AND the owner explicitly says «да» to this video. If that never happens, it never runs and the slot goes to the hero.",
+  "FROST RULE: frost or snow is filmed only outside (gate, yard, sky). Stock and bags appear only indoors. Any clip showing frost on our pallets or film is discarded.",
+  "REACH CAP: ID02 wrap sound runs once in the whole test. Other sound clips are allowed only as B-roll inside hero or question episodes.",
+  "TIME BUDGET: staff ≤20 min/week (card ≤3–4 shots in 1 location, plus the 30-s voice note). Desk and rep incremental time is logged rather than capped, because it rises with inquiries. If staff time exceeds 20 min in a week, the next card drops to 3 shots and the agent builds 3 of the 5 posts from the library. The verdict always uses the TOTAL hours.",
+  "Private buyers: if they are >50% of social-sourced chats for 2 weeks → add the owner's routing line to captions and the quick reply. Never qualified.",
+  "DR10 Capacity: if reps cannot process new qualified inquiries within 1 working day, or the owner says trucks or the warehouse are full → pause conversion CTAs and shift to hero utility only.",
+  "DR11 Honesty kill-switch: a comment credibly disputes a fact (e.g. a label reading) or claims a bad delivery → pause that series, verify, and tell the owner the same day. Never argue in comments.",
+  "DR13 Claims: no arm is called a 'winner' (n<10 per arm). Report «лидирует, рано судить» with an interval.",
+  "DR15 Owner: rejections >30% of a batch → read the reasons and update the constraints. A fact rejection means fixing the ledger.",
+  "DR16: never delete flops, except for truth, consent or legal problems.",
+  "VERDICT (pre-registered, 2026-11-23):\n- **YES:** new qualified companies from social media ≥ the threshold (default 3) AND ≥1 invoice to one of them → the next sprint is b2b_leads.\n- **NO:** below the threshold with ≥15 posts → stop video. Owner wording: «органика нового аккаунта за 4 недели не дала». Keep 2GIS and a static profile, and offer a spring re-test.\n- **INCONCLUSIVE:** fewer than 15 posts → extend by 2 weeks, once.\n- **Always reported:** per-hour results for the 2GIS and rep-forwarding controls, so the owner chooses a channel, not just yes or no to video."
+ ],
+ "learning_questions": [
+  "Verdict question: does organic Instagram video bring NEW Karaganda companies outside the reps' lists, at what rate per total hour, and does at least one reach an invoice?",
+  "Channel question: per total hour, how does organic video compare with the 2GIS link and with reps forwarding videos to prospects?",
+  "Capture question: what share of social-sourced inquiries arrive via per-video codes vs the bio prefill, the «расчёт» keyword or the rep's «Откуда узнали?» (i.e. how badly codes alone would have undercounted)?",
+  "Fit question: does the numbers-first «Считаем по паспорту» hero produce messages that already contain material + area/volume more often than the question or reach posts?",
+  "Reach question: what share of reached accounts is in Karaganda, and does the local end card plus city text raise it over the test?"
+ ],
+ "owner_asks": [
+  {
+   "ask": "Здравствуйте, это AI-ассистент. Предлагаем 4-недельную проверку Instagram: съёмка с 13.10, ролики с 26.10, итог — 23.11. Считаем только НОВЫЕ компании (их нет в вашей базе и у менеджеров), которые пришли из соцсетей любым путём, и выставленные им счета. Что для вас «да, стоит»: 1 — 3+ таких компаний и 1+ счёт, 2 — 6+ и 2+ счёта, 3 — 10+ и 3+ счёта? По умолчанию: 1. Если не наберём, скажем прямо: «органика нового аккаунта за 4 недели не дала» — и остановимся. Ответ до 14.10 12:00.",
+   "why": "Pre-registers a verdict that a skeptical owner can trust: new clients only, invoice required, per total hour.",
+   "minutes": 2
+  },
+  {
+   "ask": "Без этого ролики не выйдут — ответьте по пунктам «да/нет»: 1) склад, который снимаем, — ваш, в Караганде; 2) возите на объекты по Караганде своими машинами; 3) напишите 5 ходовых позиций, которые обычно есть на складе; 4) какой номер телефона/WhatsApp ставить в ролики; 5) по материалу и площади менеджер посчитает, сколько мешков нужно; 6) можно вскрыть один мешок для съёмки. Пока нет ответа — ничего не публикуем, напомним 14.10 и 16.10.",
+   "why": "Blocking fact pack. Without it, every post lacks a reason to write (fatal review point). It also gates the end card, the bio, the single-minded message and ID03/ID10.",
+   "minutes": 3
+  },
+  {
+   "ask": "Кого считаем клиентом из роликов: 1 — только юрлица, 2 — ещё ИП, бригады и прорабы с оплатой по счёту, 3 — всех? Что отвечать частнику с несколькими мешками: 1 — вежливо отказать, 2 — продать с самовывозом, 3 — другое (напишите)? По умолчанию: 2 и 1.",
+   "why": "Defines 'qualified', unblocks ID14's wording and gives the private-buyer routing reply.",
+   "minutes": 1
+  },
+  {
+   "ask": "Утвердите правила один раз: без лиц (руки, мешки, машины без номеров), без цен, без сроков и обещаний доставки, только факты из ваших ответов; иней — только снаружи, мешки — только в помещении. Дальше: 1 — ролики недели выходят в четверг в 12:00, если вы не написали «стоп» (превью в среду; новое лицо, акция, новые факты или цифры объёмов — только с вашего «да»), 2 — утверждаю каждую неделю сам. По умолчанию: 2.",
+   "why": "A one-time human decision under L8. It avoids weekly approval gaps drifting the test to INCONCLUSIVE, and it sets the face and frost rules.",
+   "minutes": 2
+  },
+  {
+   "ask": "Вместо экспорта чатов. Честно: всё присланное обрабатывает ИИ-сервис вне компании; в ролики из чатов ничего не попадает, только пересказ частых вопросов. 1 — менеджер сам пишет 10 частых вопросов клиентов за месяц и примерно сколько раз каждый (~10 минут его времени), 2 — менеджер сам экспортирует 15 чатов и до отправки удаляет имена, номера, цены и названия объектов, 3 — ничего не присылаем. По умолчанию: 1.",
+   "why": "Honest data-handling wording (major review point). Gives real questions for «Вопрос из WhatsApp» and ID07 without client secrets leaving the company.",
+   "minutes": 1
+  },
+  {
+   "ask": "Аккаунты: начинаем только с Instagram и 2ГИС, TikTok и YouTube — после 2-й недели и только если Instagram оживёт. Сотрудник, который отвечает в WhatsApp, создаёт бизнес-аккаунт Instagram и подтверждает 2ГИС по нашей инструкции (~20 минут, учитываем в общем времени). 1 — да, 2 — аккаунты уже есть (пришлите ссылки), 3 — не создаём. Без ответа ничего не создаём.",
+   "why": "Accounts are an owner decision. Starting with one platform halves setup time and focuses the test on the platform most used for local checks.",
+   "minutes": 1
+  },
+  {
+   "ask": "Утвердите (тексты пришлём): шаблон ответа в WhatsApp, ответ частнику, автоответ на комментарий со словом «расчёт», ссылку WhatsApp для 2ГИС; одна метка «Соцсети» в чатах; менеджеры спрашивают новых клиентов только «Откуда узнали?». И отдельно: 1 — менеджеры могут пересылать лучший ролик недели своим потенциальным клиентам (считаем отдельно), 2 — нет. По умолчанию: шаблоны не используем, пересылку не делаем.",
+   "why": "Builds the conversion and attribution layer and the rep-forwarding control arm, at the minimum time cost to reps.",
+   "minutes": 2
+  }
+ ],
+ "risks": [
+  "HYPOTHETICAL CLIENT: every business detail is an assumption and the ledger is empty. No audience string may carry a number, spec, delivery, stock, timing, city or capability claim until its fact id exists. The fact pack is a hard gate on publishing.",
+  "NEEDS FACT (blocking, owner): the warehouse filmed is the owner's own and is in Karaganda (end card, bio).",
+  "NEEDS FACT (blocking, owner): delivery to sites inside Karaganda with own trucks (end card; gate for ID03 and ID10).",
+  "NEEDS FACT (blocking, owner): 5 usually-stocked SKUs, used only as material names, never as «в наличии».",
+  "NEEDS FACT (blocking, owner): the phone/WhatsApp number shown on the end card.",
+  "NEEDS FACT (owner): the desk will count bags from material + area. The single-minded message and the quick reply depend on this. If «нет», the fallback is «Пишите материал и объём».",
+  "NEEDS FACT (staff film + agent ledger): verbatim label lines (consumption, layer, storage, pot life) for every hero episode. Example areas are labelled «пример», and the truth rail may still query them.",
+  "NEEDS FACT (owner): OK to open one bag. Without it, no mixing clip is shot; the hero does not need one.",
+  "NEEDS FACT (owner + label): for ID07, the storage/application-temperature lines plus a frost question the rep marked as asked ≥2 times.",
+  "NEEDS FACT (owner): before any ID21/ID02 follow-up explains the wrap, the owner confirms that wrapping is standard on outgoing pallets.",
+  "NEEDS FACT (owner): average order value, gross margin and close rate, needed before any post-verdict boost cap can be computed.",
+  "Low prior: a new account in one city in November most likely yields 0–3 new-company inquiries. The test is designed so a NO is cheap and honestly worded («органика нового аккаунта за 4 недели не дала»), not a judgement on social media in general.",
+  "Timeline: if the owner answers the fact pack late, every date shifts by a week, deeper into winter. The fact pack is chased on 10.14 and 10.16 and never assumed.",
+  "Total-time honesty: the desk's per-chat minutes (0.5 for labelling, 5 for replies) are [ASSUMPTION] until checked with the desk in week 2. A big inquiry week raises the denominator, which is correct and intended.",
+  "Arm label mismatch: ID13 keeps its step-4 slugs (myth_check / curiosity_gap) although the reworked episodes behave like check_before_buy / practical_value. That pollutes pooled arms. NEXT BATCH: re-log the numbers-first hero as a new idea with the correct slugs.",
+  "End card shows a phone number: a judgment deviation from D6 (cta_ru stays without numbers), because foremen call rather than type codes. The number is used only as a ledger fact.",
+  "The comment-to-DM automation on Instagram may need a Meta-approved third-party tool [ASSUMPTION]. If unavailable, the caption asks people to write «расчёт» in DM instead. «+» is never used (D6 bait ban).",
+  "Instagram-only weeks 1–2 rule out using platforms as blocks for hook variants. Variants go to Trial Reels where available, or are deferred.",
+  "TikTok reach, if added, will mostly be outside Karaganda. Verdict counts only Karaganda-serviceable companies; the local end card and city text are the mitigation.",
+  "Reputation: comments may raise real past delivery complaints regardless. DR11 applies (pause, verify, tell the owner the same day, never argue in public). ID10 stays held.",
+  "Frost footage: any clip showing frost on stock is discarded, and stock appears only indoors. «Тёплый/сухой склад» is never claimed unless it is a ledger fact.",
+  "B2B confidentiality: no client names, sites, tender details, prices, documents or vehicle plates. Rep-anonymised inputs only. Raw text stays internal.",
+  "Private buyers may arrive via the prefill or keyword. They are routed by the owner's rule and excluded from the verdict.",
+  "Seasonality: a NO in November means 'no for this winter', and a spring re-test is offered.",
+  "Safety: no staff performance. If the mixing clip is shot, gloves on and the phone on a stand.",
+  "NEXT BATCH: «Дата изготовления на мешке», a fresh-batch production-date proof video (sensory and B2B signal), to replace further sound posts.",
+  "NEXT BATCH: «Собираем заказ на объект», a real-time loading episode (process_full) once delivery facts exist, in case ID03 does not fit the new end-card structure.",
+  "NEXT BATCH: a POV with nothing to do with delivery (e.g. estimating materials for a client late at night) to replace ID10 as the identity arm.",
+  "NEXT BATCH: an anti_sell idea for I09 («Кому к нам писать не стоит»), once the owner's private-buyer rule exists.",
+  "METHOD gaps (judgment): F3 has no mix for should_we_do_social; used about 50/30/20 hero / conversion / probes. Silent-consent publishing is used only after a one-time explicit owner opt-in. The hero is on I03, not the top-ranked I01, because I01 cannot be resolved truthfully without delivery facts."
+ ],
+ "attribution_codes": {
+  "ID14": "BA23",
+  "ID10": "BA24",
+  "ID19": "BA25",
+  "ID07": "BA26",
+  "ID21": "BA27",
+  "ID13": "BA28",
+  "ID17": "BA29",
+  "ID02": "BA32"
+ }
+}

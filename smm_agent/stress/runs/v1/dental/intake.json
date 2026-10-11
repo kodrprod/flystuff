@@ -1,0 +1,54 @@
+{
+ "request_type": "sales_push",
+ "reframed_request": "«Нужно больше пациентов на импланты» → Increase booked implant consultations from new patients in Almaty, counted by video code in WhatsApp, phone and Instagram DM, within the two implant surgeons' free capacity. Content shows the process and answers patient fears, with no outcome claims, because this is regulated medical advertising.",
+ "business_objective": "Reach at least 1.5× the week-0 weekly baseline of booked implant consultations (first visits to assess implants) on average across sprint weeks 3–4, ending 2026-11-15, and stay within free surgeon capacity. Implant treatment plans accepted are tracked as a lagging metric through 2026-12-31. The baseline is unknown today: it is counted in week 0 (2026-10-12 to 2026-10-18), and the multiple is fixed at the end of week 2.",
+ "marketing_objective": "Adults in Almaty who have one or more missing teeth, or a failing bridge or removable denture, and have put off implants because they fear pain, cost, a long process or the wrong doctor, send the code from a video in WhatsApp or Instagram DM (or say it by phone) and book an implant consultation, by 2026-11-15.",
+ "success_metric": {
+  "name": "Coded implant consultations booked (WhatsApp / Instagram DM / phone, by video code)",
+  "how_measured": "Video codes counted in the weekly WhatsApp chat export, plus Instagram DMs, plus codes the administrator logs from phone calls (log sheet). Each one is matched to a booked consultation with the admin label «Имплант-консультация»; attendance is confirmed against the clinic schedule. Total implant-consultation bookings (coded and uncoded) vs the week-0 baseline is reported as an estimate; the coded count is the floor.",
+  "target": "conservative 1.2× / expected 1.5× / stretch 2× the weekly baseline of implant-consultation bookings (average of weeks 3–4); baseline = week-0 count (unknown now, no export yet); absolute numbers fixed at end of week 2 (2026-11-01)",
+  "by_when": "2026-11-15"
+ },
+ "leading_indicators": [
+  "views_48h ÷ the platform median (the account's last 15 posts; pooled dental vertical median until the account has 10 posts of its own)",
+  "shares + saves per 1,000 views vs the account median",
+  "coded chats (WhatsApp + DM + phone) per 1,000 views",
+  "profile visits per 1,000 views"
+ ],
+ "constraints": [
+  "BUDGET: 0 ₸ (default; ad budget is a known unknown, deferred until a post qualifies under F10)",
+  "OWNER: ≤15 min onboarding, ≤5 min/week, in one batched message (default)",
+  "STAFF: ≤17 planned min/week (20 incl. safety), one phone, usable audio only within ~30 cm (stated)",
+  "FILMING: hands, instruments, objects and voice only; no faces. Patient faces, mouths or X-rays/CT scans only with written consent (stated: RK medical rules); staff faces only with consent (default until Q2)",
+  "PRICES: none in content. The ledger is empty; only owner-confirmed, dated prices ≤7 days old, after Q3 (stated: prices are a known unknown)",
+  "OFFER: none (default); no «бесплатная консультация» unless the owner confirms it exists",
+  "CAPACITY: unknown for the 2 implant surgeons; no «запишем завтра», no «без очереди», no fast-turnaround claims (default)",
+  "REGULATED: medical/dental. No outcome claims or guarantees («без боли», «навсегда», «приживается 100%», «за 1 день»). No before/after without written patient consent. No AI depiction of real results. AI only for labelled explainers of the invisible (e.g. implant in bone). The owner and the responsible doctor sign off on every batch. The owner confirms compliance with RK medical-advertising and language rules (we supply RU and KZ text; no legal advice) (stated + default)",
+  "AVOID: politics, religion, ethnicity, mocking patients (e.g. their teeth), naming competitors or other clinics' work, implant brand claims until confirmed (default)",
+  "ACCOUNTS: Instagram ~3k followers (assumed), WhatsApp, phone. No TikTok or YouTube known (owner ask). Business accounts use commercial-library music only (evidence/default)",
+  "APPROVAL: the owner approves each weekly batch explicitly; offers, faces, patient material and spend always need explicit approval (default)",
+  "GUARDRAIL: median first reply to WhatsApp/DM ≤15 min in working hours; missed calls returned the same day (default)",
+  "GUARDRAIL: new implant-consultation bookings stay ≤80% of the free surgeon capacity confirmed in Q1; above that, pause conversion pieces (default)",
+  "GUARDRAIL: 2GIS/Google rating not below the current value; no new complaints about pressure selling (default)"
+ ],
+ "assumptions": [
+  "BOTTLENECK: consideration (anxiety: pain, total cost, a long multi-visit process, «хватит ли кости», trust in the surgeon), low confidence. No chats, reviews or call notes ingested yet; this is a vertical prior. Alternative: conversion (price asked in chat and no next step, slow replies, phone calls not returned). Verify from the WhatsApp export and 2GIS reviews in step 2 by 2026-10-16.",
+  "REALISM: baseline and close rate unknown, so the target cannot be checked against a requirement yet; only achievable volume is estimated. [ASSUMPTION] Reels median 500–1,500 views (3k followers) → ach_views = 20 posts (weeks 1–4) × 1,000 × 1.8 ≈ 36k (range 18k–54k). At [ASSUMPTION] 0.3–3 coded chats per 1k views → ~11–108 coded chats over 4 weeks (10× range). At [ASSUMPTION] 20–40% chat→booked consultation → ~2–43 coded consultations. The verdict (feasible/stretch) is fixed on 2026-11-01 once the week-0 baseline and the measured chats/1k exist. Time: 5 weeks to the deadline (>14 days), so organic content has time to learn. Warm-base (WhatsApp Status to existing patients) is the fallback lever.",
+  "[ASSUMPTION] An implant decision takes weeks (consultation → CT → plan → surgery), so surgeries started inside the sprint undercount the effect | if wrong (patients decide at the first visit): switch the primary metric to plans accepted | verify: the clinic schedule for the last 10 implant cases (consultation date vs surgery date), owner, by 2026-10-16",
+  "[ASSUMPTION] The phone is a major booking channel, so codes must be spoken in the video and logged by the administrator from calls (METHOD covers WhatsApp codes only; extended by judgment) | if wrong: WhatsApp-only attribution | verify: share of first contacts by channel in the week-0 count",
+  "[ASSUMPTION] Free implant capacity is +20% over the current consultation volume (default) | if wrong: targets and DR10 rescale | verify: answer to Q1 by 2026-10-10 12:00",
+  "[ASSUMPTION] «Prices above average» is an owner self-description in a hypothetical profile and is not usable in content. Price-objection content (why_it_costs) needs an owner-confirmed process and dated prices | if wrong: n/a | verify: price-list photo in step 2",
+  "[ASSUMPTION] The ledger is empty. No number, price, implant brand, warranty, years of experience, case count or «без боли» appears in any audience string until a dated fact exists. Missing facts go to NEEDS FACT | verify: step 2 fetch of the site, 2GIS and Instagram plus owner inputs",
+  "[ASSUMPTION] Disguised non-marketing problems (slow replies, price position, recent bad reviews, surgeon availability) are not yet excluded | if wrong: fix them before scaling content | verify: chat export + 2GIS reviews, step 2",
+  "[ASSUMPTION] Hygiene and crowns are out of scope for this sprint | if wrong (owner wants them too): SECONDARY gets ≤20% of slots | verify: owner reaction to the batch",
+  "SECONDARY: none stated. Hygiene and crowns could become a ≤20% secondary line only if implant capacity proves to be full.",
+  "[ASSUMPTION] Paid boosts of medical services may carry extra RK compliance requirements; the boost question is deferred to week 2 under F10 and needs the owner's legal confirmation | verify: when a post qualifies",
+  "NOTE: The profile is explicitly HYPOTHETICAL. Every business detail above (6 chairs, 2 surgeons, ~3k followers) is treated as an unverified assumption."
+ ],
+ "clarifying_questions": [
+  "Сколько дополнительных консультаций по имплантам в неделю ваши два хирурга реально смогут принять: 1 — до +2, 2 — +3–5, 3 — больше 5 (напишите число)? По умолчанию: +20% к нынешнему числу. Ответ до 10.10 12:00, иначе работаем по умолчанию.",
+  "Кого можно снимать: 1 — только руки, инструменты и голос; 2 — врачей с лицом (с их согласия); 3 — и пациентов (только с письменным согласием, без «до/после» без согласия)? По умолчанию: 1. Ответ до 10.10 12:00.",
+  "Цены на импланты в роликах: 1 — можно, пришлите фото прайса с датой; 2 — не называем, цену обсуждаем только в WhatsApp или на консультации? По умолчанию: 2. Ответ до 10.10 12:00."
+ ],
+ "push_back": "Сделаем, но честно: решение об имплантах пациенты обычно принимают неделями, поэтому за 4 недели считаем записи на консультацию по коду из ролика, а операции учитываем позже. Ваших цен и нынешнего числа консультаций мы пока не знаем: в роликах не будет ни одной цифры, пока вы её не подтвердите, а цель зафиксируем через две недели как рост к нынешнему уровню. Обещаний результата и «до/после» без письменного согласия не будет, это запрещено правилами медрекламы; вместо этого показываем процесс и честно отвечаем на страхи пациентов. Если ответ в WhatsApp или перезвон занимает дольше 15 минут, сначала исправим это, иначе ролики не помогут."
+}

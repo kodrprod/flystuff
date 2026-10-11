@@ -1,0 +1,276 @@
+{
+ "name": "Seen up close, at full price (price_pressure, Шымкент beauty salon, HYPOTHETICAL client, sprint 2026-10-19 → 2026-11-15) — revision 2",
+ "big_idea": "A client compares prices because she cannot see what the price pays for: the hygiene before she sits down, the steps and time a careful master takes, and the master's judgment. So every week we show those things up close, at 20 cm, on real hands, with no comparison to anyone. We start with the clients who already know us and the services that have free slots. This gives at least 20 episodes: hygiene and prep steps for each service, the process of each service, what a master refuses, what she checks, care between visits and preparing for a той, across nails, hair and brows. It can be proven on camera because only real routine is filmed. It points at one action: a coded WhatsApp chat asking for a free slot, booked through the salon's own number.",
+ "single_minded_message_ru": "Смотрите, за что вы платите",
+ "why_this_wins": "This is a plan that lets audience data choose, not a forecast (L1, L001, L003). The message has no price, number or comparison, so it needs no ledger fact (facts_usable is empty). It is true by construction, because every episode only shows routine the owner or master has confirmed and the camera has filmed.\n\nWhat changed from revision 1, and why:\n(1) The fatal gap is closed. The brief is «зачем платить больше», so the hero is now the proof series «Вблизи у мастера» (I01 price_value: E04, E05, E06, E13, E16; I07 content reality: E21, E22). It leads week 1 with a hygiene episode and a process episode. The ASMR loop (ID01) and the anti-sell wildcard (ID19) no longer lead the salon's first public week.\n(2) The fastest lever gets the effort. REALISM gives organic reach a ratio of 0.6–5.9, so weeks 1–2 put about 40% of effort into the warm base. That means personal reactivation messages to clients who haven't come in for 6–10 weeks (I10: E32, E05, E03), plus Status. This arm is measured on its own.\n(3) The owner's master-flight risk (I08: E26) is built in. By default, masters are not named in public, every episode is salon-branded, and booking goes only through the salon number. The 'meet the master' promise is dropped, so the person series is honestly called «Мастер считает».\n(4) Free capacity drives the slate. At least 2 of the 4 week-1 videos are on the service the owner names as having free slots, which is non-nail by default.\n(5) Kazakh is the default for the той series. Masters dictate and check the Kazakh lines, which satisfies L9.\n(6) Attribution works by tapping. Prefilled wa.me links carry the code, Instagram Direct is added, and the admin's «откуда узнали?» question is the primary source.\n\nOther insights in use: I05 for the той moment (E19, E20), I06 for hidden knowledge (E23, E17, E25, E30), I09 for the honest-signal wildcard (from week 3, only with the owner's «да»).\n\nCaveat: every insight is assumption-only (strength ≤2). Step 3 is rerun on the export and the 2GIS fetch by 2026-10-16, and step 4 is rerun the same day to produce the two hero episodes (NEXT BATCH).\n\nLearning plan: video arms are read by series with relative views plus shares and saves until there are 20 attributed chats. The reactivation arm is read separately by bookings per 100 messages. The bilingual vs KZ-only test runs on the той series.",
+ "series": [
+  {
+   "name": "«Вблизи у мастера»",
+   "role": "HERO. Proof and price_value: it shows what the price pays for, with no price and no «у других». Metrics: saves + shares per 1k, attributed chats per 1k, and chat→booking rate of those chats at the current price. Opening ritual (fixed): frame 1 is an extreme close-up (≤20 cm) of a prep, hygiene or process step already in motion, with its real sound. The series tag sits top-centre and the first text line names the step. Fixed structure: the step → why the master does it («мастер считает», only for routine the owner or master has confirmed) → payoff close-up → CTA for a free slot through the salon number. Variable: the service and the step. It rotates across nails, hair and brows, led by the services with free slots. Episodes: E1 hygiene «Что происходит до того, как вы сели в кресло» (steriliser, sealed pouch opened on camera, new file, desk wiped; uses ID01's file footage). E2 process or why_it_costs on the free-slot service (a duration appears only once confirmed). Both come from the week-0 step-4 rerun (NEXT BATCH). ID13 (removal done by the master, myth_check) joins from week 2 once its belief source is found. ID01 is never published as a bare ASMR loop with «Включите звук»; its sound becomes the hook of E1.",
+   "idea_ids": [
+    "ID01",
+    "ID13"
+   ],
+   "cadence": "2/week from week 1, each episode ≤4 staff minutes."
+  },
+  {
+   "name": "«Мастер считает»",
+   "role": "SUPPORTING. Trust and conversion. Metrics: attributed chats per 1k that ask for the episode's service, and their booking rate. Opening ritual: a master's hands already working at her own station, her voice starting by 0.5 s (recorded at 25–30 cm in «тихий угол»), and the series tag top-centre. The salon is branded; the master is not named by default (owner risk: clients follow masters). A name appears only with the owner's separate «да» for that master, and a face only with her consent too. Booking always goes through the salon's WhatsApp, never a personal number. ID17 episode 1 is filmed with a master of the service that has free slots (hair or brows by default). ID09 (what a master checks) and ID19 (anti-sell wildcard, owner «да» required) come from week 3.",
+   "idea_ids": [
+    "ID17",
+    "ID09",
+    "ID19"
+   ],
+   "cadence": "1/week in weeks 1–2, then up to 2/week if the arm leads."
+  },
+  {
+   "name": "«Перед тоем» (KZ title dictated by a native-speaker master)",
+   "role": "SUPPORTING. Moment and conversion. Metrics: attributed chats per 1k that include an event date, and bookings on free slots. Opening: a recognisable pre-той situation on hands. On screen by default: the KZ hook large and the RU line small, each line ≤8 words, ≤12 words visible at once. KZ text is only what a native-speaker master dictated or checked. Test: one той episode runs KZ-only vs bilingual (caption-language variant). The CTA asks for the event date and never promises a slot.",
+   "idea_ids": [
+    "ID20",
+    "ID15"
+   ],
+   "cadence": "1/week, timed 10–14 days before той weekends once dates are verified."
+  },
+  {
+   "name": "«Между визитами»",
+   "role": "SUPPORTING. SECONDARY retention, raised to about 40% of effort in weeks 1–2 at the owner's request. Metrics: replies and bookings per 100 reactivation messages, and repeat bookings from existing contacts. Two parts. (a) The non-video reactivation arm: the admin sends a personal message from the salon WhatsApp to clients who haven't booked in 6–10 weeks, in their own master's name only with the owner's OK, with no discount, and offering only slots confirmed that day. These messages carry their own label «Возврат». (b) Care content (ID24) plus the week's best video on WhatsApp Status. Broadcasts go only to opted-in contacts.",
+   "idea_ids": [
+    "ID24"
+   ],
+   "cadence": "Reactivation: up to 20 messages a day in weeks 1–2, at most 1 message per client per sprint. ID24 in week 2, then 1/week on Status from week 3, falling to ≤20% of slots."
+  }
+ ],
+ "offer": {
+  "needed": false,
+  "proposal": "Без акций и без скидок: цену не трогаем, это решение владельца. В сообщениях постоянным клиенткам — тоже без скидки, только свободное время, подтверждённое администратором в тот же день. Кандидат на 3-ю неделю (только после «да» владельца и только если на 2-й неделе чаты останавливаются после цены): «Пришлите в WhatsApp фото ваших ногтей и код {CODE} — мастер посмотрит и до записи подскажет, что подойдёт». Бесплатно, без обязательства записаться, до 15.11, без ограничений по количеству. Тест: тот же формат роликов с этим предложением и без него.",
+  "fact_ids": [],
+  "needs_owner_approval": true
+ },
+ "channels": [
+  {
+   "channel": "WhatsApp chat (conversion, top priority)",
+   "role": "This is where bookings close and the most likely leak, so it is fixed in week 0. Booking happens ONLY through the salon's number; masters' personal numbers never appear. Attribution is tap-only: every video's CTA, story link sticker, bio link and TikTok bio uses a prefilled wa.me link whose message already contains the code, e.g. «Здравствуйте! Я по видео МАСТЕР-3». The viewer never types. Per-video codes stay as code assigns them, but decisions are read per series (strategist judgment, to reach readable counts). The admin asks every codeless chat «Подскажите, откуда вы о нас узнали?» and labels «Видео»; this is the primary attribution source, and codes are the floor. Labels are «Видео», «Записан» and «Возврат». Target first reply ≤15 min in working hours; if the export shows a median over 60 min, that is leak #1 and is fixed before content scales. Quick replies are drafted by the agent and approved once. (1) Coded chat: «Здравствуйте! Вы по видео {CODE}. Подскажите, какая услуга и какой день вам удобен — сразу скажем, у какого мастера есть окно.» (2) After a price, using only the dated price list: «[цена из прайса]. Хотите, подберём мастера и время? Какой день вам удобнее?» (3) Codeless: «Подскажите, пожалуйста, откуда вы о нас узнали?» (4) Handover: «Спасибо, что пришли! Если понравилось — пара слов в 2ГИС очень поможет мастеру.» No incentive for reviews. We never argue about price and never mention other salons."
+  },
+  {
+   "channel": "WhatsApp reactivation (warm base, weeks 1–2 focus)",
+   "role": "Personal 1:1 messages to existing clients who have chatted with the salon before and whose last booking was 6–10 weeks ago. The admin finds them in her own WhatsApp chat list, sorted by date; the agent supplies the criteria and the text, and no client data leaves the salon. The owner approves the text once. Template: «Здравствуйте, {имя}! Это {имя мастера}, ваш мастер из салона. Давно не виделись — есть свободное время {день/время, подтверждённое сегодня}. Записать вас?» If the owner does not allow the master's name: «Это администратор салона, вы были у нас у мастера {имя мастера}…», or with no name at all. No discount, at most 1 message per client per sprint, and anyone who answers «не пишите» goes on a do-not-contact list. Replies get the «Возврат» label and are tracked as their own arm."
+  },
+  {
+   "channel": "WhatsApp Status / broadcast",
+   "role": "The week's best 2 videos go to existing contacts, plus ID24 from week 2. In weeks 1–2 the hygiene episode and the той episode go to Status. Broadcasts go only to contacts who opted in. Free-slot announcements appear only when the admin confirms them the same day."
+  },
+  {
+   "channel": "Instagram Reels + profile + Direct",
+   "role": "Account status is unknown: the agent searches, and a missing account is an owner ask. Reels is the shop window where Шымкент clients check that the salon is legitimate. Instagram Direct is a booking channel. Where the account supports it, a keyword auto-reply («Напишите МАСТЕР») sends the prefilled wa.me link; otherwise the admin uses saved replies. Direct chats get the same labels «Видео»/«Записан» and the question «откуда узнали?». Bio: services, address (from 2GIS) and a prefilled wa.me link with a bio code. Story link stickers carry each video's prefilled link. Pin 3 posts: the best «Вблизи у мастера» episode, the best «Мастер считает» episode, and «Как записаться». Highlights: «Как записаться», «Гигиена» (only filmed, confirmed routine), «Отзывы» (public 2GIS screenshots, no names). No «Цены» highlight until a dated price list is in the ledger. Masters' personal accounts are not tagged unless the owner says «да» for that master."
+  },
+  {
+   "channel": "TikTok",
+   "role": "Non-follower reach and the fastest test bed. Creating an account needs the owner's OK. The bio carries a prefilled wa.me link with a bio code. It is a cold start, so arms are not judged on its first 5–10 posts."
+  },
+  {
+   "channel": "YouTube Shorts",
+   "role": "Cheap cross-post with a search tail. Titles use plain service words, e.g. «Снятие гель-лака у мастера» or «Стерилизация инструментов в салоне», and only for steps that were actually filmed."
+  },
+  {
+   "channel": "2GIS",
+   "role": "Proof and local intent. The agent fetches the rating, review count and recurring praise words (guardrail baseline, future I04 content). Photos are refreshed with real hands-on work and filmed hygiene routine. The handover quick reply asks for a review. Never fake or incentivised reviews."
+  },
+  {
+   "channel": "Paid boost (optional, decided in week 2)",
+   "role": "Only for DR2 posts with ≥1 attributed chat or a conversion role, using click-to-WhatsApp within a Шымкент radius. Ceiling CPQC_cap = average check × gross margin × close rate × 0.3, computed in week 2 from the owner's numbers and the export. Stop-loss: stop if spend reaches 5× the cap with fewer than 3 attributed chats, or if cost per attributed chat rises 3 days in a row. Never with an unconfirmed offer."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Setup and diagnosis (2026-10-10 → 10-18). No posts. Collect inputs and the baseline, set up prefilled wa.me codes, quick replies, the Direct auto-reply (if available), the profile and the reality scan. By 10-16: rerun step 3 on the export and the 2GIS fetch, then rerun step 4 to produce the 2 hero episodes («Вблизи у мастера» E1 hygiene, E2 process on the free-slot service) and the non-nail ideas (NEXT BATCH). Check non-marketing causes first: reply time, clients leaving with a master, the 2GIS trend. Set up the reactivation arm: the owner approves the template once, and the admin is given the selection rule.",
+   "idea_ids": [],
+   "worker_ask_ru": "Здравствуйте, это ИИ-ассистент салона. Один раз на этой неделе, ~15 минут, лица не нужны: 1) 3 пробных клипа (фраза с телефоном в 30 см, звук пилки в 20 см, общий вид зала) и 2 минуты тихой прогулки по салону с телефоном; 2) голосовое на 2–3 минуты: что вы на самом деле делаете каждый раз до того, как клиентка села в кресло (инструменты, пилка, стол), и какие шаги в услуге, где есть свободные окна; 3) мастер, которой удобно по-казахски: надиктуйте голосом 3 короткие подписи для роликов про той — текст пришлём на русском, переведите своими словами.",
+   "ai_work": "Fetch the 2GIS card (rating, count, recurring words, services, hours, published prices with fetch date) and check Instagram/TikTok presence. Read nearby public price lists for internal context only. Ingest and anonymise the chat export (cust_###). Compute where chats die, median first reply, close rate and the 4-week baseline. Draft the 4 quick replies, the reactivation template and the Direct auto-reply. Build prefilled wa.me links per video and per series. Rerun steps 3 and 4: hygiene and process episodes for the hero (only steps the voice note and owner confirm), plus brow and hair episodes. Transcribe the KZ hook lines as dictated, word for word, without editing. Recompute REALISM. If the export shows slow replies or master-linked churn, send the owner a 1-line Russian note that content is not the first fix (DR0)."
+  },
+  {
+   "week": 1,
+   "goal": "Explore (2026-10-19 → 10-25). Two jobs.\n\n(A) WARM BASE, about 40% of effort. The admin sends approved reactivation messages to clients lapsed 6–10 weeks (up to 20/day, slots confirmed that day), labelled «Возврат». The hygiene episode and ID20 also go to Status.\n\n(B) 4 base videos, published Wed → Sat:\n- Wed: hero E1 hygiene «Что происходит до того, как вы сели в кресло» (NEXT BATCH; ID01's file and sound footage is its hook, so ID01 is filmed but not published alone).\n- Thu: ID20, bilingual KZ+RU.\n- Fri: ID17 «Мастер считает», with a master of the free-slot service, salon-branded and unnamed.\n- Sat: hero E2 process on the free-slot service (NEXT BATCH).\nAt least 2 of the 4 (ID17 and E2) are on the service the owner named in question 3; with no answer, the default is the non-nail service with weekday daytime slots. ID19, ID13 and ID09 are out of week 1. The card is capped at 4 ideas, split into two short windows: before the first client (≈6 min) and the dead hour after lunch (≈7 min). Staged shots use staff members' own nails. Card ≈13 min + KZ check 3 min ≈ 16 planned; code recomputes.\n\nFallbacks:\n- Hygiene routine not confirmed by 10-16 → E1 is not made (we never show what isn't routine) and ID15 takes its slot.\n- Process steps not confirmed → E2 is process-only with no duration or «почему» claim.\n- No master consents to voice → ID17 is hands plus captions «мастер считает».",
+   "idea_ids": [
+    "ID01",
+    "ID20",
+    "ID17"
+   ],
+   "worker_ask_ru": "Это ИИ-ассистент салона. Съёмка во вторник 20.10, два коротких окна: утром до первой клиентки (~6 минут) и в тихий час после обеда (~7 минут): маникюрный стол, кресло мастера, тихий угол. Лица не нужны, для постановочных кадров — ваши собственные ногти, карточку пришлём. Плюс 3 минуты: проверить казахские подписи. Администратору отдельно: отправить одобренное сообщение клиенткам, которые не были 6–10 недель (правило отбора пришлём), и ставить метку «Возврат».",
+   "ai_work": "Edit 4 bodies with 2 hook variants each (first frame and hook text), all through the truth rails. ID20 gets bilingual KZ-large / RU-small captions using only native-checked KZ text. E1 uses ID01's real file sound as the hook, with no «Включите звук» and no music. Make Status cuts of E1 and ID20. Cross-post to Reels, TikTok and Shorts with a separate cover and caption per platform, put prefilled wa.me links in the story sticker and bio, and the code in the caption and pinned comment. Count «Возврат» replies and bookings daily. Triage comments daily and draft replies (never argue about price, never name anyone). Read every post at 48 h against the pooled beauty median."
+  },
+  {
+   "week": 2,
+   "goal": "Explore + follow-up (2026-10-26 → 11-01).\n\nWarm base stays at about 40% of effort: the second reactivation wave, and ID24 on Status. Expand to 10–16 weeks lapsed only if REACT1 allows.\n\nCard capped at 4 ideas:\n- ID24 (staff member's own nails);\n- ID15 (bilingual; KZ-only variant on another platform the same day);\n- hero E3 on the free-slot service (NEXT BATCH);\n- ID13, only if the belief source is found in the export or 2GIS; otherwise a «Мастер считает» episode 2 with a second consenting master (ID17).\n\nOther work:\n- 2 follow-ups for any DR2 breakout;\n- first reply videos from real comments (zero minutes);\n- a 2-minute payoff bank of finished work at the end of the shoot day, which replaces the payoff shots inside cards (net-neutral minutes);\n- the boost question with real numbers;\n- fix the success target as a multiple of the baseline.",
+   "idea_ids": [
+    "ID24",
+    "ID15",
+    "ID13",
+    "ID17"
+   ],
+   "worker_ask_ru": "Это ИИ-ассистент. На неделю (до 17 минут): 1) карточка во вторник — два коротких окна, постановочные кадры на ваших ногтях; 2) в конце дня съёмки 2 минуты: готовые работы крупно у окна; 3) 3 минуты — проверить казахские подписи; 4) голосовое 30 секунд: 3 вопроса клиенток за неделю. Администратору: вторая волна сообщений тем, кто давно не был, метки «Видео», «Записан», «Возврат».",
+   "ai_work": "Update the driver × format posteriors at series level. Code new comments, chats and «Возврат» replies into evidence. Add failed hooks to the graveyard. Re-cut and repost any DR3 hook failure (≥7 days later, once only). Edit reply videos from library clips. Compute the boost cap. Draft the owner report (≤5 lines) and the week-2 owner asks (anti-sell «да», photo review «да»). Send staff one true results line, e.g. «Ваш кадр с пакетом инструментов посмотрели N раз, M человек написали»."
+  },
+  {
+   "week": 3,
+   "goal": "Focus (2026-11-02 → 11-08).\n\nRetention returns to ≤20% of slots: ID24 on Status, and reactivation only if REACT1 showed bookings. Run Thompson allocation by series. Hero «Вблизи у мастера» runs 2/week on services with confirmed free slots. Also in this week:\n- ID09 «Мастер считает», with its CTA only if the owner said «да» to photo review;\n- ID19 anti-sell wildcard, only with the owner's «да»; otherwise it is dropped;\n- ID20 timed to verified той dates.\nKeep ≥2 base videos on free-slot services. Run the first boost only if approved and DR9 holds. Test the non-price offer only with the owner's «да» and if chats still stall after the price.",
+   "idea_ids": [
+    "ID09",
+    "ID19",
+    "ID20",
+    "ID17"
+   ],
+   "worker_ask_ru": "Это ИИ-ассистент. Всё как на прошлой неделе: карточка во вторник двумя короткими окнами (до 17 минут вместе с проверкой казахских подписей), голосовое про 3 вопроса клиенток, метки «Видео», «Записан», «Возврат». Новых задач нет.",
+   "ai_work": "Run allocation and the DR5/DR6 checks: if attributed chats are under 30% of plan, audit the prefilled links, sticker, bio, Direct auto-reply and reply time before making more content. Draft reply scripts for wherever chats die. Run the boost and monitor it against the stop-loss. Pre-script the New Year corporate-party moment (NEXT BATCH)."
+  },
+  {
+   "week": 4,
+   "goal": "Convert + review (2026-11-09 → 11-15). Conversion push within capacity (DR10), pointed at services with free slots. Compare weekly bookings at undiscounted prices with the baseline, and report the reactivation arm separately. Write learnings with strength labels. Choose next sprint's arms and decide whether the hero continues.",
+   "idea_ids": [
+    "ID17",
+    "ID20",
+    "ID24"
+   ],
+   "worker_ask_ru": "Это ИИ-ассистент. Последняя неделя спринта: карточка во вторник двумя окнами (до 17 минут), голосовое про вопросы клиенток, метки «Видео», «Записан», «Возврат». Спасибо — в пятницу пришлём итоги в цифрах.",
+   "ai_work": "Final 7-day reads. Report:\n- the attributed-booking floor (codes + «видео» answers) and total bookings vs the 4-week baseline as an estimate;\n- reactivation bookings per 100 messages;\n- chat→booking rate vs baseline;\n- the guardrails (reply time, 2GIS rating, zero discounts, opt-outs).\nRun the mechanism check of each driver against its own metric. Write learnings.jsonl entries labelled hypothesis or measured (correlational), never «winner» without DR13. Send the owner one decision for the next sprint."
+  }
+ ],
+ "measurement": {
+  "success_metric": "WhatsApp bookings at current, undiscounted prices per week, 2026-10-19 → 2026-11-15.\n- Conservative: at baseline (the decline is stopped).\n- Expected: +10% vs baseline.\n- Stretch: +20% vs baseline.\nThe baseline comes from the 4 weeks before 10-19 in the chat export, or from the week-0 count if there is no export; the multiple is fixed at the end of week 2. Sub-metric for the warm-base arm: bookings per 100 reactivation messages (label «Возврат»).\nGuardrails:\n- chat→booking rate not below baseline;\n- median first reply ≤15 min;\n- 2GIS rating not below its current level;\n- zero price cuts;\n- opt-out complaints from reactivation ≤2.",
+  "attribution": "Tap-only codes. Every video's prefilled wa.me link already contains its code, in the story link sticker, the Instagram bio or link-in-bio, the TikTok bio, and wherever links are clickable. The code is also on screen for ≥2 s, in the caption and in the pinned comment.\nThe PRIMARY source is the admin's «Подскажите, откуда вы о нас узнали?» asked in every chat that has no code, including Instagram Direct chats, labelled «Видео». Coded chats are a floor.\nPer-video codes stay as code assigns them, but allocation and decisions read at SERIES level (code + «видео» answers pooled per series) so counts reach a readable size (strategist judgment).\nReactivation messages carry the «Возврат» label and are a separate arm, never mixed with video attribution.\nTotal weekly bookings vs the 4-week baseline are an estimate. Walk-ins: the admin asks «откуда узнали?» and tallies «видео» (assumption).\nAttribution window: 30 days per code. No Kaspi channel.",
+  "leading_indicators": [
+   "views_48h ÷ median of the last 15 posts on that platform (pooled beauty_salon median, assumed ~500, until 10 own posts), using the log ratio for arms",
+   "3-second hold / skip rate and average % watched, plus bilingual vs KZ-only on the той series",
+   "shares + saves per 1,000 views vs median, with each driver matched to its own metric (relief/proof → saves, moment_trigger → saves, identity → shares, mastery → completion)",
+   "attributed WhatsApp + Direct chats per 1,000 views (codes + «видео» answers), and the share asking for a service with free slots or giving an event date",
+   "reactivation reply rate and bookings per 100 messages (non-video arm)"
+  ],
+  "review_cadence": "Each post is read at 48 h (allocation) and at 7 days (final). The reactivation arm is read daily in weeks 1–2 and weekly after that. Weekly campaign read on Monday, with an owner report of ≤5 lines in Russian, true numbers only and at most 1 decision. Phase review in week 4 (2026-11-13). Code attribution window: 30 days. The allocation metric is relative views plus shares and saves until the client reaches 20 attributed chats in total; after that, attributed chats per 1,000 views, read per series."
+ },
+ "decision_rules": [
+  "DR0 (client-specific, week 0): if the export shows a median first reply over 60 min in working hours, or that most lost clients left with a departed master, fixing replies or staffing comes first. Conversion CTAs are held, and the owner is told in one sentence.",
+  "DR1 Read every post at 48 h and at 7 days, per platform, against that platform's own baseline.",
+  "DR2 Breakout: ≥3× platform median at 48 h (≈1,500 views on the pooled ~500 median [ASSUMPTION]; switch to the own median after 10 posts), or shares + saves per 1k ≥2× median. Within 7 days: a part 2 or the same insight in a new format, plus a reply to the top comment. Pin it if conversion-relevant, put it on Status, and make it boost-eligible. At ≥10× (≈5,000 views) it becomes a series, and the owner hears «вирусный» described as a tail event.",
+  "DR3 Hook failure (3-second hold <0.7× account median): re-cut with a different first frame and hook text, and repost ≥7 days later, once only.",
+  "DR4 Body failure (hold OK, completion <0.7× median): shorten and move the payoff earlier in the next episode. No repost as is.",
+  "DR5 Conversion-layer miss: views on plan but attributed chats (codes + «видео» answers) under 30% of plan by the end of week 3. Illustrative plan ≈8/week [ASSUMPTION], recomputed after the export. Before more content, check the prefilled links, story sticker, bio, Direct auto-reply and reply time.",
+  "DR6 Sales-handling miss: attributed chats on plan but chat→booking below baseline. Report where chats die and draft reply scripts. Price stays the owner's call, and we never propose a discount.",
+  "DR7 Attention-only arm (≥10 posts, ≥10,000 views, 0 attributed chats while other arms convert): cap at 1 post/week and use its footage as B-roll. A bare ASMR loop (ID01 alone) is never published unless it carries a hero proof message.",
+  "DR8 Retire an arm when P(arm beats client median) <0.10 after ≥8 posts: drop it to the exploration floor; its data stays in the pool.",
+  "DR9 Boost only DR2 posts with ≥1 attributed chat or a conversion role, within the owner's cap (average check × gross margin × close rate × 0.3, computed in week 2). Stop-loss: stop if spend reaches 5× the cap with fewer than 3 attributed chats, or if cost per chat rises 3 days in a row. Never with an unconfirmed offer.",
+  "DR10 Capacity and coverage: every week, ≥2 base videos go to services or masters with owner-confirmed free slots. When attributed demand for a master or service reaches ≥80% of her reported free slots, pause CTAs pointing there and redirect to other free slots. CTAs and reactivation messages offer only slots the admin confirmed that day.",
+  "DR11 Honesty kill-switch: if a comment credibly disputes something shown (a hygiene step, a care tip, the removal opinion), pause that series, verify with the master, and tell the owner the same day. A hygiene step is shown only if it is done for every client. Price-comparison comments get a calm reply draft and are never argued with or answered by naming anyone.",
+  "DR12 Pivot: if by week 4 no arm has P(beats median) >0.6 and weekly bookings are still below baseline, rerun step 3 with fresh chats and voice notes, diagnose the funnel, and send the owner options: another bottleneck, more warm base, a non-price offer, boost, or pause.",
+  "DR13 Claims: a «winner» needs P(best) ≥0.9, n ≥10 per contender and an interval. Otherwise it is «лидирует, рано судить». The KZ-only vs bilingual test reports direction only this sprint.",
+  "DR14 Staff: if card completion is below 80% for 2 weeks, or a window overruns by more than 5 min, go to 3 ideas per card, only «маникюрный стол», staff members' own nails, and more zero-minute reply and re-cut videos. A card never has more than 4 ideas.",
+  "DR15 Owner: if more than 30% of the batch is rejected, read the reasons and update the constraints. A fact rejection means fixing the ledger first.",
+  "DR16 Never delete flops, except for truth, consent or legal problems.",
+  "REACT1 Reactivation [thresholds are ASSUMPTIONS, re-set after the export]: send in waves of ≤20 per day. After the first 40 messages, if ≥4 bookings (≥10%), extend to clients lapsed 10–16 weeks in week 2. If <2 bookings, stop, and in week 3 read the replies for the real reason clients left (price / master / other) as evidence. If ≥2 «не пишите» or complaints, stop and tell the owner the same day. Each client gets at most 1 message per sprint, and the do-not-contact list is permanent.",
+  "MASTER1 Master-flight guard: a master's name, face or personal account appears in public content only with the owner's separate «да» for that master (and her consent for face and voice). Booking always goes through the salon number. If a featured master leaves, her episodes are unpinned (not deleted, DR16) and her CTA is redirected to the salon."
+ ],
+ "learning_questions": [
+  "Is reactivating clients lapsed 6–10 weeks with a personal no-discount message a faster source of full-price bookings than video in weeks 1–2, and what do their replies say about why they left (price, master, or something else)?",
+  "Does the hero «Вблизи у мастера» (hygiene and process shown up close, no comparison) produce attributed chats that book at the current price, or only saves?",
+  "Do videos aimed at the services with free slots fill those slots, or does demand still pile onto nails?",
+  "Does a KZ-large/RU-small or KZ-only той episode get more shares and dated chats in Шымкент than the bilingual version?",
+  "Where do chats die (after price / «подумаю» / slow reply), and does sending the price with one next-step question raise chat→booking at unchanged prices?"
+ ],
+ "owner_asks": [
+  {
+   "ask": "Здравствуйте, это ИИ-ассистент вашего салона. Три коротких вопроса: 1) Кто уходит — новые после цены / постоянные / вслед за мастером / не знаю? 2) Кого снимать — только руки и голос / мастеров с лицом (с их согласия) / и клиентов (с их согласия)? 3) Где больше всего свободных окон — маникюр / волосы / брови и ресницы / почти везде (если можно — у каких мастеров и в какие дни)? Если нет ответа до 10.10 12:00 — по умолчанию: новые клиенты; только руки и голос; зовём на будни днём, без обещаний «свободно сегодня».",
+   "why": "Sets the primary loss branch, consent, and which service at least 2 of the week-1 videos must cover (free capacity).",
+   "minutes": 2
+  },
+  {
+   "ask": "Пришлите экспорт 15–30 последних чатов с клиентами: откройте чат → ⋮ → «Экспорт чата» → «Без медиафайлов». Имена и номера удаляем сразу, наружу ничего не попадает. Если не получится до 14.10 — по умолчанию считаем записи недели 0 вручную.",
+   "why": "Gives the baseline, close rate, reply time and where chats die. It grounds or kills the assumption-only insights and calibrates reactivation.",
+   "minutes": 3
+  },
+  {
+   "ask": "Фото действующего прайса (с датой). По умолчанию: цен в роликах и ответах не называем.",
+   "why": "Price facts for the after-price quick reply only. Never used for comparisons.",
+   "minutes": 2
+  },
+  {
+   "ask": "Мастера: 1) Чьё имя можно называть в роликах — напишите имена или «никто» (по умолчанию — никто, ролики только от имени салона, запись только через номер салона). 2) Кто из мастеров согласен на свой голос, а кто — и на лицо? 3) Кто из мастеров или администраторов будет 3–5 минут в неделю проверять казахские подписи? По умолчанию: голос без имени не используем, подписи на казахском не публикуем.",
+   "why": "Balances the owner's master-flight risk against the person series, and assigns the native-speaker KZ check that makes bilingual той content possible (L9).",
+   "minutes": 2
+  },
+  {
+   "ask": "Возврат постоянных клиенток: можно ли администратору написать лично тем, кто не был 6–10 недель, без скидки, от имени их мастера: «Здравствуйте, {имя}! Это {имя мастера}, ваш мастер из салона. Давно не виделись — есть свободное время {день/время}. Записать вас?» 1 — да, так; 2 — да, но от имени салона, без имени мастера; 3 — нет. По умолчанию: 3, не пишем.",
+   "why": "This is the fastest lever in a 4-week window (REALISM). Contacting customers needs the owner's explicit approval (L8). This also decides whether masters are named in private messages.",
+   "minutes": 2
+  },
+  {
+   "ask": "Что у вас делается для КАЖДОЙ клиентки (отметьте номера): 1 — инструменты из сухожара в запечатанном крафт-пакете, вскрываем при клиентке; 2 — новая пилка на каждую клиентку; 3 — стол и лампу протираем перед каждой; 4 — ничего из этого. По умолчанию: такой ролик не снимаем.",
+   "why": "The hero hygiene episode is the main answer to «зачем платить больше». We show only what is done every time; the camera verifies it, and the owner statement becomes a «мы делаем X» fact.",
+   "minutes": 1
+  },
+  {
+   "ask": "Есть ли у салона Instagram и TikTok? Пришлите названия или «нет». Можно ли завести TikTok (1 — да, 2 — нет) и включить в Instagram автоответ на слово «МАСТЕР» со ссылкой на WhatsApp салона (1 — да, 2 — нет)? По умолчанию: публикуем только туда, где аккаунт есть, без автоответа.",
+   "why": "Channel plan, baselines, and tap-only attribution through Instagram Direct.",
+   "minutes": 1
+  },
+  {
+   "ask": "Мы пришлём 4 готовых ответа для WhatsApp (на код из видео, после цены, «откуда узнали?», просьба об отзыве в 2ГИС). Ответьте «да» или поправьте. По умолчанию: не используем, пока не одобрите.",
+   "why": "The conversion layer is the cheapest lever to stop the decline, and outward messages need the owner's approval (L8).",
+   "minutes": 2
+  },
+  {
+   "ask": "(Неделя 2, в еженедельном сообщении) Можно ли выпустить ролик, где мастер честно говорит: вот это можно сделать дома между визитами, а вот это лучше у мастера? 1 — да, 2 — нет. По умолчанию: 2, ролик не снимаем.",
+   "why": "ID19 is an anti-sell wildcard planned for week 3 and needs the owner's explicit «да». It is deferred so onboarding stays within 15 minutes.",
+   "minutes": 1
+  },
+  {
+   "ask": "(Неделя 2, в еженедельном сообщении) Может ли администратор в WhatsApp посмотреть фото ногтей клиентки и подсказать, что подойдёт, до записи? 1 — да, 2 — нет. По умолчанию: 2, такое не обещаем.",
+   "why": "Needed for the ID09 CTA in week 3 and the candidate non-price offer. We never promise what staff won't do.",
+   "minutes": 1
+  }
+ ],
+ "risks": [
+  "HYPOTHETICAL client: the ledger is empty and every insight is assumption-only (strength ≤2). The plan is diagnostic and must be re-grounded by rerunning steps 3 and 4 by 2026-10-16. No number, price, duration or rating may appear in any audience string until it is a ledger fact.",
+  "NEXT BATCH (URGENT, week-0 step-4 rerun by 10-16): hero «Вблизи у мастера» E1, why_it_costs/backstage «Что происходит до того, как вы сели в кресло» (steriliser, sealed pouch opened on camera, new file, desk wiped; ID01's file sound as hook). It can only show steps the owner confirms are done for every client.",
+  "NEXT BATCH (URGENT, week-0 step-4 rerun by 10-16): hero E2, process_full/why_it_costs on the service with free slots. A duration hook («почему … идёт N часа») only after the duration is a ledger fact.",
+  "NEXT BATCH: non-nail episodes to reach free slots: brow mapping macro (thread + pencil, hands only) and hair-wash / blow-dry close sound, plus a hair or brow «Мастер считает» episode.",
+  "NEXT BATCH: KZ-dictated hook variants for ID15 and ID20 and the KZ series title, plus reply videos from week-1 comments, a 2GIS review screen episode (I04) and a New Year corporate-party moment (practical, no greeting card).",
+  "Week-1 dependency: two of the four week-1 videos come from the week-0 rerun. If the hygiene or process steps are not confirmed by 10-16, ID15 replaces E1, and E2 runs as process-only with no claims. Week 1 then has fewer proof pieces, and this is reported to the owner.",
+  "NEEDS FACT: the hygiene routine done for every client — sealed pouch, new file, steriliser (owner tap + camera) — blocks hero E1.",
+  "NEEDS FACT: the real steps (and duration) of the service with free slots (master voice note + owner) — blocks E2 claims.",
+  "NEEDS FACT: which services and masters have free slots per week (owner, question 3) — blocks the coverage rule and DR10 thresholds.",
+  "NEEDS FACT: the owner's per-master «да» for names, plus each master's consent for voice or face (owner, masters) — governs ID17 and the reactivation sender name.",
+  "NEEDS FACT: the owner's approval of the reactivation template and its sending (owner) — blocks the warm-base arm.",
+  "NEEDS FACT: a native-speaker master assigned to dictate and check Kazakh lines (owner) — blocks KZ captions (L9).",
+  "NEEDS FACT: the owner's explicit «да» on the anti-sell stance (owner, week 2) — blocks ID19.",
+  "NEEDS FACT: the belief «снятие гель-лака портит ноготь» in ≥2 real chats or public reviews, plus the master's own opinion — blocks ID13.",
+  "NEEDS FACT: the admin will review clients' nail photos in WhatsApp (owner, week 2) — blocks the ID09 CTA and the candidate offer.",
+  "NEEDS FACT: той-season peak dates relevant in Шымкент (agent; native check) — timing for ID15 and ID20.",
+  "NEEDS FACT: a dated price list ≤7 days old — needed for the after-price quick reply only.",
+  "NEEDS FACT: 2GIS rating, review count and praise words (agent fetch); average check, gross margin and close rate (owner + export) for the boost cap.",
+  "Strategist judgment beyond METHOD: retention was capped at ≤20% of slots as SECONDARY. It is raised to about 40% of effort for weeks 1–2 at the owner's request, because REALISM shows the conservative target depends on the warm base. It returns to ≤20% from week 3 unless REACT1 shows it is the best arm.",
+  "Strategist judgment beyond METHOD: reactivation messaging is done by the admin as part of normal chat work (≈10 min/day in waves). It is NOT counted in the ≤17-minute filming budget. The owner decides whether this time is available.",
+  "Strategist judgment beyond METHOD: code still assigns per-video codes (L3), but allocation reads at series level and treats the admin's «откуда узнали?» as the primary source, because typed codes undercount in this market.",
+  "Strategist judgment beyond METHOD: the creator wanted masters' personal accounts tagged in exchange for consent. The owner's master-flight risk takes precedence (A7, owner's hard constraint). In return, masters get a pinned episode on the salon profile and a weekly results line. The owner can allow tagging for a specific master in one tap.",
+  "Strategist judgment beyond METHOD: price_pressure has no row in the F3 mix table. Week 1 runs 50% proof (hero), 50% conversion (ID17, ID20), with reach coming through the hero's close-sound opening. From week 3 the target is ~35% proof, ~35% conversion, ~30% reach and utility, before Thompson shifts it.",
+  "Staff load: the card is capped at 4 ideas in two short windows (before the first client, and the dead hour after lunch), and staged shots use staff members' own nails. Code recomputes minutes; if it exceeds 17 planned, ID20's detail shot moves to the payoff bank and the KZ check is cut to 2 minutes.",
+  "Week 1 publishes 4 base videos instead of 5 (E4 minimum is 3) to keep the shoot realistic. The fifth 'slot' is effectively the reactivation arm.",
+  "Kazakh copy: the agent does not write Kazakh. All KZ text is dictated or checked by a native-speaker master, and the agent transcribes it without editing. Each on-screen line is ≤8 words and ≤12 words are visible at once.",
+  "Reactivation risk: messages to people who did not opt in to marketing could feel intrusive. Mitigation: only clients who chatted with the salon before, 1 message per sprint, a personal tone, no discount, a permanent do-not-contact list, and a stop at ≥2 complaints.",
+  "Non-marketing risk: if replies are slow or clients follow a departed master, content will not fix it (DR0). If the hygiene routine is not actually done for every client, that is a service issue to fix before any hero episode.",
+  "Consent: client hands appear only after her verbal OK (no face or voice); otherwise staff hands are used. ID15 keeps its «постановка» label visible.",
+  "Capacity unknown: no CTA or message promises «свободно сегодня/завтра» or «успеем». Only slots confirmed that day are offered.",
+  "Price-pressure comments («у них дешевле») are likely. We reply calmly via drafts, never argue, never name or imply anyone, and never make «дешевле/дороже» claims.",
+  "Cold-start accounts: Instagram/TikTok status is unknown, so early arm reads are noisy. Do not judge arms on the first 5–10 TikTok posts.",
+  "Realism: organic acquisition alone ranges from stretch to unrealistic (ratio 0.6–5.9, all inputs assumed). The conservative target depends mainly on the WhatsApp layer and reactivation."
+ ],
+ "attribution_codes": {
+  "ID15": "BA23",
+  "ID19": "BA24",
+  "ID20": "BA25",
+  "ID17": "BA26",
+  "ID24": "BA27",
+  "ID13": "BA28",
+  "ID01": "BA29",
+  "ID09": "BA32"
+ }
+}

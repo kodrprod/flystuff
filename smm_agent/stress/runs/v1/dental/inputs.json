@@ -1,0 +1,214 @@
+{
+ "have": [
+  {
+   "input": "Client profile (explicitly HYPOTHETICAL)",
+   "what_it_gives": "Vertical dental_clinic in Almaty. Languages: RU and KK. Lines: implants, crowns, hygiene. Sales channels: WhatsApp, phone, Instagram DM. Staff budget: 20 min/week, one phone, usable audio only close up. All business details are unverified assumptions with 0 ledger facts: 6 chairs, 2 implant surgeons, «prices above average», ~3k Instagram followers. No account handles, site URL or 2GIS link were given."
+  },
+  {
+   "input": "Stated constraint: RK medical-advertising rules",
+   "what_it_gives": "Hard rails: no outcome guarantees, no before/after without consent, no patient faces without written consent. These are already in the intake constraints as FILMING and REGULATED lines."
+  },
+  {
+   "input": "Known unknowns declared by the client",
+   "what_it_gives": "4 named gaps: prices, implant brands, patient consent policy, ad budget. Below they map to the money map, the agent site fetch plus the money map, the permissions card, and the deferred boost ask."
+  },
+  {
+   "input": "Intake brief (1_intake, sales_push)",
+   "what_it_gives": "Objective: coded implant consultations, target 1.2× / 1.5× / 2× of a week-0 baseline, by 2026-11-15. The baseline is counted in week 0 (2026-10-12 to 2026-10-18) and absolute numbers are fixed on 2026-11-01. Bottleneck hypothesis: consideration (fear of pain, cost, process, bone, surgeon), low confidence. 3 clarifying questions (capacity, who may be filmed, prices); these are merged into the permissions card and the money map below so the owner is not asked twice. Guardrails: first reply within 15 min, surgeon capacity, rating."
+  },
+  {
+   "input": "Ledger (facts_usable: [], facts_not_usable: [])",
+   "what_it_gives": "0 usable facts. No price, number, brand, warranty, years, case count or «бесплатная консультация» can appear in audience copy until a dated fact exists. Until then, only question, recognition and process content is possible."
+  },
+  {
+   "input": "Files",
+   "what_it_gives": "None. No chat export, reviews, footage, price list or account statistics have been ingested."
+  },
+  {
+   "input": "Knowledge base: learnings L001, L003, L005, L006 (cross-vertical)",
+   "what_it_gives": "L001 (measured): the text judge reaches Spearman 0.11 on Shorts (0.07 retail), so scores are priors only. L003 (measured): long-form title formulas do not transfer to Shorts. L005 (expert judgment): no price slides. L006 (measured, correlational, n=48): product demos with no buyer question underperform, so demos must be tied to a patient's question. There are no pooled dental-vertical driver or format posteriors and no hook graveyard yet."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Links to the clinic's own accounts (Instagram handle, website, 2GIS / Google Maps card)",
+   "why_it_matters": "The profile name is hypothetical and no handle or URL was given, so the agent cannot find the clinic by search. Every Tier-0 own-footprint fetch (ledger facts, reviews, post history, the account median) depends on these links. Asking for them is the only way to turn 0 facts into usable facts.",
+   "how": "«Я — ИИ-ассистент, который будет готовить для клиники короткие видео. Пришлите, пожалуйста, ссылки одним сообщением: Instagram клиники, сайт (если есть), карточка в 2GIS или Google Maps. Если чего-то нет — напишите „нет“.»",
+   "who": "owner",
+   "owner_minutes": 0.5,
+   "fallback_if_missing": "The agent tries a name and address search on 2GIS, Google and Instagram. If nothing resolves, the ledger stays empty, the platform baseline uses the pooled dental median from the peer scan, and the batch has only question, recognition and process content with no claims.",
+   "blocks_step": "2_inputs: Tier-0 own-footprint fetch (ledger, reviews, post history)"
+  },
+  {
+   "input": "Own footprint fetch: site, Instagram, 2GIS / Google / Yandex cards",
+   "why_it_matters": "This is the only way to get usable ledger facts without owner minutes. It may return published implant prices, installment and warranty wording, named implant systems, doctors listed, hours, address, published offers (for example, whether a free consultation really exists), licence details shown, rating and review count. It also gives the real Instagram median (last 15 posts), the outliers at 3× the median or more, and posts whose comments ask questions. Any of these facts unlocks ideas such as policy_story and why_it_costs.",
+   "how": "Agent: once the links resolve, fetch every page that mentions имплант/имплантация/коронка/цены/гарантия/рассрочка/врачи/лицензия. Store each fact with its URL and fetch date: prices expire in 7 days, policies in 90. Copy installment and warranty terms word for word. On Instagram, record per-post views for the last 15 posts and divide by the median, describe what the ≥3× outliers contain (engine, first frame, faces), and save comment questions verbatim. Flag hygiene errors (old prices, «гарантия навсегда», outcome claims already published) for the owner and never repeat them. On a 403/429, log it and do not bypass.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "The ledger stays empty, so there are no fact claims and everything goes to NEEDS FACT. The leading-indicator baseline uses the pooled dental median from the peer scan.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Public reviews: 2GIS, Google, Yandex, Instagram comments",
+   "why_it_matters": "Without a chat export, this is the main source of real patient language: fears («боялась боли», «сколько визитов»), delight, and complaints. It also tests the disguised non-marketing problems the intake flagged: pressure selling, pain complaints, waiting times, unanswered calls. Those must be fixed before content is scaled.",
+   "how": "Agent: pull every review from the last 24 months and filter for имплант / удаление / хирург / мост / протез / цена / больно / страшно / администратор / не перезвонили. Code each with C2 tags (Q/F/D/M/C/B/W/J/X), with counts and dates. Strip patient names. Count X complaints separately and report them to the owner as a fix-first list, never as content.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Peer comments and the vertical prior. All frequencies are marked `likely` or assumption, and insight strength is capped at 2–3.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Peer outlier scan: 10–20 Almaty dental and implant accounts, then RU-language CIS implant doctors",
+   "why_it_matters": "Gives the category conventions (what nearly every peer does). In dental that is probably smiling before/after shots and price stickers, which we must not copy; this is an assumption until the scan confirms it. It also gives the mechanisms behind posts at 3× their own median or more, the questions patients ask in peer comments, and a pooled dental median views proxy until this account has 10 posts.",
+   "how": "Agent: on Instagram Reels and TikTok, Almaty clinics first, find posts from the last 90 days at 3× their own channel median or more. Record the mechanism only: engine, first-frame type, length, and faces / hands / screen. Flag which outliers rely on before/after or outcome claims that are not usable here. Collect peer comment questions verbatim and tag them with C2. Compute the median views per platform across peers as the interim baseline. Never name or show peers in content.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No category convention list. Ideas rely on L006 (tie demos to a question) and own-chat insights. Leading indicators use only the account's own median.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Demand phrases (RU and KZ search suggestions)",
+   "why_it_matters": "Patients' own search wording gives hooks and captions and shows which fears are searched most (pain, cost, implant vs bridge, bone loss, number of visits). It also adds a YouTube Shorts search tail.",
+   "how": "Agent: collect TikTok, YouTube, Google and Yandex autocomplete for seeds such as «имплант зуба Алматы», «больно ли ставить имплант», «имплант или мост», «нет кости для импланта», «сколько визитов имплантация», «имплант после удаления», «пожилым можно имплант». Repeat for KZ phrasing, marked for native check before any use. Rank by how often each phrase appears across platforms. These are phrasing seeds only, never claims.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hook vocabulary comes from reviews and the chat export only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Calendar and seasonality check",
+   "why_it_matters": "Moment engines need real entry points. For implants, candidates (all assumptions to test) are the run-up to the New Year holidays and to той and wedding season, plus end-of-year planning. Moments must enter the plan 10–14 days ahead.",
+   "how": "Agent: build a 3-month calendar for Almaty (2026-10 to 2026-12) with public holidays, school holidays and the main той season. Mark each item as relevant only if the clinic actually serves that moment. Do not invent dental seasonality, and label everything as hypothesis until weekly bookings confirm it.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No moment ideas this sprint, only evergreen fear and question content.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Kaspi and installment check (judgment: the B2 Kaspi SKU-position step does not apply to a clinic)",
+   "why_it_matters": "Clinics sell services, not Kaspi SKUs, so no price-position comparison is possible or allowed. But if the clinic publishes Kaspi Red / рассрочка or another installment option, that is the strongest truthful answer to the cost fear. Only the exact published wording may be used.",
+   "how": "Agent: search the clinic's site, Instagram highlights and 2GIS card for «рассрочка», «Kaspi», «кредит», «оплата частями» and save the exact wording, URL and date. If nothing is found, it becomes a NEEDS FACT question for the owner, asked only when an idea needs it.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No installment or payment claims. The cost fear is handled only through process transparency («из чего складывается план лечения») once the owner confirms the steps.",
+   "blocks_step": "4_ideas: payment/installment claims"
+  },
+  {
+   "input": "Public text of RK medical-advertising rules, used as a rail lexicon (judgment: not in B2, added because the category is regulated)",
+   "why_it_matters": "Gives a list of banned or risky wording (outcome guarantees, testimonials, «лучший», comparisons, any mandatory disclosures) that code can enforce on top of C6. This is not legal advice: the owner and the responsible doctor still sign off on every batch.",
+   "how": "Agent: fetch the current public text of the RK health code and advertising law sections on medical services advertising. Extract the prohibited claim types and any mandatory elements into an internal checklist. Label it «справочно, не юридическая консультация» and show it to the owner for confirmation together with permissions card item Д.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use the stricter default: no outcome words, no testimonials, no comparisons, and owner plus doctor sign-off on every item.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Week-0 baseline count: admin labels every implant enquiry and logs phone calls",
+   "why_it_matters": "The whole success metric is a multiple of the week-0 count of booked implant consultations. Without it, the target cannot be fixed on 2026-11-01 and coded phone bookings cannot be measured. It also gives the channel split (WhatsApp vs phone vs DM), which tests the intake's phone-channel assumption.",
+   "how": "Staff (administrator), about 2 min/day, ≤10 min in week 0 and then ≤2 min/week of labelling: «С понедельника 12.10 по воскресенье 18.10: каждому новому обращению про импланты (WhatsApp, Instagram, звонок) ставьте в WhatsApp ярлык „Имплант-консультация“, а звонки отмечайте строкой в таблице: дата, канал, записался да/нет, откуда узнал. Таблицу пришлём готовую. Имена пациентов в таблицу не пишите.» (Owner only forwards it; this is included in the batched message.)",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Total inbound from the WhatsApp export divided by the number of weeks covered is used as an estimate, labelled assumption. Phone bookings stay uncounted, so coded counts are a floor only.",
+   "blocks_step": "1_intake: target fixing on 2026-11-01; measurement: phone attribution"
+  },
+  {
+   "input": "WhatsApp chat export (15–30 recent implant-related chats, no media), plus Instagram DM screenshots",
+   "why_it_matters": "This is the highest-value input per minute. It gives counted patient questions and fears in their own words, where chats die (after the price? after «подумаю»? after «нужно КТ»?), the median first reply time (a guardrail and a possible top leak), the close rate from chat to booked consultation (needed for the REALISM math), and enquiries per week. It confirms or overturns the consideration-bottleneck hypothesis.",
+   "how": "«Откройте в WhatsApp клиники чат с пациентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Пришлите 15–30 последних чатов, где спрашивали про импланты, отсутствующие зубы, мосты или протезы. Если пишут и в Instagram Direct — добавьте 10 скриншотов. Имена, номера и любые медицинские подробности, по которым можно узнать человека, удаляем сразу; переписка остаётся внутри и никогда не публикуется.» Agent on ingest: replace identities with cust_###, drop health details tied to identity, and keep raw files internal only.",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Reviews, peer comments and the optional voice note. Frequencies become `likely`. Close rate and reply time become assumptions (close rate 20–40% as in the intake). The bottleneck stays low-confidence.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Permissions tap card: faces, patient consent form, prices, sign-off doctor, mandatory ad details, new accounts (merges intake Q2 and Q3)",
+   "why_it_matters": "Sets the hard constraints in a regulated category. It decides whether doctors may show their faces, whether any patient material is possible (only with a written consent form), whether prices may appear, who medically signs off each batch, what mandatory details must appear in ads, and whether TikTok and YouTube Shorts exist as test beds.",
+   "how": "«Ответьте цифрами одним сообщением до 10.10 12:00:\nА) Кого можно снимать: 1 — только руки, инструменты и голос; 2 — врачей с лицом (с их согласия); 3 — и пациентов (только с письменным согласием). По умолчанию: 1.\nБ) Есть ли у клиники бланк письменного согласия пациента на съёмку и публикацию (фото, видео, снимки, КТ)? 1 — есть (пришлите фото пустого бланка); 2 — нет. По умолчанию: 2 — пациентов и их снимки не показываем.\nВ) Цены на импланты в роликах: 1 — можно, по прайсу с датой; 2 — не называем, цену обсуждаем в WhatsApp или на консультации. По умолчанию: 2.\nГ) Кто из врачей каждую неделю проверяет ролики перед публикацией? По умолчанию: вы сами.\nД) Какие сведения клиника обязательно указывает в рекламе (например, номер лицензии)? Пришлите формулировку, как у вас принято. По умолчанию: ничего не публикуем, пока вы не подтвердите.\nЕ) Открыть TikTok и YouTube на номер клиники: 1 — да, 2 — нет. По умолчанию: только Instagram.»",
+   "who": "owner",
+   "owner_minutes": 1.5,
+   "fallback_if_missing": "A5 defaults: hands, instruments and voice only; no patient material; no prices; owner as sign-off; Instagram only. Publishing waits for the owner to confirm the mandatory ad details.",
+   "blocks_step": "publish: faces, patient material, any batch until sign-off and mandatory details are confirmed; 4_ideas: price claims"
+  },
+  {
+   "input": "Money map: dated price-list photo, free surgeon capacity, lines not to push, implant system and warranty documents (merges intake Q1)",
+   "why_it_matters": "Dated prices go into the ledger (usable 7 days, re-fetched before publishing) even if they never appear on screen, and they make why_it_costs and budget_ladder possible if allowed. Free capacity sets the DR10 guardrail and the target ceiling. «Not to push» keeps us away from cases the surgeons don't want. Implant system and warranty facts are only usable if documented, never from memory.",
+   "how": "«Пришлите: 1) фото прайса на имплантацию и коронки на имплантах, где видна дата (без вашего „да“ цены в роликах не появятся); 2) сколько дополнительных консультаций по имплантам в неделю реально примут два хирурга: 1 — до +2, 2 — +3–5, 3 — больше 5 (напишите число); 3) что сейчас не продвигать (например, сложные случаи, костную пластику, дни отпуска хирурга); 4) если хотите, чтобы мы упоминали марку имплантов или гарантию — фото страницы договора или сайта, где это написано. По умолчанию: +20% к нынешнему числу консультаций, цен, марок и гарантий в роликах нет.»",
+   "who": "owner",
+   "owner_minutes": 2.5,
+   "fallback_if_missing": "Capacity defaults to +20% (assumption). The agent infers lines from the site's service pages (`likely`). No price, brand or warranty claims, which go to NEEDS FACT.",
+   "blocks_step": "4_ideas: price, brand and warranty claims; campaign: DR10 capacity threshold"
+  },
+  {
+   "input": "Proof folder: about 20 real photos and videos without patients, sent as files",
+   "why_it_matters": "Provides zero-staff-minute footage for at least 2 ideas, plus filmable realities: sterilisation packs, instruments, the CT unit, a jaw model with an implant, implant packaging, the surgery room empty. It shows what the camera can verify (L6: real beats polished) and what AI must never fake.",
+   "how": "«Перешлите файлами (как „Документ“, без сжатия) 20 фото и видео без пациентов: инструменты, стерилизация, пустой кабинет, аппарат КТ, руки врача с моделью челюсти или импланта, упаковки имплантов. Фото пациентов, их зубов и снимков — только если есть письменное согласие на публикацию; если не уверены — не присылайте.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Staff film the proof shots in the week-1 session, and the zero-minute ideas are dropped from the first batch.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Instagram account insights (screenshots or analyst access)",
+   "why_it_matters": "Gives the real platform baseline (median reach of the last 15 posts), hold, shares and saves, and the audience city. If the audience is not Almaty, reach is not reaching patients. Without it, leading indicators are reduced to public counts.",
+   "how": "«Instagram → профиль → „Профессиональная панель“ → „Статистика“ → сделайте скриншоты: охват за 30 дней, топ публикаций по охвату, города аудитории. Или выдайте нам доступ „Аналитик“ в Meta Business Suite — так нам больше не придётся вас просить.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Public view counts only, with a flag that hold, shares, saves and city are unavailable. The pooled dental median from the peer scan is used until 10 own posts exist.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Optional owner or surgeon voice note (3 questions)",
+   "why_it_matters": "Myths and boundaries from the people who hear the fears daily (for example «нет кости — значит нельзя», «имплант отторгается»). These feed myth_check, wa_question and backstage ideas. Statements stay `likely` and are never used as outcome or superiority claims; real-case stories also need consent.",
+   "how": "«Если есть 3 минуты — голосовое (можно попросить хирурга): 1) Что пациенты чаще всего понимают неправильно про импланты? 2) Один случай без имени, когда пациент очень боялся, а потом сказал, что зря тянул. 3) Что в клинике нельзя показывать в видео?»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Skip it. Myths come only from reviews, peer comments and chats. There are no story-engine claims, and real_case waits for a consented case.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Implant case timeline: last 10 implant cases, consultation date → CT → plan accepted → surgery (anonymised)",
+   "why_it_matters": "Tests the intake assumption that implant decisions take weeks. If patients decide at the first visit, the primary metric switches to plans accepted. It also shows the real number of visits, which is a candidate counted fact for process content (as a 30-day internal number, only once documented).",
+   "how": "Staff (administrator), about 5 min once, from the clinic schedule: «Для последних 10 пациентов с имплантами выпишите без имён: дата первой консультации, дата КТ, дата согласия на план, дата операции. Номера вместо имён: 1, 2, 3…»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Keep the intake assumption (decision takes weeks, consultations are the primary metric) and do not state visit counts or timelines in content.",
+   "blocks_step": "1_intake: primary-metric lag assumption check (by 2026-10-16)"
+  },
+  {
+   "input": "Staff reality scan: 3 test clips plus a 2-minute silent walkthrough, with no patients in frame",
+   "why_it_matters": "Shows the real audio distance, light and noise (the compressor, drill and suction sounds may help or hurt), and which spots can be filmed without patient data on screens. It gives exact location names for code's shoot-card merging, which matters in a clinic where sterile zones and patient privacy limit where the phone can go.",
+   "how": "Staff (assistant or administrator), 10 min once, outside patient hours: «Когда в кабинете нет пациентов: 1) скажите фразу „Нам часто пишут про импланты“, держа телефон в 30 см ото рта, в самом тихом месте; 2) снимите 10 секунд звука инструмента или упаковки в 20–30 см; 3) 10 секунд пустого кабинета от двери; 4) пройдите 2 минуты молча: ресепшн, кабинет, стерилизационная, кабинет КТ. Экраны с данными пациентов не снимайте. Телефон вертикально, отправьте файлом.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Worst case: speech only with the phone at the mouth in one quiet corner, no wide shots, and process shown as hands, instruments and models only.",
+   "blocks_step": "4_ideas: producibility (location names, audio feasibility)"
+  },
+  {
+   "input": "Weekly staff voice note: «3 вопроса пациентов за неделю + 1 случай»",
+   "why_it_matters": "Fresh patient language every week for wa_question and reply series, and early warning of new fears or complaints.",
+   "how": "Staff (administrator), 1 min/week, from week 1: «В пятницу — голосовое на 30 секунд: какие 3 вопроса про импланты задавали на этой неделе, и один случай, если был. Без имён.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Comments and coded chats only.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Offer approval (deferred; only if F4 later needs a non-price offer)",
+   "why_it_matters": "The default is no offer. A truthful non-price offer, such as a consultation with a CT review of an existing scan or a plan explained by WhatsApp video, would need exact terms and the owner's «да». «Бесплатная консультация» is used only if it is published or the owner confirms it.",
+   "how": "Asked later in the weekly ≤5-min message, only if the week-3 data show a conversion gap: «Готовы по коду из ролика [точное предложение] до [дата]? По умолчанию: без акций.»",
+   "who": "owner",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No offer.",
+   "blocks_step": "6_campaign: offer"
+  },
+  {
+   "input": "Boost budget and paid-medical-ad compliance (deferred until a post qualifies under F10)",
+   "why_it_matters": "A paid click-to-WhatsApp boost for proven posts needs a cap, a maximum cost per coded chat and the owner's confirmation that paid medical ads meet RK rules. Average check and margin are also needed for CPQC_cap.",
+   "how": "Asked in week 2 or later with real numbers, only once a post reaches 3× the median and has a coded chat: «Ролик „…“ набрал в N раз больше обычного и дал K обращений. Продвигать его за ваш бюджет до X ₸? По умолчанию: нет.»",
+   "who": "owner",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No boost; organic and warm base only.",
+   "blocks_step": "boost"
+  }
+ ]
+}

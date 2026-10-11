@@ -1,0 +1,55 @@
+{
+ "request_type": "hiring",
+ "reframed_request": "«Нам нужен продавец-консультант. Найдите через соцсети.» → Use short videos about the real job at the Muzzone store in Astana (ул. Кажымукана, 14) to get enough qualified, coded WhatsApp applications for the owner to hire one sales consultant. The candidate is the \"customer\" here, and we track screened applications, not views.",
+ "business_objective": "1 sales consultant (продавец-консультант) for the Muzzone store in Astana, ул. Кажымукана 14, hired and accepted by 2026-11-20 [ASSUMPTION: date; no date stated]. They must come from a pool of ≥5 screened applicants that the owner is willing to interview.",
+ "marketing_objective": "People in Astana who can get to ул. Кажымукана 14 daily. They know instruments well enough to talk about them: they play guitar, piano or drums, study at a music college, or work in retail and are into music. They are looking for a job or a change. By 2026-11-08 they send a WhatsApp message with a «РАБОТА-xx» video code and answer the 3-question screen the owner approved.",
+ "success_metric": {
+  "name": "Qualified coded job applications (WhatsApp, code family «РАБОТА»)",
+  "how_measured": "Chats that open with a «РАБОТА-xx» code and pass the owner-approved 3-question screen. Counted from the weekly WhatsApp chat export plus a «РАБОТА» label set by whoever handles the chats. Applications reaching the owner from other channels (hh.kz, enbek.kz, word of mouth) are counted separately as context.",
+  "target": "conservative 3 / expected 6 / stretch 10 qualified applicants. Downstream outcome: 1 hire. Baseline: 0 coded (no social hiring history). Applications from other channels in week 0 are the reference count, and the target is fixed as a multiple of it at the end of week 2.",
+  "by_when": "2026-11-08"
+ },
+ "leading_indicators": [
+  "views_48h ÷ platform median (pooled music_instruments_retail median until 10 own posts exist; no Shorts/TikTok baseline yet)",
+  "shares + saves per 1,000 views (job posts spread by forwarding: «скинь другу-гитаристу»)",
+  "coded «РАБОТА» chats per 1,000 views",
+  "profile visits per 1,000 views"
+ ],
+ "constraints": [
+  "BUDGET: 0 ₸ (default; no ad budget assumed per profile)",
+  "OWNER: ≤15 min onboarding, ≤5 min/week, reached via Andrey/Pavel; no direct contact yet (stated)",
+  "STAFF: ≤17 planned min/week (20 incl. safety); one mid/low phone; audio usable only close to the instrument/mouth (stated)",
+  "FILMING: hands, instruments, store objects and voice only. No faces until consent is recorded on camera. Customers only with on-camera consent. Minors (e.g. kids at lessons/with parents) only with a parent's written OK (default; consent not yet asked)",
+  "JOB FACTS: pay, schedule, shift length, requirements, trial period, sales targets: none in the ledger. Nothing about them in audience copy until the owner states them in writing. Site call hours (пн–пт 10–19, сб 10–17, fact:hours) are not shift hours and are not used as a schedule (evidence)",
+  "HIRING RULES: no requirements on age, gender, ethnicity, appearance or marital status. No unpaid trial days promised or implied. The job is not shown as better than it is (method A2/A7)",
+  "PRICES: product prices are not needed for hiring content. If one appears incidentally, it must be a ledger price ≤7 days old (default)",
+  "OFFER: none. The site-wide «Финальная распродажа» (fact:sale_page) is not referenced in hiring content: reason and end date unknown (evidence)",
+  "CAPACITY: 1 open position. Screening capacity unknown (who reads and answers applications); assume ≤10 applicant chats/week can be handled (default/assumption)",
+  "REGULATED: none for hiring. If paid job ads are used later, the owner confirms RK advertising, language and labour rules; we supply RU/KZ text, not legal advice (default)",
+  "AVOID: politics, religion, ethnicity, mocking customers or applicants, naming competitors (default)",
+  "ACCOUNTS: YouTube (3 620 subs, 379 videos, last upload 2026-05-10, dormant ~5 months); Instagram muzzone_astana (exists, not analysed: blocks anonymous fetch); VK muzzoneastana; Facebook muzzonemusicshop; TikTok: none linked, ownership unknown (evidence). Business accounts: commercial-library music or original instrument sound only",
+  "PRIVACY: applicant names and numbers stripped on ingest (cust_###); the agent never contacts applicants. Replies are sent by the owner's person using approved quick replies (L8)",
+  "APPROVAL: owner approves each weekly batch, the 3-question screen, the applicant quick reply, and any stated pay/schedule wording (default)",
+  "LANGUAGE: Russian copy; Kazakh captions only after a native-speaker check (profile languages ru, kk)",
+  "GUARDRAIL: applicant chats get a first reply within 1 working day; customer WhatsApp first-reply median stays ≤15 min in working hours. Applicant chats are labelled «РАБОТА» so they do not crowd out buyers on the sales line +7 701 0987734 (fact:wa)",
+  "GUARDRAIL: hiring content must not depict current staff as leaving or the store as closing; no complaints from current staff about being filmed"
+ ],
+ "assumptions": [
+  "REALISM: target 1 hire. [ASSUMPTION] 1 hire per 3–8 screened applicants → ~5 qualified needed; [ASSUMPTION] 30–50% of coded applicants pass the screen → req_applications ≈ 10–17. At [ASSUMPTION] 0.3–3 coded chats per 1k views (no vertical rate for job posts; replace after week 2): req_views ≈ 3 300–57 000. ach_views = 20 posts (5/week × 4 weeks) × [ASSUMPTION] 300–1 000 median views (no Shorts/Reels/TikTok baseline; YouTube long-form median 2 300 does not transfer, L002/L003) × 1.8 ≈ 10 800–36 000. ratio ≈ 0.1–5.3 → feasible to stretch, and very uncertain. Main risk: only views from Astana count, and the local share of reach is unmeasured. Time: if the owner needs someone in <14 days, organic cannot learn in time; warm base (WhatsApp Status to customers, staff and regulars forwarding) plus job sites come first, and video is the reach layer.",
+  "BOTTLENECK: awareness among the right job seekers in Astana (few musically literate people see that this store is hiring), plus consideration (seeker fears about pay, unpaid trial days, sales pressure, and possibly the «Финальная распродажа» banner read as a store closing). Confidence: low. No application history, no chat export, no reviews analysed yet. Evidence: no TikTok, YouTube dormant since 2026-05-10, no job facts on the site.",
+  "SECONDARY: none stated. Customer sales content (incl. the sale section) is not part of this sprint unless the owner asks; then ≤20% of slots. Job-reality videos also act as store-legitimacy content, but this is not measured.",
+  "[ASSUMPTION] The store is not closing: hiring a consultant implies continued operation, and «Финальная распродажа» is a clearance, not a shutdown | if wrong: hiring content would mislead seekers, so stop and re-brief | verify: ask Pavel/Andrey in the week-0 owner message, by 2026-10-12",
+  "[ASSUMPTION] Hire needed by ~2026-11-20; applications window 2026-10-12 → 2026-11-08 | if wrong (urgent, <14 days): shift to warm base + hh.kz/enbek.kz first | verify: owner reply, by 2026-10-10",
+  "[ASSUMPTION] Applicants write to the store's WhatsApp +7 701 0987734 (fact:wa) with code «РАБОТА-xx», and the person who handles sales chats routes them | if wrong (owner wants a separate number): only the CTA changes | verify: owner approval of the applicant quick reply, by 2026-10-12",
+  "[ASSUMPTION] Default 3-question screen for owner approval: (1) какой инструмент знаете/на чём играете; (2) есть ли опыт продаж или работы с людьми; (3) с какого числа и в какие дни сможете выходить | if wrong: the owner edits it, no effect on content | verify: owner tap-approve, by 2026-10-12",
+  "[ASSUMPTION] Hiring posts go to Instagram Reels (existing account, local audience) and YouTube Shorts (existing channel). TikTok only if the owner confirms or creates an account; a new account is a cold start | if wrong: channel mix changes | verify: owner ask in week 0",
+  "[ASSUMPTION] Job-site listings (hh.kz, enbek.kz) are owner actions outside our scope; we draft the text | if the owner refuses: the social-only risk is stated in push_back | verify: owner reply, week 0",
+  "[ASSUMPTION] Seeker insights (fears: late or unclear pay, unpaid trial days, rude management, pure sales-plan pressure; pulls: working among instruments, playing gear daily) are generic category hypotheses until the owner or current staff confirm what is actually true and good about this job | if wrong: insights get rewritten in step 3 | verify: optional owner/staff voice note in week 0"
+ ],
+ "clarifying_questions": [
+  "Какие условия можно назвать в роликах о вакансии? 1 — пришлю одной строкой: зарплата (сумма или «от … ₸», оклад/процент), график, дни выхода; 2 — зарплату не называем, только график; 3 — ничего не называем, условия обсуждаем в WhatsApp. По умолчанию: 3 (тогда откликов может быть больше, но подходящих меньше). Ответ до 10.10 18:00.",
+  "Кого ищем? 1 — обязательно играет на инструменте (укажите на каком); 2 — главное опыт продаж, в инструментах научим; 3 — можно без опыта, но с интересом к музыке. По умолчанию: 2. Ответ до 10.10 18:00.",
+  "Кого можно снимать в роликах о работе в магазине? 1 — только руки, инструменты и голос; 2 — сотрудников с лицом (только с их согласия, записанного на камеру); 3 — и вас, владельца, с лицом. По умолчанию: 1. Ответ до 10.10 18:00."
+ ],
+ "push_back": "Найти продавца только роликами за 3–4 недели рискованно: TikTok у магазина нет, YouTube не обновлялся с мая, а сколько просмотров ролики соберут именно в Астане, пока неизвестно. Поэтому параллельно советуем разместить вакансию на hh.kz и enbek.kz (около 10 минут вашего времени, текст подготовим мы). Ролики покажут реальную работу в магазине, без приукрашивания, а зарплату и график назовём только в вашей формулировке. Успех считаем не в просмотрах, а в откликах по коду «РАБОТА», которые прошли 3 коротких вопроса."
+}

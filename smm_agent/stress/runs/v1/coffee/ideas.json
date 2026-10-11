@@ -1,0 +1,1684 @@
+[
+ {
+  "id": "ID01",
+  "title": "Three bar sounds only the barista hears (series «Звук бара», ep.1)",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "prediction_game",
+  "format": "guess",
+  "funnel": "attention",
+  "hook_ru": "Три звука, которые слышит только бариста",
+  "first_frame": "Extreme macro, phone 20 cm from the grinder spout already spinning, so tight the object can't be recognised. Grinder roar starts at frame 0. Hook text upper-middle, small «Звук 1» under it.",
+  "on_screen_ru": [
+   "Три звука, которые слышит только бариста",
+   "Звук 1",
+   "Звук 2",
+   "Звук 3",
+   "Что это было? Ответ — через секунду",
+   "Кофемолка. Темпер. Паровая трубка.",
+   "Скоро — вторая точка на Левом берегу"
+  ],
+  "what_happens": "0–1 s unreadable macro plus grinder sound. 1–4 s sound 1 continues. 4–7 s sound 2: tamp and knock-box thud in macro. 7–10 s sound 3: steam-wand hiss in macro. 10–11 s text pause «Что это было?» (the viewer forms a guess silently; no imperative game wording, per H2 fix). 11–14 s reveal (payoff): each take pulls back to show the object. 14–16 s end card with code, which loops to the macro. DM line: «спорим, третий не узнаешь». Save reason: weak; built for rewatch and comments. Series-able: «Звук бара» with three new sounds per episode.",
+  "why_stop": "Sound onset plus an unreadable object in frame 1, and a hook that promises insider access (sounds only the barista hears). The question «что это?» is held from second 1 and answered at second 11. Muted viewers still see the odd macro and the promise.",
+  "why_share_or_save": "Sent as a challenge to a friend who claims to know coffee: «узнаешь все три?»",
+  "comment_prompt_ru": "Какой звук узнали сразу? Номер",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Телефон в 20 см от носика кофемолки, включаете помол. Начните вплотную, потом медленно отведите телефон назад, чтобы стало видно кофемолку. Музыку в зале выключить.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Темпер прижимает кофе, потом стук холдера о нок-бокс. Телефон в 20–30 см, сначала вплотную, потом отъезд.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Паровая трубка в питчере, телефон в 25 см от питчера: шипение. Сначала вплотную, потом отъезд.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Cut each take into an unreadable macro part (sounds 1–3) and its pull-back (reveal). Number cards, burned-in RU captions, denoise without removing the real sound, cover = frame 1 macro. No music.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Comments per 1k and average % watched (prediction_game); coded sign-ups per 1k views",
+  "risks": [
+   "NEEDS FACT: owner confirms in writing that a second location opens on Левый берег (owner, Q1)",
+   "Reality scan must confirm all three sounds are clean at 20–30 cm with the hall music off",
+   "Code channel (WhatsApp vs Instagram DM) depends on intake Q3; CTA wording adjusts",
+   "JUDGMENT: H2 flagged the imperative «Угадайте»; the guess mechanic is kept but carried by the pause card and the reveal, not by a game command. Hook variants at edit time must also avoid «угадай*»."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.038,
+  "_value": 3.038
+ },
+ {
+  "id": "ID02",
+  "title": "Milk pitch drop loop",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Слушайте, как меняется звук молока",
+  "first_frame": "Steam-wand tip already in milk, pitcher filling half the frame, phone resting 20–30 cm away. Hiss audible at frame 0. Hook text fades in upper-middle at about 1 s.",
+  "on_screen_ru": [
+   "Слушайте, как меняется звук молока",
+   "Сначала — шипение",
+   "Потом звук становится ниже",
+   "По этому звуку бариста ловит момент"
+  ],
+  "what_happens": "0–1 s wordless hiss. 1–8 s the pitch drops as the milk heats while captions follow the sound. 8–11 s glossy milk poured into a cup (payoff: the sound became texture). 11–12 s cut back to the wand tip so it loops. Code card shows for 2 s inside the loop, and the CTA sits in the caption. DM line: «включи со звуком, залипнешь». Save reason: an ASMR rewatch.",
+  "why_stop": "A real close sound in frame 1 where the category usually plays music (E17, assumed convention). The changing pitch is a micro-question: why does it change?",
+  "why_share_or_save": "Rewatched and sent with the sound on: «послушай со звуком»",
+  "comment_prompt_ru": "На что похож этот звук? Одним словом",
+  "cta_ru": "Напишите {CODE} — пришлём дату открытия на Левом берегу",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Взбиваете молоко от начала до конца. Телефон лежит на стойке в 20–30 см от питчера, не двигается. Музыку выключить.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Наливаете молоко в чашку крупно, сверху, в 25 см.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Pick the cleanest take, keep the original audio (denoise only), make a seamless loop end→start, burned-in RU captions timed to the pitch, code card for 2 s, cover = frame 1. No music.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Loop rate / average % watched >100% and shares per 1k (sensory); coded sign-ups per 1k",
+  "risks": [
+   "NEEDS FACT: owner confirms the Левый берег location in writing (owner, Q1)",
+   "Barista confirms the «ловит момент на слух» line is how they actually work (staff, at shoot)",
+   "L006: a pure demo may underperform; the pitch question is the mitigation"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.038,
+  "_value": 3.038
+ },
+ {
+  "id": "ID03",
+  "title": "«Что тут будет?» ep.1 — the empty room",
+  "insight_ids": [
+   "I03",
+   "I02"
+  ],
+  "driver": "curiosity_gap",
+  "format": "backstage",
+  "funnel": "attention",
+  "hook_ru": "Пустая комната на Левом берегу. Что будет?",
+  "first_frame": "A hand already pushing open the door of the bare new room. Steps echo. Hook text upper-middle. No street sign or house number visible.",
+  "on_screen_ru": [
+   "Пустая комната на Левом берегу. Что будет?",
+   "Подсказка 1",
+   "Подсказка 2",
+   "Здесь будет кофейня",
+   "Дату и адрес — лично, по коду"
+  ],
+  "what_happens": "0–1 s door opens, echo. 1–5 s slow walk through the empty room. 5–8 s hint 1: a hand sets a tamper on the bare counter, metal clink at 20 cm. 8–11 s hint 2: a bag of beans shaken close to the phone. 11–14 s reveal (payoff): «Здесь будет кофейня». 14–16 s code card. The series «Что тут будет?» continues weekly through fit-out. DM line: «это же рядом с твоим офисом?». Save reason: none; it is built for sending.",
+  "why_stop": "An empty room plus a direct «что будет?» opens a specific question that is answered by second 12. It inverts the countdown-poster convention (E18, assumed).",
+  "why_share_or_save": "Sent to a colleague or neighbour who passes the spot: «смотри, что у нас открывают»",
+  "comment_prompt_ru": "Проходите здесь утром или вечером?",
+  "cta_ru": "Напишите BA23 — пришлём дату открытия и адрес лично",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Открываете дверь новой точки и медленно идёте по пустой комнате. Телефон вертикально на уровне груди. Вывески и номера дома в кадр не брать.",
+     "location": "новая точка",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Кладёте темпер на пустую стойку, телефон в 20 см — нужен звон.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Трясёте пачку зёрен прямо у телефона, в 20 см.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Edit with echo kept, captions, hint cards, blur any address, sign or plate, cover = door frame. Keep every clip in library clients/<client>/library/2026-10-w1/ for ID13, ID17 and ID18.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)",
+   "NEEDED: owner OK to film the new site now (E21)"
+  ],
+  "kpi": "Shares per 1k and profile visits per 1k (curiosity_gap); coded sign-ups per 1k",
+  "risks": [
+   "NEEDS FACT: owner confirms the Левый берег location and that the site may be filmed (owner)",
+   "No address, date or countdown on screen until Q1 = 1",
+   "Light and noise at the new site are unknown until the reality scan",
+   "Reply to coded messages within 15 min in working hours (guardrail)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 5,
+   "objective_fit": 4
+  },
+  "_prior": 3.615,
+  "_value": 3.615,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID04",
+  "title": "From box to first espresso at the new site",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "sensory",
+  "format": "process_full",
+  "funnel": "attention",
+  "hook_ru": "Из коробки — до первого эспрессо",
+  "first_frame": "Close-up of hands slicing the packing tape on the machine box, blade sound at 20 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Из коробки — до первого эспрессо",
+   "Распаковка",
+   "Первое включение",
+   "Первый шот на новом месте"
+  ],
+  "what_happens": "0–2 s tape cut. 2–6 s film peeled, machine revealed. 6–10 s switch flipped, lamp or gauge comes alive. 10–18 s first shot pours in macro (payoff at about 15 s). 18–20 s code card. Only shown if this really is the first shot at the new site. DM line: «смотри, машину уже привезли». Save reason: none.",
+  "why_stop": "Hands and a blade sound already moving in frame 1. The compressed transformation promises the first shot, and delivers it.",
+  "why_share_or_save": "Sent by location-1 regulars to each other: «у них уже машина стоит»",
+  "comment_prompt_ru": "Что первым заказали бы из этой машины?",
+  "cta_ru": "Напишите {CODE} — сообщим, когда машина заработает для гостей",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Режете скотч на коробке с машиной и снимаете плёнку. Телефон в 20–30 см, звук ножа нужен.",
+     "location": "новая точка",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: рука включает машину, загорается лампа или двигается манометр.",
+     "location": "новая точка",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Первый шот на новой машине: крупно струя в чашку, телефон в 25 см.",
+     "location": "новая точка",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Speed-ramp the unboxing and mark the ramp «ускорено». Jump cuts, captions, keep the real sound. Store clips in the library for ID17 and ID19.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Average % watched (sensory/process); coded sign-ups per 1k",
+  "risks": [
+   "NEEDS FACT: machine delivery and installation date, and whether staff (not a technician) may film it (owner)",
+   "«Первый шот» only if it really is the first shot at the new site; otherwise change the on-screen line",
+   "Technician's face is not shown without consent",
+   "Speed-up must be labelled (mastery failure mode)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.128,
+  "_value": 3.128
+ },
+ {
+  "id": "ID05",
+  "title": "«Где именно? Когда?» answered (series «Вопрос про новую точку»)",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "relief",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "Нам пишут: „Где именно? Когда откроетесь?“",
+  "first_frame": "An anonymised message bubble slides onto the screen over a barista holding a cup in the quiet corner, phone about 30 cm away. The barista starts speaking at 0.5 s. Text upper-middle.",
+  "on_screen_ru": [
+   "Нам пишут: „Где именно? Когда откроетесь?“",
+   "Дату назовём, когда будем уверены",
+   "Пока — лично, по коду",
+   "Напишите код — ответим сами"
+  ],
+  "what_happens": "0–1 s bubble plus the barista's first words. 1–10 s barista explains in their own words: the date and address are given personally once they are certain. 10–16 s B-roll of the new site from the ID03/ID04 library. 16–20 s text card listing what a person gets after sending the code: date, address, how to find the entrance (payoff: the next step is clear). 20–22 s code on screen for at least 2 s. DM line: «напиши им код, они скажут адрес». Save reason: kept until the opening.",
+  "why_stop": "The viewer's own question, shown as a message bubble, plus a face speaking within 0.5 s",
+  "why_share_or_save": "Sent to the coworker who asked «а где это будет?»",
+  "comment_prompt_ru": "Вам удобнее до работы или в обед?",
+  "cta_ru": "Напишите BA28 — пришлём дату и адрес, как только они точные",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Бариста в тихом углу держит телефон в 30 см от лица и своими словами отвечает, почему дату пока не называем.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Дату скажем, когда будем уверены. Напишите код — пришлём лично.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Anonymised bubble card (no real chat screenshot), B-roll from clients/<client>/library/2026-10-w1/ (ID03/ID04), captions, «что вы получите» text card, code card at least 2 s.",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: at least 2 real messages or comments asking where/when before «Нам пишут» is used (C6.5)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Coded sign-ups per 1k and saves per 1k (relief); total coded sign-ups",
+  "risks": [
+   "NEEDS FACT: at least 2 real where/when messages before publishing (agent counts comments and DMs after ID03); otherwise the hook becomes «Где и когда? Отвечаем»",
+   "NEEDS FACT: Q1 answer (date and address withheld vs confirmed); if confirmed, answer with the fact id",
+   "Barista consent recorded on camera before the first face shot",
+   "Promise holds only if coded messages get a reply within 15 min in working hours"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 5
+  },
+  "_prior": 3.192,
+  "_value": 3.192,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID06",
+  "title": "«Don't come on day one if you're rushing» — WILDCARD",
+  "insight_ids": [
+   "I02",
+   "I01"
+  ],
+  "driver": "honest_signal",
+  "format": "anti_sell",
+  "funnel": "conversion",
+  "hook_ru": "Честно: в первый день не приходите",
+  "first_frame": "Barista's face close (30 cm) in the quiet corner, already mid-sentence, shaking their head. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Честно: в первый день не приходите",
+   "Если торопитесь на работу",
+   "Новый бар, новая машина — притираемся",
+   "Хотите спокойно — приходите на второй неделе"
+  ],
+  "what_happens": "0–1 s the confession line. 1–8 s reason in the barista's words: a new bar and new machine, so the first days are for getting used to them. 8–14 s B-roll of test shots at the new site (library). 14–18 s turn: «а кто никуда не спешит — ждём и в первый день». 18–20 s code card. Spreads first visits over 14 days (capacity guardrail). DM line: «скинь тому, кто вечно опаздывает». Save reason: none.",
+  "why_stop": "A business telling people not to come violates the expectation in the first second",
+  "why_share_or_save": "Sent to the friend who is always late for work, as a joke and a heads-up",
+  "comment_prompt_ru": "Вы на открытия ходите или ждёте?",
+  "cta_ru": "Напишите BA27 — пришлём дату и адрес, выберете день сами",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Бариста в тихом углу, телефон в 30 см от лица: говорит своими словами, почему в первый день лучше не спешить.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Честно: в первый день не приходите, если торопитесь на работу.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Punch-ins on the talk, B-roll from library (ID04/ID19 test shots), captions, code card. Owner approves the exact wording before the edit.",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: owner approves the message that the first days may be slower (owner statement, I02/E25)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares per 1k and comment sentiment (honest_signal); coded sign-ups per 1k",
+  "risks": [
+   "WILDCARD: high variance, and it may clash with the owner's «ажиотаж» wording; owner may reject",
+   "NEEDS FACT: owner agrees to say the first days are for getting used to the bar (owner)",
+   "Barista consent on camera",
+   "No claims about speed or queues (CAPACITY)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.295,
+  "_value": 3.295,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID07",
+  "title": "What the barista makes for themselves (series «Бариста себе»)",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "mastery",
+  "format": "character",
+  "funnel": "consideration",
+  "hook_ru": "Что бариста делает себе, когда нет гостей",
+  "first_frame": "Barista's hands already pouring milk into their own mug, 30 cm from the phone. Hook text upper-middle. The face appears at 2 s for the talk.",
+  "on_screen_ru": [
+   "Что бариста делает себе, когда нет гостей",
+   "Бариста — своими словами",
+   "Себе — вот так",
+   "А вы что берёте?"
+  ],
+  "what_happens": "0–2 s hands finish the personal drink. 2–10 s close talk: what they make for themselves and why. 10–14 s first sip and an honest reaction (payoff). 14–16 s comment prompt and code. The episode varies by barista, so the series introduces the cast before the new bar opens. DM line: «смотри, что сами бариста пьют». Save reason: a drink idea for the next visit.",
+  "why_stop": "An insider promise (what professionals drink themselves) plus real hand motion in frame 1",
+  "why_share_or_save": "Sent to a coffee-loving friend as an order idea: «попробуй как бариста»",
+  "comment_prompt_ru": "А вы что берёте каждое утро?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Бариста делает напиток себе: крупно руки и чашка, телефон в 30 см.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Бариста держит телефон в 30 см от лица, говорит своими словами и делает глоток. Музыку выключить.",
+     "location": "бар",
+     "seconds": 10,
+     "takes": 3,
+     "say_ru": "Себе я обычно делаю вот это. И вот почему.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Jump cuts, name caption only after consent, burned-in captions, fixed series opening card «Бариста себе».",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: barista's name and on-camera consent (E06)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Comments per 1k and follows per 1k (character/series); coded sign-ups per 1k",
+  "risks": [
+   "Consent recorded on camera before the first face shot",
+   "Drink names said must be on the menu; otherwise NEEDS FACT menu",
+   "Series fatigue: rotate baristas"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.167,
+  "_value": 3.167
+ },
+ {
+  "id": "ID08",
+  "title": "Who will stand behind the new bar",
+  "insight_ids": [
+   "I05",
+   "I04"
+  ],
+  "driver": "story",
+  "format": "character",
+  "funnel": "trust",
+  "hook_ru": "Знакомьтесь: этот человек откроет новый бар",
+  "first_frame": "Hands untying an apron at the location-1 bar and folding it into a bag, 30 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Знакомьтесь: этот человек откроет новый бар",
+   "Здесь — первая точка",
+   "Что заберёт с собой",
+   "Скоро — на Левом берегу"
+  ],
+  "what_happens": "0–2 s apron comes off. 2–12 s close talk (want and turn): what they take with them to the new bar, shown as a real object. 12–17 s the same apron hung on a hook at the new site (payoff). 17–19 s code card. DM line from regulars: «смотри, это же наш бариста». Save reason: none.",
+  "why_stop": "A recognisable human moment (taking off the apron) plus an announcement in the hook",
+  "why_share_or_save": "Location-1 regulars forward it to each other: «наш бариста переходит на Левый берег»",
+  "comment_prompt_ru": "Ваш бариста помнит ваш заказ?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Бариста снимает фартук и складывает в сумку. Крупно руки, телефон в 30 см.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Бариста держит телефон в 30 см от лица и своими словами говорит, что заберёт с собой на новую точку. Показывает эту вещь.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Отсюда я заберу с собой одну вещь — вот эту.",
+     "kind": "talk"
+    },
+    {
+     "what_ru": "Тот же фартук вешаете на крючок на новой точке, крупно.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Story cut, captions, name caption after consent, cover = apron frame.",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: which barista works at location 2 (owner)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares per 1k among followers and saves (story); coded sign-ups from existing followers",
+  "risks": [
+   "NEEDS FACT: who staffs location 2; if nobody moves, the idea is dropped (owner)",
+   "Barista consent on camera",
+   "May make regulars fear losing their barista at location 1 (E16); owner checks the wording"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 5,
+   "objective_fit": 4
+  },
+  "_prior": 3.423,
+  "_value": 3.423
+ },
+ {
+  "id": "ID09",
+  "title": "The first espresso of the morning isn't for you (dial-in)",
+  "insight_ids": [
+   "I04",
+   "I07"
+  ],
+  "driver": "social_currency",
+  "format": "backstage",
+  "funnel": "trust",
+  "hook_ru": "Первый эспрессо утра — не вам. Почему?",
+  "first_frame": "A shot already pouring into a small cup, and a hand lifts it up out of frame to taste. No face. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Первый эспрессо утра — не вам. Почему?",
+   "Бариста пробует",
+   "Кисло — помол мельче",
+   "Горько — помол крупнее",
+   "Пока не станет как надо"
+  ],
+  "what_happens": "0–2 s shot plus taste. 2–8 s barista voice-over (phone at mouth) on why the first shots are tasted. 8–13 s close-up of the grinder adjustment click. 13–19 s second shot and the barista's quiet «вот» (payoff: the ritual explained). 19–21 s code card. DM line: «вот почему утром кофе не сразу». Save reason: an insider detail to retell.",
+  "why_stop": "A counter-intuitive claim about the viewer's own coffee in the hook, plus a pour in motion",
+  "why_share_or_save": "Retold to coworkers as insider knowledge: «знал, что первый эспрессо выливают?»",
+  "comment_prompt_ru": "Сколько чашек кофе у вас до обеда?",
+  "cta_ru": "Напишите {CODE} — пришлём дату открытия новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Утром до открытия: шот в маленькую чашку, бариста поднимает и пробует. Крупно руки, лицо не нужно, телефон в 25 см.",
+     "location": "бар",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: рука поворачивает регулятор помола, нужен щелчок, телефон в 20 см.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Бариста держит телефон у рта (30 см) в тишине до открытия и своими словами объясняет, зачем пробует первые шоты.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Первые шоты пробую сам. Кисло — мельче, горько — крупнее.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice-over laid over the hands footage, captions, a simple AI diagram «мельче/крупнее» (labelled as a diagram, explaining something invisible).",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner/staff confirm that a morning dial-in tasting is done (E22)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares and saves per 1k (social_currency); coded sign-ups per 1k",
+  "risks": [
+   "NEEDS FACT: the dial-in ritual really happens here; no «каждое утро» claim without it (owner/staff)",
+   "Comments may call it wasteful; reply with the barista's reason"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.0,
+  "_value": 3.0
+ },
+ {
+  "id": "ID10",
+  "title": "Myth: you need fancy words to order",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "relief",
+  "format": "myth_check",
+  "funnel": "consideration",
+  "hook_ru": "Говорят, тут надо знать умные слова",
+  "first_frame": "Barista's face close (30 cm) with a raised eyebrow, a hand already sliding an empty cup across the counter toward the camera. Hook text upper-middle, «постановка» tag small in the corner.",
+  "on_screen_ru": [
+   "Говорят, тут надо знать умные слова",
+   "Проверяем: заказ своими словами",
+   "«Покрепче и с молоком»",
+   "Бариста переводит сам",
+   "постановка"
+  ],
+  "what_happens": "0–1 s hook. 1–4 s an off-screen staff voice close to the phone orders plainly: «мне покрепче и с молоком». 4–14 s barista makes the drink, with close process sound. 14–18 s barista: talk however you like, translating is my job (payoff: the belief is disproved on camera). 18–20 s code card. Labelled as staged. DM line: «вот, а ты боялась туда заходить». Save reason: confidence for a first visit.",
+  "why_stop": "States a belief many non-specialty drinkers hold privately, then promises a test",
+  "why_share_or_save": "Sent to a friend who avoids «модные кофейни»",
+  "comment_prompt_ru": "Какое кофейное слово вас пугает?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Голос коллеги за кадром, телефон в 30 см от него: «Мне покрепче и с молоком». В кадре только руки на стойке.",
+     "location": "бар",
+     "seconds": 5,
+     "takes": 3,
+     "say_ru": "Мне покрепче и с молоком.",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Бариста готовит этот напиток. Крупно руки, телефон в 25 см, звук питчера.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Бариста, телефон в 30 см от лица, ставит чашку и говорит фразу своими словами.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 3,
+     "say_ru": "Говорите как удобно. Перевести на кофейный — моя работа.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Cut, captions, «постановка» label, cover = eyebrow frame. Comments become «reply» episodes (one scary word per episode).",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: owner agrees that baristas help guests who order in plain words (service stance)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Saves per 1k and comments per 1k (relief); coded sign-ups per 1k",
+  "risks": [
+   "NEEDS FACT: owner confirms the service stance (owner)",
+   "Belief E24 is unsourced; peer comment mining should confirm it",
+   "Must be labelled «постановка»; barista consent on camera"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 5,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.205,
+  "_value": 3.205
+ },
+ {
+  "id": "ID11",
+  "title": "Drink instant? Where to start in a coffee shop",
+  "insight_ids": [
+   "I07",
+   "I01"
+  ],
+  "driver": "practical_value",
+  "format": "who_is_it_for",
+  "funnel": "consideration",
+  "hook_ru": "Пьёте растворимый? С чего начать в кофейне",
+  "first_frame": "A spoon tipping instant granules into a mug at 20 cm (no brand visible), then a hard cut to an espresso pour. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Пьёте растворимый? С чего начать в кофейне",
+   "С молоком и мягко → латте",
+   "Покрепче, но с молоком → флэт уайт",
+   "Без молока, как дома → американо",
+   "Сохраните — пригодится у стойки"
+  ],
+  "what_happens": "0–2 s instant spoon, then the cut. 2–8 s profile 1 with a latte pour. 8–14 s profile 2 with a flat white pour. 14–20 s profile 3 with an americano pour. 20–23 s «сохраните» (payoff: a personal starting point). 23–25 s code card. DM line: «скинь коллеге, который пьёт растворимый». Save reason: used at the counter on the first visit.",
+  "why_stop": "Calls out the viewer's habit in two words, with motion in frame 1",
+  "why_share_or_save": "Saved for the first visit; sent to a coworker who drinks instant",
+  "comment_prompt_ru": "Ваш вариант: латте, флэт или американо?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Ложка растворимого кофе в кружку, крупно, телефон в 20 см. Этикетку не показывать.",
+     "location": "бар",
+     "seconds": 4,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Наливаете латте, сверху крупно, телефон в 25 см.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Наливаете флэт уайт, сверху крупно.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Наливаете американо, вода в эспрессо, крупно сбоку.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Text-led edit, profile cards, captions, save prompt. No prices.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: menu confirms latte, flat white and americano at location 2 (owner menu photo)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Saves per 1k (practical_value); coded sign-ups per 1k",
+  "risks": [
+   "NEEDS FACT: menu items (owner price-list or menu photo)",
+   "Generic-tips risk: brand_link is low; the drinks must be filmed at this bar",
+   "No prices until a dated menu is in the ledger"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.167,
+  "_value": 3.167
+ },
+ {
+  "id": "ID12",
+  "title": "Before the first sip, look at this",
+  "insight_ids": [
+   "I01",
+   "I07"
+  ],
+  "driver": "practical_value",
+  "format": "check_before_buy",
+  "funnel": "consideration",
+  "hook_ru": "Перед первым глотком посмотрите на это",
+  "first_frame": "Macro (20 cm) of a cappuccino being tilted, glossy foam moving in the cup. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Перед первым глотком посмотрите на это",
+   "По мнению бариста:",
+   "1. Пена блестит, без крупных пузырей",
+   "2. Ложка — пена держится",
+   "3. Рисунок не тонет сразу",
+   "Сохраните на следующий кофе"
+  ],
+  "what_happens": "0–2 s tilt. 2–8 s check 1 shown in macro. 8–14 s check 2: a spoon is dragged and the foam holds. 14–19 s check 3: the art holds its shape. 19–21 s «сохраните» (payoff: three checks, each shown). 21–23 s code card. Framed as the barista's opinion. DM line: «вот как понять, что капучино нормальный». Save reason: a check on the next coffee anywhere.",
+  "why_stop": "A true warning archetype plus a moving glossy surface in frame 1",
+  "why_share_or_save": "Saved as a checklist; sent to a friend who complains about bad coffee",
+  "comment_prompt_ru": "Что для вас главное в капучино?",
+  "cta_ru": "Напишите {CODE} — пришлём адрес, проверите сами",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Капучино, медленно наклоняете чашку. Крупно сверху, 20 см.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Проводите ложкой по пене, крупно, видно, что пена держится.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Рисунок на капучино крупно, держите кадр 5 секунд.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Numbered check cards (exactly 3, matching the 3 shots), captions, «по мнению бариста» label.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Saves per 1k (practical_value); coded sign-ups per 1k",
+  "risks": [
+   "Generic-tips risk: any café could post this, so it scores low on brand_link",
+   "Checks are the barista's opinion; the barista confirms the wording at the shoot",
+   "Structural count 3 must equal the shots shown"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 2.846,
+  "_value": 2.846
+ },
+ {
+  "id": "ID13",
+  "title": "POV: your favourite café is on the other bank — WILDCARD",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "identity",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: любимая кофейня — на другом берегу",
+  "first_frame": "A hand carries a steaming cup out of the location-1 door into cold air. Hook text upper-middle, «POV · постановка» label small.",
+  "on_screen_ru": [
+   "POV: любимая кофейня — на другом берегу",
+   "Утро. Мост. Пробка.",
+   "Кофе уже остыл",
+   "Скоро — и на Левом берегу"
+  ],
+  "what_happens": "0–1 s cup out the door, steam. 1–5 s text beats over the cup in hand. 5–8 s «кофе уже остыл» over a still cup on the windowsill. 8–11 s cut to the empty new room with lights coming on (library ID03): «Скоро — и на Левом берегу» (payoff). 11–13 s code card, which loops to the door. DM line: «это же ты каждое утро». Save reason: none.",
+  "why_stop": "Names a precise, recognisable commute situation in the viewer's own city",
+  "why_share_or_save": "Sent to the person who crosses the river every morning: «это ты»",
+  "comment_prompt_ru": "Вы с какого берега?",
+  "cta_ru": "Напишите BA25 — пришлём дату и адрес на Левом берегу",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Выносите чашку с паром из двери первой точки на улицу. Видно руку и пар, лиц прохожих нет.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Text beats, «POV · постановка» label, new-site clip from clients/<client>/library/2026-10-w1/ (ID03), captions, loop.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: location 1 is not on Левый берег (E14, owner)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares per 1k and comment split by bank (identity); coded sign-ups per 1k",
+  "risks": [
+   "WILDCARD: thin evidence (I08 strength 1)",
+   "NEEDS FACT: location 1 really is off Левый берег; if not, drop the idea (owner)",
+   "The joke stays about the commute, never about people from either bank (AVOID)",
+   "Label as POV/постановка"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.397,
+  "_value": 3.397,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID14",
+  "title": "Only in Astana: wind vs your coffee — WILDCARD",
+  "insight_ids": [
+   "I08",
+   "I09"
+  ],
+  "driver": "amusement_awe",
+  "format": "local",
+  "funnel": "attention",
+  "hook_ru": "Только в Астане поймут этот ветер",
+  "first_frame": "A hand holds a cup at the door; a gust visibly rips the steam sideways and the wind roars on the mic. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Только в Астане поймут этот ветер",
+   "Кофе: горячий",
+   "Ветер: нет",
+   "Поэтому — поближе к работе",
+   "Скоро — Левый берег"
+  ],
+  "what_happens": "0–1 s gust tears the steam away. 1–5 s hand shields the cup and pulls it inside a coat sleeve. 5–8 s door slams shut and the steam calms indoors. 8–11 s payoff text «поближе к работе — скоро Левый берег». 11–12 s loop to the gust. DM line: «это мы каждое утро». Save reason: none.",
+  "why_stop": "A visible physical event (steam ripped sideways) plus a city in-joke every local recognises",
+  "why_share_or_save": "Local DM: «только наши поймут», sent to friends in Astana",
+  "comment_prompt_ru": "Сколько минут вы идёте до кофе?",
+  "cta_ru": "Напишите {CODE} — пришлём, где будет новая точка",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "В ветреный день: держите чашку с паром у двери, ветер сдувает пар. Крупно чашка, телефон в 30 см.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Заходите внутрь, дверь закрывается, пар снова поднимается спокойно.",
+     "location": "бар",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Text beats, captions, keep the wind sound, loop. Shot when the weather allows (if-then trigger).",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares per 1k (amusement_awe); comment answers as catchment signal",
+  "risks": [
+   "WILDCARD: depends on a windy day (if-then trigger on the shoot card)",
+   "No claims about keeping coffee hot; no health or «согреет» claims",
+   "Benign weather joke only"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.179,
+  "_value": 3.179
+ },
+ {
+  "id": "ID15",
+  "title": "Cold morning at the new door",
+  "insight_ids": [
+   "I09",
+   "I02"
+  ],
+  "driver": "moment_trigger",
+  "format": "moment",
+  "funnel": "conversion",
+  "hook_ru": "Холодное утро на Левом берегу",
+  "first_frame": "Steam rising from a cup in a gloved hand at the door of the new site, breath visible. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Холодное утро на Левом берегу",
+   "Кофе по дороге — где?",
+   "Скоро — здесь",
+   "Дата и адрес — по коду"
+  ],
+  "what_happens": "0–2 s steam and cold air. 2–6 s the hand turns the cup toward the still-closed door of the new site. 6–9 s the window with the light on inside (payoff: «скоро — здесь»). 9–12 s code card held at least 2 s. Placed at D−7 to D. DM line: «смотри, по пути на работу». Save reason: until it opens.",
+  "why_stop": "A weather cue the viewer is feeling that same morning, plus steam motion in frame 1",
+  "why_share_or_save": "Sent to coworkers on the same route: «будет по дороге»",
+  "comment_prompt_ru": "Во сколько выходите из дома?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес, чтобы зайти по пути",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "В холодное утро у двери новой точки: чашка с паром в руке крупно, телефон в 30 см. Вывеску и номер дома не брать.",
+     "location": "новая точка",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Окно новой точки снаружи, внутри горит свет. Держите кадр 6 секунд.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Captions, code card at least 2 s, blur any address or sign, cover = steam frame. If-then trigger on a cold-morning forecast.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Coded sign-ups per 1k (moment_trigger/conversion); profile visits per 1k",
+  "risks": [
+   "NEEDS FACT: Левый берег location confirmed (owner)",
+   "Weather is an assumption (E12); check the forecast at shoot-card time",
+   "No health or «согреет» claims"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID16",
+  "title": "Vote: what we write on the new window — WILDCARD",
+  "insight_ids": [
+   "I10"
+  ],
+  "driver": "participation",
+  "format": "audience_vote",
+  "funnel": "retention",
+  "hook_ru": "Что написать на окне новой точки?",
+  "first_frame": "A hand with a window marker already drawing the first stroke on the glass of the new site; the squeak is audible at 20 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Что написать на окне новой точки?",
+   "Вариант А",
+   "Вариант Б",
+   "Победит — напишем и покажем"
+  ],
+  "what_happens": "0–2 s marker squeak. 2–8 s two owner-approved options held up on paper against the glass. 8–12 s «голосуйте в комментариях; победителя напишем и покажем». 12–14 s code card. A follow-up episode shows the winning text being written (payoff in ep.2). DM line: «проголосуй за А». Save reason: none.",
+  "why_stop": "Hand motion and a squeak in frame 1 plus a real decision handed to the viewer",
+  "why_share_or_save": "Sent to friends to win the vote: «голосуй за наш вариант»",
+  "comment_prompt_ru": "А или Б? Свой вариант — тоже можно",
+  "cta_ru": "Напишите {CODE} — пришлём фото окна и дату открытия",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Маркером делаете первый штрих на стекле новой точки. Крупно, телефон в 20 см, нужен скрип.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Держите у стекла по очереди два листа с вариантами А и Б, крупно.",
+     "location": "новая точка",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Option cards, captions, comment tally by agent, follow-up episode plan.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner permits the audience to decide the window text, and approves options A and B (I10)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Comments per 1k and follows (participation); coded sign-ups per 1k",
+  "risks": [
+   "WILDCARD: thin evidence (I10 strength 1)",
+   "NEEDS FACT: owner's permission and the two options; without them the idea cannot run",
+   "Must follow through and show the result, or it breaks the participation rule",
+   "Few comments on a ~2.1k account may make the vote look empty"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 5,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID17",
+  "title": "Reply to «а где именно?» from library clips (zero staff minutes)",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "participation",
+  "format": "reply",
+  "funnel": "conversion",
+  "hook_ru": "Ответ на комментарий: „А где именно?“",
+  "first_frame": "A real comment sticker (username blurred) over the moving library clip of the empty new room. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Ответ на комментарий: „А где именно?“",
+   "Адрес скажем, когда всё точно",
+   "Вот что уже готово",
+   "Пока — лично, по коду"
+  ],
+  "what_happens": "0–2 s comment sticker over the room. 2–8 s recap: unboxing and first shot from library. 8–11 s text answer. 11–14 s code card (payoff: the exact way to get the address). The hook wording is replaced with the real comment's wording at edit. DM line: «вот, тут написано, как узнать адрес». Save reason: kept until opening.",
+  "why_stop": "A familiar comment-reply format plus the viewer's own question",
+  "why_share_or_save": "Sent back to the person who asked in the comments or in a group chat",
+  "comment_prompt_ru": "Что ещё спросить про новую точку? Ответим видео",
+  "cta_ru": "Напишите BA26 — пришлём адрес и дату лично",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. Real comment from ID03's post (username blurred). Clips from clients/<client>/library/2026-10-w1/ (ID03 room walk, ID04 unboxing and first shot), created at week-1 ingest. Captions, code card at least 2 s.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: a real comment asking where/when (agent, after ID03 is published)"
+  ],
+  "kpi": "Coded sign-ups per 1k (conversion); reply-video comments",
+  "risks": [
+   "Depends on a real comment existing; week 2 at the earliest",
+   "If Q1 = 1 (address confirmed), answer with the address fact id instead",
+   "Library clips from ID03/ID04 must exist"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 4,
+   "objective_fit": 4
+  },
+  "_prior": 3.474,
+  "_value": 3.474,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID18",
+  "title": "Location 1 also started as an empty room (archive re-cut, zero staff minutes)",
+  "insight_ids": [
+   "I03",
+   "I04"
+  ],
+  "driver": "story",
+  "format": "before_after",
+  "funnel": "trust",
+  "hook_ru": "Первая точка тоже начиналась с пустой комнаты",
+  "first_frame": "A real archive photo of location 1 before opening with a slow push-in (motion on a real photo, not AI-generated). Hook text upper-middle.",
+  "on_screen_ru": [
+   "Первая точка тоже начиналась с пустой комнаты",
+   "Тогда",
+   "Сейчас",
+   "Теперь — Левый берег"
+  ],
+  "what_happens": "0–2 s empty-room archive photo. 2–6 s 2–3 archive frames (paint, first cup). 6–9 s match cut to the same angle today, taken from a recent Instagram post. 9–13 s cut to the empty new room (ID03 library): «и снова» (payoff: the same journey again). 13–15 s code card. DM line from regulars: «помнишь, какой она была?». Save reason: none.",
+  "why_stop": "A real before/after promise; the hook names a transformation the viewer can watch",
+  "why_share_or_save": "Sent between long-time regulars: «смотри, какой она была»",
+  "comment_prompt_ru": "С какого года вы к нам ходите?",
+  "cta_ru": "Напишите BA24 — пришлём дату и адрес второй точки",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Zero staff minutes. Owner sends 5 photos or videos of location 1 before opening (owner camera roll → clients/<client>/inputs/archive/; 1 owner min). The current frame is re-cut from the agent-fetched Instagram post (path recorded at fetch). Then: match cut, Ken Burns on real photos only, blur faces of anyone without consent, captions. No AI-generated past imagery.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: archive photos of location 1 before opening (owner)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares among followers and saves (story); coded sign-ups from existing followers",
+  "risks": [
+   "NEEDS FACT: archive photos exist (owner, 1 min); otherwise drop",
+   "Faces in old photos blurred unless consent",
+   "Hook claim only if the archive really shows an empty room"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 5,
+   "objective_fit": 3
+  },
+  "_prior": 3.603,
+  "_value": 3.603,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID19",
+  "title": "How many test shots it took to tune the new machine — WILDCARD",
+  "insight_ids": [
+   "I03",
+   "I04"
+  ],
+  "driver": "social_currency",
+  "format": "real_number",
+  "funnel": "trust",
+  "hook_ru": "Сколько шотов вылили, пока настраивали новую машину?",
+  "first_frame": "A test shot being tipped into the drain at the new site, splash audible at 20 cm; the edge of a tally sheet is visible. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Сколько шотов вылили, пока настраивали новую машину?",
+   "Считали честно, палочками",
+   "Как думаете, сколько?",
+   "Итог — на этом листке",
+   "Теперь — для гостей. Скоро."
+  ],
+  "what_happens": "0–2 s shot poured out. 2–8 s montage of test shots, each followed by a pen stroke on the tally sheet (pen sound). 8–11 s pause card «Как думаете, сколько?» (a plain question, not a game command, per H2 fix). 11–14 s the sheet with the counted total shown (payoff; the number is added at edit only once it is in the ledger). 14–16 s code card. DM line: «вот это они заморочились». Save reason: none.",
+  "why_stop": "A specific countable mystery with a guaranteed reveal, plus motion and sound in frame 1",
+  "why_share_or_save": "Retold as an insider number: «знаешь, сколько они вылили?»",
+  "comment_prompt_ru": "Ваша цифра была ближе или дальше?",
+  "cta_ru": "Напишите BA29 — пришлём дату и адрес",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Выливаете тестовый шот в слив на новой точке. Крупно, телефон в 20 см.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Ставите палочку на листке после шота, крупно. Звук ручки нужен.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "В конце настройки покажите листок целиком, держите 5 секунд.",
+     "location": "новая точка",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Montage, tally counter overlay (number from the ledger only), captions, question pause card. Staff keep the tally during setup, which is work they are doing anyway.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: counted number of test shots and the period, from the staff tally sheet (staff/owner)"
+  ],
+  "kpi": "Shares per 1k and comment guesses (social_currency); coded sign-ups per 1k",
+  "risks": [
+   "WILDCARD: untested format for this client",
+   "NEEDS FACT: staff must actually tally; the number goes on screen only once it is in the ledger",
+   "Waste comments possible; the barista can explain why test shots are needed",
+   "JUDGMENT: H2 flagged «Угадайте»; replaced with a plain question card. Edit-time hook variants must avoid «угадай*»."
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.295,
+  "_value": 3.295,
+  "_why": "explore"
+ },
+ {
+  "id": "ID20",
+  "title": "Same beans, two grinds — spot the difference",
+  "insight_ids": [
+   "I04",
+   "I07"
+  ],
+  "driver": "curiosity_gap",
+  "format": "ab_compare",
+  "funnel": "consideration",
+  "hook_ru": "Одно зерно, два помола. Найдите разницу",
+  "first_frame": "Split screen: two shots pouring at once, the left gushing thin, the right a slow honey stream. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Одно зерно, два помола. Найдите разницу",
+   "Слева — быстро, водянисто",
+   "Справа — медленно, густо",
+   "Бариста пробует оба",
+   "Мнение бариста — в конце"
+  ],
+  "what_happens": "0–2 s split pour. 2–8 s slow-motion flows side by side. 8–14 s barista tastes both (hands and voice only). 14–18 s barista's verdict in their own words (payoff). 18–20 s code card. DM line: «вот почему дома кофе кислит». Save reason: home-brewers adjusting their grind.",
+  "why_stop": "Two visibly different pours in frame 1 make a spot-the-difference task",
+  "why_share_or_save": "Sent to a friend with a home coffee machine: «вот почему у тебя кислит»",
+  "comment_prompt_ru": "Кислинка в кофе: плюс или минус?",
+  "cta_ru": "Напишите {CODE} — пришлём дату открытия новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Шот на крупном помоле: струя сбоку крупно, телефон в 25 см.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Тот же кофе на мелком помоле: струя с того же ракурса.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Бариста пробует оба, телефон в 30 см от рта, лицо не нужно — только руки с чашками.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Левый кислит. Правый — вот такой я хочу.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Split-screen synced pours, slow motion, captions. The verdict text is the barista's own words.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Average % watched and saves per 1k (curiosity_gap); coded sign-ups per 1k",
+  "risks": [
+   "Taste is the barista's opinion; label it as such",
+   "Same angle for both pours, or the comparison is unfair"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID21",
+  "title": "Will the latte art survive the walk?",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "curiosity_gap",
+  "format": "stress_test",
+  "funnel": "attention",
+  "hook_ru": "Переживёт ли рисунок на латте дорогу?",
+  "first_frame": "A latte-art heart forming top-down at 20 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Переживёт ли рисунок на латте дорогу?",
+   "Рисуем",
+   "Несём быстрым шагом",
+   "Смотрим",
+   "Итог — как есть, без дублей"
+  ],
+  "what_happens": "0–3 s pour. 3–10 s stabilised walk with the uncovered cup, through the door and a few steps outside and back. 10–14 s top-down reveal of the art, whatever happened to it (payoff, honest). 14–16 s verdict text, then a loop to the pour. DM line: «вот почему я пью кофе на месте». Save reason: none.",
+  "why_stop": "A pour in motion plus a yes/no stake that is answered on camera",
+  "why_share_or_save": "Sent to the friend who always takes coffee to go",
+  "comment_prompt_ru": "Кофе с собой или на месте?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Рисунок на латте сверху крупно, телефон в 20 см.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Несёте чашку без крышки быстрым шагом к двери и обратно. Телефон в другой руке смотрит на чашку.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Ставите чашку и снимаете рисунок сверху крупно.",
+     "location": "бар",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Stabilise, captions, honest result card, loop.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Average % watched and comment split (curiosity_gap); coded sign-ups per 1k",
+  "risks": [
+   "Result must be shown as it happened (first take of the test, no picking the best)",
+   "No claims about lids or takeaway quality"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID22",
+  "title": "A day of the barista opening the new location (day-in-life structure)",
+  "insight_ids": [
+   "I05",
+   "I03"
+  ],
+  "driver": "story",
+  "format": "trend_remix",
+  "funnel": "consideration",
+  "hook_ru": "День бариста, который открывает новую точку",
+  "first_frame": "Hands unlocking the location-1 door in the morning dark, keys jingling at 20 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "День бариста, который открывает новую точку",
+   "Утро: первая точка",
+   "Днём: коробки на Левом берегу",
+   "Вечер: устал, но…"
+  ],
+  "what_happens": "0–2 s keys. 2–6 s morning work at the bar. 6–10 s afternoon among boxes at the new site. 10–15 s close talk at the new site: one honest sentence about the day (payoff, the turn). 15–17 s lights off, then the code card. Evergreen «день из жизни» structure, original audio. DM line: «смотри, как они готовятся». Save reason: none.",
+  "why_stop": "Keys and motion in frame 1 plus a familiar day-in-life promise with a specific twist (opening a new place)",
+  "why_share_or_save": "Sent by regulars and friends of the staff: «это же наш бариста»",
+  "comment_prompt_ru": "Что у вас первым делом утром?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Утром открываете дверь первой точки ключом. Крупно руки, звук ключей, телефон в 20 см.",
+     "location": "бар",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "На новой точке открываете коробку или расставляете чашки, крупно руки.",
+     "location": "новая точка",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Бариста на новой точке держит телефон в 30 см от лица и говорит одну честную фразу про этот день.",
+     "location": "новая точка",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Сегодня устал, но вот это место уже почти наше.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Day-structure edit with time-of-day captions, original audio only (no trending sound), lights-off ending.",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: which barista opens location 2 (owner)",
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Average % watched and follows (story); coded sign-ups per 1k",
+  "risks": [
+   "Trend-dependent (evergreen day-in-life structure), counts toward the max of 2",
+   "NEEDS FACT: who opens location 2 (owner)",
+   "Consent on camera; audio at the new site unknown, so the talk shot needs the phone at the mouth",
+   "The say_ru line is a suggestion; the barista says it in their own words"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.808,
+  "_value": 2.808
+ },
+ {
+  "id": "ID23",
+  "title": "Salt in coffee — barista tests the viral hack",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "social_currency",
+  "format": "expert_reacts",
+  "funnel": "attention",
+  "hook_ru": "Соль в кофе. Бариста проверяет",
+  "first_frame": "A pinch of salt falling from fingers into an espresso at 20 cm, crema visibly reacting. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Соль в кофе. Бариста проверяет",
+   "Без соли",
+   "С щепоткой соли",
+   "Мнение бариста"
+  ],
+  "what_happens": "0–2 s salt falls. 2–6 s two cups side by side. 6–14 s barista tastes both and gives an honest opinion in their own words. 14–18 s verdict text (payoff). 18–20 s code card. As a stitch on TikTok if the viral clip is circulating; on Reels a text card describes the claim (no re-upload). DM line: «вот, проверили твой лайфхак». Save reason: none.",
+  "why_stop": "A widely shared hack being tested on camera, with a strange action in frame 1",
+  "why_share_or_save": "Sent to the friend who posted or tried the salt hack",
+  "comment_prompt_ru": "Какой кофейный лайфхак проверить следующим?",
+  "cta_ru": "Напишите {CODE} — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Щепотка соли падает в эспрессо. Крупно, телефон в 20 см.",
+     "location": "бар",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Бариста держит телефон в 30 см от лица, пробует оба эспрессо и честно говорит, что чувствует.",
+     "location": "бар",
+     "seconds": 10,
+     "takes": 3,
+     "say_ru": "Пробую без соли… теперь с солью. Скажу честно, что чувствую.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Stitch or text card of the claim (no third-party re-upload), captions, verdict card.",
+   "people_on_camera": 1
+  },
+  "facts_used": [
+   "NEEDED: owner's written confirmation that a second location opens on Левый берег (E02)"
+  ],
+  "kpi": "Shares per 1k and comment suggestions (social_currency); coded sign-ups per 1k",
+  "risks": [
+   "Trend-dependent; trend expires: re-check the hack is still circulating within 14 days before publishing (by 2026-10-23)",
+   "No health claims about salt; never mock the original creator",
+   "Barista consent on camera"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID24",
+  "title": "The strange order a barista really made — WILDCARD",
+  "insight_ids": [
+   "I06",
+   "I05"
+  ],
+  "driver": "amusement_awe",
+  "format": "odd_request",
+  "funnel": "attention",
+  "hook_ru": "Странный заказ, который бариста правда сделал",
+  "first_frame": "Hands adding the unusual ingredient into a cup at 20 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Странный заказ, который бариста правда сделал",
+   "Гость попросил вот это",
+   "Повторяем",
+   "Вердикт бариста"
+  ],
+  "what_happens": "0–2 s the odd ingredient goes in. 2–10 s barista recreates the order (process close-up). 10–14 s barista's voice paraphrases the anonymised request. 14–17 s taste and an honest reaction (payoff). 17–19 s code card. Laughing with the guest, never at them. DM line: «смотри, что кто-то заказал». Save reason: none.",
+  "why_stop": "An unexpected ingredient entering a coffee in frame 1",
+  "why_share_or_save": "Sent as a «you won't believe this» to a coffee friend",
+  "comment_prompt_ru": "А что странного заказывали вы?",
+  "cta_ru": "Напишите BA32 — пришлём дату и адрес новой точки",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Повторяете странный заказ: крупно руки и необычный ингредиент, телефон в 20–25 см.",
+     "location": "бар",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Бариста держит телефон у рта (30 см), пересказывает просьбу без имени гостя и пробует.",
+     "location": "бар",
+     "seconds": 8,
+     "takes": 3,
+     "say_ru": "Гость попросил вот так. Повторил. Сейчас попробую.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Cut, captions, verdict card. The order comes from the staff weekly voice note.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: a real unusual order from the staff voice note (staff)"
+  ],
+  "kpi": "Shares per 1k (amusement_awe); comments as reply material",
+  "risks": [
+   "WILDCARD: depends on a real odd order existing",
+   "NEEDS FACT: the order is real and anonymised (staff)",
+   "Never mock the guest"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 2
+  },
+  "_prior": 3.218,
+  "_value": 3.218,
+  "_why": "explore"
+ }
+]

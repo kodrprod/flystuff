@@ -1,0 +1,120 @@
+[
+ {
+  "persona": "Boss of Muzzone (music instrument store, Astana). I asked for more sales through social media, and my staff have one phone and 20 minutes a week between them. I care whether this sells instruments, what it costs my people, and whether anything in it could embarrass the store or turn out to be untrue.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "ID23 «Сколько на самом деле стоит начать на электрогитаре», together with the WhatsApp code system. It is the only piece that is clearly about selling a basket: guitar plus amp, over the 100 000 ₸ free-delivery line, with a CTA that asks the customer to let us assemble the set. Counting coded chats and orders rather than views is the right measure for me. ID01 (clean vs drive, «игрушка?») is the strongest hook and should lead. Both ideas, though, stand on a clearance amp we only have about 2 of (see refutations).",
+  "refutations": [
+   {
+    "target": "Staff time budget: week-1 shoot card «~15 минут» and the ≤17 min/week claim",
+    "why_fails": "The week-1 session films ID01, ID06, ID14, ID23, ID11 and ID15. That is 15 separate shots at 2 takes each, about 30 takes, at two locations. It also means plugging in the guitar and amp, carrying the guitar and amp to the counter, putting the ukulele in its case and moving the phone between the piano and the guitar wall. Realistically that is 30–45 minutes, not 15. On top of that, the plan quietly adds ongoing work that is not counted in the 20 minutes: labelling every chat «Видео»/«Оплачен», asking «назовите код из ролика» at the counter, sending weekly 30-second voice notes, and asking customers for on-camera consent. The plan says it fits 20 minutes, and it doesn't.",
+    "severity": "major",
+    "fix": "Time one real session in week 0 and plan from that measured number. Cut the week-1 bank to 4 worker ideas (drop banking ID11/ID15, or film them in week 2). List the chat-labelling minutes as a separate, explicit ask, or have the agent do the labelling from the export instead."
+   },
+   {
+    "target": "ID08 «Не переплачивайте за пианино» – claim «Разница на бумаге — полифония: 128 и 192»",
+    "why_fails": "I doubt the claim is true. The PX-770 and the AP-270 also differ in speaker/amplifier output, in cabinet (the Celviano has a key lid and a furniture cabinet), and probably in tones and features. Saying the only paper difference is polyphony is the kind of claim a knowledgeable commenter will publicly disprove (DR11), which would embarrass us. It also actively talks customers out of my most expensive in-stock item (AP-270, 734 886 ₸, 5 units). That costs about 213 000 ₸ of revenue per diverted sale, in a sprint meant to raise sales.",
+    "severity": "major",
+    "fix": "Do a full spec diff from the site's spec tables, not a partial one, and show every real difference (speakers, cabinet, lid). Reframe as «чем на самом деле отличаются», not «не переплачивайте». The CTA becomes «сыграем обе — решите на слух», so the AP-270 still gets a fair hearing."
+   },
+   {
+    "target": "ID01 / ID23 / ID11 / ID15 all depend on the Hibilly Retro 30R",
+    "why_fails": "Four of the eight slate ideas, including the hero episode, the main conversion piece and the free-delivery basket, are built on a clearance amp with about 2 units in stock. If 2 people buy it in week 1, the hero series, the basket math (116 376 ₸ > 100 000 ₸) and the banked footage are all dead. DR10 would then pause the very content that worked. Using the hero to sell off a clearance item is not a repeatable series.",
+    "severity": "major",
+    "fix": "Shoot the guitar+amp demos with a regularly stocked amp that has a price over about 40 300 ₸ (so the basket still crosses 100 000 ₸). Use the Hibilly only in a sale-line piece. Check stock for the replacement amp before shooting, not just on publish day."
+   },
+   {
+    "target": "Owner ask #1: export 15–30 WhatsApp chats to the AI assistant",
+    "why_fails": "These are customer chats with names, phone numbers and possibly addresses. Exporting them to an outside AI vendor before anyone strips the names, without the customers' consent, is a personal-data risk under Kazakhstan's personal-data law. The promise «имена и номера удаляем сразу» comes after the data has already left the store. If this leaks or a customer complains, it is my store's problem, not the vendor's.",
+    "severity": "major",
+    "fix": "Let the staff (or me) count the baseline locally instead: number of new chats per week, time to first reply on 10 chats, and how many ended in payment, typed into a 5-row table. Get raw exports only after confirming legal grounds, with names removed on the phone before sending."
+   },
+   {
+    "target": "Timeline vs buying cycle: 5-week sprint, week 0 has no posts, verdict on 2026-11-15",
+    "why_fails": "The first post is around 2026-10-21, so there are only about 3.5 weeks of content. A parent choosing a 520–735k ₸ piano does not buy within days of seeing a Reel. With a cold-start TikTok and a YouTube channel dormant since May, it is plausible that by 15.11 there are almost no orders. The pre-registered «<6 = DR12 report» could then tell me «social doesn't sell» because the window was too short, not because the approach failed.",
+    "severity": "major",
+    "fix": "Keep the 15.11 checkpoint for chats per line. Give the should_we_do_social verdict on orders at around 2026-12-15, which also covers the New Year gift peak for ukuleles and guitars. Report coded chats still open, not just closed orders."
+   },
+   {
+    "target": "Owner asks (9 items) and approval path via Andrey and Pavel",
+    "why_fails": "The asks add up to 17 minutes against a stated ≤15-minute onboarding. Every week also needs a «да» relayed through two intermediaries. The deadlines don't match each other: the clarifying questions are due 10.10 18:00, which is today, while the owner asks are due 14.10. With the «no publish without approval» rule, relay delays will push publish days and squeeze week 1 to Thu–Sun, as the plan itself admits.",
+    "severity": "minor",
+    "fix": "Cut the onboarding to 3 asks: line priority, the «Финальная» reason and consent level, all with defaults. Make weekly approval silence-as-yes after 24 h for content that uses only verified facts and no faces. Explicit «да» stays required for offers, faces and spend. Use one deadline: 14.10."
+   },
+   {
+    "target": "Targets and realism math (12 orders, 25% close rate, 500 views per short on dormant or new accounts)",
+    "why_fails": "Every number in the forecast is an assumption: close rate, chats per 1k (with a 10× range), views. The stated ratio of 0.3–3.0 means anywhere from failure to success. I am being asked to commit staff time to a target the plan admits is made up until 01.11. That is honest, but it gives me no way to judge ROI today.",
+    "severity": "minor",
+    "fix": "State the decision criterion up front in plain terms: «если к 01.11 меньше X кодовых чатов в неделю при Y просмотрах — сокращаем до 2 роликов в неделю». Also state what the AI editing and agent service costs me per month, so cost per order can actually be computed."
+   },
+   {
+    "target": "ID23 cable line «И кабель — без него не подключить» with no price",
+    "why_fails": "A video promising «сколько на самом деле стоит» that then leaves out the cable price breaks its own promise and looks evasive. It is the same hidden-cost problem the video claims to solve.",
+    "severity": "minor",
+    "fix": "Settle the cable fact in week 0 by checking the site. If it is still unknown, drop the cable shot and do not publish the «на самом деле» hook."
+   },
+   {
+    "target": "ID19 library re-cut and ID15 POV (reach arms)",
+    "why_fails": "ID19 uses gear we may not sell any more, still has an unfilled placeholder («Ответ: [по исходному тесту]») and cannot carry prices. ID15 is pure entertainment with brand_link 2. Neither moves my sales goal. They cost little staff time, but they take publishing slots and my approval attention.",
+    "severity": "minor",
+    "fix": "Keep at most one reach piece per week. Replace ID19 with a re-cut of the 64 000-view beginner guitar video that features gear currently in stock."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local retail in Kazakhstan/CIS. I've shot hundreds of shop Reels and TikToks on staff phones and judge plans by whether one tired seller can film it between customers, and whether it brings DMs rather than just views.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "ID14 (ukulele chord with one finger, as a gift). It needs about 3 minutes of staff time. An unplugged ukulele at 20 cm records cleanly even on a weak phone. The payoff is visible in the first frame and true on camera. It gives gift buyers a reason to forward it, and it ends on two concrete prices. ID19 comes second: re-cutting the shop's own old A/B test costs 0 minutes, and the ear-test game reliably gets people commenting «А или Б» in the CIS. Ship both of these first, whatever happens to the rest.",
+  "refutations": [
+   {
+    "target": "Week 1 shoot card «~15 минут» (ID01, ID06, ID14, ID23 + banked ID11, ID15)",
+    "why_fails": "That is 6 videos, 15 shots and about 30 takes across 2 rooms. Each needs setup: plugging in the amp, setting gain clean then drive, retuning, moving to the piano hall, clearing the spot in front of the piano, then the counter top-down for ID23, then sending files. Raw footage alone is about 3.5 min, and real store time with customers walking in is 30–45 min. That is 2–3× the hard 17 min/week cap. Staff will do half, skip the rest, and the card-completion rule DR14 fires in week 2. One more trap: if they send the files through WhatsApp as video, they get compressed to mush. The card has to say «отправьте как документ/файл».",
+    "severity": "fatal",
+    "fix": "Week 1 = one location per session, max 4 videos. Do guitar wall only on Tuesday: ID01, ID15 and the ID11 jack click all share one amp setup and use the same 3 takes. Do ID14 in the same spot because the ukulele hangs there. Move ID06 to a separate 5-min piano session in week 2. Drop ID23's 3 placing shots and cut it from the ID01/ID11 footage instead. Put the timing in the card per shot («шаг 1 — 2 мин») and add «отправить как файл»."
+   },
+   {
+    "target": "ID01 / ID15 hero: overdrive through Hibilly, filmed on a weak phone at 20 cm from the speaker",
+    "why_fails": "Cheap phone mics clip and auto-gain on distortion at 20 cm. The drive section will sound like fizzy broken noise. So the answer to «Игрушка?» on screen becomes «yes, it sounds like a toy», which kills the hero and the whole «Послушайте, прежде чем платить» promise. The plan forbids EQ, which is correct, so nothing can rescue it in the edit. The week-0 audio test only covers clean guitar plus piano, not drive.",
+    "severity": "major",
+    "fix": "Add a drive test to week 0: amp master on 2–3, gain at half, phone 40–50 cm off-axis (not facing the cone), 10 s. If it clips, the hero becomes clean vs. a different chord or register, and ID15 is parked. Also, film in a quiet hour: store noise plus amp hum is the usual killer."
+   },
+   {
+    "target": "Conversion mechanic: «Напишите в WhatsApp {CODE}» as the only counted inbound",
+    "why_fails": "KZ shop audiences don't type codes. They comment «цена?» or «есть в наличии?», or write to Instagram Direct, and many open WhatsApp and send a screenshot of the video. Reels have no clickable link except the bio. So the coded-chat floor will be near zero even if the videos work, and DR5/DR7 will 'kill' arms that are actually producing inquiries in Direct and comments. Alphanumeric codes like G01 also read as bureaucratic, like an ad.",
+    "severity": "major",
+    "fix": "Use word codes people actually send: «напишите «ГИТАРА» / «ПИАНИНО» / «УКУЛЕЛЕ»» (one word per line, plus a 2-letter suffix per video only in the prefilled wa.me text). Count Instagram Direct, TikTok DMs and «цена» comments as inquiries with the same «Видео» label, and add a staff rule: reply to each «цена» comment with the price plus «пишите в WhatsApp». Reply to comments within 1 h, because the algorithm and the buyer both reward it."
+   },
+   {
+    "target": "ID08 (screen-recorded product pages + cropped 16:9 library clip)",
+    "why_fails": "Scrolling a website spec sheet is the most ad-like, least stopping format on TikTok/Reels. It is basically the price slide L005 already bans. The library crop from a horizontal comparison video will be soft and may show the other brand. «Не переплачивайте» is a good hook wasted on a screencast.",
+    "severity": "major",
+    "fix": "Keep the hook, change the body. In the same 5-min piano session, play the same 4-bar phrase on the PX-770 and then the AP-270, phone fixed at 25 cm, with the specs as 2 caption lines only («128 / 192 полифония», prices). That makes it an ear test, the format that works for you. Screencast only as a 2-s insert, if at all."
+   },
+   {
+    "target": "ID06 «Пианино в музыкалку: проверьте три вещи»",
+    "why_fails": "The 'checks' are not checks a parent can use. «88 клавиш» is obvious, «банкетки нет» is a store minus framed as advice, and «сервис Casio в Алматы» is a reason for an Astana parent not to buy. None of these is what a music-school teacher tells parents to check. The video saves nothing, and it reads as a disclaimer, not utility.",
+    "severity": "major",
+    "fix": "Use the real teacher checks, each shown on the PX-770 by hand. 1) Weighted (hammer) keys: press slowly and show the resistance. 2) 3 pedals on a stand, not one loose pedal: tap the pedal. 3) Headphone jack for practice at night: plug in the headphones. Keep the warranty line honest in the caption, not as the payoff. Hook: «Учитель в музыкалке спросит про эти 3 вещи»."
+   },
+   {
+    "target": "ID23 «Сколько на самом деле стоит начать»",
+    "why_fails": "Hands placing items plus a running price total is a catalogue ad, and its 'forgotten item' payoff (the cable) is an unconfirmed fact. If the cable price and inclusion can't be shown, the twist is empty. The free delivery over 100 000 ₸ also means nothing to the Astana majority.",
+    "severity": "minor",
+    "fix": "Merge it into the ID01 ending as the final 4 s («весь старт: гитара + комбик = X ₸, по Казахстану доставка бесплатно»). Replace the separate ID23 slot with ID19 (0 staff minutes) in week 1."
+   },
+   {
+    "target": "Faceless-only rule across the whole slate + generic comment prompts",
+    "why_fails": "In KZ local retail, the seller's face and voice («я Пётр, продаю гитары 10 лет») is the trust and DM driver. Twenty hand-only videos read like supplier B-roll and blur into every Kaspi seller. Prompts like «Ваша первая гитара была дешёвой или дорогой?» get 0–2 replies.",
+    "severity": "minor",
+    "fix": "Bring the consent ask forward to week 0 with a concrete pitch: one seller saying a single sentence on camera at the end of each video. Use binary or provocative prompts: «Игрушка или нет? Да / нет в комменты», «Сколько дадите за эту гитару, не глядя на цену?»."
+   },
+   {
+    "target": "Owner onboarding asks (9 asks, ~17 min) + 5 series for 5 posts a week",
+    "why_fails": "The asks break the ≤15 min onboarding cap and are relayed through 2 intermediaries, so half will come back unanswered and approvals will slip. Five series at 5 posts a week means no series repeats often enough for viewers to recognise it.",
+    "severity": "minor",
+    "fix": "Send the owner 4 asks: chat export, consent, the number and template, the offer «да/нет». Everything else gets a default. Run 2 recognisable series in sprint 1 (the «Игрушка или нет?» ear test + «Проверьте перед покупкой»). The rest are just formats inside them."
+   }
+  ]
+ }
+]

@@ -1,0 +1,160 @@
+{
+ "have": [
+  {
+   "input": "Client profile (HYPOTHETICAL, stress-test)",
+   "what_it_gives": "Working assumptions only, none of them ledger facts. The client is a B2B supplier of dry mixes and insulation in Karaganda with about 40 SKUs [A], a warehouse and delivery trucks. It sells by phone, WhatsApp, tenders and sales reps. The owner is skeptical of social media. Staff have 20 min/week, one phone, and audio works only close up. Known unknowns: who buys (foreman or procurement), prices and terms, delivery radius. profile.social is empty, so no accounts are known."
+  },
+  {
+   "input": "Ledger (facts_usable / facts_not_usable)",
+   "what_it_gives": "0 usable facts and 0 unusable facts. Until facts are added, no audience string may contain a price, number, spec, delivery or stock claim, superlative or capability. Every such claim becomes NEEDS FACT."
+  },
+  {
+   "input": "Client files",
+   "what_it_gives": "0 files: no chat export, reviews, footage, price list or post history. Step 3 has no verified customer language yet."
+  },
+  {
+   "input": "Step-1 intake brief",
+   "what_it_gives": "request_type should_we_do_social. The 4-week test runs 2026-10-19 → 2026-11-15, with the verdict on 2026-11-16. The pre-registered verdict is: YES at ≥3 qualified coded inquiries (company/ИП + material + volume) with ≥1 reaching an offer or invoice; NO below the threshold after ≥15 posts. Week-0 baseline: 2026-10-12 → 2026-10-18. Constraints: 0 ₸, no prices, no faces by default, no capacity or spec claims without a datasheet. 3 clarifying questions (threshold, who counts as a client, faces) are already queued in the batched owner message and are not repeated here."
+  },
+  {
+   "input": "Learnings L001, L003 (measured, any vertical)",
+   "what_it_gives": "The text judge is near chance on Shorts (ρ 0.11 overall, 0.07 retail, n=1,172), and long-form title patterns did not replicate. Rubric scores are priors only, and the batch must be diverse and cheap."
+  },
+  {
+   "input": "Learnings L005 (expert judgment), L006 (measured, correlational)",
+   "what_it_gives": "No catalogue-photo price slides. Product demos without a buyer question or human angle underperform (Muzzone brand demos: median 390 vs channel median 2,300, n=48). Warehouse demos must be tied to a contractor's question."
+  },
+  {
+   "input": "Pooled vertical priors for b2b_construction_materials",
+   "what_it_gives": "None exist. No learnings are specific to this vertical, so priors are cold-start and every arm is exploration. The 300-view new-account median in the REALISM line is still an assumption."
+  }
+ ],
+ "missing": [
+  {
+   "input": "Company identity: legal/trade name as on 2GIS, website and any existing social accounts",
+   "why_it_matters": "Every Tier-0 fetch (own footprint, reviews, 2GIS card, Kaspi/Satu listings, post history) needs the real name. Without it the agent can fetch only peers and demand phrases. If accounts already exist, their past posts set the baseline and become zero-minute re-cuts.",
+   "how": "«Здравствуйте, это AI-ассистент. Пришлите, пожалуйста, одним сообщением: 1) название компании, как в 2ГИС; 2) ссылку на сайт (если есть); 3) есть ли Instagram/TikTok/YouTube — ссылки или «нет». Этого достаточно, остальное найдём сами.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "The agent searches 2GIS, Google, Instagram and TikTok for warehouse-supplier names in Karaganda and asks the owner to confirm with one tap. Until confirmed: no ledger facts and no own-history baseline. Peer research and demand phrases go ahead anyway.",
+   "blocks_step": "none (it blocks only the agent's own-footprint fetch and the ledger)"
+  },
+  {
+   "input": "Tier-0 own footprint and public reviews (2GIS/Google/Yandex card, site, Kaspi/Satu.kz listings, any existing accounts)",
+   "why_it_matters": "These produce ledger facts with URL and fetch date: hours, address, contacts, delivery and payment wording, published brands and SKUs, rating and review count. Reviews are the only verified customer language available before the chat export arrives. Hygiene errors are flagged.",
+   "how": "Agent fetch plan, run once the name is known: 1) the 2GIS card for hours, address, rating, review count and all reviews verbatim, coded with C2 and anonymised as cust_###; 2) the site's catalogue, delivery and payment pages, each fact with URL and date; 3) Kaspi and Satu.kz searches for the company's SKUs, recording price position vs other sellers on the date (never used to claim «дешевле»); 4) an Instagram/TikTok/YouTube search, and if posts exist, the last 15 posts' views ÷ median, any outliers ≥3× and question comments. On 403/429: log it, don't bypass, and ask for a screenshot only if a step is blocked.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Ledger stays empty. Content uses recognition, question and process ideas only, with no claims. The baseline is the week-0 tally.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Peer outliers: 10–20 construction-materials suppliers, warehouses and finishing brigades (Karaganda/KZ first, then RU-language CIS)",
+   "why_it_matters": "With no chats or reviews yet, peer comments are the main source of contractor questions (расход, усадка, «трескается», «какой утеплитель»). Peer outliers show which mechanisms work for B2B building content (warehouse process, comparisons, foreman POV). The research also gives the category conventions to break.",
+   "how": "Agent: find 10–20 accounts on TikTok, Instagram and YouTube Shorts, covering local suppliers and RU-CIS материаловеды/прорабы channels. From the last 90 days, take posts at ≥3× their own channel median and record the mechanism only (engine, first-frame type, length, faces or not). Also record the top questions from their comments with counts, and 3–5 category conventions. Store in research/peers.json. Label everything as hypotheses (likely).",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Engines are chosen from the D3 fit table alone. All market evidence is assumption-level.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Demand phrases and the seasonal calendar for Karaganda",
+   "why_it_matters": "Search phrases give hook and caption wording in contractors' own words. The calendar times the interior-finishing and insulation angle: end of the outdoor season, first frost, the start of the heating season, and rules for winter mortar work.",
+   "how": "Agent: collect TikTok, YouTube and Google/Yandex autosuggest in RU for «штукатурка/шпаклёвка/плиточный клей/наливной пол/утеплитель/минвата/пеноплекс» + «расход», «как выбрать», «зимой», «Караганда». Pull the Karaganda weather forecast for first frost and sub-zero dates, and the 2026 heating-season start from public sources, with URLs. Record them as moment evidence.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Hooks come only from the peer comments and the chat export. Seasonal timing stays an assumption.",
+   "blocks_step": "none"
+  },
+  {
+   "input": "WhatsApp chat export: 15–30 recent chats with company clients, without media",
+   "why_it_matters": "It answers the most important known unknown, who actually writes (foreman or procurement), which decides whether short video can work at all. It also gives the questions and objections with counts, where chats die, the median first reply, the close rate and a real baseline. It is the only source of verified customer language for step 3.",
+   "how": "«Откройте чат с клиентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Пришлите 15–30 последних чатов с прорабами/снабженцами. Имена, номера, названия компаний и детали тендеров удаляем сразу, наружу ничего не попадает. Если клиенты в основном звонят, а не пишут, — ответьте одним словом «звонят».»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Use 2GIS reviews, peer comments and the rep tally plus a weekly voice note. Question frequencies stay likely. The close rate and the qualified share (50%) stay assumptions. The procurement-vs-foreman question is answered only by the rep tally.",
+   "blocks_step": "none (3_insights confidence is capped at likely)"
+  },
+  {
+   "input": "Permissions tap card: prices, trucks and logos, use of existing contacts",
+   "why_it_matters": "These are the hard constraints for content and channels. Faces are already covered by intake Q3 and are not repeated here.",
+   "how": "«Три коротких ответа цифрой: 1) Цены в роликах: 1 — нельзя, 2 — можно только с вашего прайса. По умолчанию: 1. 2) Машины и логотип компании в кадре: 1 — можно, 2 — номера и логотип размываем. По умолчанию: 2. 3) Лучшие ролики отправлять в WhatsApp-статус вашим нынешним клиентам: 1 — да, 2 — нет. По умолчанию: 2. Ответ до 10.10 12:00.»",
+   "who": "owner",
+   "owner_minutes": 1,
+   "fallback_if_missing": "A5 and intake defaults apply: no prices, plates and logos blurred, no Status or broadcast to existing clients (the separately coded rep-outreach arm is not run).",
+   "blocks_step": "publish: prices, unblurred trucks/logo, WhatsApp Status arm"
+  },
+  {
+   "input": "Money map: brands and SKU lines, 2–3 lines to push, lines not to push, delivery area, minimum order, payment by invoice (с НДС?), free capacity per week",
+   "why_it_matters": "The ledger is empty. Without this, no capability claim (delivery, invoice payment, minimum order) can appear in a CTA. A conversion CTA needs at least one true next step («пришлём расчёт по объёму»). It also tells us which brands' datasheets to fetch for any spec content, and whether there is spare capacity to fill.",
+   "how": "«Ответьте голосом или текстом (2–3 мин): 1) какие марки/бренды смесей и утеплителя у вас основные; 2) какие 2–3 позиции хотите продавать больше, какие — не продвигать; 3) куда возите (только Караганда / область / радиус км) и есть ли минимальный заказ; 4) работаете ли по счёту с НДС; 5) сколько ещё заказов в неделю потянете без проблем. Можно просто сфотографировать прайс — цены в ролики без вашего «да» не попадут.»",
+   "who": "owner",
+   "owner_minutes": 3,
+   "fallback_if_missing": "Infer lines from catalogue depth on the site or 2GIS (likely). CTAs promise only «напишите материал и объём — ответим, сможем ли» with no delivery, minimum or invoice claims. Capacity is unknown, so DR10 cannot be computed and conversion stays soft.",
+   "blocks_step": "4_ideas: delivery/payment/minimum-order claims and push-line choice; 3_insights: datasheet fetch"
+  },
+  {
+   "input": "Manufacturer datasheets for the brands they stock",
+   "why_it_matters": "Technical content (расход на м², время высыхания, работа при минусе, теплопроводность, класс горючести) is the most likely save and share material for foremen. Per the intake constraint, it may appear only verbatim from a stored datasheet.",
+   "how": "Agent: once the money map names the brands, download the official PDFs and spec pages for the top 5–10 SKUs. Store them under inputs/datasheets/<brand>_<sku>.pdf with URL and date, and add each spec line as a ledger fact (90-day expiry, like a policy). Never paraphrase a spec.",
+   "who": "agent",
+   "owner_minutes": 0,
+   "fallback_if_missing": "No spec numbers in content. Utility ideas become questions and process demos with no figures, or carry NEEDS FACT.",
+   "blocks_step": "4_ideas: technical spec claims"
+  },
+  {
+   "input": "Proof folder: 10–20 real photos and videos from the warehouse, loading and deliveries, sent as files",
+   "why_it_matters": "These are zero-staff-minute footage (E3 needs ≥2 zero-minute ideas) and a first reality inventory: what the warehouse looks and sounds like, and which trucks, pallets and processes exist. They make week 1 cheaper for staff.",
+   "how": "«Перешлите как файлы (не как фото) 10–20 снимков и видео со склада, погрузки, машин, разгрузки на объекте — что уже есть в телефоне у вас или у водителя/кладовщика. Лица и номера размоем, объекты клиентов без согласия не покажем.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Staff film proof in week 1 inside the 17-minute card. There are no zero-minute ideas until the first footage arrives.",
+   "blocks_step": "none (it only removes the zero-minute ideas)"
+  },
+  {
+   "input": "Accounts: create TikTok and Instagram (business) and claim or verify the 2GIS card",
+   "why_it_matters": "Nothing can be published without accounts, and the test window starts on 2026-10-19. An Instagram profile and the 2GIS card are the shop window procurement checks. If accounts already exist, screenshots of their insights give the real baseline (rank 5).",
+   "how": "«Для теста нужны аккаунты. Мы всё подготовим (название, описание, ссылка на WhatsApp), от вас — подтвердить код из SMS на рабочий номер, ~2 минуты. Можно также подтвердить карточку в 2ГИС, если она ещё не ваша. Если аккаунты уже есть — пришлите скрин «Статистика» за 30 дней.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "No publishing, so the test start slips day for day. The verdict date moves to keep ≥15 posts. The agent keeps building the ideas and the library.",
+   "blocks_step": "publish: all posts"
+  },
+  {
+   "input": "Week-0 baseline tally and buyer-role tally by sales reps and the WhatsApp operator (2026-10-12 → 2026-10-18)",
+   "why_it_matters": "The intake fixes week 0 as the baseline for all inbound company inquiries. The tally also answers «кто звонит — прораб или снабжение?», which decides content direction, and it sets up the «откуда узнали?» habit needed to attribute phone inquiries during the test.",
+   "how": "Staff, about 5 minutes total in week 0, using a paper or WhatsApp tally card sent by the agent: «На каждый новый входящий звонок/чат от компании ставьте одну отметку: кто звонит (прораб/бригадир — снабженец — директор — частник) и материал. С 19.10 добавьте вопрос: „Подскажите, откуда о нас узнали?“» Reps also tag coded inquiries «КП/счёт: да/нет». The owner only forwards the card.",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "There is no baseline, so the verdict relies on coded counts alone. The buyer role stays an assumption, and phone-originated video inquiries go uncounted (the YES verdict is undercounted).",
+   "blocks_step": "verdict: baseline comparison and the «≥1 reaches КП/счёт» condition"
+  },
+  {
+   "input": "Staff reality scan: 3 test clips (a voice line at 30 cm, a mix being poured or stirred at 30 cm, a bag dropped onto a pallet) plus a 2-minute silent warehouse walkthrough",
+   "why_it_matters": "It gives real audio distance and noise (warehouses echo; forklifts), light, filmable spots and named locations («склад», «погрузка», «тихий угол»). D9 needs exact location names to keep ≤3 locations and ≤17 minutes.",
+   "how": "Staff, about 10 minutes once in week 0. The agent sends a card: «Снимите вертикально, телефон протрите: 1) скажите одну фразу, телефон в 30 см от рта; 2) звук: насыпьте/размешайте смесь, телефон в 20–30 см; 3) бросьте мешок на поддон, телефон в 1 м; 4) пройдите молча по складу 2 минуты, медленно. Отправьте как файлы.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Assume the worst case: speech only with the phone at the mouth in a quiet corner, no wide shots in the dark warehouse, close sound only.",
+   "blocks_step": "4_ideas: producibility (location names, audio plan)"
+  },
+  {
+   "input": "Optional owner voice note (≤2 min): «Что прорабы чаще всего понимают неправильно про смеси/утеплитель?» and «Что на складе нельзя показывать?»",
+   "why_it_matters": "It gives myths (B code) and boundaries (e.g. supplier names, stock levels, tender clients). The skeptical owner's own words also sharpen honest_signal and anti_sell angles. Owner statements stay likely.",
+   "how": "«По желанию, голосом до 2 минут: что прорабы и бригады чаще всего понимают неправильно про смеси или утеплитель — и что на складе нельзя показывать.»",
+   "who": "owner",
+   "owner_minutes": 2,
+   "fallback_if_missing": "Skip it. Myths come only from peer comments and the export, and there are no myth_check claims without proof. Boundaries stay at the defaults (no client names, tenders, plates or stock levels).",
+   "blocks_step": "none"
+  },
+  {
+   "input": "Weekly rep voice note from week 1: «3 вопроса прорабов за неделю + 1 случай»",
+   "why_it_matters": "Fresh B2B customer language comes from reps, who hear the questions that never reach WhatsApp. This feeds wa_question and reply episodes and the weekly re-ranking of insights.",
+   "how": "Staff, 1 min/week (inside the 17-minute budget): «Голосовое на 30 секунд: какие 3 вопроса задавали прорабы/снабженцы на этой неделе и один случай, который запомнился. Без названий компаний.»",
+   "who": "staff",
+   "owner_minutes": 0,
+   "fallback_if_missing": "Use comments on our own posts only.",
+   "blocks_step": "none"
+  }
+ ]
+}

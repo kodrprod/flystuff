@@ -1,0 +1,80 @@
+[
+ {
+  "from": "inputs",
+  "q": "Accounts: create TikTok and Instagram (business) and claim or verify the 2GIS card",
+  "how": "«Для теста нужны аккаунты. Мы всё подготовим (название, описание, ссылка на WhatsApp), от вас — подтвердить код из SMS на рабочий номер, ~2 минуты. Можно также подтвердить карточку в 2ГИС, если она ещё не ваша. Если аккаунты уже есть — пришлите скрин «Статистика» за 30 дней.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Optional owner voice note (≤2 min): «Что прорабы чаще всего понимают неправильно про смеси/утеплитель?» and «Что на складе нельзя показывать?»",
+  "how": "«По желанию, голосом до 2 минут: что прорабы и бригады чаще всего понимают неправильно про смеси или утеплитель — и что на складе нельзя показывать.»",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Здравствуйте, это AI-ассистент. Предлагаем 4-недельную проверку Instagram: съёмка с 13.10, ролики с 26.10, итог — 23.11. Считаем только НОВЫЕ компании (их нет в вашей базе и у менеджеров), которые пришли из соцсетей любым путём, и выставленные им счета. Что для вас «да, стоит»: 1 — 3+ таких компаний и 1+ счёт, 2 — 6+ и 2+ счёта, 3 — 10+ и 3+ счёта? По умолчанию: 1. Если не наберём, скажем прямо: «органика нового аккаунта за 4 недели не дала» — и остановимся. Ответ до 14.10 12:00.",
+  "why": "Pre-registers a verdict that a skeptical owner can trust: new clients only, invoice required, per total hour.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Без этого ролики не выйдут — ответьте по пунктам «да/нет»: 1) склад, который снимаем, — ваш, в Караганде; 2) возите на объекты по Караганде своими машинами; 3) напишите 5 ходовых позиций, которые обычно есть на складе; 4) какой номер телефона/WhatsApp ставить в ролики; 5) по материалу и площади менеджер посчитает, сколько мешков нужно; 6) можно вскрыть один мешок для съёмки. Пока нет ответа — ничего не публикуем, напомним 14.10 и 16.10.",
+  "why": "Blocking fact pack. Without it, every post lacks a reason to write (fatal review point). It also gates the end card, the bio, the single-minded message and ID03/ID10.",
+  "minutes": 3
+ },
+ {
+  "from": "campaign",
+  "q": "Кого считаем клиентом из роликов: 1 — только юрлица, 2 — ещё ИП, бригады и прорабы с оплатой по счёту, 3 — всех? Что отвечать частнику с несколькими мешками: 1 — вежливо отказать, 2 — продать с самовывозом, 3 — другое (напишите)? По умолчанию: 2 и 1.",
+  "why": "Defines 'qualified', unblocks ID14's wording and gives the private-buyer routing reply.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Утвердите правила один раз: без лиц (руки, мешки, машины без номеров), без цен, без сроков и обещаний доставки, только факты из ваших ответов; иней — только снаружи, мешки — только в помещении. Дальше: 1 — ролики недели выходят в четверг в 12:00, если вы не написали «стоп» (превью в среду; новое лицо, акция, новые факты или цифры объёмов — только с вашего «да»), 2 — утверждаю каждую неделю сам. По умолчанию: 2.",
+  "why": "A one-time human decision under L8. It avoids weekly approval gaps drifting the test to INCONCLUSIVE, and it sets the face and frost rules.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Вместо экспорта чатов. Честно: всё присланное обрабатывает ИИ-сервис вне компании; в ролики из чатов ничего не попадает, только пересказ частых вопросов. 1 — менеджер сам пишет 10 частых вопросов клиентов за месяц и примерно сколько раз каждый (~10 минут его времени), 2 — менеджер сам экспортирует 15 чатов и до отправки удаляет имена, номера, цены и названия объектов, 3 — ничего не присылаем. По умолчанию: 1.",
+  "why": "Honest data-handling wording (major review point). Gives real questions for «Вопрос из WhatsApp» and ID07 without client secrets leaving the company.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Аккаунты: начинаем только с Instagram и 2ГИС, TikTok и YouTube — после 2-й недели и только если Instagram оживёт. Сотрудник, который отвечает в WhatsApp, создаёт бизнес-аккаунт Instagram и подтверждает 2ГИС по нашей инструкции (~20 минут, учитываем в общем времени). 1 — да, 2 — аккаунты уже есть (пришлите ссылки), 3 — не создаём. Без ответа ничего не создаём.",
+  "why": "Accounts are an owner decision. Starting with one platform halves setup time and focuses the test on the platform most used for local checks.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Утвердите (тексты пришлём): шаблон ответа в WhatsApp, ответ частнику, автоответ на комментарий со словом «расчёт», ссылку WhatsApp для 2ГИС; одна метка «Соцсети» в чатах; менеджеры спрашивают новых клиентов только «Откуда узнали?». И отдельно: 1 — менеджеры могут пересылать лучший ролик недели своим потенциальным клиентам (считаем отдельно), 2 — нет. По умолчанию: шаблоны не используем, пересылку не делаем.",
+  "why": "Builds the conversion and attribution layer and the rep-forwarding control arm, at the minimum time cost to reps.",
+  "minutes": 2
+ },
+ {
+  "from": "facts",
+  "q": "ID07: datasheet or label text (staff film + agent ledger). No temperature statement of our own (E19)"
+ },
+ {
+  "from": "facts",
+  "q": "ID07: ≥2 matching chats (owner export)"
+ },
+ {
+  "from": "facts",
+  "q": "ID13: label mixing text (staff film + agent ledger)"
+ },
+ {
+  "from": "facts",
+  "q": "ID13: owner permits using one bag"
+ },
+ {
+  "from": "facts",
+  "q": "ID17: the counted number and its period (staff tally)"
+ },
+ {
+  "from": "facts",
+  "q": "ID02: owner confirms that wrapping is standard for every outgoing pallet before any follow-up says «всегда обматываем» (owner)"
+ }
+]

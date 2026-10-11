@@ -1,0 +1,103 @@
+{
+ "slate": [
+  {
+   "id": "BLIND-01",
+   "prior": 4.09,
+   "value": 4.09,
+   "why": "prior+data",
+   "driver": "comment: asks musicians and teachers what they actually hear and whether it matters for a pupil. This is a real question, and the answers feed REPLY-19. watch: the same phrase on both pianos, with the one spec line that differs held back until the end",
+   "format": "E09 blind test rewritten as an open A/B listen with no guessing, 12–15 s, hands plus real close-up piano sound, loopable",
+   "staff_min": 3.2,
+   "needs_facts": [
+    "BLIND-01.comment_prompt_ru: absolute/superlative claim without a backing fact: 'Самые точные'"
+   ]
+  },
+  {
+   "id": "CHECK-03",
+   "prior": 4.026,
+   "value": 4.026,
+   "why": "prior+data",
+   "driver": "save: a numbered checklist you can read on pause",
+   "format": "E06 check before buying, 15–20 s, numbered, each point shown in a shot",
+   "staff_min": 4.0,
+   "needs_facts": [
+    "CHECK-03.comment_prompt_ru: absolute/superlative claim without a backing fact: 'Лучший'"
+   ]
+  },
+  {
+   "id": "FIRSTYEAR-15",
+   "prior": 4.026,
+   "value": 4.026,
+   "why": "prior+data",
+   "driver": "comment: parents share their own experience; share to other music-school parents",
+   "format": "E05 question plus E11 sorter, 12–15 s, hands and text with an AI voiceover",
+   "staff_min": 1.6,
+   "needs_facts": []
+  },
+  {
+   "id": "GIFT-05",
+   "prior": 3.949,
+   "value": 3.949,
+   "why": "prior+data",
+   "driver": "share: built-in recipient (the partner you hide presents with); comment: a real story prompt",
+   "format": "E12 POV with humour, 10–14 s, text over a real box and showroom footage",
+   "staff_min": 2.3,
+   "needs_facts": [
+    "GIFT-05.comment_prompt_ru: absolute/superlative claim without a backing fact: 'самый большой'",
+    "GIFT-05.on_screen_ru[0]: number '31' not backed by a usable fact"
+   ]
+  },
+  {
+   "id": "STATUS-18",
+   "prior": 3.756,
+   "value": 3.756,
+   "why": "prior+data",
+   "driver": "share: referral from existing customers to the families they know",
+   "format": "Retention re-cut, 10–15 s, posted weekly to WA Status and to opted-in broadcasts only",
+   "staff_min": 0.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ANAT-02",
+   "prior": 4.013,
+   "value": 4.013,
+   "why": "prior+data",
+   "driver": "save: a reference comparison you can read on pause; comment: «что ещё сравнить»",
+   "format": "E08 price anatomy, 18–22 s, site-card screen capture plus hands and sound",
+   "staff_min": 1.7,
+   "needs_facts": []
+  },
+  {
+   "id": "TIERS-07",
+   "prior": 3.923,
+   "value": 3.923,
+   "why": "explore",
+   "driver": "save: budget tiers in one frame; share to the partner who sets the budget",
+   "format": "E20 budget tiers plus E11 sorter, 15–20 s, the same phrase on three in-stock models",
+   "staff_min": 3.1,
+   "needs_facts": []
+  },
+  {
+   "id": "STAKES-11",
+   "prior": 3.885,
+   "value": 3.885,
+   "why": "explore",
+   "driver": "comment: an opinion with high stakes (is a 10× price gap worth it?); watch until the reveal",
+   "format": "E09 blind listen, raised stakes, 12–15 s, no guessing call-to-action",
+   "staff_min": 3.1,
+   "needs_facts": []
+  }
+ ],
+ "blocked": [],
+ "week1_filmed": [
+  "BLIND-01",
+  "CHECK-03",
+  "FIRSTYEAR-15",
+  "GIFT-05",
+  "ANAT-02",
+  "TIERS-07",
+  "STAKES-11"
+ ],
+ "week1_minutes": 16.9,
+ "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"
+}

@@ -1,0 +1,132 @@
+[
+ {
+  "persona": "Owner of a B2B building-materials supplier in Karaganda (dry mixes, insulation). Sceptical of social media. Sells through sales reps and tenders. I asked whether we need social media at all.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "The core of the plan is sound. You don't argue about whether social media works; you run a 0 ₸ test for 4 weeks, with a YES/NO threshold set in advance, a separate WhatsApp code for each video, and a promise to say «не нужно» if the numbers don't come. Two parts are actually useful to me even if video fails. First, the reply-time check in WhatsApp (if a first reply takes over 60 minutes, that is the main leak, not the content). Second, the plan admits that reps forwarding videos is the stronger lever for B2B. My best pick is ID14, \"how to write to get a quote fast\". It works as a template for incoming requests even with no audience at all.",
+  "refutations": [
+   {
+    "target": "Staff time limit of 20 min/week and «не отнимаем время у менеджеров»",
+    "why_fails": "The 20 minutes only covers the shoot card. On top of that come: the tally sheet at the gate (~1 min a day, not a week, if every truck gets a mark), the weekly voice note «3 вопроса», «Видео» and «КП/счёт» labels on every chat, reps asking «откуда узнали / смотрели профиль?» and keeping a tally, tagging offers and invoices, and replying to WhatsApp within 15 minutes. That last one is a sales rep's job, and nobody has counted it. In practice it is 1–2 hours a week of reps' and the desk's time, which breaks the plan's own rule about not taking time from reps. The verdict is calculated 'per staff hour' from the cards only, so it will flatter the result.",
+    "severity": "major",
+    "fix": "Count ALL minutes (cards plus tally, labels, reply desk, rep questions) in one sheet and calculate the verdict from that total. Cut what isn't needed: drop the truck tally (ID17) and keep only one label per chat."
+   },
+   {
+    "target": "Owner time: ≤15 min onboarding, ≤5 min/week",
+    "why_fails": "The owner_asks list adds up to 1+1+1+3+3+2+2 = 13 minutes on paper. In reality that means creating three accounts, verifying a 2GIS card, exporting chats, agreeing reply templates and briefing the reps, which is easily an hour or more. The deadline is 10.10 at 12:00, and today is 10.09. Week 0 starts on 10.12 and expects accounts, a baseline and the label texts in the ledger to be ready by then. The schedule is not realistic, and the plan itself admits that a slip pushes the test to INCONCLUSIVE.",
+    "severity": "major",
+    "fix": "Give me 3 working days to answer. Shift the whole timeline by 1 week (posts from 10.26). Start with Instagram plus 2GIS only and add TikTok and YouTube after week 2 if Instagram shows life."
+   },
+   {
+    "target": "WhatsApp export request: «Имена и номера удаляем сразу, наружу ничего не попадает»",
+    "why_fails": "That isn't true. The export of my clients' chats goes to an AI service, so it leaves the company. The chats hold prices, terms and project details, which are commercial secrets of my clients and of my firm. I can't sign off on this wording, and if a client found out it would be embarrassing.",
+    "severity": "major",
+    "fix": "Say it honestly: «чаты обрабатывает ИИ-сервис, мы удаляем имена/номера/цены до анализа». Even better: a rep exports and anonymises the chats himself (delete prices and names) and sends 15 of them. Or skip the export and use a list of the 10 most common questions written by a rep."
+   },
+   {
+    "target": "ID07 and ID19 (frost on the stretch film, at the door, on our pallets)",
+    "why_fails": "For a supplier of dry mixes and insulation, showing frost and snow on our own stock is shooting ourselves in the foot. A contractor sees 'they keep material in the cold or outside'. Even if that's fine for these products, the comments will say «у вас смесь промёрзла». The risk is to our reputation, not a gain.",
+    "severity": "major",
+    "fix": "Shoot frost only outside the warehouse (the yard, the gate, the sky) and the stock only in a dry, warm room. Or drop ID19 and keep ID07 without frost on our pallets."
+   },
+   {
+    "target": "ID10 POV «бригада на объекте, а машины нет»",
+    "why_fails": "A supplier who has no confirmed facts about how reliable its deliveries are is reminding its audience of the pain of late deliveries. That invites comments like «а от вас я ждал 3 часа». Real complaints in public are the very embarrassment the plan promises to avoid.",
+    "severity": "major",
+    "fix": "Don't publish until delivery facts are in the ledger and the owner says «да». Otherwise replace it with a POV that has nothing to do with deliveries."
+   },
+   {
+    "target": "ID13 «Воду на глаз? Читаем мешок» and the whole hero series",
+    "why_fails": "For a professional foreman this is teaching him basic things he does every day, which comes across as condescending. Reading the manufacturer's label aloud adds nothing that comes from us; he can read the bag himself. The plan's own brand_link score is 3. As the hero of a campaign meant to bring B2B inquiries, it is weak. Opening a bag to film also costs product.",
+    "severity": "minor",
+    "fix": "Make the hero «Вопрос из WhatsApp»/ID14 (lowest effort, closest to the request itself). Keep «Читаем мешок» for one or two episodes as a test, not as the hero."
+   },
+   {
+    "target": "ID17 «сколько машин ушло за неделю»",
+    "why_fails": "This publishes sales volume to competitors. If the number is small it looks weak. It also adds the daily tally chore. It doesn't help the verdict (objective_fit 2).",
+    "severity": "minor",
+    "fix": "Remove it from the test."
+   },
+   {
+    "target": "Verdict logic: 4 weeks on a NEW account → «NO = прекратить видео»",
+    "why_fails": "The plan itself assumes ~300 views per post and a range of 0.3–3 chats per 1,000 views, so the most likely outcome is 0–2 inquiries. TikTok will mostly show the videos outside Karaganda. The test measures a cold start in November, not whether social media is useful to a B2B supplier. On top of that, the YES bar of '≥3 inquiries and 1 offer' is noise: a single existing client using a code can push it through, and an offer costs nothing to send. The verdict ends up random in both directions.",
+    "severity": "major",
+    "fix": "Count only NEW clients (not in the CRM or the reps' lists) and require an invoice, not just an offer. Add a cheap control: the reps' forwarding arm, counted separately, and the 2GIS card with its own code. Then the decision covers 'which channel', not just 'video yes or no'. Word a NO as «органика нового аккаунта за 4 недели не дала», not «соцсети не нужны»."
+   },
+   {
+    "target": "Format of the plan for me as the owner",
+    "why_fails": "There are 7 ideas, 4 series, 16 DR rules, Thompson allocation and posteriors, mostly in English. Before I can say 'yes' I need one page in Russian: what we do, what it costs, what I give, when the answer comes. Otherwise I will drop it at the first weekly «да/нет».",
+    "severity": "minor",
+    "fix": "Before launch, a one-page summary in Russian: 3 numbers (cost, staff time, YES/NO threshold), 3 actions from me, the verdict date. The rest stays inside the agent."
+   },
+   {
+    "target": "Weekly approval: «не ответили до четверга — ролики не выходят»",
+    "why_fails": "If I miss approval once or twice, the test fails as INCONCLUSIVE because of me, and that gets extended by another 2 weeks. That puts weight on the person least interested in the test.",
+    "severity": "minor",
+    "fix": "Approve the content rules and templates once. After that, only posts that contain facts, numbers or people need my explicit «да». Silence on the rest means they go out after 24 hours."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan/CIS. Has run construction-supply and warehouse accounts in Karaganda, Almaty and Astana.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "Keep ID14 and the «Читаем мешок» format, but the strongest idea is one the plan doesn't have yet. Film the production date printed on the bag of a delivery that just arrived: «Свежая партия: смотрите дату на мешке». The camera can prove it, it doesn't depend on any ledger fact, and it answers a real foreman worry: old plaster that has caked or lost its properties. It is also local and timely, and it is very cheap to make: one close-up shot of about 6 seconds, around 2 minutes of staff time. The next strongest is ID14, as long as the message template ends with «Караганда, доставка на объект» once the owner confirms delivery. It is the only post whose CTA matches the verdict metric.",
+  "refutations": [
+   {
+    "target": "Whole slate / ledger defaults (no delivery, stock, city or what-we-sell claims until confirmed; owner checklist defaults to «нет»)",
+    "why_fails": "Foremen in Karaganda message a supplier for 3 reasons: it's in stock, it's nearby and it delivers. Every one of those claims is blocked by default. That leaves 20 videos about pallet wrap and bag labels that never say «мы склад в Караганде, привозим на объект». A viewer has no reason to write, so the test will come out NO because the posts are empty, not because the market said no. The organic reach is a second problem. A new TikTok or Reels account gets shown across all of Kazakhstan and Russia. Out of 300 views, maybe 20–40 come from Karaganda, and ASMR-style wrap clips will pull in random viewers rather than local brigades.",
+    "severity": "fatal",
+    "fix": "Make a 2-minute fact pack from the owner a blocking requirement in week 0, before any post goes out: own warehouse yes/no, delivery inside Karaganda yes/no, the 5 best-selling SKUs that are usually in stock. If he hasn't answered, ask again. Don't treat silence as «нет». Then put a fixed end card on every video and a matching bio line: «Сухие смеси и утеплитель · склад в Караганде · пишите материал и объём». Put «Караганда» in the on-screen text, the caption and the hashtags (#караганда #стройкакараганда #прорабкараганда). Where possible, shoot with local cues in frame, like snow on the gate or the street outside, so the platforms and the viewers read the posts as local."
+   },
+   {
+    "target": "Attribution via per-video typed codes ({CODE}) + verdict threshold",
+    "why_fails": "Links in Reels and TikTok captions can't be clicked. A foreman will not type «ID13» into WhatsApp. He will call the number or write «скинь прайс на ротбанд». Coded chats will therefore undercount real inquiries several times over. Combined with a one-week baseline and a cold account, the verdict is tilted toward NO from the start.",
+    "severity": "major",
+    "fix": "Use one wa.me link in the bio, prefilled with «Здравствуйте, я из TikTok/Instagram», one per platform. Show the phone number in large text on the end card. Count the verdict as all new company inquiries where «откуда узнали» = соцсети, either via a code or via the rep's question, with codes kept only as per-video detail. Add an Instagram auto-reply to a comment keyword («+» or «расчёт»). That brings in DMs you can count without anyone typing a code."
+   },
+   {
+    "target": "ID13 «Воду на глаз? Читаем мешок» (HERO series premise)",
+    "why_fails": "This lectures brigades on something they've done for 20 years. In CIS construction comments, «мы на глаз мешаем 20 лет, учитель нашёлся» is the guaranteed reply, and the supplier ends up looking like a know-it-all, not a partner. It also breaks the plan's own «never mock brigades» rule in spirit. Production is the other problem: opening a bag, water, a bucket, a drill mixer, dust and cleanup won't fit in about 4 minutes. Realistically it's 15 or more minutes and a mess.",
+    "severity": "major",
+    "fix": "Change the hero series so it reads labels and data for the foreman, not at him: «Расход на м² — сколько мешков на 100 м²?» and «Сколько стоит смесь при открытом мешке?». Make it a fast, numbers-first format: the foreman needs the figure for his estimate. The angle is «посчитаем за вас по паспорту», which also sets up the CTA. Shoot mixing only once, as a library clip, and reuse it."
+   },
+   {
+    "target": "ID02 film squeal / «Склад слышно» series",
+    "why_fails": "Every warehouse and marketplace account already posts stretch-wrap ASMR. On a cold account it reaches ASMR viewers all over the CIS, not foremen. Even if it breaks out, it brings 0 inquiries, and then DR7 caps it in week 3. That spends 4 of 20 test slots on posts that can't add anything to the verdict.",
+    "severity": "major",
+    "fix": "Cut it to 1 post in the whole test. Use the slot for the fresh-batch production-date video, or for a real-time loading video: «Собираем заказ на объект: 40 мешков штукатурки + утеплитель», which can be shot once delivery is confirmed. Both are just as sensory but carry a B2B signal."
+   },
+   {
+    "target": "ID10 POV «бригада на объекте, а машины нет»",
+    "why_fails": "The POV dramatises a supplier being late. Then it cuts to our warehouse, but without any timing claim it promises nothing. So viewers see the pain next to our logo and no answer, and the brand ends up associated with the problem. The footage is also a mismatch: fingers drumming on a stack inside our warehouse are supposed to stand in for a foreman waiting on site.",
+    "severity": "minor",
+    "fix": "Run it only after the owner confirms some delivery fact, even a soft one («своими машинами по городу»). Otherwise keep it as a pure comment-bait question card («сколько вы ждали материал?») and leave the cut to our warehouse out."
+   },
+   {
+    "target": "ID19 / ID07 «Первый мороз» timing",
+    "why_fails": "In Karaganda the first frosts usually come in late September or early October. By 10-19 «первый мороз» is old news, and anyone local will see that. The real moment in the test window is the first lasting snow, plus the shift to working «внутри, на тёплом контуре».",
+    "severity": "minor",
+    "fix": "Retitle it «Первый снег — переходим на внутренние работы» and trigger it on the weather fetch for the first snow cover. Shoot the B-roll as soon as it snows."
+   },
+   {
+    "target": "Staff time budget (≤17–20 min/week)",
+    "why_fails": "The plan hides extra time outside the shoot card: a tally sheet at the gate, a weekly voice note, WhatsApp labels by whoever replies, a rep tally on every call, filming label texts, and a «свободное видео». The 15.2 minutes for 7 ideas in one session also assume no takes are wasted to forklift noise. In practice it's 30–40 minutes. DR14 then drops the plan to 3 posts a week and it drifts toward INCONCLUSIVE.",
+    "severity": "major",
+    "fix": "Cut it to 3–4 worker shots a week, all at one location. Track only one habit, either the tally or the voice note, not both. Batch-shoot 2 weeks of B-roll in week 0, and let the AI build at least 2 of the 5 weekly posts from library footage."
+   },
+   {
+    "target": "Owner weekly approval with no-publish default",
+    "why_fails": "A sceptical owner who has to answer one more message every Wednesday will miss 1–2 weeks. The no-reply-means-no-publish default turns his inattention into an INCONCLUSIVE result, and the plan itself points this out. Organic tests die this way all the time.",
+    "severity": "major",
+    "fix": "Get the owner to approve the rails once, in week 0. After that, apply silent consent: posts with no prices and no new claims go out at 12:00 Thursday unless he says «стоп». Explicit approval stays required only for new facts, faces, offers or the volume number."
+   },
+   {
+    "target": "ID17 truck tally / no faces at all",
+    "why_fails": "A count of trucks out of the gate is a small number. Without the owner's context it reads as weak, and he will probably veto it as confidential. More broadly, faceless B2B accounts get far fewer DMs. In Kazakhstan, people buy from «Ерлан со склада», not from hands.",
+    "severity": "minor",
+    "fix": "Swap ID17 for the fresh-batch production-date video. In Q3, offer the face option more concretely: one consenting storekeeper doing a 3-second «Пишите — посчитаю» on the end card. Show it as a separate test arm."
+   }
+  ]
+ }
+]

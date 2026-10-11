@@ -1,0 +1,85 @@
+[
+ {
+  "from": "intake",
+  "q": "Сколько дополнительных консультаций по имплантам в неделю ваши два хирурга реально смогут принять: 1 — до +2, 2 — +3–5, 3 — больше 5 (напишите число)? По умолчанию: +20% к нынешнему числу. Ответ до 10.10 12:00, иначе работаем по умолчанию."
+ },
+ {
+  "from": "intake",
+  "q": "Кого можно снимать: 1 — только руки, инструменты и голос; 2 — врачей с лицом (с их согласия); 3 — и пациентов (только с письменным согласием, без «до/после» без согласия)? По умолчанию: 1. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "intake",
+  "q": "Цены на импланты в роликах: 1 — можно, пришлите фото прайса с датой; 2 — не называем, цену обсуждаем только в WhatsApp или на консультации? По умолчанию: 2. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "inputs",
+  "q": "Links to the clinic's own accounts (Instagram handle, website, 2GIS / Google Maps card)",
+  "how": "«Я — ИИ-ассистент, который будет готовить для клиники короткие видео. Пришлите, пожалуйста, ссылки одним сообщением: Instagram клиники, сайт (если есть), карточка в 2GIS или Google Maps. Если чего-то нет — напишите „нет“.»",
+  "minutes": 0.5
+ },
+ {
+  "from": "inputs",
+  "q": "Week-0 baseline count: admin labels every implant enquiry and logs phone calls",
+  "how": "Staff (administrator), about 2 min/day, ≤10 min in week 0 and then ≤2 min/week of labelling: «С понедельника 12.10 по воскресенье 18.10: каждому новому обращению про импланты (WhatsApp, Instagram, звонок) ставьте в WhatsApp ярлык „Имплант-консультация“, а звонки отмечайте строкой в таблице: дата, канал, записался да/нет, откуда узнал. Таблицу пришлём готовую. Имена пациентов в таблицу не пишите.» (Owner only forwards it; this is included in the batched message.)",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "WhatsApp chat export (15–30 recent implant-related chats, no media), plus Instagram DM screenshots",
+  "how": "«Откройте в WhatsApp клиники чат с пациентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Пришлите 15–30 последних чатов, где спрашивали про импланты, отсутствующие зубы, мосты или протезы. Если пишут и в Instagram Direct — добавьте 10 скриншотов. Имена, номера и любые медицинские подробности, по которым можно узнать человека, удаляем сразу; переписка остаётся внутри и никогда не публикуется.» Agent on ingest: replace identities with cust_###, drop health details tied to identity, and keep raw files internal only.",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Permissions tap card: faces, patient consent form, prices, sign-off doctor, mandatory ad details, new accounts (merges intake Q2 and Q3)",
+  "how": "«Ответьте цифрами одним сообщением до 10.10 12:00:\nА) Кого можно снимать: 1 — только руки, инструменты и голос; 2 — врачей с лицом (с их согласия); 3 — и пациентов (только с письменным согласием). По умолчанию: 1.\nБ) Есть ли у клиники бланк письменного согласия пациента на съёмку и публикацию (фото, видео, снимки, КТ)? 1 — есть (пришлите фото пустого бланка); 2 — нет. По умолчанию: 2 — пациентов и их снимки не показываем.\nВ) Цены на импланты в роликах: 1 — можно, по прайсу с датой; 2 — не называем, цену обсуждаем в WhatsApp или на консультации. По умолчанию: 2.\nГ) Кто из врачей каждую неделю проверяет ролики перед публикацией? По умолчанию: вы сами.\nД) Какие сведения клиника обязательно указывает в рекламе (например, номер лицензии)? Пришлите формулировку, как у вас принято. По умолчанию: ничего не публикуем, пока вы не подтвердите.\nЕ) Открыть TikTok и YouTube на номер клиники: 1 — да, 2 — нет. По умолчанию: только Instagram.»",
+  "minutes": 1.5
+ },
+ {
+  "from": "inputs",
+  "q": "Money map: dated price-list photo, free surgeon capacity, lines not to push, implant system and warranty documents (merges intake Q1)",
+  "how": "«Пришлите: 1) фото прайса на имплантацию и коронки на имплантах, где видна дата (без вашего „да“ цены в роликах не появятся); 2) сколько дополнительных консультаций по имплантам в неделю реально примут два хирурга: 1 — до +2, 2 — +3–5, 3 — больше 5 (напишите число); 3) что сейчас не продвигать (например, сложные случаи, костную пластику, дни отпуска хирурга); 4) если хотите, чтобы мы упоминали марку имплантов или гарантию — фото страницы договора или сайта, где это написано. По умолчанию: +20% к нынешнему числу консультаций, цен, марок и гарантий в роликах нет.»",
+  "minutes": 2.5
+ },
+ {
+  "from": "inputs",
+  "q": "Proof folder: about 20 real photos and videos without patients, sent as files",
+  "how": "«Перешлите файлами (как „Документ“, без сжатия) 20 фото и видео без пациентов: инструменты, стерилизация, пустой кабинет, аппарат КТ, руки врача с моделью челюсти или импланта, упаковки имплантов. Фото пациентов, их зубов и снимков — только если есть письменное согласие на публикацию; если не уверены — не присылайте.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Implant case timeline: last 10 implant cases, consultation date → CT → plan accepted → surgery (anonymised)",
+  "how": "Staff (administrator), about 5 min once, from the clinic schedule: «Для последних 10 пациентов с имплантами выпишите без имён: дата первой консультации, дата КТ, дата согласия на план, дата операции. Номера вместо имён: 1, 2, 3…»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Staff reality scan: 3 test clips plus a 2-minute silent walkthrough, with no patients in frame",
+  "how": "Staff (assistant or administrator), 10 min once, outside patient hours: «Когда в кабинете нет пациентов: 1) скажите фразу „Нам часто пишут про импланты“, держа телефон в 30 см ото рта, в самом тихом месте; 2) снимите 10 секунд звука инструмента или упаковки в 20–30 см; 3) 10 секунд пустого кабинета от двери; 4) пройдите 2 минуты молча: ресепшн, кабинет, стерилизационная, кабинет КТ. Экраны с данными пациентов не снимайте. Телефон вертикально, отправьте файлом.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Weekly staff voice note: «3 вопроса пациентов за неделю + 1 случай»",
+  "how": "Staff (administrator), 1 min/week, from week 1: «В пятницу — голосовое на 30 секунд: какие 3 вопроса про импланты задавали на этой неделе, и один случай, если был. Без имён.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Offer approval (deferred; only if F4 later needs a non-price offer)",
+  "how": "Asked later in the weekly ≤5-min message, only if the week-3 data show a conversion gap: «Готовы по коду из ролика [точное предложение] до [дата]? По умолчанию: без акций.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Boost budget and paid-medical-ad compliance (deferred until a post qualifies under F10)",
+  "how": "Asked in week 2 or later with real numbers, only once a post reaches 3× the median and has a coded chat: «Ролик „…“ набрал в N раз больше обычного и дал K обращений. Продвигать его за ваш бюджет до X ₸? По умолчанию: нет.»",
+  "minutes": 0
+ },
+ {
+  "from": "facts",
+  "minutes": 2.0,
+  "q": "Подтвердите или поправьте, пожалуйста, факты для роликов: the surgeon's real criteria for advising against (surgeon); no-obligation consultation (owner); written consent + legal OK on patient testimonials in RK medical advertising (owner); anaesthesia/sensation answer wording, approved by the responsible doctor (otherwise the ho; real reprocessing protocol and step order (owner + responsible doctor); pouch opened in front of patient; plan explained on model (doctor) (и ещё 1)"
+ }
+]

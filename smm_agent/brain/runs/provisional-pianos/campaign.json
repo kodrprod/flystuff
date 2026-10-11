@@ -1,0 +1,384 @@
+{
+ "name": "«Покажем до оплаты»: what the extra money buys, shown on in-stock pianos (Muzzone, digital pianos to 31.12.2026), revision 2",
+ "big_idea": "Revision 2. Every listing in the category says «88 клавиш». In-stock prices run from 232 960 ₸ to 754 990 ₸ on the models we need to move. Buyers can't see what the extra money buys, and the old answer, «listen to the difference», does not survive a weak phone mic, platform compression and a phone speaker. So the hero no longer asks viewers to hear anything. It **shows the differences a phone camera captures reliably**:\n- key travel when a finger presses and releases;\n- what is on the floor (stand, 1 pedal or 3, a bench or none);\n- headphones going in, then a silent room;\n- the depth and look of the body (cabinet vs portable).\n\nEach claim about a model is shown only once it is in that model's spec card in the ledger.\n\n**Platform idea «Покажем до оплаты».**\n- Device, frame 1 of every episode: top-down, two in-stock pianos side by side, one finger pressing the same key on each with the real key thud. On-screen question «[разница] — за что?», with no ₸ figure in the first 2 seconds (G4).\n- Fixed end frame: «Астана, Кажымукана 14 · WhatsApp: слово ___».\n\n**Episodes go to the overstocked SKUs first** (site stock read 2026-10-08):\n- Kurzweil CUP E1 vs CUP M1: both 637 520 ₸, 3 units each. «Одна цена — два разных пианино».\n- Estrada EDP-220BK (9 units) vs Casio PX-S1100 (5 units): a 130 030 ₸ gap.\n- EDP-220BK vs Casio AP-300WE (4 units): more than 3× the price.\n- PX-770 vs AP-270 (3 and 5 units) moves to the YouTube model-name search line. STAKES-11's 2 M ₸ Dexibell is dropped.\n\n**Around the hero:**\n- «Перед оплатой»: a real buyer's checklist covering keys, stand and pedals, and headphones.\n- «Вопрос родителя»: honest answers, including a teacher-question episode.\n- A December gift series.\n- A local distribution track. Music-school teachers and class parent chats get a forwardable card with its own code.\n\n**Conversion layer:** one WA code per video, a pinned «Как заказать пианино» video, WA Status for existing contacts, and instalment pricing («от X ₸/мес»). Instalment pricing is used only if the owner confirms the exact Kaspi or bank terms.\n\n**Timeline** (type S, back-planned from 31.12):\n- explore 12–25 Oct;\n- focus 26 Oct–22 Nov;\n- scale 23 Nov–20 Dec;\n- push 21–31 Dec.\n\n**SMP status:** provisional (no chat evidence yet). It is locked or replaced from data on 22 Nov.",
+ "single_minded_message_ru": "Покажем, за что вы платите, — до того, как заплатите.",
+ "why_this_wins": "This is not a forecast. Text judges are near chance on short-form (L001, ρ 0.07 for retail), so this is a better-built set of shots on goal. What changed, and why it is the better bet:\n\n1. **The format can now keep its promise.** The hero shows key travel, pedals, stand, headphones and body depth. A weak phone films these reliably. A 4-second sound A/B through phone mic → compression → phone speaker would mostly get «одинаково» and push viewers to the cheapest listing anywhere. Sound comparison survives only as one exploration episode, and only if it passes a staff blind playback test on a cheap Android and the boss approves after listening.\n\n2. **Reach goes to the stock that has to move.** Week 1 is Kurzweil CUP E1/M1 (3+3 units), week 2 is EDP-220BK (9) vs PX-S1100 (5), week 3 adds AP-300WE (4). Together these are 24 units in the first three weeks of hero content. Nothing promotes a 1-unit 2 M ₸ piano.\n\n3. **We don't talk buyers out of our own Casio stock.** Casio's Almaty-only service stays fully disclosed in the WA reply, if asked, and on the trust highlight in exact site wording. It is no longer a hook line in a weekly Status. The warranty line in videos waits for the owner to confirm how the shop handles repairs.\n\n4. **It uses the local buying lever.** Instalments («от X ₸/мес») are now owner question #1 in week 0. If they are confirmed, they reframe the budget, gift and «а если бросит?» videos. The return-policy angle that helped nobody is gone.\n\n5. **Distribution is local, not CIS musicians.** A teacher track (ДМШ teachers → class parent chats, coded ПЕДАГОГ1/РОДИТЕЛИ1), forwardable vertical utility cuts, and the Astana address on every end frame point reach at buyers in Astana.\n\n6. **The shoot is realistic.** Each session uses ≤2 pianos, ≤3 setups and ≤10 minutes, with a preset/volume/framing checklist taped to each piano. That is four small October sessions instead of one impossible 17-minute marathon.\n\n7. **It fixes our known failure mode.** Demos are tied to a buyer's money question (L006), there are no price slides (L005), and a YouTube model-name search line reuses the footage (L002/L004) at zero extra minutes.",
+ "series": [
+  {
+   "name": "«Покажем до оплаты» (HERO): two in-stock pianos, one visible difference per beat, the price gap told inside the story",
+   "role": "Reach plus consideration. Arm A1 (E17 counter-convention + E08 price anatomy). Fixed ritual: top-down frame of the same key pressed on both pianos with the real key thud, caption «[разница] — за что?» (no ₸ before 2 s), end frame «Астана, Кажымукана 14 · WhatsApp: слово ___». Length 12–20 s.\n\nOnly differences that are both in the ledger spec cards and visible on camera are shown. Sound is never the argument. Comment driver: «Какое бы поставили дома — и почему?» This is a harmless choice question, not a guess.\n\nEpisodes, in order of stock:\n- BLIND-01, rebuilt: Kurzweil CUP E1 vs CUP M1, same 637 520 ₸;\n- ANAT-02, rebuilt: EDP-220BK vs PX-S1100, a 130 030 ₸ gap;\n- STAKES-11, rebuilt: EDP-220BK vs AP-300WE, more than 3× the price, no Dexibell.\n\nFurther pairs are carded weekly from the 14 in-stock SKUs.",
+   "idea_ids": [
+    "BLIND-01",
+    "ANAT-02",
+    "STAKES-11"
+   ],
+   "cadence": "1–2 posts/week in weeks 1–10 (Thompson R4, cap 50%); 1–2/week in the push with conversion CTAs"
+  },
+  {
+   "name": "«Перед оплатой» (UTILITY): a real buyer's checklist plus budget tiers, cut to forward into parent chats",
+   "role": "Saves and forwards. Arm A2 (E06 + E20/E11).\n\nCHECK-03 is rewritten as a true pre-purchase check:\n1. Are the keys weighted / hammer action? (a finger pressing a key)\n2. What comes in the box: stand, 3 pedals or 1, bench? (shown on PX-S1100 vs a cabinet model)\n3. Is there a headphone output? (headphones go in)\n\nModel-specific answers appear only from ledger spec cards. The generic checks are worded and approved by the store.\n\nTIERS-07 shows three real price points: EDP-220BK 232 960 ₸ / PX-S1100 362 990 ₸ / AP-300WE 754 990 ₸, each with «от X ₸/мес» only if instalments are confirmed.\n\nBoth are made as a 9:16 short and as a still card for WhatsApp parent chats.",
+   "idea_ids": [
+    "CHECK-03",
+    "TIERS-07"
+   ],
+   "cadence": "1 post/week; 2/week if A2 leads on saves per 1k or codes"
+  },
+  {
+   "name": "«Вопрос родителя / вопрос педагогу» (RESPONSE): honest answers to real doubts, plus an expert invite to teachers",
+   "role": "Comments and parent-chat shares. Arm A3 (E05 + E15/E19). No children on camera.\n\n- FIRSTYEAR-15 is rewritten: «А если через полгода бросит?» → «честно: не знает никто» → start at the entry tier (EDP-220BK 232 960 ₸), or pay in parts (only with confirmed terms) → «напишите бюджет». The return-policy angle is removed.\n- TEACH-09 is new, and the local distribution hook: «Педагоги, что советуете родителям — молоточковая механика обязательна?». It is a question with no claim, because INS7 has T=0.\n- From week 2, E19 replies quote the best teacher answers (anonymised public comments). After the chat sample arrives, real WA questions are added.",
+   "idea_ids": [
+    "FIRSTYEAR-15",
+    "TEACH-09"
+   ],
+   "cadence": "1 post/week"
+  },
+  {
+   "name": "«Подарок весом с холодильник» (SEASONAL, December)",
+   "role": "Shares (the partner or grandparent you plot presents with) and December conversion. Arm A4 (E12 POV). Box shots are filmed in the showroom in the week 7 session, not in week 1.\n\nPublished from 2026-12-01 only after Q3 gives December reserve and delivery cut-offs. Uses «от X ₸/мес» only if instalments are confirmed. If Q3 never clears, the slots go to gift-tier hero episodes with pickup and published delivery facts only.",
+   "idea_ids": [
+    "GIFT-05"
+   ],
+   "cadence": "1–2 posts/week, 1–27 Dec, gated"
+  },
+  {
+   "name": "«Статус для своих» + teacher/parent card (CONVERSION and LOCAL DISTRIBUTION)",
+   "role": "Reaches music-school parents through people who already have the shop's number, and through teachers.\n\n- STATUS-18 is rebuilt as the new CHECK-03 points plus the address. The Almaty line is removed from anything recurring.\n- A forwardable teacher/parent card (code РОДИТЕЛИ1) is made from the same cut.\n- Pinned «Как заказать пианино» video, using facts only: code word → model → 3-working-day reserve → pickup at Кажымукана 14 or free RK delivery over 100 000 ₸ → Kaspi QR / Kaspi Pay / cards / cash (plus instalments if confirmed).",
+   "idea_ids": [
+    "STATUS-18"
+   ],
+   "cadence": "WA Status weekly; opted-in broadcast at most every 2 weeks (weekly 21–31 Dec); teacher card refreshed monthly"
+  },
+  {
+   "name": "«Модель vs модель» (YouTube search line)",
+   "role": "Evergreen search capture for buyers in the research phase (L002/L004). Plain titles, e.g. «Casio PX-770 vs Casio Celviano AP-270 — сравнение» (both ≥3 units per the site crawl, so they qualify). Also «Estrada EDP-220BK vs Casio PX-S1100», «Kurzweil CUP E1 vs CUP M1».\n\nLonger takes, and line-out audio only if the shop has a cable that connects the piano's headphone out to the phone. Otherwise close mic plus an on-screen note that the recording is from a phone. Not a Thompson arm; measured against the channel's own median.",
+   "idea_ids": [
+    "ANAT-02",
+    "BLIND-01"
+   ],
+   "cadence": "1 long-form every 2 weeks from week 4 (PX-770/AP-270 session); all short bodies cross-posted to Shorts"
+  }
+ ],
+ "offer": {
+  "needed": false,
+  "proposal": "**No new offer at launch.**\n\n**Standing published terms, quoted exactly:**\n- minimum 12-month warranty;\n- Casio 2-year manufacturer warranty (the Almaty service detail is given in the WA reply and trust highlight, not in hooks);\n- 14-day return of unused goods, with two-way delivery withheld;\n- free RK ground delivery over 100 000 ₸;\n- free Astana courier over 20 kg and 15 000 ₸;\n- 3-working-day pickup reserve, extendable on request;\n- payment by Kaspi QR / Kaspi Pay / transfer / cards / Apple Pay / cash.\n\nSite markdowns are mentioned only as published, with no deadline and no «распродажа» wording until Q2.\n\n**Instalments are a payment fact to confirm, not an offer we create.** Owner ask #1: is there a Kaspi shop or Kaspi/bank instalment on pianos, and on what exact terms?\n- If yes: the exact terms become a `client` fact (provider, term, monthly amount, any fee). TIERS-07, GIFT-05 and FIRSTYEAR-15 then show «от X ₸/мес» with the provider named.\n- My judgment beyond the method: instalments count as financial-services advertising in RK. So the wording is conservative, with no «0%» unless the owner confirms it, and every such post needs owner sign-off.\n- If no: we drop the monthly framing and say so plainly in chat replies.\n\n**Non-discount options drafted for the owner** (used only after an explicit «да»):\n1. Try-in-store: «приходите — по слову из ролика покажем рядом модели, которые вам интересны». The hero CTAs depend on it.\n2. December gift reserve with exact hold-until terms. This is the only legitimate December urgency and is required for GIFT-05.\n3. Trade-in or rental. Flagged only.\n\nTrigger: if the 22 Nov checkpoint misses ≥10 coded inquiries after the R7 fixes, option 1 or 2 is proposed formally.\n\nTeachers get no paid referral or commission unless the owner creates one (that would be a new offer). We also will not use the site's «компенсация доставки за честный отзыв или видео» (likely an incentivised review) and recommend removing it.",
+  "fact_ids": [
+   "payments",
+   "pickup_reserve",
+   "returns_14d",
+   "returns_conditions",
+   "returns_cost",
+   "warranty",
+   "warranty_casio",
+   "delivery_free_100k",
+   "delivery_astana",
+   "sale_page",
+   "address"
+  ],
+  "needs_owner_approval": true
+ },
+ "channels": [
+  {
+   "channel": "Instagram Reels + profile (muzzone_astana)",
+   "role": "The primary feed test surface from week 1. Location tag «Астана» on every post, and the address on the end frame (never in the first 2 s).\n\nTrust shelf:\n- pinned «Как заказать пианино»;\n- highlights for «Гарантия и сервис» (exact site wording, including Casio service in Almaty and how the shop handles repairs once the owner confirms), «Доставка и оплата» (plus instalments if confirmed), «Возврат 14 дней — условия» and «Отзывы» (public, anonymised).\n\nPrefilled wa.me in the bio. Insights access is requested so we can read the share of Astana viewers. Until then, weekly screenshots."
+  },
+  {
+   "channel": "Music-school teachers and class parent WhatsApp chats (new local distribution track)",
+   "role": "The real local channel where piano advice spreads.\n\n- Week 1: the worker sends a forwardable card (a 9:16 CHECK-03 still plus the address plus code РОДИТЕЛИ1) to 5–10 teachers already in the shop's contacts or visiting the store. Shop business cards with the code handwritten go to teachers who come in (assumes the shop has cards).\n- TEACH-09 invites teachers publicly, and their code is ПЕДАГОГ1.\n- Physical visits to nearby ДМШ fall outside the 20-minute content budget and happen only if the owner assigns time (owner ask).\n- No commissions or incentives unless the owner creates them."
+  },
+  {
+   "channel": "TikTok",
+   "role": "If the owner confirms an account or agrees to open a business account, it becomes the fastest test surface from week 2, with the same bodies. Feed reach here skews non-local, so TikTok is judged on codes from Astana, not on views."
+  },
+  {
+   "channel": "YouTube (Shorts + long-form; 3 620 subs; dormant since 2026-05-10)",
+   "role": "All shorts are cross-posted to Shorts. The search line carries plain model-name comparisons (L002/L004), starting with PX-770 vs AP-270 in week 4. wa.me goes in descriptions. Measured against the channel's own median per format."
+  },
+  {
+   "channel": "WhatsApp (+7 701 0987734)",
+   "role": "Conversion and attribution:\n- one code per video plus the teacher/parent codes;\n- quick replies per code, approved once, quoting ledger facts only and always asking the budget, the city and «нужна ли рассрочка»;\n- full warranty and service disclosure (including Casio service in Almaty) answered here when asked;\n- weekly Status (STATUS-18);\n- opted-in broadcasts only;\n- reply-time guardrail at 60 min;\n- whoever answers WA logs code → model → sold Y/N weekly."
+  },
+  {
+   "channel": "Kaspi (conditional on owner ask #1)",
+   "role": "If a Kaspi shop or Kaspi instalment exists, CTAs may point to it with the exact confirmed terms, and attribution adds promoted vs unpromoted piano SKU lift on Kaspi (weak). If not, Kaspi is mentioned only as a published payment method."
+  },
+  {
+   "channel": "Site muzzone.kz",
+   "role": "Transaction point for RK delivery. A weekly crawl of piano prices (7-day TTL, re-fetched on publish day) and stock_qty, used for the R9 stock guardrail and a weak difference-in-differences attribution."
+  },
+  {
+   "channel": "2GIS / Google / Yandex maps",
+   "role": "The «is it real / is it open?» check, given «Финальная распродажа». A monthly photo refresh from the shoots. Satisfied buyers are asked for reviews with an owner-approved message. No incentives."
+  },
+  {
+   "channel": "VK / Facebook",
+   "role": "Mirror cross-posts at 0 minutes. No decisions are made on their data."
+  },
+  {
+   "channel": "Paid boost",
+   "role": "None (0 ₸). If the owner later approves a budget and a cost cap, R3 candidates get an Astana-radius click-to-WhatsApp boost."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Onboarding, 9–11 Oct.\n\n**Owner card.** Send through Andrey and Pavel (≤14 min). Instalments/Kaspi is question #1. Defaults apply on 10.10 18:00.\n\n**Ledger ingest.** Add web facts from the 2026-10-08 crawl, with the TTL to 15 Oct and a re-fetch before any publish:\n- Estrada EDP-220BK 232 960 ₸ (9 units);\n- Casio PX-S1100BKC7 362 990 ₸ (5);\n- Casio AP-300WEC7 754 990 ₸ (4);\n- Kurzweil CUP E1 SR and CUP M1 SR 637 520 ₸ each (3+3);\n- PX-770 (3) and AP-270 (5) stock.\n\n**Derived facts:** EDP-220BK→PX-S1100 gap 130 030 ₸; AP-300WE/EDP-220BK ≈ 3.24 («больше чем в 3 раза»); CUP E1 and M1 at the same price.\n\n**Spec fetch** for these 5 hero SKUs: key action, pedals, stand, bench, headphone outputs.\n\n**Sound feasibility test:** record PX-770 vs AP-270 and play it back as a private Reel on a cheap Android.",
+   "idea_ids": [],
+   "worker_ask_ru": "Всего ~5 мин.\n1) Тест звука, 2 мин: на Casio PX-770 и AP-270 сыграйте один и тот же аккорд, телефон в 20–30 см от динамика, по 5 секунд на каждом. Пришлите мне. Потом послушайте вдвоём с коллегой с дешёвого телефона: различаете, где какое?\n2) Голосовое, 2 мин: 10 вопросов про пианино, которые покупатели задают каждый день. Отдельно — спрашивают ли про рассрочку.\n3) Одной строкой: стоят ли в зале включёнными Kurzweil CUP E1, CUP M1, Estrada EDP-220BK, Casio PX-S1100, AP-300 белое. Есть ли в магазине наушники и кабель с выхода на наушники в телефон.",
+   "ai_work": "- Ingest the ledger entries and derived facts above.\n- Fetch the spec cards.\n- Write a printed per-piano checklist (preset, volume, phone position, framing tape mark).\n- Draft the owner card in Russian.\n- Draft WA quick replies per code (ВЫБОР1, ПРОВЕРКА1, ПЕДАГОГ1, РОДИТЕЛИ1, ПЕРВЫЙ1, СЕМЬЯ1, РАЗНИЦА1, БЮДЖЕТ1, ЗАЧТО1, ПОДАРОК1).\n- Draft the teacher/parent card.\n- Run the blind sound check with 2 staff. If they can't tell the pianos apart, sound is retired from short-form and kept only for YouTube.\n- Run the literals check on all cards."
+  },
+  {
+   "week": 1,
+   "goal": "Explore, 12–18 Oct.\n\n**Session 1:** Kurzweil CUP E1 + CUP M1 only, 3 setups, ≤10 min.\n\n**Publish:**\n- BLIND-01, rebuilt as «Одна цена — два разных пианино. Чем отличаются?». The price appears after 2 s, and only spec-card differences that are visible on camera are shown. If the spec cards show no visible difference, it runs as a no-claim «какое поставили бы дома?» look comparison. A1, Wed.\n- CHECK-03, rewritten as keys / what's in the box / headphones. Model specifics come only from the ledger, and there is no Almaty line. A2, Thu.\n- TEACH-09, the teacher question with no claims. A3, Fri.\n- FIRSTYEAR-15: the instalment version if Q1 is confirmed, otherwise the entry-tier version with no return-policy line. A3, Sat.\n- STATUS-18 rebuilt plus the teacher/parent card, Sun.\n\n4 feed posts on Instagram and Shorts (plus TikTok if it exists). Each gets 2 reserve hook variants, and every end frame shows the address.",
+   "idea_ids": [
+    "BLIND-01",
+    "CHECK-03",
+    "TEACH-09",
+    "FIRSTYEAR-15",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, съёмка ≤10 мин, только Kurzweil CUP E1 и CUP M1. Настройки — по листку, приклеенному к каждому пианино.\n1) Сверху, оба пианино в кадре: палец медленно нажимает и отпускает одну и ту же клавишу сначала на одном, потом на другом. Телефон близко к клавишам. 8 с × 2.\n2) Педали крупно на каждом, рука нажимает по очереди. 6 с × 2.\n3) Наушники вставляем в выход, играем аккорд — в комнате тихо. Телефон в 20–30 см. 8 с × 2. В конце закройте крышку клавиатуры со звуком.\nПротрите камеру. Свободный кадр 10 с.\n\nДо пятницы, ≤6 мин: перешлите карточку для родителей 5–10 педагогам, которые есть в контактах магазина или заходят к вам. Если есть визитки — напишите на них слово РОДИТЕЛИ1.\nПятница, 2 мин: кодовые слова из WhatsApp.",
+   "ai_work": "- Re-fetch prices and stock on publish day (TTL ends 15 Oct).\n- Edit 4 bodies plus 2 hook variants each, captions and the address end frame.\n- Make a 9:16 still of CHECK-03 for parent chats.\n- Wednesday batch for one-tap approval. FIRSTYEAR-15 needs explicit approval if instalment terms appear.\n- Log setup time for the shoot card."
+  },
+  {
+   "week": 2,
+   "goal": "Explore, 19–25 Oct.\n\n**Session 2:** EDP-220BK + PX-S1100, ≤10 min.\n\n**Publish:**\n- ANAT-02, rebuilt: «Обе — 88 клавиш. Зачем доплачивать?», then the 130 030 ₸ gap after 2 s, then the site-card lines that differ plus close-ups (portable vs cabinet, what's on the floor). A1.\n- Wildcard HUSH (INS5, E04): the session-1 headphone shot, «POV: 22:00, соседи спят». Only if the headphone output is in the ledger; otherwise a second CUP episode.\n- TEACH-09 reply (E19) from the best teacher comments. A3.\n- STATUS-18 v2.\n\nBy the end of week 2 there are 7 feed posts across E17, E08, E06, E15, E05, E04 and E19.\n\nR1 rescue on any week-1 post with rel_hold3 < 0.7.",
+   "idea_ids": [
+    "ANAT-02",
+    "TEACH-09",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин, только Estrada EDP-220BK и Casio PX-S1100. Настройки — по листку.\n1) Сверху, оба в кадре: одна и та же клавиша нажимается на каждом. 8 с × 2.\n2) Что стоит на полу у каждого: стойка, педаль (одна или три), банкетка. Камера медленно вдоль пола. 6 с × 2.\n3) Сбоку: насколько каждое пианино глубокое, оба в одном кадре. 5 с × 1.\nПротрите камеру. Свободный кадр 10 с. Пятница: коды, 2 мин.",
+   "ai_work": "- T+48h and T+7d reviews, R1 re-cuts.\n- ANAT-02 claims checked line by line against the spec cards.\n- Add the chat sample (if received) to the evidence base: where chats die, inquiry-to-order rate, reply time, share asking about instalments.\n- Draft the E19 reply."
+  },
+  {
+   "week": 3,
+   "goal": "Focus, 26 Oct–1 Nov.\n\n**Session 3:** AP-300WE, ≤10 min.\n\n**Publish:**\n- TIERS-07: EDP-220BK / PX-S1100 / AP-300WE with the same framing from sessions 2–3, «от X ₸/мес» only if confirmed, sorter labels only if the owner approves them. A2.\n- STAKES-11, rebuilt: «Одно — больше чем в 3 раза дороже. За что?» EDP-220BK vs AP-300WE, visible differences only, explicit owner approval required. A1 explore.\n- A FIRSTYEAR or chat-question episode. A3.\n\nFirst Thompson allocation (R4), exploration ≥25%. Re-rank the insights with the chat evidence. Build the conversion layer: pinned how-to-order, highlights, bio wa.me.",
+   "idea_ids": [
+    "TIERS-07",
+    "STAKES-11",
+    "FIRSTYEAR-15",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин, только Casio AP-300 белое.\n1) Сверху, тот же ракурс, что у Estrada и PX-S1100: нажатие клавиши. 8 с × 2.\n2) Педали крупно, рука нажимает по очереди. 6 с × 2.\n3) Общий план корпуса сбоку и спереди. 5 с.\nСвободный кадр. Пятница: коды, 2 мин.",
+   "ai_work": "- Allocation and posteriors.\n- Pinned how-to-order video from reused shots.\n- TIERS-07 as a short and a parent-chat still.\n- Weekly ≤5-line report."
+  },
+  {
+   "week": 4,
+   "goal": "Focus, 2–8 Nov.\n\n**Session 4:** PX-770 + AP-270 for the YouTube search line (line-out if a cable exists).\n\n- Recalibrate on 2026-11-02, using our own medians where a platform has ≥10 posts.\n- R7 funnel check: E vs codes, reply time, the share of inquiries from Astana.\n- Q2 check: if the store is closing, pause the warranty lines.\n- Sound A/B in short-form only if the week-0 test passed and the boss approved after listening, as one exploration slot.",
+   "idea_ids": [
+    "ANAT-02",
+    "BLIND-01",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин, Casio PX-770 и AP-270 — для YouTube.\n1) Одна и та же фраза на каждом, 15 с. Если есть кабель с выхода на наушники в телефон — пишем через него, если нет — телефон в 20–30 см. По 1 дублю.\n2) Сверху: нажатие клавиши на обоих. 8 с.\n3) Педали обоих. 6 с.\nСвободный кадр. Пятница: коды, 2 мин.",
+   "ai_work": "- YouTube long-form «Casio PX-770 vs Celviano AP-270 — сравнение» with a plain title.\n- Recalibration and R7 diagnosis.\n- New hook variants for the leading arm.\n- Report."
+  },
+  {
+   "week": 5,
+   "goal": "Focus, 9–15 Nov. Thompson allocation (exploration ≥25%, cap 50%, every arm ≥1 slot every 2 weeks until 6 posts). Next hero pairs come from in-stock SKUs. Gift-tier fallback cards are prepared. Black Friday (27 Nov) content only if the owner confirms a real offer with terms.",
+   "idea_ids": [
+    "BLIND-01",
+    "TIERS-07",
+    "TEACH-09"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин: 2 пианино по карточке недели (не больше 3 кадров). Свободный кадр. Пятница: коды, 2 мин.",
+   "ai_work": "- Allocation.\n- Teacher-card refresh with the best-saving cut.\n- Library note (show-not-hear in music retail).\n- Report with one decision: Black Friday offer, yes or no (default: none)."
+  },
+  {
+   "week": 6,
+   "goal": "Focus, 16–22 Nov. **Checkpoint 2026-11-22:** ≥10 coded piano inquiries.\n- If hit: switch the reward to coded inquiries per 1k reach and lock or swap the SMP.\n- If missed: R7 fixes first, then propose offer option 1 or 2.\n- R8 rethink if no arm has P > 0.6.",
+   "idea_ids": [
+    "CHECK-03",
+    "ANAT-02",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин: кадры по карточке. Если покупатель согласен: 1 вопрос на кассе «Почему выбрали это пианино и чего боялись?» — только звук, телефон близко, лицо не снимаем (≤5 мин). Пятница: коды, 2 мин.",
+   "ai_work": "- Checkpoint analysis with P(beats median) and 80% intervals.\n- SMP lock or swap.\n- Offer draft if missed.\n- December calendar.\n- Report."
+  },
+  {
+   "week": 7,
+   "goal": "Scale, 23–29 Nov.\n- Weight slots toward the leading arms. R3 on any post at ≥3× the median with ≥1 code.\n- Shoot the gift shots in the showroom.\n- The Q3 gate must clear by 30 Nov, otherwise December gift slots run gift-tier hero episodes.",
+   "idea_ids": [
+    "BLIND-01",
+    "TIERS-07",
+    "GIFT-05"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин, шоурум (не склад).\n1) Сверху: коробка с пианино на полу зала, руки пытаются её подвинуть. 6 с × 2.\n2) Рука хлопает по коробке. 4 с.\n3) Если лента есть в магазине — рука завязывает бант на коробке. 6 с.\nПятница: коды, 2 мин.",
+   "ai_work": "- GIFT-05 final copy with the owner's reserve terms, plus instalments if confirmed.\n- Sequels per R2.\n- Opted-in broadcast draft.\n- Report."
+  },
+  {
+   "week": 8,
+   "goal": "Scale, 30 Nov–6 Dec. GIFT-05 from 1 Dec, only with confirmed terms. Mix 50/35/15. Stock check on every promoted SKU (R9).",
+   "idea_ids": [
+    "GIFT-05",
+    "TIERS-07",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин: кадры по карточке (подарочные бюджеты). Свободный кадр. Пятница: коды, 2 мин.",
+   "ai_work": "- GIFT-05 variants.\n- Gift-tier episodes from ledger prices only.\n- Slot swaps if a promoted SKU hits 0.\n- Report."
+  },
+  {
+   "week": 9,
+   "goal": "Scale, 7–13 Dec. Allocation continues. Second GIFT episode if A4 performs. YouTube search video «какое цифровое пианино подарить ребёнку». Teacher card refreshed for December.",
+   "idea_ids": [
+    "GIFT-05",
+    "STAKES-11",
+    "FIRSTYEAR-15"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин: кадры по карточке. Свободный кадр. Пятница: коды, 2 мин.",
+   "ai_work": "- Gift search video.\n- Pre-cut push-week CTA versions of the top 3 bodies.\n- Report."
+  },
+  {
+   "week": 10,
+   "goal": "Scale, 14–20 Dec. Prepare the push: CTA re-cuts, an opted-in broadcast, Status. Re-confirm the Q3 cut-offs. If none were given, the push is pickup and reserve only.",
+   "idea_ids": [
+    "BLIND-01",
+    "GIFT-05",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤10 мин: последние подарочные кадры + выдача коробки в зале (без лиц покупателей). Пятница: коды, 2 мин.",
+   "ai_work": "- Push plan at 30/30/40.\n- Broadcast copy for approval.\n- Full literals re-check.\n- Report."
+  },
+  {
+   "week": 11,
+   "goal": "Push, 21–27 Dec. Mix 30/30/40, exploration ≥15%. Best bodies re-run with conversion CTAs and instalment lines (if confirmed). Urgency only from owner-confirmed dates. WA reply time watched daily.",
+   "idea_ids": [
+    "GIFT-05",
+    "TIERS-07",
+    "CHECK-03",
+    "STATUS-18"
+   ],
+   "worker_ask_ru": "Вторник, ≤8 мин: только недостающие кадры для CTA-версий. Каждый день, 1 мин: кодовые слова и продано/нет.",
+   "ai_work": "- CTA re-cuts.\n- Daily code and stock monitoring with R9 swaps.\n- Broadcast after approval.\n- Report."
+  },
+  {
+   "week": 12,
+   "goal": "Close, 28–31 Dec. Final posts using pickup and reserve facts only. Stop all promotion of SKUs at 0 stock. Final attribution: codes → sales, Astana vs regions, teacher codes, stock difference-in-differences (weak). January plan.",
+   "idea_ids": [
+    "STATUS-18",
+    "GIFT-05"
+   ],
+   "worker_ask_ru": "Без съёмки. 31.12 или 2.01, 3 мин: сколько пианино продано по кодовым словам и какие модели.",
+   "ai_work": "- Final ≤5-line report and learning card.\n- Arm posteriors with intervals.\n- Library contribution.\n- January retention plan."
+  }
+ ],
+ "measurement": {
+  "success_metric": "Business: digital pianos sold and attributed by 2026-12-31.\n\nThe target is assumed at +10 attributed sales ≈ 50 coded inquiries (assumed 20% inquiry-to-order rate). It is replaced by the owner's Q2 number and the chat-sample rate.\n\nThompson reward: E-score = √(rel_reach × rel_actions) at T+7d, scored as beating the median.\n- YouTube is normalised against the channel's own median.\n- Instagram and TikTok use the pooled music-retail median, a hypothesis until there are 10 posts per platform.\n- The reward switches to coded piano WA inquiries per 1k reach at ≥10 coded inquiries in a rolling 4 weeks.\n\nTail: ≥1 post at ≥5× the median by 20 Dec (likely, not guaranteed).",
+  "attribution": "1. One WA code per video and per platform variant: ВЫБОР1, ПРОВЕРКА1, ПЕДАГОГ1, ПЕРВЫЙ1, СЕМЬЯ1, РАЗНИЦА1, БЮДЖЕТ1, ЗАЧТО1, ПОДАРОК1, with new codes per episode. The teacher/parent card has its own code, РОДИТЕЛИ1, so the local track is measured separately.\n2. The WA logger records code → model → city → instalment asked Y/N → sold Y/N, weekly (daily in the push).\n3. Weak signals: promoted vs unpromoted piano SKU stock_qty on the site (difference-in-differences), plus Kaspi SKU lift if a Kaspi shop is confirmed.\n4. Uncoded inquiries are logged «без кода» and never claimed.",
+  "leading_indicators": [
+   "rel_hold3 and average watch % at T+48h (R1 below 0.7)",
+   "Saves per 1k on «Перед оплатой» and tiers",
+   "Shares per 1k, especially DM shares (forwarding to a partner or a parent chat)",
+   "Comments per 1k on hero and TEACH-09, and the share of substantive teacher answers",
+   "Coded piano inquiries per week; share from Astana; share naming an in-stock model and a budget",
+   "РОДИТЕЛИ1 and ПЕДАГОГ1 codes (local track yield)",
+   "Share of Instagram viewers from Astana (once insights access is given)",
+   "Share of inquiries asking about instalments",
+   "Median WA reply time on piano inquiries (guardrail >60 min)",
+   "YouTube search views on model-name comparisons vs the channel median",
+   "Weekly stock_qty change on EDP-220BK, PX-S1100, AP-300WE, CUP E1/M1 vs unpromoted pianos",
+   "Guardrails: comments saying «одинаково / переплата» on hero posts; closure or «распродажа» sentiment; complaints or returns"
+  ],
+  "review_cadence": "- Per post: T+48h (R1) and T+7d (reward).\n- Monday: posteriors, R4 allocation, TTL re-fetch, the shoot card (≤10 min, ≤2 pianos).\n- Wednesday: owner one-tap approval.\n- Friday: code log.\n- Weekly: ≤5-line RU report to the boss.\n- Every 2 weeks: R7 funnel check.\n- Checkpoints: 2026-11-02 recalibration; 2026-11-22 for ≥10 coded inquiries, SMP lock and R8; 2026-12-20 switch to the push mix; 2026-12-31 final attribution."
+ },
+ "decision_rules": [
+  "Mix: 50/35/15 (hero / proof+utility / conversion) to 20 Dec with exploration ≥25%; 30/30/40 on 21–31 Dec with exploration ≥15%.",
+  "SKU priority rule. Hero and utility slots go to SKUs with ≥3 units on the site, re-read weekly: EDP-220BK, PX-S1100, AP-300WE, CUP E1/M1, and PX-770/AP-270 on the YouTube line. A 1-unit SKU never gets a hero slot. If a priority SKU drops below 2, its slots move to the next most-stocked in-stock model.",
+  "Show-not-hear rule. Hero episodes argue only with visible, ledger-backed differences. A sound A/B may run only as one exploration slot, and only if two staff told the pianos apart on a cheap Android in the week-0 test and the boss approved after listening. Line-out recording is used only with a cable the shop already has. A 10× sound comparison never runs.",
+  "G4 tightening (my call, beyond the slate): no ₸ figure in the first 2 seconds of any video. Prices and gaps appear from 2 s onward, inside the story.",
+  "Casio service disclosure rule. Full disclosure (2-year warranty, service in Almaty) goes in the WA reply when asked and on the trust highlight in exact site wording. It is never in a hook or a recurring Status. In videos the warranty line is «гарантия 2 года, по гарантийному случаю — [как магазин организует ремонт]», published only after the owner confirms the procedure. It is never hidden.",
+  "Instalment gate (Q1). If instalments are confirmed, «от X ₸/мес» goes into TIERS-07, GIFT-05 and FIRSTYEAR-15 with the provider and exact terms, owner sign-off on every post, and no «0%» unless confirmed. If they are not confirmed, no monthly figures appear anywhere, and FIRSTYEAR-15 runs the entry-tier version.",
+  "Local rule. Every video ends on «Астана, Кажымукана 14 · WhatsApp: слово ___» with an Instagram location tag. If coded inquiries from outside Astana exceed 50% without sales, CTAs are re-weighted toward the free RK delivery fact.",
+  "Shoot rule. Each weekly session uses ≤2 pianos and ≤3 setups and takes ≤10 minutes, with the printed preset/volume/framing checklist taped to each piano. A shot that is skipped is replaced by reuse, never by AI depicting the product.",
+  "R1 Rescue at T+48h: rel_hold3 < 0.7 → re-cut with the next hook variant and repost ≥72 h later, once. If hold is fine but completion < 0.7, bring the payoff forward next time.",
+  "R2 Iterate on any post at ≥2× the median: a new pair on the same device, the same insight on a new engine, and an E19 reply.",
+  "R3 Scale on a post at ≥3× the median with ≥1 code: pin it, add it to Status and the teacher card. Paid only if approved.",
+  "R4 Allocate every Monday across A1 hero, A2 utility, A3 parent/teacher question and A4 gift (from 1 Dec) by 1 000 Thompson draws. Exploration ≥25%, cap 50% per arm, ≥1 slot every 2 weeks until 6 posts.",
+  "R5 Retire an arm if P(success rate > 0.5) < 0.15 after ≥8 posts.",
+  "R6 Report honestly: P(beats median) plus an 80% interval, «пока похоже, что…».",
+  "R7 Funnel check every 2 weeks: if E is rising but codes are flat, fix the CTA, the codes, reply time, the pinned video and the instalment info before making more content.",
+  "R8 Rethink: no arm at P > 0.6 and fewer than 10 codes by 22 Nov → rerun C with the chats and micro-voice, and propose a non-discount offer.",
+  "R9 Stock: re-check on publish day. A promoted SKU at 0 has its posts pulled and swapped. Never promote out-of-stock SKUs.",
+  "Truth gates: every price or gap literal is re-fetched within 7 days before publishing. Spec claims are made only from fetched spec cards. CHECK-03's generic checks are worded and approved by the store.",
+  "Q2 gate: until it is answered, no «распродажа» and no deadlines. If the store is closing, all warranty and after-sales lines pause.",
+  "Q3 gate: no «до 31-го» or «успеем к Новому году» without owner cut-offs.",
+  "CTA gate: «покажем рядом / приходите» CTAs only if the owner confirms showroom try-out. Otherwise the CTA is «пришлём, чем отличаются эти модели»."
+ ],
+ "learning_questions": [
+  "Does showing the difference (key action, pedals, stand, headphones, body) earn more saves and codes than reading it from spec cards? And does a sound A/B, if it passes the gate, add anything beyond that?",
+  "Does instalment framing («от X ₸/мес») raise coded inquiries and the inquiry-to-order rate on 230k–755k ₸ models, compared with full-price framing?",
+  "Does the teacher/parent-chat track (РОДИТЕЛИ1, ПЕДАГОГ1) produce more Astana inquiries per minute of effort than feed reach?",
+  "Which hero pair converts: same price / different piano (CUP E1 vs M1), the budget step (EDP-220BK vs PX-S1100), or the 3× gap (EDP-220BK vs AP-300WE)? Do sales follow stock depth?",
+  "Which tension actually moves Astana buyers: price vs what you get (INS1), the child quitting (INS4), spec confusion (INS3), the teacher's opinion (INS7) or the gift moment (INS2)? This decides the SMP lock on 22 Nov.",
+  "Is the bottleneck consideration, or conversion (chats dying at price or instalments, slow replies)?",
+  "What share of coded inquiries come from Astana vs regions, and does free RK delivery convert regional buyers?",
+  "Do teacher comments under TEACH-09 give material for E19 replies that outperform the originals?"
+ ],
+ "owner_asks": [
+  {
+   "ask": "1) «Есть ли на цифровые пианино рассрочка — через Kaspi (Kaspi-магазин / Kaspi Red / рассрочка) или банк? Если да: на какой срок, сколько в месяц, есть ли переплата, какие модели. По умолчанию: в роликах нет ни слова о рассрочке и платежах в месяц.» Ответ до 10.10, 18:00.",
+   "why": "Instalments are the main local lever for a 230k–755k ₸ purchase. They change TIERS-07, GIFT-05 and FIRSTYEAR-15. Exact terms are required, because financial claims need conservative wording and the owner's sign-off.",
+   "minutes": 2
+  },
+  {
+   "ask": "2) «Что для вас победа к 31.12 и почему именно к Новому году? Что значит «Финальная распродажа» — закрытие, уход бренда или акция со сроком? По умолчанию: цель +10 продаж по кодовым словам, в первую очередь Estrada EDP-220BK, Casio PX-S1100, AP-300 белое, Kurzweil CUP E1/M1; без слова «распродажа» и без дедлайнов.»",
+   "why": "Sets the target and the priority SKUs. Tells us whether any real deadline exists and whether warranty content is credible.",
+   "minutes": 1
+  },
+  {
+   "ask": "3) «До какой даты заказа точно доставите пианино к 31.12 — по Астане и в регионы? До какой даты держите оплаченный подарок в магазине? По умолчанию: не обещаем «успеем к Новому году» и «до 31-го».»",
+   "why": "Unblocks GIFT-05 and every December timing claim. A real cut-off is the only truthful urgency.",
+   "minutes": 1
+  },
+  {
+   "ask": "Экспорт 50+ чатов WhatsApp про пианино за 2–3 месяца (или перешлите 20 типичных). Имена и номера удалим.",
+   "why": "Insights have no customer evidence yet. The chats show the real questions, how often instalments come up, where chats die, the conversion rate and the reply time.",
+   "minutes": 4
+  },
+  {
+   "ask": "Отметьте:\n☐ снимать только руки и процесс (по умолчанию)\n☐ можно голос продавца с телефоном у лица\n☐ покупатели могут прийти и сыграть на пианино в зале\n☐ гарантийный ремонт: принимаем в магазине и сами отправляем в сервис (да / нет / как иначе)\n☐ TikTok есть / можно открыть\n☐ доступ к статистике Instagram\n☐ есть кабель для записи звука с выхода на наушники в телефон\n☐ можно выделить время, чтобы продавец занёс карточку в 2–3 ближайшие музыкальные школы (по умолчанию: только через контакты и посетителей магазина)",
+   "why": "Covers the permissions gate (G2). Gives the warranty-handling wording the videos need instead of the Almaty line. Confirms the try-in-store CTA, the TikTok surface, local-audience metrics, line-out audio for YouTube, and whether teacher outreach can go beyond the content budget.",
+   "minutes": 2
+  },
+  {
+   "ask": "Послушайте 2 записи по 5 секунд (Casio PX-770 и AP-270, снято на телефон магазина): слышна ли разница? Если нет — звук в коротких роликах не используем.",
+   "why": "The sound-test gate: a comparison that sounds identical through a phone would talk buyers out of the pricier models and invite mockery from musicians.",
+   "minutes": 1
+  },
+  {
+   "ask": "Утвердите один раз: шаблоны быстрых ответов WhatsApp по кодовым словам; текст карточки для педагогов и родительских чатов; формулировки «для кого какая модель» и пунктов проверки перед покупкой. И решение: убрать с сайта компенсацию доставки за отзыв (рекомендуем).",
+   "why": "Judgment claims and expert wording need sign-off. Quick replies cut reply time. The review compensation likely breaks platform rules.",
+   "minutes": 3
+  },
+  {
+   "ask": "Каждую среду — одно нажатие: утвердить ролики недели. Ролики с ценами, рассрочкой, гарантией или сравнением «в 3 раза» — явное «да».",
+   "why": "Nothing posts without approval. Access goes through Andrey and Pavel, so a fixed slot avoids latency.",
+   "minutes": 5
+  }
+ ],
+ "risks": [
+  "Show-not-hear depends on real visible differences. If the spec cards for CUP E1 vs M1 show nothing visible, BLIND-01 falls back to a no-claim «какое поставили бы дома?» look comparison, and the pair goes to YouTube only.",
+  "Honest «what's in the box» content may show the PX-S1100 needs a stand or pedals bought separately. That is true and useful, but may cool interest. It is answered with the full price of the set only if those accessories are in the ledger, and the owner approves.",
+  "Instalment advertising counts as financial services in RK (my judgment beyond the method). Conservative wording, the provider named, exact terms, no «0%» unless confirmed, owner sign-off on every post. If the terms change, the posts are pulled.",
+  "Owner access only through Andrey and Pavel: defaults on every question, a fixed Wednesday slot, and claim-free bodies (TEACH-09, the no-claim CHECK-03 version) ready to go if approvals lag.",
+  "«Финальная распродажа» may mean closure. The Q2 gate pauses all warranty lines, and no «распродажа» wording is used.",
+  "Ledger gaps: the new hero prices come from our 2026-10-08 crawl and expire 15 Oct. Everything is re-fetched before publishing, and a mismatch blocks the post.",
+  "Teacher outreach could exceed the worker budget, and could look like soliciting if done clumsily. It is limited to existing contacts and store visitors within ≤6 min. School visits happen only if the owner assigns time. No incentives without an owner-created offer.",
+  "Feed reach may still skew non-local. Mitigations are the location tag, the address end frame, the РОДИТЕЛИ1/ПЕДАГОГ1 track, and judging TikTok by Astana codes rather than views.",
+  "Smaller sessions mean TIERS-07 and STAKES-11 slip to week 3, so the week 1–2 exploration portfolio is 7 posts, slightly below the 8–12 guideline. That is accepted for feasibility, and hook variants add data points.",
+  "Thin evidence: the SMP is provisional. INS1 supplies 3 of 9 ideas (33%), within the 40% cap. Re-ranked after the chat sample.",
+  "Conversion may be the real bottleneck (reply time, instalments, chats dying after price). Content can't fix that, so R7 checks it every 2 weeks.",
+  "December logistics: no timing promises without Q3. Otherwise conversion relies on pickup and reserve.",
+  "Low base rate at 0 ₸ for a high-ticket item with a long research phase. The +10 target may not be reachable organically. That will be said honestly on 22 Nov, together with the levers: more posts, an approved offer, an approved paid boost."
+ ],
+ "attribution_codes": {
+  "BLIND-01": "BA23",
+  "CHECK-03": "BA24",
+  "FIRSTYEAR-15": "BA25",
+  "GIFT-05": "BA26",
+  "STATUS-18": "BA27",
+  "ANAT-02": "BA28",
+  "TIERS-07": "BA29",
+  "STAKES-11": "BA32"
+ }
+}

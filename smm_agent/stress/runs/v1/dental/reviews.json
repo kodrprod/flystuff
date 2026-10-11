@@ -1,0 +1,132 @@
+[
+ {
+  "persona": "Владелец стоматологии в Алматы (гипотетическая клиника: 6 кресел, 2 хирурга-имплантолога, цены выше среднего). Мне нужны пациенты на импланты, а не охваты. Я плачу за время хирургов и администратора и отвечаю перед регулятором за каждое слово в медрекламе.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "ID05 «Когда хирург сам отговаривает от импланта». Это единственный ролик, который бьёт прямо в главный страх дорогой клиники: «меня разведут на деньги». Он честный, лицо снимать не нужно, а хирург сам решает, о каких случаях говорить. Ещё полезны шаблоны ответов в WhatsApp: ответ на «сколько стоит» всегда заканчивается предложением записаться. Это может дать записи быстрее любого ролика.",
+  "refutations": [
+   {
+    "target": "Главный рычаг: органические ролики на аккаунте ~3k за 4 недели (раздел REALISM, weeks 1–4)",
+    "why_fails": "Вы сами пишете, что выйдет от 2 до 43 закодированных консультаций. Разброс в 20 раз, то есть прогноза нет. А самый дешёвый и быстрый источник, наша собственная база, стоит в плане запасным вариантом в виде WhatsApp Status. Я имею в виду пациентов, которым удаляли зуб, кто был на консультации по имплантам и не начал лечение, и тех, у кого старые мосты и съёмные протезы. Таких у нас в МИС сотни. Это тёплые люди: им можно позвонить или написать лично на этой же неделе, и запись будет уже в октябре. Платную рекламу (Instagram, 2GIS) вы тоже откладываете до 3-й недели. В итоге 4 недели уходят на «обучение рук», а мне нужны пациенты.",
+    "severity": "fatal",
+    "fix": "Сделать работу с базой основным рычагом с недели 0. Админ выгружает пациентов с удалениями и неначатыми планами имплантации за 24 месяца и пишет им персонально (текст согласует врач, без обещаний и без «акций»), со своим кодом. Ролики остаются вторым слоем доверия. Вопрос о бюджете на 2GIS и рекламу задать на онбординге, а не на 3-й неделе."
+   },
+   {
+    "target": "Время хирургов: голос в ID03, ID04, ID05; виза на каждую партию; 6 вопросов да/нет; утверждение ответов на комментарии (DR11b)",
+    "why_fails": "В бюджете есть «≤17 минут персонала» и «5 минут владельца», а минут хирурга нет совсем. При этом хирург должен записывать голос в 3 из 5 роликов первой недели (по 3 дубля), визировать каждую партию, утверждать каждый ответ в комментариях и формулировку про анестезию. Час хирурга — это самый дорогой час в клинике. Если он устанет от этого на второй неделе, встанут и ID04/ID05, и вся серия «Вопрос врачу».",
+    "severity": "major",
+    "fix": "Отдельно посчитать минуты хирурга в неделю с потолком (например, ≤15 минут). Все голосовые записать за одну сессию на неделе 0, чтобы получился запас ответов. Визу делать раз в неделю пакетом, а ответы в комментариях — по заранее утверждённым шаблонам, без согласования каждого."
+   },
+   {
+    "target": "Главная серия «Что за дверью» (ID02, ID03): стерилизация как основное доказательство",
+    "why_fails": "Во-первых, это не про импланты: так же можно продавать гигиену у любой клиники. Во-вторых, это риск. Любой кадр стерилизационной видят СЭС, конкуренты и коллеги-стоматологи. Нет индикатора на пакете, не тот режим, перчатки не по протоколу — и в комментариях нас разбирают публично. В-третьих, ID03 учит пациента: «проверьте, вскрывают ли пакет при вас». После этого каждая наша смена должна делать это без единого исключения, иначе первый же пациент снимет нас на телефон. А «на что смотреть при выборе клиники» читается как намёк на чужие клиники.",
+    "severity": "major",
+    "fix": "Каждый кадр стерилизационной перед публикацией проверяет ответственный за санитарный режим, а не только хирург. ID03 переделать с «проверьте клинику» на «как у нас проходит консультация по имплантам». Хотя бы половину главной серии отдать именно имплантологии: КТ, планирование на модели, этапы лечения на макете. Это то, что отличает нас от «просто чистой клиники»."
+   },
+   {
+    "target": "Язык рекламы в РК: весь текст на экране, хуки и CTA только на русском",
+    "why_fails": "По законодательству РК реклама распространяется на казахском и русском языках. Вы пишете «предоставим KZ-текст, проверка носителем», но во всех роликах on_screen_ru только на русском. На мне как на владельце будет реклама только на русском языке, а это повод для проверки.",
+    "severity": "major",
+    "fix": "Двуязычные субтитры или пары роликов RU/KZ для каждого публикуемого видео, вычитанные носителем языка до публикации. Добавить это в DR0 как условие публикации наравне с визой врача."
+   },
+   {
+    "target": "ID20 «Голос пациента»",
+    "why_fails": "Закон РК о рекламе запрещает в рекламе медицинских услуг ссылаться на случаи излечения и благодарности пациентов. Рассказ «чего я боялся и как прошёл первый визит» — это по сути отзыв, даже без лица. Вы перекладываете юридическую оценку на меня («подтвердите»), но всё равно держите ролик в плане 1-й и 2-й недели и тратите на него время. Это потенциальный штраф, а не «тестовая гипотеза».",
+    "severity": "major",
+    "fix": "Убрать ID20 из этого спринта. Вернуться к нему только после письменного заключения юриста. Страхи пациентов озвучивает врач в «Вопросе врачу», а не пациент."
+   },
+   {
+    "target": "Цена полностью вне контента (ограничение PRICES, нет roliков I03/I10 в слейте)",
+    "why_fails": "Мы дороже среднего, и при выборе импланта главный вопрос — «сколько стоит». План ставит в гипотезы страх перед ценой, но ни один ролик в слейте на него не отвечает. Всё отложено в NEXT BATCH. Люди будут смотреть ролики про стерилизацию, а потом уходить в клинику, где цена написана в Instagram.",
+    "severity": "major",
+    "fix": "В 1–2-ю неделю добавить один ролик «от чего зависит стоимость импланта» без цифр (КТ, сам имплант, костная пластика, коронка), согласованный с врачом. Мне задать вопрос не только «можно ли цены», но и «можно ли вилку „от“»."
+   },
+   {
+    "target": "Цель и сроки: базовая линия неизвестна, цель фиксируется 01.11, окно атрибуции 30 дней при подсчёте за недели 3–4",
+    "why_fails": "Сегодня я утверждаю план без цифр: цель — «1,5× от неизвестно чего». Записи из роликов 4-й недели по 30-дневному окну досчитаются уже после 15.11, то есть итог на 15.11 недосчитан. Неделя 0 — это всего одна неделя, и одна случайная неделя сдвигает весь множитель.",
+    "severity": "minor",
+    "fix": "Взять базовую линию из МИС: среднее число консультаций по имплантам в неделю за последние 8–12 недель (админ выгрузит за 10 минут) и зафиксировать цель в цифрах уже на онбординге. Отчёт по коду сделать 15.11 предварительным, а окончательным — 15.12."
+   },
+   {
+    "target": "ID11: хук «Настоящий имплант» при «Демонстрационный образец» в кадре",
+    "why_fails": "Хук говорит «настоящий», а подпись — «демонстрационный». Внимательный зритель или коллега увидит в этом противоречие. Кроме того, связь с записями слабая, вы сами это признаёте.",
+    "severity": "minor",
+    "fix": "Хук: «Вот какого размера имплант. Ожидали больше?» Без слова «настоящий». Держать в резерве, а не в основном слоте."
+   },
+   {
+    "target": "ID14 POV «мама говорит „мне уже не надо“» с нарезкой яблока",
+    "why_fails": "Постановочная переписка плюс нарезанное яблоко как намёк, что мама не может жевать, легко прочитать как насмешку над пожилыми или как давление на чувства детей. Для медрекламы, где мы обещаем «без давления», это тонкий лёд.",
+    "severity": "minor",
+    "fix": "Оставить ролик, но финал сделать без вины («просто сходите вместе узнать»), а текст утвердить мне лично. Если в комментариях начнут высмеивать старших, убрать по DR11."
+   },
+   {
+    "target": "Нагрузка на администратора: лист звонков, метки, коды, ответ ≤15 минут, Instagram DM, TikTok и YouTube",
+    "why_fails": "Вы добавляете админу журнал звонков, две метки, вопрос «по какому видео» и SLA 15 минут, и не считаете это в минутах персонала. Пациенты по телефону коды не называют, так что данные будут грязными. Заводить ещё TikTok и YouTube для клиники с одним администратором — это дополнительный риск непрочитанных сообщений.",
+    "severity": "minor",
+    "fix": "Посчитать минуты админа явно. На звонке вместо кода спрашивать «откуда узнали» с 3 вариантами ответа. TikTok и YouTube отложить до момента, когда Instagram стабильно даёт обращения."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan/CIS. I judge whether a plan can be shot on one weak phone in 20 minutes, whether people will share it, and whether it brings WhatsApp inquiries.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "ID05 «Когда хирург сам отговаривает от импланта». It is the only idea a promo-heavy Almaty dental feed doesn't already have. It shows the clinic won't upsell, which is the real fear behind \"a consultation is a sales trap\". It also brings warmer chats than reach pieces. Second choice is ID14 (the adult child deciding for mum). In KZ, children often pay for a parent's implants, so it spreads in family chats. Fix ID14's weak brand link: replace the generic CTA with «Напишите {CODE} — подскажем, как прийти на консультацию вместе с мамой», and show the clinic tag on the last frame.",
+  "refutations": [
+   {
+    "target": "Hero series «Что за дверью» (ID02 sterilisation cycle)",
+    "why_fails": "Autoclave, pouch and washer reels are the most overused dental content in the CIS. Every clinic in Almaty and Astana has posted «куда уходит инструмент». They get saves from other dentists, not inquiries from implant patients. The video is about general hygiene, not implants, so a viewer with a missing tooth gets no reason to write. Calling a 2026 sterilisation reel 'a position competitors don't hold' is wrong; they hold it and it's worn out.",
+    "severity": "major",
+    "fix": "Keep sterilisation as one episode only, not the hero. Point the hero at implant-specific hidden steps the camera can show without patients: the CT/plan screen on the doctor's monitor (blurred, no patient data), the surgical kit laid out for one implant case, the temporary tooth/crown model, the surgeon's hands drawing the plan on paper for 'one missing tooth vs three'. Episode-7 test: 'what the surgeon checks before saying yes to an implant'."
+   },
+   {
+    "target": "Price avoidance + low-intent CTAs (all ideas; I03 pushed to NEXT BATCH)",
+    "why_fails": "In Almaty, the first message about implants is «сколько стоит имплант?» almost every time. The plan puts no price-related content in weeks 1–2, and its CTAs ask people to write in exchange for «расскажем, как проходит консультация». Nobody types a code for that. You'll get views and saves but almost no chats, and the low numbers will look like a 'consideration bottleneck' when they come from a weak call to action.",
+    "severity": "major",
+    "fix": "Move the I03 idea («Из чего складывается цена импланта», no figures, doctor-approved: CT, the implant itself, the abutment, the crown, the number of visits) into week 1 as a «Вопрос врачу» episode. Change the CTA to a concrete deliverable: «Напишите {CODE} — врач скажет, какие этапы нужны именно в вашем случае, по фото или снимку». Only use it if the doctor agrees, but give people a reason to write."
+   },
+   {
+    "target": "Faceless doctor voice over gloved hands (ID02, ID03, ID04, ID05; 4 of 8 ideas)",
+    "why_fails": "For a surgery decision, KZ/CIS patients trust a face and a name: «к какому врачу иду». An anonymous voice over cotton rolls feels like a stock ad, and repeated top-down gloved hands make the feed look like one video posted five times. ID04's tray-of-cotton-rolls B-roll has nothing to do with implant pain, so the picture and the words don't match.",
+    "severity": "major",
+    "fix": "Make the surgeon's face (with consent) the default ask in Q2. Sell it to the owner as the main trust lever, not as an optional extra. Shoot him at a desk: phone on a stack of books at eye level, 50 cm away, with a 1,500 ₸ clip-on lav or the phone held at chest level for audio. If he refuses, use a single recurring visual identity (his hands + the name tag «Хирург-имплантолог Ерлан» on the desk) so the series has a recognisable person."
+   },
+   {
+    "target": "Language compliance: on_screen_ru / hook_ru only",
+    "why_fails": "The RK advertising law requires ads distributed in Kazakhstan to be in Kazakh as well as Russian. Every on-screen text set in the plan is RU-only, and KZ is mentioned only as 'variants, native check before use'. A regulated medical advertiser posting RU-only promotional reels with CTAs is an easy complaint target. Also, medical ads in RK usually have to state licence details, and that is missing from the captions and bio.",
+    "severity": "major",
+    "fix": "Burn in RU + KZ text for the hook and the CTA on every video (KZ as a second line, or in the caption plus the cover). Add the licence number to the bio and the caption template. Put both on the owner's compliance checklist as yes/no items, with no legal advice."
+   },
+   {
+    "target": "Doctor sign-off gate + Tuesday shoot before the Wednesday fact deadline (Week 1, DR0)",
+    "why_fails": "A working implant surgeon will not answer 6 yes/no questions, record 3 voice takes per idea and approve every batch on a weekly cycle without falling behind. The plan shoots on Tuesday and confirms facts on Wednesday at 12:00, so staff may spend their 17 minutes filming ideas that are then blocked. The likely outcome is 1–2 posts in week 1 instead of 5, and the sprint is only 4 weeks long.",
+    "severity": "major",
+    "fix": "Get the doctor's sheet answered and recorded in one 15-minute sitting during week 0, and record all voice answers in that sitting (batch the audio). Shoot only ideas whose facts are already confirmed. Keep 2 zero-fact reserves ready (ID11 once the sample is confirmed, ID14, which needs no facts)."
+   },
+   {
+    "target": "ID20 patient voice testimonial",
+    "why_fails": "Medical-ad rules in RK, like FZ-38 in Russia, generally forbid referring to specific cases of patient treatment or gratitude in medical-service advertising. Getting written consent and a patient voice recording takes effort the clinic can't spare, and the video will very likely never be published. It still sits in the week 1 and week 2 lists and in the reserve queue.",
+    "severity": "major",
+    "fix": "Drop ID20 from the slate and the reserve order. Use the same fear angle in a FAQ: the doctor reads out anonymised real questions from the WhatsApp export («Боялся, что...» → his answer)."
+   },
+   {
+    "target": "Per-video spoken codes across IG/TikTok/Shorts + phone log",
+    "why_fails": "In the CIS, people don't type codes. They write «здравствуйте, сколько имплант» or forward the reel. Five new codes a week across three platforms, plus an admin asking callers «назовите код», will undercount badly. The admin will also stop logging by week 2, and the 'coded floor' will be close to zero for reasons that have nothing to do with the content.",
+    "severity": "minor",
+    "fix": "Use one short code per series (e.g. ДВЕРЬ, ВРАЧ), plus prefilled wa.me links that carry the code automatically. Admin script: «Где вы нас увидели — Instagram, TikTok, 2GIS?» Count forwarded reels in chats as attributed."
+   },
+   {
+    "target": "Cold organic content as the only lever for a 5-week 1.5× booking push",
+    "why_fails": "A ~3k-follower account plus a new TikTok almost never produces 1.5× implant consultations in 4 weeks through organic reach alone. The plan's own range is 2–43 consultations. The fastest source of implant leads is the clinic's own database: patients who had extractions or have failing bridges, already in the records. The plan only mentions WhatsApp Status as a fallback.",
+    "severity": "major",
+    "fix": "Add a week-1 warm-base action. The admin pulls patients who had extractions or bridge/denture work in the last 24 months and sends an opted-in, doctor-approved personal WhatsApp message with the best «Вопрос врачу» video plus «если хотите обсудить, ответьте ВРАЧ». Track it as a separate arm so it doesn't hide the content results."
+   },
+   {
+    "target": "ID03 checklist hook «Выбираете клинику для импланта? Смотрите сюда»",
+    "why_fails": "The hook is generic, and the two checks (the pouch opened in front of you, the plan shown on a model) are weak reasons to choose a surgeon. Viewers will scroll past it as an ad wearing an advice costume.",
+    "severity": "minor",
+    "fix": "Lead with a sharper question the viewer can ask themselves: «Вам поставили имплант без КТ? Спросите вот что» (only if the doctor confirms CT is standard). Add the payoff as three questions to ask at any consultation, shown as a screenshot-able card for saves."
+   }
+  ]
+ }
+]

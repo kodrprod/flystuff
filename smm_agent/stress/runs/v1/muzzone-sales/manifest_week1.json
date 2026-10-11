@@ -1,0 +1,107 @@
+[
+ {
+  "n": 1,
+  "shot_id": "ID01_0",
+  "seconds": 10,
+  "kind": "hook",
+  "idea_id": "ID01"
+ },
+ {
+  "n": 2,
+  "shot_id": "ID11_0",
+  "seconds": 8,
+  "kind": "hook",
+  "idea_id": "ID11"
+ },
+ {
+  "n": 3,
+  "shot_id": "ID14_0",
+  "seconds": 8,
+  "kind": "hook",
+  "idea_id": "ID14"
+ },
+ {
+  "n": 4,
+  "shot_id": "ID15_0",
+  "seconds": 10,
+  "kind": "hook",
+  "idea_id": "ID15"
+ },
+ {
+  "n": 5,
+  "shot_id": "ID23_0",
+  "seconds": 6,
+  "kind": "hook",
+  "idea_id": "ID23"
+ },
+ {
+  "n": 6,
+  "shot_id": "ID01_1",
+  "seconds": 10,
+  "kind": "demo",
+  "idea_id": "ID01"
+ },
+ {
+  "n": 7,
+  "shot_id": "ID11_2",
+  "seconds": 10,
+  "kind": "demo",
+  "idea_id": "ID11"
+ },
+ {
+  "n": 8,
+  "shot_id": "ID23_1",
+  "seconds": 6,
+  "kind": "demo",
+  "idea_id": "ID23"
+ },
+ {
+  "n": 9,
+  "shot_id": "ID14_1",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ID14"
+ },
+ {
+  "n": 10,
+  "shot_id": "ID15_1",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ID15"
+ },
+ {
+  "n": 11,
+  "shot_id": "ID23_2",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ID23"
+ },
+ {
+  "n": 12,
+  "shot_id": "ID11_1",
+  "seconds": 6,
+  "kind": "process",
+  "idea_id": "ID11"
+ },
+ {
+  "n": 13,
+  "shot_id": "ID06_0",
+  "seconds": 8,
+  "kind": "hook",
+  "idea_id": "ID06"
+ },
+ {
+  "n": 14,
+  "shot_id": "ID06_1",
+  "seconds": 5,
+  "kind": "detail",
+  "idea_id": "ID06"
+ },
+ {
+  "n": 15,
+  "shot_id": "ID06_2",
+  "seconds": 4,
+  "kind": "detail",
+  "idea_id": "ID06"
+ }
+]

@@ -1,0 +1,108 @@
+[
+ {
+  "persona": "Владелица салона красоты в Шымкенте (гипотетический клиент). Задала вопрос: «Конкуренты дешевле, клиенты уходят. Что делать?» Цены снижать не хочу. Бюджет 0 ₸, у меня 8 мастеров, один телефон для съёмки, на это я готова тратить минимум своего времени.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "Неделя 0 без роликов. Смотрим переписку и находим, где клиенты отваливаются: долго отвечаем, молчим после цены или уходят за мастером. Даём администратору 4 готовых ответа, особенно «цена + вопрос, какой день удобен». Пишем лично (без скидки) тем, кто не был 6–10 недель, и считаем такие записи отдельно, с меткой «Возврат». Это бесплатно, быстро, легко посчитать, и от этого решения про цены меньше зависит от догадок. Это я одобрила бы сразу, отдельно от контент-плана.",
+  "refutations": [
+   {
+    "target": "Hero-серия «Вблизи у мастера» (E1 гигиена, E2 процесс). На ней держится ответ «за что платить больше»",
+    "why_fails": "Главных роликов в плане нет: они помечены NEXT BATCH и появятся только 16.10, а их выход на неделе 1 зависит от фактов, которых пока нет. Мне на утверждение дают ID01 (ASMR-пилка), ID17 и ID20, а ответ на мой вопрос откладывают. К тому же стерилизатор, крафт-пакет и новая пилка — это санитарные требования, их обязан выполнять и дешёвый салон. Если показать норму как преимущество, это не объясняет разницу в ~30%. Знающие клиентки ответят в комментариях «а что, где-то не так?», и мы получим ту самую ценовую перепалку, которой план хочет избежать.",
+    "severity": "fatal",
+    "fix": "До утверждения покажите мне готовые сценарии E1 и E2. В E2 опирайтесь на то, что реально отличает нас: сколько длится услуга, сколько шагов, какие материалы и как долго держится результат, и всё это как подтверждённые факты от мастера. Гигиену сделайте коротким эпизодом-доверием, а не главной идеей. Если отличий, которые видно на камере, нет, так и скажите прямо: тогда вопрос не в контенте, а в цене или услуге."
+   },
+   {
+    "target": "Шаблон возврата клиенток «Здравствуйте, {имя}! Это {имя мастера}, ваш мастер…», который отправляет администратор",
+    "why_fails": "Пишет администратор, а подписывается именем мастера. Это обман. Клиентка ответит «мастеру» лично, придёт и спросит про переписку, и выйдет неловко. Если мастер уже ушла, мы ещё и пишем от имени человека, который у нас больше не работает. Кроме того, WhatsApp сортирует чаты по последнему сообщению, а не по последнему визиту, поэтому отбор «не была 6–10 недель» по списку чатов даст ошибки. Время на это (20 сообщений в день плюс ответы, реально 30–40 минут) в нагрузку не входит.",
+    "severity": "major",
+    "fix": "По умолчанию пишем только от имени салона: «Это администратор салона, вы были у мастера {имя}». От имени мастера — только если она сама отправляет со своего согласия. Отбор делать по журналу записей или тетради, а не по чатам. Честно посчитать время администратора и спросить меня, есть ли оно. Начать с 10 сообщений в день."
+   },
+   {
+    "target": "Просьба прислать экспорт чатов: «Имена и номера удаляем сразу, наружу ничего не попадает»",
+    "why_fails": "Это неправда: экспорт уходит ИИ-ассистенту, то есть за пределы салона. Это персональные данные клиенток, по закону РК о персональных данных у меня нет согласия на их передачу. К тому же 15–30 чатов не дают базу за 4 недели. Часть клиенток записывается по телефону, через 2ГИС или приходит без записи, поэтому база «записи в WhatsApp» неполная и цель +10% измеряется на зыбком основании.",
+    "severity": "major",
+    "fix": "Предложить вариант, при котором данные не уходят: администратор сама заполняет табличку из 4 колонок за 4 недели (дата, услуга, «записалась да/нет», на чём остановился разговор). Либо прямо написать, что данные передаются агенту, и попросить обезличить их до отправки. Базу считать по всем каналам записи, а не только по WhatsApp."
+   },
+   {
+    "target": "Ответ на мой вопрос в целом: «только контент и ответы, никаких ценовых решений»",
+    "why_fails": "Я сказала, что не хочу снижать цены. Но план закрывает и все ценовые ходы без скидок: время подешевле в будние дни, линейку «топ-мастер / мастер», абонементы и комплексы. Конкурентов не проверили (их ~30% дешевле — пока только моё ощущение), и ни один вариант мне не предложили. В итоге на вопрос «что делать» я получаю ролики с ожидаемым эффектом +4 записи в неделю, причём по собственному расчёту плана органика «от растянутой цели до нереалистичной».",
+    "severity": "major",
+    "fix": "Добавить одну страницу для владельца: что показала проверка прайсов конкурентов (только для внутреннего использования) и 2–3 варианта без скидки (линейка мастеров, будние окна, комплекс), каждый с оценкой. Решение остаётся за мной, но варианты я должна видеть."
+   },
+   {
+    "target": "Срок ответов владельца «до 10.10 12:00» и 10 вопросов",
+    "why_fails": "Сегодня 09.10, на ответ меньше суток. За это время я должна решить, чьи имена называть, кто согласен на голос, что делается для каждой клиентки, сделать экспорт и согласовать шаблоны. По плану это около 15 минут, но на деле мне нужно поговорить с 8 мастерами. Если не отвечу, всё выставится по умолчанию, и неделя 1 сдвинется.",
+    "severity": "minor",
+    "fix": "До 10.10 оставить только вопрос 1 (кто уходит) и вопрос 3 (где есть свободные окна). Вопросы про мастеров, гигиену и шаблоны — до 13.10, одним сообщением с цифрами-кнопками."
+   },
+   {
+    "target": "ID01 и ID09/ID13 (съёмка звука, «куда смотрит мастер», миф о снятии)",
+    "why_fails": "ID01: «Выключить музыку в зале» при клиентках ради звука пилки мешает работе. ID09 учит клиенток придираться к маникюру, и первыми под эту проверку попадут наши работы. ID13 «портит спешка» читается как намёк на дешёвые быстрые салоны, то есть как скрытое сравнение, которое сам план запрещает, плюс это почти утверждение о здоровье ногтей.",
+    "severity": "minor",
+    "fix": "Звук снимать до открытия, на ногтях сотрудниц. В ID09 показать, как мастер проверяет свою работу перед тем, как отпустить клиентку (контроль, а не урок для клиентки). В ID13 убрать вывод про «спешку», оставить только то, что видно на камере, и мнение мастера про домашнее снятие."
+   },
+   {
+    "target": "Нагрузка на персонал и роль администратора",
+    "why_fails": "Администратору в одни и те же недели достаются метки «Видео/Записан/Возврат», вопрос «откуда узнали?» в каждом чате, ответ в течение 15 минут, рассылка и учёт отказов от сообщений. Если первый ответ уже сейчас медленный (одна из гипотез плана), новая нагрузка его только ухудшит, а это один из ограничителей самого плана.",
+    "severity": "minor",
+    "fix": "Ввести правило: если среднее время первого ответа больше 15 минут, рассылку возврата на этой неделе останавливаем. Меток оставить две («Записан» и источник), источник писать одним словом."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local salons and service businesses in Kazakhstan and the CIS. I judged the plan on whether one weak phone can shoot it in 20 minutes, whether it would spread, and whether it would bring WhatsApp inquiries in Шымкент.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "The reactivation arm combined with ID17 «Мастер считает: чего я не сделаю, даже если попросите». Reactivation is the only part that can realistically move bookings in 4 weeks with zero budget. ID17 is the only video with a real opinion and a person behind it. It isn't another 'beautiful nails' reel, and it answers «зачем платить больше» without comparing the salon to anyone. Promote ID17 to the hero series. Make it the salon's voice across all services, starting with hair and brows.",
+  "refutations": [
+   {
+    "target": "Week 1 hero E1/E2 («Вблизи у мастера»)",
+    "why_fails": "The two most important week-1 videos, the ones answering «зачем платить больше», don't exist yet. They are 'NEXT BATCH', to be written by 10-16 and shot on 10-20, and they depend on the owner ticking hygiene boxes. If that slips, the salon's first public week is ID20 + ID17 + ID15: a той-advice reel and a staged POV. That is exactly the generic content that does nothing against price pressure. I can't approve a hero I haven't seen.",
+    "severity": "major",
+    "fix": "Write E1 and E2 now as full cards with a first frame, hook, shots and fallback. Hook: «Что происходит до того, как вы сели в кресло». E2 fallback if the routine isn't confirmed: show the gel/material brand packaging and the master's prep steps (the product name is a verifiable fact, not a price). Lock both by 10-14, not 10-16."
+   },
+   {
+    "target": "Slate coverage vs DR10 / free-slot rule",
+    "why_fails": "All 8 slate ideas are nails. The plan says at least 2 of 4 week-1 videos must cover the free-slot service, which defaults to non-nail (hair/brows), but no hair or brow idea exists. So in practice ID17 and E2 will be shot at the manicure table, because that's where the props are. Demand will pile onto nails, which are probably the busiest service already. That breaks the core 'fill free capacity' logic.",
+    "severity": "major",
+    "fix": "Add 2 ready non-nail cards now. (1) Brow mapping macro with thread and pencil, hands only, real sound. Hook: «Почему брови не рисуют сразу». (2) Hair: comb pulling sectioned wet hair, scissors sound at 20 cm. Hook: «Что мастер делает до первого среза». Make ID17 ep.1 a brow or hair master by default."
+   },
+   {
+    "target": "Reactivation arm (sender name + selection)",
+    "why_fails": "(a) WhatsApp's chat list doesn't show 'last booking 6–10 weeks ago'. The admin has to cross-check the booking journal (paper, YClients/Altegio, or memory). That isn't '10 min/day', and on a busy day it won't happen. (b) Sending «Это {имя мастера}, ваш мастер» from the salon number while the admin types is impersonation. If the client later talks to the master, it feels fake. (c) 20 unsolicited messages a day from a WhatsApp Business number can get reported and the number limited. That number is the only booking channel.",
+    "severity": "major",
+    "fix": "Default the sender to «Это администратор салона, вы были у {мастер}». Ask the owner for the booking-journal source in ask #5. Cap at 10/day for the first 3 days and check for blocks/reports before scaling. Add a 1-line selection rule for the admin, e.g. 'clients in the journal for 2 months who haven't booked since'."
+   },
+   {
+    "target": "ID01 / E1 hygiene as 'proof'",
+    "why_fails": "Sterilisation and kraft-pouch reels are the most overused salon trope in KZ beauty Instagram. Every salon in Шымкент has one, so it doesn't differentiate, and viewers scroll past. On the price question it can also read as an implied «а у других грязно», which brushes against the no-comparison rule.",
+    "severity": "minor",
+    "fix": "Keep hygiene, but frame it as a person's ritual: the master's own habit in her own voice, ID17-style («я всегда вскрываю пакет при вас, потому что…»). Don't make it a generic process montage. Hygiene should be one beat inside ID17-type episodes, not a whole episode."
+   },
+   {
+    "target": "ID20 / ID24 / ID13 hooks",
+    "why_fails": "«До тоя меньше недели? Что успеть» and «Что делать, чтобы маникюр дожил до записи» are generic care/tip content any salon posts. Nobody forwards a cuticle-oil tip from a salon they don't know. They are saves at best, with almost no chats. ID13 depends on a belief source that may not show up.",
+    "severity": "minor",
+    "fix": "Use ID24 only on Status for the warm base (that part is right) and don't count it as reach. For ID20, add a concrete, local, opinionated beat from the master, e.g. «Мастер считает: не делайте новый дизайн впервые перед тоем — вот что было у клиентки». Drop ID13 if the source isn't found by week 2, with no reframe."
+   },
+   {
+    "target": "Owner onboarding load",
+    "why_fails": "8 asks in week 0, several multi-part (ask #4 has three sub-questions, plus chat export instructions). A real Шымкент salon owner answers 2 of them, late, by voice note. Defaults then kick in: no names, no KZ, no reactivation (default 3 = нет), no hygiene episode. Under those defaults the plan collapses to hands-only nail reels.",
+    "severity": "major",
+    "fix": "Cut week-0 onboarding to 3 asks in one message: (1) who leaves and where the free slots are; (2) a reactivation yes/no from the salon's name; (3) a hygiene tick-list. Move the export, price list, master names, KZ checker and accounts to the agent fetch or week 1. Change the reactivation default to 'да, от имени салона' if the owner doesn't object within 24 h. It's the fastest lever, so it shouldn't depend on silence meaning no."
+   },
+   {
+    "target": "Local spread / geo",
+    "why_fails": "TikTok and Reels will push hands-only nail videos nationally or to the whole CIS. Views from Almaty or Russia bring zero bookings and distort the 'views ÷ median' arm reads. Apart from той, nothing in the videos signals Шымкент.",
+    "severity": "minor",
+    "fix": "Geotag Шымкент, name the neighbourhood or landmark in the caption and pinned comment, and use 1 local cue on screen (e.g. «Шымкент, {район}»). Read arms on coded chats and the «откуда узнали» answers, not raw views."
+   },
+   {
+    "target": "Missing 'дорого' reply content",
+    "why_fails": "The insight is that chats stall after the price, but no video answers the objection where it happens. The plan forbids price talk entirely, so there's no reply-video format for comments like «у вас дорого».",
+    "severity": "minor",
+    "fix": "Add a zero-minute reply-video format. Answer a real «дорого» comment with ID17 footage: the master's voice explains what goes into the service (time, steps, materials brand). Never mention another salon. Draft it now so it's ready when the first such comment lands in week 1."
+   }
+  ]
+ }
+]

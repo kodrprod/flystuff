@@ -1,0 +1,98 @@
+{
+ "slate": [
+  {
+   "id": "ID19",
+   "prior": 4.064,
+   "value": 4.064,
+   "why": "prior+data",
+   "driver": "relief",
+   "engine": "policy_story",
+   "staff_min": 1.9,
+   "needs_facts": []
+  },
+  {
+   "id": "ID06",
+   "prior": 4.0,
+   "value": 4.0,
+   "why": "prior+data",
+   "driver": "practical_value",
+   "engine": "check_before_buy",
+   "staff_min": 2.6,
+   "needs_facts": []
+  },
+  {
+   "id": "ID13",
+   "prior": 3.705,
+   "value": 3.705,
+   "why": "prior+data",
+   "driver": "honest_signal",
+   "engine": "who_is_it_for",
+   "staff_min": 2.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID03",
+   "prior": 3.949,
+   "value": 3.949,
+   "why": "prior+data",
+   "driver": "curiosity_gap",
+   "engine": "ab_compare",
+   "staff_min": 2.7,
+   "needs_facts": [
+    "ID03.on_screen_ru[6]: number '116 376 ₸' not backed by a usable fact"
+   ]
+  },
+  {
+   "id": "ID05",
+   "prior": 3.577,
+   "value": 3.577,
+   "why": "prior+data",
+   "driver": "social_currency",
+   "engine": "why_it_costs",
+   "staff_min": 2.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID24",
+   "prior": 3.333,
+   "value": 3.333,
+   "why": "prior+data",
+   "driver": "participation",
+   "engine": "reply",
+   "staff_min": 0.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID01",
+   "prior": 3.679,
+   "value": 3.679,
+   "why": "explore",
+   "driver": "prediction_game",
+   "engine": "guess",
+   "staff_min": 2.2,
+   "needs_facts": []
+  },
+  {
+   "id": "ID14",
+   "prior": 3.654,
+   "value": 3.654,
+   "why": "explore",
+   "driver": "identity",
+   "engine": "pov_situation",
+   "staff_min": 2.8,
+   "needs_facts": []
+  }
+ ],
+ "blocked": [],
+ "week1_filmed": [
+  "ID19",
+  "ID06",
+  "ID13",
+  "ID03",
+  "ID05",
+  "ID01",
+  "ID14"
+ ],
+ "week1_minutes": 14.9,
+ "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"
+}

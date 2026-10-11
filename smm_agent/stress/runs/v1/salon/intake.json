@@ -1,0 +1,55 @@
+{
+ "request_type": "price_pressure",
+ "reframed_request": "«Конкуренты дешевле, клиенты уходят. Что делать?» → Keep current prices and win back booking volume by finding where clients are lost, then using real hands-and-process content plus a tighter WhatsApp reply layer to show what the price pays for, with coded bookings steered to masters and time slots that have free capacity.",
+ "business_objective": "By 2026-11-15, with no price cuts, weekly booked salon visits closed via WhatsApp return to at least the 4-week pre-campaign baseline (expected +10%, stretch +20%) on services and masters with free slots, while the chat-to-booking rate stays at or above baseline. The baseline count comes from the chat export; if there is no export, the week-0 count is the baseline and the target multiple is fixed at the end of week 2.",
+ "marketing_objective": "People in Шымкент who regularly get a beauty service (manicure, hair, brows or lashes) and are deciding this week whether to book with us or a cheaper salon nearby send WhatsApp the code from one of our videos and book a free slot at the listed price, between 2026-10-19 and 2026-11-15.",
+ "success_metric": {
+  "name": "WhatsApp bookings at current (undiscounted) prices per week. Coded bookings are reported as a floor and total bookings vs baseline as an estimate.",
+  "how_measured": "Weekly WhatsApp chat export plus admin labels «Видео» and «Записан». Per-video codes are counted in the chats. Total weekly bookings come from the same export, compared with the 4 weeks before 2026-10-19. Chat-to-booking rate = chats labelled «Записан» ÷ all new inbound chats.",
+  "target": "Conservative: weekly bookings at baseline (decline stopped). Expected: +10% vs baseline. Stretch: +20% vs baseline. All at unchanged prices. Baseline: unknown (ledger empty). It comes from the export of the last 4 weeks, or from the week-0 count if there is no export, and the multiple is fixed at the end of week 2.",
+  "by_when": "2026-11-15"
+ },
+ "leading_indicators": [
+  "views_48h ÷ platform median (pooled beauty_salon median until the client has 10 own posts)",
+  "shares + saves per 1,000 views vs account median",
+  "coded WhatsApp chats per 1,000 views",
+  "profile visits per 1,000 views"
+ ],
+ "constraints": [
+  "BUDGET: 0 ₸ (default)",
+  "OWNER: ≤15 min onboarding, ≤5 min/week in one batched message (default)",
+  "STAFF: ≤17 planned min/week, 20 including safety margin; one phone, audio usable only within ~30 cm (stated)",
+  "FILMING: hands, tools, objects and voice only. No master faces until consent is given (masters' consent is stated as unknown). Clients only with consent recorded on camera, and client faces or before/after shots only with that consent. No minors without a parent's written OK (default)",
+  "PRICES: none usable. The ledger is empty and exact prices are a stated unknown, so no price, number or price-band claim goes into content until a dated price list or 2GIS/Instagram price ≤7 days old is in the ledger (stated + default)",
+  "PRICE POSITION: the owner keeps current prices (stated). No discounts, no «дешевле/дороже, чем у…», no named or implied competitors. «Competitors ~30% cheaper» is an unverified owner perception and is used internally only, never in content (stated)",
+  "OFFER: none (default). Non-price offers only, each needing the owner's explicit «да»",
+  "CAPACITY: unknown per master and service (8 masters is stated but unverified). No «свободно сегодня/завтра», no fast-slot claims (default)",
+  "REGULATED: if the salon offers injections, peels or other medical-cosmetic procedures, show the process only, with no outcome claims («омолодит», «навсегда») and owner sign-off (default)",
+  "AVOID: politics, religion, ethnicity, mocking clients who chose a cheaper salon, naming or showing competitors, cheap-vs-expensive shaming (default)",
+  "ACCOUNTS: WhatsApp booking and 2GIS card exist (stated). Instagram and TikTok are unknown: the agent searches, and a missing account becomes an owner ask. Commercial-library music only on business accounts (default)",
+  "APPROVAL: owner approves each weekly batch. Offers, faces and any spend always need explicit approval (default)",
+  "GUARDRAIL: median first WhatsApp reply ≤15 min in working hours",
+  "GUARDRAIL: chat→booking rate not below the baseline",
+  "GUARDRAIL: 2GIS rating not below its current level (evidence: owner reports good reviews; agent to fetch)",
+  "GUARDRAIL: zero price cuts or unapproved discounts during the sprint"
+ ],
+ "assumptions": [
+  "SECONDARY: retention_or_loyalty. «Клиенты уходят» may mean regulars stop coming back. It gets ≤20% of slots this sprint (care_howto and reply content, WhatsApp Status for existing contacts, broadcast to opted-in contacts only). A full retention plan waits until the export shows who leaves.",
+  "LADDER: competitors are cheaper → clients leave → owner wants to keep bookings without cutting price → weekly booked visits (the first number counted every week). Fork: (a) new inquiries that stall after the price, (b) regulars who lapse, (c) clients who follow a master who left. Chose (a) plus free-capacity slots as primary because it is measurable through codes and labels and cheapest to move. (b) is SECONDARY; (c) is a non-marketing check.",
+  "BOTTLENECK: unknown, low confidence (~30%). Lead hypothesis: consideration/conversion, meaning chats stall after the price is sent («дорого», «подумаю», «а там дешевле») because the price arrives with no explanation of value and no next step. Alternative: conversion leak from slow first replies. Evidence: only the owner's statement. 2GIS reviews are stated as good, which suggests the service itself is not the cause. Verify: chat export (where chats die, median reply time, close rate) during week 0, by 2026-10-16.",
+  "[ASSUMPTION][strategist judgment beyond METHOD] In beauty salons a large share of churn usually follows individual masters (a master leaves or cuts their own price and clients go with them), and price is a convenient explanation. | if wrong: the plan stays content plus conversion | verify: question 1 to the owner plus the export, by 2026-10-10.",
+  "[ASSUMPTION] Disguised non-marketing check before any content push: reply time, which services lost clients, master turnover, seasonality, and 2GIS review trend. | if one of these is the cause: state it in push_back and fix it first | verify: agent fetches 2GIS and the owner sends the chat export during week 0.",
+  "[ASSUMPTION] Competitors being ~30% cheaper is the owner's perception, not a dated comparison. | if wrong: the price-objection insight weakens | verify: agent reads public 2GIS/Instagram price lists of nearby salons for internal context only, by 2026-10-14. Never published or used as «дешевле/дороже».",
+  "[ASSUMPTION] Service lines are hair, nails and brows/lashes, with no medical-cosmetic procedures. | if wrong: REGULATED rules apply and outcome claims are banned | verify: agent fetches the 2GIS card and price list by 2026-10-12.",
+  "[ASSUMPTION] Close rate is about 50% of new inquiries (placeholder). | if wrong: REALISM numbers rescale | verify: chat export by 2026-10-16.",
+  "REALISM (illustrative, every input is an [ASSUMPTION]): baseline about 40 WhatsApp bookings/week. Expected +10% gives +4/week × 4 weeks = 16 extra bookings. req_chats = 16 ÷ 0.5 = 32 coded chats. At 0.3–3 chats per 1k views, req_views = 11k–107k. ach_views = 20 posts × pooled median of about 500 (new or unknown account) × 1.8 ≈ 18k. Ratio is 0.6–5.9, so organic acquisition alone ranges from stretch to unrealistic. The conservative target (stop the decline) depends mostly on conversion fixes and the warm base, not on views. Levers: WhatsApp reply scripts that explain value after the price, Status and opted-in broadcast to existing clients, a longer window. Boost question deferred to week 2 (F10). Recompute once the export arrives.",
+  "[ASSUMPTION] Instagram exists but its performance is unknown, and there is no TikTok. | if wrong: week-1 channel plan changes | verify: agent search by 2026-10-12; a missing account becomes an owner ask.",
+  "[ASSUMPTION] Default posting window is lunch and 19:00–22:00 local. Not tested."
+ ],
+ "clarifying_questions": [
+  "Кто именно уходит? 1 — новые: пишут, узнают цену и не записываются; 2 — постоянные клиенты перестали возвращаться; 3 — клиенты ушли вслед за мастером, который ушёл или работает отдельно; 4 — не знаю. По умолчанию: 1. Ответ до 10.10 12:00.",
+  "Кого можно снимать? 1 — только руки мастеров и голос; 2 — мастеров с лицом (только тех, кто согласен); 3 — и клиентов (если они согласятся на камеру). По умолчанию: 1. Ответ до 10.10 12:00.",
+  "Куда звать новых клиентов? 1 — на будни днём; 2 — к конкретным мастерам или на конкретные услуги, где есть окна (напишите какие); 3 — свободно почти всё. По умолчанию: 1, без обещаний «свободно сегодня». Ответ до 10.10 12:00."
+ ],
+ "push_back": "Мы — ИИ-ассистент, и снижать цены вслед за соседями не предлагаем: в роликах мы не сравниваем себя ни с кем и никого не называем, а показываем руками мастеров, за что люди платят у вас. Сначала проверим по переписке, где теряются клиенты: если запись срывается из-за долгого ответа или потому что после цены не предложили следующий шаг, это быстрее исправят готовые ответы в WhatsApp, а не видео. Гарантировать, что ролик «залетит», не может никто; успех считаем по записям в WhatsApp по коду из ролика, а не по просмотрам. За 4 недели только роликами много новых клиентов не придёт, поэтому самый быстрый рычаг — вернуть тех, кто уже был у вас: через статусы и рассылку тем, кто на неё согласился."
+}

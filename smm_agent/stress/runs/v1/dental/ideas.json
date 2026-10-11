@@ -1,0 +1,1560 @@
+[
+ {
+  "id": "ID01",
+  "title": "Behind the door: sterile pouch close sound (series «Что за дверью» ep.1)",
+  "insight_ids": [
+   "I04",
+   "I09"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Что слышно за закрытой дверью клиники",
+  "first_frame": "Extreme close-up at 20–30 cm: gloved fingers already pressing the seal of a sterile pouch, crackle audible from frame 1, no music. Hook text upper-middle, appears at ~1 s.",
+  "on_screen_ru": [
+   "Что слышно за закрытой дверью клиники",
+   "Пакет запечатали",
+   "Стерилизатор",
+   "Вскрыли перед работой"
+  ],
+  "what_happens": "0–1 s: seal crackle, no words. 1–6 s: pouch sealed and placed into the steriliser, door closes (close sound). 6–8 s: hard cut. 8–11 s (payoff): the pouch is torn open over the tray and the instrument slides out. 11–12 s: loops back to the seal. Labelled «ускорено» if any speed-up is used. DM line: «смотри, вот что у них за дверью». Save reason: weak, this is a reach piece. Series «Что за дверью», ep. 1 (fixed opening: a macro of hands in the sterilisation room).",
+  "why_stop": "A real, sharp sound starts in frame 1 with no music, and the hands are mid-action. It replaces the category's interior tours and before/after (E21, E25) with something viewers have never heard.",
+  "why_share_or_save": "Sent to a family member who is choosing a clinic and worries about hygiene: «смотри, как у них стерилизуют».",
+  "comment_prompt_ru": "Вы спрашивали врача про стерильность?",
+  "cta_ru": "Есть вопрос про имплант? Напишите {CODE} в WhatsApp",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Руки в перчатках запечатывают пакет с инструментом и кладут в стерилизатор, закрываете дверцу. Телефон на столе в 25–30 см — нужен звук печати и дверцы.",
+     "location": "стерилизационная",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: рвёте запечатанный пакет над лотком, инструмент выскальзывает на лоток. Телефон в 20–30 см, музыку выключить.",
+     "location": "стерилизационная",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Cut to sound, denoise, no music; loop end→start; burned-in RU captions; cover = frame 1; blur any labels on pouches (names, dates, operator).",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms filming in the sterilisation room is allowed and the filmed sequence is the clinic's real protocol"
+  ],
+  "kpi": "Loop rate / avg % watched and shares per 1k vs median; profile visits and coded chats per 1k (floor)",
+  "risks": [
+   "NEEDS FACT: the filmed seal → steriliser → open sequence is the real protocol (owner)",
+   "Insight I04/I09 is PROVISIONAL (assumption-only evidence); audio quality unverified until the staff reality scan",
+   "REGULATED: owner + responsible doctor sign off the batch"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 2,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 2
+  },
+  "_prior": 2.974,
+  "_value": 2.974
+ },
+ {
+  "id": "ID02",
+  "title": "Where an instrument goes after the patient (backstage)",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "social_currency",
+  "format": "backstage",
+  "funnel": "trust",
+  "hook_ru": "Куда уходит инструмент после пациента",
+  "first_frame": "Gloved hand already dropping a used instrument into a cleaning container, top-down at 30 cm, splash/clink sound. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Куда уходит инструмент после пациента",
+   "Сначала — мойка",
+   "Потом — пакет и печать",
+   "Потом — стерилизатор",
+   "Всё это — до того, как вы сели в кресло"
+  ],
+  "what_happens": "0–2 s: instrument into the cleaning container. 2–7 s: washing step (text «Сначала — мойка»). 7–12 s: into the pouch and sealed. 12–16 s: steriliser door closes, beep (payoff: the full cycle shown, not told). 16–18 s: soft CTA. Only steps the camera actually shows appear as text. DM line: «вот это я понимаю, показали». Save: reference for someone comparing clinics. Series «Что за дверью», ep. 2.",
+  "why_stop": "A process normally hidden behind a door, opening on a used instrument in motion. The hook names a question people don't know they have until they see it.",
+  "why_share_or_save": "Shared to a relative who is choosing a clinic for surgery; it gives them something concrete to compare with.",
+  "comment_prompt_ru": "Что ещё показать из-за двери?",
+  "cta_ru": "Напишите BA28 в WhatsApp — расскажем, как проходит первая консультация",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: рука в перчатке кладёт использованный инструмент в ёмкость для мойки. Телефон в 30 см, звук нужен.",
+     "location": "стерилизационная",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Инструмент в пакет, запечатываете, кладёте в стерилизатор, закрываете дверцу до сигнала. Телефон на столе в 30 см.",
+     "location": "стерилизационная",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Jump cuts between steps, step captions in RU, punch-ins, label «ускорено» if sped up; blur labels and screens; cover = frame 1.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms the clinic's reprocessing steps (cleaning → pouch → steriliser) in this order",
+   "NEEDED: content of the consultation description promised in the CTA"
+  ],
+  "kpi": "Shares + saves per 1k vs median; coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: real reprocessing protocol and step order (owner + responsible doctor)",
+   "Do not say «одноразовые» or name a sterilisation standard until confirmed",
+   "PROVISIONAL insight"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 3.333,
+  "_value": 3.333,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID03",
+  "title": "Choosing an implant clinic? Look here",
+  "insight_ids": [
+   "I04",
+   "I02"
+  ],
+  "driver": "practical_value",
+  "format": "check_before_buy",
+  "funnel": "consideration",
+  "hook_ru": "Выбираете клинику для импланта? Смотрите сюда",
+  "first_frame": "A sealed sterile pouch thrust toward the lens in a gloved hand at 25 cm, already being torn open. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Выбираете клинику для импланта? Смотрите сюда",
+   "Пакет вскрывают при вас?",
+   "Врач объясняет план на модели?",
+   "Мнение врача, не реклама",
+   "Спросите об этом на консультации"
+  ],
+  "what_happens": "0–2 s: pouch torn open close to the lens. 2–8 s: the doctor's close voice: what he would check himself. 8–14 s: hands on the jaw model, pointing at the gap («объясняет план на модели?»). 14–20 s (payoff): the two checks repeated as on-screen questions to ask any clinic. 20–23 s: CTA. No count in the hook, so the structure stays honest. DM line: «перед тем как идти, посмотри». Save: a checklist for the day of the visit.",
+  "why_stop": "The hook calls out an active situation (choosing a clinic), with motion and pouch sound in frame 1.",
+  "why_share_or_save": "Saved by people about to choose a clinic; sent to a parent or sibling who is going for implants.",
+  "comment_prompt_ru": "Что вы проверяете первым в клинике?",
+  "cta_ru": "Напишите BA29 — расскажем, что покажем вам на консультации",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Рука в перчатке подносит запечатанный пакет к камере и рвёт его. Телефон в 25 см, звук нужен.",
+     "location": "кабинет",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки врача на модели челюсти: палец показывает место без зуба. Телефон сверху в 30 см.",
+     "location": "кабинет",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Врач в тихом углу, телефон у рта в 20–30 см, только голос.",
+     "location": "тихий угол",
+     "seconds": 10,
+     "takes": 3,
+     "say_ru": "Вот что я бы сам проверил, выбирая клинику.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice-over laid over the hand shots; captions; punch-ins; cover with hook; label «Мнение врача».",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: doctor confirms pouches are opened in front of the patient",
+   "NEEDED: doctor confirms the plan is explained on a model at consultation"
+  ],
+  "kpi": "Saves per 1k vs median; coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: pouch opened in front of patient; plan explained on model (doctor)",
+   "Risk of generic advice; it is anchored on this clinic's own pouch and model",
+   "Doctor voice consent needed; REGULATED sign-off"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.231,
+  "_value": 3.231,
+  "_why": "explore"
+ },
+ {
+  "id": "ID04",
+  "title": "«Это больно?» — the implant doctor answers (series «Вопрос врачу»)",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "relief",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "«Это больно?» Отвечает врач-имплантолог",
+  "first_frame": "Question card upper-middle over gloved hands already placing cotton rolls on a tray at 30 cm. The doctor's close voice starts at 0.5 s.",
+  "on_screen_ru": [
+   "«Это больно?» Отвечает врач-имплантолог",
+   "Мнение врача — не гарантия",
+   "Что почувствуете — объяснит врач на приёме"
+  ],
+  "what_happens": "0–1 s: question card plus tray motion, voice starts. 1–15 s: the doctor answers in his own signed-off words: what is felt during and after the procedure, with no promises (no «без боли»). 15–20 s (payoff): what the doctor does to make it easier, ONLY after the protocol is confirmed. 20–23 s: CTA. No «Нам пишут» until the export shows ≥2 real messages (judgment: the question is framed as the viewer's own). DM line: «ты же этого боишься — послушай». Save: reread before booking.",
+  "why_stop": "The viewer's own unspoken question is the first thing on screen, and a real doctor's voice starts within 0.5 s.",
+  "why_share_or_save": "Sent to a spouse or parent who keeps postponing out of fear: «послушай, тут честно».",
+  "comment_prompt_ru": "Чего боитесь больше: укола или звука?",
+  "cta_ru": "Напишите BA26 в WhatsApp — расскажем, как проходит консультация",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Врач-имплантолог в тихом углу, телефон у рта в 20–30 см: отвечает своими словами, без обещаний.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Отвечу честно, без обещаний: вот как это обычно проходит.",
+     "kind": "talk"
+    },
+    {
+     "what_ru": "Сверху: руки в перчатках раскладывают ватные валики на лотке. Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Question card (no chat screenshot, no 'нам пишут'); voice over the tray footage; captions; label «Мнение врача».",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: anaesthesia protocol in the doctor's own wording, signed off",
+   "NEEDED: implant doctor agrees to record his voice"
+  ],
+  "kpi": "Avg % watched; saves + coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: anaesthesia/sensation answer wording, approved by the responsible doctor (otherwise the hook has no payoff and the idea is blocked)",
+   "Judgment call: no «Нам пишут» framing because 0 messages counted (E13)",
+   "No «без боли», «не почувствуете» (RK medical-ad rules)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.346,
+  "_value": 3.346,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID05",
+  "title": "When the surgeon talks you out of an implant",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "honest_signal",
+  "format": "anti_sell",
+  "funnel": "trust",
+  "hook_ru": "Когда хирург сам отговаривает от импланта",
+  "first_frame": "Gloved hand pushing an implant model away from the jaw model on a desk, top-down at 30 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Когда хирург сам отговаривает от импланта",
+   "Мнение врача",
+   "Решение — после осмотра, и оно ваше"
+  ],
+  "what_happens": "0–2 s: implant model pushed aside. 2–14 s: the doctor's close voice gives the real situations where he advises waiting or another option (only the cases he confirms). 14–18 s (payoff): «решение — после осмотра, и оно ваше». 18–20 s: CTA. DM line: «смотри, тут хоть честно говорят». Save: proof that this clinic won't upsell (E17 fear).",
+  "why_stop": "Arguing against your own sale breaks the category's promo convention (E23). The hand motion matches the hook literally.",
+  "why_share_or_save": "Shared by people who distrust private clinics: «вот, не все разводят».",
+  "comment_prompt_ru": "Вам врач когда-нибудь отсоветовал лечение?",
+  "cta_ru": "Напишите BA23 в WhatsApp — подскажем, как записаться на консультацию",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: рука в перчатке отодвигает модель импланта от модели челюсти. Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Хирург, телефон у рта в 20–30 см: когда он советует подождать или другой вариант.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Бывает, я советую не ставить имплант. Объясню, когда.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice over the model footage; captions; punch-ins; label «Мнение врача».",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: surgeon confirms he does advise against implants in some cases, and which cases",
+   "NEEDED: the consultation carries no obligation to start treatment"
+  ],
+  "kpi": "Shares per 1k; comment rate; chat→booking rate of coded chats",
+  "risks": [
+   "NEEDS FACT: the surgeon's real criteria for advising against (surgeon)",
+   "NEEDS FACT: no-obligation consultation (owner)",
+   "Must not become fake modesty; only real cases"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 4
+  },
+  "_prior": 3.615,
+  "_value": 3.615,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID06",
+  "title": "What an implant price is made of (no numbers)",
+  "insight_ids": [
+   "I10",
+   "I03"
+  ],
+  "driver": "relief",
+  "format": "why_it_costs",
+  "funnel": "consideration",
+  "hook_ru": "Из чего складывается цена импланта",
+  "first_frame": "Top-down: gloved hand already placing the first object (blank CT disc envelope) at the left of a clean tray. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Из чего складывается цена импланта",
+   "Снимок",
+   "План лечения",
+   "Имплант",
+   "Коронка",
+   "Мнение врача. Цифры — после осмотра"
+  ],
+  "what_happens": "0–2 s: first object placed. 2–12 s: each component placed in a row, one per 2–3 s, with its caption (only elements the owner confirms). 12–20 s: the doctor's voice on why the total depends on the case. 20–24 s (payoff): the full row is visible, with «Цифры — после осмотра». 24–26 s: CTA. Never a price slide (L005): hands, real objects, a real voice. DM line: «вот почему везде разные цены». Save: a reference while comparing quotes.",
+  "why_stop": "Price is the hidden question behind most implant chats (hypothesis E10). Objects appear one by one, so something changes every 2 s.",
+  "why_share_or_save": "Saved by people collecting quotes from several clinics, to compare what is included.",
+  "comment_prompt_ru": "Что пугает больше: цена или процесс?",
+  "cta_ru": "Напишите {CODE} — расскажем, как узнать цену для вашего случая",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: руки по одному кладут в ряд на лоток предметы (конверт снимка без данных пациента, модель импланта, модель коронки). Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Цену до осмотра не назову, но скажу, от чего она зависит.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Captions per object synced to placement; voice-over; punch-ins; no prices, no motion-graphic price cards.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms which elements make up the implant treatment cost at this clinic",
+   "NEEDED: demo implant and crown models exist",
+   "NEEDED: Q3 answer (prices in content: default no)"
+  ],
+  "kpi": "Saves per 1k; coded chats per 1k; drop-off after price in chats (export)",
+  "risks": [
+   "NEEDS FACT: cost components list (owner)",
+   "No real patient X-ray/CT on screen (E03)",
+   "Never compare with other clinics' prices"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.218,
+  "_value": 3.218
+ },
+ {
+  "id": "ID07",
+  "title": "«Сколько стоит имплант?» honest answer (zero staff minutes)",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "practical_value",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "«Сколько стоит имплант?» Честный ответ",
+  "first_frame": "An illustrative chat card labelled «пример» slides in over moving library footage of hands on the jaw model. Hook text upper-middle.",
+  "on_screen_ru": [
+   "«Сколько стоит имплант?» Честный ответ",
+   "Пример переписки",
+   "Зависит: сколько зубов, кость, коронка",
+   "Поэтому сначала — осмотр",
+   "Мнение врача"
+  ],
+  "what_happens": "0–2 s: illustrative question bubble. 2–10 s: the factors, as text over library hand footage. 10–16 s (payoff): the next step, so the chat doesn't dead-end. 16–18 s: CTA. Paired with the agent-drafted WhatsApp quick reply that always offers a next step (non-content fix for E10). DM line: «вот почему тебе цену сразу не сказали». Save: kept until the person writes to a clinic.",
+  "why_stop": "It is the exact question people type, and it promises an answer instead of «только на консультации».",
+  "why_share_or_save": "Saved by price-shoppers to understand quotes; sent to whoever is gathering prices for the family.",
+  "comment_prompt_ru": "Вы сначала спрашиваете цену? Да или нет",
+  "cta_ru": "Напишите {CODE} — ответим, от чего будет зависеть цена у вас",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Illustrative chat card built from scratch, labelled «пример», no real customer; text answer from doctor-approved wording; B-roll from library/week1/kabinet_jaw_model_*.mp4 and library/week1/kabinet_tray_objects_*.mp4 (footage from ID03/ID06 shoots); captions; no prices.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: doctor-approved list of price factors",
+   "NEEDED: Q3 answer on naming prices"
+  ],
+  "kpi": "Coded chats per 1k; % of coded chats that reach a booking",
+  "risks": [
+   "NEEDS FACT: price factors wording (doctor)",
+   "Depends on week-1 library footage existing",
+   "Judgment call: no «Нам пишут» until ≥2 real messages match (E12 counted 0)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 4
+  },
+  "_prior": 3.077,
+  "_value": 3.077
+ },
+ {
+  "id": "ID08",
+  "title": "Myth: «no bone — no implant»",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "curiosity_gap",
+  "format": "myth_check",
+  "funnel": "consideration",
+  "hook_ru": "«Кости нет — имплант нельзя». Так ли?",
+  "first_frame": "Gloved finger tapping the gap in a jaw model, top-down at 30 cm, already moving. Hook text upper-middle.",
+  "on_screen_ru": [
+   "«Кости нет — имплант нельзя». Так ли?",
+   "Мнение врача, не диагноз",
+   "Что решает: снимок и осмотр",
+   "Схема — иллюстрация ИИ"
+  ],
+  "what_happens": "0–2 s: finger on the gap. 2–8 s: a labelled AI cross-section of bone (the invisible part). 8–18 s: the doctor's voice on what the phrase usually means and what it depends on. 18–22 s (payoff): «что решает: снимок и осмотр», with no promise that it will work for you. 22–24 s: CTA. DM line: «тебе же так сказали — посмотри». Save: kept by people once told «кости нет».",
+  "why_stop": "It quotes a belief that closes the decision, and promises to test it.",
+  "why_share_or_save": "Sent to a parent or friend who was once told implants are impossible for them.",
+  "comment_prompt_ru": "Вам говорили, что кости мало?",
+  "cta_ru": "Напишите {CODE} — расскажем, что смотрят на консультации",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: палец в перчатке стучит по месту без зуба на модели челюсти. Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Объясню на модели, от чего это зависит.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "AI cross-section of jaw bone (invisible part only), labelled «иллюстрация»; voice-over; captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: doctor's signed-off wording on bone volume and options",
+   "NEEDED: whether the clinic offers bone augmentation (no claim until confirmed)"
+  ],
+  "kpi": "Comment rate + shares per 1k; coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: medical wording (responsible doctor)",
+   "Belief E16 counted 0 so far; myth_check has no on-camera proof, so it is explanation only",
+   "AI visual must not depict a real result"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.064,
+  "_value": 3.064
+ },
+ {
+  "id": "ID09",
+  "title": "Bridge vs implant: look at the neighbouring teeth",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "curiosity_gap",
+  "format": "ab_compare",
+  "funnel": "consideration",
+  "hook_ru": "Мост или имплант: смотрите на соседние зубы",
+  "first_frame": "Two jaw models side by side, a gloved finger already tapping the neighbour teeth of the left one. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Мост или имплант: смотрите на соседние зубы",
+   "Мост",
+   "Имплант",
+   "Мнение врача — решает осмотр"
+  ],
+  "what_happens": "0–2 s: finger on the neighbours. 2–10 s: the bridge model, with the doctor's voice on what happens to adjacent teeth. 10–18 s: the implant model, same angle and same light. 18–22 s (payoff): the difference side by side, plus «решает осмотр». 22–24 s: CTA. DM line: «тебе мост предлагали — глянь». Save: reference for a decision.",
+  "why_stop": "A direct A/B on the same frame. The viewer looks at the neighbour teeth before the answer comes.",
+  "why_share_or_save": "Saved by people who were offered a bridge and are deciding.",
+  "comment_prompt_ru": "Мост или имплант — что у вас?",
+  "cta_ru": "Сомневаетесь между мостом и имплантом? Напишите {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: две модели рядом, палец по очереди касается соседних зубов. Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Покажу на модели, чем они отличаются для соседних зубов.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Split-screen alignment; captions; voice-over; label «Мнение врача».",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: demo bridge and implant models exist",
+   "NEEDED: doctor's signed-off comparison wording"
+  ],
+  "kpi": "Comment split + saves per 1k; coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: demo models; comparison wording (doctor)",
+   "No claim that implants are better for everyone; regulated"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 2.872,
+  "_value": 2.872
+ },
+ {
+  "id": "ID10",
+  "title": "WILDCARD: every sterile pouch opened in one day",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "social_currency",
+  "format": "real_number",
+  "funnel": "trust",
+  "hook_ru": "Все стерильные пакеты, вскрытые за один день",
+  "first_frame": "Top-down: a box tipping, empty torn pouches already spilling onto a table with crinkle sound. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Все стерильные пакеты, вскрытые за один день",
+   "Собирали весь день в одну коробку",
+   "Посчитали руками"
+  ],
+  "what_happens": "0–2 s: pouches pour out. 2–8 s: hands spread them out. 8–12 s (payoff): the counted number, with the date (added only after the count is filmed). 12–14 s: loop to the pour. DM line: «смотри, сколько у них за день». Save: none; this is trust/reach.",
+  "why_stop": "A pile of real objects, with sound onset in frame 1. It turns sterility into a counted, filmed number rather than a promise.",
+  "why_share_or_save": "Shared as a surprising fact: «вот сколько они за день открывают».",
+  "comment_prompt_ru": "Вы видели, как врач вскрывает пакет?",
+  "cta_ru": "Хотите спросить про стерильность? Напишите {CODE}",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Вечером: высыпаете из коробки все вскрытые за день пакеты на стол. Телефон сверху в 30 см, шуршание нужно.",
+     "location": "стерилизационная",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки раскладывают пакеты по столу, считать вслух не нужно. Телефон сверху.",
+     "location": "стерилизационная",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Count overlay with date only after the staff count is confirmed; blur labels/names on pouches; captions; loop.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: the counted number of pouches and the date (counted on camera by staff)",
+   "NEEDED: infection-control OK to collect used pouches for filming"
+  ],
+  "kpi": "Shares per 1k; relative views; comment rate",
+  "risks": [
+   "NEEDS FACT: count + date (staff, verified on camera)",
+   "Infection-control/waste rules: owner confirms",
+   "Wildcard: the pile may read as waste, not care; honest low scores",
+   "FIXED after H2: guess-style comment prompt replaced with a real yes/no experience split; answers seed a reply on how pouches are opened (ID21)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 2
+  },
+  "_prior": 3.244,
+  "_value": 3.244
+ },
+ {
+  "id": "ID11",
+  "title": "WILDCARD: the real size of an implant (closed-fist reveal)",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "amusement_awe",
+  "format": "guess",
+  "funnel": "attention",
+  "hook_ru": "Настоящий имплант. Какого он размера?",
+  "first_frame": "A closed gloved fist moving toward the lens at 25 cm. Hook text upper-middle. The palm has not opened yet.",
+  "on_screen_ru": [
+   "Настоящий имплант. Какого он размера?",
+   "Демонстрационный образец",
+   "Рядом — кофейное зерно"
+  ],
+  "what_happens": "0–3 s: fist approaches and pauses (the viewer's own size guess forms). 3–6 s (payoff): the palm opens to show the demo implant next to a coffee bean. 6–10 s: macro rotation between the fingers. 10–12 s: loop to the closed fist. No brand, no size numbers. Answers the patient question «что вообще ставят?» (E30). DM line: «я думал, он огромный». Save: none.",
+  "why_stop": "A closed fist plus a precise size question is a specific curiosity gap. The reveal contradicts the big-screw image from 3D animations (E24).",
+  "why_share_or_save": "Sent to a scared relative: «смотри, какой он маленький».",
+  "comment_prompt_ru": "Каким вы его представляли?",
+  "cta_ru": "Остались вопросы про имплант? Напишите BA32 в WhatsApp",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Кулак в перчатке подносите к камере, раскрываете: на ладони демо-имплант и кофейное зерно. Телефон в 25 см, фокус долгим нажатием.",
+     "location": "кабинет",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Крупно: медленно поворачиваете имплант пальцами. Логотип не показывать.",
+     "location": "кабинет",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Short hold on the closed fist before the reveal; captions; loop; blur any brand marking.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: a demo implant sample exists and may be filmed (no brand shown)"
+  ],
+  "kpi": "3-s hold + shares per 1k vs median; profile visits",
+  "risks": [
+   "NEEDS FACT: demo sample (owner)",
+   "Implant brand not confirmed: keep marking off-screen",
+   "Reach piece; weak link to bookings",
+   "FIXED after H2: «Угадайте…» imperative removed (the bait lexicon flags it even though D3 lists it as the guess pattern); the guess mechanic is kept as a plain question plus a true reveal. Judgment: noted as a METHOD/code conflict for the guess engine"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 3.141,
+  "_value": 3.141,
+  "_why": "explore"
+ },
+ {
+  "id": "ID12",
+  "title": "WILDCARD: what is that clinic sound? (quiet sounds, not the drill)",
+  "insight_ids": [
+   "I09"
+  ],
+  "driver": "prediction_game",
+  "format": "guess",
+  "funnel": "attention",
+  "hook_ru": "Что это за звук в стоматологии?",
+  "first_frame": "Extreme macro, out-of-focus gloved fingers moving while the first sound (pouch tear) is already playing. Hook text appears at 1 s, upper-middle.",
+  "on_screen_ru": [
+   "Что это за звук в стоматологии?",
+   "Это — вскрывают стерильный пакет",
+   "Это — инструмент ложится на лоток",
+   "Это — стерилизатор закончил цикл"
+  ],
+  "what_happens": "0–3 s: sound 1 over blur, then focus pull reveals the pouch tear. 3–6 s: sound 2 over blur, reveal the instrument on the tray. 6–9 s: sound 3 (steriliser beep from ID01 footage), reveal. 9–11 s (payoff): «вот что вы слышите за дверью». 11–12 s: loop. No drill sound (it is the fear trigger, E27). DM line: «послушай, знаешь, что это?». Save: none.",
+  "why_stop": "A sound puzzle over a blurred image creates a 2-second stake before each reveal. It reframes the dreaded clinic soundscape.",
+  "why_share_or_save": "Sent to friends as a sound puzzle: «послушай, знаешь, что это?».",
+  "comment_prompt_ru": "Какой звук клиники пугает вас?",
+  "cta_ru": "Боитесь звуков клиники? Напишите {CODE} — ответим на вопросы",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Крупно: рвёте стерильный пакет. Телефон в 20 см, сначала не в фокусе, потом долгим нажатием фокус.",
+     "location": "кабинет",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Инструмент кладёте на металлический лоток, телефон в 20 см — нужен звон.",
+     "location": "кабинет",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Blur-to-focus effect; steriliser beep reused from library/week1/sterilizatsionnaya_seal_*.mp4 (ID01); captions; loop.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Comment rate + relative views; shares per 1k",
+  "risks": [
+   "Wildcard: may remind viewers of the chair; honest low objective fit",
+   "Comment answers may name the drill: reply only with doctor-approved text",
+   "Audio quality unverified until reality scan",
+   "FIXED after H2: «Угадайте…» hook replaced with a plain question; the reveal mechanic is unchanged"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 3.077,
+  "_value": 3.077
+ },
+ {
+  "id": "ID13",
+  "title": "POV: chewing on one side only",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "identity",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: жуёте только одной стороной",
+  "first_frame": "Top-down plate: hands already cutting food into tiny pieces and pushing them to one side. Hook text upper-middle, «постановка» tag small in the corner.",
+  "on_screen_ru": [
+   "POV: жуёте только одной стороной",
+   "постановка",
+   "И уже который год «потом»",
+   "Первый шаг — разговор с врачом, не операция"
+  ],
+  "what_happens": "0–3 s: tiny pieces pushed to one side. 3–6 s: fork pauses, hand puts it down. 6–10 s: «который год «потом»». 10–15 s (payoff): a library clip of hands on the jaw model, with «Первый шаг — разговор с врачом, не операция». 15–17 s: CTA. Empathy, never mocking. DM line: «это же ты». Save: none.",
+  "why_stop": "A precise everyday behaviour that someone with a gap recognises in 1 second.",
+  "why_share_or_save": "Sent to a spouse or parent who does exactly this: «это же ты».",
+  "comment_prompt_ru": "Сколько вы уже откладываете?",
+  "cta_ru": "Откладываете? Напишите {CODE} — расскажем, с чего начать",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: руки режут еду на мелкие кусочки и сдвигают на одну сторону тарелки. Телефон в 30 см над тарелкой.",
+     "location": "тихий угол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Вилка замирает, рука кладёт её на стол. Тот же ракурс.",
+     "location": "тихий угол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Text over footage; «постановка» label; jaw-model clip from library/week1/kabinet_jaw_model_*.mp4; captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms the first visit is a consultation, separate from surgery"
+  ],
+  "kpi": "Shares per 1k + comment rate; coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: consultation is separate from surgery (owner)",
+   "Staged: labelled «постановка»; staff hands only, volunteer",
+   "PROVISIONAL insight I01"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.359,
+  "_value": 3.359
+ },
+ {
+  "id": "ID14",
+  "title": "WILDCARD: POV — mum says «мне уже не надо»",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "identity",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: мама говорит «мне уже не надо»",
+  "first_frame": "A hand holding a phone with a staged chat being typed: «Мам, давай запишу тебя?» → «Мне уже не надо». Hook text upper-middle, «постановка» tag.",
+  "on_screen_ru": [
+   "POV: мама говорит «мне уже не надо»",
+   "постановка",
+   "А сама режет яблоко на кусочки",
+   "Не уговаривайте. Предложите просто сходить узнать"
+  ],
+  "what_happens": "0–3 s: staged chat on screen. 3–8 s: hands slice an apple into thin pieces next to a cup of tea. 8–13 s (payoff): soft advice: «Не уговаривайте. Предложите просто сходить узнать». 13–15 s: CTA. Speaks to the adult child (decision-maker, E36). DM line: «скинь сестре — это про маму». Save: weak.",
+  "why_stop": "The family line is recognisable in one second, and the target (adult children) is a different viewer from the patient.",
+  "why_share_or_save": "Sent to a sibling: «это же наша мама».",
+  "comment_prompt_ru": "Ваши родители тоже так говорят?",
+  "cta_ru": "Напишите BA25 — подскажем, как записать родителя на консультацию",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Рука держит телефон, на экране постановочная переписка (без реальных номеров и имён). Телефон-камера в 25 см.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Сверху: руки режут яблоко тонкими дольками рядом с чашкой чая.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Staged chat text added in edit if typing is hard; «постановка» label; captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Shares per 1k; share of coded chats from relatives (export)",
+  "risks": [
+   "Wildcard: relative-led decisions unverified (E36, 0 counted)",
+   "Staged chat must be labelled and contain no real data",
+   "Must not mock older people"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.487,
+  "_value": 3.487,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID15",
+  "title": "Taking mum for implants? Ask her these first",
+  "insight_ids": [
+   "I07",
+   "I02"
+  ],
+  "driver": "practical_value",
+  "format": "check_before_buy",
+  "funnel": "conversion",
+  "hook_ru": "Ведёте маму на имплант? Сначала спросите её",
+  "first_frame": "Top-down: a hand already writing the first question on a card with a pen, scratch audible. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Ведёте маму на имплант? Сначала спросите её",
+   "Что тебе тяжелее всего есть?",
+   "Чего ты боишься больше всего?",
+   "Какие лекарства пьёшь?",
+   "Ответы возьмите на консультацию"
+  ],
+  "what_happens": "0–2 s: pen writing. 2–6 s: voice: «задайте ей три вопроса». 6–18 s: the three questions written one by one (exactly three shown). 18–22 s (payoff): «Ответы возьмите на консультацию». 22–25 s: CTA. DM line: «давай спросим маму». Save: kept until the appointment.",
+  "why_stop": "It calls out a specific job (taking a parent for treatment), with the pen moving in frame 1.",
+  "why_share_or_save": "Saved until the visit; sent to a sibling to split the conversation with the parent.",
+  "comment_prompt_ru": "Кто в семье ведёт родителей к врачу?",
+  "cta_ru": "Напишите {CODE} — подскажем, как записать родителя на консультацию",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: рука пишет три вопроса на карточке. Телефон в 30 см, звук ручки нужен.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Администратор или врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 10,
+     "takes": 3,
+     "say_ru": "Прежде чем записывать маму, задайте ей три вопроса.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Typed captions synced to handwriting; voice-over; cover = card with hook.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: doctor confirms these three questions (incl. medications) are useful before an implant consultation"
+  ],
+  "kpi": "Saves per 1k; coded chats per 1k; share of bookings for a parent",
+  "risks": [
+   "NEEDS FACT: doctor sign-off on the medication question",
+   "Structural count «три» must match the three questions shown",
+   "Relative-led decisions unverified (E36)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 2,
+   "objective_fit": 4
+  },
+  "_prior": 3.218,
+  "_value": 3.218
+ },
+ {
+  "id": "ID16",
+  "title": "Tooth just pulled? What to decide now",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "moment_trigger",
+  "format": "moment",
+  "funnel": "conversion",
+  "hook_ru": "Удалили зуб? Вот что решить сейчас",
+  "first_frame": "Top-down: a hand already drawing the first arrow of a step sequence on paper. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Удалили зуб? Вот что решить сейчас",
+   "Мнение врача, не назначение",
+   "Удаление → консультация → снимок → план",
+   "Сроки скажет врач после осмотра"
+  ],
+  "what_happens": "0–2 s: the arrow is drawn. 2–14 s: the steps are drawn one by one while the doctor's voice explains why the decision is easier soon after extraction (his signed-off words). 14–20 s (payoff): the full sequence on paper, plus «сроки скажет врач после осмотра». 20–23 s: CTA. No durations until confirmed. DM line: «тебе же недавно удаляли». Save: kept as the to-do sequence.",
+  "why_stop": "The call-out hits people at the exact trigger moment (E19), with the pen in motion.",
+  "why_share_or_save": "Saved by someone who just had an extraction; sent to a friend who did.",
+  "comment_prompt_ru": "Давно удалили зуб или недавно?",
+  "cta_ru": "Недавно удалили зуб? Напишите {CODE} — подскажем, когда прийти",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: рука рисует стрелки и шаги на листе. Телефон в 30 см.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Зуб удалили — давайте разберём, какие шаги дальше.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Captions; voice-over; step labels; no durations unless confirmed.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: doctor-confirmed typical sequence after extraction and guidance on timing"
+  ],
+  "kpi": "Saves per 1k; coded chats per 1k",
+  "risks": [
+   "NEEDS FACT: sequence and timing guidance (doctor)",
+   "Regulated: advice framed as the doctor's opinion, not a prescription",
+   "CTA promise needs staff able to answer timing questions per doctor's script"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 2,
+   "objective_fit": 4
+  },
+  "_prior": 3.115,
+  "_value": 3.115
+ },
+ {
+  "id": "ID17",
+  "title": "A той is coming and a tooth is missing: honest timing",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "honest_signal",
+  "format": "moment",
+  "funnel": "consideration",
+  "hook_ru": "Впереди той, а зуба нет?",
+  "first_frame": "A hand already circling a date on a paper calendar with a red marker, at 30 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Впереди той, а зуба нет?",
+   "Честно: к дате не обещаем",
+   "Почему — объясняет врач",
+   "Спросите, что реально успеть"
+  ],
+  "what_happens": "0–2 s: the date is circled. 2–14 s: the doctor's voice explains honestly why no date can be promised before an exam. 14–18 s (payoff): what you can ask at the consultation (options only if confirmed). 18–20 s: CTA. Plan 10–14 days before той season peaks. DM line: «у тебя же свадьба скоро». Save: weak.",
+  "why_stop": "A local moment (той) plus a refusal to promise, which inverts the category's urgency promos.",
+  "why_share_or_save": "Sent to a family member with a celebration ahead.",
+  "comment_prompt_ru": "Какой той у вас впереди?",
+  "cta_ru": "Напишите {CODE} и дату — честно скажем, что можно успеть",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Рука обводит дату в бумажном календаре красным маркером. Телефон в 30 см.",
+     "location": "тихий угол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Честно: к конкретной дате обещать не буду. Объясню почему.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Captions; voice-over; KZ caption variant only after native check.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner/doctor agree with the no-date-promise stance",
+   "NEEDED: any temporary options the clinic offers (no claim until confirmed)"
+  ],
+  "kpi": "Comment rate; coded chats mentioning a date",
+  "risks": [
+   "NEEDS FACT: stance + temporary options (doctor)",
+   "Capacity: date requests may cluster; respect DR10",
+   "Never «успеете к тою»"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.192,
+  "_value": 3.192
+ },
+ {
+  "id": "ID18",
+  "title": "How the room is prepared for implant surgery (process)",
+  "insight_ids": [
+   "I01",
+   "I04"
+  ],
+  "driver": "mastery",
+  "format": "process_full",
+  "funnel": "attention",
+  "hook_ru": "Как готовят кабинет к имплантации",
+  "first_frame": "Top-down: gloved hands already tearing a pouch and laying the first instrument on the tray. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Как готовят кабинет к имплантации",
+   "Без пациента, без лиц",
+   "Ускорено"
+  ],
+  "what_happens": "0–2 s: first instrument down. 2–12 s: instruments laid out in order, compressed (labelled «ускорено»), with close clinks. 12–16 s (payoff): a sterile drape covers the finished tray. 16–18 s: CTA. Real sound only, no music. DM line: «смотри, как у них всё по порядку». Save: none.",
+  "why_stop": "Flawless hand motion plus close sound, showing what a patient never sees from the chair.",
+  "why_share_or_save": "Shared with someone afraid of surgery: «смотри, как всё готовят».",
+  "comment_prompt_ru": "Смотреть такое — спокойнее или страшнее?",
+  "cta_ru": "Вопросы про имплантацию — напишите {CODE} в WhatsApp",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: руки вскрывают пакеты и раскладывают инструменты на лотке по порядку. Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Накрываете готовый лоток стерильной салфеткой. Тот же ракурс.",
+     "location": "кабинет",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Speed ramp labelled «ускорено»; denoise; captions; cover = frame 1.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner/doctor confirm the filmed set-up is the real preparation for implant surgery"
+  ],
+  "kpi": "Avg % watched + shares per 1k; profile visits",
+  "risks": [
+   "NEEDS FACT: real set-up (doctor)",
+   "Sharp instruments may trigger fear; comment split will tell (learning)",
+   "No speed-up without the label"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 3.077,
+  "_value": 3.077
+ },
+ {
+  "id": "ID19",
+  "title": "Assistant's hands: what I check before surgery (character series)",
+  "insight_ids": [
+   "I01",
+   "I04"
+  ],
+  "driver": "mastery",
+  "format": "character",
+  "funnel": "trust",
+  "hook_ru": "Руки ассистента: что я проверяю перед операцией",
+  "first_frame": "A gloved thumb already pressing on a pouch's indicator strip, held to the lens at 25 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Руки ассистента: что я проверяю перед операцией",
+   "Голос ассистента, без лица",
+   "Если что-то не так — пакет не вскрываем"
+  ],
+  "what_happens": "0–2 s: thumb on the indicator. 2–12 s: the assistant's own voice explains the check. 12–16 s (payoff): what happens if the check fails (only if confirmed). 16–18 s: CTA. A recurring voice-only character, «Руки ассистента», ep. 1; each episode shows one ritual. DM line: «у них ассистент такое проверяет». Save: weak.",
+  "why_stop": "A human ritual in extreme close-up, in a first-person voice, which is rare in the category.",
+  "why_share_or_save": "Shared by people who value care in details; builds familiarity over a series.",
+  "comment_prompt_ru": "Какой вопрос задать ассистенту?",
+  "cta_ru": "Напишите {CODE} — ответим на вопросы о подготовке",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Ассистент подносит пакет к камере, палец на полоске-индикаторе. Телефон в 25 см, фокус долгим нажатием.",
+     "location": "кабинет",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Ассистент, телефон у рта в 20–30 см, своими словами.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Покажу, что я проверяю на пакете перед операцией.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice-over on hand footage; captions; series title card.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: pouches have sterilisation indicators and the assistant checks them",
+   "NEEDED: what is done if the indicator fails"
+  ],
+  "kpi": "Avg % watched; follows per 1k; series retention",
+  "risks": [
+   "NEEDS FACT: indicator check + failure procedure (owner)",
+   "Needs a willing assistant (voice consent)",
+   "Not acting: the assistant uses her own words"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.808,
+  "_value": 2.808
+ },
+ {
+  "id": "ID20",
+  "title": "Patient's voice: what I feared before the implant (consent required)",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "story",
+  "format": "real_case",
+  "funnel": "trust",
+  "hook_ru": "Голос пациента: чего я боялся до импланта",
+  "first_frame": "Library footage of gloved hands laying a tray, with the patient's voice starting at 0.5 s and a waveform-free caption. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Голос пациента: чего я боялся до импланта",
+   "С письменного согласия, без лица",
+   "Опыт одного человека, не обещание"
+  ],
+  "what_happens": "0–1 s: voice starts. 1–20 s: one patient tells in their own words what they feared and how long they put it off. 20–35 s (turn): what the first visit was actually like. 35–40 s (payoff): what they would tell someone still postponing, with no outcome claims. 40–42 s: CTA. Over library footage only. DM line: «это как ты, послушай».",
+  "why_stop": "A real voice of someone who shared the viewer's fear lowers counter-arguing.",
+  "why_share_or_save": "Sent to a postponing relative: «послушай, он тоже боялся».",
+  "comment_prompt_ru": "А чего боялись вы?",
+  "cta_ru": "Боитесь того же? Напишите BA24 — ответим на ваш вопрос",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Пациент (только с письменным согласием) говорит своими словами, телефон в 20–30 см от рта. Лицо не снимать.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Patient voice over library/week1/kabinet_tray_*.mp4; captions; remove any outcome statements; no voice changes beyond denoise.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: written patient consent for voice use",
+   "NEEDED: owner confirms RK medical-ad rules allow patient experience stories"
+  ],
+  "kpi": "Avg % watched; chat→booking rate of coded chats",
+  "risks": [
+   "NEEDS FACT: written consent + legal OK on patient testimonials in RK medical advertising (owner)",
+   "Edit out any result claims («не больно», «навсегда»)",
+   "Patient time is outside staff minutes"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 2,
+   "brand_link": 5,
+   "objective_fit": 4
+  },
+  "_prior": 3.397,
+  "_value": 3.397,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID21",
+  "title": "Reply to a real week-1 comment (zero staff minutes)",
+  "insight_ids": [
+   "I02",
+   "I01"
+  ],
+  "driver": "participation",
+  "format": "reply",
+  "funnel": "retention",
+  "hook_ru": "Ответ на ваш комментарий про имплант",
+  "first_frame": "The real comment (author removed) slides in over moving library footage of hands on the jaw model. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Ответ на ваш комментарий про имплант",
+   "Комментарий — без имени автора",
+   "Ответ согласован с врачом"
+  ],
+  "what_happens": "0–2 s: the comment appears. 2–15 s: doctor-approved text answer over library footage. 15–18 s (payoff): the direct answer line. 18–20 s: «спрашивайте — ответим следующим видео» plus CTA. Starts only once a real question comment exists. DM line: «вот ответ на твой вопрос». Save: if the answer is practical.",
+  "why_stop": "The commenter and others with the same question see their own words.",
+  "why_share_or_save": "The commenter shares it; people with the same question save it.",
+  "comment_prompt_ru": "Что спросить дальше? Ответим видео",
+  "cta_ru": "Свой вопрос пришлите в WhatsApp с кодом BA27",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Anonymised comment card; text answer from doctor-approved wording; B-roll from library/week1/kabinet_*.mp4 and library/week1/sterilizatsionnaya_*.mp4; captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: a real comment from week-1 posts",
+   "NEEDED: doctor-approved answer text"
+  ],
+  "kpi": "Comment rate + follows per 1k; coded chats",
+  "risks": [
+   "Depends on real comments existing (none yet)",
+   "Doctor approval turnaround could delay posting"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.192,
+  "_value": 3.192,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID22",
+  "title": "Vote: which question the surgeon answers next (zero staff minutes)",
+  "insight_ids": [
+   "I01",
+   "I02"
+  ],
+  "driver": "participation",
+  "format": "audience_vote",
+  "funnel": "retention",
+  "hook_ru": "Какой вопрос хирургу задать в следующем ролике?",
+  "first_frame": "Three option cards popping in one by one over moving library footage of the tray. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Какой вопрос хирургу задать в следующем ролике?",
+   "Больно ли?",
+   "Сколько всё длится?",
+   "От чего зависит цена?",
+   "Выбор пишите в комментариях — ответим видео"
+  ],
+  "what_happens": "0–2 s: hook plus the first card. 2–8 s: the three options. 8–10 s (payoff): a real commitment that the winner is recorded next week. Next week, the answer video opens by showing the vote result (follow-through). DM line: «проголосуй за цену». Save: none.",
+  "why_stop": "The viewer gets a direct say in the next video, and each option is a real fear.",
+  "why_share_or_save": "Low share; it builds the comment base and the reply pipeline.",
+  "comment_prompt_ru": "Боль, сроки или цена?",
+  "cta_ru": "Хотите спросить лично? Напишите {CODE} в WhatsApp",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Option cards and motion text over library/week1/kabinet_tray_*.mp4; captions; result card next week.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: surgeon commits to record an answer to the winning question within a week"
+  ],
+  "kpi": "Comment rate per 1k; follow-through video views",
+  "risks": [
+   "NEEDS FACT: surgeon commitment (asking and not following through is a failure mode)",
+   "Price option: answer without numbers unless Q3 allows"
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 5,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 2.923,
+  "_value": 2.923
+ },
+ {
+  "id": "ID23",
+  "title": "Came to the consultation and changed your mind — what then?",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "relief",
+  "format": "policy_story",
+  "funnel": "conversion",
+  "hook_ru": "Пришли на консультацию и передумали. Что дальше?",
+  "first_frame": "A hand already sliding a paper treatment plan (no patient data) across a desk toward the camera at 30 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "Пришли на консультацию и передумали. Что дальше?",
+   "План — у вас на руках",
+   "Решение — за вами",
+   "Мнение не навязываем"
+  ],
+  "what_happens": "0–2 s: the plan slides across. 2–14 s: the doctor's or admin's voice tells what happens if you leave to think (only confirmed policy: what you take away, whether anyone calls). 14–18 s (payoff): «Решение — за вами». 18–21 s: CTA. Directly targets the upsell fear (E17). DM line: «видишь, не заставят». Save: before booking.",
+  "why_stop": "It names the exact fear that stops booking and promises its resolution.",
+  "why_share_or_save": "Sent to someone hesitant to book: «видишь, можно просто прийти узнать».",
+  "comment_prompt_ru": "Вы уходили с консультации «подумать»?",
+  "cta_ru": "Напишите {CODE} — расскажем, что входит в консультацию",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Рука двигает по столу лист с планом лечения (без данных пациента) к камере. Телефон в 30 см.",
+     "location": "кабинет",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Врач или администратор, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Расскажу, что происходит, если после консультации вы решили подумать.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice-over on plan footage; captions; blur any text on the plan sheet.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: consultation policy (paid/free, what the patient takes away, follow-up calls, no obligation)"
+  ],
+  "kpi": "Coded chats per 1k; chat→booking rate",
+  "risks": [
+   "NEEDS FACT: consultation terms (owner); no «бесплатно» unless confirmed",
+   "«Мнение не навязываем» must match real practice; owner confirms"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.154,
+  "_value": 3.154
+ },
+ {
+  "id": "ID24",
+  "title": "«An implant is just a screw» — the doctor comments",
+  "insight_ids": [
+   "I05",
+   "I08"
+  ],
+  "driver": "social_currency",
+  "format": "expert_reacts",
+  "funnel": "attention",
+  "hook_ru": "«Имплант — это просто винт». Врач комментирует",
+  "first_frame": "Quote card (no source, no clinic named) over gloved hands already screwing a demo crown model onto an implant model at 25 cm. Hook text upper-middle.",
+  "on_screen_ru": [
+   "«Имплант — это просто винт». Врач комментирует",
+   "Мнение врача",
+   "Из чего он состоит — на модели"
+  ],
+  "what_happens": "0–2 s: quote plus assembly motion. 2–12 s: the doctor's voice on which part sits in bone and what goes on top, using the parts in his hands. 12–18 s (payoff): the assembled model next to the jaw model. 18–20 s: CTA. No stitch of other clinics' videos and no names; a respectful correction of a common phrase. DM line: «а я думал, просто винт». Save: weak.",
+  "why_stop": "It quotes a widespread belief and promises an insider correction, with hands assembling something in frame 1.",
+  "why_share_or_save": "Shared as an insider fact: «знал, что там несколько частей?».",
+  "comment_prompt_ru": "Как вы представляли имплант?",
+  "cta_ru": "Вопрос про имплант? Напишите {CODE} в WhatsApp",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Руки в перчатках собирают модель: имплант + коронка. Телефон в 25 см, логотип не показывать.",
+     "location": "кабинет",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Врач, телефон у рта в 20–30 см.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Покажу на модели, почему это не совсем так.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Quote card (no source shown); voice-over; captions; optional labelled AI cross-section of the part in bone.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: demo implant/abutment/crown models exist",
+   "NEEDED: doctor's signed-off explanation of implant components"
+  ],
+  "kpi": "Shares per 1k; comment rate",
+  "risks": [
+   "NEEDS FACT: models + wording (doctor)",
+   "Wildcard-ish: insider tone may feel like a lecture",
+   "Never stitch or name another clinic"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 2
+  },
+  "_prior": 2.885,
+  "_value": 2.885
+ }
+]

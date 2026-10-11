@@ -1,0 +1,126 @@
+[
+ {
+  "persona": "Владелец кофейни в Астане (гипотетическая), открываю вторую точку на Левом берегу через 3 недели. Хочу ажиотаж и гостей в первый месяц. Свободного времени у меня и у персонала нет: идёт запуск.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "Плакат на витрине новой точки и карточка на стойке первой точки. Плюс одно слово «ЛЕВЫЙ», чтобы получить напоминание в день открытия, и та же кнопка на кассе. Это дешёвый и честный способ дойти до людей, которые каждый день ходят мимо. Мой Instagram на 2,1 тыс. подписчиков сам до них не дотянется. А кнопка на кассе показывает настоящих гостей, а не просмотры. Серия «Узнаёте это место?» с видом из окна тоже хороша, но только если в кадре реально узнаётся двор или остановка.",
+  "refutations": [
+   {
+    "target": "Слейт (ID03, ID05, ID13, ID17, ID18, ID24) против кампании v2",
+    "why_fails": "Карточки идей устарели. В ID03 так и осталось «Пустая комната… Что будет?», адрес спрятан, внизу карточка с кодом. Во всех CTA написано «Напишите {CODE} — пришлём дату и адрес лично». В тексте кампании другое: адрес открыт, а реакция — одно слово «ЛЕВЫЙ» для напоминания. В ID05 бариста говорит «Дату скажем, когда будем уверены», а кампания такую фразу прямо запрещает. Если персонал снимет по этим карточкам, мы получим ролики, которые противоречат и плакату, и 2ГИС, и мне.",
+    "severity": "major",
+    "fix": "Переписать каждую карточку в слейте до того, как её получит персонал: hook_ru, on_screen_ru, cta_ru, say_ru и worker_shots под ритуал «вид из окна» и слово «ЛЕВЫЙ». Старые тексты с кодом за адрес убрать полностью. В карточку на съёмку 13.10 идут только исправленные версии."
+   },
+   {
+    "target": "Две разные цели успеха (intake 40/80/150 против measurement 60/120/250)",
+    "why_fails": "В разделе intake цель — «коды за дату и адрес» до 30.10, в разделе measurement — «ЛЕВЫЙ» с другими цифрами. Я не понимаю, по какой из них меня будут отчитывать в понедельник. Получается, что цель подвинули задним числом.",
+    "severity": "minor",
+    "fix": "Оставить одну метрику: уникальные «ЛЕВЫЙ» плюс коды источников, 60/120/250, с пересмотром 16.10. Старую формулировку из intake удалить."
+   },
+   {
+    "target": "Вопросы ко мне (owner_asks) и срок «до 10.10 12:00»",
+    "why_fails": "Сегодня 10.10, и срок ответа по сути уже прошёл. Вопросов девять, по плану на них уходит 2+2+1+2+2+1+2+1+5 = 18 минут. Обещали не больше 15 минут на старт, а в week 0 вообще пишут «≤13 мин». Внутри ещё вложенные варианты: офисы, закрытый вечер, чаты домов, бюджет, лимит на запись. В разгар запуска я столько не прочитаю.",
+    "severity": "major",
+    "fix": "Одним сообщением прислать только три критичных вопроса: подтверждён ли адрес и ориентир, можно ли снимать помещение, какой бюджет на продвижение (да/нет плюс сумма). Остальное спрашивать по одному вопросу в день в течение недели, срок перенести на 11.10 вечер. Счёт минут проверить заново."
+   },
+   {
+    "target": "Ажиотаж и повод прийти: «Неделя первых соседей» по умолчанию без предложения",
+    "why_fails": "Я просил ажиотаж. По умолчанию мне предлагают доску, где гости пишут имя или улицу, без скидки и без подарка. Это не повод ехать в новую кофейню. Если я не дам условия акции, на открытии будет только напоминание «мы открылись». Поэтому прогноз 36–60 визитов с напоминаний выглядит оптимистично.",
+    "severity": "major",
+    "fix": "Дать мне 2–3 готовых варианта акции с ценой для меня: например, второй напиток в подарок по слову «ЛЕВЫЙ» первые 14 дней, лимит N в день, только на новой точке. Посчитать стоимость через мой средний чек. Доску оставить дополнением к акции. Писать имя на доске не обязательно (приватность), улицы хватит."
+   },
+   {
+    "target": "Неделя 1: 2 из 5 слотов — подстановочные ID13 и ID24 («Странный заказ»)",
+    "why_fails": "До открытия 16 дней публикаций. У ID24 оценка objective_fit = 2, и к новой точке он отношения не имеет. Это пост ради охвата, а охват по моей базе в Астане Левый берег не приводит. ID13 зависит от непроверенного факта, что первая точка не на Левом берегу. При этом в неделе 4 они снова стоят в списке.",
+    "severity": "major",
+    "fix": "ID24 заменить вторым эпизодом «Узнаёте это место?» или ответом на реальный вопрос из чатов домов. ID13 оставить только после моего подтверждения про первую точку. Подстановочные идеи до открытия — максимум 1 из 5."
+   },
+   {
+    "target": "Механика «комментарий ЛЕВЫЙ → мгновенный автоответ в директ»",
+    "why_fails": "На этой механике держится вся главная метрика. Но в Instagram нет встроенного автоответа в директ на комментарий: нужен сторонний сервис, и в плане стоит лишь «agent check». Если сервис не подключится, комментаторы останутся без ответа. Рассылка в день открытия тогда не дойдёт, а обещание «напомним» мы нарушим публично.",
+    "severity": "major",
+    "fix": "До 12.10 проверить и подключить инструмент (или сказать, что его нет). Запасной вариант прописать заранее: ответственный вручную отвечает на каждый «ЛЕВЫЙ» дважды в день. Плюс сохранённый список, и напоминание уходит в директ в день открытия. Цель по записям ограничить тем, сколько сообщений человек реально успевает обработать."
+   },
+   {
+    "target": "Сложность всего плана (10 каналов, ~15 правил DR, 5 типов кодов)",
+    "why_fails": "Плакат, стойка, чаты домов, Status, буст, 2ГИС, офисы, Reels, TikTok, закрытый вечер — и всё это за 3 недели при одном телефоне и персонале, занятом запуском. Каждый канал со своим {CODE}. Кто-то перепутает QR, и вся атрибуция развалится. Мне важно, чтобы это сделали, а не красиво посчитали.",
+    "severity": "minor",
+    "fix": "Свести к ядру: Reels, плакат, карточка на стойке, 2ГИС, буст. Чаты домов и офисы оставить опциями после 19.10. TikTok/YouTube убрать до открытия. QR и коды генерирует и печатает агент, мне приходит уже готовый PDF."
+   },
+   {
+    "target": "Цель бизнеса «≥50% чеков первой точки» и прогноз визитов",
+    "why_fails": "Порог 50% взят с потолка, и конверсия из записи в визит 30–50% тоже предположение. Если в отчёте окажется 45%, я не пойму, провал это или нормально для новой точки на новом берегу.",
+    "severity": "minor",
+    "fix": "Подписать в отчёте, что 50% — ориентир, а не норма. После 7 дней работы пересчитать его по фактическим чекам дней 1–7 и моим данным о вместимости."
+   },
+   {
+    "target": "Буст: потолок за одну запись и старт 16.10",
+    "why_fails": "Формула потолка требует моего среднего чека, маржи и частоты визитов, а этих данных ещё нет. Без них буст на 20–50 тыс. ₸ стартует без потолка или не стартует вовсе. Плюс радиус 1,5–2 км вокруг новой точки — тоже предположение.",
+    "severity": "minor",
+    "fix": "Если я не дал цифры к 15.10, взять жёсткий потолок по умолчанию (например, 500 ₸ за запись) и дневной лимит. Через 3 дня прислать мне одну строку: сколько потрачено и сколько записей."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan/CIS. I judge on whether a barista can shoot it on one weak phone in 20 minutes, whether people in Astana would forward it, and whether it brings real inquiries.",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "The window poster on the closed shopfront, paired with the «Узнаёте это место?» series that opens on the view from the new window. This is how a new café actually gets talked about on Левый берег: people from the ЖК walk past the papered glass every day, see the poster, then see the same spot in their feed and forward it as «это же у нас во дворе». It is physical, local, free and repeatable. It also turns the fit-out, which you have to do anyway, into weekly episodes. Everything else in the plan should feed this.",
+  "refutations": [
+   {
+    "target": "Slate vs campaign v2 (ID03, ID05, all CTAs)",
+    "why_fails": "The shot cards still carry the v1 specs. ID03 has tamper and bean hints, the reveal «Здесь будет кофейня» and the card «Дату и адрес — лично, по коду». ID05 says «Дату назовём, когда будем уверены», which the campaign explicitly bans. Every CTA is still «Напишите {CODE}», not «ЛЕВЫЙ». Staff get the slate cards, not the essay, so on Tuesday they will shoot the old version, and the editor will get two conflicting scripts for the same id.",
+    "severity": "major",
+    "fix": "Regenerate the slate entries for ID03, ID05, ID13, ID17, ID18 and ID24 to the v2 spec before the Monday card goes out. That means new hook_ru, first_frame, on_screen_ru, cta_ru and worker_shots (ID03 becomes one 10 s window→room shot). Run a check that fails if any slate string contains «лично, по коду», «{CODE}» in cta_ru, or «когда будем уверены»."
+   },
+   {
+    "target": "Keyword «ЛЕВЫЙ»",
+    "why_fails": "In Russian slang «левый» means «random, shady, fake», as in «левый чувак» or «левый товар». A café asking people to comment «ЛЕВЫЙ» invites jokes like «левый кофе». It also reads oddly at the till: «скажите кассиру „левый“». In KZ comment sections people are used to «+», «хочу» or «где?».",
+    "severity": "minor",
+    "fix": "Use «КОФЕ», «РЯДОМ» or just «+» in comments. Keep the source codes in link prefill and QR codes, where the wording doesn't matter. Test the word with two baristas aged 20–25 before printing."
+   },
+   {
+    "target": "Opening-day reminder delivery via Instagram DM",
+    "why_fails": "Automated comment-to-DM tools can't message people two to three weeks later: they only work inside Meta's 24 h window, plus 7 days with the human-agent tag. So the opening-day reminder becomes 60–250 near-identical DMs sent by hand. One person does that on the busiest day of the opening, and mass identical DMs from a 2.1k account risk an action block. The promise «напомним в день открытия» is the core of the CTA, and the plan never says who presses send or how.",
+    "severity": "major",
+    "fix": "Add a countdown sticker with «Напомнить» to the pinned Stories/highlight as soon as the date is firm, so Instagram sends the native reminder. Ask people who sign up to save the WhatsApp number so Status and broadcast reach them. Spread any manual DMs over D−1 and D0 morning, split between 2 people, with message templates varied. Put this in the week-3 ai_work and the owner asks."
+   },
+   {
+    "target": "Week 1 shoot: ID03/ID05 at the new site plus ID13/ID24 at location 1 in a «~9 minute» session on 13.10",
+    "why_fails": "The stated constraint is one session at ONE location, because staff are busy setting up location 2. ID13 (location 1 door) and ID24 (location 1 bar) can't be shot in the same 9 minutes as the new-site window shots without travel across the river. The 8.3–9.3 min estimate ignores this. ID24 also has objective_fit 2 and costs barista time in launch week for a post with no launch content.",
+    "severity": "major",
+    "fix": "Split it. The new site gets ID03 and ID05 on Tuesday. Location 1 gets ID13 (8 s, hands only) whenever the shift there is quiet, filmed by whoever is on shift. Drop ID24 from week 1. Replace it with a zero-minute piece cut from reality-scan footage, or with a second hero cut from the same window clip using a different hook."
+   },
+   {
+    "target": "Hero series default when the landmark isn't confirmed («ориентир не называем»)",
+    "why_fails": "«Узнаёте это место?» with no landmark, and a window view of a typical Левый берег ЖК courtyard or parking lot, looks like 500 other places. The hook only works if the frame or the text pins the location: a named ЖК, business centre or street, or a visible city landmark. With the owner-asks default set to «nothing named», the hero series becomes a generic empty-room video.",
+    "severity": "major",
+    "fix": "Change the default to «name the ЖК/БЦ, which is already public on 2GIS», and ask the owner to opt OUT rather than in. In the reality scan, tell the barista to find the window angle with the most recognisable thing in it (sign of the ЖК, bus stop name, a landmark tower). If none exists, frame from the street outside looking at the shopfront and put the ЖК name in text."
+   },
+   {
+    "target": "Window backlight on a weak phone",
+    "why_fails": "The hero shot goes from exposing for a bright window to turning into a dark, unlit fit-out room. Cheap phones hunt exposure for 1–2 seconds, so the room goes black and then pumps. The 'one thing that changed this week' then reads as mud.",
+    "severity": "minor",
+    "fix": "Shoot the window and the room as two separate clips and cut on the turn, with exposure locked by a long press on each. Shoot near midday with the work lights on. Add this to what_ru."
+   },
+   {
+    "target": "Building chats as «owner posts in chats they're already in»",
+    "why_fails": "The owner of a Right Bank café is rarely a member of the ЖК chats around the new unit, so this channel will quietly produce zero. In Astana the gatekeeper for these chats is the ОСИ/КСК chairman or the building's management company.",
+    "severity": "minor",
+    "fix": "Owner ask: one message to the ОСИ/КСК of the new building (and 1–2 neighbouring ones) asking them to post the text and clip as a «новый сосед на первом этаже» announcement. Many will do it for free because a café improves the building. Offer a coffee for the chairman if the owner approves."
+   },
+   {
+    "target": "Owner onboarding time",
+    "why_fails": "The owner asks add up to 2+2+1+2+2+1+2+1+5 = 18 minutes, against a stated limit of ≤15 minutes for onboarding. There are also 9 separate decisions, so the owner will answer 3 and the defaults will kill the hero series (see the landmark default).",
+    "severity": "minor",
+    "fix": "Merge everything into one numbered message of 6 lines at most. The truth gate (address, ЖК name, date, filming permission) and the reply person come first. Push the archive photos, office drop-offs and preview evening into next Monday's ask."
+   },
+   {
+    "target": "Missing local amplifier",
+    "why_fails": "There is no plan for the local Левый берег micro-bloggers and city pages (Astana food and «что нового» accounts) that actually move a launch in KZ. With a ~2.1k account and the REALISM ratio of ≈1–33, Reels alone won't reach the catchment, and the boost decision is uncertain.",
+    "severity": "minor",
+    "fix": "Add an owner-approval option: a barter preview for 2–3 local micro-bloggers (5–20k, living on Левый берег) at the preview evening. They post with their own source code and the «ЛЕВЫЙ»/«+» mechanic. Coffee only, no claims, and the owner approves the exact terms."
+   }
+  ]
+ }
+]

@@ -1,0 +1,53 @@
+{
+ "request_type": "should_we_do_social",
+ "reframed_request": "«Мы продаём только компаниям. Нам вообще нужны соцсети?» → Run a cheap 4-week organic short-video test with a verdict agreed in advance: if it brings enough coded inquiries from companies per staff hour, keep going; if not, stop.",
+ "business_objective": "By 2026-11-16, a yes/no decision agreed before the test starts. YES if the 4-week test (2026-10-19 → 2026-11-15) produces at least 3 new qualified company inquiries for dry mixes or insulation via video codes, and at least 1 of them reaches a commercial offer or invoice. The threshold of 3 is a default for the owner to confirm. The cost limits are 0 ₸ and 20 staff minutes or less per week.",
+ "marketing_objective": "Foremen, brigade leads and small or mid-size contractors in Karaganda (delivery radius unknown) who are planning interior finishing or insulation work in the next 1–4 weeks and need bulk dry mixes or insulation delivered to site send a WhatsApp message with a video code, naming their company or ИП, the material and an approximate volume, between 2026-10-19 and 2026-11-15.",
+ "success_metric": {
+  "name": "Qualified coded B2B inquiries per staff hour (4-week should-we-do-social test)",
+  "how_measured": "Each video gets its own WhatsApp code. Coded chats are counted from the weekly WhatsApp export, and phone/rep inquiries are logged as «откуда узнали?» answers. A coded inquiry counts as qualified if it names the company or ИП, the material and an approximate volume. Staff minutes come from completed shoot cards. Whether an inquiry reached an offer or invoice comes from a yes/no tag added by the rep.",
+  "target": "Over 4 weeks: conservative 2 / expected 5 / stretch 10 qualified coded inquiries. At about 80 planned staff minutes, that is roughly 1.5 / 3.5 / 7.5 per staff hour. Baseline: unknown, because there is no export or social account yet. The week-0 count of all inbound company inquiries (phone and WhatsApp, 2026-10-12 → 2026-10-18) becomes the baseline. Verdict threshold, set in advance: YES if at least 3 are qualified and at least 1 reaches an offer or invoice (default until the owner answers Q1).",
+  "by_when": "2026-11-16"
+ },
+ "leading_indicators": [
+  "views_48h ÷ platform median: the pooled b2b_construction_materials median until the account has 10 posts of its own, then its own last-15 median",
+  "Shares + saves per 1,000 views (forwarding to a foreman or colleague is the B2B share signal)",
+  "Coded WhatsApp chats per 1,000 views, all of them before the qualification filter",
+  "Profile visits per 1,000 views (procurement and new contractors check legitimacy here before the first order)"
+ ],
+ "constraints": [
+  "BUDGET: 0 ₸ for the whole test. No boost, so the verdict reflects organic reach only. A boost of a proven post can come later as a separate, owner-approved arm (default + judgment)",
+  "OWNER: ≤15 min onboarding, ≤5 min/week, one batched message. The owner is skeptical, so the weekly report is 5 lines or fewer with true numbers only (default + stated skepticism)",
+  "STAFF: ≤17 planned min/week (20 including safety), one phone, audio usable only within about 30 cm (stated)",
+  "FILMING: hands, bags, mixing, pallets, loading, trucks and voice only. No faces. No customer sites, customer workers, company logos on site or vehicle plates without consent; blur them otherwise (default)",
+  "PRICES: none in content. The ledger is empty and B2B prices are assumed to be quote-based (default)",
+  "OFFER: none (default)",
+  "CAPACITY: unknown. No «в наличии», «доставим завтра», delivery-radius, minimum-order or lead-time claims until confirmed in the ledger (default)",
+  "REGULATED: not a listed regulated category. Judgment: technical and safety specs (морозостойкость, теплопроводность, расход на м², ГОСТ, класс горючести) appear only verbatim from manufacturer datasheets stored in the ledger with a URL or file. No outcome promises about the finished building (judgment)",
+  "AVOID: politics, religion, ethnicity, mocking customers or brigades, naming competitors, naming clients, tender details (default + judgment: B2B confidentiality)",
+  "ACCOUNTS: none known (profile.social is empty). The agent searches for existing Instagram/TikTok/YouTube/2GIS presence. Creating accounts and claiming the 2GIS card are owner asks. Business accounts use commercial-library music only (evidence + default)",
+  "APPROVAL: the owner approves each weekly batch explicitly. Account creation, any face on camera, offers, spend and any contact with existing clients (Status or broadcast) always need explicit approval (default)",
+  "GUARDRAIL: median first WhatsApp reply ≤15 min in working hours (default)",
+  "GUARDRAIL: no time taken from sales reps or the tender process beyond the 20 staff min/week (judgment)",
+  "GUARDRAIL: inquiries from private individuals are routed under the owner's rule (Q2) and never counted as qualified (judgment)"
+ ],
+ "assumptions": [
+  "VERDICT (pre-registered, judgment, because the METHOD does not define a B2B qualification rule): YES = qualified coded inquiries at or above the threshold (default 3) AND at least 1 reaches an offer or invoice → next sprint becomes b2b_leads. NO = below the threshold with at least 15 posts published → stop making video; keep only the 2GIS card and a static profile as a shop window (≈0 min/week). INCONCLUSIVE = fewer than 15 posts published (an execution failure, not a market answer) → extend 2 weeks once. The verdict is announced on 2026-11-16 whatever the result.",
+  "SECONDARY: b2b_leads, a qualified pipeline. It applies only if the verdict is YES and gets no slots in this test beyond conversion CTAs. Shorts alone are weak for B2B, so direct outreach by reps (sending the best videos to existing contacts) is flagged as the stronger lever and tracked as a separately coded arm, not counted in the 'new inquiries' verdict.",
+  "SECONDARY: shop-window legitimacy. Procurement and new contractors may check the supplier's Instagram or 2GIS before a first order. This value is invisible to codes, so reps ask «смотрели наш профиль/ролики?» on new calls. It is reported as directional only.",
+  "BOTTLENECK: unknown, low confidence, no evidence (the ledger and files are empty). Working hypothesis: awareness among small and mid-size contractors and brigades that the reps do not reach. Alternative: there is no marketing bottleneck at all, because sales run on reps and tenders. That alternative is exactly what the test checks. Step 2 checks for a disguised conversion problem (reply time, where chats die).",
+  "REALISM: target 5 qualified. Assuming [ASSUMPTION] 50% of coded chats are qualified, req_chats ≈ 10. req_views = 10 ÷ (0.3–3 per 1k, [ASSUMPTION] 10× range) ≈ 3.3k–33k. ach_views = 20 posts (5/week × 4) × [ASSUMPTION] 300-view median for a new B2B account in one city × 1.8 ≈ 10.8k. ratio 0.3–3.1 → feasible to stretch, with very wide uncertainty. New accounts are a cold start, and a one-city B2B audience is small. Replace these numbers after week 2.",
+  "[ASSUMPTION] For small and mid-size orders the person who makes first contact is a foreman or brigade lead; procurement mostly handles large orders and tenders | if wrong (procurement only): content shifts to documents, specs and delivery reliability, short video is weaker, a NO is likely, and reps' direct outreach becomes the main lever | verify: 15–30 chat WhatsApp export plus a rep tally of who calls, in step 2, by 2026-10-16",
+  "[ASSUMPTION] The company has no social accounts (profile.social is empty) | if wrong: past posts set the baseline and are re-cut as zero-minute ideas | verify: agent search of Instagram/TikTok/YouTube/2GIS by 2026-10-12",
+  "[ASSUMPTION] The warehouse and trucks have free capacity for more small and mid-size orders | if wrong: conversion CTAs are throttled (DR10) and the test measures trust only | verify: money map in step 2 (owner, 2 min)",
+  "[ASSUMPTION] Seasonality: the test runs at the end of the outdoor season in Karaganda, so facade and exterior demand is likely falling while interior finishing and insulation continue. Content leans toward interior work | if wrong: none | verify: compare inquiry counts with the same weeks last year if the owner has them. A NO in November means 'no for this winter', and a spring re-test is offered, not assumed.",
+  "[ASSUMPTION] Production: 5 posts a week fit in ≤17 staff minutes because warehouse realities (pouring, mixing, stacking, loading) are short close-sound shots at 1–2 locations, plus zero-minute AI edits | if wrong: drop to 3 posts a week, keep the 15-post minimum for the verdict, extend by 1 week | verify: staff reality scan in week 0",
+  "JUDGMENT: METHOD gap. 'Qualified' for B2B is defined here as naming the company or ИП, the material and an approximate volume (A2 b2b_leads wording). Inquiries that miss one element are counted but reported separately."
+ ],
+ "clarifying_questions": [
+  "Здравствуйте, это AI-ассистент. Через 4 недели решаем: продолжать соцсети или нет. Сколько новых обращений от компаний по коду из ролика (с названием компании, материалом и объёмом) за 4 недели для вас будет означать «да, стоит»? 1 — 3 и больше, 2 — 6 и больше, 3 — 10 и больше. По умолчанию: 1, и хотя бы одно из них должно дойти до КП или счёта. Ответ до 10.10 12:00.",
+  "Кого считаем клиентом из роликов: 1 — только юрлица с договором, 2 — ещё ИП, бригады и прорабы с оплатой по счёту, 3 — всех, включая частных покупателей? По умолчанию: 2, а частников вежливо направляем по вашему правилу. Ответ до 10.10 12:00.",
+  "Кого можно снимать на складе: 1 — только руки, мешки, погрузку, машины и голос, 2 — ещё сотрудников с лицом (только с их согласия)? По умолчанию: 1. Ответ до 10.10 12:00."
+ ],
+ "push_back": "Честно: заранее этого не знает никто, поэтому предлагаем не спорить, а проверить за 4 недели — 0 ₸, до 20 минут в неделю у сотрудника и до 5 минут у вас. Считаем не просмотры, а обращения от компаний по коду из ролика (с названием, материалом и объёмом); порог договорим заранее, и если не наберём — прямо скажем «не нужно» и остановимся. Для B2B ролики сами по себе слабы: основные заказы всё равно идут через менеджеров и тендеры, а ролики — это витрина, которую смотрят перед первым заказом, и способ выйти на прорабов, до которых менеджеры не доходят. Тест приходится на конец сезона, поэтому «нет» в ноябре будет значить «нет на зиму», а не «нет навсегда»."
+}

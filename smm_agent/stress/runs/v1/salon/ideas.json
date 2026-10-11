@@ -1,0 +1,1588 @@
+[
+ {
+  "id": "ID01",
+  "title": "Close sound: nail file and gel brush, loop",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Так звучит маникюр вблизи",
+  "first_frame": "Top-down macro, the file is already moving across a nail edge and fills about 60% of the frame. The rasp is audible from frame 0. Hook text fades in at 1 s, upper-middle.",
+  "on_screen_ru": [
+   "Так звучит маникюр вблизи",
+   "Включите звук",
+   "Пилка",
+   "Кисть с гелем"
+  ],
+  "what_happens": "0–1 s: file strokes with no words, only the real sound. 1–6 s: file passes along the edge, label «Пилка». 6–10 s: a slow brush pull of gel along the nail, label «Кисть с гелем». 10–11 s: payoff, the glossy finished nail turns into the light. 11–12 s: hard cut back to the first file stroke so it loops. No music. Series «Звук кресла», ep. 1. DM line: «послушай, залипательно». Save reason: a relaxing loop people replay.",
+  "why_stop": "Sound onset and macro motion in frame 1. It breaks the hypothesised category convention of finished nails under trending music (E25), and the weak phone's one strength (≤30 cm audio) carries it.",
+  "why_share_or_save": "Sent to a friend who likes ASMR/relaxing clips: «послушай перед сном». It is a reach piece, not a reference save.",
+  "comment_prompt_ru": "Какой звук в салоне вы любите?",
+  "cta_ru": "Хотите так же? Напишите в WhatsApp BA29 — подскажем свободное время у мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: пилка идёт по краю ногтя. Телефон на подставке в 20–30 см, музыку в зале выключить — нужен звук пилки. Секунда до и после.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Кисть с гелем медленно тянется по ногтю, телефон в 20 см, в зале тихо.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Pick the best take, cut on sound peaks, light denoise that keeps the file sound, loop end→start, burned-in RU captions, cover = frame 1. No music. Save raw clips to library/week1/ID01_*.mp4 for reuse in ID06, ID07 and ID22.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Driver: average % watched and replays, shares per 1k vs pooled median. Business: coded chats per 1k (expected low; DR7 watch).",
+  "risks": [
+   "Consent: a client's hands are filmed only after her verbal OK (no face, no voice), or use a staff member's own hands",
+   "Sound quality unverified until the staff reality scan (E21)",
+   "Insight I07 is assumption-only (strength 2). Attention-only piece with a weak link to bookings"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.167,
+  "_value": 3.167,
+  "_why": "explore"
+ },
+ {
+  "id": "ID02",
+  "title": "Close sound: scissors on hair ends",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "sensory",
+  "format": "close_sound",
+  "funnel": "attention",
+  "hook_ru": "Закройте глаза: это стрижка кончиков",
+  "first_frame": "Side macro 20 cm from the lens: scissors are already closing on a strand of damp hair ends, with the snip audible at frame 0. No face in frame. Text appears at 1 s, upper-middle.",
+  "on_screen_ru": [
+   "Закройте глаза: это стрижка кончиков",
+   "Только ножницы, без музыки"
+  ],
+  "what_happens": "0–1 s: snip on a strand, wordless. 1–8 s: a rhythm of snips along the comb-held strand. 8–11 s: payoff, the comb slides through the even ends and the cut hair falls onto the cape. 11–12 s: loop to the first snip. Series «Звук кресла», ep. 2. DM line: «это лучше любого ASMR».",
+  "why_stop": "An unexpected audio-first instruction («закройте глаза») plus a sharp snip at frame 0. Hair salons usually post the finished blow-out instead.",
+  "why_share_or_save": "Sent to ASMR fans and to anyone who «давно собиралась подстричь кончики».",
+  "comment_prompt_ru": "Кончики: раз в сезон или когда отрастут?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем свободное время у мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сбоку крупно: ножницы срезают кончики пряди, лица клиентки в кадре нет. Телефон в 20 см, фен в зале выключен.",
+     "location": "кресло мастера",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Расчёска медленно проходит по ровным кончикам, телефон в 20 см.",
+     "location": "кресло мастера",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Sound-led cut, denoise, loop, RU captions, cover = frame 1. Blur any face or reflection in a mirror. Save raw clips to library/week1/ID02_*.mp4.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Driver: completion and replays, shares per 1k. Business: coded chats per 1k for hair services.",
+  "risks": [
+   "Consent: client's verbal OK before her hair is filmed. No face, no mirror reflection",
+   "Unverified whether hair services exist (assumption: hair, nails, brows). Agent confirms on the 2GIS card",
+   "Hair dryers nearby will ruin the audio. Shoot in a quiet moment",
+   "Same format as ID01 with a different first-frame object. Do not post both in the same week (near-duplicate rule)"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.167,
+  "_value": 3.167
+ },
+ {
+  "id": "ID03",
+  "title": "Everything that happens before the colour",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "mastery",
+  "format": "process_full",
+  "funnel": "consideration",
+  "hook_ru": "Что делают до первого слоя покрытия",
+  "first_frame": "Macro of the master's hands already pushing back the cuticle on a bare nail. Hook text upper-middle from frame 0.",
+  "on_screen_ru": [
+   "Что делают до первого слоя покрытия",
+   "Ускорено",
+   "Подготовка ногтя",
+   "Форма и край",
+   "Только потом — цвет"
+  ],
+  "what_happens": "0–1 s: cuticle work mid-motion. 1–10 s: prep steps compressed, with «Ускорено» shown on screen and each step named as it appears. 10–14 s: real-speed first colour stroke, the moment viewers usually never see in context. 14–16 s: payoff, the finished nail. 16–18 s: CTA. Series «За что вы платите», ep. 1. DM line: «вот почему у меня всё отлетает, там этого не делали» (said by the viewer; we never say it). Save reason: to know what to expect at the next appointment.",
+  "why_stop": "A familiar result (a manicure) shown from the hidden half. The question «what happens before?» is answered visibly by about 14 s.",
+  "why_share_or_save": "Saved by people who compare salons, so they know what to watch for. Sent to a friend who complains her coating chips.",
+  "comment_prompt_ru": "Какой этап показать в полной версии?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — пришлём, что входит в услугу",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху, без перерыва: подготовка ногтя от кутикулы до формы. Телефон на подставке в 25 см, не двигать.",
+     "location": "маникюрный стол",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Первый мазок цветом крупно, медленно, в 20 см.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Speed-ramp the prep clip with a visible «Ускорено» label (no undisclosed speed-up), step labels, RU captions, cover = first frame. Keep the room sound low under licensed music or no music.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner/master confirms which prep steps are standard in a basic manicure here (no prices)"
+  ],
+  "kpi": "Driver: average % watched, saves per 1k. Business: coded chats asking «что входит».",
+  "risks": [
+   "NEEDS FACT: list of standard prep steps in the salon's basic manicure (owner, voice note)",
+   "Consent for the client's hands, or use a staff member's own hands",
+   "Insight I01 is assumption-only (strength 2). Never imply that other salons skip these steps"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.128,
+  "_value": 3.128
+ },
+ {
+  "id": "ID04",
+  "title": "Where the money in a manicure goes (shown, no numbers)",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "relief",
+  "format": "why_it_costs",
+  "funnel": "conversion",
+  "hook_ru": "За что вы платите в маникюре",
+  "first_frame": "Macro of the master's hands mid-step on a nail. The master's voice, recorded close in the quiet corner, starts at 0.3 s. Text upper-middle.",
+  "on_screen_ru": [
+   "За что вы платите в маникюре",
+   "Цвет — последний этап",
+   "Подготовка",
+   "Форма и край",
+   "Запечатанный торец",
+   "Мастер считает: это и есть работа"
+  ],
+  "what_happens": "0–1 s: hook over hands at work, voice starts. 1–15 s: each step appears as a hands clip while the master names it in her own words. 15–20 s: payoff, a macro of the sealed edge turned to the light, with the line «мастер считает: это и есть работа». 20–23 s: CTA. No prices, no comparisons. Series «За что вы платите», ep. 2. DM line: «вот, теперь понятно, за что деньги». Save reason: a reference when the price feels high.",
+  "why_stop": "It names the viewer's own unspoken question at the moment of price doubt (I01) and answers it with visible work instead of a price slide (L005).",
+  "why_share_or_save": "Saved by someone who just got a price quote. Sent to a partner or mother who asks «почему так дорого?».",
+  "comment_prompt_ru": "Что важнее: цвет или чтобы держалось?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — пришлём, что входит в услугу у мастера",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Мастер в тихом углу, телефон в 25–30 см от рта: своими словами, что делается до цвета.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Цвет — это последний этап. Покажу, что до него.",
+     "kind": "talk"
+    },
+    {
+     "what_ru": "Сверху: запечатывание торца ногтя кистью, крупно, телефон в 20 см.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Lay the voice track over the ID03 prep footage (library/week1/ID03_*.mp4) plus the new edge-seal clip. Step labels, RU captions, cover. No price numbers until the ledger has them.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms the steps included in the standard manicure service",
+   "NEEDED (later): dated price list ≤7 days if a price is ever added"
+  ],
+  "kpi": "Driver: saves per 1k, coded chats per 1k. Business: chat→booking rate on coded chats vs baseline.",
+  "risks": [
+   "NEEDS FACT: steps included in the standard service (owner)",
+   "Must never say or imply «у других хуже/дешевле» (AVOID, C6.8)",
+   "Master's consent to have her voice published",
+   "Insight I01 is assumption-only. Bottleneck (price stall) is unverified until the export"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.051,
+  "_value": 3.051
+ },
+ {
+  "id": "ID05",
+  "title": "Backstage: the station before you sit down",
+  "insight_ids": [
+   "I01",
+   "I07"
+  ],
+  "driver": "social_currency",
+  "format": "backstage",
+  "funnel": "trust",
+  "hook_ru": "Что происходит до того, как вы сели",
+  "first_frame": "Hands already wiping the manicure table with a cloth, then the tools are laid out in a row (motion from frame 0). Text upper-middle.",
+  "on_screen_ru": [
+   "Что происходит до того, как вы сели",
+   "Стол",
+   "Инструменты",
+   "Всё готово — можно садиться"
+  ],
+  "what_happens": "0–1 s: wiping motion. 1–8 s: tools laid out one by one with a close clink. 8–11 s: (only if confirmed) a sealed instrument pouch is torn open close to the phone. 11–13 s: payoff, the ready station from above with the lamp switching on. 13–15 s: loop to the wipe. DM line: «смотри, на что обращать внимание в салоне». Save reason: what a clean station looks like.",
+  "why_stop": "Viewers never see the minute before they arrive. Real sounds of the clink and the pouch tear sit at ≤30 cm.",
+  "why_share_or_save": "Sent to a friend who is anxious about hygiene in salons. Saved as a reference.",
+  "comment_prompt_ru": "Вы смотрите на инструменты мастера?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем свободное время у мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: протираете стол и раскладываете инструменты по одному. Телефон на подставке в 30 см, слышно, как они кладутся.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Только если у вас так делают: вскрываете запечатанный крафт-пакет с инструментами в 20 см от телефона.",
+     "location": "маникюрный стол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Sound-led edit, labels, RU captions, loop. If the pouch shot is not confirmed, cut it and end on the lamp.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms the instrument-sterilisation routine and sealed pouches (E22) before the pouch shot is used"
+  ],
+  "kpi": "Driver: shares per 1k, saves per 1k. Business: coded chats per 1k.",
+  "risks": [
+   "NEEDS FACT: sterilisation/sealed-pouch routine (owner). Without it the pouch shot is dropped",
+   "No hygiene claims in text («стерильно», «безопасно»). Show only",
+   "Insights are assumption-only"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.128,
+  "_value": 3.128
+ },
+ {
+  "id": "ID06",
+  "title": "«А сколько стоит?» answered honestly",
+  "insight_ids": [
+   "I02"
+  ],
+  "driver": "relief",
+  "format": "wa_question",
+  "funnel": "conversion",
+  "hook_ru": "Нам пишут: «А сколько стоит?»",
+  "first_frame": "An anonymised chat-bubble card with the question pops over a macro of hands at work. The master's voice starts at 0.5 s. Text upper-middle.",
+  "on_screen_ru": [
+   "Нам пишут: «А сколько стоит?»",
+   "Честно — зависит от ваших ногтей",
+   "Пришлите фото рук при дневном свете",
+   "Мастер скажет цену заранее"
+  ],
+  "what_happens": "0–1 s: question bubble. 1–10 s: master's voice explains that she would rather see the nails before naming a price, over hands footage. 10–17 s: payoff, what to send (photo of the hands in daylight plus a reference idea) so the price is exact before booking. 17–20 s: CTA. Series «Вопрос из WhatsApp», ep. 1. Save reason: how to get a straight answer before booking.",
+  "why_stop": "The viewer's own first message (hypothesised dominant opener E18) is on screen in frame 1.",
+  "why_share_or_save": "Saved by people about to book. Low share; it is a conversion piece.",
+  "comment_prompt_ru": "Вы сначала спрашиваете цену или мастера?",
+  "cta_ru": "Пришлите фото рук и код {CODE} — мастер скажет цену",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Мастер в тихом углу, телефон в 25–30 см от рта: почему цену лучше назвать после фото рук, своими словами.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Сразу честно не скажу — сначала хочу увидеть ваши ногти.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Anonymised chat card (no names or numbers), voice over hands B-roll from library/week1/ID01_*.mp4 and ID03_*.mp4, RU captions, cover = chat card over hands. Add «от … ₸» only once a dated price is in the ledger.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: ≥2 real chats with this question (WhatsApp export) for the paraphrase",
+   "NEEDED: owner confirms that price depends on nail condition/design and that staff quote from a photo"
+  ],
+  "kpi": "Driver: saves per 1k. Business: coded chats per 1k and the share of coded chats that send a photo and book.",
+  "risks": [
+   "NEEDS FACT: the question appears in ≥2 real chats (C6.5)",
+   "NEEDS FACT: quote-from-photo policy (owner)",
+   "Viewers may read a non-number answer as evasive. Add a ledger price later",
+   "Raises inbound volume: the reply-time guardrail (≤15 min) must hold"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 4
+  },
+  "_prior": 3.013,
+  "_value": 3.013
+ },
+ {
+  "id": "ID07",
+  "title": "«А сколько продержится?» what depends on you",
+  "insight_ids": [
+   "I02",
+   "I10"
+  ],
+  "driver": "practical_value",
+  "format": "wa_question",
+  "funnel": "consideration",
+  "hook_ru": "Нам пишут: «А сколько продержится?»",
+  "first_frame": "Chat-bubble card over a macro of a finished nail being tapped on the table. The master's voice starts at 0.5 s.",
+  "on_screen_ru": [
+   "Нам пишут: «А сколько продержится?»",
+   "Зависит не только от мастера",
+   "Мастер советует:",
+   "Перчатки для уборки",
+   "Ногти — не инструмент"
+  ],
+  "what_happens": "0–1 s: bubble. 1–6 s: master's voice: the answer depends on her work and on the client. 6–18 s: payoff, the two or three habits the master really advises, each shown on hands from library footage. 18–21 s: CTA. No durability numbers. Series «Вопрос из WhatsApp», ep. 2. DM line: «это тебе, ты всё открываешь ногтями».",
+  "why_stop": "A common anxious question asked verbatim, with an unexpectedly honest «depends on you» turn.",
+  "why_share_or_save": "Saved for after the next appointment, and sent to the friend who opens cans with her nails.",
+  "comment_prompt_ru": "Что первым портит ваш маникюр?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — мастер подскажет, что подойдёт вашим ногтям",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Мастер в тихом углу, телефон в 25–30 см: от чего зависит, сколько держится, своими словами, без цифр.",
+     "location": "тихий угол",
+     "seconds": 12,
+     "takes": 3,
+     "say_ru": "Сколько продержится — зависит и от вас. Вот что важно.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Chat card, voice over hands clips from library/week1/ (ID01, ID03, ID24 footage), labels «Мастер советует», RU captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: ≥2 real chats with this question (export)",
+   "NEEDED: master's own care advice confirmed (voice note). No durability numbers"
+  ],
+  "kpi": "Driver: saves per 1k. Business: coded chats per 1k; repeat bookings from existing contacts if posted to Status.",
+  "risks": [
+   "NEEDS FACT: question frequency (export)",
+   "No outcome or duration claims («держится N недель»)",
+   "Comments may raise complaints about chipped coating: triage, never argue (DR11)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.167,
+  "_value": 3.167
+ },
+ {
+  "id": "ID08",
+  "title": "Checklist before an event manicure",
+  "insight_ids": [
+   "I03",
+   "I05"
+  ],
+  "driver": "practical_value",
+  "format": "check_before_buy",
+  "funnel": "consideration",
+  "hook_ru": "Маникюр перед тоем: проверьте это заранее",
+  "first_frame": "Macro: a finished nail is already rotating slowly toward the lens under daylight. An orange stick points at the cuticle line. Text upper-middle.",
+  "on_screen_ru": [
+   "Маникюр перед тоем: проверьте это заранее",
+   "Линия у кутикулы — без щели",
+   "Торец ногтя закрыт",
+   "Форма одинаковая на всех пальцах",
+   "Мастер советует: проверьте при дневном свете"
+  ],
+  "what_happens": "0–1 s: rotating nail. 1–14 s: payoff in three checks, each shown on a real finished nail in macro, with on-screen labels and no voice. 14–17 s: the hand next to a window in daylight. 17–20 s: CTA with the event date. Series «Перед тоем», ep. 1. DM line: «скинь сестре, у неё той в субботу». Save reason: a checklist to use in the chair.",
+  "why_stop": "It names a high-stakes situation (той, being photographed with relatives) and promises a concrete check.",
+  "why_share_or_save": "Sent to a sister or friend with an upcoming той, and saved to check in the salon.",
+  "comment_prompt_ru": "Когда у вас ближайший той?",
+  "cta_ru": "Напишите в WhatsApp {CODE} и дату тоя — подскажем свободное время",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Готовый ноготь крупно, медленно поворачиваете к окну; апельсиновой палочкой показываете линию у кутикулы. Телефон в 20 см, фокус долгим нажатием.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Торец ногтя крупно сбоку, потом все пальцы рядом сверху.",
+     "location": "маникюрный стол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Labels synced to the pointing, RU captions, cover. Kazakh caption variant only after a native check.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master confirms these three checks are her own criteria (voice note)"
+  ],
+  "kpi": "Driver: saves and shares per 1k. Business: coded chats that mention an event date.",
+  "risks": [
+   "NEEDS FACT: master's checklist (staff voice note)",
+   "Never show or describe other salons' work as the failing example",
+   "Той season dates in Шымкент unverified (E19)",
+   "The structural count must match the shots: exactly three checks"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.192,
+  "_value": 3.192
+ },
+ {
+  "id": "ID09",
+  "title": "Where a master looks first (insider eye)",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "social_currency",
+  "format": "check_before_buy",
+  "funnel": "consideration",
+  "hook_ru": "Куда мастер смотрит в готовом маникюре",
+  "first_frame": "Extreme macro: an orange stick is already tapping three spots on a finished nail, and the tap is audible. Text upper-middle.",
+  "on_screen_ru": [
+   "Куда мастер смотрит в готовом маникюре",
+   "Боковые валики",
+   "Блик ровный или с волной",
+   "Теперь вы тоже это видите"
+  ],
+  "what_happens": "0–1 s: tapping. 1–10 s: two insider spots, each in extreme macro with a label. 10–13 s: payoff, the nail tilted so the highlight runs straight across. 13–15 s: loop to the tap. Series «Глазами мастера», ep. 1. DM line: «смотри, теперь буду так проверять».",
+  "why_stop": "Insider framing («what the master sees that you don't») plus extreme macro in frame 1.",
+  "why_share_or_save": "Sent so the sender looks in the know. Saved for the next salon visit.",
+  "comment_prompt_ru": "На что вы смотрите первым?",
+  "cta_ru": "Напишите в WhatsApp BA32 — мастер посмотрит фото ваших ногтей",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Апельсиновой палочкой постукиваете по точкам на готовом ногте, телефон в 15–20 см, долгое нажатие для фокуса.",
+     "location": "маникюрный стол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Боковые валики крупно, медленно сбоку.",
+     "location": "маникюрный стол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Наклоняете палец к окну, чтобы блик прошёл по ногтю.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Macro labels, RU captions, loop, cover = tap frame.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master confirms these are the spots she checks (voice note)",
+   "NEEDED: owner confirms staff will review a client's nail photo in WhatsApp (CTA)"
+  ],
+  "kpi": "Driver: shares per 1k. Business: coded chats with nail photos.",
+  "risks": [
+   "NEEDS FACT: master's actual checks",
+   "Do not post in the same week as ID08 (same format). Different first frame and insight, but a related mechanism",
+   "Insight I06 is assumption-only"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.167,
+  "_value": 3.167,
+  "_why": "explore"
+ },
+ {
+  "id": "ID10",
+  "title": "Same gel, two edges: which is sealed?",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "prediction_game",
+  "format": "ab_compare",
+  "funnel": "attention",
+  "hook_ru": "Один лак, два края. Какой запечатан?",
+  "first_frame": "Two practice tips held side by side between fingers fill the frame, edges toward the lens, already rotating slowly. Text upper-middle.",
+  "on_screen_ru": [
+   "Один лак, два края. Какой запечатан?",
+   "Демонстрация на типсах",
+   "Левый или правый?",
+   "Правый: край закрыт",
+   "Мастер считает: сколы начинаются отсюда"
+  ],
+  "what_happens": "0–1 s: tips rotating. 1–5 s: still on both edges while the guess prompt shows. 5–9 s: macro of each edge. 9–13 s: payoff, the reveal with a nail-tip tap on the sealed edge and the master's opinion line. 13–15 s: loop to the two tips. Both tips are made by the same master on purpose and labelled as a demonstration. DM line: «угадай, какой».",
+  "why_stop": "A two-option guess with a visible stake in frame 1. Viewers commit before the reveal.",
+  "why_share_or_save": "Sent as a challenge («угадай»). Sometimes saved as a quality cue.",
+  "comment_prompt_ru": "Левый или правый?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем свободное время у мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Держите два типса рядом торцами к телефону, медленно поворачиваете. Телефон в 15–20 см, у окна.",
+     "location": "маникюрный стол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Каждый торец крупно по очереди, потом постучите ногтем по запечатанному.",
+     "location": "маникюрный стол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    }
+   ],
+   "ai_parts": "Pause frame for the guess, reveal label, RU captions, loop.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master's opinion that chips start at an unsealed edge (voice note)",
+   "NEEDED: practice tips available at the salon"
+  ],
+  "kpi": "Driver: comments per 1k and completion. Business: profile visits per 1k.",
+  "risks": [
+   "[strategist judgment beyond METHOD] Demo on practice tips is honest only if labelled; never imply other salons do the unsealed version",
+   "NEEDS FACT: master's opinion line",
+   "The prepared demo tips take master time outside the 17 minutes (prep off-card) — confirm"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID11",
+  "title": "One design start to finish, real clock in frame",
+  "insight_ids": [
+   "I01"
+  ],
+  "driver": "prediction_game",
+  "format": "guess",
+  "funnel": "attention",
+  "hook_ru": "Сколько длится один дизайн? Часы в кадре",
+  "first_frame": "Fast-forward of hands painting a design, with a real wall clock or second-phone stopwatch visible in the corner of the frame, already running. Text upper-middle.",
+  "on_screen_ru": [
+   "Сколько длится один дизайн? Часы в кадре",
+   "Ускорено",
+   "Начало — смотрите на часы",
+   "Конец — снова часы",
+   "Мастер считает: время — это и есть работа"
+  ],
+  "what_happens": "0–1 s: sped-up painting with the clock visible. 1–10 s: compressed process with «Ускорено»; the viewer silently makes an estimate because the clock is in frame. 10–14 s: payoff, the start-clock and end-clock frames side by side, so the real time is read from the filmed clocks with no typed or invented number. 14–17 s: the finished design turned to the light. 17–19 s: CTA. Series «За что вы платите», ep. 3. DM line: «смотри, сколько это на самом деле». Save reason: knowing how much time to plan for a design.",
+  "why_stop": "A specific question with a verifiable answer already visible in frame 1 (the running clock). People tend to underestimate salon time, so the reveal carries a stake.",
+  "why_share_or_save": "Sent to a friend or partner who asks «почему так долго в салоне?». Occasionally saved to plan time before an event.",
+  "comment_prompt_ru": "Сколько вы обычно сидите у мастера?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем, сколько времени заложить на вашу услугу",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Часы на стене (или секундомер второго телефона) рядом с руками — кадр в начале работы.",
+     "location": "маникюрный стол",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    },
+    {
+     "what_ru": "Сверху без перерыва: роспись дизайна, телефон на подставке в 25 см, часы в углу кадра.",
+     "location": "маникюрный стол",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Те же часы рядом с готовыми ногтями — кадр в конце работы.",
+     "location": "маникюрный стол",
+     "seconds": 5,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Speed ramp with a visible «Ускорено» label, side-by-side clock reveal, RU captions. The duration is never typed as a number unless it is entered in the ledger from the filmed clocks.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: start and end clock readings captured on camera (becomes a counted fact for this video only)",
+   "NEEDED: owner confirms staff can tell a client how long a service takes (CTA)"
+  ],
+  "kpi": "Driver: completion and comments per 1k. Business: profile visits per 1k and coded chats asking about service time.",
+  "risks": [
+   "Rewritten after H2 flag: no «угадайте» and no comment-bait line; the reveal is the filmed clock, the comment prompt asks about the viewer's own experience",
+   "NEEDS FACT: a visible clock or second device in the room (reality scan)",
+   "The process shot must come from a real appointment with client consent for her hands",
+   "Insight I01 is assumption-only"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 2.833,
+  "_value": 2.833
+ },
+ {
+  "id": "ID12",
+  "title": "WILDCARD: coating vs keys and a can tab",
+  "insight_ids": [
+   "I06",
+   "I03"
+  ],
+  "driver": "mastery",
+  "format": "stress_test",
+  "funnel": "consideration",
+  "hook_ru": "Покрытие против ключей. Проверяем на типсе",
+  "first_frame": "Keys are already scraping across a coated practice tip held in fingers, with the scrape audible at 20 cm. Text upper-middle.",
+  "on_screen_ru": [
+   "Покрытие против ключей. Проверяем на типсе",
+   "Ваша версия: выдержит?",
+   "Ключи",
+   "Крышка банки",
+   "Итог — смотрите сами"
+  ],
+  "what_happens": "0–1 s: scrape. 1–3 s: prediction prompt. 3–9 s: key scraping, close sound. 9–14 s: opening a can tab with the tip. 14–18 s: payoff, a macro of the tip turned to the light with whatever result is real. 18–20 s: CTA. A realistic everyday test, published honestly whatever the result. DM line: «вот, а ты говоришь ключи ни при чём».",
+  "why_stop": "A physical test with an uncertain outcome and a harsh sound in frame 1.",
+  "why_share_or_save": "Sent to friends who argue about what ruins a manicure.",
+  "comment_prompt_ru": "Ваша версия: выдержит или нет?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем свободное время у мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Ключами с силой проводите по покрытому типсу, телефон в 20 см — звук нужен.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Типсом поддеваете ключ банки, потом типс крупно к окну.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Sound-led cut, prediction pause, RU captions. No slow-motion trickery and no cutting away from the result.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: practice tips coated with the salon's standard coating"
+  ],
+  "kpi": "Driver: completion and comments per 1k. Business: coded chats per 1k.",
+  "risks": [
+   "Wildcard: high variance, untested format",
+   "If the coating chips, the owner may veto it. Never re-shoot until it passes (that would be a rigged test)",
+   "A tip is not a real nail: the label «на типсе» stays on screen",
+   "No durability claim beyond what is filmed"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.141,
+  "_value": 3.141
+ },
+ {
+  "id": "ID13",
+  "title": "Myth: removing gel ruins the nail",
+  "insight_ids": [
+   "I06"
+  ],
+  "driver": "curiosity_gap",
+  "format": "myth_check",
+  "funnel": "consideration",
+  "hook_ru": "Говорят, снятие гель-лака портит ноготь. Смотрим",
+  "first_frame": "Macro: a file is already working on gel coating at 20 cm with the sound audible. Text upper-middle.",
+  "on_screen_ru": [
+   "Говорят, снятие гель-лака портит ноготь. Смотрим",
+   "Ускорено",
+   "Снятие у мастера",
+   "Вот ноготь после",
+   "Мастер считает: портит спешка, а не снятие"
+  ],
+  "what_happens": "0–1 s: file on coating. 1–10 s: careful removal compressed with «Ускорено». 10–15 s: payoff, an unedited macro of the nail plate after removal turned to the light. 15–18 s: the master's opinion line. 18–20 s: CTA. On a staff member's own nail with her consent. DM line: «вот, а ты сама сдираешь».",
+  "why_stop": "It challenges a common belief and promises to show the hidden result, the bare nail after removal.",
+  "why_share_or_save": "Sent to a friend who peels off her gel herself. Saved by people deciding whether to keep doing gel.",
+  "comment_prompt_ru": "Снимаете сами или у мастера?",
+  "cta_ru": "Напишите в WhatsApp BA28 — подскажем свободное время у мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: снятие гель-лака пилкой без перерыва, телефон на подставке в 20–25 см. Ноготь сотрудницы, с её согласия.",
+     "location": "маникюрный стол",
+     "seconds": 15,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    },
+    {
+     "what_ru": "Ноготь после снятия крупно у окна, медленно поверните палец.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Speed ramp with label, no colour grading on the after shot, RU captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: the belief appears in ≥2 real chats or public reviews (export/2GIS)",
+   "NEEDED: master's own opinion on removal (voice note)"
+  ],
+  "kpi": "Driver: completion and comments per 1k. Business: coded chats per 1k.",
+  "risks": [
+   "NEEDS FACT: belief source (C6.11). If it is not found in customer language, reframe as «Нас часто спрашивают…» only with ≥2 chats",
+   "No health or outcome claims. Show the nail and frame the conclusion as opinion",
+   "Consent of the staff member whose nail is filmed"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.269,
+  "_value": 3.269,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID14",
+  "title": "Hands before / after, same angle, same light",
+  "insight_ids": [
+   "I03"
+  ],
+  "driver": "curiosity_gap",
+  "format": "before_after",
+  "funnel": "consideration",
+  "hook_ru": "Руки до и после. Тот же ракурс",
+  "first_frame": "Fixed top-down phone: the client's hands are just being placed onto the towel (motion in frame 1), regrown nails visible, no face. Text upper-middle.",
+  "on_screen_ru": [
+   "Руки до и после. Тот же ракурс",
+   "До",
+   "После",
+   "Свет и ракурс не меняли"
+  ],
+  "what_happens": "0–1 s: hands placed down. 1–4 s: the 'before' hold. 4–5 s: a hand-swipe transition. 5–10 s: payoff, the 'after' from the identical phone position. 10–12 s: slow finger spread, then CTA. DM line: «хочу такой же цвет».",
+  "why_stop": "The transformation is promised and delivered within 5 s. The fixed frame makes the change undeniable.",
+  "why_share_or_save": "Saved as colour or shape inspiration. Sent «вот такой хочу».",
+  "comment_prompt_ru": "Вы бы выбрали: нюд или цвет?",
+  "cta_ru": "Хотите такой же? Напишите в WhatsApp {CODE} — подскажем свободное время",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сначала запишите голосом согласие клиентки на съёмку рук. Телефон закреплён сверху в 30 см, руки кладутся на полотенце — «до».",
+     "location": "маникюрный стол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Телефон в том же месте, не двигать: те же руки после работы.",
+     "location": "маникюрный стол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Swipe transition, no filters or retouching (the on-screen line depends on it), RU captions. Consent audio is archived, not published.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: client consent recorded on camera (audio) for before/after"
+  ],
+  "kpi": "Driver: saves per 1k. Business: coded chats per 1k.",
+  "risks": [
+   "Consent: before/after needs the client's on-camera consent (FILMING constraint)",
+   "«Свет и ракурс не меняли» must be literally true. No filter in the edit",
+   "Category convention (E25), so distinctiveness is low",
+   "Never present 'before' as another salon's work"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.128,
+  "_value": 3.128
+ },
+ {
+  "id": "ID15",
+  "title": "POV: the той is tomorrow and the nails aren't done",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "identity",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: завтра той, а маникюра нет",
+  "first_frame": "Bare-nailed fingers are already drumming nervously on the table next to a phone calendar. Text upper-middle, plus a small «постановка» label.",
+  "on_screen_ru": [
+   "POV: завтра той, а маникюра нет",
+   "Постановка",
+   "Пишете всем мастерам сразу",
+   "…и сидите у мастера",
+   "Вывод: записываться заранее"
+  ],
+  "what_happens": "0–1 s: nervous drumming. 1–4 s: fingers scrolling chats (screen blurred). 4–10 s: hands now at the manicure table, with the master's hands working. 10–13 s: payoff, the finished nails holding a той-style glass or fabric. 13–15 s: CTA. Staged and labelled. Series «Перед тоем», ep. 2. DM line: «это ты перед каждым тоем».",
+  "why_stop": "An instantly recognisable local situation in the viewer's own words. Motion from frame 1.",
+  "why_share_or_save": "Sent to a sister or friend who always leaves it to the last day.",
+  "comment_prompt_ru": "Вы заранее или в последний день?",
+  "cta_ru": "Напишите в WhatsApp BA23 и дату тоя — подскажем свободное время",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: пальцы без покрытия нервно стучат по столу рядом с телефоном. Руки сотрудницы, лица нет. Телефон в 30 см.",
+     "location": "маникюрный стол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Руки мастера работают над теми же ногтями, потом готовые ногти держат бокал. Телефон в 25 см.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Text beats, «постановка» label, blur on any screen, RU captions. Optional KZ caption after a native check.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Driver: shares per 1k. Business: coded chats with event dates.",
+  "risks": [
+   "Staged: the label must stay visible (C6.6)",
+   "Must not mock clients for being late. It laughs with them",
+   "Capacity unknown: CTA never promises «успеем завтра» (CAPACITY)",
+   "Той season timing is unverified"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.487,
+  "_value": 3.487,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID16",
+  "title": "WILDCARD POV: your master is on vacation",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "amusement_awe",
+  "format": "pov_situation",
+  "funnel": "attention",
+  "hook_ru": "POV: ваш мастер ушла в отпуск",
+  "first_frame": "An empty master's chair, tools neatly laid out, a hand switching off the work lamp (motion in frame 1). Text upper-middle, plus a «постановка» label.",
+  "on_screen_ru": [
+   "POV: ваш мастер ушла в отпуск",
+   "Постановка",
+   "К другому мастеру? Нет уж",
+   "Отращиваю. Терплю. Жду",
+   "Она вернулась"
+  ],
+  "what_happens": "0–1 s: lamp off over the empty station. 1–6 s: text beats over static tools and the dust cover. 6–9 s: hands tapping impatiently. 9–13 s: payoff, the lamp clicks on and the master's hands start working. 13–15 s: loop to the lamp. DM line: «это я, когда ты в отпуске» (sent to their own master).",
+  "why_stop": "Loyalty to 'my master' is a universal salon feeling. The empty chair is an odd image in frame 1.",
+  "why_share_or_save": "Clients send it to their own master, or to a friend who 'can't cheat' on hers.",
+  "comment_prompt_ru": "Ждёте своего мастера или идёте к другому?",
+  "cta_ru": "Ищете своего мастера? Напишите в WhatsApp {CODE} — расскажем, кто чем занимается",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Пустое кресло мастера и разложенные инструменты; рука выключает лампу. Телефон на подставке в 40 см, без звука речи.",
+     "location": "кресло мастера",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Лампа включается, руки мастера начинают работу, крупно в 25 см.",
+     "location": "кресло мастера",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Text beats with comic timing, «постановка» label, light licensed music or room tone, RU captions, loop.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Driver: shares per 1k. Business: coded chats asking about specific masters.",
+  "risks": [
+   "Wildcard: humour may fall flat",
+   "If churn follows departed masters (E26), this may sting the owner, so the owner approves the topic",
+   "Staged label required"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.115,
+  "_value": 3.115
+ },
+ {
+  "id": "ID17",
+  "title": "Master character: what she won't do even if asked",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "mastery",
+  "format": "character",
+  "funnel": "conversion",
+  "hook_ru": "Чего мастер не сделает, даже если попросите",
+  "first_frame": "Close-up of one master's hands already working at her chair. Her own voice starts at 0.3 s (recorded close in the quiet corner). Text upper-middle.",
+  "on_screen_ru": [
+   "Чего мастер не сделает, даже если попросите",
+   "Её голос, её руки",
+   "Почему — её словами",
+   "К ней можно записаться"
+  ],
+  "what_happens": "0–1 s: hands at work, voice starts. 1–15 s: the master names one thing she refuses to do and why, in her own words, over her hands. 15–20 s: payoff, a close-up of her signature detail of work. 20–23 s: CTA steering to this master's free slots. Series «Руки мастера», one master per episode (voice and hands only).",
+  "why_stop": "A refusal is unexpected from a salon. It promises a firm, personal opinion.",
+  "why_share_or_save": "Sent to someone looking for 'a master who won't ruin things'.",
+  "comment_prompt_ru": "А вы бы попросили?",
+  "cta_ru": "Напишите в WhatsApp BA26 — подскажем свободное время у этого мастера",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Мастер в тихом углу, телефон в 25–30 см от рта: одна вещь, которую не сделаете даже по просьбе клиента, и почему. Своими словами.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Есть одна вещь, которую я не сделаю, даже если попросите.",
+     "kind": "talk"
+    },
+    {
+     "what_ru": "Руки этого мастера за работой крупно, в 25 см.",
+     "location": "кресло мастера",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "process"
+    }
+   ],
+   "ai_parts": "Voice over hands, punch-ins every 2–3 s, RU captions, cover. The master's first name appears only with her OK.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master consents to her voice being published",
+   "NEEDED: owner approves the master's statement",
+   "NEEDED: which masters have free slots (owner, question 3)"
+  ],
+  "kpi": "Driver: completion and follows. Business: coded chats naming this master and their booking rate.",
+  "risks": [
+   "Consent: master's voice and name",
+   "Her statement must not become an outcome or health claim, and must not refer to other salons",
+   "Capacity: point CTA only to masters with free slots"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 3,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 5,
+   "objective_fit": 4
+  },
+  "_prior": 3.256,
+  "_value": 3.256,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID18",
+  "title": "Master's confession: why I became a master",
+  "insight_ids": [
+   "I08"
+  ],
+  "driver": "story",
+  "format": "character",
+  "funnel": "trust",
+  "hook_ru": "Честно: почему я пошла в мастера",
+  "first_frame": "The master's hands are already folding a towel at her station. Her close-recorded voice starts at 0.3 s. Text upper-middle.",
+  "on_screen_ru": [
+   "Честно: почему я пошла в мастера",
+   "Её история, её голос",
+   "А вы своего мастера как нашли?"
+  ],
+  "what_happens": "0–1 s: hands and voice. 1–30 s: her real short story (one want, one obstacle, one turn), over hands B-roll with a visual change every 2–3 s. 30–38 s: payoff, the turn in her words over her best close-up. 38–40 s: soft CTA. Series «Руки мастера» (alternate episode).",
+  "why_stop": "A confession archetype in the first line. Real voice, not an ad voice.",
+  "why_share_or_save": "Low share. Her own regular clients may send it to friends («это мой мастер»).",
+  "comment_prompt_ru": "А вы своего мастера как нашли?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем свободное время у неё",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Мастер в тихом углу, телефон в 25 см от рта: начало истории — почему пошла в профессию.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Честно: почему я пошла в мастера.",
+     "kind": "talk"
+    },
+    {
+     "what_ru": "Там же, продолжение истории: что изменилось потом, своими словами.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Cut the story to ≤40 s, hands B-roll from library/week1/, RU captions, light licensed music under the voice. No invented details. The edit only trims.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master's consent to publish her voice and story"
+  ],
+  "kpi": "Driver: average % watched. Business: coded chats naming her.",
+  "risks": [
+   "Story must be real and in her words (no invented customers)",
+   "Shy staff: skip if she is not willing (forced-performance anti-pattern)",
+   "Weak stop: slow start risk"
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 3,
+   "brand_link": 5,
+   "objective_fit": 3
+  },
+  "_prior": 2.718,
+  "_value": 2.718
+ },
+ {
+  "id": "ID19",
+  "title": "WILDCARD anti-sell: when you don't need a salon",
+  "insight_ids": [
+   "I09"
+  ],
+  "driver": "honest_signal",
+  "format": "anti_sell",
+  "funnel": "trust",
+  "hook_ru": "Честно: иногда салон вам не нужен",
+  "first_frame": "The master's hands put the file down and push the tools away (motion in frame 1). Her voice starts at 0.3 s. Text upper-middle.",
+  "on_screen_ru": [
+   "Честно: иногда салон вам не нужен",
+   "Мастер считает:",
+   "Это можно дома",
+   "А вот это — к мастеру"
+  ],
+  "what_happens": "0–1 s: tools pushed away. 1–12 s: the master's opinion on small things that are fine at home between visits, over hands. 12–20 s: the turn, what she thinks should not be done at home and why. 20–23 s: payoff and CTA. Framed as opinion. No other salon is mentioned or implied. DM line: «вот, даже мастер говорит, можно дома».",
+  "why_stop": "A salon arguing against its own sale breaks the expected ad voice in the first second.",
+  "why_share_or_save": "Saved for home care. Sent to a thrifty friend.",
+  "comment_prompt_ru": "Что вы делаете с ногтями сами?",
+  "cta_ru": "Если всё-таки к мастеру — напишите в WhatsApp BA24, подскажем время",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Мастер в тихом углу, телефон в 25–30 см от рта: что можно сделать дома, а что лучше нет. Своими словами.",
+     "location": "тихий угол",
+     "seconds": 15,
+     "takes": 3,
+     "say_ru": "Честно: иногда салон вам не нужен. Вот что можно дома.",
+     "kind": "talk"
+    }
+   ],
+   "ai_parts": "Voice over hands B-roll from library/week1/ (ID01, ID24), labels «Мастер считает», RU captions.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner's explicit «да» on the anti-sell stance",
+   "NEEDED: master's own list (voice note)"
+  ],
+  "kpi": "Driver: shares and saves per 1k. Business: coded chats and chat→booking rate.",
+  "risks": [
+   "Wildcard: may push away some low-margin demand",
+   "Owner approval required before shooting",
+   "Advice must not create a safety risk (no cuticle cutting at home etc.). The master decides"
+  ],
+  "rubric": {
+   "stop": 4,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 3,
+   "objective_fit": 3
+  },
+  "_prior": 3.462,
+  "_value": 3.462,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID20",
+  "title": "Less than a week to the той: what to book",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "moment_trigger",
+  "format": "moment",
+  "funnel": "conversion",
+  "hook_ru": "До тоя меньше недели? Что успеть",
+  "first_frame": "The master's hands are already holding a colour palette next to a fabric swatch, flipping through the shades. Text upper-middle.",
+  "on_screen_ru": [
+   "До тоя меньше недели? Что успеть",
+   "Мастер советует:",
+   "Записаться заранее, не в последний день",
+   "Новый дизайн — не впервые перед тоем",
+   "Покажите мастеру свои ногти заранее"
+  ],
+  "what_happens": "0–1 s: palette flip. 1–14 s: the master's practical advice, each point over a hands shot. 14–18 s: payoff, the chosen shade on the finished nail next to the fabric. 18–21 s: CTA with the event date, steered to free weekday slots once question 3 is answered. Series «Перед тоем», ep. 3. Publish 10–14 days before a peak той weekend.",
+  "why_stop": "A precise time-bound situation the viewer is in right now.",
+  "why_share_or_save": "Saved for the next той. Sent to whoever is organising the women's side of a family той.",
+  "comment_prompt_ru": "Какой той у вас следующий?",
+  "cta_ru": "Напишите в WhatsApp BA25 и дату — подскажем свободное время",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Палитра цветов рядом с кусочком ткани, перелистываете оттенки. Телефон сверху в 25 см, у окна.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Готовый ноготь выбранного оттенка рядом с той же тканью, крупно.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Advice text beats, RU captions, optional KZ caption after a native check. Calendar timing set by the agent.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master confirms the advice points",
+   "NEEDED: owner's answer to question 3 (which slots to steer to)",
+   "NEEDED: той-season dates relevant in Шымкент"
+  ],
+  "kpi": "Driver: saves per 1k. Business: coded chats with an event date and bookings on free slots.",
+  "risks": [
+   "Capacity: never «успеем»/«свободно завтра» without confirmed slots",
+   "Not a greeting card. Practical only",
+   "Seasonal timing unverified (E19)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 2,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 4
+  },
+  "_prior": 3.372,
+  "_value": 3.372,
+  "_why": "prior+data"
+ },
+ {
+  "id": "ID21",
+  "title": "WILDCARD local: Шымкент picks nails for the той",
+  "insight_ids": [
+   "I05"
+  ],
+  "driver": "identity",
+  "format": "local",
+  "funnel": "attention",
+  "hook_ru": "Шымкент поймёт: маникюр выбирают под той",
+  "first_frame": "Hands are already holding a finished nail against a sparkly dress fabric, then flipping to another fabric. Text upper-middle.",
+  "on_screen_ru": [
+   "Шымкент поймёт: маникюр выбирают под той",
+   "Под платье",
+   "Под фото с роднёй",
+   "А через неделю — следующий той"
+  ],
+  "what_happens": "0–1 s: fabric flip. 1–8 s: three quick beats, each a different fabric with the nails held against it. 8–11 s: payoff, the punchline «а через неделю — следующий той» with a new fabric. 11–13 s: loop to the first fabric. Light, laughing with people, never at them. DM line: «это про нас с тобой».",
+  "why_stop": "A local in-joke in frame 1 that only a Шымкент viewer fully gets.",
+  "why_share_or_save": "Sent to friends and relatives who go to every той together.",
+  "comment_prompt_ru": "Цвет под платье или под настроение?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подберём оттенок под ваше платье по фото",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Готовые ногти прикладываете к разным тканям по очереди, быстро. Телефон в 25 см у окна.",
+     "location": "маникюрный стол",
+     "seconds": 10,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    },
+    {
+     "what_ru": "Последняя ткань крупно, пальцы медленно раскрываются.",
+     "location": "маникюрный стол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Fast beat edit, RU captions. Any Kazakh words only after a native check.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: owner confirms staff will suggest a shade from a dress photo (CTA)"
+  ],
+  "kpi": "Driver: shares per 1k and local-audience share. Business: coded chats with dress photos.",
+  "risks": [
+   "Wildcard: local humour may misfire",
+   "Avoid ethnicity or religion jokes. The joke is about the busy той calendar only",
+   "Fabrics and props must be on hand (staff bring them)"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 3.115,
+  "_value": 3.115
+ },
+ {
+  "id": "ID22",
+  "title": "WILDCARD vote: which sound do we film in full",
+  "insight_ids": [
+   "I07"
+  ],
+  "driver": "participation",
+  "format": "audience_vote",
+  "funnel": "attention",
+  "hook_ru": "Какой звук снять целиком? Выбирайте",
+  "first_frame": "Hands are already laying a file, scissors and a gel brush onto the table one by one, each landing with a close clink; then a three-way split screen (file, scissors, gel brush) with all three in motion. Text upper-middle.",
+  "on_screen_ru": [
+   "Какой звук снять целиком? Выбирайте",
+   "Пилка",
+   "Ножницы",
+   "Кисть",
+   "Пишите слово — снимем победителя"
+  ],
+  "what_happens": "0–2 s: three tools laid down with close clinks (new 6-s shot). 2–4 s: split screen with motion. 4–6 s: file sound solo. 6–8 s: scissors solo. 8–10 s: brush solo. 10–12 s: the vote line. The winner is filmed in the next weekly session as a full-length «Звук кресла» episode, and that video opens with «Вы выбрали…». DM line: «голосуй за ножницы». Return reason: to see the chosen sound filmed.",
+  "why_stop": "Real tool sounds and motion from frame 1, plus a stake: the viewer's choice decides the next video.",
+  "why_share_or_save": "Low share. People who comment tend to come back to see their pick filmed.",
+  "comment_prompt_ru": "Пилка, ножницы или кисть?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем свободное время у мастера",
+  "production": {
+   "mode": "mixed",
+   "worker_shots": [
+    {
+     "what_ru": "Сверху: кладёте на стол по очереди пилку, ножницы и кисть. Телефон на подставке в 25 см — нужен звук каждого инструмента.",
+     "location": "маникюрный стол",
+     "seconds": 6,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "hook"
+    }
+   ],
+   "ai_parts": "Open on the new tools-down shot, then re-cut existing week-1 clips: library/week1/ID01_*.mp4 (file, brush) and library/week1/ID02_*.mp4 (scissors). Split screen, sound solos, RU captions. Available from week 2 only.",
+   "people_on_camera": 0
+  },
+  "facts_used": [],
+  "kpi": "Driver: comments per 1k and return viewers on the follow-up. Business: follows (indirect).",
+  "risks": [
+   "Fixed after check 'mixed but no worker shots': added one 6-s tools-down shot at an already-used location (~0.7 staff min)",
+   "Blocked until the week-1 clips exist",
+   "We must actually film and post the winner (participation failure mode)",
+   "Weak link to bookings"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 2,
+   "comment": 4,
+   "producible": 4,
+   "brand_link": 2,
+   "objective_fit": 2
+  },
+  "_prior": 2.782,
+  "_value": 2.782
+ },
+ {
+  "id": "ID23",
+  "title": "Reply to a public 2GIS review (zero staff minutes)",
+  "insight_ids": [
+   "I04"
+  ],
+  "driver": "participation",
+  "format": "reply",
+  "funnel": "trust",
+  "hook_ru": "Ответ на отзыв в 2ГИС",
+  "first_frame": "A screen recording of the public 2GIS review is already scrolling into view with the reviewer's name blurred. Text upper-middle.",
+  "on_screen_ru": [
+   "Ответ на отзыв в 2ГИС",
+   "Из отзыва в 2ГИС, без имени",
+   "Показываем, о чём речь"
+  ],
+  "what_happens": "0–2 s: review scrolls in and the praised detail is highlighted (verbatim quote added after the fetch). 2–12 s: payoff, hands footage of exactly the praised work (e.g. if the review praises cuticle care, the cuticle shot). 12–15 s: a text thank-you plus CTA. Optional labelled synthetic voice. Series «Отвечаем на отзывы».",
+  "why_stop": "Real third-party words in frame 1. Viewers trust other clients over the salon (I04).",
+  "why_share_or_save": "The reviewer may share it. Prospects comparing salons may save it.",
+  "comment_prompt_ru": "Вы читаете отзывы перед записью?",
+  "cta_ru": "Напишите в WhatsApp {CODE} — подскажем, к какому мастеру с вашим запросом",
+  "production": {
+   "mode": "screen",
+   "worker_shots": [],
+   "ai_parts": "Agent screen-records the public 2GIS card (fetch pending) and blurs names and avatars. Hands footage matching the praised detail comes from library/week1/ (ID01, ID03, ID09 clips). RU captions; any synthetic voice-over is labelled. Available from week 2.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: fetched 2GIS review text and date (agent fetch)",
+   "NEEDED: rating and review count, only if shown (agent fetch)"
+  ],
+  "kpi": "Driver: saves per 1k. Business: chat→booking rate; new 2GIS reviews per week.",
+  "risks": [
+   "NEEDS FACT: reviews not yet fetched. Nothing can be quoted until then",
+   "Never reply to a negative review on video unless the owner confirms the fix",
+   "Zero minutes but depends on week-1 library footage"
+  ],
+  "rubric": {
+   "stop": 2,
+   "truth": 2,
+   "share_save": 2,
+   "comment": 3,
+   "producible": 4,
+   "brand_link": 4,
+   "objective_fit": 3
+  },
+  "_prior": 2.744,
+  "_value": 2.744
+ },
+ {
+  "id": "ID24",
+  "title": "Care: make the manicure last until the next visit",
+  "insight_ids": [
+   "I10"
+  ],
+  "driver": "practical_value",
+  "format": "care_howto",
+  "funnel": "retention",
+  "hook_ru": "Что делать, чтобы маникюр дожил до записи",
+  "first_frame": "A drop of cuticle oil is already falling onto a finished nail in macro and spreading. Text upper-middle.",
+  "on_screen_ru": [
+   "Что делать, чтобы маникюр дожил до записи",
+   "Мастер советует:",
+   "Масло для кутикулы",
+   "Перчатки для уборки",
+   "Отошёл край — не отрывайте"
+  ],
+  "what_happens": "0–1 s: oil drop. 1–6 s: oil rubbed in. 6–10 s: hands pulling on rubber gloves. 10–14 s: payoff, a slightly lifted tip edge, the master's hand stops a finger from picking it, and the text tells you to come to the master instead. 14–17 s: CTA. Posted to WhatsApp Status for existing contacts (opted-in broadcast only). Save reason: care routine between visits.",
+  "why_stop": "A sensory macro drop in frame 1 plus a practical promise for current clients.",
+  "why_share_or_save": "Saved by clients right after a visit. Sent to a friend who always picks at her coating.",
+  "comment_prompt_ru": "Что первым убивает ваш маникюр?",
+  "cta_ru": "Пора обновить? Напишите в WhatsApp BA27 — подскажем время у вашего мастера",
+  "production": {
+   "mode": "worker",
+   "worker_shots": [
+    {
+     "what_ru": "Капля масла падает на ноготь и втирается, крупно сверху, телефон в 20 см.",
+     "location": "маникюрный стол",
+     "seconds": 12,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "demo"
+    },
+    {
+     "what_ru": "Руки надевают резиновые перчатки; потом палец мастера останавливает руку, которая тянет отошедший край.",
+     "location": "маникюрный стол",
+     "seconds": 8,
+     "takes": 2,
+     "say_ru": "",
+     "kind": "detail"
+    }
+   ],
+   "ai_parts": "Labels «Мастер советует», RU captions, cover = oil drop. A Status-format cut for the warm base.",
+   "people_on_camera": 0
+  },
+  "facts_used": [
+   "NEEDED: master confirms these care tips (voice note)"
+  ],
+  "kpi": "Driver: saves per 1k. Business: repeat bookings from existing contacts (SECONDARY objective).",
+  "risks": [
+   "No duration or outcome claims",
+   "Broadcast only to opted-in contacts",
+   "SECONDARY objective: ≤20% of slots",
+   "Comment prompt overlaps ID07. Do not post both in the same week"
+  ],
+  "rubric": {
+   "stop": 3,
+   "truth": 3,
+   "share_save": 4,
+   "comment": 3,
+   "producible": 5,
+   "brand_link": 2,
+   "objective_fit": 3
+  },
+  "_prior": 3.321,
+  "_value": 3.321,
+  "_why": "prior+data"
+ }
+]

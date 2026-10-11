@@ -1,0 +1,67 @@
+[
+ {
+  "from": "intake",
+  "q": "Здравствуйте, это AI-ассистент. Через 4 недели решаем: продолжать соцсети или нет. Сколько новых обращений от компаний по коду из ролика (с названием компании, материалом и объёмом) за 4 недели для вас будет означать «да, стоит»? 1 — 3 и больше, 2 — 6 и больше, 3 — 10 и больше. По умолчанию: 1, и хотя бы одно из них должно дойти до КП или счёта. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "intake",
+  "q": "Кого считаем клиентом из роликов: 1 — только юрлица с договором, 2 — ещё ИП, бригады и прорабы с оплатой по счёту, 3 — всех, включая частных покупателей? По умолчанию: 2, а частников вежливо направляем по вашему правилу. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "intake",
+  "q": "Кого можно снимать на складе: 1 — только руки, мешки, погрузку, машины и голос, 2 — ещё сотрудников с лицом (только с их согласия)? По умолчанию: 1. Ответ до 10.10 12:00."
+ },
+ {
+  "from": "inputs",
+  "q": "Company identity: legal/trade name as on 2GIS, website and any existing social accounts",
+  "how": "«Здравствуйте, это AI-ассистент. Пришлите, пожалуйста, одним сообщением: 1) название компании, как в 2ГИС; 2) ссылку на сайт (если есть); 3) есть ли Instagram/TikTok/YouTube — ссылки или «нет». Этого достаточно, остальное найдём сами.»",
+  "minutes": 1
+ },
+ {
+  "from": "inputs",
+  "q": "WhatsApp chat export: 15–30 recent chats with company clients, without media",
+  "how": "«Откройте чат с клиентом → ⋮ (или имя контакта) → „Экспорт чата“ → „Без медиафайлов“. Пришлите 15–30 последних чатов с прорабами/снабженцами. Имена, номера, названия компаний и детали тендеров удаляем сразу, наружу ничего не попадает. Если клиенты в основном звонят, а не пишут, — ответьте одним словом «звонят».»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Permissions tap card: prices, trucks and logos, use of existing contacts",
+  "how": "«Три коротких ответа цифрой: 1) Цены в роликах: 1 — нельзя, 2 — можно только с вашего прайса. По умолчанию: 1. 2) Машины и логотип компании в кадре: 1 — можно, 2 — номера и логотип размываем. По умолчанию: 2. 3) Лучшие ролики отправлять в WhatsApp-статус вашим нынешним клиентам: 1 — да, 2 — нет. По умолчанию: 2. Ответ до 10.10 12:00.»",
+  "minutes": 1
+ },
+ {
+  "from": "inputs",
+  "q": "Money map: brands and SKU lines, 2–3 lines to push, lines not to push, delivery area, minimum order, payment by invoice (с НДС?), free capacity per week",
+  "how": "«Ответьте голосом или текстом (2–3 мин): 1) какие марки/бренды смесей и утеплителя у вас основные; 2) какие 2–3 позиции хотите продавать больше, какие — не продвигать; 3) куда возите (только Караганда / область / радиус км) и есть ли минимальный заказ; 4) работаете ли по счёту с НДС; 5) сколько ещё заказов в неделю потянете без проблем. Можно просто сфотографировать прайс — цены в ролики без вашего «да» не попадут.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Proof folder: 10–20 real photos and videos from the warehouse, loading and deliveries, sent as files",
+  "how": "«Перешлите как файлы (не как фото) 10–20 снимков и видео со склада, погрузки, машин, разгрузки на объекте — что уже есть в телефоне у вас или у водителя/кладовщика. Лица и номера размоем, объекты клиентов без согласия не покажем.»",
+  "minutes": 2
+ },
+ {
+  "from": "inputs",
+  "q": "Week-0 baseline tally and buyer-role tally by sales reps and the WhatsApp operator (2026-10-12 → 2026-10-18)",
+  "how": "Staff, about 5 minutes total in week 0, using a paper or WhatsApp tally card sent by the agent: «На каждый новый входящий звонок/чат от компании ставьте одну отметку: кто звонит (прораб/бригадир — снабженец — директор — частник) и материал. С 19.10 добавьте вопрос: „Подскажите, откуда о нас узнали?“» Reps also tag coded inquiries «КП/счёт: да/нет». The owner only forwards the card.",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Staff reality scan: 3 test clips (a voice line at 30 cm, a mix being poured or stirred at 30 cm, a bag dropped onto a pallet) plus a 2-minute silent warehouse walkthrough",
+  "how": "Staff, about 10 minutes once in week 0. The agent sends a card: «Снимите вертикально, телефон протрите: 1) скажите одну фразу, телефон в 30 см от рта; 2) звук: насыпьте/размешайте смесь, телефон в 20–30 см; 3) бросьте мешок на поддон, телефон в 1 м; 4) пройдите молча по складу 2 минуты, медленно. Отправьте как файлы.»",
+  "minutes": 0
+ },
+ {
+  "from": "inputs",
+  "q": "Weekly rep voice note from week 1: «3 вопроса прорабов за неделю + 1 случай»",
+  "how": "Staff, 1 min/week (inside the 17-minute budget): «Голосовое на 30 секунд: какие 3 вопроса задавали прорабы/снабженцы на этой неделе и один случай, который запомнился. Без названий компаний.»",
+  "minutes": 0
+ },
+ {
+  "from": "facts",
+  "minutes": 2.0,
+  "q": "Подтвердите или поправьте, пожалуйста, факты для роликов: ID15.on_screen_ru[2]: absolute/superlative claim without a backing fact: 'лучший'; ID15.say_ru[1]: absolute/superlative claim without a backing fact: 'лучше'; ID23.hook_ru: absolute/superlative claim without a backing fact: 'лучшему'; ID23.on_screen_ru[0]: absolute/superlative claim without a backing fact: 'лучшему'; Q2 answer (owner); «быстрее считаем» depends on the reply guardrail (≤15 min median). Check the reply time fi (и ещё 6)"
+ }
+]

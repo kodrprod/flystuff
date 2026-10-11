@@ -1,0 +1,371 @@
+{
+ "evidence": [
+  {
+   "id": "E01",
+   "kind": "fact",
+   "claim": "The business is a mid-price beauty salon in Шымкент. Unverified: the client is hypothetical and nothing is documented.",
+   "source": "assumption: client profile what_they_sell + city (HYPOTHETICAL, inline input 2026-10-09)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E02",
+   "kind": "fact",
+   "claim": "The salon has 8 masters. The count is unverified, and service lines per master are unknown.",
+   "source": "assumption: client profile what_they_sell (owner statement, undocumented)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E03",
+   "kind": "fact",
+   "claim": "Bookings come through WhatsApp, 2GIS and walk-ins.",
+   "source": "assumption: client profile sales_channels (undocumented)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E04",
+   "kind": "market",
+   "claim": "The owner believes nearby competitors are about 30% cheaper. There is no dated comparison. INTERNAL ONLY: never usable as «дешевле/дороже» or in any audience copy.",
+   "source": "assumption: client profile what_they_sell (owner perception, no dated price source)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E05",
+   "kind": "behaviour",
+   "claim": "The owner reports «клиенты уходят». It is unknown which clients (new vs regular), which services, since when, and how many.",
+   "source": "assumption: boss request verbatim «Конкуренты дешевле, клиенты уходят» + known_unknowns 'which services lose clients'",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E06",
+   "kind": "constraint",
+   "claim": "The owner wants to keep current prices: no price cuts and no discounts during the sprint.",
+   "source": "assumption: client profile what_they_sell 'owner wants to keep prices' (owner statement)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E07",
+   "kind": "proof_asset",
+   "claim": "The owner says the salon has good 2GIS reviews. Rating, review count, dates and review wording have not been fetched yet. The agent must fetch the 2GIS card before any review can be quoted.",
+   "source": "assumption: client profile 'good 2GIS reviews' (owner statement); agent fetch pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E08",
+   "kind": "constraint",
+   "claim": "The ledger is empty: no usable price, number, policy, hours or capability fact. No number, price, price band, superlative or policy may appear in audience copy.",
+   "source": "assumption: client inputs facts_usable=[] and files=[] (inline input 2026-10-09; certain for these inputs)",
+   "confidence": "verified"
+  },
+  {
+   "id": "E09",
+   "kind": "constraint",
+   "claim": "Staff budget is 20 min/week including safety, so ≤17 planned. Staff have one phone, and audio is usable only close to it (~30 cm).",
+   "source": "assumption: client profile staff_capacity",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E10",
+   "kind": "constraint",
+   "claim": "Masters' consent to be filmed is unknown, so the default is hands, tools and voice only, with 0 identifiable faces. No client faces or before/after without consent recorded on camera.",
+   "source": "assumption: client profile known_unknowns 'masters' consent to be filmed' + A5 FILMING default",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E11",
+   "kind": "constraint",
+   "claim": "Exact prices are unknown. budget_ladder, guess-the-price and any why_it_costs version with numbers are blocked until a dated price list (≤7 days) is in the ledger.",
+   "source": "assumption: client profile known_unknowns 'exact prices'",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E12",
+   "kind": "constraint",
+   "claim": "Instagram status is unknown and TikTok is assumed absent. There is no own post history, so the platform baseline is the pooled beauty_salon median (~500 views, an assumption) until there are 10 own posts.",
+   "source": "assumption: client profile social.instagram='unknown'; intake REALISM line",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E13",
+   "kind": "behaviour",
+   "claim": "Bottleneck hypothesis: new WhatsApp chats stall right after the price is sent, with no value explanation and no next step. Not observed, because there is no chat export yet.",
+   "source": "assumption: intake BOTTLENECK line (~30% confidence); verify with chat export by 2026-10-16",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E14",
+   "kind": "behaviour",
+   "claim": "Median first WhatsApp reply time and chat→booking close rate are unknown. The 50% close rate is a placeholder.",
+   "source": "assumption: intake assumptions (close rate placeholder); verify with chat export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E15",
+   "kind": "customer_language",
+   "claim": "[C] «а там дешевле» / «у соседей дешевле»: HYPOTHESISED phrasing, 0/0 observed. Not usable in copy, as verbatim or as paraphrase, until ≥2 real messages match (C6.5).",
+   "source": "assumption: owner framing of the problem (E04/E05); to be coded from chat export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E16",
+   "kind": "customer_language",
+   "claim": "[F] «дорого» / «подумаю» as the last client message after the price: HYPOTHESISED, 0/0 observed.",
+   "source": "assumption: intake bottleneck hypothesis; to be coded from chat export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E17",
+   "kind": "customer_language",
+   "claim": "[F] fear of a bad result, e.g. «боюсь, испортят», «не так подстригли», «покрытие слезло через неделю»: HYPOTHESISED category anxiety, 0/0 observed.",
+   "source": "assumption: strategist category knowledge; verify in 2GIS reviews of this and peer salons + chat export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E18",
+   "kind": "customer_language",
+   "claim": "[Q] First message «а сколько стоит …?» with no other context: HYPOTHESISED dominant opener, 0/0 observed.",
+   "source": "assumption: strategist category knowledge; count in chat export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E19",
+   "kind": "moment",
+   "claim": "Within the sprint window (2026-10-19 → 2026-11-15) clients book before autumn тойs and family events, and pre–New Year corporate-party bookings likely start in late Nov or December. In these situations being seen matters more than saving money. Dates and salience in Шымкент are unverified.",
+   "source": "assumption: B2 calendar knowledge (той season, Новый год); verify dates and owner's seasonal pattern",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E20",
+   "kind": "constraint",
+   "claim": "Free capacity is unknown per master and service. Weekday daytime slots are assumed to be the likeliest free capacity, so no «свободно сегодня/завтра» claims.",
+   "source": "assumption: intake CAPACITY constraint + clarifying question 3 (default 1)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E21",
+   "kind": "proof_asset",
+   "claim": "Reality inventory (hypothesised): close-range sounds capturable at ≤30 cm include scissors cutting hair, a nail file on a nail, clipper buzz and brush strokes of gel. The hairdryer is too loud to use under speech.",
+   "source": "assumption: typical salon processes; verify with staff reality scan (3 test clips at 30 cm)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E22",
+   "kind": "proof_asset",
+   "claim": "Possible hygiene ritual: instruments sterilised and opened from a sealed pouch in front of the client. NEEDS FACT: whether this salon does it, and how. Not usable until the owner confirms it and the camera shows it.",
+   "source": "assumption: common salon practice; owner confirmation + filmed verification required",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E23",
+   "kind": "proof_asset",
+   "claim": "Possible pre-service check: the master inspects the nail plate, hair condition or brow shape and agrees on the result before starting. NEEDS FACT: whether masters here do this as a routine.",
+   "source": "assumption: common salon practice; verify with owner/staff voice note and footage",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E24",
+   "kind": "constraint",
+   "claim": "Filmable locations are unknown. Provisional inventory names «маникюрный стол», «кресло мастера» and «тихий угол» are pending the staff's 2-minute walkthrough (light and noise notes).",
+   "source": "assumption: B3 rank 7 staff reality scan not yet done",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E25",
+   "kind": "market",
+   "claim": "Hypothesised category conventions in CIS beauty Reels: (1) finished nails or hair close-up with trending music; (2) before/after split; (3) price-list slides; (4) master selfie talking or dancing. The peer scan of 10–20 Шымкент and RU-language salons has not been run.",
+   "source": "assumption: strategist knowledge of CIS beauty short-form; verify with B2 peer outlier scan",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E26",
+   "kind": "market",
+   "claim": "Hypothesis (strategist judgment beyond METHOD): salon churn often follows individual masters, when a master leaves or starts working cheaper on their own. «Конкуренты дешевле» may be the visible explanation for that. If true, this is a non-marketing problem.",
+   "source": "assumption: strategist judgment; verify with owner question 1 (option 3) + export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E27",
+   "kind": "market",
+   "claim": "A blind text judge ranks Shorts performance barely above chance: Spearman 0.11 overall and 0.07 for retail (CI includes 0), n=1,172 peer Shorts. Scores are priors only.",
+   "source": "assumption: knowledge base learning L001 (strength 'measured', 2026-10-08); its cited file experiments/002_shorts_scores_and_labels.json is not among this client's input files",
+   "confidence": "likely"
+  },
+  {
+   "id": "E28",
+   "kind": "market",
+   "claim": "Long-form title patterns («для начинающих», vs/сравнение) did not replicate on Shorts: median relative views 1.00 and 0.99.",
+   "source": "assumption: knowledge base learning L003 (strength 'measured', 2026-10-08); its cited file experiments/002_shorts_scores_and_labels.json is not among this client's input files",
+   "confidence": "likely"
+  },
+  {
+   "id": "E29",
+   "kind": "market",
+   "claim": "Polished motion-graphic price slides from catalogue photos were judged useless (owner feedback 2026-10-08). No idea may rest on price plus product photo alone.",
+   "source": "assumption: knowledge base learnings L005 (expert judgment, owner feedback 2026-10-08, no file)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E30",
+   "kind": "market",
+   "claim": "Brand-only product demo clips had a median of 390 views vs a channel median of 2,300 (n=48), and interviews 118 (n=4). Demos without a buyer question or human angle under-performed. This is another vertical and correlational.",
+   "source": "assumption: knowledge base learning L006 (strength 'measured (correlational)', other client and vertical, 2026-10-08); its cited file clients/muzzone/research/youtube_channel.json is not among this client's input files",
+   "confidence": "likely"
+  },
+  {
+   "id": "E31",
+   "kind": "constraint",
+   "claim": "If the salon offers injections, peels or other medical-cosmetic procedures, only process content is allowed: no outcome claims, and owner sign-off. The service list is unverified.",
+   "source": "assumption: intake REGULATED constraint; agent fetches 2GIS card/price list by 2026-10-12",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E32",
+   "kind": "behaviour",
+   "claim": "Secondary hypothesis: regular clients lapse between visits with no reminder or reason to come back. Unobserved.",
+   "source": "assumption: intake SECONDARY retention_or_loyalty line",
+   "confidence": "assumption"
+  }
+ ],
+ "insights": [
+  {
+   "id": "I01",
+   "insight": "[price_value] When a client gets our price in WhatsApp and remembers a cheaper salon nearby, she wants the same result for less. She cannot see what the difference pays for (minutes per client, prep steps, finishing), so she says «подумаю» and tries the cheaper place. We can show the invisible steps with the master's hands at close range. This moves weekly undiscounted bookings because it answers the price doubt at the moment the chat stalls, without a price cut or a comparison. PROVISIONAL (strategist judgment beyond METHOD): every item is assumption-only, so C4 test 1 (evidenced) fails. The insight is kept to unblock step 4 and is capped at 2. Rerun step 3 when the chat export and 2GIS fetch arrive (by 2026-10-16).",
+   "tension": "Wants the same result for less vs cannot see what our price pays for",
+   "evidence_ids": [
+    "E04",
+    "E05",
+    "E06",
+    "E13",
+    "E16",
+    "E15",
+    "E29"
+   ],
+   "who_feels_it": "A client who has just received our price in WhatsApp and knows a cheaper salon a few streets away",
+   "content_reality": "The master's hands doing the prep and finishing steps a client normally doesn't notice, shot at «маникюрный стол» or «кресло мастера», phone ≤30 cm, faces 0. No ledger prices or process facts yet, so: show the process only. No «поэтому дороже», no numbers, no comparison. why_it_costs only after the owner confirms the steps (NEEDS FACT).",
+   "strength": 2
+  },
+  {
+   "id": "I02",
+   "insight": "[friction] When someone texts «а сколько стоит?» and gets a bare price with no next step, she wants a quick yes or no on whether it's worth it. The chat gives her nothing to say yes to, so she drifts to whichever salon answers faster or cheaper. We can show a master answering the real recurring question in her own voice, and fix the reply script with one value line plus one question. This moves the chat→booking rate, the cheapest lever for 'stop the decline'. If the export shows slow first replies (>60 min median), that is the leak to fix before more content (A3 conversion). PROVISIONAL: no export yet, capped at 2.",
+   "tension": "Wants a fast, clear answer about value and a slot vs gets a bare price and no next step",
+   "evidence_ids": [
+    "E13",
+    "E14",
+    "E18",
+    "E16",
+    "E03"
+   ],
+   "who_feels_it": "New inquirers comparing 2–3 salons in WhatsApp in the same evening",
+   "content_reality": "Anonymised question card (screen mode) plus the master's voice recorded at ≤30 cm in «тихий угол», over hands-at-work footage at «маникюрный стол». No real chat questions counted yet, so recognition/question content only. Wording must come from ≥2 real matching messages after the export.",
+   "strength": 2
+  },
+  {
+   "id": "I03",
+   "insight": "[tension] When she has an event coming (a той, a family celebration, a work party), a client who tries a cheaper salon risks something worse than lost money: arriving with chipped coating or a haircut she hides. Price shopping feels risky exactly when it matters, but she has no way to judge quality before sitting down. We can show what a master checks and agrees with the client before starting, and how the work is finished, so the anxiety is resolved by seeing the process. This holds bookings at current price without attacking anyone. Never show or mock 'bad work from elsewhere'.",
+   "tension": "Wants to save money vs fears a bad result before an important event, in front of people",
+   "evidence_ids": [
+    "E17",
+    "E19",
+    "E23",
+    "E10"
+   ],
+   "who_feels_it": "Someone with an event within 2–14 days, deciding between her usual salon and a cheaper one",
+   "content_reality": "The pre-service check and finishing details on hands only at «маникюрный стол» / «кресло мастера». E23 is unconfirmed, so the check ritual needs owner confirmation (NEEDS FACT) before it is framed as «у нас так». Until then: empathy/recognition content and practical checklists only, no outcome claims.",
+   "strength": 2
+  },
+  {
+   "id": "I04",
+   "insight": "[proof] When a hesitant client is choosing, she trusts strangers' reviews more than the salon's words, but she won't dig through 2GIS. So she defaults to price, the only thing she can compare at a glance. We can show real public 2GIS reviews (no names, «из отзыва в 2ГИС») over the master's hands doing the praised work. This moves bookings because it moves the comparison from price to evidence. Strength stays at 2 until the agent fetches the card: rating, count and recurring praise words are unknown, and «хорошие отзывы» is only the owner's word.",
+   "tension": "Wants certainty from other clients vs only price is easy to compare",
+   "evidence_ids": [
+    "E07",
+    "E04",
+    "E29"
+   ],
+   "who_feels_it": "A prospective client who found the salon on 2GIS or was sent our video, and is comparing options",
+   "content_reality": "Zero staff minutes possible: screen recording of the public 2GIS card, plus library hands footage once it exists. Location «маникюрный стол» for new detail shots. No reviews fetched yet: nothing may be quoted, and no rating number may appear until it is a ledger fact.",
+   "strength": 2
+  },
+  {
+   "id": "I05",
+   "insight": "[moment] Before a той, a family celebration or the start of the pre–New Year party season, a client wants to look right in photos and in front of relatives. A few days out, certainty matters more than a lower price, but she leaves booking late and grabs any free slot. We can show a practical 'what to book and when before an event' guide with hands-on demonstration, steered to slots with free capacity (weekday daytime by default). This moves bookings onto free capacity at full price. No «свободно завтра» or deadline claims without owner-confirmed slots.",
+   "tension": "Wants to look right at the event vs leaves it late and books on price or availability",
+   "evidence_ids": [
+    "E19",
+    "E20",
+    "E17"
+   ],
+   "who_feels_it": "People in Шымкент with a той or celebration 2–14 days away",
+   "content_reality": "Hands-on demo of an event-ready service at «кресло мастера» / «маникюрный стол», plus a calendar-cue on-screen frame. Event-season dates and free slots are unverified, so practical/recognition framing only. Steer to weekdays only after question 3 is answered.",
+   "strength": 2
+  },
+  {
+   "id": "I06",
+   "insight": "[hidden_knowledge] When a client compares salons, she has no criteria beyond price and photos of finished nails or hair, because she doesn't know what a well-done job looks like up close: clean cuticle line, coating sealed at the edge, even ends. She judges on the one number she understands. We can give her the master's checklist of how to tell good work, shown on real hands. This is useful wherever she goes, and it quietly sets criteria where a careful salon wins. It moves bookings through saves and trust rather than through a claim. Never say who fails the checklist.",
+   "tension": "Wants to choose well vs has no way to judge quality except price",
+   "evidence_ids": [
+    "E23",
+    "E17",
+    "E25",
+    "E30"
+   ],
+   "who_feels_it": "Clients who switch salons and can't tell whether the difference is real",
+   "content_reality": "Macro detail shots at ≤30 cm of finished work on hands at «маникюрный стол». Which checks the masters actually use is unconfirmed (NEEDS FACT: staff voice note «что мастер проверяет в готовой работе»). Until then, framed as «мастер считает» and limited to what is visibly filmed.",
+   "strength": 2
+  },
+  {
+   "id": "I07",
+   "insight": "[content_reality] Snipping scissors, a file on a nail edge, the brush pulling gel: nobody outside the chair hears or sees these at close range, and the category posts the finished look with trending music on top (hypothesised convention E25). The outsider curiosity gap is the sound and the micro-process itself. We can capture close sound on the weak phone, which is its one strength at ≤30 cm. The possible hygiene ritual (sealed instrument pouch opened in front of the client) is held back until the owner confirms it and the camera shows it. This feeds reach (sensory/close_sound wildcards) and only indirectly the booking objective.",
+   "tension": "Outsider's curiosity gap: «снаружи этого никто не слышит и не видит так близко»",
+   "evidence_ids": [
+    "E21",
+    "E22",
+    "E25",
+    "E09"
+   ],
+   "who_feels_it": "Any scroller in Шымкент, and existing clients who enjoy the ritual",
+   "content_reality": "Close-sound loops at «маникюрный стол» and «кресло мастера», phone on a stand 20–30 cm away, hands only, faces 0. Sounds are unverified until the staff reality scan. The sterilisation pouch shot is blocked by NEEDS FACT (E22).",
+   "strength": 2
+  },
+  {
+   "id": "I08",
+   "insight": "[identity] Many clients don't choose a salon, they choose 'my master'. Loyalty is to a person's hands and judgment, and a stranger's lower price rarely beats that, but a new client has no way to meet the masters before booking. So she books on price. We can show each master as a recurring hands-and-voice character (how she works, what she won't do), so a new client picks a person instead of a price. This moves coded bookings to named masters with free slots. If the export shows clients left WITH a departed master (E26), that is a non-marketing problem (staffing and retention), and content will not fix it. That goes to push_back, not into ideas.",
+   "tension": "Wants a master she can trust vs can't meet anyone before booking, so price decides",
+   "evidence_ids": [
+    "E26",
+    "E02",
+    "E10",
+    "E20"
+   ],
+   "who_feels_it": "New clients choosing a master for a recurring service, and regulars whose master has a free window",
+   "content_reality": "Voice-only or hands-only character episodes at each master's station, «кресло мастера» / «маникюрный стол». Speech only at ≤30 cm. Faces blocked until each master consents. Masters' willingness and free slots are unknown, so this waits for question 2 and question 3.",
+   "strength": 2
+  },
+  {
+   "id": "I09",
+   "insight": "[price_value] WILDCARD. When a client is torn between us and a cheaper salon, every salon telling her «у нас качество» sounds like an ad, so she discounts it and goes with price. A salon that honestly says when a cheaper option is fine for her (e.g. a quick tidy-up between full visits) and when it isn't would be believed. We could film a master's honest take, framed as «мастер считает», at the station. This could build trust that holds full-price bookings for the services that matter, but it risks the owner's comfort and may push some low-margin demand away. Needs the owner's «да». Thin evidence, high distinctiveness.",
+   "tension": "Wants honest advice vs every salon claims quality, so the claims cancel out and price wins",
+   "evidence_ids": [
+    "E04",
+    "E06",
+    "E15",
+    "E29"
+   ],
+   "who_feels_it": "Price-sensitive clients who suspect salons upsell",
+   "content_reality": "The master's voice at ≤30 cm in «тихий угол» over hands-at-work footage at «маникюрный стол». It is pure opinion with no ledger facts, so it must be framed as an opinion and must not name or imply competitors. Owner approval of the anti_sell stance is required.",
+   "strength": 1
+  },
+  {
+   "id": "I10",
+   "insight": "[friction] SECONDARY (retention, ≤20% of slots). Regular clients mean to come back, but without a reminder or a reason the gap stretches, and a cheaper salon's ad lands during that gap. So they try it 'just once'. We can post care how-tos (how to make a result last until the next visit) and the week's best videos on WhatsApp Status, broadcasting only to opted-in contacts. This moves repeat bookings from the warm base, the fastest lever within the 4-week window. Unobserved until the export separates new from returning clients.",
+   "tension": "Wants to keep her regular look vs no prompt to rebook, so the gap opens for cheaper alternatives",
+   "evidence_ids": [
+    "E32",
+    "E05",
+    "E03"
+   ],
+   "who_feels_it": "Existing clients 3–6 weeks after their last visit",
+   "content_reality": "Care micro-demos on hands at «маникюрный стол» / «кресло мастера». Care advice is framed as «мастер советует», with no outcome or duration claims (no ledger facts). Status and broadcast depend on opt-in.",
+   "strength": 1
+  }
+ ]
+}

@@ -1,0 +1,532 @@
+{
+ "evidence": [
+  {
+   "id": "E01",
+   "kind": "performance",
+   "claim": "The channel's top video is «CORT X100 - Электрогитара для начинающих»: 64 000 views, 147 s. That is about 28× the channel median of 2 300 (long-form YouTube).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=128",
+   "confidence": "verified"
+  },
+  {
+   "id": "E02",
+   "kind": "performance",
+   "claim": "Videos framed as beginner electric or bass guitars sit at 4.8–8.3× the channel median: «Электрогитара для новичков CORT G100» 19 000; «Cort KX100 - гитара для новичков» 17 000; «CORT CR150 - бюджетный Les Paul для начинающих» 14 000; «CORT CR100 ... for Beginners» 11 000; «Squier ... Бас гитара для начинающих» 11 000. These are long-form results only; per L003, beginner framing did not replicate on Shorts.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=129,137,148,31,71",
+   "confidence": "verified"
+  },
+  {
+   "id": "E03",
+   "kind": "performance",
+   "claim": "Head-to-head comparisons got 10 000–61 000 views: Anton Davidyants bass comparison 61 000; «Cort X300 vs Cort KX300» 28 000; «Marshall CODE vs Fender Mustang GT || Сравнение гитарных комбиков для дома» 24 000; Boss GT1 vs Digitech 21 000; «Squier Bullet Strat vs Cort G210» 11 000; Mooer vs Digitech 10 000. All long-form; per L003, the 'vs' framing did not replicate on Shorts.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=356,107,197,247,239,46",
+   "confidence": "verified"
+  },
+  {
+   "id": "E04",
+   "kind": "performance",
+   "claim": "Short clips (under 90 s) with plain model-name titles produced several of the channel's outliers: «Акустическая гитара Cort AD810BKS» 32 000 (83 s); «Cort CEC-1 OP с нейлоновыми струнами» 21 000 (82 s); «Squier Contemporary Active Stratocaster» 17 000 (78 s); «Takamine GD51BSB» 14 000 (65 s); «PAISTE PST7 CHINA 18\"» 13 000 (34 s).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=223,212,173,328,276",
+   "confidence": "verified"
+  },
+  {
+   "id": "E05",
+   "kind": "performance",
+   "claim": "Cymbal, snare and drum clips titled with the brand only: median 390 views vs the 2 300 channel median (n=48, L006). Examples: «SABIAN XSR FAST CRASH» 48, «SABIAN HH KING» 128. Mapex artist interviews: 68–233.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=117-125,234-237",
+   "confidence": "verified"
+  },
+  {
+   "id": "E06",
+   "kind": "performance",
+   "claim": "A few very short, sound-only percussion clips broke out of that low cluster: «Перкуссионный инструмент Кахон LP1426» 6 900 (23 s) and «PAISTE PST X Swiss Splash 10\"» 5 600 (21 s), while neighbouring PST X clips got 168–581.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=344,288,282-287",
+   "confidence": "verified"
+  },
+  {
+   "id": "E07",
+   "kind": "performance",
+   "claim": "The «Юные гости магазина МузZone» series (children playing store pianos and drums): 6 videos at 457–5 200 views, mostly below the median. The Casio PX 770 episode got 663.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=146,193,194,195,359,360",
+   "confidence": "verified"
+  },
+  {
+   "id": "E08",
+   "kind": "performance",
+   "claim": "Digital-piano videos with plain model titles: «Цифровое фортепиано Kurzweil КА130» 11 000, «Kurzweil M110» 6 400. The 16.5-minute «Китаец Lexington DP791 VS Японец Casio Celviano AP-270» got 1 100.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=252,244,14",
+   "confidence": "verified"
+  },
+  {
+   "id": "E09",
+   "kind": "performance",
+   "claim": "The channel has already asked the guitar-vs-amp question: «ТЕСТ: Дешевая гитара и дорогой усилитель или НАОБОРОТ???» got 2 600 (about the median), and a home-amp comparison got 24 000.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=200,197",
+   "confidence": "verified"
+  },
+  {
+   "id": "E10",
+   "kind": "performance",
+   "claim": "The channel is dormant. The last upload was on 2026-05-10. The 8 newest videos have no view count in the fetch, and the latest lesson series got 129–630 views. There is no Shorts, Reels or TikTok baseline of our own.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=0-12",
+   "confidence": "verified"
+  },
+  {
+   "id": "E11",
+   "kind": "performance",
+   "claim": "Videos led by people with skill did well: the Guthrie Govan clinic part 1 got 39 000, the Anton Davidyants clinic 40 000, and a blogger review of the Enya NOVA GO 27 000. The novelty video «45 гитар в одном соло» got 233.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#pos=371,355,17,238",
+   "confidence": "verified"
+  },
+  {
+   "id": "E12",
+   "kind": "fact",
+   "claim": "Alston AS-100BK electric guitar: 59 800 ₸, in stock per the site (2026-10-08; expires 2026-10-15).",
+   "source": "fact:as100_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E13",
+   "kind": "fact",
+   "claim": "The AS-100BK has the deepest stock of the 8 in-stock electric guitars sampled: 11 units. Most of the others have 1–2.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json#electric_guitars/AS-100BK",
+   "confidence": "verified"
+  },
+  {
+   "id": "E14",
+   "kind": "fact",
+   "claim": "AS-100BK specs: 6 strings, Stratocaster shape, HSS pickups, maple neck and fretboard, poplar body, made in China.",
+   "source": "fact:as100_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E15",
+   "kind": "fact",
+   "claim": "Hibilly Retro 30R Cream combo amp: 56 576 ₸, previously 70 720 ₸ (sale section), 2 units in stock on 2026-10-08.",
+   "source": "fact:hib_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E16",
+   "kind": "fact",
+   "claim": "Hibilly Retro 30R specs: 30 W, one 10\" speaker, transistor amplification.",
+   "source": "fact:hib_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E17",
+   "kind": "behaviour",
+   "claim": "AS-100BK (59 800 ₸) plus Hibilly Retro 30R (56 576 ₸) comes to 116 376 ₸. That is above the 100 000 ₸ free-delivery threshold for Kazakhstan. This is derived; recompute it from same-day prices before publishing.",
+   "source": "fact:delivery_free_100k",
+   "confidence": "verified"
+  },
+  {
+   "id": "E18",
+   "kind": "fact",
+   "claim": "A Cort X100 is in stock: the Open Pore Black Cherry Burst variant, 98 280 ₸, 2 units. This is the model family in the channel's 64 000-view video. The Open Pore Black variant is out of stock. Neither is in the ledger yet.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json#electric_guitars/cort-x100-open-pore-black-cherry-burst",
+   "confidence": "verified"
+  },
+  {
+   "id": "E19",
+   "kind": "fact",
+   "claim": "Casio PX-770 BKC7 digital piano: 521 935 ₸, 3 units in stock per the site (2026-10-09).",
+   "source": "fact:web_cifrovoe_pianino_casio_px_770_bkc7_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E20",
+   "kind": "fact",
+   "claim": "Casio Celviano AP-270 BKC7: 734 886 ₸, 5 units in stock per the site (2026-10-09).",
+   "source": "fact:web_cifrovoe_pianino_casio_celviano_ap_270_bkc7_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E21",
+   "kind": "fact",
+   "claim": "PX-770 vs AP-270 on paper: both have 88 keys, no Bluetooth and no bench included («Банкетка: Нет»). Polyphony is 128 vs 192 (ap270_specs).",
+   "source": "fact:px770_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E22",
+   "kind": "behaviour",
+   "claim": "The AP-270 costs 212 951 ₸ more than the PX-770 (734 886 − 521 935, same-day 2026-10-09 ledger prices). This is derived; recompute it before use.",
+   "source": "fact:web_cifrovoe_pianino_casio_celviano_ap_270_bkc7_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E23",
+   "kind": "constraint",
+   "claim": "The PX-770 price changed sharply within 16 h: 695 913 ₸ on 2026-10-08T22:24 vs 521 935 ₸ on 2026-10-09T14:08. The older ids are marked do_not_use. Piano prices are volatile, so they can't go into evergreen copy and must be re-fetched on publish day.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/products_batch001.json#PX-770BKC7",
+   "confidence": "verified"
+  },
+  {
+   "id": "E24",
+   "kind": "market",
+   "claim": "Digital pianos: 14 of 25 sampled listings in stock, from 200 720 ₸ (Estrada EDP-200WH) to 2 075 617 ₸ (Dexibell VIVO H10), a span of about 10×. Brands include Casio, Kurzweil, Gewa, Estrada and Dexibell.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json#digital_pianos",
+   "confidence": "verified"
+  },
+  {
+   "id": "E25",
+   "kind": "fact",
+   "claim": "An in-stock concert-ukulele price ladder exists: Caesar U-246 22 100 ₸ / Caesar US-C40 32 901 ₸ (usc40_price) / Alston UF-330 64 501 ₸ (uf330_price), dated 2026-10-08.",
+   "source": "fact:u246_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E26",
+   "kind": "fact",
+   "claim": "All three ukuleles in the ladder include a case («Чехол в комплекте: Да»). The tops differ: U-246 spruce («Ель»), US-C40 solid spruce («Массив ели»), UF-330 maple («Клён») (usc40_specs, uf330_specs).",
+   "source": "fact:u246_specs",
+   "confidence": "verified"
+  },
+  {
+   "id": "E27",
+   "kind": "behaviour",
+   "claim": "Only 4 of 20 sampled ukulele listings are in stock (15 out of stock, 1 fetch error): UF-330 5 units, U-246 4, US-C40 3, U-243L 1.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json#ukulele",
+   "confidence": "verified"
+  },
+  {
+   "id": "E28",
+   "kind": "behaviour",
+   "claim": "73 of 135 sampled listings across 5 site lists show «нет в наличии» (54%). Acoustic guitars are the worst at 22/25. A site visitor regularly lands on unavailable items.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json#all",
+   "confidence": "verified"
+  },
+  {
+   "id": "E29",
+   "kind": "fact",
+   "claim": "Goods of proper quality can be returned within 14 days if unused, with appearance, labels, packaging and the purchase document kept (returns_conditions).",
+   "source": "fact:returns_14d",
+   "confidence": "verified"
+  },
+  {
+   "id": "E30",
+   "kind": "fact",
+   "claim": "When goods of proper quality are returned, delivery both ways is withheld, plus 3% for cash on delivery. A remote buyer's return therefore costs money.",
+   "source": "fact:returns_cost",
+   "confidence": "verified"
+  },
+  {
+   "id": "E31",
+   "kind": "constraint",
+   "claim": "The returns page offers delivery compensation for an honest review or video in social media. This is an incentivised review and must never be promoted or used as a source of testimonials.",
+   "source": "fact:returns_cost",
+   "confidence": "verified"
+  },
+  {
+   "id": "E32",
+   "kind": "fact",
+   "claim": "Every product in the store has at least a 12-month warranty.",
+   "source": "fact:warranty",
+   "confidence": "verified"
+  },
+  {
+   "id": "E33",
+   "kind": "fact",
+   "claim": "Casio carries a 2-year manufacturer warranty, but service is only at the Almaty service centre.",
+   "source": "fact:warranty_casio",
+   "confidence": "verified"
+  },
+  {
+   "id": "E34",
+   "kind": "fact",
+   "claim": "Delivery anywhere in Kazakhstan (ground transport) is free on orders over 100 000 ₸.",
+   "source": "fact:delivery_free_100k",
+   "confidence": "verified"
+  },
+  {
+   "id": "E35",
+   "kind": "fact",
+   "claim": "Courier delivery in Astana is free when the order weighs more than 20 kg and costs more than 15 000 ₸. Piano weights are not in the ledger.",
+   "source": "fact:delivery_astana",
+   "confidence": "verified"
+  },
+  {
+   "id": "E36",
+   "kind": "fact",
+   "claim": "A pickup reservation holds for 3 working days and can be extended on request. This is an existing non-price 'hold' option.",
+   "source": "fact:pickup_reserve",
+   "confidence": "verified"
+  },
+  {
+   "id": "E37",
+   "kind": "fact",
+   "claim": "Payment: Kaspi QR, Kaspi Pay, Kaspi transfer, Visa/MasterCard, Apple Pay, or cash on delivery or pickup. No installment or «рассрочка» is stated, so that claim is not available.",
+   "source": "fact:payments",
+   "confidence": "verified"
+  },
+  {
+   "id": "E38",
+   "kind": "fact",
+   "claim": "The site's sale section is titled «Финальная распродажа» and holds 535 listings. Its reason and end date are unknown.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/catalog_listings.json#lists.sale.n",
+   "confidence": "verified"
+  },
+  {
+   "id": "E39",
+   "kind": "behaviour",
+   "claim": "In the sale sample, 27 of 40 listings are drums, cymbals, drum hardware or sticks. 12 of the 29 in-stock sale items have only 1 unit. Discounts run from 20% (Hibilly 30R) to about 70% (Kramer RK-4PT-B 15 006 ₸ vs 50 019 ₸).",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/stock_sample.json#sale",
+   "confidence": "verified"
+  },
+  {
+   "id": "E40",
+   "kind": "fact",
+   "claim": "Mapex Comet drum kit (5 drums, poplar): 283 296 ₸, previously 354 120 ₸ (mapex_old). Only 1 unit in stock on 2026-10-08.",
+   "source": "fact:mapex_price",
+   "confidence": "verified"
+  },
+  {
+   "id": "E41",
+   "kind": "market",
+   "claim": "Of 13 RU-language peer YouTube channels, review and lesson channels have medians of 1 200–8 950 (e.g. «Георгий Морев» 8 950, «Вова и Гитары» 5 800). Store channels sit at 762–4 000, except MAJOR-MUSIC at 23 500. Person-led formats outdraw store channels. No post-level peer outlier mechanisms were fetched.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/peer_channels_meta.json",
+   "confidence": "likely"
+  },
+  {
+   "id": "E42",
+   "kind": "market",
+   "claim": "Category convention seen on our own channel and the peer list: model-name product demos 2–6 min long, with a player in a showroom or studio and high-quality audio, titled «[тип] [бренд модель]». Price, the buyer's question and what's in the box are almost never on screen.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json#titles",
+   "confidence": "likely"
+  },
+  {
+   "id": "E43",
+   "kind": "constraint",
+   "claim": "Staff: 20 min/week (17 planned), one mid/low phone, audio usable only with the phone close to the instrument or mouth. Face consent has not been asked, so hands, instruments and voice only.",
+   "source": "assumption: client profile staff_capacity (stated by intermediary, 2026-10-08)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E44",
+   "kind": "constraint",
+   "claim": "We have no customer-language inputs: no WhatsApp export, no public reviews, no post comments. Question frequencies, where chats die, the median reply time and the close rate are all unknown, so every customer-language item below is a hypothesis.",
+   "source": "assumption: inputs bundle 2026-10-09 contains no chat, review or comment files",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E45",
+   "kind": "constraint",
+   "claim": "The site's «100% оригинальный товар» is an absolute claim with no third-party source. It is not usable in audience copy.",
+   "source": "fact:original",
+   "confidence": "verified"
+  },
+  {
+   "id": "E46",
+   "kind": "fact",
+   "claim": "Calls are answered Mon–Fri 10:00–19:00 and Sat 10:00–17:00; no Sunday hours are listed.",
+   "source": "fact:hours",
+   "confidence": "verified"
+  },
+  {
+   "id": "E47",
+   "kind": "proof_asset",
+   "claim": "Own library of 379 YouTube videos of real store instruments, including the Cort X100 beginner demo (pos 128), an AP-270 comparison (pos 14), a PX 770 child test (pos 195) and cymbal close-sound clips. This can be re-cut for zero-staff-minute ideas. Footage of minors is reused only with a parent's OK.",
+   "source": "file:/home/user/flystuff/smm_agent/clients/muzzone/research/youtube_channel.json",
+   "confidence": "verified"
+  },
+  {
+   "id": "E48",
+   "kind": "moment",
+   "claim": "The music-school year runs from September, so parents are choosing an 88-key piano for a child now, in October–November.",
+   "source": "assumption: KZ school calendar + intake timing assumption",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E49",
+   "kind": "moment",
+   "claim": "New Year gift season: ukuleles (22 100–64 501 ₸) and beginner guitars fall in the gift band. A gift angle should be pre-tested now and scaled 10–14 days before the holiday.",
+   "source": "assumption: calendar (Новый год) + ledger price band",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E50",
+   "kind": "customer_language",
+   "claim": "[Q] Hypothesised recurring questions: «какую взять начинающему / ребёнку?», «есть в наличии?», «а звук нормальный, не как игрушка?», «что ещё нужно докупить?». 0 counted; the basis is the beginner-title outliers (E01, E02) and the out-of-stock rate (E28). To be replaced by the WhatsApp export.",
+   "source": "assumption: inferred from E01, E02, E28; no chat data",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E51",
+   "kind": "proof_asset",
+   "claim": "Provisional reality inventory: sounds that can be filmed at 20–30 cm are piano keys and speaker, guitar through the Hibilly amp, ukulele strum, cymbal and drum hits. Provisional locations: «гитарная стена», «зал с пианино», «тихий угол». Light, noise and real names are unknown until the staff reality scan.",
+   "source": "assumption: catalogue in stock (stock_sample.json) + store address fact:address; reality scan pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E52",
+   "kind": "fact",
+   "claim": "There is a physical store at Астана, ул. Кажымукана, 14, НП-6. Pickup exists, so «приходите попробовать» is a feasible next step; in-store trial policy still needs the owner's confirmation.",
+   "source": "fact:address",
+   "confidence": "verified"
+  }
+ ],
+ "insights": [
+  {
+   "id": "I01",
+   "insight": "[tension] When someone is buying a first electric guitar, for themselves or a teenager, they want to start playing for little money. But they fear a cheap guitar will sound like a toy, and they can't judge sound from a catalogue. So they hunt for «для начинающих» model videos and delay, or ask around. We can show the 59 800 ₸ AS-100BK (11 in stock) plugged into the Hibilly Retro 30R, played by staff hands with the phone at the amp, clean then drive. That pair crosses the 100 000 ₸ free-delivery line. This moves coded guitar+amp chats because it answers the one doubt that blocks the order: does it sound real?",
+   "tension": "Want to start cheap vs fear that cheap = toy sound and money wasted",
+   "evidence_ids": [
+    "E01",
+    "E02",
+    "E12",
+    "E13",
+    "E14",
+    "E15",
+    "E16",
+    "E17",
+    "E09",
+    "E50"
+   ],
+   "who_feels_it": "A beginner, or the parent of a teen, choosing a first electric guitar in the next few weeks, in Astana or ordering for delivery",
+   "content_reality": "Hands on the AS-100BK, phone 20–30 cm from the Hibilly speaker at «гитарная стена» (provisional name). Proof is the sound itself. Prices are ledger-backed but expire 2026-10-15, so re-fetch. The cheapest ladder rung is ledger; the Cort X100 (98 280 ₸) needs a ledger fact first.",
+   "strength": 4
+  },
+  {
+   "id": "I02",
+   "insight": "[moment] When a buyer has narrowed down to a specific model, they type the model name into YouTube or TikTok to hear it before paying. They want to hear the exact instrument, but most results are long reviews of other units. So they watch 5-minute demos or guess. Our short plain-name clips already catch this moment (Cort AD810BKS 32 000 in 83 s; Squier Contemporary Active 17 000 in 78 s). We can post 15–30 s sound clips of in-stock SKUs titled with the exact model, which is cheap and searchable. This moves coded chats about named models because the viewer is already at the decision step.",
+   "tension": "Ready to buy a named model vs can't hear this exact one without a long review or a trip",
+   "evidence_ids": [
+    "E04",
+    "E01",
+    "E03",
+    "E10",
+    "E42",
+    "E47"
+   ],
+   "who_feels_it": "A musician or parent who has already shortlisted 1–2 models and is checking sound before paying",
+   "content_reality": "One in-stock instrument per clip, played at 20–30 cm at «гитарная стена» / «зал с пианино» (provisional). Also re-cuts of the 379-video library. This is a search line (L004), and L003 warns title tricks don't transfer to Shorts. It is measured separately.",
+   "strength": 3
+  },
+  {
+   "id": "I03",
+   "insight": "[price_value] When a child is a year or more into music school, parents must buy an 88-key digital piano. They want one that lasts years, but the shelf runs from 200 720 ₸ to 2 075 617 ₸. On paper the PX-770 (521 935 ₸) and AP-270 (734 886 ₸) differ mainly in polyphony, 128 vs 192, for 212 951 ₸. Neither includes a bench. So parents copy the teacher's advice or default to cheapest or most expensive. We can play the same phrase on both, phone at the keys and speaker, and say plainly what the extra money buys and what it doesn't. This moves high-ticket coded chats by turning an unjudgeable spec sheet into an audible choice.",
+   "tension": "Want the right piano for years vs can't hear or understand a 200k+ ₸ difference",
+   "evidence_ids": [
+    "E19",
+    "E20",
+    "E21",
+    "E22",
+    "E24",
+    "E23",
+    "E08",
+    "E07",
+    "E48"
+   ],
+   "who_feels_it": "Parents of a music-school pupil in Astana, or out of town via delivery, choosing a first serious piano this autumn",
+   "content_reality": "Hands on two Casio pianos side by side at «зал с пианино» (provisional), phone 20–30 cm from the speaker. Piano prices are volatile (E23), so re-fetch on publish day or show no price. No child on camera without a parent's written OK.",
+   "strength": 3
+  },
+  {
+   "id": "I04",
+   "insight": "[proof] When a buyer finds a model on the site, they want to be sure it's actually there and that the unit they'll get is fine. But 54% of sampled listings show «нет в наличии», and a delivery return costs them both-way shipping. So they hesitate, phone, or buy where stock looks certain. We can film the exact in-stock unit on request, with serial-free close-ups and the sound, and send it in WhatsApp before payment. This moves coded chats to orders, especially out of town, because it removes the 'what will actually arrive' risk.",
+   "tension": "Want certainty about this exact unit vs site often says unavailable and a remote return is costly",
+   "evidence_ids": [
+    "E28",
+    "E27",
+    "E18",
+    "E30",
+    "E34",
+    "E36",
+    "E44"
+   ],
+   "who_feels_it": "Buyers outside Astana or busy buyers who won't visit, choosing an instrument over 100 000 ₸ for free delivery",
+   "content_reality": "Staff hands filming one instrument off the wall, a 10 s strum or keys, at «гитарная стена». The 'video of your exact unit' promise needs owner approval as a non-price offer, so until then only recognition and process content.",
+   "strength": 3
+  },
+  {
+   "id": "I05",
+   "insight": "[friction] When someone buys an expensive instrument, especially by delivery, they want to know what happens if it disappoints or breaks. The real terms are a 14-day return for unused goods, with delivery both ways withheld; a 12-month minimum warranty; and Casio's 2-year warranty, serviced only in Almaty. Buyers either don't read them or fear a hidden catch, so they postpone. We can tell these rules straight, including the inconvenient parts, as a short policy story. Admitting the cost builds trust and pre-empts returns (guardrail).",
+   "tension": "Want a safety net on a big purchase vs the safety net has real costs nobody explains up front",
+   "evidence_ids": [
+    "E29",
+    "E30",
+    "E32",
+    "E33",
+    "E31",
+    "E34"
+   ],
+   "who_feels_it": "Anyone about to pay 100 000–750 000 ₸ for an instrument they can't fully test at home first",
+   "content_reality": "Voice-over recorded at «тихий угол» with the phone at the mouth, over hands-on-instrument B-roll and an anonymised policy card. Every line maps to returns_14d, returns_cost, warranty and warranty_casio. Never mention the review-for-compensation clause.",
+   "strength": 3
+  },
+  {
+   "id": "I06",
+   "insight": "[hidden_knowledge] When a first-time buyer prices an instrument, they want the total cost. But they don't know what's in the box: the pianos come without a bench, the electric guitar needs an amp, and the ukuleles include a case. So they get surprised in the chat or after delivery. We can show, item by item on the counter, what comes with each instrument and what doesn't. This moves conversion because a complete, honest basket gets fewer stalls after the price and lets us build orders over the 100 000 ₸ delivery threshold.",
+   "tension": "Want to know the full price vs the listing hides what's missing",
+   "evidence_ids": [
+    "E21",
+    "E26",
+    "E17",
+    "E14",
+    "E16",
+    "E50"
+   ],
+   "who_feels_it": "A first-time buyer, or a gift buyer, who doesn't play yet and can't tell what else is needed",
+   "content_reality": "Hands unboxing or laying out items at «гитарная стена» / «зал с пианино». Only in-box facts that are in the ledger (bench «Нет», case «Да»). Cable and strap contents need NEEDS FACT before they are claimed.",
+   "strength": 3
+  },
+  {
+   "id": "I07",
+   "insight": "[moment] When a holiday or birthday is coming, a gift buyer wants something that will be played rather than left in a cupboard. But they fear a cheap ukulele is junk and can't tell why one costs 22 100 ₸ and another 64 501 ₸. So they buy random or not at all. We can play the three in-stock concert ukuleles (22 100 / 32 901 / 64 501 ₸, all with a case) in one take and show the difference in wood and sound. This moves coded ukulele chats and pre-tests the New Year gift line.",
+   "tension": "Want a gift that gets played vs can't judge cheap vs good",
+   "evidence_ids": [
+    "E25",
+    "E26",
+    "E27",
+    "E49",
+    "E50"
+   ],
+   "who_feels_it": "Someone buying a gift for a teen, partner or friend 1–6 weeks before a date",
+   "content_reality": "Three ukuleles strummed with the same chord at «гитарная стена», phone at 20 cm. Stock is thin (4 models in stock), so re-check. The gift timing is an assumption, so test now and scale later.",
+   "strength": 3
+  },
+  {
+   "id": "I08",
+   "insight": "[content_reality] Outsiders never hear what a 218 400 ₸ cymbal or a full drum kit sounds like up close. Brand-only demos flop (median 390), but 21–34 s pure-sound clips broke out (cajon 6 900, splash 5 600, PST7 China 13 000). The sale list is mostly drums and cymbals, many with 1 unit. We can film single hits and decays at 20–30 cm as loops. This gives reach and pooled-arm data; conversion is weak and stock-limited.",
+   "tension": "Outsider curiosity gap: «снаружи этого никто не слышит» (how big the difference in cymbals sounds up close)",
+   "evidence_ids": [
+    "E06",
+    "E05",
+    "E39",
+    "E40",
+    "E43"
+   ],
+   "who_feels_it": "Drummers and curious scrollers; the buyers are a narrow niche",
+   "content_reality": "Stick hits on in-stock cymbals or kit, phone 20–30 cm, at the drum corner (location name pending the reality scan). No conversion push on 1-unit SKUs without a same-day stock re-check.",
+   "strength": 3
+  },
+  {
+   "id": "I09",
+   "insight": "[price_value] Wildcard. When a player has been eyeing gear, a 20–70% markdown pulls them in. But a sale labelled «Финальная» with no reason invites the doubt «почему так дёшево — что с ним?». So they wait or ask. We can show the exact discounted item, its sound and condition, at the published price (e.g. Hibilly 30R 56 576 ₸, was 70 720 ₸). This may move sale-stock chats, but the reason and the word «финальная» stay off screen until the owner answers.",
+   "tension": "Want the discount vs suspicion about why it's discounted",
+   "evidence_ids": [
+    "E38",
+    "E39",
+    "E40",
+    "E15"
+   ],
+   "who_feels_it": "Musicians who already know the gear and watch prices, mostly drummers given the sale mix",
+   "content_reality": "Hands play the sale item at its shelf. Prices are shown only as published and re-fetched. The doubt itself is hypothesised, so no claims about why the item is cheap.",
+   "strength": 2
+  },
+  {
+   "id": "I10",
+   "insight": "[identity] Wildcard. Musicians trust other musicians more than shops: person-led review and lesson channels outdraw store channels, and the shop's own masterclasses and blogger reviews were its big hits. A buyer wants advice from someone who plays, not a seller. We could build a recurring hands-and-voice character: «что играет продавец» on whatever just came in. This is untested; staff musicianship and consent are unknown.",
+   "tension": "Want a player's honest opinion vs distrust of a salesperson's pitch",
+   "evidence_ids": [
+    "E11",
+    "E41",
+    "E43",
+    "E05"
+   ],
+   "who_feels_it": "Hobby musicians in Astana who follow players, not brands",
+   "content_reality": "Staff hands and voice only (phone at the mouth for opinions, at 20–30 cm for sound), at «гитарная стена». Opinions are framed as «продавец считает». Note that Mapex artist interviews flopped (68–233), so talking heads are out. Recognition content only until a willing player is confirmed.",
+   "strength": 2
+  }
+ ]
+}

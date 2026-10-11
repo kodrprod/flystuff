@@ -1,0 +1,266 @@
+{
+ "name": "Left Bank launch v2 — «Узнаёте это место?» (the neighbours' view, one word for a reminder, a week-long opening ritual)",
+ "big_idea": "People on Левый берег learn about the new coffee shop the way a neighbour would. They see the view from its window (their own street, courtyard or bus stop), the room behind the glass, the people who will make their morning coffee, and an opening week they can take part in. The address and landmark are public, the same as on the 2GIS card. Viewers comment or DM one word, «ЛЕВЫЙ», to get a reminder on opening day. Generative: 20+ episodes come from the window view across the fit-out, real neighbour questions, the regulars' preview and the opening-week ritual. Provable: everything is filmed on site. Measurable: the keyword per post, the codes on the poster, counter card and Status, and POS checks from opening day. Truth gate: nothing runs until the owner confirms in writing the location, the landmark or address we may name, and permission to film the new site (E02, E21).",
+ "single_minded_message_ru": "Узнаёте это место? Скоро здесь кофе",
+ "why_this_wins": "The ledger is empty, so the message cites no fact ids yet. It is true by construction once the owner confirms the location and that the site may be filmed (E02, E21 → NEEDS FACT). Every insight is strength ≤2, so this is a learning bet, not a forecast (L001).\n\nWhat changed from v1, and why:\n(1) Location is the thing people share. The landmark or address now goes in the hook and on screen of every episode, wherever the owner allows it (same data as the 2GIS card). This fixes the contradiction in v1, which hid the address in videos while publishing it on 2GIS. A forwarded line like «смотри, это же у нас во дворе» only works if the place is recognisable. I03 (moment: a closed shopfront on the daily route, E21/E18/E11/E23) is re-dramatised as the view from the window, not an empty-room-plus-tamper cliché.\n(2) The measured action is now one tap: comment or DM «ЛЕВЫЙ», and we remind you on opening day. In v1 people had to DM a code to get an address, which nobody does (I02 friction, E02/E03/E15/E26/E09/E25). The keyword also opts people in to the opening-day message.\n(3) Most of the volume comes from channels outside Reels, because the REALISM ratio (≈1–33 organic) says a ~2.1k account built around location 1 cannot reach Левый берег alone. These are: a window poster on the covered shopfront, 2–3 nearby building chats posted by the owner, a geo-boost decided now (not on 19.10), the location-1 counter card and a regulars' preview evening (I04/I05 warm base, E05/E14/E16/E22).\n(4) «Ажиотаж» gets a real reason to come: an opening-week ritual with the owner's offer, redeemed at the till with the same word. Visits spread naturally across a week-long ritual, so nobody is told not to come. ID06 is dropped, and capacity is handled by staffing.\n(5) Staff load is cut to ≤10 min/week of filming. The ID19 tally, voice notes and opening-week tick sheet are gone, and one named person answers messages behind an instant auto-reply.\n\nLearning plan: 5 posts in week 1 across 5 drivers (curiosity_gap, identity, amusement_awe, story, relief). Each is read at 48 h internally, and the target is re-fixed on 16.10. The owner sees only a 3-number Monday report; allocation statistics stay inside code. JUDGMENT: F6 assumes a 4-week runway, but here there are 3 weeks before opening, so reach and conversion run together from week 1.",
+ "series": [
+  {
+   "name": "«Узнаёте это место?» (HERO)",
+   "role": "Reach plus reminder sign-ups in the new catchment (I03, I02). Metric: shares/1k, profile visits/1k, «ЛЕВЫЙ» sign-ups/1k. Fixed opening ritual: frame 1 is the view out of the new window, backlit by daylight so the weak phone exposes well, showing the recognisable street, courtyard or stop. The hook is «Узнаёте это место? Скоро здесь кофе», with the landmark name added if the owner allows it (e.g. «[ориентир]: узнаёте? Скоро здесь кофе»). Structure: window view (0–2 s) → turn into the room → the one thing that changed this week → a cup on the counter → «Напишите „ЛЕВЫЙ“ — напомним в день открытия». ID03 is re-specced to this ritual with the same id and arm (curiosity_gap/backstage): the question is now «where is this?», answered by the landmark, not «what is it?» answered by «кофейня». The tamper/beans/empty-room hint cards are removed. Stranger test: ep.7 is «вид из окна в первое утро с гостями», and people would still watch it.",
+   "idea_ids": [
+    "ID03",
+    "ID04"
+   ],
+   "cadence": "Week 1: ep.1 (ID03, one 10 s shot). Week 2: ep.2 (ID04, provisional, re-cut to the window ritual at edit). Episodes 3+ come from the NEXT BATCH. Each episode ≤2 staff min, filmed at «новая точка» during setup work."
+  },
+  {
+   "name": "«Вопросы про новую точку»",
+   "role": "Conversion (I02). Metric: sign-ups/1k, saves/1k. It answers what people actually ask, with ledger facts: landmark or address, how to find the entrance, opening hours, whether you can sit with a laptop, and the menu (each only once confirmed). It never says «дату назовём, когда будем уверены». ID05 is re-specced as a 12 s answer by one consented barista, shot at «новая точка» by the window if the reality scan shows it is quiet enough. Its hook uses real comment wording if ≥2 real where/when questions exist; otherwise «Где и когда? Отвечаем». It ends with «Дату открытия напомним — напишите „ЛЕВЫЙ“», or states the date once Q1 confirms it. ID17 answers a real «а где именно?» comment with the landmark and library clips (0 staff min).",
+   "idea_ids": [
+    "ID05",
+    "ID17"
+   ],
+   "cadence": "ID05 on Sun of week 1. ID17 in week 2 once a real comment exists. In week 3 there is an ID05 re-cut with the confirmed date and ritual (a variant posted ≥7 days after the original)."
+  },
+  {
+   "name": "«Для своих» (warm base: location-1 regulars)",
+   "role": "Trust plus regulars' intent (I04, I05). Metric: shares among followers, counter-card/Status sign-ups, preview-evening RSVPs. ID18 is the zero-staff-minute archive before/after («первая точка тоже начиналась с пустой комнаты»). The preview-evening invitation and recap and «ваш бариста теперь и на Левом» are NEXT BATCH, gated on owner approval and confirmed staffing. ID06 («в первый день не приходите») is dropped entirely after the owner's refutation.",
+   "idea_ids": [
+    "ID18"
+   ],
+   "cadence": "ID18 in week 1 if the archive arrives (otherwise dropped). Preview-evening pieces in weeks 2–3 once approved (NEXT BATCH)."
+  },
+  {
+   "name": "Reach tests: «Два берега» / «Странный заказ»",
+   "role": "Wildcard reach (I08 identity; I06/I05 amusement_awe). Metric: views_48h ÷ M, shares/1k, the bank split in comments. ID13 opens on steam from a cup carried out of location 1's door, labelled «POV · постановка». It now differs from the hero's window-view frame, so the door repetition is gone. ID24 opens on an odd ingredient going into a cup at 20 cm. Both end with the «ЛЕВЫЙ» keyword. Either becomes a series only on a breakout (DR2). ID13 is dropped if location 1 turns out to be on Левый берег.",
+   "idea_ids": [
+    "ID13",
+    "ID24"
+   ],
+   "cadence": "One episode each in week 1. Repeats only on a breakout, ≤1/week each."
+  }
+ ],
+ "offer": {
+  "needed": true,
+  "proposal": "Нужно ваше «да» и точные условия. Вариант по умолчанию без денег — «Неделя первых соседей», с [дата открытия] по [дата открытия + 6 дней]: на новой точке висит доска «Первые соседи», каждый гость может написать своё имя или улицу. Это можно снимать (гостей — только с их «да» на камеру). Плюс, по вашему выбору, одно предложение по слову «ЛЕВЫЙ» на кассе с [дата открытия] по [дата открытия + 13 дней]: [ваши точные слова — что получает гость, лимит в день, только на новой точке]. Варианты без скидки: наклейка или штамп «первая неделя» на стакане; бариста первой точки за стойкой в первую неделю (только если это правда). Без «первым N», без «успейте», без «только в день открытия». Слово «ЛЕВЫЙ» пробивается на кассе отдельной кнопкой, поэтому бумажный учёт не нужен.",
+  "fact_ids": [],
+  "needs_owner_approval": true
+ },
+ "channels": [
+  {
+   "channel": "Window poster on the new site (NEW, top priority)",
+   "role": "Reaches the hundreds of target people who walk past daily, at about 0 ₸ (office printer). It is still printed only with the owner's «да». Text (RU): «Что тут будет? Кофейня. Напишите „ЛЕВЫЙ“ в Instagram — напомним в день открытия», plus the date once Q1 confirms it, plus a QR code to an ig.me/wa.me link prefilled with its own {CODE}, so poster sign-ups are counted separately. It goes up as soon as the owner approves (target 11.10)."
+  },
+  {
+   "channel": "Nearby building/office chats (NEW, owner action)",
+   "role": "Where locals actually ask «что открывают на первом этаже?». The agent drafts a 2-line RU text with the landmark, the ID03 clip and a link prefilled with the chat-source {CODE}. The owner (or a staff member who is already in the chat) posts it once in 2–3 nearby building or office chats they belong to, with the chat admin's OK. No spamming, no posting in chats they are not part of. One post per chat, then reply only to questions."
+  },
+  {
+   "channel": "Instagram Reels + profile (main video channel)",
+   "role": "Reach plus the shop window. Every post carries the location tag of the new building (once the address is confirmed) and the city «Астана». Bio: «Кофейня в Астане · вторая точка: [адрес/ориентир] · откроемся [дата] · напишите ЛЕВЫЙ — напомним». The date appears only once confirmed, and the bio link is prefilled with the bio {CODE}. Pins: ID03 (hero), ID05 (answers), ID18 (proof). The «Новая точка» highlight collects every episode. Posting at lunch or 19:00–22:00 [ASSUMPTION], not tested."
+  },
+  {
+   "channel": "Sign-up desk: Instagram comments + DM (default), or WhatsApp per Q3",
+   "role": "Where the primary metric is counted. «ЛЕВЫЙ» in a post's comments is attributed to that post automatically, and DMs are attributed via the per-post {CODE} prefilled in the caption and pinned-comment link. Instant auto-reply (RU, approved once by the owner): «Здравствуйте! Я ИИ-помощник кофейни. Записали: напомним о дне открытия новой точки здесь, в директе. Не нужно — напишите „стоп“.» Commenters get «Отправили вам в директ». Sending the keyword is the opt-in; «стоп» removes the contact. One named person (owner ask) answers follow-up questions within 15 min in working hours. Codeless messages get «Подскажите, откуда о нас узнали?»."
+  },
+  {
+   "channel": "Location 1 counter card + preview evening (warm base)",
+   "role": "An A6 card at location 1's counter: «Скоро — вторая точка: [ориентир]. Напишите ЛЕВЫЙ — напомним в день открытия», with a QR and its own {CODE}. Baristas don't pitch; the card does the work. Optional preview evening for location-1 regulars at the new site 1–2 days before opening (owner decides the date, number of guests and what is served). RSVPs come through the counter card and Status code and are counted as «постоянные гости, что придут»."
+  },
+  {
+   "channel": "WhatsApp Status / broadcast",
+   "role": "Each week's best episode goes to Status. The opening-day message (date, address, how to find the entrance, the «Неделя первых соседей» ritual and offer if approved) goes only to contacts who sent «ЛЕВЫЙ», a code or a «да». No list buying."
+  },
+  {
+   "channel": "2GIS",
+   "role": "Create the new location's card now, with the address, so people can save it (owner action; the agent drafts the photos and description with no claims). Location 1: photo refresh and a review request in the handover reply. New location: first reviews monitored daily in weeks 1–2 after opening."
+  },
+  {
+   "channel": "Paid geo-boost (decided NOW at onboarding, not on 19.10)",
+   "role": "Click-to-DM boost within a ~1.5–2 km radius of the new address [ASSUMPTION], budget per the owner's answer today. It starts with the first qualifying post: one that hits DR2 at 48 h, or, if nothing does by 16.10, the week-1 post with the highest shares+saves/1k that has ≥1 sign-up. JUDGMENT: F10 normally needs DR2; the bar is lowered because a boost started at D−11 cannot learn in time. Cap per sign-up = avg_check × gross_margin × sign-up→visit rate (0.3–0.5 [ASSUMPTION]) × expected visits in days 1–28 × 0.3, from the owner's numbers, unless the owner sets a cap directly. Stop-loss: after spending 5× the cap with <3 sign-ups, or after cost per sign-up rises for 3 days in a row. Window 16.10 to 06.11. Never with an unconfirmed offer."
+  },
+  {
+   "channel": "Office coffee drop-offs (optional, owner/ops)",
+   "role": "In days D−3 to D+3, the owner or an ops person (not the content staff) brings coffee to 2–3 nearby offices they choose, with a small card «Напишите ЛЕВЫЙ» carrying its own {CODE}. Cost and people are the owner's call. Default: no. Filmable only with on-camera consent (NEXT BATCH)."
+  },
+  {
+   "channel": "TikTok / YouTube Shorts",
+   "role": "Low priority. These are cold starts and cannot localise to Левый берег in 21 days. The same cuts are cross-posted only if the accounts exist, with plain Shorts titles («Новая кофейня на Левом берегу, Астана»), each read against its own baseline."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Setup, 09.10–11.10. Close the truth gates today: the owner confirms in writing the location, the landmark or address we may name, the opening date (or that it is not yet firm), permission to film the new site, the opening-week ritual or offer, the boost budget and the named reply person. Barista consent recorded on camera. 5-minute reality scan at «новая точка». Window poster, counter card and 2GIS card drafted. Auto-reply set up. Reels median M fetched. No posts.",
+   "idea_ids": [],
+   "worker_ask_ru": "Я ИИ-помощник кофейни. До понедельника, ~5 минут на новой точке: снимите 10 секунд вида из окна днём, одну фразу с телефоном в 30 см от рта и 10 секунд тишины в зале. Кто готов сниматься с лицом — скажите на камеру: «Я согласен сниматься для Instagram кофейни».",
+   "ai_work": "Fetch the last 15 IG posts (M, outliers, comment questions); check TikTok/YouTube accounts. Draft in RU: the auto-reply, the bio, the window poster, the counter card, 2 building-chat texts, the 2GIS description and the opening-day message template with [ДАТА]/[АДРЕС] placeholders (filled only from facts). Set up keyword and code tracking and dedupe by contact. Check the reality-scan clips for window backlight and noise at the new site. Compute the boost cap from the owner's numbers. Batch all owner asks into one message of ≤13 min."
+  },
+  {
+   "week": 1,
+   "goal": "Explore, D−18 to D−12, 12.10–18.10. The poster and 2GIS card are live. 5 base posts across 5 drivers: ID03 hero ep.1 Wed 14.10 (window view + landmark), ID13 Thu, ID24 Fri, ID18 Sat (if the archive arrived; otherwise ID05 moves up and a reserve idea fills the slot), ID05 Sun (a 12 s answer with real facts). The owner posts in building chats with the ID03 clip on 14–15.10. The boost starts with the first qualifying post (from 16.10). Target re-fixed 16.10.",
+   "idea_ids": [
+    "ID03",
+    "ID13",
+    "ID24",
+    "ID18",
+    "ID05"
+   ],
+   "worker_ask_ru": "Я ИИ-помощник кофейни. Съёмка во вторник 13.10, ~9 минут: новая точка и бар, лицо — только у бариста, который дал согласие на камеру. Перед съёмкой вспомните один странный заказ гостя — повторим его. Карточку пришлём в понедельник.",
+   "ai_work": "Card: ID03 (one 10 s backlit window-to-room shot, 2 takes), ID13 (8 s), ID05 (12 s talk, 2 takes; JUDGMENT: D9 plans 2 takes as the floor, but the barista may stop after the first good one), ID24 (2 shots). Total ≈ 2 + 2–3 locations + 4.3 = 8.3–9.3 min. Edit 5 bodies plus 2 hook variants each under the same rails. Keyword end card «Напишите „ЛЕВЫЙ“ — напомним в день открытия» ≥2 s; {CODE} in the caption link and pinned comment. Landmark and address on screen only from ledger facts. «POV · постановка» label on ID13. Blur plates and the faces of anyone without consent. Commercial-library music under real sound. Save new-site clips to clients/<client>/library/2026-10-w1/ for ID04 and ID17. Read posts at 48 h, code comments into evidence, draft replies for approval. Monday 3-number report."
+  },
+  {
+   "week": 2,
+   "goal": "Follow-up + consideration, D−11 to D−5, 19.10–25.10. Breakout follow-ups within 3 days. Hero ep.2 (ID04, provisional, window ritual). ID17 answers a real «где именно?» comment with the landmark (0 staff min). Preview-evening invitation via counter card and Status, if approved (NEXT BATCH piece). Boost continues within the cap. DR5 conversion-layer check on 21.10.",
+   "idea_ids": [
+    "ID04",
+    "ID17"
+   ],
+   "worker_ask_ru": "Карточка съёмки на неделю — не больше 10 минут, пришлём в понедельник. По желанию: если утром мороз, 10 секунд пара от стакана у двери новой точки, без лиц прохожих.",
+   "ai_work": "Follow-ups to breakouts (part 2 or the same insight in a new format, plus a reply to the top comment). Re-cut ID04 to the window ritual. Build ID17 from library clips and the real comment (username blurred). Fill the date into the bio, poster and CTAs once Q1 confirms it. Boost monitoring against the cap and stop-loss. Status selection. One true line of results to staff. Monday 3-number report."
+  },
+  {
+   "week": 3,
+   "goal": "Opening, D−4 to D+2 (opening assumed 30.10), 26.10–01.11. Preview evening for regulars (if approved). Opening-day message to opted-in contacts only, carrying the «Неделя первых соседей» ritual and the owner's offer. ID05 re-cut with the confirmed date, entrance and ritual (≥7 days after the original), and ID17 if comments warrant it. Extra staff from location 1 on opening day per the owner's staffing decision. Capacity watch (DR10).",
+   "idea_ids": [
+    "ID05",
+    "ID17"
+   ],
+   "worker_ask_ru": "Карточка на неделю — не больше 10 минут. На кассе новой точки: если гость говорит «ЛЕВЫЙ», нажмите кнопку «ЛЕВЫЙ» — одно касание. Если гость сам обрадовался у доски «Первые соседи» — спросите «Можно сниму 10 секунд для Instagram?» и снимайте, только если ответил «да» в камеру.",
+   "ai_work": "Fill the opening-day message from facts and send only to «ЛЕВЫЙ»/code/«да» contacts after owner approval. Daily sign-up count from 23.10. Edit consented opening clips (non-consenting faces blurred) into NEXT BATCH opening-week pieces. Monitor the new 2GIS card and first reviews daily. Watch comments for disputes (DR11). Boost monitoring. Monday 3-number report with a capacity line."
+  },
+  {
+   "week": 4,
+   "goal": "Opening days 3–9, 02.11–08.11. Turn first visits into repeats and reviews. Opening-week pieces from consented footage at the «Первые соседи» board (NEXT BATCH). Reply videos to opening comments. Wildcard repeats only if they broke out. Phase review on 09.11: sign-ups vs target, «ЛЕВЫЙ» till presses, POS checks days 1–7 vs location 1's daily average, cannibalisation check. Next brief for days 10–28 (business read on 30.11).",
+   "idea_ids": [
+    "ID17",
+    "ID24",
+    "ID13"
+   ],
+   "worker_ask_ru": "Карточка на неделю — не больше 10 минут, кнопка «ЛЕВЫЙ» на кассе до 13.11. Спасибо — итоги недели пришлём одной строкой.",
+   "ai_work": "Internal sprint review: arm posteriors with intervals (not shown to the owner), mechanism check (each driver vs its own metric), insight re-rank by sign-ups, graveyard of failed hooks with reasons, learnings.jsonl entries with strength labels. Draft the retention brief for days 10–28. Monday 3-number report."
+  }
+ ],
+ "measurement": {
+  "success_metric": "Primary, pre-opening: reminder sign-ups for the new location, meaning unique contacts who sent «ЛЕВЫЙ» in comments or DM, or a code from the poster, counter card, building chat or Status. Deduped by contact. Target by 30.10: conservative 60 / expected 120 / stretch 250. These are assumptions: baseline 0, and the target was raised from v1's 40/80/150 because the keyword takes one tap and the poster, chats and boost add sources. Re-fixed on 16.10 from week-1 sign-ups per 1k views and per source. Forecast in visits [ASSUMPTION 30–50% sign-up→visit]: about 18–30 / 36–60 / 75–125 traced first visits in days 1–14, re-estimated from «ЛЕВЫЙ» till presses. Business objective, read 30.11: average daily POS checks at the new location over days 1–28 reach ≥50% of location 1's 4-week daily average (ratio and date are assumptions; the absolute number is set once the owner sends location 1's POS average). The owner's Monday report carries 3 numbers only: (1) sign-ups; (2) regulars who said they'll come (counter-card/Status codes plus preview RSVPs); (3) POS checks at the new location from opening day, with «ЛЕВЫЙ» presses at the till.",
+  "attribution": "Comments containing «ЛЕВЫЙ» are attributed to the post they sit on. DMs are attributed by the per-post {CODE} prefilled in the caption and pinned-comment link; DMs without a code are counted as Reels-unattributed. The poster, counter card, building chats, Status and office cards each carry their own {CODE}. JUDGMENT: v1's per-video code card in the video was replaced by one viewer-facing keyword. Per-post attribution is preserved by comment location and link codes, which departs from L3's spoken/on-screen code. Coded and keyword counts are a floor; codeless «новая точка» messages asked «Откуда узнали?» are an estimate. At the till, «ЛЕВЫЙ» is a POS button (0 ₸, or the owner's offer line) on days 1–14. It replaces the paper tick sheet and is directional. New-location POS vs location 1's average is directional and labelled. Attribution window: 30 days.",
+  "leading_indicators": [
+   "views_48h ÷ M (IG Reels median of the last 15 posts; pooled specialty_coffee median for TikTok/Shorts)",
+   "shares + saves per 1,000 views (the «это же у нас во дворе» forward)",
+   "«ЛЕВЫЙ» sign-ups per 1,000 views, per post",
+   "profile visits per 1,000 views",
+   "sign-ups per source per week (Reels vs poster vs chats vs counter card vs boost)",
+   "Астана audience share (if the owner grants insights access)"
+  ],
+  "review_cadence": "Internal (agent only): each post at 48 h and 7 days; daily sign-up count from 23.10 through opening week. Owner: a Monday report with 3 numbers, ≤5 lines, read within the 5 min/week (12.10, 19.10, 26.10, 02.11, 09.11). Template: «Неделя N: записались на напоминание — X (из них витрина/чаты/стойка — Y). Постоянные гости, что придут, — Z. Чеки на новой точке — W, нажатий „ЛЕВЫЙ“ — V. Дальше: … Нужно от вас: … (по умолчанию …)». Target re-fix 16.10. Phase review 09.11. Business read 30.11."
+ },
+ "decision_rules": [
+  "Owner-facing simplicity: allocation statistics run inside code and never appear in the owner report. The owner sees 3 numbers and at most one decision a week.",
+  "DR1 Read: each post at 48 h and 7 days. M = IG Reels median of the last 15 posts (fetched by 11.10; planning value 300–1,000 [ASSUMPTION]).",
+  "DR2 Breakout: ≥3×M views at 48 h, or shares+saves/1k ≥2× the account median. Within 3 days: 2 follow-ups (part 2 plus a reply to the top comment), pin it, put it on Status, and it is boost-eligible. ≥10×M is reported as «вирусный — редкий случай, не план».",
+  "DR3 Hook failure: 3-second hold <0.7× the account median → re-cut with a new first frame and hook, repost ≥7 days later, once only. No pre-opening reposts after 28.10.",
+  "DR5 Conversion-layer check on 21.10: if total sign-ups are <20 or sign-ups/1k <0.3 → before making more content, check that the keyword card is visible ≥2 s, the caption and pinned link, the auto-reply firing, the poster QR and the bio link.",
+  "DR-R Reply guardrail: the auto-reply answers instantly. If the named person's median human reply to follow-up questions exceeds 60 min in working hours over 3 days, tell the owner it is the top leak and pause the boost until fixed.",
+  "DR-Q1 Facts gate: landmark, address, date, hours, menu, seating and offer appear in audience copy only from written owner facts. If the date slips, update the bio, poster and 2GIS the same day. Posts already out stay up, and none of them counts down.",
+  "DR9 Boost: approved at onboarding. Start on the first qualifying post (DR2, or from 16.10 the best week-1 post by shares+saves/1k with ≥1 sign-up), within the owner's total budget and cap per sign-up. Stop after spending 5× the cap with <3 sign-ups, or after cost per sign-up rises for 3 days. Never with an unconfirmed offer.",
+  "DR10 Capacity: if opening-week checks reach ≥80% of the owner's stated daily capacity, or comments or reviews mention long waits → ask the owner for extra staff or a shift from location 1, pause the boost, and shift posts to the week-long «Первые соседи» ritual. Never tell people not to come.",
+  "DR-C Cannibalisation: if location 1's weekly checks fall >10% below its 4-week average for 2 weeks after opening → remove the counter card, and aim content at new Левый берег people only.",
+  "DR11 Honesty kill-switch: a comment credibly disputes a fact (date, address, offer) → pause that series, verify with the owner, and tell the owner the same day.",
+  "DR12 Pivot on 23.10: if sign-ups are <15 (25% of conservative) → move effort to the poster, chats, counter card and boost, and send the owner a 3-option note (raise the boost / add office drop-offs / accept a smaller opening list).",
+  "DR13 Claims: no «победитель» in any report. The owner hears «лидирует, рано судить» at this n.",
+  "DR14 Staff: the weekly card is ≤10 min. If it is not completed in any one week → the next card uses 1 location, face-free shots and zero-minute ideas (ID17, ID18 types).",
+  "DR16: never delete flops, except for truth, consent or legal problems."
+ ],
+ "learning_questions": [
+  "Which source brings the most «ЛЕВЫЙ» sign-ups per unit of effort before opening: Reels, the window poster, building chats, the counter card or the boost?",
+  "Does showing the recognisable place in frame 1 (window view plus landmark, ID03) earn more shares/1k and sign-ups/1k than the identity and amusement wildcards (ID13, ID24)? This is pooled for the launch_or_event arms.",
+  "How many pre-opening sign-ups turn into «ЛЕВЫЙ» till presses in days 1–14, and is a keyword reminder list a usable leading indicator for a café launch?",
+  "Does the week-long «Первые соседи» ritual spread first visits across days 1–7 (daily POS checks) without queues?",
+  "Shared experiment: does a consented barista face in frame 1 (ID05) vs hands or place in frame 1 (ID03, ID24, ID13) change 3-second hold? Directional only at this n; logged for pooling."
+ ],
+ "owner_asks": [
+  {
+   "ask": "Я ИИ-помощник вашей кофейни. Подтвердите письменно сегодня: 1) вторая точка — по адресу ___ ; в роликах можно назвать ориентир ___ (ЖК, БЦ, улица или «напротив …»); 2) дата открытия: ___ (или «пока не точная»); 3) новое помещение можно снимать уже сейчас: да / нет. По умолчанию, если не ответите до 10.10 12:00: снимаем только первую точку, ориентир не называем.",
+   "why": "E02, E21 and the landmark/date facts are the truth gate for the hero series, the bio, the poster and the 2GIS card. Every address string needs a ledger fact.",
+   "minutes": 2
+  },
+  {
+   "ask": "Повод прийти на открытие: 1 — «Неделя первых соседей» (доска, где гости пишут имя или улицу), без скидок; 2 — плюс ваше предложение по слову «ЛЕВЫЙ» на кассе в первые 14 дней: напишите точно, что получает гость и лимит в день; 3 — бариста первой точки работают на новой в первую неделю (только если это так); 4 — ничего. И кто дополнительно выйдет на смену в день открытия? По умолчанию: 1.",
+   "why": "The boss asked for a reason to come and a measurable offer; every offer and every claim about staff needs the owner's exact terms. Opening-day staffing replaces telling people not to come.",
+   "minutes": 2
+  },
+  {
+   "ask": "Продвижение лучшего ролика вокруг нового адреса (решаем сейчас, чтобы стартовать с 16.10): 1 — нет; 2 — до 20 000 ₸; 3 — до 50 000 ₸; 4 — своя сумма ___. Максимум за одну запись на напоминание: ___ ₸ или «посчитайте сами». По умолчанию: 1.",
+   "why": "A boost decided on 19.10 cannot learn before opening. Spend needs explicit approval (L8); the amounts are options, not recommendations.",
+   "minutes": 1
+  },
+  {
+   "ask": "Кто отвечает на вопросы в директе в рабочее время в течение 15 минут (имя)? И одобрите автоответ: «Здравствуйте! Я ИИ-помощник кофейни. Записали: напомним о дне открытия новой точки здесь, в директе. Не нужно — напишите „стоп“.» 1 — да; 2 — поправлю. По умолчанию: отвечаете вы.",
+   "why": "The sign-up desk and the reply guardrail need one named person; the auto-reply is customer contact and needs approval.",
+   "minutes": 2
+  },
+  {
+   "ask": "Три цифры: 1) сколько чеков в день в среднем на первой точке за последние 4 недели; 2) сколько гостей в день новая точка спокойно обслужит в первую неделю; 3) можно ли на кассе завести кнопку «ЛЕВЫЙ» (да/нет). Если кнопки нет — считаем только общее число чеков.",
+   "why": "Sets the absolute business objective, the DR10 capacity trigger, and replaces the paper tick sheet with a till count.",
+   "minutes": 2
+  },
+  {
+   "ask": "Печатаем на офисном принтере (макеты пришлём): плакат на витрину новой точки «Что тут будет? Кофейня. Напишите „ЛЕВЫЙ“ — напомним в день открытия» с QR и карточку на стойку первой точки — 1 да / 2 нет. Карточка новой точки в 2ГИС: 1 — черновик готовим мы, вы подтверждаете; 2 — сами. По умолчанию: 1 и 1.",
+   "why": "The poster and the counter card reach the target people that a 2.1k Reels account cannot; the 2GIS card lets people save the place.",
+   "minutes": 1
+  },
+  {
+   "ask": "Опубликуйте один раз наш текст и ролик в 2–3 чатах соседних домов или офисов, где вы или сотрудники уже состоите (с согласия админа чата) — 1 да / 2 нет. Закрытый вечер для постоянных гостей первой точки на новой точке за 1–2 дня до открытия: 1 — да, дата ___, до ___ гостей; 2 — нет. Кофе в 2–3 соседних офиса в дни открытия (кто отвезёт?): 1 — да; 2 — нет. По умолчанию: 1, 2, 2.",
+   "why": "Building chats and the regulars' preview are the cheapest local reach and the warm base. The office drop-offs and the evening cost the owner's money and people.",
+   "minutes": 2
+  },
+  {
+   "ask": "Пришлите 5 фото или видео первой точки до открытия (пустое помещение, ремонт, первая чашка) как файлы. Если нет — ответьте «нет», ролик уберём.",
+   "why": "ID18 (zero staff minutes) cannot run without real archive images; AI past imagery is banned.",
+   "minutes": 1
+  },
+  {
+   "ask": "Каждый понедельник: отчёт из 3 цифр и пакет роликов — ответьте «да» или номерами тех, что убрать. Без ответа до среды 12:00 ничего не публикуем.",
+   "why": "L8 batch approval within the 5 min/week owner budget; the report is cut to 3 numbers per the owner's request.",
+   "minutes": 5
+  }
+ ],
+ "risks": [
+  "DROPPED: ID06 («в первый день не приходите») after the owner's fatal refutation; capacity is handled by staffing (DR10) and the week-long ritual. ID19 (test-shot tally) dropped to cut staff load during setup.",
+  "JUDGMENT: the boss wants the date and address in the videos, while the creator wanted the date kept private. Precedence goes to the owner: the address or landmark is public once confirmed, and the date is public once firm. The keyword is a reminder, not a gate to information.",
+  "JUDGMENT: ID03 and ID05 keep their ids and arms (curiosity_gap/backstage, relief/wa_question) but are re-specced at edit: the ID03 hook becomes «Узнаёте это место? Скоро здесь кофе» (6 words) on a window-view first frame; ID05 becomes a 12 s factual answer. Both go back through the H1–H3 rails before publishing.",
+  "NEEDS FACT: written owner confirmation of the second location, its address, and the landmark that may be named (owner). Every hero hook depends on it.",
+  "NEEDS FACT: permission to film the new site now, and window backlight and noise from the reality scan (owner + staff). If filming is refused, the hero moves to location 1 and ID03/ID04 wait.",
+  "NEEDS FACT: the opening date (owner). Until it is firm, copy says «скоро», with no countdown.",
+  "NEEDS FACT: opening hours, menu items, and whether laptop seating exists (owner) before ID05 says any of them.",
+  "NEEDS FACT: the exact opening-week ritual and offer terms, dates and daily limit (owner). No «первым N», no «успейте».",
+  "NEEDS FACT: whether location-1 baristas staff the new site in week 1 (owner) before any «ваш бариста теперь и на Левом».",
+  "NEEDS FACT: whether the POS can log a «ЛЕВЫЙ» button (owner). If not, till attribution falls back to total POS checks.",
+  "NEEDS FACT: the named reply person (owner), and whether the auto-reply and comment-to-DM tool works on this Instagram account (agent check). If it doesn't, the named person replies manually within 15 min.",
+  "NEEDS FACT: location 1 is not on Левый берег (owner). If it is, drop ID13 and reword the counter card.",
+  "NEEDS FACT: ≥2 real where/when comments before ID05 uses their wording; otherwise the hook is «Где и когда? Отвечаем».",
+  "NEEDS FACT: a real odd order recalled by staff at the shoot (ID24), and archive photos (ID18). Otherwise drop the idea and pull a reserve.",
+  "NEEDS FACT: building-chat admins' OK (owner). No posting in chats the owner or staff are not already members of.",
+  "REALISM: even with the new sources, the sign-up targets are assumptions. Mitigation: the poster, chats, counter card, a boost decided now, and the DR12 note on 23.10. No views target is promised.",
+  "STAFF LOAD: the filming card is ≤10 min/week (week 1 ≈8.3–9.3 min). There are no voice notes and no paper tally, and the till button is one tap in the normal sale flow.",
+  "CONSENT: barista consent is recorded on camera before ID05. Opening guests at the «Первые соседи» board appear only with an on-camera «да»; no minors.",
+  "BROADCAST: the opening-day message goes only to contacts who sent «ЛЕВЫЙ», a code or a «да»; «стоп» removes the contact.",
+  "CANNIBALISATION: the counter card may pull regulars away from location 1 (DR-C).",
+  "AVOID: the two-bank joke (ID13) is about the commute and weather only. No naming other Левый берег cafés. Kazakh captions only after a native speaker checks them. Commercial-library music only.",
+  "SECONDARY not served: if location 2 needs baristas, that needs a separate hiring brief with the «РАБОТА» code family.",
+  "NEXT BATCH: hero episodes 3+ with the window-view opening ritual (machine installed, first cup at the new bar, D−1 view at dusk).",
+  "NEXT BATCH: preview-evening invitation (warm base) and a consented recap; «Неделя первых соседей» opening-week pieces filmed at the board with consent.",
+  "NEXT BATCH: «ваш бариста теперь и на Левом» (I05 character), only after staffing is confirmed; an office drop-off clip with consent if the owner chooses drop-offs.",
+  "NEXT BATCH: an I07 myth piece («спешелти — это долго?», as the barista's opinion, no price or speed claims) and an I09 first-cold-morning piece from optional steam footage."
+ ],
+ "attribution_codes": {
+  "ID03": "BA23",
+  "ID18": "BA24",
+  "ID13": "BA25",
+  "ID17": "BA26",
+  "ID06": "BA27",
+  "ID05": "BA28",
+  "ID19": "BA29",
+  "ID24": "BA32"
+ }
+}

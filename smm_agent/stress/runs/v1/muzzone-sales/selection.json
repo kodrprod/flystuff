@@ -1,0 +1,95 @@
+{
+ "slate": [
+  {
+   "id": "ID23",
+   "prior": 3.885,
+   "value": 3.885,
+   "why": "prior+data",
+   "driver": "relief",
+   "engine": "why_it_costs",
+   "staff_min": 3.1,
+   "needs_facts": []
+  },
+  {
+   "id": "ID08",
+   "prior": 3.731,
+   "value": 3.731,
+   "why": "prior+data",
+   "driver": "honest_signal",
+   "engine": "anti_sell",
+   "staff_min": 0.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID06",
+   "prior": 3.705,
+   "value": 3.705,
+   "why": "prior+data",
+   "driver": "practical_value",
+   "engine": "check_before_buy",
+   "staff_min": 3.1,
+   "needs_facts": []
+  },
+  {
+   "id": "ID14",
+   "prior": 3.795,
+   "value": 3.795,
+   "why": "prior+data",
+   "driver": "moment_trigger",
+   "engine": "moment",
+   "staff_min": 2.4,
+   "needs_facts": []
+  },
+  {
+   "id": "ID19",
+   "prior": 3.59,
+   "value": 3.59,
+   "why": "prior+data",
+   "driver": "prediction_game",
+   "engine": "ab_compare",
+   "staff_min": 0.0,
+   "needs_facts": []
+  },
+  {
+   "id": "ID01",
+   "prior": 3.731,
+   "value": 3.731,
+   "why": "prior+data",
+   "driver": "curiosity_gap",
+   "engine": "myth_check",
+   "staff_min": 2.7,
+   "needs_facts": []
+  },
+  {
+   "id": "ID11",
+   "prior": 3.603,
+   "value": 3.603,
+   "why": "explore",
+   "driver": "mastery",
+   "engine": "process_full",
+   "staff_min": 3.3,
+   "needs_facts": []
+  },
+  {
+   "id": "ID15",
+   "prior": 3.449,
+   "value": 3.449,
+   "why": "explore",
+   "driver": "identity",
+   "engine": "pov_situation",
+   "staff_min": 2.5,
+   "needs_facts": []
+  }
+ ],
+ "blocked": [],
+ "week1_filmed": [
+  "ID23",
+  "ID06",
+  "ID14",
+  "ID01",
+  "ID11",
+  "ID15"
+ ],
+ "week1_minutes": 15.0,
+ "note": "prior = weighted rubric; audience data (engine_state.json) overrides it as posts accumulate"
+}

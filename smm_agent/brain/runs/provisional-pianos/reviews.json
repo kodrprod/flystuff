@@ -1,0 +1,120 @@
+[
+ {
+  "persona": "Владелец Muzzone (Астана). Хочу распродать цифровые пианино, которые есть на складе, до 31.12. Оцениваю по трём вопросам: продаст ли это пианино, во сколько это обойдётся моим людям, может ли это опозорить магазин.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "Лучшая часть плана — честная утилита и перезапуск YouTube. CHECK-03 («Перед оплатой проверьте 3 вещи»), TIERS-07 (три бюджета на моделях, которые есть в наличии) и ролики «Модель vs модель» под поиск собраны из тех же исходников и не требуют лишних минут работника. Это помогает родителю, который выбирает пианино несколько недель, и даёт мне кодовые обращения в WhatsApp. Ещё один плюс: план прямо предлагает убрать с сайта компенсацию доставки за отзыв. Это я бы сделал сразу.",
+  "refutations": [
+   {
+    "target": "Выбор SKU для главной серии (BLIND-01, ANAT-02, CHECK-03 построены на Casio PX-770 и AP-270)",
+    "why_fails": "Сначала надо продать то, чего на складе много: Estrada EDP-220BK (9 шт.), Casio PX-S1100 (5), AP-300WE (4), Kurzweil CUP E1/M1 (по 3). А весь первый пакет роликов посвящён PX-770 и AP-270, у которых количество на складе неизвестно. EDP-220BK встречается только в TIERS-07, и этот ролик заблокирован до появления цен. Kurzweil впервые снимают только на второй неделе. Получается, что самые затоваренные позиции почти не получают показов.",
+    "severity": "major",
+    "fix": "Перестроить первую неделю вокруг моделей, которых больше всего. Например, первая «Одна фраза»: EDP-220BK против PX-S1100, а ANAT-02 — на той же паре. Цены на эти модели собрать сегодня, они есть на сайте. Пару PX-770 и AP-270 оставить на потом, если окажется, что их на складе ≥3."
+   },
+   {
+    "target": "CHECK-03 и STATUS-18: строка «Casio — сервис только в Алматы», которая крутится еженедельно",
+    "why_fails": "Скрывать это нельзя, но и выносить в заголовок еженедельного ролика незачем. Casio — это PX-S1100, AP-300, PX-770 и AP-270, то есть большая часть моих приоритетных остатков. Мы сами будем отговаривать людей от того, что нужно продать, и ещё рассылать это существующим клиентам через Status. При этом в плане нет ни слова о том, как магазин решает вопрос гарантии: забираем ли мы инструмент и сами отправляем в Алматы.",
+    "severity": "major",
+    "fix": "Отвечать на вопрос о сервисе в чате, если клиент спросит. В ролике о гарантии говорить так: «гарантия 2 года, по гарантийному случаю — [как магазин организует ремонт, подтвердить у меня]». Сам пункт про Алматы убрать из ролика, который повторяется каждую неделю в Status."
+   },
+   {
+    "target": "BLIND-01 и STAKES-11: слепое сравнение звука на слабый телефон в 20–30 см от динамика",
+    "why_fails": "Слабый микрофон телефона и сжатие звука в соцсетях почти уравняют пианино за 200 тыс. и за 2 млн. Самым честным ответом зрителя будет «не слышно». Значит, мы сами внушаем людям, что дорогие модели (Dexibell, Kurzweil, AP-300) — переплата, а музыканты в комментариях посмеются над качеством записи. Это бьёт и по выручке, и по репутации.",
+    "severity": "major",
+    "fix": "Перед публикацией сделать тестовую запись и дать мне послушать. Если разницы не слышно, менять формат: не «слышно ли», а «что вы получаете» (клавиши, наушники, корпус, гарантия). STAKES-11 с разницей в 10 раз без моего одобрения не выпускать. Если линейный выход доступен, писать звук с него."
+   },
+   {
+    "target": "Конверсия: в предложении нет рассрочки",
+    "why_fails": "В Казахстане пианино за 200 тыс.–2 млн ₸ покупают в рассрочку: Kaspi Red, 0-0-12 и тому подобное. В плане сказано «только способы оплаты Kaspi», а рассрочка упомянута лишь вскользь как вопрос для меня. Для дорогой покупки к Новому году это главный рычаг, и в списке вопросов ко мне его нет. Страх родителя «а вдруг бросит» тоже снимает рассрочка, а не формулировки об условиях возврата.",
+    "severity": "major",
+    "fix": "Добавить в Q1 вопрос: «Есть ли рассрочка через Kaspi или банк? Если да, на каких условиях?» Если есть, во всех роликах о бюджете и подарках писать «от X ₸/мес» с точными условиями."
+   },
+   {
+    "target": "FIRSTYEAR-15: «Вернуть можно… только если инструментом не пользовались»",
+    "why_fails": "Во входных данных условия сайта звучат как «14 дней, стоимость доставки в обе стороны удерживается». Слов «если не пользовались» среди собранных фактов нет, это пересказ. Кроме того, ролик, который отвечает на страх родителя фразой «вернуть почти нельзя», такой страх только усиливает.",
+    "severity": "minor",
+    "fix": "Если упоминать возврат, то дословно как на сайте и только после моего «да». Лучше заменить это на рассрочку или на предложение прийти и поиграть в зале."
+   },
+   {
+    "target": "Нагрузка на работника и съёмку на первой неделе",
+    "why_fails": "За 17 минут нужно: восемь сцен, семь инструментов, на каждом выставить одинаковый тембр и громкость, по 2 дубля, кто-то должен сыграть фразу, переставить коробку и снять вход. Это нереально на одном слабом телефоне. При этом бюджет работника 20 минут в неделю, а он ещё каждую неделю отмечает коды. В итоге сорванная съёмка или нечестное сравнение.",
+    "severity": "minor",
+    "fix": "В первую съёмку взять только 2 пары и 3 вспомогательных кадра. Сначала узнать, кто в зале умеет играть, а не выяснять это в день съёмки."
+   },
+   {
+    "target": "Сроки и вопросы ко мне",
+    "why_fails": "Ответ на Q1–Q3 нужен к 10.10 18:00, то есть через день, и через двух посредников. Без ответа план сам ставит цель «+10» и работает по ней.",
+    "severity": "minor",
+    "fix": "Дать 3 рабочих дня. На первую неделю ставить только ролики без утверждений: про сравнение звука и про банкетку."
+   },
+   {
+    "target": "Измерения: Thompson, E-score, разность разностей",
+    "why_fails": "При 3 постах в неделю и нескольких кодах статистика будет шумом. Мне нужно знать одно: сколько пианино продано по кодам за неделю и какой ролик это дал. К тому же люди пишут в WhatsApp, не вводя код, и такие продажи потеряются.",
+    "severity": "minor",
+    "fix": "Отчёт в 3 строки: обращения о пианино (с кодом и без), продажи и время ответа. Продавцу дать вопрос «Откуда узнали?», а не полагаться только на коды."
+   }
+  ]
+ },
+ {
+  "persona": "Short-form creator and SMM for local retail in Kazakhstan and the CIS, mostly Astana and Almaty shops selling expensive items through WhatsApp and Kaspi. I judge whether a plan can be filmed on one weak phone, whether people will share it locally, and whether it brings real inquiries, not just views.",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "TIERS-07 (three budgets with the same phrase) is the best idea here. It answers the question parents in Astana actually ask: «сколько стоит нормальное пианино ребёнку в музыкалку». It is the only hero idea built on the high-stock models (Estrada EDP-220BK 9 units, PX-S1100 5, AP-300WE 4). It gets saved and forwarded to whoever pays, and its CTA (\"send your budget\") gives the seller something to answer. I would make it the lead series and run each tier as its own episode. The runner-up is the headphone-silence wildcard (INS5): «22:00, соседи, ребёнок занимается». Every Astana apartment family has this problem, and the phone mic can capture it because the payoff is silence, not tone.",
+  "refutations": [
+   {
+    "target": "Campaign SMP «Услышьте, за что платите больше» / hero series «Одна фраза» (BLIND-01, STAKES-11)",
+    "why_fails": "The whole lead series depends on a sound difference reaching the viewer. It has to pass through a weak phone mic (automatic gain and noise suppression flatten piano decay), then Instagram/TikTok audio compression, then the viewer's phone speaker. The difference the video cites is polyphony 128 vs 192, which nobody can hear on a 4-second phrase. Most comments will say «одинаково». That pushes viewers toward the cheapest listing anywhere, including Kaspi, and does not make them think Muzzone is the place to choose. The message itself promises something the medium cannot deliver.",
+    "severity": "fatal",
+    "fix": "Before committing the hero arm, do a 30-second test. Record the PX-770 and AP-270 phrase, upload it as a private Reel, and play it back on a cheap Android phone. If two people on staff can't tell the two apart, change the hero to differences the phone can show. Examples: the key action filmed close-up (hammer weight, a finger pressing and releasing), headphones plugged in followed by silence, a 3-pedal unit vs a single sustain pedal, the instrument's footprint in a typical Astana apartment corner, cabinet vs portable. Change the SMP to something like «Покажем, за что вы платите — до того, как заплатите»."
+   },
+   {
+    "target": "Hero SKU choice (BLIND-01 and ANAT-02 use PX-770 vs AP-270; STAKES-11 uses a 2 M ₸ Dexibell)",
+    "why_fails": "The business goal says to push models with 3 or more units in stock: EDP-220BK, PX-S1100, AP-300WE, Kurzweil CUP. Yet the first and most-reused video is built on two Casios with unknown stock, and STAKES-11 gives reach to a 2 M ₸ piano that nobody in this audience will buy. The best organic reach in week 1 goes to the wrong stock.",
+    "severity": "major",
+    "fix": "Build week 1 on the high-stock models: EDP-220BK vs PX-S1100 (the budget question) and Kurzweil CUP E1 vs M1. Move PX-770 vs AP-270 to the YouTube search line, where it fits as a model-name query. Drop STAKES-11 or replace the Dexibell with the most expensive model that is actually in stock and sensibly priced."
+   },
+   {
+    "target": "Week 1 shoot «≤17 мин» (8 setups, 7 pianos, matched presets and volume, 2 takes each)",
+    "why_fails": "It can't be done in 17 minutes. Seven instruments have to be found on the floor, powered on, set to the same preset and volume (each brand's menus are different), and played by someone who can repeat the phrase cleanly. The box also has to be brought out of the back room, and the worker has to go outside for the entrance shot. That is 40 to 60 minutes realistically, and the worker budget is 20 minutes a week including logging codes. The worker either skips shots or rushes them, and a rushed preset match ruins the 'fair test' premise that musicians will check.",
+    "severity": "major",
+    "fix": "Limit each session to 2 pianos and 3 setups, at most 10 minutes. Write the preset name and volume as a printed checklist that stays taped to each piano. Plan four sessions across October instead of one big one. Cut the entrance shot and the box shot from week 1, since stock footage or AI covers can stand in for them."
+   },
+   {
+    "target": "Missing Kaspi / installment angle (FIRSTYEAR-15, offer section, owner asks)",
+    "why_fails": "In Kazakhstan, a buyer spending 230 k to 750 k ₸ checks Kaspi.kz first and pays with Kaspi Red or an installment plan (0-0-12/24). The plan treats «Kaspi shop unknown» and installments as a side flag. FIRSTYEAR-15 answers «а если бросит?» with a return policy that only applies if the piano is unused, which helps nobody. Meanwhile the obvious local answer, spreading the cost to about 20 k ₸ a month, is not in the plan at all.",
+    "severity": "major",
+    "fix": "Make it owner ask #1 in week 0: «Есть ли Kaspi-магазин / Kaspi рассрочка на пианино?» If the answer is yes, rewrite FIRSTYEAR-15 as «Пианино ребёнку — от X ₸/мес через Kaspi» using only the confirmed terms, and use the monthly price in the hooks for TIERS-07 and GIFT-05. If the answer is no, say so in chat replies and drop the return-policy angle."
+   },
+   {
+    "target": "Distribution: the reach is 'musicians argue in the comments'",
+    "why_fails": "Musicians who argue about sound in the comments are spread across the whole CIS and are not buying a starter piano in Astana. With 0 ₸ of paid promotion and an Instagram account nobody has looked at, A/B-listen videos that work will mostly bring non-local views and very few inquiries. The plan never names the real local channel: music-school teachers and the WhatsApp chats of each class's parents, where piano advice actually spreads.",
+    "severity": "major",
+    "fix": "Add a teacher track. In week 1, the worker gives the store's card to 5 or 10 teachers at nearby music schools or ДМШ. Make one video addressed to teachers: «Педагоги, что советуете родителям — молоточковая клавиатура обязательна?». Make TIERS-07 and CHECK-03 short and vertical enough to be forwarded straight into class parent chats. Put the location (Астана, Кажымукана 14) on screen in every video so local viewers know where the shop is."
+   },
+   {
+    "target": "CHECK-03 content and visuals",
+    "why_fails": "The checklist is a list of Muzzone's terms (no bench, service in Almaty, delivery), not an actual buyer's checklist, so it reads like a disclaimer. The shots are an empty floor, a lid closing and the shop entrance, which give nothing to stop on. Point 2 (service only in Almaty) will put off Astana buyers of Casio, the brand with the most stock.",
+    "severity": "major",
+    "fix": "Rewrite it as a real check before buying: (1) Are the keys weighted hammer action? Show a finger pressing a key. (2) Are a stand and 3 pedals included? The PX-S1100 is portable, so check what comes with it and show it. (3) Is there a headphone output? Show headphones going in. Keep the warranty and Almaty disclosure in the trust highlights and in the WhatsApp reply, where full disclosure fits better than in a hook."
+   },
+   {
+    "target": "Hands only, no faces, AI voiceover (FIRSTYEAR-15, all series)",
+    "why_fails": "Local buyers in Astana trust a person. Headless hands with an AI 'parent-to-parent' voice read as generic dropshipping content, which is the opposite of the trust a 'Финальная распродажа' store needs. The AI voice also cuts reach in the Russian-speaking feed.",
+    "severity": "minor",
+    "fix": "In week 0, ask for one seller who will appear by voice only, recording on a phone held near the face. Move this from week 3 to week 1. If nobody agrees, use text with the instrument's own sound and no AI voiceover."
+   },
+   {
+    "target": "Attribution via code words (СЛЫШНО1 etc.) logged by the worker in 2 min/week",
+    "why_fails": "Most people who write after a Reel won't type a code. They will say «здравствуйте, сколько стоит пианино из видео». Links in Reels aren't clickable, and sellers won't keep a weekly log while working. You will end up with 2 or 3 coded inquiries and a misleading 'content doesn't work' signal at the 22 November checkpoint.",
+    "severity": "minor",
+    "fix": "Use one prefilled wa.me link per platform in the bio and the pinned comment, and count every 'from video' message. Ask the seller to keep one habit: when a piano inquiry comes in, reply «Откуда о нас узнали?» and forward the chat to a single WhatsApp group. AI then does the counting each week."
+   },
+   {
+    "target": "GIFT-05 payoff",
+    "why_fails": "The joke works, but the payoff (a 3-day reserve, extendable) is weak and blocked behind Q3. If Q3 isn't answered, the only December conversion idea becomes empty filler.",
+    "severity": "minor",
+    "fix": "End on the gift budget instead: «подарок от X ₸» or the Kaspi monthly price, with pickup. Treat the reserve wording as an optional extra once the owner confirms it."
+   }
+  ]
+ }
+]

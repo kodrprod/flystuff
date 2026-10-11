@@ -1,0 +1,126 @@
+[
+ {
+  "persona": "Владелец Muzzone (Астана). Хочу больше продаж через соцсети. У продавцов есть телефон и 20 минут в неделю, бюджета на рекламу нет, а общаюсь я через посредников (Андрей, Павел).",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "Самое сильное в плане — снимать инструменты вблизи, без лиц, с настоящим звуком: «Послушайте, прежде чем платить». Это честно: человек слышит звук, а не читает характеристики. Снимать дёшево. И это прямо закрывает главный страх покупателя «а вдруг дешёвая гитара — игрушка». Лучшие ролики:\n- ID14, укулеле, аккорд одним пальцем: подарок, просто снять, недорого.\n- ID23, «сколько стоит начать»: собирает корзину больше 100 000 ₸ и даёт бесплатную доставку.\n- ID19: переделка нашего старого ролика, у сотрудников не берёт ни минуты.\nЕщё одобряю подсчёт обращений по слову из ролика («ГИТАРА», «ПИАНИНО», «УКУЛЕЛЕ») и то, что выгрузку переписки с покупателями из магазина не выносим.",
+  "refutations": [
+   {
+    "target": "slate: ID01, ID11, ID15, ID23 (on_screen_ru и facts_used)",
+    "why_fails": "Слейт до сих пор написан под комбик Hibilly: «комбик — 56 576 ₸», hib_price. Hibilly — товар из распродажи, на складе 2 шт. В кампании сказано, что его заменят «постоянным» комбиком дороже 40 200 ₸. Но в вашей же выборке со склада такого комбика нет: из комбиков видны только два товара распродажи. Значит, основа гитарной линии (герой + корзина) держится на товаре, которого может не быть. И есть риск, что выйдет ролик со старым названием и ценой. Это 3–4 из 4 роликов первой недели.",
+    "severity": "major",
+    "fix": "До недели 1 перепишите тексты на экране в слейте под конкретный комбик, который есть на сайте, и пришлите мне его название, цену и остаток. Если такого нет — неделя 1 = укулеле + ID19 + гитара без комбика и без цены, ID23 не выпускаем. Не обещайте «потом заменим»."
+   },
+   {
+    "target": "ID23: «Значит, доставка по Казахстану бесплатно»",
+    "why_fails": "На сайте условие другое: «наземным транспортом, при заказе свыше 100 000 ₸». В ролике сокращено до «бесплатно по Казахстану» — без способа доставки и без того, что сумма должна быть больше 100 000 ₸ по ценам на день публикации. Покупатель из Актау захочет быструю доставку, возникнет спор, а может, и возврат с удержанием за доставку. Это ровно тот риск возвратов, который вы сами назвали.",
+    "severity": "major",
+    "fix": "Пишите на экране дословно: «Заказ от 100 000 ₸ — доставка по Казахстану бесплатно (наземным транспортом)». И проверяйте сумму по ценам в день публикации."
+   },
+   {
+    "target": "Время сотрудников: неделя 1 = «до 12 минут», всего ≤17 минут",
+    "why_fails": "3 минуты на то, чтобы подключить и настроить гитару с комбиком, два непрерывных дубля, штекер крупно, укулеле в чехол и отправка файлами — нереально, особенно в зале с покупателями. «Тихого часа» у нас может и не быть. Ещё вы не знаете, умеет ли кто-то из продавцов чисто сыграть 3 аккорда и фразу на пианино. Если не умеет — главная серия и ID08 отпадают. В итоге продавец либо потратит 30+ минут, либо снимет халтуру, и звук будет как у игрушки — ровно то, чего мы боимся.",
+    "severity": "major",
+    "fix": "В неделю 0 первым делом выясните, кто умеет играть, и замерьте время на одну съёмку. План недели 1 утверждаю только после замера. Неделя 1 по умолчанию — 2 ролика с новой съёмкой + 2 из готовых материалов, а не 4 + 1."
+   },
+   {
+    "target": "Хук серии «Игрушка или нет?» / ID01 «Гитара за 59 800 ₸ — игрушка?»",
+    "why_fails": "Мы сами спрашиваем, не игрушка ли наш товар, — и с записью на слабый телефон. В комментариях напишут «да, игрушка», и это будет висеть под нашим логотипом. Проверка перегруза, которую вы предлагаете, ловит только клиппинг, а не «звучит дёшево».",
+    "severity": "minor",
+    "fix": "Первый выпуск сначала покажите мне готовым, до публикации. Держите запасной хук без слова «игрушка» («Что умеет гитара за 59 800 ₸»), и если в первых комментариях преобладает «игрушка» — переходим на него."
+   },
+   {
+    "target": "Цели и даты: 12 заказов к 15.11, потом итог перенесён на 15.12",
+    "why_fails": "Я просил больше продаж, а получил: неделю подсчётов без постов, цели «назовём после второй недели» и итог через два месяца. Прогноз в ~54 тыс. просмотров держится на допущении 500 просмотров на Shorts. Но канал спит с мая, по вашей же записи L003 короткие ролики на YouTube не заходили, а TikTok — с нуля. Конверсия чатов 25% тоже взята с потолка. Нигде не сказано, сколько это в тенге, — я не могу понять, стоит ли оно того.",
+    "severity": "major",
+    "fix": "Одной строкой: «12 заказов ≈ X ₸ выручки при среднем чеке Y». Промежуточный порог 15.11 сделайте жёстким: меньше N обращений — останавливаемся, а не «рано судить». Прогноз просмотров подавайте как вилку от нуля."
+   },
+   {
+    "target": "Owner asks (9 вопросов) и согласование через Андрея и Павла",
+    "why_fails": "Вы просите ответить до 14.10, а съёмка недели 0 — уже 12–18.10. Мне приходит 9 сообщений с вариантами 1/2/3, доступ к Instagram, TikTok и Kaspi, утверждение шаблонов, пороги… Через двух посредников это неделя задержки. Без доступа к Instagram и без моего «да» ничего не выйдет, и первый пост 21.10 сорвётся.",
+    "severity": "major",
+    "fix": "Сведите всё к одному сообщению из 3 вопросов (кого снимать; какой комбик; доступ к Instagram или «публикую сам»), всё остальное — по умолчанию. И заложите в график запасную неделю на задержку согласования."
+   },
+   {
+    "target": "Автоответ ИИ на «цена?» в комментариях в течение часа",
+    "why_fails": "Ассистент сам пишет цену от имени магазина. Если сайт не обновили или цена за день изменилась — мы публично называем неверную цену, а покупатель потом требует её в WhatsApp.",
+    "severity": "minor",
+    "fix": "По умолчанию шаблон без цены: «Напишите в WhatsApp «ГИТАРА» — пришлём цену и наличие». С ценой — только после того, как я одобрю это отдельно."
+   },
+   {
+    "target": "ID06/ID08: пианино, «Не переплачивайте», «Сервис Casio — в Алматы»",
+    "why_fails": "Исправленная версия лучше, но в слейте всё ещё старые тексты: «Не переплачивайте…», «Разница на бумаге — полифония», «Сервис — в Алматы» на экране. Если смонтируют по слейту, мы сами отговорим покупателя от AP-270 за 734 886 ₸ и напомним, что ремонт — в другом городе.",
+    "severity": "minor",
+    "fix": "Уберите старые тексты из слейта, а не просто пометьте «REVISED» в описании кампании. На экран — только проверенные различия. Гарантию указываем в подписи."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator: short-form creator and SMM for local businesses in Kazakhstan/CIS",
+  "score": 6,
+  "would_approve": true,
+  "best_idea": "ID23 «Сколько на самом деле стоит начать на электрогитаре», with ID14 (one-finger ukulele chord) close behind. ID23 is the only piece where the payoff is a number a parent will screenshot and send: the running total crosses 100 000 ₸ and delivery becomes free. It doesn't depend on good phone audio or a skilled player, and its CTA («соберём комплект и посчитаем итог») is a service people actually write in for. It is a real conversion piece, not an awareness piece pretending to convert. ID14 works because a non-player watching can do the payoff themselves. Both can be shot with one weak phone in under 5 minutes.",
+  "refutations": [
+   {
+    "target": "Slate vs campaign drift (ID01, ID08, ID11, ID15, ID23 cards)",
+    "why_fails": "The campaign text says «REVISED»: a replacement amp, ID08 as an ear test, ID06 as hand-checks. But the slate cards that will actually go to the editor still show the Hibilly name and 56 576 ₸ on screen, ID08 as a screencast with «Разница на бумаге — полифония», and ID06 with «банкетки нет». L005 already says screencasts and price slides failed for this client. If the edit is built from the cards, the old version ships. With two relays to the owner, nobody will notice until it's live.",
+    "severity": "major",
+    "fix": "Rewrite the slate cards themselves (on_screen_ru, facts_used, worker_shots, production.mode) so they match the revised versions before the batch goes to the owner. Don't keep revisions as prose in why_this_wins. Re-tag ID08 to ab_compare in the data now, not 'at edit time'."
+   },
+   {
+    "target": "Hero «Игрушка или нет?» (ID01) recorded through the phone mic",
+    "why_fails": "A cheap amp recorded on a weak phone mic at 20 cm sounds thin, boxy and hissy, which is exactly what a toy sounds like. Then Reels/TikTok compress it again and people play it on phone speakers. The hook asks «игрушка?» and the audio answers «да». That is a self-own on the main series. The drive gate only covers clipping, not overall tone.",
+    "severity": "major",
+    "fix": "Record the amp's headphone/line out straight into the phone with a TRRS adapter or splitter (the store sells cables, cost about 0 ₸ and 1 extra minute), and keep the room mic for the click and pick sounds. Add a week-0 pass/fail test: play the clip on a phone speaker to someone who isn't staff and ask «звучит как игрушка?». If the answer is yes, the hero switches to the ukulele or piano."
+   },
+   {
+    "target": "ID08 «decide by ear» PX-770 vs AP-270",
+    "why_fails": "The difference between two Casio digital pianos' speakers, filmed on a weak phone and heard on phone speakers, is close to zero. 128 vs 192 polyphony is inaudible in a 4-bar phrase. The viewer hears the same sound twice, decides the 213 000 ₸ gap is a scam, and either buys the cheaper one somewhere else or nowhere. «Решите на слух» promises something the format can't deliver.",
+    "severity": "major",
+    "fix": "Make it a visible comparison, not an audible one: «Разница 213 000 ₸ — за что?» The phone pans each body side by side (cabinet height, lid, pedal unit, key surface macro) with only verified differences captioned. End with «вживую разницу слышно — приходите сыграть обе» if the owner OKs it. Keep sound only as background."
+   },
+   {
+    "target": "REVISED ID06 hand-checks (key resistance / pedals / headphone jack)",
+    "why_fails": "Every digital piano has pedals and a headphone jack, so none of these are real checks. This is generic catalogue filler and won't get saved. The original bench line was the only surprise in it, and the revision removed it. A music-school parent in an Astana apartment actually worries about: will it fit, will the neighbours complain, are the keys weighted the way the teacher wants, will it get up to the 9th floor.",
+    "severity": "major",
+    "fix": "Hook: «Пианино в квартиру: 3 вопроса, которые задают все родители». Shots: a tape measure across the depth (поместится?), headphones plugged in with the sound cutting to silence (соседи), a slow key press macro with the verified action name once the fact exists. Put the bench («в комплекте нет») as a caption surprise. Same 3 shots, same minutes."
+   },
+   {
+    "target": "No human anywhere (hands-only default for the whole sprint)",
+    "why_fails": "For local retail in KZ/CIS, short videos sell through a seller's face and voice: «вот, смотрите, я вам покажу». Faceless hands with burned-in captions look like an AliExpress listing, and the trust/legitimacy check people run on Instagram fails. The 64k YouTube hit was a person playing. The ID06 synthetic voice-over labelled «озвучено ИИ» makes this worse, because it reads as a bot shop.",
+    "severity": "major",
+    "fix": "Make 'one seller, face plus voice, with consent' a separate yes/no owner ask (not buried in option 2), with a concrete pitch: «один продавец, 1 ролик в неделю, 15 секунд в камеру». Drop AI voice-over completely. If there's no face, use the staff's own voice at the mouth (already allowed) for one line per video, e.g. «за 59 800 — вот так звучит»."
+   },
+   {
+    "target": "Week-1 staff card: 4 ideas, ≤12 min, one take of guitar playing",
+    "why_fails": "Tuning the guitar, finding a cable, powering the amp, two clean continuous takes, jack macros, a ukulele macro plus the case and zip, then sending the files as documents: that's 20–25 min in a real store, not 12. It also assumes a seller who plays 3 clean chords on camera without fluffing. The first week will come back half-shot, and morale breaks on week 1.",
+    "severity": "major",
+    "fix": "Week 1 = ID01 + ID23 only (shared setup, ID23 needs no playing skill), plus the zero-staff ID19. Bank ID14 for week 2. Pre-tune and leave the AS-100BK plugged in the evening before (tell staff explicitly). Send files via Telegram/Drive link, not WhatsApp documents."
+   },
+   {
+    "target": "CTA mechanic: word only at the end, WhatsApp-first",
+    "why_fails": "A word that appears for ≥2 s at second 18–22 is seen by maybe 20–30% of viewers. In KZ, Reels viewers don't leave the app to type in WhatsApp. They write «цена?» or «+» in the comments. The plan treats comments as a secondary count, but they are the main door, and commenting also feeds reach.",
+    "severity": "minor",
+    "fix": "Make the comment the primary CTA: «Напишите «ГИТАРА» в комментариях — пришлём цену и наличие в директ», shown in frame 1–2 as a small sticker and again at the end. Staff/agent reply in Direct with the wa.me link. Keep WhatsApp as the closing channel, not the entry ask."
+   },
+   {
+    "target": "Prices burned into the video",
+    "why_fails": "Reels and TikTok keep getting views for weeks. If the site price changes after publishing, the video shows the wrong price forever. That leads to 'у вас в ролике дешевле' arguments, which trigger DR11 and pause the series. The plan only re-fetches on publish day.",
+    "severity": "minor",
+    "fix": "Add a small «цена на 21.10» date tag to every on-screen price. Pin a comment with the current price and update it when the ledger changes. When a price moves, archive or re-cut the video instead of deleting it."
+   },
+   {
+    "target": "Owner onboarding: 9 asks through Andrey and Pavel",
+    "why_fails": "Nine multi-option questions, sent through two intermediaries to an owner nobody has spoken to, won't get answered by 14.10. In practice you get «делайте как считаете» or silence, and the sprint start slips past 19.10.",
+    "severity": "minor",
+    "fix": "Cut it to 3 blocking asks: (1) approve the codes, quick reply and comment template; (2) which amp is always in stock and is a cable included; (3) can one seller appear on camera. Everything else runs on stated defaults, with a note: «если не согласны — напишите, поменяем»."
+   },
+   {
+    "target": "ID15 POV with a «постановка» label",
+    "why_fails": "The label kills the POV joke, and brand_link is 2. It's a reach-only slot from a store that has no audience yet, so the reach goes nowhere. It's also gated on a drive test that is likely to fail on this phone.",
+    "severity": "minor",
+    "fix": "Replace it with a 7-second sound loop that a non-player can do: drum stick hits or a cymbal macro (I08), or a «угадай цену по звуку» ukulele vs guitar game that ties back to the lines being sold."
+   }
+  ]
+ }
+]

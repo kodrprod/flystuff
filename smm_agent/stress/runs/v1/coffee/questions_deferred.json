@@ -1,0 +1,76 @@
+[
+ {
+  "from": "inputs",
+  "q": "Customer chat/DM sample: WhatsApp export (15–30 chats, no media) or 10 Instagram DM screenshots",
+  "how": "«Если гости пишут вам в WhatsApp: откройте чат с гостем → ⋮ (или имя контакта) → «Экспорт чата» → «Без медиафайлов», 15–30 последних чатов. Если пишут в основном в директ — 10 скринов последних вопросов гостей. Если почти не пишут — просто ответьте «нет». Имена и номера удаляем сразу, наружу ничего не попадает. До 12.10.»",
+  "minutes": 3
+ },
+ {
+  "from": "inputs",
+  "q": "Optional owner voice note (≤3 min): why Левый берег, what stays the same and what changes, what regulars already ask, what must not be shown",
+  "how": "«По желанию, голосовое до 3 минут, до 13.10: 1) Почему именно Левый берег и что там будет так же, а что по-другому? 2) Что постоянные гости уже спрашивают про вторую точку? 3) Что нельзя показывать? Можно пропустить.»",
+  "minutes": 3
+ },
+ {
+  "from": "campaign",
+  "q": "Я ИИ-помощник вашей кофейни. Подтвердите письменно сегодня: 1) вторая точка — по адресу ___ ; в роликах можно назвать ориентир ___ (ЖК, БЦ, улица или «напротив …»); 2) дата открытия: ___ (или «пока не точная»); 3) новое помещение можно снимать уже сейчас: да / нет. По умолчанию, если не ответите до 10.10 12:00: снимаем только первую точку, ориентир не называем.",
+  "why": "E02, E21 and the landmark/date facts are the truth gate for the hero series, the bio, the poster and the 2GIS card. Every address string needs a ledger fact.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Повод прийти на открытие: 1 — «Неделя первых соседей» (доска, где гости пишут имя или улицу), без скидок; 2 — плюс ваше предложение по слову «ЛЕВЫЙ» на кассе в первые 14 дней: напишите точно, что получает гость и лимит в день; 3 — бариста первой точки работают на новой в первую неделю (только если это так); 4 — ничего. И кто дополнительно выйдет на смену в день открытия? По умолчанию: 1.",
+  "why": "The boss asked for a reason to come and a measurable offer; every offer and every claim about staff needs the owner's exact terms. Opening-day staffing replaces telling people not to come.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Продвижение лучшего ролика вокруг нового адреса (решаем сейчас, чтобы стартовать с 16.10): 1 — нет; 2 — до 20 000 ₸; 3 — до 50 000 ₸; 4 — своя сумма ___. Максимум за одну запись на напоминание: ___ ₸ или «посчитайте сами». По умолчанию: 1.",
+  "why": "A boost decided on 19.10 cannot learn before opening. Spend needs explicit approval (L8); the amounts are options, not recommendations.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Кто отвечает на вопросы в директе в рабочее время в течение 15 минут (имя)? И одобрите автоответ: «Здравствуйте! Я ИИ-помощник кофейни. Записали: напомним о дне открытия новой точки здесь, в директе. Не нужно — напишите „стоп“.» 1 — да; 2 — поправлю. По умолчанию: отвечаете вы.",
+  "why": "The sign-up desk and the reply guardrail need one named person; the auto-reply is customer contact and needs approval.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Три цифры: 1) сколько чеков в день в среднем на первой точке за последние 4 недели; 2) сколько гостей в день новая точка спокойно обслужит в первую неделю; 3) можно ли на кассе завести кнопку «ЛЕВЫЙ» (да/нет). Если кнопки нет — считаем только общее число чеков.",
+  "why": "Sets the absolute business objective, the DR10 capacity trigger, and replaces the paper tick sheet with a till count.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Печатаем на офисном принтере (макеты пришлём): плакат на витрину новой точки «Что тут будет? Кофейня. Напишите „ЛЕВЫЙ“ — напомним в день открытия» с QR и карточку на стойку первой точки — 1 да / 2 нет. Карточка новой точки в 2ГИС: 1 — черновик готовим мы, вы подтверждаете; 2 — сами. По умолчанию: 1 и 1.",
+  "why": "The poster and the counter card reach the target people that a 2.1k Reels account cannot; the 2GIS card lets people save the place.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Опубликуйте один раз наш текст и ролик в 2–3 чатах соседних домов или офисов, где вы или сотрудники уже состоите (с согласия админа чата) — 1 да / 2 нет. Закрытый вечер для постоянных гостей первой точки на новой точке за 1–2 дня до открытия: 1 — да, дата ___, до ___ гостей; 2 — нет. Кофе в 2–3 соседних офиса в дни открытия (кто отвезёт?): 1 — да; 2 — нет. По умолчанию: 1, 2, 2.",
+  "why": "Building chats and the regulars' preview are the cheapest local reach and the warm base. The office drop-offs and the evening cost the owner's money and people.",
+  "minutes": 2
+ },
+ {
+  "from": "campaign",
+  "q": "Пришлите 5 фото или видео первой точки до открытия (пустое помещение, ремонт, первая чашка) как файлы. Если нет — ответьте «нет», ролик уберём.",
+  "why": "ID18 (zero staff minutes) cannot run without real archive images; AI past imagery is banned.",
+  "minutes": 1
+ },
+ {
+  "from": "campaign",
+  "q": "Каждый понедельник: отчёт из 3 цифр и пакет роликов — ответьте «да» или номерами тех, что убрать. Без ответа до среды 12:00 ничего не публикуем.",
+  "why": "L8 batch approval within the 5 min/week owner budget; the report is cut to 3 numbers per the owner's request.",
+  "minutes": 5
+ },
+ {
+  "from": "facts",
+  "q": "ID19: staff must actually tally; the number goes on screen only once it is in the ledger"
+ },
+ {
+  "from": "facts",
+  "q": "ID24: the order is real and anonymised (staff)"
+ }
+]

@@ -1,0 +1,264 @@
+{
+ "name": "Ask the surgeon first: implant consultations, Almaty (sprint 2026-10-12 → 2026-11-15, revision 1)",
+ "big_idea": "People put off implants because the answers they need come from a surgeon they haven't met yet: does it hurt, what does the price depend on, will they push me into treatment. In this plan the clinic's implant surgeon answers those questions personally. He answers patients already in the clinic's records directly, which gets bookings in October. He answers everyone else on camera with recurring hidden implant steps: the real implant, the plan on the jaw model, and the cases where he advises against one. This can produce 20+ episodes, because each patient question and each implant-specific step is its own episode. It is provable on camera, because only surgeon-confirmed steps and words appear. It points at the measured action, a coded booking or a reply of «ВРАЧ».",
+ "single_minded_message_ru": "Сначала спросите хирурга — решите потом",
+ "why_this_wins": "This is not a forecast. Every insight is PROVISIONAL (strength 2): the client is hypothetical and the ledger is empty. The message only invites people to ask; nothing is claimed about the business. It becomes fully true once the surgeon confirms two things in the week-0 session: that the consultation carries no obligation (NEEDS FACT, I02/E17) and that he answers patient questions.\n\nWhat changed after review, and why:\n\n(1) The base is now the main lever from week 0. Patients already in the clinic's records (MIS) get a personal, doctor-approved WhatsApp message in waves sized to capacity, with reply keyword «ВРАЧ». This is the fastest route to October bookings. Organic content alone has a 10–20× uncertainty range (REALISM in the intake). The base is measured as its own arm so it doesn't hide what content does.\n\n(2) The hero is now «Вопрос хирургу», built on I01, I02 and I03 (E13, E17, E20, E10, E23). It answers fear, the sales-trap worry and price. Sterilisation is no longer the hero. It is one episode (ID02), because it is a worn category convention and not specific to implants.\n\n(3) Price is addressed in week 1. A «от чего зависит цена импланта» episode (I03, no figures) is fast-tracked through step 4. Prices or an «от» range appear only after the owner sends a dated price list.\n\n(4) The CTAs promise something worth writing for: the surgeon's preliminary view of the likely stages, from a photo or X-ray. This is a non-price offer that needs owner and surgeon approval, plus a daily cap.\n\n(5) The surgeon's face is the default ask, because for a surgery decision people want to see who they are going to. A recurring name tag is the fallback. This also tests the shared experiment, face vs hands in frame 1.\n\n(6) Compliance gates: RU+KZ hook and CTA on every video, checked by a native speaker; licence number in the bio and caption; the sanitary-regime lead checks any sterilisation frame. ID20 (patient voice) is removed.\n\nLearning plan: each post is read at 48 h and 7 days against the pooled dental median until the account has 10 posts of its own. Allocation runs on relative views plus shares and saves until 20 coded chats, then on coded chats per 1k views. The base arm is read separately as replies and bookings per message sent.",
+ "series": [
+  {
+   "name": "Вопрос хирургу",
+   "role": "HERO. Conversion + trust, built on I01, I02 and I03. Metrics: coded chats per 1k views, coded chat → booked consultation rate, saves per 1k. Opening ritual: a question card upper-middle (RU line plus KZ line), and within 0.5 s the implant surgeon answers. Default: his face at a desk, phone on a stack of books at eye level 35–40 cm away (speech-distance rule), or a lav mic if the owner approves. Fallback if he refuses his face: the same desk, his hands on the jaw model, and a fixed name tag «Хирург-имплантолог [имя]», used only with his consent. That gives the series one recognisable person. No tray or cotton-roll B-roll: pictures must match the words (jaw model, demo implant, the surgeon). Every answer is labelled «Мнение врача». The surgeon records all answers in one batched session. The «Нам пишут: …» framing is used only after the export shows ≥2 matching real messages; the surgeon then reads out anonymised real questions, which replaces the patient-voice idea ID20. Episode-7 test: «Можно ли имплант, если зуб удалили давно?»",
+   "idea_ids": [
+    "ID04",
+    "ID05",
+    "ID21"
+   ],
+   "cadence": "2 per week (Thu + Sun) from week 1; ID21 from week 2 once real comments exist. Priority NEXT BATCH episode «от чего зависит цена импланта» (I03) takes a week-1 slot if it passes the rails"
+  },
+  {
+   "name": "Кабинет имплантолога",
+   "role": "Proof / utility, implant-specific hidden steps the camera can show without patients. Metrics: saves + shares per 1k, profile visits per 1k, then coded chats per 1k. Opening ritual: an implant object already moving in frame 1 (demo implant, jaw model, plan on paper), filmed at 20–30 cm with its own sound, with the tag «Кабинет имплантолога» upper-left. ID03 is published only as a re-cut about how OUR implant consultation goes. Its hook and text move from «выбираете клинику? смотрите сюда» to the visit sequence on the jaw model. The 'check other clinics' lines «Пакет вскрывают при вас?» are removed; the re-cut passes the rails again. ID02 (sterilisation) runs once only, in week 2, after the clinic's sanitary-regime lead has checked every frame. Further episodes go to NEXT BATCH: the CT/plan screen (blurred, no patient data), the surgical kit for one case, the temporary crown model, 'one missing tooth vs three' drawn on paper. Episode-7 test: «Что хирург проверяет, прежде чем сказать „да“ импланту».",
+   "idea_ids": [
+    "ID03",
+    "ID11",
+    "ID02"
+   ],
+   "cadence": "1–2 per week"
+  },
+  {
+   "name": "Со стороны",
+   "role": "Reach / exploration wildcard for the adult child who decides for a parent (I07). Metrics: relative views (views_48h ÷ median), shares per 1k, and the share of coded chats written by relatives. Its first frame is a staged phone chat labelled «постановка», which breaks the run of desk and hand openings. It must not mock older people.",
+   "idea_ids": [
+    "ID14"
+   ],
+   "cadence": "1 per week (Wed)"
+  }
+ ],
+ "offer": {
+  "needed": true,
+  "proposal": "Non-price offer. It is the default CTA for conversion pieces («Вопрос хирургу», «Кабинет имплантолога»), published only after the owner's «да» and the surgeon's agreement: «Пришлите в WhatsApp код {CODE} и фото или снимок — хирург-имплантолог предварительно подскажет, какие этапы обычно нужны в похожей ситуации. Точный план — только после осмотра.» Limits: runs 2026-10-19 → 2026-11-15. At most N replies per working day, where the surgeon sets N in the week-0 session. Above N, the admin offers a consultation slot instead. No diagnosis or price in the reply. We do not write «бесплатно» or «без обязательств» unless the owner confirms it in writing. Test: CTA with this offer vs the soft CTA «расскажем, как проходит консультация» on reach pieces (ID14, ID11). Directional only, because the arms differ. No discounts and no «акции».",
+  "fact_ids": [],
+  "needs_owner_approval": true
+ },
+ "channels": [
+  {
+   "channel": "Base of existing patients (personal WhatsApp from the admin)",
+   "role": "PRIMARY lever for the deadline, from week 0. Separate arm with keyword «ВРАЧ». The admin pulls three segments from the MIS for the last 24 months: A, implant consultation/plan given but treatment not started; B, extraction with no replacement recorded; C, bridge or removable denture work. Only patients whose records allow contact by the clinic (NEEDS FACT: consent-to-contact basis). Personal one-to-one messages, not a mass broadcast. Waves: A on 2026-10-16, B in week 1, C in week 2. Wave 1 ≤40 messages; later waves are sized so expected bookings stay ≤80% of free surgeon capacity, using the measured wave-1 rates. One message per person per sprint, no reminders. «НЕТ» → removed for good. Agent-drafted text, approved by the surgeon and the owner: «Здравствуйте, {имя}! Это администратор клиники {название}, вы у нас лечились. Если вы ещё думаете об импланте, наш хирург-имплантолог может ответить на ваши вопросы: что беспокоит, какие этапы обычно нужны. Хотите обсудить — ответьте «ВРАЧ». Не хотите таких сообщений — ответьте «НЕТ», больше не напишем.» Waves 2–3 attach the best published «Вопрос хирургу» episode. Admin time is approved by the owner and budgeted outside the 17 content minutes."
+  },
+  {
+   "channel": "WhatsApp chat",
+   "role": "Conversion. Per-video code {CODE}: spoken, on screen ≥2 s (RU+KZ), in the caption and in the pinned comment. Median first reply ≤15 min in working hours; if the week-0 export shows >60 min, that is fixed before more content. Quick reply (owner approves once): «Здравствуйте! Вы по видео {CODE}. Пришлите, пожалуйста, фото или снимок и напишите, какой зуб беспокоит — хирург предварительно подскажет этапы, а мы предложим время консультации.» This is the version after the offer is approved; before approval: «…подскажите, какой зуб беспокоит и когда удобно прийти». Price question (surgeon signs off): «Точную сумму врач называет после осмотра — она зависит от снимка, кости, импланта и коронки. Подобрать время на консультацию?». After the owner's price answer, a dated «от» range can be added. Codeless chats: «Подскажите, откуда о нас узнали?». The handover message after a visit carries a review request, never incentivised."
+  },
+  {
+   "channel": "Instagram Reels + profile",
+   "role": "Main content channel (~3k followers [ASSUMPTION]) and the window where patients check whether a clinic is legitimate. Bio: what the clinic does, district, the medical licence number (NEEDS FACT), and a wa.me link with bio code «БИО». Bio is RU+KZ. Pin 3 posts: the best «Вопрос хирургу», the price-dependency episode, «Как проходит консультация». Highlights: «Как проходит консультация», «Вопросы хирургу», «Отзывы» (public 2GIS quotes, no names, no treatment stories). «Цены» highlight only after a dated price list. Instagram DMs are coded and labelled like WhatsApp."
+  },
+  {
+   "channel": "Phone",
+   "role": "Judgment extension (the METHOD covers WhatsApp codes only). Codes and «ВРАЧ» are spoken in videos and messages. The admin asks «По какому видео или сообщению вы звоните?» and logs code, date and booked yes/no on a one-page sheet. Missed calls are returned the same day."
+  },
+  {
+   "channel": "TikTok + YouTube Shorts",
+   "role": "Cross-posts only if the owner says «да» (default: Instagram only). TikTok is a cold start: no arm is judged on its first 5–10 posts. Shorts titles are plain, e.g. «Как проходит консультация по имплантам — Алматы», with no numbers or outcomes. Commercial-library or original audio only."
+  },
+  {
+   "channel": "WhatsApp Status",
+   "role": "The week's best episode goes to existing contacts, who may forward it to relatives (the I07 route). No availability or urgency claims unless free slots are confirmed that day."
+  },
+  {
+   "channel": "2GIS / Google maps",
+   "role": "Proof and local intent. The agent fetches rating and reviews in week 0 as the guardrail baseline. Photo refresh with non-patient footage (consultation desk, jaw model). Review request at handover. Paid 2GIS placement can start in week 1 if the owner sets a budget at onboarding and confirms RK medical-ad compliance. It does not depend on our videos proving themselves, so it is not gated by DR2."
+  },
+  {
+   "channel": "Paid boost (Instagram click-to-WhatsApp, Almaty radius)",
+   "role": "The budget question is asked at onboarding, not in week 3. Boosting video posts is still limited to DR2-qualified posts with ≥1 coded chat or a conversion role. Week-1 posts are read at 48 h, so the earliest boost is week 2. Requires the owner's budget and the owner's confirmation of RK medical-ad compliance (we supply RU/KZ text, no legal advice). Cap per coded chat (judgment adaptation: one chat ≠ one sale) = avg implant plan × gross margin × consultation→plan rate × chat→consultation rate × 0.3, all owner numbers. Stop-loss: stop after spending 5× the cap with <3 coded chats, or when cost per coded chat rises 3 days in a row."
+  }
+ ],
+ "weeks": [
+  {
+   "week": 0,
+   "goal": "Setup + first bookings, 2026-10-12 → 10-18. (a) Baseline: the admin counts implant consultations from the MIS for the 4 prior weeks (2026-09-14 → 10-11). This replaces the week-0 count, so the base arm can start now without contaminating the baseline. (b) Base wave 1, segment A (≤40 personal messages) on Fri 10-16, after the owner and surgeon approve the text and the consent-to-contact basis is confirmed. (c) ONE 15-minute surgeon session on Thu 10-15, which uses the whole surgeon cap for the week: yes/no fact sheet (4 min); voice/face answers for ID04, ID05, ID03 and the priority price episode (≈7 min); approval of the 8-template comment-reply bank, the warm message and the quick replies (≈3 min); his daily cap N for photo reviews (1 min). (d) The owner answers budget, prices/«от», face consent, licence number, KZ checker and compliance in one onboarding message. (e) Mid-cycle step-4 run on 2026-10-14: the price-dependency episode (I03) gets an id and passes the rails. (f) Staff reality scan. No posts.",
+   "idea_ids": [],
+   "worker_ask_ru": "Здравствуйте, это ИИ-помощник клиники по роликам. Администратору: 1) выгрузить из МИС число консультаций по имплантам за 4 недели (14.09–11.10) и три списка за 24 месяца: начатый, но не продолженный план имплантации; удаление без протезирования; мосты и съёмные протезы. Писать только тем, кому по карте можно писать. 2) В пятницу отправить первым 40 пациентам из списка А согласованный текст — лично, по одному. Ответ «НЕТ» — сразу убрать из списка. Сотруднику для съёмки, ~10 минут один раз: 3 пробных видео (фраза с телефоном у рта в 30 см в тихом углу, звук в кабинете в 20–30 см, 2 минуты кабинета без звука). Лица и пациентов не снимать.",
+   "ai_work": "Fetch the site, 2GIS/Google cards and Instagram (baseline median of the last 15 posts, outliers). Pull peer dental outliers (mechanisms only). Anonymise the chat export to cust_###; count Q/F clusters, where chats die, reply time and close rate. Draft the warm messages per segment (A/B/C), quick replies, phone sheet, bio (RU+KZ, licence placeholder), the surgeon fact sheet and the comment-template bank. Write the price-dependency episode in the step-4 run. Prepare the RU+KZ caption template with a licence line. Set up the code register, including the «ВРАЧ» arm."
+  },
+  {
+   "week": 1,
+   "goal": "Explore + base wave 2, 2026-10-19 → 10-25. Five base videos across ≥4 drivers (relief, honest_signal, practical_value/mastery, amusement_awe, identity), with hero episodes 1–2. Only ideas whose facts were confirmed in the Thursday session go on the Monday card, so staff never film blocked ideas. Order for first-frame variety: Wed ID14 (staged phone chat) → Thu ID05 (surgeon at desk) → Fri ID11 (closed fist) → Sat ID03 re-cut (jaw model, our consultation) → Sun ID04 (question card + surgeon). The price-dependency episode replaces ID11 if it passed the rails; ID11 then moves to week 2. Zero-fact reserve: ID14 always; ID11 once the sample is confirmed. ID20 is removed. Base wave 2 goes to segment B with ID05 or ID04 attached. Shoot ≈9 planned staff minutes (кабинет + тихий угол only), because all doctor talk was recorded in week 0.",
+   "idea_ids": [
+    "ID05",
+    "ID04",
+    "ID03",
+    "ID14",
+    "ID11"
+   ],
+   "worker_ask_ru": "Это ИИ-помощник клиники. Съёмка во вторник, ~9 минут: кабинет и тихий угол, только руки, модель челюсти и демо-имплант, пациентов не снимаем — карточку пришлём. Сотруднику со знанием казахского: в среду прочитать казахские строки к 5 роликам (~4 минуты). Администратору: волна 2 по списку Б с роликом, метки «Видео», «ВРАЧ», «Имплант-консультация» и лист звонков.",
+   "ai_work": "Edit 5 bodies plus 2 edit-time hook variants each, with no two consecutive desk or top-down openings. Burn in RU+KZ hook and CTA (KZ after the native check); add the licence line to captions; labels «Мнение врача» and «постановка». ID04 B-roll is the surgeon or his hands on the jaw model/demo implant, not trays. ID03 is re-cut around our consultation sequence and the 'check the clinic' lines are removed. Code on screen ≥2 s, in the caption and in the pinned comment. Comment replies only from the approved template bank. 48 h reads; base-arm counts per message sent."
+  },
+  {
+   "week": 2,
+   "goal": "Explore + follow-up + base wave 3, 2026-10-26 → 11-01. Follow up DR2 breakouts. ID21 starts from real comments, with answers built from the template bank or the week-0 recordings. ID02 runs as the single sterilisation episode, only after the sanitary-regime lead has checked the frames. ID11 runs if it was displaced. NEXT BATCH «Кабинет имплантолога» episodes (CT screen blurred, surgical kit for one case, plan on paper). Base wave 3 goes to segment C. The first boost is possible if a week-1 post qualifies and the budget and legal OK exist. On 2026-11-01, fix the absolute targets from the MIS baseline, measured chats/1k and base-arm rates, and give the REALISM verdict.",
+   "idea_ids": [
+    "ID21",
+    "ID02",
+    "ID11"
+   ],
+   "worker_ask_ru": "Карточка недели (≤11 минут съёмки, пришлём в понедельник). Казахские строки — ~4 минуты в среду. Свободный кадр 10 секунд: что-то из имплантологии, чего пациенты не видят (без пациентов и экранов с данными). Голосовое 30 секунд: «3 вопроса пациентов про импланты за неделю». Администратору: волна 3 по списку В, метки и лист звонков.",
+   "ai_work": "ID21 from library/week1/kabinet_*.mp4 plus approved template text (0 staff minutes). New hero episodes from the surgeon's week-0 recordings. DR3 re-cuts (repost ≥7 days later). Code comments, chats and base replies into evidence. Arm updates including the base arm. Boost-cap calculation from owner numbers. Owner report (≤5 lines). One line of results to staff."
+  },
+  {
+   "week": 3,
+   "goal": "Focus, 2026-11-02 → 11-08. Thompson allocation. «Вопрос хирургу» 2/week; from 2026-11-05 the final-10-day mix is ~40% conversion, as long as total bookings (base + content) stay ≤80% of free surgeon capacity. Surgeon session 2 (≤10 min): new answers from the top 3 real questions. Boost or 2GIS continues within the stop-loss. DR5 check of the conversion layer. No new base waves unless capacity allows (segments re-sized by measured rates).",
+   "idea_ids": [
+    "ID04",
+    "ID05",
+    "ID21",
+    "ID03"
+   ],
+   "worker_ask_ru": "Карточка недели (≤11 минут). Казахские строки ~4 минуты. Свободный кадр 10 секунд. Голосовое «3 вопроса пациентов». Метки и лист звонков — до 2 минут в день.",
+   "ai_work": "Allocate the slate plus provisional NEXT BATCH ideas by data. Variants for leading arms. DR6 reply scripts if chats die after the price. Daily boost stop-loss checks. Owner report."
+  },
+  {
+   "week": 4,
+   "goal": "Convert + review, 2026-11-09 → 11-15. Conversion push within capacity (DR10). Primary metric vs the MIS baseline, split into base arm / content-coded / total estimate. Breakouts reported as tail events. Learnings with intervals. Next-sprint arms. Plans accepted are tracked to 2026-12-31.",
+   "idea_ids": [
+    "ID04",
+    "ID05",
+    "ID21"
+   ],
+   "worker_ask_ru": "Карточка недели (≤11 минут). Казахские строки ~4 минуты. Голосовое «3 вопроса пациентов». Спасибо — в пятницу пришлём, сколько людей написали по вашим роликам и сообщениям.",
+   "ai_work": "Final 7-day reads. Sprint report: bookings vs baseline per arm with intervals, the mechanism check, insight re-rank, base vs content cost per booking (staff minutes + money). Graveyard entries. learnings.jsonl entries with strength labels. Next-sprint brief and NEXT BATCH requests."
+  }
+ ],
+ "measurement": {
+  "success_metric": "Booked implant consultations, coded (video code or «ВРАЧ», via WhatsApp / Instagram DM / phone), matched to the admin label «Имплант-консультация» and checked for attendance in the schedule. Target: conservative 1.2× / expected 1.5× / stretch 2× the weekly baseline, averaged over weeks 3–4, by 2026-11-15. Baseline = mean weekly implant consultations from the MIS, 2026-09-14 → 10-11. If unavailable, use the week-0 count of uncoded bookings. Absolute numbers and the REALISM verdict are fixed on 2026-11-01. Reported in three lines: base arm («ВРАЧ»), content-coded (video codes, a floor), and total vs baseline (estimate). Lagging metric: plans accepted, to 2026-12-31. REALISM update: [ASSUMPTION] reply rate 5–15% × booking 30–50% → ~2–8 consultations per 100 base messages. The list size is unknown, so the owner's «сотни» is unverified; the estimate is replaced by wave-1 measured rates.",
+  "attribution": "Per-video code {CODE}: spoken, on screen ≥2 s (RU+KZ), in the caption and in the pinned comment; prefilled wa.me in the bio. The base arm uses the keyword «ВРАЧ», counted separately and never mixed into content results. Phone: the admin asks for and logs the code (judgment extension). Instagram DMs labelled the same way. Codeless chats are asked «Откуда о нас узнали?». The 30-day attribution window covers multi-week decisions. Paid traffic (2GIS/boost) gets its own codes and is reported as its own line.",
+  "leading_indicators": [
+   "views_48h ÷ median of the last 15 posts on that platform (log ratio per engine); pooled dental median until 10 own posts",
+   "3-second hold vs account median (also the face-vs-hands-in-frame-1 shared experiment)",
+   "average % watched",
+   "shares + saves per 1,000 views",
+   "coded chats (WhatsApp + DM + phone) per 1,000 views, and photo/X-ray submissions per 1,000 views (offer pull)",
+   "coded chat → booked consultation rate",
+   "base arm: replies «ВРАЧ» per 100 messages, bookings per 100 messages, «НЕТ»/complaints per 100 messages",
+   "surgeon minutes used per week vs the 15-minute cap"
+  ],
+  "review_cadence": "Every post at 48 h (allocation) and 7 days (final). Each base wave read at 72 h before the next is sized. Weekly campaign read on Monday with a ≤5-line owner report. Targets fixed 2026-11-01. Phase review 2026-11-15. 30-day code window. Mechanism check per idea: driver vs its own metric."
+ },
+ "decision_rules": [
+  "DR0 Publish gate (regulated, judgment): a video goes out only if ALL of these hold: (1) its NEEDS FACT items were confirmed before the Monday card, so unconfirmed ideas are never filmed; (2) the surgeon's weekly batch sign-off and the owner's batch approval are both done in one Wednesday pass; (3) the RU+KZ hook and CTA have passed the native Kazakh check; (4) the caption carries the licence line; (5) any sterilisation or instrument frame has been checked by the clinic's sanitary-regime lead. Failure → a confirmed reserve takes the slot (ID14 → ID11 → ID21).",
+  "DR-S Surgeon minutes: cap 15 per week (week 0 = one 15-min session; weeks 1–4 ≤10: the Wednesday batch sign-off plus ≤5 min of new answers every other week). Comment replies come only from the approved template bank, so there is no per-comment approval. If the cap is exceeded or sign-off is late twice → switch the next week to zero-new-recording episodes (ID21, library re-cuts) and cut new questions to 1.",
+  "DR-W1 Base waves: wave 1 ≤40 messages. Each later wave = (free consultation slots this week × 0.8 − content bookings) ÷ measured bookings per message. No wave when DR10 is triggered.",
+  "DR-W2 Base safety: «НЕТ» → removed for good; one message per person per sprint; no reminders. If «НЕТ» + complaints exceed 10% of a wave (judgment threshold), stop and rewrite the text with the owner. Messages are sent personally in batches of ≤20 per hour to avoid WhatsApp spam blocks.",
+  "DR1 Read: every post at 48 h and 7 days against that platform's median of the last 15 posts (pooled dental median until 10 own posts).",
+  "DR2 Breakout: ≥3× platform median at 48 h ([ASSUMPTION] Reels median ~1,000 → ≥3,000 views, replaced after the week-0 fetch), or shares+saves per 1k ≥2× median → within 7 days 2 follow-ups (part 2 / same insight in a new format + a reply to the top comment), pin it if conversion-relevant, add it to the next base wave and Status, and mark it boost-eligible. At ≥10× it becomes a series; the owner hears «вирусный» described as a tail event.",
+  "DR3 Hook failure: 3-s hold <0.7× account median → re-cut with a different first-frame type and hook, repost ≥7 days later, once.",
+  "DR4 Body failure: hold OK, completion <0.7× median → shorten and move the payoff earlier in the next episode.",
+  "DR5 Conversion-layer miss: views on plan but coded chats <30% of the 2026-11-01 plan by week 3 → check the spoken and on-screen code, caption, pinned comment, bio link, the offer CTA's visibility, phone logging and reply time before making more content.",
+  "DR6 Sales-handling miss: coded chats on plan, bookings low → report where chats die (after price? after photo review?) and draft scripts. Price, any «от» range and the offer are the owner's call.",
+  "DR7 Attention-only arm: ≥10 posts, ≥10,000 views, 0 coded chats while other arms convert → 1 post/week.",
+  "DR8 Retire: P(arm beats client median) <0.10 after ≥8 posts → exploration floor; data stays in the pool.",
+  "DR9 Boost: video boosts only for DR2 posts with ≥1 coded chat or a conversion role, from week 2. 2GIS placement may start week 1 on the owner's budget. Both need owner-confirmed RK compliance. Cap per coded chat = avg plan × margin × consultation→plan × chat→consultation × 0.3 (owner numbers). Stop at 5× the cap with <3 coded chats, or when cost per coded chat rises 3 days in a row. Never with an unapproved offer.",
+  "DR10 Capacity: total new implant-consultation bookings (base + content + paid) ≥80% of free surgeon capacity (Q1; default +20% over baseline), or photo-review requests above the surgeon's daily N → pause base waves first, then conversion CTAs, and shift to «Кабинет имплантолога» and reach.",
+  "DR11 Honesty kill-switch: a comment credibly disputes a fact or alleges harm → pause that series, move the conversation to private, verify with the surgeon, tell the owner the same day.",
+  "DR11b Medical comments: no diagnosis, prognosis or price in public. Use the pre-approved templates only; off-template questions get «это решает врач после осмотра — напишите {CODE}, подскажем, как записаться» and become ID21 candidates.",
+  "DR12 Pivot: by week 4–6, no arm with P >0.6 and the primary metric <25% of target → rerun step 3 with fresh chats, base replies and voice notes; diagnose reply time, price position, reviews and surgeon availability; send the owner an honest options report.",
+  "DR13 Claims: 'winner' only with P(best) ≥0.9, n ≥10 per contender and an interval; otherwise «лидирует, рано судить».",
+  "DR14 Staff: card completion <80% for 2 weeks → fewer locations, shorter takes, more library cuts.",
+  "DR15 Owner/surgeon: rejections >30% → read the reasons and update constraints; a fact rejection means fixing the ledger.",
+  "DR16 Never delete flops, except for truth, consent, medical-ad, language-law or legal problems."
+ ],
+ "learning_questions": [
+  "How many bookings per 100 messages does the base arm («ВРАЧ», by segment A/B/C) produce, compared with content per 1,000 views, and what does each cost in staff minutes and money?",
+  "Does a concrete CTA (the surgeon's preliminary stages from a photo or X-ray) raise coded chats per 1k views compared with the soft «расскажем, как проходит консультация»? Directional only.",
+  "Shared experiment: does the surgeon's face in frame 1 beat hands with a name tag on 3-s hold and coded chats per 1k? Randomised per «Вопрос хирургу» episode if he consents to his face.",
+  "Does the price-dependency episode (I03) turn price-first chats into bookings? Compare where chats die in the week-0 export and in weeks 3–4.",
+  "Do adult children write first for a parent (ID14 and base segment C)? Measure the share of coded chats from relatives."
+ ],
+ "owner_asks": [
+  {
+   "ask": "Это ИИ-помощник по роликам. Главный быстрый шаг — ваша база. Разрешаете администратору: 1) выгрузить из МИС число консультаций по имплантам за 4 недели и списки за 24 месяца (неначатый план имплантации / удаление без протезирования / мосты и съёмные протезы), 2) писать лично, волнами по ≤40 человек, только тем, кому по карте можно писать, текстом, который утвердит хирург (без акций и обещаний), 3) тратить на это до 15 минут в день? Да / нет / поправлю. По умолчанию: да, первая волна 16.10.",
+   "why": "Fixes the boss's fatal point: the warm base is the fastest source of October bookings. The MIS count also gives a 4-week baseline, so outreach doesn't contaminate it.",
+   "minutes": 3
+  },
+  {
+   "ask": "Пришлите экспорт 15–30 последних чатов WhatsApp про импланты: чат → ⋮ → «Экспорт чата» → «Без медиафайлов». Имена и номера удаляем сразу. По умолчанию (если нет до 16.10): судим по ответам на сообщения базы и комментариям.",
+   "why": "Needed for real question clusters (the «Нам пишут» framing, which replaces patient voices), the point where chats die, and reply time.",
+   "minutes": 3
+  },
+  {
+   "ask": "Бюджет на рекламу в октябре–ноябре: 1 — 0 ₸; 2 — да, напишите сумму в месяц и максимум, который готовы платить за одну запись на консультацию; 3 — сначала 2ГИС, потом Instagram. По умолчанию: 1.",
+   "why": "The boss asked for budget at onboarding. 2GIS can start in week 1; video boosts start once a post qualifies (week 2).",
+   "minutes": 1
+  },
+  {
+   "ask": "Хирург-имплантолог, одна сессия 15 минут в четверг 15.10: ответы да/нет по листу, запись ответов на вопросы пациентов, утверждение шаблонов ответов. Снимать его: 1 — с лицом (с письменного согласия, это главный рычаг доверия), 2 — только руки и табличка с именем, 3 — только голос. Можно ли купить петличный микрофон (около 1 500 ₸, цена — наше предположение)? По умолчанию: 2, без покупки.",
+   "why": "Batches all surgeon time into one session (≤15 min/week cap) and asks for his face as the main trust lever, not an optional extra.",
+   "minutes": 1
+  },
+  {
+   "ask": "Цены: 1 — можно точные (фото прайса с датой); 2 — только вилка «от … до …» по прайсу с датой; 3 — без цифр, только «от чего зависит». И можно ли в CTA: «пришлите фото или снимок — хирург предварительно подскажет этапы» (хирург назовёт, сколько ответов в день)? Да / нет. По умолчанию: 3, CTA без фото.",
+   "why": "Price is the first question patients ask. A dated «от» range is usable only from a ledger fact. The photo CTA is the non-price offer that gives people a reason to write. Replaces intake Q3.",
+   "minutes": 1
+  },
+  {
+   "ask": "Соответствие правилам (да/нет, юридическую оценку не даём): 1) номер медицинской лицензии — пришлите, поставим в профиль и подписи; 2) в каждом ролике хук и CTA на русском и казахском — согласны; 3) кто из сотрудников — носитель казахского и вычитает строки (~4 мин/нед); 4) кто отвечает за санрежим и проверит кадры стерилизационной; 5) платная реклама медуслуг допустима — да / уточню у юриста. Рассказы пациентов в этом спринте не делаем. По умолчанию: без лицензии и казахской вычитки ролики не выходят.",
+   "why": "Language law, licence details and the sanitary check become publishing gates (DR0). The patient-story idea ID20 is dropped.",
+   "minutes": 2
+  },
+  {
+   "ask": "Утвердите один раз шаблоны ответов в WhatsApp (пришлём 3) и попросите администратора ставить метки «Видео», «ВРАЧ», «Имплант-консультация», а звонящих спрашивать «по какому видео или сообщению?». 1 — да, 2 — поправлю. По умолчанию: 1 с 19.10.",
+   "why": "Conversion layer and attribution across WhatsApp, DM and phone.",
+   "minutes": 1
+  },
+  {
+   "ask": "Сколько дополнительных консультаций по имплантам в неделю хирурги реально примут: 1 — до +2, 2 — +3–5, 3 — больше 5 (число)? По умолчанию: +20% к нынешнему. Ответ до 10.10 12:00.",
+   "why": "Intake Q1. Base waves, photo-review volume and DR10 are all sized from it.",
+   "minutes": 1
+  },
+  {
+   "ask": "Завести TikTok и YouTube: 1 — да, сами; 2 — дайте доступ нам; 3 — только Instagram. По умолчанию: 3.",
+   "why": "More free test bed at no staff cost; optional.",
+   "minutes": 1
+  },
+  {
+   "ask": "Каждую среду (≤5 минут, вместе с визой хирурга): одобрить пакет роликов и волну сообщений базе — «да» / «убрать №…». По умолчанию: без ответа ничего не публикуем и не отправляем.",
+   "why": "L8 plus the regulated category; this is the weekly budget, separate from the 15 onboarding minutes.",
+   "minutes": 5
+  }
+ ],
+ "risks": [
+  "HYPOTHETICAL CLIENT: every business detail is an assumption and the ledger is empty. No number, price, brand, duration, licence or experience claim appears anywhere until a dated fact exists.",
+  "Owner onboarding: asks 1–9 total 14 min, plus the intake's capacity question, which is included as ask 8 (15 min). Intake Q2/Q3 are replaced by asks 4 and 5. The weekly approval (5 min) is the separate weekly budget.",
+  "Surgeon minutes are a new budget line (cap 15/week). If the week-0 session slips, most of week 1 falls back to ID14, ID11 and library cuts, and the hero starts in week 2.",
+  "Admin outreach time (≤15 min/day) is outside the METHOD's 17 staff minutes. It is a sales task the owner explicitly requested and approves; this is a judgment call.",
+  "NEEDS FACT: legal basis for contacting patients from the MIS (consent to contact in the patient record / RK personal-data rules) (owner). The base arm does not start without it.",
+  "NEEDS FACT: the surgeon agrees to answer base replies and photo/X-ray requests, and his daily cap N (surgeon). Without it the offer and the warm text drop «хирург ответит».",
+  "NEEDS FACT: whether the preliminary photo review is free and non-binding (owner). «бесплатно» / «без обязательств» stay off until confirmed.",
+  "NEEDS FACT: medical licence number for bio and captions (owner).",
+  "NEEDS FACT: named Kazakh-native checker and the sanitary-regime lead (owner).",
+  "NEEDS FACT: surgeon consent to face or name on camera; his name for the name tag (surgeon).",
+  "NEEDS FACT: anaesthesia/sensation answer in the surgeon's signed-off words (ID04); his real criteria for advising against an implant and the non-binding consultation (ID05); our consultation sequence on the jaw model (ID03 re-cut); demo implant sample without brand (ID11); reprocessing steps and order (ID02).",
+  "NEEDS FACT: dated price list or «от» range with what it includes (owner). No figure appears until then; the price episode explains only what the price depends on.",
+  "ID03 re-cut changes its hook and text from 'check any clinic' to 'our consultation'. It must pass the rails again at edit time; if rejected, it moves to NEXT BATCH and ID14/ID11 cover the slot.",
+  "WhatsApp Business may flag bulk messaging: messages are personal, paced ≤20/hour, and use opt-out wording.",
+  "Capacity flood: base + content + paid could exceed surgeon capacity quickly; DR10 pauses base waves first.",
+  "REGULATED: no «без боли», «навсегда», «приживается», «за 1 день», no before/after, no patient testimonials (ID20 removed), no AI depiction of results, no diagnosis in comments or photo reviews.",
+  "Sterilisation footage is publicly scrutinised: ID02 runs once, only after the sanitary-regime lead's frame check.",
+  "Attribution: codes undercount (phone especially); in-sprint surgeries undercount; base, content and paid are reported as separate lines.",
+  "NEXT BATCH (priority, mid-cycle step-4 run 2026-10-14): «Вопрос хирургу» episode «От чего зависит цена импланта» (I03; CT, the implant itself, bone grafting if needed, abutment, crown, number of visits; no figures; surgeon-approved; RU+KZ). It takes a week-1 slot if it passes the rails.",
+  "NEXT BATCH: «Кабинет имплантолога» episodes: blurred CT/plan screen (no patient data), surgical kit laid out for one case, temporary crown model, 'one tooth vs three' drawn on paper, «что хирург проверяет, прежде чем сказать „да“».",
+  "NEXT BATCH: «Нам пишут: „Боялся, что…“» FAQ episodes, with the surgeon reading anonymised real questions once the export shows ≥2 matching messages. This replaces ID20.",
+  "NEXT BATCH: a moment idea for I06 (after an extraction; той season planned 10–14 days ahead) and a myth_check for I05 («кости нет», «мост проще»), surgeon-signed.",
+  "NEXT BATCH: why_it_costs for I10 only after the owner confirms each cost element and dated prices."
+ ],
+ "attribution_codes": {
+  "ID05": "BA23",
+  "ID20": "BA24",
+  "ID14": "BA25",
+  "ID04": "BA26",
+  "ID21": "BA27",
+  "ID02": "BA28",
+  "ID03": "BA29",
+  "ID11": "BA32"
+ }
+}

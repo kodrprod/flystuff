@@ -1,0 +1,132 @@
+[
+ {
+  "persona": "Владелец кофейни в Астане, открывает вторую точку на Левом берегу через 3 недели, просил ажиотаж",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "ID03 «Что тут будет?»: backstage series from the new site (empty room → tamper → machine), filmed during setup work anyway, plus the A6 counter card at location 1 with its own code for regulars who live or work on Левый берег.",
+  "refutations": [
+   {
+    "target": "ID06 «Честно: в первый день не приходите»",
+    "why_fails": "Tells people to stay away when I asked for buzz. «Притираемся к новой машине» signals a specialty coffee shop that isn't ready. Embarrassing for the brand.",
+    "severity": "fatal",
+    "fix": "Drop it. Handle capacity with extra staff on opening day, not by asking guests not to come."
+   },
+   {
+    "target": "Hiding the date and address behind a code (default Q1=2, CTA «дату и адрес — лично, по коду»)",
+    "why_fails": "Nobody messages a coffee shop to get its address; they look in 2GIS. The plan itself opens a 2GIS card for the new location before opening, which reveals the address. The «secret» is contradictory and adds friction to the main action.",
+    "severity": "major",
+    "fix": "Owner confirms the date and address in writing today. Put them in the videos, bio and 2GIS. Use the code for «напомним в день открытия» or for a real offer."
+   },
+   {
+    "target": "ID05 «Дату назовём, когда будем уверены»",
+    "why_fails": "Saying two weeks before opening that we don't know the date looks disorganised and kills intent.",
+    "severity": "major",
+    "fix": "After the date is confirmed, answer directly: date, address, how to find the entrance."
+   },
+   {
+    "target": "Budget 0 ₸, no offer, boost decision deferred to 19.10",
+    "why_fails": "The plan's own REALISM math says organic reach from ~2.1k followers won't deliver. A boost started at D−11 doesn't have time to learn. No event, no tasting and no offer makes this content without a reason to come.",
+    "severity": "major",
+    "fix": "Decide the geo-boost budget now and start from the first qualifying post. Add a preview evening for location 1 regulars, coffee drop-offs at nearby offices, and one measurable offer on the owner's terms for days 1–14."
+   },
+   {
+    "target": "Success metric: 40/80/150 coded sign-ups plus 16 decision rules and P(best) statistics",
+    "why_fails": "Tiny target for this level of process. For 15 posts in 3 weeks, Bayesian winner-picking is overkill and eats my 5 min/week reading reports.",
+    "severity": "major",
+    "fix": "Monday report with 3 numbers: sign-ups, regulars who said they'll come, and POS from opening day. Forecast in visits."
+   },
+   {
+    "target": "Staff load during setup of location 2 (test-shot tally, on-camera consent, weekly shoots, voice notes, tick sheet in opening week, 15-min replies)",
+    "why_fails": "Staff are already overloaded with the setup. The tick sheet lands in the busiest week. No named person answers messages within 15 minutes, so the plan's 15-min reply rule fails.",
+    "severity": "major",
+    "fix": "Name one person for replies. Replace the tick sheet with the code at the till. Drop the ID19 tally. Keep shoots to ≤10 min per week."
+   },
+   {
+    "target": "ID24 strange order and ID19 «сколько шотов вылили»",
+    "why_fails": "ID24 has objective_fit 2, the lowest on the slate, and doesn't sell the opening. ID19 invites comments about waste.",
+    "severity": "minor",
+    "fix": "Swap for extra hero episodes and an introduction to the new location's bar team."
+   },
+   {
+    "target": "Quick reply «Я ИИ-помощник кофейни…»",
+    "why_fails": "Cold, off-brand first touch for a guest writing to a coffee shop.",
+    "severity": "minor",
+    "fix": "A short reply in the shop's own voice, with a person following up."
+   },
+   {
+    "target": "Week 1 slate: only 1 of 5 posts is the hero series",
+    "why_fails": "With 16 days left at first post, week 1 spends most slots on wildcards that aren't about the opening.",
+    "severity": "minor",
+    "fix": "At least 2 hero or opening posts per week from week 1. Wildcards no more than 1 per week."
+   },
+   {
+    "target": "Business objective of 50% of location 1 checks",
+    "why_fails": "The ratio is made up, with nothing behind it.",
+    "severity": "minor",
+    "fix": "Owner sends location 1's POS average. Set the target in absolute checks per day."
+   }
+  ]
+ },
+ {
+  "persona": "veteran_creator — short-form creator and SMM for local businesses in Kazakhstan/CIS (Астана coffee and HoReCa launches)",
+  "score": 5,
+  "would_approve": false,
+  "best_idea": "ID13 «POV: любимая кофейня — на другом берегу» is the strongest idea, followed by ID18, the archive before/after. ID13 is the only piece built around something every Астана viewer recognises: the bridge, the traffic and the coffee going cold. People will send it to a friend, and the comment prompt «Вы с какого берега?» is easy to answer. ID18 costs the staff no time and suits the regulars. I'd make ID13 the template for the hero series: lead with recognisable Левый берег geography (the view from the new window, the ЖК or БЦ, the route people walk), not with a generic empty room.",
+  "refutations": [
+   {
+    "target": "Core mechanic: hiding the address behind «Напишите {CODE} — пришлём дату и адрес лично» in every video (and the 40/80/150 coded sign-up target)",
+    "why_fails": "For a local café, the location is what makes people share. «Смотри, открывают у нас в ЖК / возле БЦ X» gets forwarded. «Где-то на Левом берегу, напиши им код» does not, because the person receiving it can't tell whether it's near them. Nobody in Астана DMs a code to a coffee shop to find out where it is. They write «где это?» in the comments or ignore the video. The plan also contradicts itself: it wants a 2GIS card for the new location live before opening, and that card publishes the address. So withholding the address makes the videos weaker and doesn't keep anything secret. The coded-DM targets will come in far below 40, and the plan's main metric will make the campaign look like a failure even if people do turn up.",
+    "severity": "fatal",
+    "fix": "Ask the owner one question: can we name the landmark (ЖК or БЦ name, street, «напротив …»)? It's the same place where the 2GIS card goes. Put the landmark in the hook of every episode. Only the date stays private. Make the measured action a comment or DM keyword: «Напишите ЛЕВЫЙ — напомним в день открытия». It takes the viewer one tap, works with an auto-reply, and still builds the opt-in list. Count comments with the keyword plus DMs, and drop the per-video code card. Use the code only on the counter card and in Status, where it's needed to attribute sign-ups."
+   },
+   {
+    "target": "Channels: relying on Instagram Reels from a ~2.1k account built around location 1 to reach people near the new site",
+    "why_fails": "An account whose followers live around location 1 won't reach Левый берег through organic Reels in 3 weeks. The plan admits this (organic reach is 1–33× short of the target) but then leans on the counter card at location 1 and an optional boost. It leaves out the channels that actually reach a new Астана neighbourhood. One is the residential complex and office-building chats on WhatsApp and Telegram, where people really do ask «что открывают на первом этаже?». The other is the covered shopfront itself, which hundreds of the target people walk past every day.",
+    "severity": "major",
+    "fix": "Add a zero-cost window poster on the new site: «Что тут будет? → Instagram @… / напишите ЛЕВЫЙ», with a QR code and its own code so sign-ups from it are counted separately. It's printed on an office printer, so it costs about 0 ₸ in line with the budget, but the owner still approves it. Give the owner a 2-line text and the ID03 clip, and ask them to post it once in 2–3 nearby building chats they or the staff belong to (with the chat admin's OK, no spamming). Tag the new building as the location on every post. These steps bring in more sign-ups than Reels from a 2.1k account."
+   },
+   {
+    "target": "ID03 «Пустая комната… Что будет? → Здесь будет кофейня»",
+    "why_fails": "The curiosity gap is fake. It's posted by a coffee shop's account, a tamper appears at second 5, and the reveal is «кофейня». Viewers know the answer in the first second. Empty room, tamper clink, shaking a bag of beans: every café opening in the CIS has posted this exact sequence. It looks like an ad, and the hint cards slow it down. A walk-through of an empty room shot on a weak phone in fit-out light looks grey and messy.",
+    "severity": "major",
+    "fix": "Make the question about the place, not the product. Open on the view from the new window (a Left Bank landmark, the courtyard, the bus stop) with the hook «Узнаёте этот двор? Скоро здесь будет ваш утренний кофе». Locals recognise their own street, comment «это же …!», and forward it. Show the room from the door inward in 1–2 seconds, then reveal the cup. Shoot with the window as backlight so the phone's exposure works for you. That's one 10-second shot."
+   },
+   {
+    "target": "ID05 «Где именно? Когда?» — a barista explaining why we don't say the date yet",
+    "why_fails": "This is a talking head that answers a question with «we won't tell you». Nobody saves or forwards a non-answer. It's 22 seconds of filler, and putting a face on screen to deliver it also uses up the barista's on-camera consent. With an anonymised «Нам пишут» bubble before real messages exist, it reads like an ad.",
+    "severity": "major",
+    "fix": "Cut it, or have it answer the questions it can: the landmark, the opening hours, what's on the menu (once the owner has confirmed), and whether there's somewhere to sit with a laptop. End with «дату пришлём — напишите ЛЕВЫЙ». Give it 12 seconds and one take."
+   },
+   {
+    "target": "No reason to come on opening day: no offer, no event, nothing for «ажиотаж»",
+    "why_fails": "The owner asked for ажиотаж. The plan delivers a waiting list and then a video telling people not to come on day one (ID06). With no price offer and no moment to show up for, the opening is just a quiet unlock of the door. The coded list gets a message with an address and nothing else. The barely-used opt-in list wastes the one advantage this plan builds.",
+    "severity": "major",
+    "fix": "Put one free or almost-free ritual in front of the owner that can be filmed: guests write their name or street on a «первые соседи» wall, or the baristas from location 1 make the drinks during the first week («ваш бариста теперь и на Левом»), or there's a sticker or stamp for the first week. That gives the opening-day message and the opening-week videos something worth showing, and it spreads visits over the week without promising «первым N»."
+   },
+   {
+    "target": "ID06 «Честно: в первый день не приходите»",
+    "why_fails": "It contradicts the owner's brief («ажиотаж»), so the owner will very likely reject it, and a rejected wildcard is a wasted slot. To a viewer who doesn't know the café, it also says «we're not ready yet». The plan's own capacity worry is hypothetical, since we don't know the new site's throughput.",
+    "severity": "minor",
+    "fix": "Keep it in reserve and only use it if DR10 actually triggers (queues or wait complaints in opening week). In that situation it's a genuine, relevant post. Before then, make the same honest point another way: «Утром до 9 — быстро на вынос, после 10 — посидеть»."
+   },
+   {
+    "target": "ID19 test-shot tally and ID24 strange order",
+    "why_fails": "ID19 depends on the machine being installed and dialled in before the window ends, and on staff keeping a tally over several days while they're busy. Pouring dozens of shots down the drain also invites «перевод продукта» comments. ID24 is filmed at location 1, has nothing to do with Левый берег, and ends with a new-location call to action that doesn't fit, so it's attention with no route to sign-ups. Neither will bring in people near the new site.",
+    "severity": "minor",
+    "fix": "Swap ID24 for the window-view or route episode («от остановки X до нашей двери — 90 секунд», filmed handheld and sped up). Keep ID19 only if the machine arrives before 20 Oct. Otherwise drop it and don't keep the tally sheet."
+   },
+   {
+    "target": "Owner and staff load: 7 owner asks, shoots at two sites, consent recordings, tick sheets",
+    "why_fails": "The staff are also setting up location 2, and the week-1 card needs two sites plus a quiet corner plus a voice note plus a tally. In practice the shoot either slips or gets done badly. The owner has to answer 3 numbered questions by noon tomorrow, plus 4 more. The owner will reply to one of them.",
+    "severity": "minor",
+    "fix": "Combine everything into one owner message with three yes/no taps (confirm the new site and filming / can we name the landmark / approve the reply text). Plan week 1 at the new site only: 3 hands-only shots, 12 minutes. Location 1 content comes from the archive (ID18) and ID13's single doorway shot, taken by whoever is opening that morning."
+   },
+   {
+    "target": "Language: Russian-only on-screen text for a Левый берег audience",
+    "why_fails": "Many young office workers and residents on Левый берег are Kazakh-speaking. A launch that is all Russian loses part of the local share potential. Waiting for a «native check» with no named checker means it never happens.",
+    "severity": "minor",
+    "fix": "Ask the baristas, if any are native Kazakh speakers, to write a one-line Kazakh version of the hook for ID13 and the window-view episode. Use it as a bilingual title card and check it with the same barista."
+   }
+  ]
+ }
+]

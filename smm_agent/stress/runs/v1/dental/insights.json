@@ -1,0 +1,401 @@
+{
+ "evidence": [
+  {
+   "id": "E01",
+   "kind": "constraint",
+   "claim": "The fact ledger is empty (facts_usable = [], files = []). No price, implant brand, warranty, years of experience, case count, doctor credential, timeline or anaesthesia claim may appear in any audience string. Every specific becomes NEEDS FACT.",
+   "source": "assumption: read directly from the client inputs JSON (facts_usable: [], files: []); no file path or URL exists for it",
+   "confidence": "verified"
+  },
+  {
+   "id": "E02",
+   "kind": "constraint",
+   "claim": "Regulated medical/dental advertising (RK): no outcome guarantees, no before/after without written patient consent, no patient faces without written consent. This means no «без боли», «навсегда», «приживается» and no AI depiction of results.",
+   "source": "assumption: client profile constraints_known (hypothetical brief) + intake REGULATED line",
+   "confidence": "likely"
+  },
+  {
+   "id": "E03",
+   "kind": "constraint",
+   "claim": "Default filming permission until Q2 is answered: hands, instruments, objects and voice only. No staff or patient faces, mouths, X-rays or CT images.",
+   "source": "assumption: intake FILMING constraint (A5 default pending clarifying question 2)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E04",
+   "kind": "constraint",
+   "claim": "Staff production budget is 20 min/week (17 planned) on one phone, with usable audio only close to the phone (~30 cm).",
+   "source": "assumption: client profile staff_capacity (hypothetical; staff reality scan pending)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E05",
+   "kind": "fact",
+   "claim": "The clinic sells implants, crowns and hygiene, with 6 chairs and 2 implant surgeons. Unverified, and not usable in copy.",
+   "source": "assumption: client profile what_they_sell (profile.note: every detail is an assumption)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E06",
+   "kind": "fact",
+   "claim": "Prices are described as «above average». This is an owner self-description with no dated price list, so it is unusable in copy and only shapes the price_value hypothesis.",
+   "source": "assumption: client profile what_they_sell; prices listed in known_unknowns",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E07",
+   "kind": "fact",
+   "claim": "Sales channels are WhatsApp, phone and Instagram DM. Instagram has ~3k followers. No TikTok or YouTube account is known.",
+   "source": "assumption: client profile social + sales_channels (hypothetical)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E08",
+   "kind": "constraint",
+   "claim": "Known unknowns that block specific content: prices, implant brands, patient consent policy, ad budget.",
+   "source": "assumption: client profile known_unknowns",
+   "confidence": "likely"
+  },
+  {
+   "id": "E09",
+   "kind": "performance",
+   "claim": "Platform baseline unknown: no per-post history ingested. Working assumption is a Reels median of 500–1,500 views for a ~3k-follower account. The pooled dental-vertical median is not yet available.",
+   "source": "assumption: intake REALISM line; Instagram history fetch not yet run",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E10",
+   "kind": "behaviour",
+   "claim": "Where chats die is UNKNOWN. Vertical hypothesis: the first message asks the price, the clinic answers «только на консультации» without a next step, and the chat stalls.",
+   "source": "assumption: dental-vertical prior; verify in WhatsApp export (owner ask, step 2)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E11",
+   "kind": "behaviour",
+   "claim": "Median first reply time, chat→booked-consultation rate and weekly implant-inquiry baseline are all UNKNOWN. The week-0 count (2026-10-12…18) is the baseline.",
+   "source": "assumption: intake success_metric + REALISM; no chat export or call log yet",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E12",
+   "kind": "customer_language",
+   "claim": "[Q] hypothesised «Сколько стоит имплант?» / «Цена под ключ?» — 0 counted (no chats or reviews ingested). Must not be used as «Нам пишут» until ≥2 real messages match.",
+   "source": "assumption: dental-vertical prior on implant inquiries; verify in WhatsApp export + Instagram DMs",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E13",
+   "kind": "customer_language",
+   "claim": "[F] hypothesised «Это больно?» / «Под наркозом или нет?» — 0 counted.",
+   "source": "assumption: dental-vertical prior on surgical anxiety; verify in export + 2GIS reviews",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E14",
+   "kind": "customer_language",
+   "claim": "[F] hypothesised «А если не приживётся?» — 0 counted.",
+   "source": "assumption: dental-vertical prior; verify in export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E15",
+   "kind": "customer_language",
+   "claim": "[Q/F] hypothesised «Сколько это по времени? Сколько ходить без зуба?» — 0 counted.",
+   "source": "assumption: dental-vertical prior on multi-visit treatment; verify in export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E16",
+   "kind": "customer_language",
+   "claim": "[B] hypothesised beliefs «Мне сказали, кости нет — значит импланты нельзя» / «Мост проще и дешевле» / «Импланты — это для пожилых» — 0 counted.",
+   "source": "assumption: dental-vertical prior; verify in export, reviews, peer comments",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E17",
+   "kind": "customer_language",
+   "claim": "[F] hypothesised fear of being upsold: «Придёшь на консультацию — насчитают на миллион» — 0 counted.",
+   "source": "assumption: private-clinic category prior; verify in 2GIS reviews + export",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E18",
+   "kind": "customer_language",
+   "claim": "[F] hypothesised sterility question: «Инструменты одноразовые? Стерильно?» — 0 counted.",
+   "source": "assumption: dental-vertical prior; verify in export + reviews",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E19",
+   "kind": "moment",
+   "claim": "Hypothesised decision triggers: a tooth just extracted or lost; a removable denture or old bridge starting to fail; an upcoming family той/wedding or photos; an adult child arranging treatment for a parent.",
+   "source": "assumption: strategist judgment for Almaty/KZ family context; verify via owner voice note + export first messages",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E20",
+   "kind": "behaviour",
+   "claim": "An implant decision is multi-step (consultation → imaging → plan → surgery) and takes weeks, so people postpone it. The clinic's real sequence and timing are unconfirmed.",
+   "source": "assumption: intake assumption on decision length; verify from the clinic schedule of the last 10 implant cases",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E21",
+   "kind": "market",
+   "claim": "Category convention 1 (hypothesis): dental accounts lead with before/after smile photos. This is restricted here without written consent, which leaves a gap for process content.",
+   "source": "assumption: strategist knowledge of CIS dental Instagram; peer outlier scan (10–20 Almaty/CIS clinics) not yet run",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E22",
+   "kind": "market",
+   "claim": "Category convention 2 (hypothesis): a doctor in a white coat as a talking head explaining at a distance (often wide-shot audio).",
+   "source": "assumption: strategist knowledge; peer scan pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E23",
+   "kind": "market",
+   "claim": "Category convention 3 (hypothesis): price promos «имплант под ключ от …», «акция» as motion-text slides.",
+   "source": "assumption: strategist knowledge; peer scan pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E24",
+   "kind": "market",
+   "claim": "Category convention 4 (hypothesis): stock 3D animation of an implant entering bone instead of the real object or real process.",
+   "source": "assumption: strategist knowledge; peer scan pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E25",
+   "kind": "market",
+   "claim": "Category convention 5 (hypothesis): polished clinic-interior tours with music and no question answered.",
+   "source": "assumption: strategist knowledge; peer scan pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E26",
+   "kind": "proof_asset",
+   "claim": "Reality inventory, all unverified until the staff reality scan: sealed sterile instrument pouches and the steriliser («стерилизационная»), the instrument tray being laid out and a jaw/demo model for explaining («кабинет»), a quiet spot for close voice recording («тихий угол»).",
+   "source": "assumption: typical private implant clinic layout; verify via staff reality scan (3 test clips + 2-min walkthrough)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E27",
+   "kind": "proof_asset",
+   "claim": "Close-audio realities (unverified): crackle of a sterile pouch being opened, instruments placed on a tray, steriliser door/beep. All are recordable at 20–30 cm. Drill and suction sounds are likely fear triggers, not pleasure sounds.",
+   "source": "assumption: strategist judgment; verify in reality scan sound clips",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E28",
+   "kind": "proof_asset",
+   "claim": "A real implant or demo sample could be shown in gloved hands next to an everyday object to show its true size. Whether a demo sample exists, and its brand, are unconfirmed, so no dimensions or brand are allowed on screen.",
+   "source": "assumption: strategist judgment; NEEDS FACT from owner (demo sample available? brand?)",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E29",
+   "kind": "performance",
+   "claim": "A blind text judge ranks Shorts performance barely above chance (Spearman 0.11 overall, 0.07 retail, CI includes 0; n=1,172), so insight strengths and rubric scores are priors only.",
+   "source": "assumption: knowledge-base learning L001 (strength 'measured', dated 2026-10-08), which cites experiments/002_shorts_scores_and_labels.json; that file is not among this client's input files, so it was not opened here",
+   "confidence": "likely"
+  },
+  {
+   "id": "E30",
+   "kind": "performance",
+   "claim": "Product demos without a buyer question under-performed on a different client: Muzzone brand-only demo clips had a median of 390 views vs a channel median of 2,300 (n=48). Correlational and cross-vertical: it supports tying every object or process shot to a patient question.",
+   "source": "assumption: knowledge-base learning L006 (strength 'measured (correlational)', dated 2026-10-08), which cites clients/muzzone/research/youtube_channel.json; that file is not among this client's input files, so it was not opened here",
+   "confidence": "likely"
+  },
+  {
+   "id": "E31",
+   "kind": "performance",
+   "claim": "Polished motion-graphic price slides were judged useless (expert judgment, L005), which reinforces avoiding the category's «от … ₸» promo convention.",
+   "source": "assumption: learnings L005, owner feedback 2026-10-08 (no file path provided)",
+   "confidence": "likely"
+  },
+  {
+   "id": "E32",
+   "kind": "performance",
+   "claim": "Long-form title formulas («для начинающих», «vs») did not replicate on Shorts (median relative views 1.00 and 0.99), so hook patterns must be tested, not assumed.",
+   "source": "assumption: knowledge-base learning L003 (strength 'measured', dated 2026-10-08), which cites experiments/002_shorts_scores_and_labels.json; that file is not among this client's input files, so it was not opened here",
+   "confidence": "likely"
+  },
+  {
+   "id": "E33",
+   "kind": "constraint",
+   "claim": "Prices are not named in content by default (Q3 default 2). Price-related content may explain what drives the cost, framed as the doctor's opinion, but shows no numbers.",
+   "source": "assumption: intake PRICES constraint + clarifying question 3 default",
+   "confidence": "likely"
+  },
+  {
+   "id": "E34",
+   "kind": "constraint",
+   "claim": "Surgeon capacity is unknown (2 surgeons assumed). No «запишем завтра», «без очереди» or turnaround claims. Conversion CTAs pause at 80% of the free capacity confirmed in Q1.",
+   "source": "assumption: intake CAPACITY + GUARDRAIL lines",
+   "confidence": "likely"
+  },
+  {
+   "id": "E35",
+   "kind": "market",
+   "claim": "Demand-phrase candidates, NOT YET FETCHED: «имплант зуба Алматы», «сколько стоит имплант», «больно ли ставить имплант», «имплант или мост». The agent must confirm them against TikTok/YouTube/Yandex suggestions before using them as hooks or captions.",
+   "source": "assumption: hypothesised search phrases; agent fetch of RU/KZ suggestions pending",
+   "confidence": "assumption"
+  },
+  {
+   "id": "E36",
+   "kind": "behaviour",
+   "claim": "Hypothesis: some prospective implant patients are older people living with removable dentures who say «мне уже не надо», and the decision is pushed or paid for by adult children.",
+   "source": "assumption: strategist judgment on KZ family decision patterns; verify by who writes first in the export (patient vs relative)",
+   "confidence": "assumption"
+  }
+ ],
+ "insights": [
+  {
+   "id": "I01",
+   "insight": "[tension] PROVISIONAL (no client data yet). When someone in Almaty has lived for months with a gap or a failing bridge, they want to chew and smile without thinking about it, but they fear the surgery itself («это больно?», «сверлят кость»), so they postpone it or stay with a removable denture. We can show what actually happens, step by step, from the patient's side: the tray being laid out, sealed instruments, the doctor's close voice explaining each step. We never promise painlessness: «без боли» is rejected by the medical-ad rules (E02) and the anaesthesia protocol is a NEEDS FACT. This moves booked implant consultations because surgical anxiety is the hypothesised consideration bottleneck.",
+   "tension": "Wants a normal tooth back vs fears the operation (pain, «кость», the unknown chair experience)",
+   "evidence_ids": [
+    "E13",
+    "E14",
+    "E20",
+    "E27",
+    "E02",
+    "E03"
+   ],
+   "who_feels_it": "Adults who have lost a tooth or have a failing bridge or denture and have postponed implants for months because of fear of the procedure",
+   "content_reality": "«кабинет»: doctor's gloved hands laying out the tray, close-mic voice (≤30 cm, recorded separately in «тихий угол») narrating what happens at each step. No faces, no mouths, no drill close-ups. No claim about pain or anaesthesia until the doctor confirms the protocol, so this is recognition/explanation content only. «Нам пишут: „Это больно?“» is blocked until the export shows ≥2 real messages.",
+   "strength": 2
+  },
+  {
+   "id": "I02",
+   "insight": "[hidden_knowledge] PROVISIONAL. Before booking, a person considering implants wants to know what they are walking into, but they fear the first consultation is a sales trap («насчитают на миллион») and do not know what happens there, so they ask the price in chat and disappear when they hear «только на консультации». We can show the first visit as a sequence: what the doctor checks, what you leave with, and that you decide later. All steps are NEEDS FACT from the owner. Honest-signal content where the doctor says when they would advise waiting or another option (owner/doctor-confirmed only) separates us from the promo-led category (E23). This sits directly on the measured action, booking a consultation, so it has the highest leverage.",
+   "tension": "Wants a clear answer before committing vs fears being pressured into an expensive plan at the first visit",
+   "evidence_ids": [
+    "E17",
+    "E10",
+    "E20",
+    "E23",
+    "E11"
+   ],
+   "who_feels_it": "People who have asked a clinic for an implant price at least once and did not book because the next step felt like a commitment",
+   "content_reality": "«кабинет»: the empty consultation desk, the jaw model in the doctor's hands, close-voice walkthrough of the visit (voice recorded in «тихий угол»). No imaging of real patients. The sequence, its duration and whether the consultation is free are NEEDS FACT, so until confirmed this is recognition content only («вот что обычно спрашивают на первом приёме»).",
+   "strength": 2
+  },
+  {
+   "id": "I03",
+   "insight": "[friction] PROVISIONAL. When someone starts comparing implant clinics, they want a number to compare, but a private clinic cannot give one before an examination (and no prices are in the ledger: E01, E33), so price-first chats stall (hypothesis E10) and the person picks whoever posted an «от … ₸» promo. We can show what the price depends on: number of teeth, bone, imaging, crown type, framed as the doctor's opinion with no figures. The CTA promises only what staff can keep (e.g. explaining what the consultation includes), plus an agent-drafted WhatsApp reply that always gives a next step. This moves coded chats → bookings because it converts the dead-end price question into a booking question.",
+   "tension": "Wants a comparable price now vs a quote that honestly depends on an exam they haven't had",
+   "evidence_ids": [
+    "E10",
+    "E12",
+    "E33",
+    "E01",
+    "E23"
+   ],
+   "who_feels_it": "People messaging several Almaty clinics in the same week asking «сколько стоит имплант»",
+   "content_reality": "«тихий угол»: administrator's hands typing the reply on a phone (anonymised chat card in screen mode), plus the doctor's hands on the jaw model in «кабинет» pointing to each factor. No prices, no comparisons with other clinics. Fixing the WhatsApp reply script is a non-content fix flagged with this insight.",
+   "strength": 2
+  },
+  {
+   "id": "I04",
+   "insight": "[proof] PROVISIONAL. When a patient sits in a surgical chair, they want to trust that everything entering their mouth is clean, but sterilisation happens behind a closed door («инструменты одноразовые?»), so they judge the clinic by the interior instead. We can film the real sterilisation ritual: pouches sealed, the steriliser cycle, a sealed pouch torn open on the tray. The camera verifies whatever is filmed. Before/after content is rejected here because it needs written consent (E02), and this is the honest proof that replaces it. It builds the trust that precedes booking an operation.",
+   "tension": "Wants certainty of safety vs cannot see what happens behind the door",
+   "evidence_ids": [
+    "E18",
+    "E26",
+    "E27",
+    "E21",
+    "E02"
+   ],
+   "who_feels_it": "People choosing a clinic for a surgical procedure who worry about hygiene and have no way to check it",
+   "content_reality": "«стерилизационная»: hands sealing pouches, steriliser door and beep, and in «кабинет» the crackle of a sealed pouch being opened at 20–30 cm. Verified only once filmed. Do not claim «одноразовое» or a sterilisation standard until the owner confirms (NEEDS FACT).",
+   "strength": 2
+  },
+  {
+   "id": "I05",
+   "insight": "[myth] PROVISIONAL. When someone has been told «кости нет» or believes «мост проще» or «импланты — для пожилых», they want the simplest fix, but the belief closes the implant option before a doctor has looked, so they settle for a bridge or denture by default. A doctor can explain on a jaw model what the belief gets wrong and what it depends on, framed as the doctor's opinion («врач считает»), with no outcome promise and only after the responsible doctor signs off the wording. This moves consultations because a belief is the hidden reason some people never ask.",
+   "tension": "Wants the easy option vs a belief that rules out the better-fitting one without an exam",
+   "evidence_ids": [
+    "E16",
+    "E24",
+    "E02",
+    "E35"
+   ],
+   "who_feels_it": "People who were once told implants are impossible or unnecessary for them, and older patients assuming it is not for their age",
+   "content_reality": "«кабинет»: doctor's hands on the jaw model showing bone, bridge and implant positions, close voice. An AI explainer is allowed only for the invisible (bone inside the jaw) and must be labelled. There is no clinical proof on camera, so this is explanation and belief-check only, never «вам подойдёт».",
+   "strength": 2
+  },
+  {
+   "id": "I06",
+   "insight": "[moment] PROVISIONAL. Right after a tooth is pulled, when a denture starts slipping, or before a family той or photos, the gap suddenly matters and the person wants to act, but does not know how long the path is («сколько ходить без зуба?»), so the urge fades and they wait for the next trigger. We can meet them at that moment with what to do in the first weeks after losing a tooth and what the steps are (sequence and timing are NEEDS FACT). We never promise «успеете к тою». This moves bookings because a moment is when consideration turns into a message.",
+   "tension": "Motivated right now vs the process looks long and uncertain, so the motivation decays",
+   "evidence_ids": [
+    "E19",
+    "E15",
+    "E20",
+    "E34"
+   ],
+   "who_feels_it": "People who just had a tooth removed, whose denture or bridge just failed, or who have a family celebration ahead",
+   "content_reality": "«кабинет» / «тихий угол»: hands drawing a simple timeline on paper next to the jaw model, close voice. No dates or durations until the doctor confirms the typical sequence. Seasonal hooks (той season, New Year photos) are planned 10–14 days ahead.",
+   "strength": 2
+  },
+  {
+   "id": "I07",
+   "insight": "[identity] WILDCARD, PROVISIONAL. When an adult child sees a parent struggling to chew with a removable denture, they want the parent to eat comfortably at the family table, but the parent says «мне уже не надо» and fears the operation, so nothing happens. The decision-maker and the patient are different people. We can speak to the child: what to ask the parent, and what a first consultation is (we can't see this yet, so it is recognition and explanation only). It creates a natural share line («скинь маме») and a second route into bookings.",
+   "tension": "Child wants the parent's comfort vs the parent's refusal and fear",
+   "evidence_ids": [
+    "E36",
+    "E19",
+    "E13"
+   ],
+   "who_feels_it": "Adult children in Almaty arranging and often paying for an older parent's dental treatment",
+   "content_reality": "«тихий угол»: hands only. A cup of tea and a plate of food on a family table plus the jaw model, close voice. No real patients or relatives on camera. Whether relatives make first contact is unverified, so this is recognition content only until the export shows who writes first.",
+   "strength": 2
+  },
+  {
+   "id": "I08",
+   "insight": "[content_reality] WILDCARD, PROVISIONAL. Outsiders picture an implant as a big «винт в челюсти» from 3D animations (category convention E24), but almost nobody has held the real object. Showing the actual implant or a demo sample in gloved hands, next to an everyday object, is a curiosity gap that also quietly shrinks the fear («снаружи этого никто не видел»). Per E30, the object must answer a patient question («что вообще ставят?»), not be a bare product demo. It feeds reach and wildcard ideas; no brand or dimensions are named until confirmed.",
+   "tension": "Outsider curiosity: «что это вообще такое и какого оно размера?» vs the scary mental image",
+   "evidence_ids": [
+    "E28",
+    "E24",
+    "E30"
+   ],
+   "who_feels_it": "Anyone who has heard «имплант» but never seen one, including people quietly afraid of it",
+   "content_reality": "«кабинет»: a demo implant in gloved hands next to a familiar object, macro shot at 20–30 cm. Requires the owner to confirm a demo sample exists (NEEDS FACT). No brand label visible, no size numbers on screen.",
+   "strength": 2
+  },
+  {
+   "id": "I09",
+   "insight": "[content_reality] WILDCARD, PROVISIONAL. Clinic sounds feed the fear: people hear a whine through the wall and imagine the worst. The quiet sounds of preparation are unseen rituals: a pouch tearing open, instruments placed on a tray, the steriliser beep. A «угадайте звук» or close-sound piece can decode what each sound is, which turns the clinic's soundscape from threat into routine. Using the drill sound as a pleasurable sensory loop is rejected because it is the fear trigger (E27). Honest risk: it may still remind viewers of the chair, so its prior stays low.",
+   "tension": "Outsider curiosity about what the sounds are vs those sounds being the source of dread",
+   "evidence_ids": [
+    "E27",
+    "E26",
+    "E13"
+   ],
+   "who_feels_it": "People who feel anxious at the mere sound of a dental clinic",
+   "content_reality": "«стерилизационная» and «кабинет»: one continuous close-sound take (pouch, tray, steriliser) at 20–30 cm, no faces, no patients. Verified only after the reality scan confirms audio quality.",
+   "strength": 2
+  },
+  {
+   "id": "I10",
+   "insight": "[price_value] PROVISIONAL. When someone sees «имплант от …» promos (E23) and then hears a higher quote, they want to believe the difference is real, but they cannot see what the price contains, so they assume overcharging or choose the cheapest ad. The «above average» positioning (E06) is only a self-description. We could show where the money goes (imaging, planning, sterile single-use kit, components) only after the owner confirms each element, and never as a price slide (E31). This defends booking conversion against promo competition without naming any clinic.",
+   "tension": "Wants value for a large spend vs suspects the higher price is just markup",
+   "evidence_ids": [
+    "E06",
+    "E23",
+    "E31",
+    "E01",
+    "E33"
+   ],
+   "who_feels_it": "People who have received a cheaper implant quote or seen promo ads and are deciding whether a pricier clinic is worth it",
+   "content_reality": "«стерилизационная» / «кабинет»: hands showing each component or step of the plan in order, close voice. Every element is NEEDS FACT from the owner. Without confirmation it stays unusable for claims and can only become a question prompt («что входит в цену имплантации — спросите у врача»).",
+   "strength": 2
+  }
+ ]
+}
