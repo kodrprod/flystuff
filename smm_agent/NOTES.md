@@ -89,8 +89,9 @@ Blocked on Andrey (see HANDOFF.md): Higgsfield SDK key + credits; TikTok/Reels t
 "Финальная распродажа"; Muzzone contact and staff consent; a 10-minute real phone test; paid-boost budget; R5 scope.
 
 Next (in order, after the usage reset):
-1. `revise_v2` workflow (run wf_230275cf-bf4): the 6 audits are cached; revise -> 2 attacks -> finalise produce method v2.
-   If it did not finish, resume it with the same args (the audits replay from cache).
+1. Method v2: `brain/METHOD_v2_draft.md` (11.8k words, from the 6 audits) and `brain/METHOD_v2_attacks.md` (2 reviews) are
+   saved; only the finalise step (apply the attacks) is missing. Resume wf_230275cf-bf4 with the same args after the reset
+   (everything else replays from cache), or apply the attacks by hand. `brain/METHOD.md` stays v1 until then.
 2. Save v2 as `brain/METHOD_v2.md` + `brain/METHOD.md`; apply its "CODE CHANGES REQUESTED"; align schemas.
 3. Re-test v2 on the hiring request + the 2 lowest-scoring cases (b2b, salon) with `python -m smm.stress --only ...`,
    at most 3 cases per usage window.
